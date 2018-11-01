@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="introduction-to-r.html">
+<link rel="prev" href="area-data-ii.html">
+<link rel="next" href="area-data-iii.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -386,27 +386,94 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Practical Data Analysis for the Spatial Sciences in R</h1>
-<h4 class="author"><em>Antonio Paez</em></h4>
-<h4 class="date"><em>2018-05-07</em></h4>
+<div id="area-data-ii-activity" class="section level1">
+<h1><span class="header-section-number">22</span> Area Data II-Activity</h1>
+<div id="practice-questions-7" class="section level2">
+<h2><span class="header-section-number">22.1</span> Practice questions</h2>
+<p>Answer the following questions:</p>
+<ol style="list-style-type: decimal">
+<li>List and describe two criteria to define proximity in area data analysis.</li>
+<li>What is a spatial weights matrix?</li>
+<li>Why do spatial weight matrices have zeros in the main diagonal?</li>
+<li>How is a spatials weights matrix row-standardized?</li>
+<li>Write the spatial weights matrices for the sample systems in Figures 1 and 2. Explain the criteria used to do so.</li>
+</ol>
+<div class="figure">
+<img src="Area%20Data%20II%20Activity%20Figure%201.jpg" alt="Figure 1. Sample areal system 1" />
+<p class="caption">Figure 1. Sample areal system 1</p>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>This book introduces data analysis for applied spatial scientists. These could be geographers, earth scientists, environmental scientists, planners, or others who work with georeferenced datasets.</p>
-<p>My aim with this book has been to introduce key concepts and techniques in the analysis of spatial data in an intuitive way. While there are more advanced treatments of many of these topics, this book should be appealing to students or others who are approaching this topic for the first time.</p>
-<p>The book is organized thematically following the cannonical approach seen, for instance, in [BAILEY &amp; GATRELL] and [UNWIN]. This approach is to conceptualize data by their unit of support.</p>
-<p>Each chapter covers a topic that builds on previous material. In this way, this is not necessarily meant as a reference (there are better books for that). The chapters are followed by an activity.</p>
-<p>I have used these materials for teaching spatial data analysis in different settings. In a flipped classroom setting, the chapters are used as practice material by the students before class. The activity is then completed in class, with the instructor providing support and motivating some discussion. Used in a traditional lecture style, the materials provide structure and visual aids. The activities can be completed by the students as homework or during lab time.</p>
+<div class="figure">
+<img src="Area%20Data%20II%20Activity%20Figure%202.jpg" alt="Figure 2. Sample areal system 2" />
+<p class="caption">Figure 2. Sample areal system 2</p>
+</div>
+</div>
+<div id="learning-objectives-19" class="section level2">
+<h2><span class="header-section-number">22.2</span> Learning objectives</h2>
+<p>In this activity, you will:</p>
+<ol style="list-style-type: decimal">
+<li>Create spatial weights matrices.</li>
+<li>Calculate the spatial moving average of a variable.</li>
+<li>Create scatterplots of a variable and its spatial moving average.</li>
+<li>Think about ways to decide whether a landscape is random when working with area data.</li>
+</ol>
+</div>
+<div id="suggested-reading-17" class="section level2">
+<h2><span class="header-section-number">22.3</span> Suggested reading</h2>
+<p>O’Sullivan D and Unwin D (2010) Geographic Information Analysis, 2nd Edition, Chapter 7. John Wiley &amp; Sons: New Jersey.</p>
+</div>
+<div id="preliminaries-20" class="section level2">
+<h2><span class="header-section-number">22.4</span> Preliminaries</h2>
+<p>For this activity you will need the following:</p>
+<ul>
+<li>This R markdown notebook.</li>
+<li>A shape file called <code>Hamilton CMA CT</code>.</li>
+</ul>
+<p>It is good practice to clear the working space to make sure that you do not have extraneous items there when you begin your work. The command in R to clear the workspace is <code>rm</code> (for “remove”), followed by a list of items to be removed. To clear the workspace from <em>all</em> objects, do the following:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</code></pre></div>
+<p>Note that <code>ls()</code> lists all objects currently on the worspace.</p>
+<p>Load the libraries you will use in this activity. In addition to <code>tidyverse</code>, you will need <code>spatstat</code>, a package designed for the analysis of point patterns (you can learn about <code>spatstat</code> <a href="https://cran.r-project.org/web/packages/spatstat/vignettes/getstart.pdf">here</a> and <a href="http://spatstat.org/resources/spatstatJSSpaper.pdf">here</a>):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(rgdal)
+<span class="kw">library</span>(broom)
+<span class="kw">library</span>(spdep)
+<span class="kw">library</span>(plotly)</code></pre></div>
+<p>In the practice that preceded this activity, you learned about the area data and visualization techniques for area data.</p>
+<p>Begin by loading the data that you will use in this activity:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Hamilton_CT &lt;-<span class="st"> </span><span class="kw">readOGR</span>(<span class="st">&quot;.&quot;</span>, <span class="dt">layer =</span> <span class="st">&quot;Hamilton CMA CT&quot;</span>, <span class="dt">integer64 =</span> <span class="st">&quot;allow.loss&quot;</span>)</code></pre></div>
+<pre><code>## OGR data source with driver: ESRI Shapefile 
+## Source: &quot;C:\Antonio\Courses\GEOG 4GA3 - Applied Spatial Analysis\Practical Data Analysis for the Spatial Sciences in R&quot;, layer: &quot;Hamilton CMA CT&quot;
+## with 188 features
+## It has 255 fields
+## Integer64 fields read as signed 32-bit integers:  ID POPULATION PRIVATE_DW OCCUPIED_D ALL_AGES AGE_4 AGE_5_TO_9 AGE_10_TO_ AGE_15_TO_ AGE_15 AGE_16 AGE_17 AGE_18 AGE_19 AGE_20_TO_ AGE_25_TO_ AGE_30_TO_ AGE_35_TO_ AGE_40_TO_ AGE_45_TO_ AGE_50_TO_ AGE_55_TO_ AGE_60_TO_ AGE_65_TO_ AGE_70_TO_ AGE_75_TO_ AGE_80_TO_ AGE_85 MEDIAN_AGE MALE_ALL_A MALE_4 MALE_5_TO_ MALE_10_TO MALE_15_TO MALE_15 MALE_16 MALE_17 MALE_18 MALE_19 MALE_20_TO MALE_25_TO MALE_30_TO MALE_35_TO MALE_40_TO MALE_45_TO MALE_50_TO MALE_55_TO MALE_60_TO MALE_65_TO MALE_70_TO MALE_75_TO MALE_80_TO MALE_85 MALE_MEDIA FEMALE_ALL FEMALE_4 FEMALE_5_T FEMALE_10_ FEMALE_15_ FEMALE_15 FEMALE_16 FEMALE_17 FEMALE_18 FEMALE_19 FEMALE_20_ FEMALE_25_ FEMALE_30_ FEMALE_35_ FEMALE_40_ FEMALE_45_ FEMALE_50_ FEMALE_55_ FEMALE_60_ FEMALE_65_ FEMALE_70_ FEMALE_75_ FEMALE_80_ FEMALE_85 FEMALE_MED MARRIED_AG MARRIED_OR MARRIED COMMON_LAW UNMARRIED SINGLE SEPARATED DIVORCED WIDOWED MARRIED_A1 MARRIED_O1 MARRIED_M COMMON_LA1 UNMARRIED_ SINGLE_M SEPARATED_ DIVORCED_M WIDOWED_M MARRIED_A2 MARRIED_O2 MARRIED_F COMMON_LA2 UNMARRIED1 SINGLE_F SEPARATED1 DIVORCED_F WIDOWED_F FAMILIES_I FAMILY_SIZ FAMILY_SI1 FAMILY_SI2 FAMILY_SI3 COUPLE_FAM COUPLE_MAR COUPLE_MA1 COUPLE_MA2 COUPLE_MA3 COUPLE_MA4 COUPLE_MA5 COUPLE_COM COUPLE_CO1 COUPLE_CO2 COUPLE_CO3 COUPLE_CO4 COUPLE_CO5 SINGLE_PAR SINGLE_PA1 SINGLE_PA2 SINGLE_PA3 SINGLE_PA4 SINGLE_PA5 SINGLE_PA6 SINGLE_PA7 SINGLE_PA8 CHILDREN_F CHILDREN_1 CHILDREN_2 CHILDREN_3 CHILDREN_4 CHILDREN_5 POPULATIO1 POPULATIO2 POPULATIO3 POPULATIO4 POPULATIO5 POPULATIO6 POPULATIO7 POPULATIO8 POPULATIO9 POPULATI10 POPULATI11 POPULATI12 PRIVATE_HO PRIVATE_HH PRIVATE_H1 PRIVATE_H2 PRIVATE_H3 PRIVATE_H4 PRIVATE_H5 PRIVATE_H6 PRIVATE_H7 PRIVATE_H8 PRIVATE_H9 PRIVATE_10 PRIVATE_11 PRIVATE_12 PRIVATE_13 PRIVATE_14 PRIVATE_15 OCC_PRIVAT OCC_PRIVA1 OCC_PRIVA2 OCC_PRIVA3 OCC_PRIVA4 OCC_PRIVA5 OCC_PRIVA6 OCC_PRIVA7 OCC_PRIVA8 OCC_PRIVA9 PRIVATE_16 PRIVATE_17 PRIVATE_18 PRIVATE_19 PRIVATE_20 PRIVATE_21 PRIVATE_22 PRIVATE_23 NATIVE_LAN NATIVE_LA1 NATIVE_LA2 NATIVE_LA3 NATIVE_LA4 NATIVE_LA5 NATIVE_LA6 NATIVE_LA7 NATIVE_LA8 NATIVE_LA9 NATIVE_L10 NATIVE_L11 NATIVE_L12 NATIVE_L13 NATIVE_L14 NATIVE_L15 NATIVE_L16 NATIVE_L17 NATIVE_L18 NATIVE_L19 NATIVE_L20 NATIVE_L21 NATIVE_L22 NATIVE_L23 NATIVE_L24 NATIVE_L25 NATIVE_L26 NATIVE_L27 NATIVE_L28 NATIVE_L29 NATIVE_L30 NATIVE_L31 NATIVE_L32 NATIVE_L33 NATIVE_L34 NATIVE_L35 NATIVE_L36 NATIVE_L37 NATIVE_L38 NATIVE_L39 NATIVE_L40 NATIVE_L41 NATIVE_L42 NATIVE_L43 NATIVE_L44 NATIVE_L45 NATIVE_L46 NATIVE_L47 NATIVE_L48 NATIVE_L49 NATIVE_L50 NATIVE_L51 NATIVE_L52 NATIVE_L53 NATIVE_L54 NATIVE_L55 NATIVE_L56 NATIVE_L57 NATIVE_L58 NATIVE_L59</code></pre>
+<p>You can obtain new (calculated) variables as follows. For instance, to obtain the proportion of residents who are between 20 and 34 years old, and between 35 and 49:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Hamilton_CT@data &lt;-<span class="st"> </span><span class="kw">mutate</span>(Hamilton_CT@data, <span class="dt">Prop20to34 =</span> (AGE_20_TO_ +<span class="st"> </span>AGE_25_TO_ +<span class="st"> </span>AGE_30_TO_)/POPULATION, <span class="dt">Prop35to49 =</span> (AGE_35_TO_ +<span class="st"> </span>AGE_40_TO_ +<span class="st"> </span>AGE_45_TO_)/POPULATION)</code></pre></div>
+<p>This is a <code>SpatialPolygonDataFrame</code>. Convert to a dataframe (“tidy” it) for plotting using <code>ggplot2</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Hamilton_CT.t &lt;-<span class="st"> </span><span class="kw">tidy</span>(Hamilton_CT, <span class="dt">region =</span> <span class="st">&quot;TRACT&quot;</span>)
+Hamilton_CT.t &lt;-<span class="st"> </span><span class="kw">rename</span>(Hamilton_CT.t, <span class="dt">TRACT =</span> id)</code></pre></div>
+<p>Rejoin the data:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Hamilton_CT.t &lt;-<span class="st"> </span><span class="kw">left_join</span>(Hamilton_CT.t, Hamilton_CT@data, <span class="dt">by =</span> <span class="st">&quot;TRACT&quot;</span>)</code></pre></div>
+<pre><code>## Warning: Column `TRACT` joining character vector and factor, coercing into
+## character vector</code></pre>
+</div>
+<div id="activity-10" class="section level2">
+<h2><span class="header-section-number">22.5</span> Activity</h2>
+<ol style="list-style-type: decimal">
+<li><p>Create a spatial weights matrix for the census tracts in the Hamilton CMA.</p></li>
+<li><p>Calculate the proportion of spatial moving average for the proportion of the population who are 20 to 34 years old, 35 to 49 years old, 50 to 65 years old, and 65 and older.</p></li>
+<li><p>Append the spatial moving averages to your dataframe.</p></li>
+<li><p>Choose one age group and create a scatterplot of the proportion of population in that group versus its spatial moving average. (Hint: if creating the scatterplot in <code>ggplot2</code> you can add the 45 degree line by using <code>geom_abline(slope = 1, intercept = 0)</code>).</p></li>
+<li><p>What would you expect the scatterplots of the variables and their spatial moving averages to look like if the variable was spatially random? Discuss.</p></li>
+</ol>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="introduction-to-r.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="area-data-ii.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="area-data-iii.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

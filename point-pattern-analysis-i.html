@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="introduction-to-r.html">
+<link rel="prev" href="statistical-maps-maps-as-processes-activity.html">
+<link rel="next" href="point-pattern-analysis-i-activity.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -386,27 +386,231 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Practical Data Analysis for the Spatial Sciences in R</h1>
-<h4 class="author"><em>Antonio Paez</em></h4>
-<h4 class="date"><em>2018-05-07</em></h4>
+<div id="point-pattern-analysis-i" class="section level1">
+<h1><span class="header-section-number">8</span> Point Pattern Analysis I</h1>
+<div id="introduction-1" class="section level2">
+<h2><span class="header-section-number">8.1</span> Introduction</h2>
+<p>NOTE: This is an <a href="http://rmarkdown.rstudio.com">R Markdown</a> Notebook. When you execute code within the notebook, the results appear beneath the code.</p>
+<p>In last practice your learning objectives were:</p>
+<ol style="list-style-type: decimal">
+<li>How to generate random numbers with different properties.</li>
+<li>About Null Landscapes.</li>
+<li>How to create new columns in a dataframe using a formula.</li>
+<li>How to simulate a spatial process.</li>
+</ol>
+<p>Please review the previous practices if you need a refresher on these concepts.</p>
+<p>For this practice you will need the following:</p>
+<ul>
+<li>This R markdown notebook.</li>
+<li>A dataset called <code>Data3.RData</code></li>
+</ul>
+<p>This dataset includes a dataframe with four sets of spatial events, labeled as “Pattern 1”, “Pattern 2”, “Pattern 3”, “PointPattern4”, with n = 60 events in each set.</p>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>This book introduces data analysis for applied spatial scientists. These could be geographers, earth scientists, environmental scientists, planners, or others who work with georeferenced datasets.</p>
-<p>My aim with this book has been to introduce key concepts and techniques in the analysis of spatial data in an intuitive way. While there are more advanced treatments of many of these topics, this book should be appealing to students or others who are approaching this topic for the first time.</p>
-<p>The book is organized thematically following the cannonical approach seen, for instance, in [BAILEY &amp; GATRELL] and [UNWIN]. This approach is to conceptualize data by their unit of support.</p>
-<p>Each chapter covers a topic that builds on previous material. In this way, this is not necessarily meant as a reference (there are better books for that). The chapters are followed by an activity.</p>
-<p>I have used these materials for teaching spatial data analysis in different settings. In a flipped classroom setting, the chapters are used as practice material by the students before class. The activity is then completed in class, with the instructor providing support and motivating some discussion. Used in a traditional lecture style, the materials provide structure and visual aids. The activities can be completed by the students as homework or during lab time.</p>
+<div id="learning-objectives-6" class="section level2">
+<h2><span class="header-section-number">8.2</span> Learning objectives</h2>
+<p>In this practice, you will learn:</p>
+<ol style="list-style-type: decimal">
+<li>A formal definition of point pattern.</li>
+<li>Processes and point patterns.</li>
+<li>The concepts of intensity and density.</li>
+<li>The concept of quadrats and how to create density maps.</li>
+<li>More ways to control the look of your plots, in particular faceting and adding lines.</li>
+</ol>
+</div>
+<div id="suggested-reading-4" class="section level2">
+<h2><span class="header-section-number">8.3</span> Suggested reading</h2>
+<p>O’Sullivan D and Unwin D (2010) Geographic Information Analysis, 2nd Edition, Chapter 5. John Wiley &amp; Sons: New Jersey.</p>
+</div>
+<div id="preliminaries-6" class="section level2">
+<h2><span class="header-section-number">8.4</span> Preliminaries</h2>
+<p>As usual, it is good practice to clear the working space to make sure that you do not have extraneous items there when you begin your work. The command in R to clear the workspace is <code>rm</code> (for “remove”), followed by a list of items to be removed. To clear the workspace from <em>all</em> objects, do the following:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</code></pre></div>
+<p>Note that <code>ls()</code> lists all objects currently on the worspace.</p>
+<p>Load the libraries you will use in this activity:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(spatstat)</code></pre></div>
+<pre><code>## Warning: package &#39;spatstat&#39; was built under R version 3.4.4</code></pre>
+<pre><code>## Loading required package: spatstat.data</code></pre>
+<pre><code>## Loading required package: nlme</code></pre>
+<pre><code>## 
+## Attaching package: &#39;nlme&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     collapse</code></pre>
+<pre><code>## Loading required package: rpart</code></pre>
+<pre><code>## 
+## spatstat 1.55-1       (nickname: &#39;Gamble Responsibly&#39;) 
+## For an introduction to spatstat, type &#39;beginner&#39;</code></pre>
+<p>Load the data that you will use for this practice:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="st">&quot;Data3.RData&quot;</span>)</code></pre></div>
+</div>
+<div id="point-patterns" class="section level2">
+<h2><span class="header-section-number">8.5</span> Point patterns</h2>
+<p>Previously you created different types of maps and learned about different kinds of processes (i.e., random, stochastic, deterministic). A map that you have seen in several occasions is one where the coordinates of an even of interest are available. The simplest kind of data of this type is when only the coordinates are available: we call this a <em>point pattern</em>.</p>
+<p>A point pattern is given by a set of events of interest that are observed in a region <span class="math inline">\(R\)</span>.</p>
+<p>A region has an infinite number of <em>points</em>, essentially coordinates <span class="math inline">\((x_i, y_i)\)</span> on the plane. The number of points is infinite, because there is a point defined by, say, coordinates (1,1), and also a point for coordinates (1.1,1), and for coordinates for (1.01,1), and so on. Any <em>location</em> that can be described by a set of coordinates contained in the region is a point.</p>
+<p>Not all points are events, however. An event is defined as a point where something of interest happened. This could be the location where a tree exists, or a crime happened, the epicenter of an earthquake, a case of a disease was reported, and so on. There might be one such occurrence, or more. Each event is be denoted by: <span class="math display">\[
+\textbf{s}_i
+\]</span> with coordinates: <span class="math display">\[
+(x_i,y_i).
+\]</span> Sometimes other attributes of the events have been measured as well. For example, the event could be an address where cholera was reported (as in John Snow’s famous map). In addition to the address (which can be converted into the coordinates of the event), the <em>number of cases</em> could be recorded. Other examples could be the height and diameter of trees, the magnitude of an earthquake, and so on.</p>
+<p>It is important, for reasons that will be discussed later, that the point pattern is a complete <em>enumeration</em>. What this means is that every event that happened has been recorded! Interpretation of most analysis becomes dubious if the events are only sampled, that is, if only a few of them have been recorded.</p>
+</div>
+<div id="processes-and-point-patterns" class="section level2">
+<h2><span class="header-section-number">8.6</span> Processes and point patterns</h2>
+<p>Point patterns are interesting in many applications. In these application, a key question of interest is whether the pattern is <em>random</em>.</p>
+<p>Imagine, for instance, a point pattern that records crimes in a region. The pattern might be random, in which case there is no way to anticipate where the next occurrence will be. Non-random patterns, on the other hand, are likely the outcome of some meaningful process. For instance, crimes might <em>cluster</em> as a consequence of some common environmental variable (e.g., concentration of wealth). On the contrary, they might repeal each other (e.g., the location of a crime draws attention of law enforcement, and therefore the next occurrence of a crime tends to happen away from it). Deciding whether the pattern is random or not is the initial step towards developing hypotheses about the underlying process.</p>
+<p>Consider for example the following patterns. To create the following figure, you can use <em>faceting</em> by means of <code>ggplot2::facet_grid</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>() +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> PointPatterns, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)) +<span class="st"> </span><span class="kw">facet_grid</span>(.~<span class="st"> </span>Pattern) +
+<span class="st">  </span><span class="kw">coord_fixed</span>()</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-107-1.png" width="672" /></p>
+<p>As you can see, faceting is a convenient way to simultaneously plot different parts of a dataframe (in the present case, the different <code>Pattern</code>s).</p>
+<p>In a previous discussion, a few ideas were suggested as possible ways of deciding whether a map of events (i.e., a point pattern) is random. One idea was to consider the <em>intensity</em> of the process. This is discussed in more detail next.</p>
+</div>
+<div id="intensity-and-density" class="section level2">
+<h2><span class="header-section-number">8.7</span> Intensity and density</h2>
+<p>The <em>intensity</em> of a spatial point process is the expected number of events per unit area. This is conventionally denoted by the greek letter <span class="math inline">\(\lambda\)</span>.</p>
+<p>In most cases the process is not know, so its intensity cannot be directly measured. In its place, the <em>density</em> of the point pattern is taken as the empirical estimate of the <em>intensity</em> of the underlying process. The density of the point pattern is calculated very simply as the number of events divided by the area of the region, that is: <span class="math display">\[
+\hat{\lambda} = \frac{(S \in R)}{a} = \frac{n}{a}.
+\]</span> Notice the use of the “hat” symbol on top of the Greek lambda. This symbol is called “caret”. The hat notation is used to indicate an estimated value of an unobserved parameter of a process, in the present case the intensity of the spatial point process.</p>
+<p>Consider one of the point patterns in your sample dataset, say “Pattern 1”. Let’s summarize it:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">subset</span>(PointPatterns, Pattern ==<span class="st"> &quot;Pattern 1&quot;</span>))</code></pre></div>
+<pre><code>##        x                y                 Pattern  
+##  Min.   :0.0285   Min.   :0.005306   Pattern 1:60  
+##  1st Qu.:0.3344   1st Qu.:0.236509   Pattern 2: 0  
+##  Median :0.5247   Median :0.500262   Pattern 3: 0  
+##  Mean   :0.5531   Mean   :0.500248   Pattern 4: 0  
+##  3rd Qu.:0.8417   3rd Qu.:0.761218                 
+##  Max.   :0.9888   Max.   :0.999808</code></pre>
+<p>We see that there are <span class="math inline">\(n = 60\)</span> points in this dataset. Since the region is the unit square (check how the values of the coordinates range from approximately zero to approximately 1), the area of the region is 1. This means that for “Pattern 1”: <span class="math display">\[
+\hat{\lambda} = \frac{60}{1} = 60
+\]</span></p>
+<p>This is the <em>overall density</em> of the point pattern.</p>
+</div>
+<div id="quadrats-and-density-maps" class="section level2">
+<h2><span class="header-section-number">8.8</span> Quadrats and density maps</h2>
+<p>The overall density of a point process (calculated above) can be mapped by means of the <code>geom_bin2d</code> function of the <code>ggplot2</code> package. This function divides two dimensional space into bins and reports the number of events or the density of the events in the bins. Let’s give this a try:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>() +
+<span class="st">  </span><span class="kw">geom_bin2d</span>(<span class="dt">data =</span> <span class="kw">subset</span>(PointPatterns, Pattern ==<span class="st"> &quot;Pattern 1&quot;</span>),
+             <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y),
+             <span class="dt">binwidth =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>)) +
+<span class="st">  </span><span class="kw">coord_fixed</span>()</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-109-1.png" width="672" /></p>
+<p>Let’s see step-by-step how this plot is made.</p>
+<ol style="list-style-type: decimal">
+<li><code>ggplot()</code> creates a plot object.</li>
+<li><code>geom_bin2d</code> is called to plot a map of counts of events in the space defined by the bins.</li>
+<li>The dataframe used for plotting the bins is <code>PointPatterns</code>, subset so that only the points in “Pattern 1” are used.</li>
+<li>The coordinates x and y are used to plot (in <code>aes()</code>, we indicate that x in the dataframe corresponds to the x axis in the plot, and y in the dataframe corresponds to y axis in the plot)</li>
+<li>The size of the bin is defined as 1-by-1 (<code>binwidth = c(1, 1)</code>)</li>
+<li><code>coord_fixed</code> is applied to ensure that the aspect ratio of the plot is one (one unit of x is the same length as one unit of y in the plot).</li>
+</ol>
+<p>The map of the overall density of the process above is not terribly interesting. It only reports what we already knew, that globally the density of the point pattern is 60. It would be more interesting to see how the density varies across the region.</p>
+<p>We do this by means of the concept of <em>quadrats</em>.</p>
+<p>Imagine that instead of calculating the overall (or global) intensity of the point pattern, we subdivided the region into a set of smaller subregions. For instance, we could draw horizontal and vertical lines to create smaller squares:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>() +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.25</span>)) +
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.25</span>)) +
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">subset</span>(PointPatterns, Pattern ==<span class="st"> &quot;Pattern 1&quot;</span>), 
+             <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)) +
+<span class="st">  </span><span class="kw">coord_fixed</span>()</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-110-1.png" width="672" /></p>
+<p>Notice the following functions used to create the vertical lines (<code>geom_vline</code>) and horizontal lines (<code>geom_hline</code>), from 0 to 1 every 0.25 units of distance respectively.</p>
+<p>Each of the smaller squares used to subdivide the region is called a <em>quadrat</em>.</p>
+<p>To make things more interesting, instead of calculating the overall density, we can calculate the density for each quadrat. Let’s visualize a density map using quadrats:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>() +
+<span class="st">  </span><span class="kw">geom_bin2d</span>(<span class="dt">data =</span> <span class="kw">subset</span>(PointPatterns, Pattern ==<span class="st"> &quot;Pattern 1&quot;</span>),
+             <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y),
+             <span class="dt">binwidth =</span> <span class="kw">c</span>(<span class="fl">0.50</span>, <span class="fl">0.50</span>)) +
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">subset</span>(PointPatterns, Pattern ==<span class="st"> &quot;Pattern 1&quot;</span>), 
+             <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)) +
+<span class="st">  </span><span class="kw">scale_fill_distiller</span>(<span class="dt">palette =</span> <span class="st">&quot;RdBu&quot;</span>) +
+<span class="st">  </span><span class="kw">coord_fixed</span>()</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-111-1.png" width="672" /></p>
+<p>You can, of course, change the size of the quadrats. Let’s take a look at the four point patterns (by means of faceting), after creating a variable to easily control the size of the quadrat. Let’s call this variable <code>q_size</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">q_size &lt;-<span class="st"> </span><span class="fl">0.25</span>
+<span class="kw">ggplot</span>() +
+<span class="st">  </span><span class="kw">geom_bin2d</span>(<span class="dt">data =</span> PointPatterns,
+             <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y),
+             <span class="dt">binwidth =</span> <span class="kw">c</span>(q_size, q_size)) +
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">data =</span> PointPatterns, 
+             <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)) +
+<span class="st">  </span><span class="kw">facet_grid</span>(.~<span class="st"> </span>Pattern) +
+<span class="st">  </span><span class="kw">scale_fill_distiller</span>(<span class="dt">palette =</span> <span class="st">&quot;RdBu&quot;</span>) +
+<span class="st">  </span><span class="kw">coord_fixed</span>()</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-112-1.png" width="672" /></p>
+<p>Notice the differences in the density maps? Try changing the size of the quadrat to 1. What happens, and why? Next, try a smaller quadrat size, say 0.25. What happens, and why? Try even smaller quadrat sizes, but greater than zero. What happens now?</p>
+<p>The package <code>spatstat</code> includes numerous functions for the analysis of point patterns. A relevant function at this point, is <code>quadratcount</code>, which returns the number of events per quadrat.</p>
+<p>To use this function, we need to convert the point patterns to a type of data used by <code>spatstat</code> denominated <code>ppp</code> (for <em>p</em>lannar <em>p</em>oint <em>p</em>attern). This is simple, thanks to a utility function in <code>spatstat</code> called <code>as.ppp</code>. This function takes as arguments (inputs) a set of coordinates, and data to define a window. Let’s convert the spatial patterns to <code>ppp</code> objects.</p>
+<p>First, define the window by means of the <code>owin</code> function, and using the 0 to 1 interval for our region:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Wnd &lt;-<span class="st"> </span><span class="kw">owin</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>)) </code></pre></div>
+<p>Now, a <code>ppp</code> object can be created:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ppp1 &lt;-<span class="st"> </span><span class="kw">as.ppp</span>(PointPatterns, Wnd)</code></pre></div>
+<p>If you examine these new <code>ppp</code> objects, you will see that they pack the same basic information (i.e., the coordinates), but also the range of the region and so on:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(ppp1)</code></pre></div>
+<pre><code>## Marked planar point pattern:  240 points
+## Average intensity 240 points per square unit
+## 
+## Coordinates are given to 8 decimal places
+## 
+## Multitype:
+##           frequency proportion intensity
+## Pattern 1        60       0.25        60
+## Pattern 2        60       0.25        60
+## Pattern 3        60       0.25        60
+## Pattern 4        60       0.25        60
+## 
+## Window: rectangle = [0, 1] x [0, 1] units
+## Window area = 1 square unit</code></pre>
+<p>As you can see, the <code>ppp</code> object includes the four patterns, calculates the frequency of each (the number of events), and their respective overall intensities.</p>
+<p>Once the patterns are in <code>ppp</code> form, <code>quadratcount</code> can be used to compute the counts of events. To calculate the count separately for each pattern, you need to use <code>split.ppp()</code>. The other two arguments are the number of quadrats in the horizontal (nx) and the vertical (ny) directions:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">quadratcount</span>(<span class="kw">split.ppp</span>(ppp1), <span class="dt">nx =</span> <span class="dv">4</span>, <span class="dt">ny =</span> <span class="dv">4</span>)</code></pre></div>
+<pre><code>## List of spatial objects
+## 
+## Pattern 1:
+##             x
+## y            [0,0.25) [0.25,0.5) [0.5,0.75) [0.75,1]
+##   [0.75,1]          3          5          1        6
+##   [0.5,0.75)        2          3          4        6
+##   [0.25,0.5)        5          4          2        3
+##   [0,0.25)          2          4          4        6
+## 
+## Pattern 2:
+##             x
+## y            [0,0.25) [0.25,0.5) [0.5,0.75) [0.75,1]
+##   [0.75,1]         14          2          2        6
+##   [0.5,0.75)        0          0          4        6
+##   [0.25,0.5)        6          3          1        2
+##   [0,0.25)          4          6          2        2
+## 
+## Pattern 3:
+##             x
+## y            [0,0.25) [0.25,0.5) [0.5,0.75) [0.75,1]
+##   [0.75,1]          2         11          5        7
+##   [0.5,0.75)        1          1          6        4
+##   [0.25,0.5)        1         10          3        2
+##   [0,0.25)          2          1          2        2
+## 
+## Pattern 4:
+##             x
+## y            [0,0.25) [0.25,0.5) [0.5,0.75) [0.75,1]
+##   [0.75,1]          4          5          6        3
+##   [0.5,0.75)        3          3          4        2
+##   [0.25,0.5)        3          3          4        2
+##   [0,0.25)          5          4          6        3</code></pre>
+<p>Compare the counts of the quadrats for each pattern. They should replicate what you observed in the density plots before.</p>
+<p>This concludes Practice 4. The next in-class activity will illustrate how quadrats are a useful tool to explore the question whether a map is random.</p>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="introduction-to-r.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="statistical-maps-maps-as-processes-activity.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="point-pattern-analysis-i-activity.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

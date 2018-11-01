@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="introduction-to-r.html">
+<link rel="prev" href="introduction-to-mapping-in-r.html">
+<link rel="next" href="statistical-maps-ii.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -386,27 +386,90 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Practical Data Analysis for the Spatial Sciences in R</h1>
-<h4 class="author"><em>Antonio Paez</em></h4>
-<h4 class="date"><em>2018-05-07</em></h4>
+<div id="introduction-to-mapping-in-r---activity" class="section level1">
+<h1><span class="header-section-number">3</span> Introduction to Mapping in R - Activity</h1>
+<div id="preliminaries-1" class="section level2">
+<h2><span class="header-section-number">3.1</span> Preliminaries</h2>
+<p>In the practice that preceded this activity, you used <code>ggmap</code> to create a proportional symbol map, a mapping technique used in spatial statistics for visualization of geocoded event information. As well, you implemented a simple technique called kernel analysis to the map to explore the distribution of events in the case of the cholera outbreak of Soho in London in 1854. Geocoded events are often called <em>point patterns</em>, so with the cholera data you were working with a point pattern.</p>
+<p>In this activity, we will map another type of spatial data, called <em>areal data</em>. Areas are often administrative or political jurisdictions.</p>
+<p>For this activity you will need the following:</p>
+<ul>
+<li><p>This R markdown notebook.</p></li>
+<li><p>A dataset called <code>HamiltonDAs.RData</code></p></li>
+</ul>
+<p>It is good practice to clear the working space to make sure that you do not have extraneous items there when you begin your work. The command in R to clear the workspace is <code>rm</code> (for “remove”), followed by a list of items to be removed. To clear the workspace from <em>all</em> objects, do the following:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</code></pre></div>
+<p>Note that <code>ls()</code> lists all objects currently on the worspace.</p>
+<p>Load the libraries you will use in this activity:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(ggmap)</code></pre></div>
+<p>Now that your workspace is clear, you can proceed to load a sample dataset. It is very important that R knows where to look for it. This means that the path to the file is explicit, or alternatively that you set the working directory to the directory where the file is.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="st">&quot;HamiltonDAs.RData&quot;</span>)</code></pre></div>
+<p>The dataframe you just loaded is of <em>Dissemination Areas</em> or DAs, a type of geography used by the Census of Canada.</p>
+<p>We will first use the <code>ggmap::get_map</code> function (this is read <code>get_map</code> function from the <code>ggmap</code> package). This function is used to obtain a base map. For this, the argument must specify the location for the capture, which can be a string of text. The outcome can be saved as an object that can later be used for mapping:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hamilton &lt;-<span class="st"> </span><span class="kw">get_map</span>(<span class="st">&quot;Hamilton, Ontario&quot;</span>)</code></pre></div>
+<pre><code>## Map from URL : http://maps.googleapis.com/maps/api/staticmap?center=Hamilton,+Ontario&amp;zoom=10&amp;size=640x640&amp;scale=2&amp;maptype=terrain&amp;language=en-EN&amp;sensor=false</code></pre>
+<pre><code>## Information from URL : http://maps.googleapis.com/maps/api/geocode/json?address=Hamilton,%20Ontario&amp;sensor=false</code></pre>
+<p>Since <code>ggmap</code> is built on top of <code>ggplot2</code>, all functions of that package are available, including other geoms. Previously you mapped points. Now, the geom for polygons can be used for areas.</p>
+<p>To create such a map, we layer other geoms objects as layers on top of the base map. For instance, to plot the DAs on your base map:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(HamiltonDAs)</code></pre></div>
+<pre><code>##        long      lat order  hole piece  group GTA06      VAR1      VAR2
+## 1 -79.86997 43.29277     1 FALSE     1 4050.1  4050 0.3788377 0.3418337
+## 2 -79.86904 43.29339     2 FALSE     1 4050.1  4050 0.3788377 0.3418337
+## 3 -79.86803 43.29426     3 FALSE     1 4050.1  4050 0.3788377 0.3418337
+## 4 -79.86699 43.29532     4 FALSE     1 4050.1  4050 0.3788377 0.3418337
+## 5 -79.86666 43.29565     5 FALSE     1 4050.1  4050 0.3788377 0.3418337
+## 6 -79.86586 43.29637     6 FALSE     1 4050.1  4050 0.3788377 0.3418337
+##        VAR3      VAR4      VAR5
+## 1 0.3450731 0.3057122 0.3622016
+## 2 0.3450731 0.3057122 0.3622016
+## 3 0.3450731 0.3057122 0.3622016
+## 4 0.3450731 0.3057122 0.3622016
+## 5 0.3450731 0.3057122 0.3622016
+## 6 0.3450731 0.3057122 0.3622016</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggmap</span>(hamilton) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_polygon</span>(<span class="dt">data =</span> HamiltonDAs, <span class="kw">aes</span>(<span class="dt">x =</span> long, <span class="dt">y =</span> lat, <span class="dt">group =</span> group), <span class="dt">color =</span> <span class="st">&#39;black&#39;</span>, <span class="dt">alpha =</span> .<span class="dv">3</span>, <span class="dt">size =</span> .<span class="dv">3</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<p>We selected color “black” for the polygons, with a transparency alpha = 0.3 (alpha = 0 is completely transparent, alpha = 1 is completely opaque, try it!), and line size 0.3.</p>
+<p>This map only shows the DAs, which is nice. However, if you examine the dataframe, you will notice that it includes, in additional to the geometric information, other variables (called VAR1, VAR2,…):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(HamiltonDAs)</code></pre></div>
+<pre><code>##        long      lat order  hole piece  group GTA06      VAR1      VAR2
+## 1 -79.86997 43.29277     1 FALSE     1 4050.1  4050 0.3788377 0.3418337
+## 2 -79.86904 43.29339     2 FALSE     1 4050.1  4050 0.3788377 0.3418337
+## 3 -79.86803 43.29426     3 FALSE     1 4050.1  4050 0.3788377 0.3418337
+## 4 -79.86699 43.29532     4 FALSE     1 4050.1  4050 0.3788377 0.3418337
+## 5 -79.86666 43.29565     5 FALSE     1 4050.1  4050 0.3788377 0.3418337
+## 6 -79.86586 43.29637     6 FALSE     1 4050.1  4050 0.3788377 0.3418337
+##        VAR3      VAR4      VAR5
+## 1 0.3450731 0.3057122 0.3622016
+## 2 0.3450731 0.3057122 0.3622016
+## 3 0.3450731 0.3057122 0.3622016
+## 4 0.3450731 0.3057122 0.3622016
+## 5 0.3450731 0.3057122 0.3622016
+## 6 0.3450731 0.3057122 0.3622016</code></pre>
+<p>Thematic maps can also be created with those variables. The next chunk of code plots the DAs and adds info. The <code>fill</code> argument is used to select a variable to color the polygons. The function <code>cut_number</code> is used to classify the values of the variable in 5 groups of equal size (notice that the lines of the polygons are still black). The <code>scale_fill_brewer</code> function can be used to select different <em>palettes</em> or coloring schemes):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggmap</span>(hamilton) +
+<span class="st">  </span><span class="kw">geom_polygon</span>(<span class="dt">data =</span> HamiltonDAs, <span class="kw">aes</span>(<span class="dt">x =</span> long, <span class="dt">y =</span> lat, <span class="dt">group =</span> group, <span class="dt">fill =</span> <span class="kw">cut_number</span>(VAR5, <span class="dv">7</span>)), <span class="dt">colour =</span> <span class="st">&#39;black&#39;</span>, <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">size =</span> .<span class="dv">3</span>) +
+<span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette =</span> <span class="st">&quot;Reds&quot;</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>This book introduces data analysis for applied spatial scientists. These could be geographers, earth scientists, environmental scientists, planners, or others who work with georeferenced datasets.</p>
-<p>My aim with this book has been to introduce key concepts and techniques in the analysis of spatial data in an intuitive way. While there are more advanced treatments of many of these topics, this book should be appealing to students or others who are approaching this topic for the first time.</p>
-<p>The book is organized thematically following the cannonical approach seen, for instance, in [BAILEY &amp; GATRELL] and [UNWIN]. This approach is to conceptualize data by their unit of support.</p>
-<p>Each chapter covers a topic that builds on previous material. In this way, this is not necessarily meant as a reference (there are better books for that). The chapters are followed by an activity.</p>
-<p>I have used these materials for teaching spatial data analysis in different settings. In a flipped classroom setting, the chapters are used as practice material by the students before class. The activity is then completed in class, with the instructor providing support and motivating some discussion. Used in a traditional lecture style, the materials provide structure and visual aids. The activities can be completed by the students as homework or during lab time.</p>
+<div id="activity" class="section level2">
+<h2><span class="header-section-number">3.2</span> Activity</h2>
+<p>Now you know how to create a thematic map with polygons (areal data).</p>
+<ol style="list-style-type: decimal">
+<li><p>Create thematic maps for variables VAR1 through VAR5 in the dataframe <code>HamiltonDAs</code>. Remember that you can introduce new chunks of code.</p></li>
+<li><p>Imagine that these maps were found, and for some reason the variables were not labeled. They may represent income, or population density, or something else. Which of the five maps you just created is more interesting? Rank the five maps from most to least interesting. Explain the reasons for your ranking.</p></li>
+</ol>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="introduction-to-r.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="introduction-to-mapping-in-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="statistical-maps-ii.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

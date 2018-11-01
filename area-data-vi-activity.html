@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
+<link rel="prev" href="area-data-vi.html">
 
-<link rel="next" href="introduction-to-r.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -386,27 +386,95 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Practical Data Analysis for the Spatial Sciences in R</h1>
-<h4 class="author"><em>Antonio Paez</em></h4>
-<h4 class="date"><em>2018-05-07</em></h4>
+<div id="area-data-vi-activity" class="section level1">
+<h1><span class="header-section-number">30</span> Area Data VI-Activity</h1>
+<div id="practice-questions-11" class="section level2">
+<h2><span class="header-section-number">30.1</span> Practice questions</h2>
+<p>Answer the following questions:</p>
+<ol style="list-style-type: decimal">
+<li>Describe and discuss the possible sources of autocorrelation in the residuals of a model.</li>
+<li>List possible corrective/remedial actions when residual autocorrelation is detected.</li>
+<li>Under which situations is a Spatial Error Model an adequate modeling strategy?</li>
+</ol>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>This book introduces data analysis for applied spatial scientists. These could be geographers, earth scientists, environmental scientists, planners, or others who work with georeferenced datasets.</p>
-<p>My aim with this book has been to introduce key concepts and techniques in the analysis of spatial data in an intuitive way. While there are more advanced treatments of many of these topics, this book should be appealing to students or others who are approaching this topic for the first time.</p>
-<p>The book is organized thematically following the cannonical approach seen, for instance, in [BAILEY &amp; GATRELL] and [UNWIN]. This approach is to conceptualize data by their unit of support.</p>
-<p>Each chapter covers a topic that builds on previous material. In this way, this is not necessarily meant as a reference (there are better books for that). The chapters are followed by an activity.</p>
-<p>I have used these materials for teaching spatial data analysis in different settings. In a flipped classroom setting, the chapters are used as practice material by the students before class. The activity is then completed in class, with the instructor providing support and motivating some discussion. Used in a traditional lecture style, the materials provide structure and visual aids. The activities can be completed by the students as homework or during lab time.</p>
+<div id="learning-objectives-27" class="section level2">
+<h2><span class="header-section-number">30.2</span> Learning objectives</h2>
+<p>In this activity, you will:</p>
+<ol style="list-style-type: decimal">
+<li>Explore a dataset with area data using visualization as appropriate.</li>
+<li>Discuss a process that might explain any pattern observed from the data.</li>
+<li>Conduct a modeling exercise using appropriate techniques. Justify your modeling decisions.</li>
+</ol>
+</div>
+<div id="suggested-reading-25" class="section level2">
+<h2><span class="header-section-number">30.3</span> Suggested reading</h2>
+<p>O’Sullivan D and Unwin D (2010) Geographic Information Analysis, 2nd Edition, Chapter 5. John Wiley &amp; Sons: New Jersey.</p>
+</div>
+<div id="preliminaries-28" class="section level2">
+<h2><span class="header-section-number">30.4</span> Preliminaries</h2>
+<p>For this activity you will need the following:</p>
+<ul>
+<li><p>This R markdown notebook.</p></li>
+<li><p>A dataset of your choice.</p></li>
+</ul>
+<p>It is good practice to clear the working space to make sure that you do not have extraneous items there when you begin your work. The command in R to clear the workspace is <code>rm</code> (for “remove”), followed by a list of items to be removed. To clear the workspace from <em>all</em> objects, do the following:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</code></pre></div>
+<p>Note that <code>ls()</code> lists all objects currently on the worspace.</p>
+<p>Load the libraries you will use in this activity (load other packages as appropriate).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(spatstat)
+<span class="kw">library</span>(spdep)</code></pre></div>
+<p>Choose one of the following datasets.</p>
+<div id="new-york-leukemia-data" class="section level3">
+<h3><span class="header-section-number">30.4.1</span> New York leukemia data</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="st">&quot;New York Leukemia.RData&quot;</span>)</code></pre></div>
+<p>A <code>SpatialPolygonsDataFrame</code> that contains the following variables:</p>
+<ul>
+<li>AREANAME name of census tract</li>
+<li>AREAKEY unique FIPS code for each tract</li>
+<li>POP8 population size (1980 U.S. Census)</li>
+<li>TRACTCAS number of cases of leukemia (1978-1982)</li>
+<li>PROPCAS proportion of cases per tract</li>
+<li>PCTOWNHOME percentage of people in each tract owning their own home</li>
+<li>PCTAGE65P percentage of people in each tract aged 65 or more</li>
+<li>Z transformed proportions</li>
+<li>AVGIDIST average distance between centroid and TCE sites</li>
+<li>PEXPOSURE “exposure potential”: inverse distance between each census tract centroid and the nearest TCE site, IDIST, transformed via log(100*IDIST)</li>
+</ul>
+</div>
+<div id="pennsylvania-lung-cancer" class="section level3">
+<h3><span class="header-section-number">30.4.2</span> Pennsylvania lung cancer</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="st">&quot;Penn Lung Cancer.RData&quot;</span>)</code></pre></div>
+<p>A <code>SpatialPolygonsDataFrame</code> that contains the following variables:</p>
+<ul>
+<li>county: Name of the county</li>
+<li>cases: Number of cases of lung cancer</li>
+<li>population: Population by county</li>
+<li>rate: Lung cancer rate by county</li>
+<li>smoking: Smoking rate by county</li>
+<li>cancer_ rate: Lung cancer rate by county (%)</li>
+<li>smoking_rate: Smoking rate by county (%)</li>
+</ul>
+</div>
+</div>
+<div id="activity-14" class="section level2">
+<h2><span class="header-section-number">30.5</span> Activity</h2>
+<ol style="list-style-type: decimal">
+<li><p>Partner with a fellow student to analyze the chosen dataset.</p></li>
+<li><p>Visualize/explore the dataset using appropriate tools.</p></li>
+<li><p>Analyze your dataset by means of regression modeling. Which should be the dependent variable in your dataset? Why?</p></li>
+<li><p>Discuss the results of your analysis, including possible limitations, and possible ways to improve it (e.g., what additional variables would you like to use?)</p></li>
+</ol>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
+<a href="area-data-vi.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="introduction-to-r.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

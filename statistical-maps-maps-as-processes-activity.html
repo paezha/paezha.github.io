@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="introduction-to-r.html">
+<link rel="prev" href="maps-as-processes-null-landscapes-and-spatial-processes.html">
+<link rel="next" href="point-pattern-analysis-i.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -386,27 +386,92 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Practical Data Analysis for the Spatial Sciences in R</h1>
-<h4 class="author"><em>Antonio Paez</em></h4>
-<h4 class="date"><em>2018-05-07</em></h4>
+<div id="statistical-maps-maps-as-processes---activity" class="section level1">
+<h1><span class="header-section-number">7</span> Statistical Maps: Maps as Processes - Activity</h1>
+<div id="practice-questions" class="section level2">
+<h2><span class="header-section-number">7.1</span> Practice questions</h2>
+<p>Answer the following questions:</p>
+<ol style="list-style-type: decimal">
+<li>What is a Geographic Information System?</li>
+<li>What distinguishes a statistical map from other types of mapping techniques?</li>
+<li>What is a null landscape?</li>
+</ol>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>This book introduces data analysis for applied spatial scientists. These could be geographers, earth scientists, environmental scientists, planners, or others who work with georeferenced datasets.</p>
-<p>My aim with this book has been to introduce key concepts and techniques in the analysis of spatial data in an intuitive way. While there are more advanced treatments of many of these topics, this book should be appealing to students or others who are approaching this topic for the first time.</p>
-<p>The book is organized thematically following the cannonical approach seen, for instance, in [BAILEY &amp; GATRELL] and [UNWIN]. This approach is to conceptualize data by their unit of support.</p>
-<p>Each chapter covers a topic that builds on previous material. In this way, this is not necessarily meant as a reference (there are better books for that). The chapters are followed by an activity.</p>
-<p>I have used these materials for teaching spatial data analysis in different settings. In a flipped classroom setting, the chapters are used as practice material by the students before class. The activity is then completed in class, with the instructor providing support and motivating some discussion. Used in a traditional lecture style, the materials provide structure and visual aids. The activities can be completed by the students as homework or during lab time.</p>
+<div id="learning-objectives-5" class="section level2">
+<h2><span class="header-section-number">7.2</span> Learning objectives</h2>
+<p>In this activity, you will:</p>
+<ol style="list-style-type: decimal">
+<li>Learn about stochastic processes.</li>
+<li>Simulate landscapes using various types of processes.</li>
+<li>Discuss the difference between random and non-random landscapes.</li>
+<li>Think about ways to decide whether a landscape is random.</li>
+</ol>
+</div>
+<div id="suggested-reading-3" class="section level2">
+<h2><span class="header-section-number">7.3</span> Suggested reading</h2>
+<p>O’Sullivan D and Unwin D (2010) Geographic Information Analysis, 2nd Edition, Chapter 4. John Wiley &amp; Sons: New Jersey.</p>
+</div>
+<div id="preliminaries-5" class="section level2">
+<h2><span class="header-section-number">7.4</span> Preliminaries</h2>
+<p>For this activity you will need the following:</p>
+<ul>
+<li>This R markdown notebook.</li>
+</ul>
+<p>It is good practice to clear the working space to make sure that you do not have extraneous items there when you begin your work. The command in R to clear the workspace is <code>rm</code> (for “remove”), followed by a list of items to be removed. To clear the workspace from <em>all</em> objects, do the following:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</code></pre></div>
+<p>Note that <code>ls()</code> lists all objects currently on the worspace.</p>
+<p>Load the libraries you will use in this activity:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
+<p>In the practice that preceded this activity, you learned how to simulate null landscapes and spatial processes. In this activity, the concept of a <em>stochastic process</em> is introduced.</p>
+<p>Some processes are <em>random</em>, such as the ones used in the practice to create <em>null landscapes</em>. These processes take values with some probability, but cannot be predicted with any certainty.</p>
+<p>Let’s illustrate using again a unit square:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">coords &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">x =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.05</span>), <span class="dt">y =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.05</span>))</code></pre></div>
+<p>Here is an example of a random pattern of events:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">events &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="kw">nrow</span>(coords), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)
+null_pattern &lt;-<span class="st"> </span><span class="kw">data.frame</span>(coords, events)
+<span class="kw">ggplot</span>() +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">subset</span>(null_pattern, events ==<span class="st"> </span><span class="dv">1</span>), <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y), <span class="dt">shape =</span> <span class="dv">15</span>) +
+<span class="st">  </span><span class="kw">coord_fixed</span>()</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-101-1.png" width="672" /></p>
+<p>A <em>systematic</em> or <em>deterministic</em> process is one that contains no elements of randomness, and can therefore be predicted with complete certainty. For instance (note the use of <code>xlim</code> to set the extent of x axis in the plot):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">deterministic_point_pattern &lt;-<span class="st"> </span>coords
+deterministic_point_pattern &lt;-<span class="st"> </span><span class="kw">mutate</span>(deterministic_point_pattern, <span class="dt">events =</span> <span class="kw">round</span>(x))
+<span class="kw">ggplot</span>() +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">subset</span>(deterministic_point_pattern, events ==<span class="st"> </span><span class="dv">1</span>), <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y), <span class="dt">shape =</span> <span class="dv">15</span>) +
+<span class="st">  </span><span class="kw">xlim</span>(<span class="dv">0</span>, <span class="dv">1</span>) +
+<span class="st">  </span><span class="kw">coord_fixed</span>()</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-102-1.png" width="672" /></p>
+<p>In the process above, I used the function <code>round()</code> and the coordinate <code>x</code>. The function gives a value of one for all points with x &gt; 0.5, and a value of zero to all points with x &lt;= 0.5. The pattern is fully deterministic: if I know the value of the x coordinate I can predict whether an event will be present.</p>
+<p>A <em>stochastic process</em>, on the other hand, is a process that is neither fully random or deterministic, but rather a combination of the two. Let’s illustrate:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stochastic_point_pattern &lt;-<span class="st"> </span>coords
+stochastic_point_pattern &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(stochastic_point_pattern, 
+         <span class="dt">events =</span> <span class="kw">round</span>(x) -<span class="st"> </span><span class="kw">round</span>(x) *<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="kw">nrow</span>(coords), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>))
+<span class="kw">ggplot</span>() +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">subset</span>(stochastic_point_pattern, events ==<span class="st"> </span><span class="dv">1</span>), <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y), <span class="dt">shape =</span> <span class="dv">15</span>) +
+<span class="st">  </span><span class="kw">xlim</span>(<span class="dv">0</span>, <span class="dv">1</span>) +
+<span class="st">  </span><span class="kw">coord_fixed</span>()</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-103-1.png" width="672" /></p>
+<p>The process above has a deterministic component (the probability of an event is zero if x &lt;= 0.5), and a random component (the probability of a coordinate being an event is 0.5 when x &gt; 0.5).</p>
+</div>
+<div id="activity-2" class="section level2">
+<h2><span class="header-section-number">7.5</span> Activity</h2>
+<ol style="list-style-type: decimal">
+<li><p>Simulate and plot a landscape using a random, stochastic, or deterministic process. It is your choice whether to simulate a point pattern or a continuous variable.</p></li>
+<li><p>Share the map with a fellow student, and ask them to guess whether the map is random or non-random.</p></li>
+<li><p>Repeat 1 and 2 a few times.</p></li>
+<li><p>Propose one or more ways to decide whether a landscape is random, and explain your reasoning. The approach does not need to be the same for point patterns and continuous variables!</p></li>
+</ol>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="introduction-to-r.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="maps-as-processes-null-landscapes-and-spatial-processes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="point-pattern-analysis-i.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

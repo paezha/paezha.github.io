@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="introduction-to-r.html">
+<link rel="prev" href="statistical-maps-ii-activity.html">
+<link rel="next" href="statistical-maps-maps-as-processes-activity.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -386,27 +386,175 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Practical Data Analysis for the Spatial Sciences in R</h1>
-<h4 class="author"><em>Antonio Paez</em></h4>
-<h4 class="date"><em>2018-05-07</em></h4>
+<div id="maps-as-processes-null-landscapes-and-spatial-processes" class="section level1">
+<h1><span class="header-section-number">6</span> Maps as Processes: Null Landscapes and Spatial Processes</h1>
+<div id="introduction" class="section level2">
+<h2><span class="header-section-number">6.1</span> Introduction</h2>
+<p>NOTE: This is an <a href="http://rmarkdown.rstudio.com">R Markdown</a> Notebook. When you execute code within the notebook, the results appear beneath the code.</p>
+<p>In last practice your learning objectives were:</p>
+<ol style="list-style-type: decimal">
+<li>How to obtain a descriptive summary of a dataframe.</li>
+<li>Factors and how to use them.</li>
+<li>How to subset a dataframe.</li>
+<li>Pipe operators and how to use them.</li>
+<li>How to improve your maps.</li>
+</ol>
+<p>Please review the previous practices if you need a refresher on these concepts.</p>
+<p>For this practice you will need the following:</p>
+<ul>
+<li>This R markdown notebook.</li>
+</ul>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>This book introduces data analysis for applied spatial scientists. These could be geographers, earth scientists, environmental scientists, planners, or others who work with georeferenced datasets.</p>
-<p>My aim with this book has been to introduce key concepts and techniques in the analysis of spatial data in an intuitive way. While there are more advanced treatments of many of these topics, this book should be appealing to students or others who are approaching this topic for the first time.</p>
-<p>The book is organized thematically following the cannonical approach seen, for instance, in [BAILEY &amp; GATRELL] and [UNWIN]. This approach is to conceptualize data by their unit of support.</p>
-<p>Each chapter covers a topic that builds on previous material. In this way, this is not necessarily meant as a reference (there are better books for that). The chapters are followed by an activity.</p>
-<p>I have used these materials for teaching spatial data analysis in different settings. In a flipped classroom setting, the chapters are used as practice material by the students before class. The activity is then completed in class, with the instructor providing support and motivating some discussion. Used in a traditional lecture style, the materials provide structure and visual aids. The activities can be completed by the students as homework or during lab time.</p>
+<div id="learning-objectives-4" class="section level2">
+<h2><span class="header-section-number">6.2</span> Learning objectives</h2>
+<p>In this practice, you will learn:</p>
+<ol style="list-style-type: decimal">
+<li>How to generate random numbers with different properties.</li>
+<li>About Null Landscapes.</li>
+<li>How to create new columns in a dataframe using a formula.</li>
+<li>How to simulate a spatial process.</li>
+</ol>
+</div>
+<div id="suggested-reading-2" class="section level2">
+<h2><span class="header-section-number">6.3</span> Suggested reading</h2>
+<p>O’Sullivan D and Unwin D (2010) Geographic Information Analysis, 2nd Edition, Chapters 4. John Wiley &amp; Sons: New Jersey.</p>
+</div>
+<div id="preliminaries-4" class="section level2">
+<h2><span class="header-section-number">6.4</span> Preliminaries</h2>
+<p>As usual, it is good practice to clear the working space to make sure that you do not have extraneous items there when you begin your work. The command in R to clear the workspace is <code>rm</code> (for “remove”), followed by a list of items to be removed. To clear the workspace from <em>all</em> objects, do the following:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</code></pre></div>
+<p>Note that <code>ls()</code> lists all objects currently on the worspace.</p>
+<p>Load the libraries you will use in this activity:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
+</div>
+<div id="random-numbers" class="section level2">
+<h2><span class="header-section-number">6.5</span> Random numbers</h2>
+<p>Colloquially, we understand <em>random</em> as something that happens in an unpredictable way. The same word in statistics has a precise meaning, as the outcome of a process that cannot be predicted with certainty.</p>
+<p>The question whether random processes exist is philosophically interesting. In the early stages of the invention of science, there was much optimism that humans could one day understand every aspect of the universe. This notion is well illustrated by Laplace’s Demon, a hypothetical entity that could predict the state of the universe in the future based on an all-encompassing knowledge of the state of the universe at any past point in time (see <a href="https://en.wikipedia.org/wiki/Laplace%27s_demon">here</a>).</p>
+<p>There are two important limitations to this perspective. First, there is the assumption that the mechanisms of operation of phenomena are well understood (in the case of Laplace’s Demon, it was somewhat naively assumed that classical Newtonian mechanics were sufficient). And secondly, the assumption that all relevant information is available to the observer.</p>
+<p>In reality, there are many processes that are not fully understood. Furthermore, there are often constraints in terms of how much information (and how accurately) can be collected with respect to any given phenomenon.</p>
+<p>A process can be deterministic. However, When limited knowledge/limited information prevent us from being able to make certain predictions, we assume that the process is random.</p>
+<p>It is important to note that “random” does not mean that just <em>any</em> outcome is possible. For instance, if you flip a coin, there are only two possible outcomes. If you roll a dice, there are only six possible outcomes. The concentration of a pollutant cannot be negative. The height of a human adult cannot be zero or 10 meters. And so on.</p>
+<p>Over time, many formulas have been devised to describe different types of random processes. A <em>random probability distribution function</em> describes the probability of observing different outcomes.</p>
+<p>For instance, a formula for processes similar to coin flips was discovered by Bernoulli in 1713 (see <a href="https://link.springer.com/referenceworkentry/10.1007%2F978-0-387-32833-1_34">here</a>).</p>
+<p>The following function reports a random binomial variable. The number of observations <code>n</code> is how many random numbers we require. The <code>size</code> is the number of trials. For instance, if the experiment was flipping a coin, it would be how many times we get heads in <code>size</code> flips. The probability of success <code>prob</code> is the probability of getting heads in any given toss. Execute the chunk repeatedly to see what happens.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)</code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p>If you tried this “experiment” repeatedly, you would find that “heads” (1s) and “tails” (0s) appear each about 50% of the time. A way to implement this is to increase <code>n</code>- think of this as recruiting more people to do coin flips at the same time:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="dv">1000</span> <span class="co"># Number of people tossing the coin one time.</span>
+coin_flips &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> n, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)
+<span class="kw">sum</span>(coin_flips)/n</code></pre></div>
+<pre><code>## [1] 0.5</code></pre>
+<p>What happens if you change the <code>size</code> to 0, and why?</p>
+<p>The binomial function is an example of a <em>discrete</em> probability distribution function, because it can take only one of a discrete (limited) number of values (0 and 1).</p>
+<p>Other random probability distribution functions are for <em>continuous</em> variables, variables that can take any value within a predefined range. The most famous of this distributions is the <em>normal distribution</em>, which you may know also as the <em>bell curve</em>, which is attributed to Gauss (see <a href="https://link.springer.com/referenceworkentry/10.1007/978-0-387-32833-1_285">here</a>).</p>
+<p>This distribution is defined by a centering paramater (its mean) and a spread parameter (its standard deviation). In the normal distribution, 68% of values are within one standard deviation from the mean, 95% of values are within two standard deviations from the mean, and 99.7% of values are within three standard deviations from the mean.</p>
+<p>The following function reports a value taken at random from a normal distribution with <code>mean</code> zero and standard deviation <code>sd</code> of one. Execute this chunk repeatedly to see what happens:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</code></pre></div>
+<pre><code>## [1] 0.7046975</code></pre>
+<p>Let’s say that the average height of Canadian men is 170.7 cm and the standard deviation is 7 cm. The heigh of a random person in this population would be:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dt">mean =</span> <span class="fl">170.7</span>, <span class="dt">sd =</span> <span class="dv">7</span>)</code></pre></div>
+<pre><code>## [1] 157.0811</code></pre>
+<p>And the distribution of heights of <code>n</code> men in this population would be:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="dv">1000</span>
+height &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n, <span class="dt">mean =</span> <span class="fl">170.7</span>, <span class="dt">sd =</span> <span class="dv">7</span>)
+height &lt;-<span class="st"> </span><span class="kw">data.frame</span>(height)
+<span class="kw">ggplot</span>(<span class="dt">data =</span> height, <span class="kw">aes</span>(<span class="dt">x =</span> height)) +<span class="st"> </span><span class="kw">geom_histogram</span>()</code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-80-1.png" width="672" /></p>
+<p>Men shorter than 150 cm would be extremely rare, as well as men taller than 190 cm.</p>
+</div>
+<div id="null-landscapes" class="section level2">
+<h2><span class="header-section-number">6.6</span> Null landscapes</h2>
+<p>So what have random variables have to do with maps?</p>
+<p>Random variables can be used to generate purely random maps. These are called <em>null landscapes</em> or <em>neutral landscapes</em> in spatial ecology (see <a href="http://www.jstor.org/stable/pdf/3546007.pdf">this</a>).</p>
+<p>The concept of null landscapes is quite useful, because they provide a benchmark to compare statistical maps. Let’s see how to generate a null landscape of events.</p>
+<p>Suppose that there is a landscape with coordinates in the unit square, that is divided in very small discrete units of land. Each of these units of land can be the location of an event. For example, a tree might be present; or a case of a disease.</p>
+<p>Let’s first create a landscape. For this, we will use the <code>expand.grid</code> function to find all combinations of two sets of coordinates in the unit interval, using small partitions:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">coords &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">x =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.05</span>), <span class="dt">y =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.05</span>))</code></pre></div>
+<p>Now, let’s generate a binomial random variable to go with these coordinates.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">events &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="kw">nrow</span>(coords), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)</code></pre></div>
+<p>We will collect the coordinates and the random variable in a dataframe for plotting:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">null_pattern &lt;-<span class="st"> </span><span class="kw">data.frame</span>(coords, events)</code></pre></div>
+<p>This is our null landscape:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>() +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">subset</span>(null_pattern, events ==<span class="st"> </span><span class="dv">1</span>), <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y), <span class="dt">shape =</span> <span class="dv">15</span>) +
+<span class="st">  </span><span class="kw">coord_fixed</span>()</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-84-1.png" width="672" /></p>
+<p>By changing the probability <code>prob</code> in the function <code>rbinom</code> you can make the event more or less frequent. Try it!</p>
+<p>A continuous random variable can be used to generate a landscape with a null trend. For instance, imagine that a group of individuals are asked to stand in formation, and that they arrange themselves purely at random. What would a map of their heights look like?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">heights &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="kw">nrow</span>(coords), <span class="dt">mean =</span> <span class="fl">170.7</span>, <span class="dt">sd =</span> <span class="dv">7</span>)</code></pre></div>
+<p>Collecting in a dataframe for plotting:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">null_trend &lt;-<span class="st"> </span><span class="kw">data.frame</span>(coords, heights)</code></pre></div>
+<p>One possible map of heights when the individuals stand in formation at random would look like:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>() +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> null_trend, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y, <span class="dt">color =</span> heights), <span class="dt">shape =</span> <span class="dv">15</span>) +
+<span class="st">  </span><span class="kw">scale_color_distiller</span>(<span class="dt">palette =</span> <span class="st">&quot;Spectral&quot;</span>) +
+<span class="st">  </span><span class="kw">coord_fixed</span>()</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-87-1.png" width="672" /></p>
+<p>These are only two of many possible techniques to generate null landscapes. We will discuss other later in the course.</p>
+</div>
+<div id="simulating-spatial-processes" class="section level2">
+<h2><span class="header-section-number">6.7</span> Simulating spatial processes</h2>
+<p>Null landscapes are interesting as a benchmark. More interesting are landscapes that emerge as the output of a non-random process. Here we will see how to introduce a systematic element into a null landscape to simulate spatial processes.</p>
+<p>Let’s begin with the point pattern, using the same landscape that we used above. We will first copy the coordinates of the landscape to a new dataframe, that we will call <code>pattern1</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pattern1 &lt;-<span class="st"> </span>coords</code></pre></div>
+<p>Next, we will use the function <code>mutate</code> from the <code>dplyr</code> package that is part of the <code>tidyverse</code>. This function adds a column to a data frame that could be calculated using a formula. For instance, we will now make the probability <code>prob</code> of the random binomial number generator a function of the coordinates:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pattern1 &lt;-<span class="st"> </span><span class="kw">mutate</span>(pattern1, <span class="dt">events =</span> <span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="kw">nrow</span>(pattern1), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> (x)))</code></pre></div>
+<p>Plot this pattern:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>() +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">subset</span>(pattern1, events ==<span class="st"> </span><span class="dv">1</span>), <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y), <span class="dt">shape =</span> <span class="dv">15</span>) +
+<span class="st">  </span><span class="kw">coord_fixed</span>()</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-90-1.png" width="672" /></p>
+<p>Since the probability of a “success” in the binomial experiment is proportional to the value of x (the coordinate of the event), now the events are clustered to the right of the plot. The underlying process in this case can be described in simple terms as “the probability of an event increases in the east direction”, possibly as a result of wind conditions, soil fertility, or other environmental factors that follow a trend.</p>
+<p>Let’s see what happens when we make this probability a function of the y coordinate:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pattern1 &lt;-<span class="st"> </span><span class="kw">mutate</span>(pattern1, <span class="dt">events =</span> <span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="kw">nrow</span>(pattern1), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> (y)))
+<span class="kw">ggplot</span>() +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">subset</span>(pattern1, events ==<span class="st"> </span><span class="dv">1</span>), <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y), <span class="dt">shape =</span> <span class="dv">15</span>) +
+<span class="st">  </span><span class="kw">coord_fixed</span>()</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-91-1.png" width="672" /></p>
+<p>Since the probability of a “success” in the binomial experiment is proportional to the value of y (the coordinate of the event), now the events are clustered to the top. The probability could be the interaction of the two coordinates:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pattern1 &lt;-<span class="st"> </span><span class="kw">mutate</span>(pattern1, <span class="dt">events =</span> <span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="kw">nrow</span>(pattern1), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> (x *<span class="st"> </span>y)))
+<span class="kw">ggplot</span>() +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">subset</span>(pattern1, events ==<span class="st"> </span><span class="dv">1</span>), <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y), <span class="dt">shape =</span> <span class="dv">15</span>) +
+<span class="st">  </span><span class="kw">coord_fixed</span>()</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-92-1.png" width="672" /></p>
+<p>Which of course means that the events cluster on the top-right corner.</p>
+<p>A somewhat more sophisticated example could make the probability a function of distance from the center of the region:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pattern1 &lt;-<span class="st"> </span>coords
+pattern1 &lt;-<span class="st"> </span><span class="kw">mutate</span>(pattern1, 
+                   <span class="dt">distance =</span> <span class="kw">sqrt</span>((<span class="fl">0.5</span> -<span class="st"> </span>x)^<span class="dv">2</span> +<span class="st"> </span>(<span class="fl">0.5</span> -<span class="st"> </span>y)^<span class="dv">2</span>), 
+                   <span class="dt">events =</span> <span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="kw">nrow</span>(pattern1), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="dv">1</span> -<span class="st"> </span><span class="kw">exp</span>(-<span class="fl">0.5</span> *<span class="st"> </span>distance)))</code></pre></div>
+<p>Don’t worry too much about the formula that I selected to generate this process; we will see different tools to describe a spatial process. In this particular example, I selected a function that makes the probability increase with distance from the center of the region.</p>
+<p>Plot this pattern:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>() +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">subset</span>(pattern1, events ==<span class="st"> </span><span class="dv">1</span>), <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y), <span class="dt">shape =</span> <span class="dv">15</span>) +
+<span class="st">  </span><span class="kw">coord_fixed</span>()</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-94-1.png" width="672" /> As you would expect, there are few events near the center, and the number of events tends to increase away from the center.</p>
+<p>To conclude this practice, let’s revisit the example of the people standing in formation, but now their sorting is not random, since taller people tend to stand towards the back. We can simulate this by making the height a function of position.</p>
+<p>First, we copy the coordinates to a new dataframe for our trend experiment:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">trend1 &lt;-<span class="st"> </span>coords</code></pre></div>
+<p>Again we use <code>mutate</code> to add a column to a data frame that could be calculated using a formula. For instance, we will now make the probability <code>prob</code> of the random binomial number generator a function of the coordinates:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">trend1 &lt;-<span class="st"> </span><span class="kw">mutate</span>(trend1, <span class="dt">heights =</span> <span class="dv">160</span> +<span class="st"> </span><span class="dv">20</span> *<span class="st"> </span>y  +<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="kw">nrow</span>(pattern1), <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">7</span>))</code></pre></div>
+<p>If people have a preference for standing next to people about their same height, and shorter people have a preference for standing near the front, this is a possible map of heights in the formation:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>() +<span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> trend1, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y, <span class="dt">color =</span> heights), <span class="dt">shape =</span> <span class="dv">15</span>) +
+<span class="st">  </span><span class="kw">scale_color_distiller</span>(<span class="dt">palette =</span> <span class="st">&quot;Spectral&quot;</span>) +
+<span class="st">  </span><span class="kw">coord_fixed</span>()</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-97-1.png" width="672" /></p>
+<p>As expected, shorter people are towards the “front” (bottom of the plot) and taller people towards the back. It is not a uniform process, since there is still some randomness, but a trend can be clearly appreciated.</p>
+<p>In the vast majority of cases, we do not know the process; that is precisely what we wish to infer. Understanding process generation in a statistical sense, as well as null landscapes, is a useful tool that can help to infer processes in applications with empirical (as opposed to simulated) data.</p>
+<p>This concludes Practice 3.</p>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="introduction-to-r.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="statistical-maps-ii-activity.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="statistical-maps-maps-as-processes-activity.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

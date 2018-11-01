@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="introduction-to-r.html">
+<link rel="prev" href="area-data-v.html">
+<link rel="next" href="area-data-vi.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -386,27 +386,102 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Practical Data Analysis for the Spatial Sciences in R</h1>
-<h4 class="author"><em>Antonio Paez</em></h4>
-<h4 class="date"><em>2018-05-07</em></h4>
+<div id="area-data-v-activity" class="section level1">
+<h1><span class="header-section-number">28</span> Area Data V-Activity</h1>
+<div id="practice-questions-10" class="section level2">
+<h2><span class="header-section-number">28.1</span> Practice questions</h2>
+<p>Answer the following questions:</p>
+<ol style="list-style-type: decimal">
+<li>Explain the main assumptions for linear regression models.</li>
+<li>How is Moran’s I used as a diagnostic in regression analysis?</li>
+<li>Residual spatial autocorrelation is symptomatic of what issues in regression analysis?</li>
+<li>What does it mean for a model to be linear in the coefficients?</li>
+<li>What is the purpose of transforming variables for regression analysis?</li>
+</ol>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>This book introduces data analysis for applied spatial scientists. These could be geographers, earth scientists, environmental scientists, planners, or others who work with georeferenced datasets.</p>
-<p>My aim with this book has been to introduce key concepts and techniques in the analysis of spatial data in an intuitive way. While there are more advanced treatments of many of these topics, this book should be appealing to students or others who are approaching this topic for the first time.</p>
-<p>The book is organized thematically following the cannonical approach seen, for instance, in [BAILEY &amp; GATRELL] and [UNWIN]. This approach is to conceptualize data by their unit of support.</p>
-<p>Each chapter covers a topic that builds on previous material. In this way, this is not necessarily meant as a reference (there are better books for that). The chapters are followed by an activity.</p>
-<p>I have used these materials for teaching spatial data analysis in different settings. In a flipped classroom setting, the chapters are used as practice material by the students before class. The activity is then completed in class, with the instructor providing support and motivating some discussion. Used in a traditional lecture style, the materials provide structure and visual aids. The activities can be completed by the students as homework or during lab time.</p>
+<div id="learning-objectives-25" class="section level2">
+<h2><span class="header-section-number">28.2</span> Learning objectives</h2>
+<p>In this activity, you will:</p>
+<ol style="list-style-type: decimal">
+<li>Explore a spatial dataset.</li>
+<li>Conduct linear regression analysis.</li>
+<li>Conduct diagnostics for residual spatial autocorrelation.</li>
+<li>Propose ways to improve your analysis.</li>
+</ol>
+</div>
+<div id="suggested-reading-23" class="section level2">
+<h2><span class="header-section-number">28.3</span> Suggested reading</h2>
+<p>O’Sullivan D and Unwin D (2010) Geographic Information Analysis, 2nd Edition, Chapter 7. John Wiley &amp; Sons: New Jersey.</p>
+</div>
+<div id="preliminaries-26" class="section level2">
+<h2><span class="header-section-number">28.4</span> Preliminaries</h2>
+<p>For this activity you will need the following:</p>
+<ul>
+<li>This R Notebook.</li>
+<li>A shape file called <code>Hamilton CMA TTS06.shp</code> with the Trafic Analysis Zones (TAZ) for Hamilton CMA, according to the Transportation Tomorrow Survey of 2011.</li>
+<li>An Excel file called <code>Hamilton CMA Trips by Mode.xlsx</code> with the number of trips by mode of transportation by TAZ, and other useful information from the 2011 census for Hamilton CMA.</li>
+<li>An Excel file called <code>travel_time_car.xlsx</code> with the travel distance/time from TAZ centroids to Jackson Square in downtown Hamilton.</li>
+</ul>
+<p>The data for this activity were retrieved from the 2011 Transportation Tomorrow Survey <a href="http://www.transportationtomorrow.on.ca/">TTS</a>, the periodic travel survey of the Greater Toronto and Hamilton Area, as well as data from the 2011 Canadian Census <a href="http://www12.statcan.gc.ca/census-recensement/index-eng.cfm">Census Program</a>.</p>
+<p>It is good practice to clear the working space to make sure that you do not have extraneous items there when you begin your work. The command in R to clear the workspace is <code>rm</code> (for “remove”), followed by a list of items to be removed. To clear the workspace from <em>all</em> objects, do the following:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</code></pre></div>
+<p>Note that <code>ls()</code> lists all objects currently on the worspace.</p>
+<p>Load the libraries you will use in this activity. In addition to <code>tidyverse</code>, you will need <code>spdep</code>, a package designed for the analysis of spatial data (you can learn about <code>spdep</code> <a href="https://cran.r-project.org/web/packages/spdep/index.html">here</a> and <a href="http://2014.ogrs-community.org/2014_workshops/R_Spatial_Bivand/ogrs_140612.pdf">here</a>):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(spdep)
+<span class="kw">library</span>(rgdal)
+<span class="kw">library</span>(readxl)</code></pre></div>
+<pre><code>## Warning: package &#39;readxl&#39; was built under R version 3.4.4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(broom)</code></pre></div>
+<p>Begin by loading the shape file:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Hamilton_TAZ &lt;-<span class="st"> </span><span class="kw">readOGR</span>(<span class="st">&quot;.&quot;</span>, <span class="dt">layer =</span> <span class="st">&quot;Hamilton CMA tts06&quot;</span>)</code></pre></div>
+<pre><code>## OGR data source with driver: ESRI Shapefile 
+## Source: &quot;C:\Antonio\Courses\GEOG 4GA3 - Applied Spatial Analysis\Practical Data Analysis for the Spatial Sciences in R&quot;, layer: &quot;Hamilton CMA tts06&quot;
+## with 297 features
+## It has 12 fields
+## Integer64 fields read as strings:  ID NUM GTA06 GTA01 AREA_M AREA_H</code></pre>
+<p>The shape file includes the geometry of the zones only. The unique identifier used to link tables is “GTA06”.</p>
+<p>Now load the data in the two Excel files:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">travel_data &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;Hamilton CMA Trips by Mode.xlsx&quot;</span>)
+travel_time &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;travel_time_car.xlsx&quot;</span>)</code></pre></div>
+<p>Attach this file to the <code>SpatialPolygonsDataFrame</code>. Note that to complete the join, the identifier (in this case <code>GTA06</code>) must be in the same format in both data frames:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Travel data</span>
+Hamilton_TAZ@data &lt;-<span class="st"> </span><span class="kw">left_join</span>(Hamilton_TAZ@data, travel_data)</code></pre></div>
+<pre><code>## Joining, by = &quot;GTA06&quot;</code></pre>
+<pre><code>## Warning: Column `GTA06` joining factor and character vector, coercing into
+## character vector</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Travel time information</span>
+travel_time$GTA06 &lt;-<span class="st"> </span><span class="kw">as.character</span>(travel_time$GTA06)
+Hamilton_TAZ@data &lt;-<span class="st"> </span><span class="kw">left_join</span>(Hamilton_TAZ@data, travel_time)</code></pre></div>
+<pre><code>## Joining, by = &quot;GTA06&quot;</code></pre>
+<p>The analysis will be on travel by car in the Hamilton CMA. Calculate the proportion of trips by car by TAZ:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Hamilton_TAZ@data &lt;-<span class="st"> </span><span class="kw">mutate</span>(Hamilton_TAZ@data, <span class="dt">Auto_driver.prop =</span> Auto_driver /<span class="st"> </span>(Auto_driver +<span class="st"> </span>Cycle +<span class="st"> </span>Walk))</code></pre></div>
+<p>Note that the proportion of people who travelled by car as passengers are not included in the denominator of the proportion! This is because every trip as a passenger is already included in trips with one driver.</p>
+<p>Hamilton_TAZ is a <code>SpatialPolygonDataFrame</code>. Convert to a dataframe (“tidy” it) for plotting using <code>ggplot2</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Hamilton_TAZ.t &lt;-<span class="st"> </span><span class="kw">tidy</span>(Hamilton_TAZ, <span class="dt">region =</span> <span class="st">&quot;GTA06&quot;</span>)
+Hamilton_TAZ.t &lt;-<span class="st"> </span><span class="kw">rename</span>(Hamilton_TAZ.t, <span class="dt">GTA06 =</span> id)</code></pre></div>
+<p>Rejoin the data:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Hamilton_TAZ.t &lt;-<span class="st"> </span><span class="kw">left_join</span>(Hamilton_TAZ.t, Hamilton_TAZ@data, <span class="dt">by =</span> <span class="st">&quot;GTA06&quot;</span>)</code></pre></div>
+</div>
+<div id="activity-13" class="section level2">
+<h2><span class="header-section-number">28.5</span> Activity</h2>
+<ol style="list-style-type: decimal">
+<li><p>Examine your dataframe. What variables are included? Are there any missing values?</p></li>
+<li><p>Map the variable <code>Auto_driver.prop</code>, and use Moran’s I to test for spatial autocorrelation. What do you find? Is autocorrelation in this variable a sign that autocorrelation will be an issue in regression analysis?</p></li>
+<li><p>Estimate regression model using the variables <code>Pop_Density</code> and travel time in <code>minutes</code>. Discuss this model.</p></li>
+<li><p>Examine residuals of the model. Are they spatially independent?</p></li>
+<li><p>Propose ways to improve your model.</p></li>
+</ol>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="introduction-to-r.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="area-data-v.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="area-data-vi.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

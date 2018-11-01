@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="introduction-to-r.html">
+<link rel="prev" href="point-pattern-analysis-ii.html">
+<link rel="next" href="point-pattern-analysis-iii.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -386,27 +386,94 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Practical Data Analysis for the Spatial Sciences in R</h1>
-<h4 class="author"><em>Antonio Paez</em></h4>
-<h4 class="date"><em>2018-05-07</em></h4>
+<div id="point-pattern-analysis-ii-activity" class="section level1">
+<h1><span class="header-section-number">11</span> Point Pattern Analysis II-Activity</h1>
+<div id="practice-questions-2" class="section level2">
+<h2><span class="header-section-number">11.1</span> Practice questions</h2>
+<p>Answer the following questions:</p>
+<ol style="list-style-type: decimal">
+<li>How does the quadrat-based test of independence respond to a small number of quadrats?</li>
+<li>How does the quadrat-based test of independence respond to a large number of quadrats?</li>
+<li>What are the limitations of quadrat analysis?</li>
+<li>What is a kernel function?</li>
+<li>How does the bandwidth affect a kernel function?</li>
+</ol>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>This book introduces data analysis for applied spatial scientists. These could be geographers, earth scientists, environmental scientists, planners, or others who work with georeferenced datasets.</p>
-<p>My aim with this book has been to introduce key concepts and techniques in the analysis of spatial data in an intuitive way. While there are more advanced treatments of many of these topics, this book should be appealing to students or others who are approaching this topic for the first time.</p>
-<p>The book is organized thematically following the cannonical approach seen, for instance, in [BAILEY &amp; GATRELL] and [UNWIN]. This approach is to conceptualize data by their unit of support.</p>
-<p>Each chapter covers a topic that builds on previous material. In this way, this is not necessarily meant as a reference (there are better books for that). The chapters are followed by an activity.</p>
-<p>I have used these materials for teaching spatial data analysis in different settings. In a flipped classroom setting, the chapters are used as practice material by the students before class. The activity is then completed in class, with the instructor providing support and motivating some discussion. Used in a traditional lecture style, the materials provide structure and visual aids. The activities can be completed by the students as homework or during lab time.</p>
+<div id="learning-objectives-9" class="section level2">
+<h2><span class="header-section-number">11.2</span> Learning objectives</h2>
+<p>In this activity, you will:</p>
+<ol style="list-style-type: decimal">
+<li>Explore a dataset using quadrats and kernel density.</li>
+<li>Experiment with different parameters (number/size of kernels and bandwidths).</li>
+<li>Discuss the impacts of selecting different parameters.</li>
+<li>Hypothesize about the underlying spatial process based on your analysis.</li>
+</ol>
+</div>
+<div id="suggested-reading-7" class="section level2">
+<h2><span class="header-section-number">11.3</span> Suggested reading</h2>
+<p>O’Sullivan D and Unwin D (2010) Geographic Information Analysis, 2nd Edition, Chapter 5. John Wiley &amp; Sons: New Jersey.</p>
+</div>
+<div id="preliminaries-9" class="section level2">
+<h2><span class="header-section-number">11.4</span> Preliminaries</h2>
+<p>For this activity you will need the following:</p>
+<ul>
+<li>This R markdown notebook.</li>
+<li>A dataset called <code>Scandinavian Bear Project Example.RData</code>.</li>
+</ul>
+<p>It is good practice to clear the working space to make sure that you do not have extraneous items there when you begin your work. The command in R to clear the workspace is <code>rm</code> (for “remove”), followed by a list of items to be removed. To clear the workspace from <em>all</em> objects, do the following:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</code></pre></div>
+<p>Note that <code>ls()</code> lists all objects currently on the worspace.</p>
+<p>Load the libraries you will use in this activity. In addition to <code>tidyverse</code>, you will need <code>spatstat</code>, a package designed for the analysis of point patterns (you can learn about <code>spatstat</code> <a href="https://cran.r-project.org/web/packages/spatstat/vignettes/getstart.pdf">here</a> and <a href="http://spatstat.org/resources/spatstatJSSpaper.pdf">here</a>):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(spatstat)</code></pre></div>
+<p>In the practice that preceded this activity, you learned about the concepts of intensity and density, about quadrats, and also how to create density maps.</p>
+<p>Begin by loading the data that you will use in this activity:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="st">&quot;Scandinavian Bear Project Example.RData&quot;</span>)</code></pre></div>
+<p>If you inspect your workspace, you will see that the following <code>ppp</code> object is there:</p>
+<ul>
+<li><code>bear.ppp</code></li>
+</ul>
+<p>This dataset was sourced from the Scandinavia Bear Project, a Swedish-Noruegian collaboration that aims to study the ecology of brown bears, to provide decision makers with evidence to support bear management, and to provide information regarding bears to the public. You can learn more about this project <a href="http://bearproject.info/about-the-project/">here</a>.</p>
+<p>The project involves tagging bears with GPS units, so that their movements can be tracked.</p>
+<p>The dataset includes coordinates of one bear’s movement over a period of several weeksin 2004. The dataset was originally taken from the <code>adehabitatLT</code> package but was somewhat simplified for this activity. Instead of full date and time information, the point pattern is marked more simply as “Day Time” and “Night Time”, to distinguish between diurnal and nocturnal activity of the bear.</p>
+<p>You can check the contents of the <code>ppp</code> object by means of <code>summary</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(bear.ppp)</code></pre></div>
+<pre><code>## Marked planar point pattern:  1000 points
+## Average intensity 2.466078e-05 points per square unit
+## 
+## Coordinates are given to 1 decimal place
+## i.e. rounded to the nearest multiple of 0.1 units
+## 
+## Multitype:
+##            frequency proportion    intensity
+## Day Time         502      0.502 1.237971e-05
+## Night Time       498      0.498 1.228107e-05
+## 
+## Window: polygonal boundary
+## single connected closed polygon with 11 vertices
+## enclosing rectangle: [515648.4, 523260.3] x [6812095, 6821583] units
+## Window area = 40550200 square units
+## Fraction of frame area: 0.562</code></pre>
+</div>
+<div id="activity-4" class="section level2">
+<h2><span class="header-section-number">11.5</span> Activity</h2>
+<ol style="list-style-type: decimal">
+<li><p>Analyze the point pattern for the movements of the bear using quadrat and kernel density methods. Experiment with different quadrat sizes and kernel bandwidths.</p></li>
+<li><p>Explain your choice of parameters (quadrat sizes and kernel bandwidths) to a fellow student.</p></li>
+<li><p>Decide whether these patterns are random, and support your decision.</p></li>
+<li><p>Do you see differences in the activity patterns of the bear by time of day? What could explain those differences, if any?</p></li>
+<li><p>Discuss the limitations of your conclusions, and of quadrat/kernel (density-based) approaches more generally.</p></li>
+</ol>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="introduction-to-r.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="point-pattern-analysis-ii.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="point-pattern-analysis-iii.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

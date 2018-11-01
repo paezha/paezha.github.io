@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="introduction-to-r.html">
+<link rel="prev" href="statistical-maps-ii.html">
+<link rel="next" href="maps-as-processes-null-landscapes-and-spatial-processes.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -386,27 +386,81 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Practical Data Analysis for the Spatial Sciences in R</h1>
-<h4 class="author"><em>Antonio Paez</em></h4>
-<h4 class="date"><em>2018-05-07</em></h4>
+<div id="statistical-maps-ii---activity" class="section level1">
+<h1><span class="header-section-number">5</span> Statistical Maps II - Activity</h1>
+<div id="housekeeping-questions" class="section level2">
+<h2><span class="header-section-number">5.1</span> Housekeeping Questions</h2>
+<p>Answer the following questions:</p>
+<ol style="list-style-type: decimal">
+<li>How many examinations are there in this course?</li>
+<li>What is the date of the first examination?</li>
+<li>Where is Mr. De Luca’s office?</li>
+</ol>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>This book introduces data analysis for applied spatial scientists. These could be geographers, earth scientists, environmental scientists, planners, or others who work with georeferenced datasets.</p>
-<p>My aim with this book has been to introduce key concepts and techniques in the analysis of spatial data in an intuitive way. While there are more advanced treatments of many of these topics, this book should be appealing to students or others who are approaching this topic for the first time.</p>
-<p>The book is organized thematically following the cannonical approach seen, for instance, in [BAILEY &amp; GATRELL] and [UNWIN]. This approach is to conceptualize data by their unit of support.</p>
-<p>Each chapter covers a topic that builds on previous material. In this way, this is not necessarily meant as a reference (there are better books for that). The chapters are followed by an activity.</p>
-<p>I have used these materials for teaching spatial data analysis in different settings. In a flipped classroom setting, the chapters are used as practice material by the students before class. The activity is then completed in class, with the instructor providing support and motivating some discussion. Used in a traditional lecture style, the materials provide structure and visual aids. The activities can be completed by the students as homework or during lab time.</p>
+<div id="learning-objectives-3" class="section level2">
+<h2><span class="header-section-number">5.2</span> Learning objectives</h2>
+<ol style="list-style-type: decimal">
+<li>The objective of this activity is to learn about patterns and processes, including random patterns.</li>
+<li>You should understand the general approach to retrieve a process from a pattern.</li>
+<li>You should be able to discuss the importance of discriminating random patterns.</li>
+</ol>
+</div>
+<div id="suggested-reading-1" class="section level2">
+<h2><span class="header-section-number">5.3</span> Suggested reading</h2>
+<p>O’Sullivan D and Unwin D (2010) Geographic Information Analysis, 2nd Edition, Chapters 1-3. John Wiley &amp; Sons: New Jersey.</p>
+</div>
+<div id="preliminaries-3" class="section level2">
+<h2><span class="header-section-number">5.4</span> Preliminaries</h2>
+<p>For this activity you will need the following:</p>
+<ul>
+<li><p>This R markdown notebook.</p></li>
+<li>The following datasets:</li>
+<li><code>Data1.RData</code></li>
+<li><p><code>Data2.RData</code></p></li>
+</ul>
+<p>It is good practice to clear the working space to make sure that you do not have extraneous items there when you begin your work. The command in R to clear the workspace is <code>rm</code> (for “remove”), followed by a list of items to be removed. To clear the workspace from <em>all</em> objects, do the following:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</code></pre></div>
+<p>Note that <code>ls()</code> lists all objects currently on the worspace.</p>
+<p>Load the libraries you will use in this activity:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
+<p>Now that your workspace is clear, you can proceed to load the required dataset. It is very important that R knows where to look for it. This means that the path to the file is explicit, or alternatively that you set the working directory to the directory where the file is.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="st">&quot;Data1.RData&quot;</span>)
+<span class="kw">load</span>(<span class="st">&quot;Data2.RData&quot;</span>)</code></pre></div>
+<p>The datasets include the following dataframe which will be used in the first part of the activity:</p>
+<ul>
+<li><code>Data</code></li>
+</ul>
+<p>And the following related dataframes, which will be used in the second part of the activity:</p>
+<ul>
+<li><code>PointPattern1</code></li>
+<li><code>PointPattern2</code></li>
+<li><code>PointPattern3</code></li>
+</ul>
+<p>The dataframe <code>Data</code> includes <span class="math inline">\(n = 65\)</span> observations (Note: text between $ characters is mathematical notation in LaTeX). These observations are geocoded using a false origin and coordinates normalized to the unit-square (the extent of their values is between zero and one). The coordinates are <code>x</code> and <code>y</code>.</p>
+<p>In addition, there are three variables associated with the locations (VAR1, VAR2, VAR3). The variables are generic. Feel free to think of them as if they were housing prices or concentrations in ppb of some contaminant. Finally, a factor variable states whether the variables were measured for a location: if the status is “FALSE”, the values of the variables are missing.</p>
+<p>The dataframes <code>PointPattern*</code> are locations of some generic event. The coordinates <code>x</code> and <code>y</code> are also based on a false origin and are normalized to the unit-square. Feel free to think of these events as cases of flu, the location of trees of a certain species, or the location of fires.</p>
+</div>
+<div id="activity-1" class="section level2">
+<h2><span class="header-section-number">5.5</span> Activity</h2>
+<ol style="list-style-type: decimal">
+<li><p>Create thematic maps for variables VAR1 through VAR3 in the dataframe <code>Data</code>.</p></li>
+<li><p>Suppose that you were tasked with estimating the value of a variable for the locations where those were not measured. For instance, you could be a realtor, and you need to assess the value of a property, and the only information available is the published values of other properties in the region. As an alternative, you could be an environmental scientist, and you need to estimate what the concentration of a contaminant at a site, based on previous measurements at other sites in the region.</p></li>
+</ol>
+<p>Propose one or more ways to guess those missing values, and explain your reasoning. The approach does not need to be the same for all variables!</p>
+<ol start="3" style="list-style-type: decimal">
+<li><p>Plot all three point patterns.</p></li>
+<li><p>Imagine that you are a public health official and you need to plan services to the public. If you were asked to guess where the next event would emerge, where would be your guess in each map? Explain your answer.</p></li>
+</ol>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="introduction-to-r.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="statistical-maps-ii.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="maps-as-processes-null-landscapes-and-spatial-processes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

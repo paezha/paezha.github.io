@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="introduction-to-r.html">
+<link rel="prev" href="area-data-ii-activity.html">
+<link rel="next" href="area-data-iii-activity.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -386,27 +386,363 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Practical Data Analysis for the Spatial Sciences in R</h1>
-<h4 class="author"><em>Antonio Paez</em></h4>
-<h4 class="date"><em>2018-05-07</em></h4>
+<div id="area-data-iii" class="section level1">
+<h1><span class="header-section-number">23</span> Area Data III</h1>
+<div id="introduction-8" class="section level2">
+<h2><span class="header-section-number">23.1</span> Introduction</h2>
+<p>NOTE: This is an <a href="http://rmarkdown.rstudio.com">R Markdown</a> Notebook. When you execute code within the notebook, the results appear beneath the code.</p>
+<p>In last previous practice/session, you learned about different ways to define <em>proximity</em> for area data, about spatial weights matrices, and how spatial weights matrices could be used to calculate spatial moving averages.</p>
+<p>For this practice you will need the following:</p>
+<ul>
+<li>This R markdown notebook.</li>
+<li>A shape file called “Hamilton CMA CT”</li>
+</ul>
+<p>This dataset includes the spatial information for the census tracts in the Hamilton Census Metropolitan Area (as polygons), and a host of demographic variables from the census of Canada, including population and languages.</p>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>This book introduces data analysis for applied spatial scientists. These could be geographers, earth scientists, environmental scientists, planners, or others who work with georeferenced datasets.</p>
-<p>My aim with this book has been to introduce key concepts and techniques in the analysis of spatial data in an intuitive way. While there are more advanced treatments of many of these topics, this book should be appealing to students or others who are approaching this topic for the first time.</p>
-<p>The book is organized thematically following the cannonical approach seen, for instance, in [BAILEY &amp; GATRELL] and [UNWIN]. This approach is to conceptualize data by their unit of support.</p>
-<p>Each chapter covers a topic that builds on previous material. In this way, this is not necessarily meant as a reference (there are better books for that). The chapters are followed by an activity.</p>
-<p>I have used these materials for teaching spatial data analysis in different settings. In a flipped classroom setting, the chapters are used as practice material by the students before class. The activity is then completed in class, with the instructor providing support and motivating some discussion. Used in a traditional lecture style, the materials provide structure and visual aids. The activities can be completed by the students as homework or during lab time.</p>
+<div id="learning-objectives-20" class="section level2">
+<h2><span class="header-section-number">23.2</span> Learning objectives</h2>
+<p>In this practice, you will learn about:</p>
+<ol style="list-style-type: decimal">
+<li>Spatial moving averages and simulation.</li>
+<li>The concept of spatial autocorrelation.</li>
+<li>Moran’s I coefficient and Moran’s scatterplot.</li>
+<li>Hypothesis testing for spatial autocorrelation.</li>
+</ol>
+</div>
+<div id="suggested-reading-18" class="section level2">
+<h2><span class="header-section-number">23.3</span> Suggested reading</h2>
+<p>O’Sullivan D and Unwin D (2010) Geographic Information Analysis, 2nd Edition, Chapter 7. John Wiley &amp; Sons: New Jersey.</p>
+</div>
+<div id="preliminaries-21" class="section level2">
+<h2><span class="header-section-number">23.4</span> Preliminaries</h2>
+<p>As usual, it is good practice to clear the working space to make sure that you do not have extraneous items there when you begin your work. The command in R to clear the workspace is <code>rm</code> (for “remove”), followed by a list of items to be removed. To clear the workspace from <em>all</em> objects, do the following:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</code></pre></div>
+<p>Note that <code>ls()</code> lists all objects currently on the worspace.</p>
+<p>Load the libraries you will use in this activity:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(rgdal)
+<span class="kw">library</span>(broom)
+<span class="co">#library(plotly)</span>
+<span class="kw">library</span>(spdep)
+<span class="kw">library</span>(reshape2)</code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;reshape2&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:tidyr&#39;:
+## 
+##     smiths</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(gridExtra)</code></pre></div>
+<p>Read the data that you will use for this practice. This is an Esri shape file that will be saved as an object of class <code>SpatialPolygonDataFrame</code>. The function used to read Esri shape files is <code>rgdal::readOGR</code>. Setting <code>integer64</code> to “allow.loss” keeps the data as integers as opposed to changing to factors or strings:</p>
+<pre><code>## OGR data source with driver: ESRI Shapefile 
+## Source: &quot;C:\Antonio\Courses\GEOG 4GA3 - Applied Spatial Analysis\Practical Data Analysis for the Spatial Sciences in R&quot;, layer: &quot;Hamilton CMA CT&quot;
+## with 188 features
+## It has 255 fields
+## Integer64 fields read as signed 32-bit integers:  ID POPULATION PRIVATE_DW OCCUPIED_D ALL_AGES AGE_4 AGE_5_TO_9 AGE_10_TO_ AGE_15_TO_ AGE_15 AGE_16 AGE_17 AGE_18 AGE_19 AGE_20_TO_ AGE_25_TO_ AGE_30_TO_ AGE_35_TO_ AGE_40_TO_ AGE_45_TO_ AGE_50_TO_ AGE_55_TO_ AGE_60_TO_ AGE_65_TO_ AGE_70_TO_ AGE_75_TO_ AGE_80_TO_ AGE_85 MEDIAN_AGE MALE_ALL_A MALE_4 MALE_5_TO_ MALE_10_TO MALE_15_TO MALE_15 MALE_16 MALE_17 MALE_18 MALE_19 MALE_20_TO MALE_25_TO MALE_30_TO MALE_35_TO MALE_40_TO MALE_45_TO MALE_50_TO MALE_55_TO MALE_60_TO MALE_65_TO MALE_70_TO MALE_75_TO MALE_80_TO MALE_85 MALE_MEDIA FEMALE_ALL FEMALE_4 FEMALE_5_T FEMALE_10_ FEMALE_15_ FEMALE_15 FEMALE_16 FEMALE_17 FEMALE_18 FEMALE_19 FEMALE_20_ FEMALE_25_ FEMALE_30_ FEMALE_35_ FEMALE_40_ FEMALE_45_ FEMALE_50_ FEMALE_55_ FEMALE_60_ FEMALE_65_ FEMALE_70_ FEMALE_75_ FEMALE_80_ FEMALE_85 FEMALE_MED MARRIED_AG MARRIED_OR MARRIED COMMON_LAW UNMARRIED SINGLE SEPARATED DIVORCED WIDOWED MARRIED_A1 MARRIED_O1 MARRIED_M COMMON_LA1 UNMARRIED_ SINGLE_M SEPARATED_ DIVORCED_M WIDOWED_M MARRIED_A2 MARRIED_O2 MARRIED_F COMMON_LA2 UNMARRIED1 SINGLE_F SEPARATED1 DIVORCED_F WIDOWED_F FAMILIES_I FAMILY_SIZ FAMILY_SI1 FAMILY_SI2 FAMILY_SI3 COUPLE_FAM COUPLE_MAR COUPLE_MA1 COUPLE_MA2 COUPLE_MA3 COUPLE_MA4 COUPLE_MA5 COUPLE_COM COUPLE_CO1 COUPLE_CO2 COUPLE_CO3 COUPLE_CO4 COUPLE_CO5 SINGLE_PAR SINGLE_PA1 SINGLE_PA2 SINGLE_PA3 SINGLE_PA4 SINGLE_PA5 SINGLE_PA6 SINGLE_PA7 SINGLE_PA8 CHILDREN_F CHILDREN_1 CHILDREN_2 CHILDREN_3 CHILDREN_4 CHILDREN_5 POPULATIO1 POPULATIO2 POPULATIO3 POPULATIO4 POPULATIO5 POPULATIO6 POPULATIO7 POPULATIO8 POPULATIO9 POPULATI10 POPULATI11 POPULATI12 PRIVATE_HO PRIVATE_HH PRIVATE_H1 PRIVATE_H2 PRIVATE_H3 PRIVATE_H4 PRIVATE_H5 PRIVATE_H6 PRIVATE_H7 PRIVATE_H8 PRIVATE_H9 PRIVATE_10 PRIVATE_11 PRIVATE_12 PRIVATE_13 PRIVATE_14 PRIVATE_15 OCC_PRIVAT OCC_PRIVA1 OCC_PRIVA2 OCC_PRIVA3 OCC_PRIVA4 OCC_PRIVA5 OCC_PRIVA6 OCC_PRIVA7 OCC_PRIVA8 OCC_PRIVA9 PRIVATE_16 PRIVATE_17 PRIVATE_18 PRIVATE_19 PRIVATE_20 PRIVATE_21 PRIVATE_22 PRIVATE_23 NATIVE_LAN NATIVE_LA1 NATIVE_LA2 NATIVE_LA3 NATIVE_LA4 NATIVE_LA5 NATIVE_LA6 NATIVE_LA7 NATIVE_LA8 NATIVE_LA9 NATIVE_L10 NATIVE_L11 NATIVE_L12 NATIVE_L13 NATIVE_L14 NATIVE_L15 NATIVE_L16 NATIVE_L17 NATIVE_L18 NATIVE_L19 NATIVE_L20 NATIVE_L21 NATIVE_L22 NATIVE_L23 NATIVE_L24 NATIVE_L25 NATIVE_L26 NATIVE_L27 NATIVE_L28 NATIVE_L29 NATIVE_L30 NATIVE_L31 NATIVE_L32 NATIVE_L33 NATIVE_L34 NATIVE_L35 NATIVE_L36 NATIVE_L37 NATIVE_L38 NATIVE_L39 NATIVE_L40 NATIVE_L41 NATIVE_L42 NATIVE_L43 NATIVE_L44 NATIVE_L45 NATIVE_L46 NATIVE_L47 NATIVE_L48 NATIVE_L49 NATIVE_L50 NATIVE_L51 NATIVE_L52 NATIVE_L53 NATIVE_L54 NATIVE_L55 NATIVE_L56 NATIVE_L57 NATIVE_L58 NATIVE_L59</code></pre>
+<p>Clear the dataframe, retain only <code>ID</code>, <code>TRACT</code>, and <code>POP_DENSIT</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Hamilton_CT@data &lt;-<span class="st"> </span><span class="kw">transmute</span>(Hamilton_CT@data, <span class="dt">ID =</span> ID, <span class="dt">TRACT =</span> TRACT, <span class="dt">POP_DENSIT =</span> POP_DENSIT)</code></pre></div>
+<p>To use the plotting functions of <code>ggplot2</code>, the <code>SpatialPolygonDataFrame</code> needs to be “tidied” by means of the <code>tidy</code> function of the <code>broom</code> package:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Hamilton_CT.t &lt;-<span class="st"> </span><span class="kw">tidy</span>(Hamilton_CT, <span class="dt">region =</span> <span class="st">&quot;TRACT&quot;</span>)
+Hamilton_CT.t &lt;-<span class="st"> </span>dplyr::<span class="kw">rename</span>(Hamilton_CT.t, <span class="dt">TRACT =</span> id)</code></pre></div>
+<p>Tidying the spatial dataframe strips it from the non-spatial information, but we can add all the data by means of the <code>left_join</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Hamilton_CT.t &lt;-<span class="st"> </span><span class="kw">left_join</span>(Hamilton_CT.t, Hamilton_CT@data, <span class="dt">by =</span> <span class="st">&quot;TRACT&quot;</span>)</code></pre></div>
+<pre><code>## Warning: Column `TRACT` joining character vector and factor, coercing into
+## character vector</code></pre>
+<p>Now the tidy dataframe <code>Hamilton_DA.t</code> contains the spatial information and the data.</p>
+<p>You can quickly verify the contents of the dataframe by means of <code>summary</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(Hamilton_CT.t)</code></pre></div>
+<pre><code>##       long             lat            order          hole        
+##  Min.   :-80.25   Min.   :43.05   Min.   :    1   Mode :logical  
+##  1st Qu.:-79.93   1st Qu.:43.21   1st Qu.: 7304   FALSE:29212    
+##  Median :-79.86   Median :43.24   Median :14606                  
+##  Mean   :-79.86   Mean   :43.25   Mean   :14606                  
+##  3rd Qu.:-79.80   3rd Qu.:43.28   3rd Qu.:21909                  
+##  Max.   :-79.51   Max.   :43.48   Max.   :29212                  
+##                                                                  
+##  piece              group          TRACT                 ID         
+##  1:29212   5370124.00.1:  822   Length:29212       Min.   : 919807  
+##            5370121.00.1:  661   Class :character   1st Qu.: 920233  
+##            5370142.01.1:  642   Mode  :character   Median : 937830  
+##            5370100.00.1:  615                      Mean   : 946568  
+##            5370101.02.1:  602                      3rd Qu.: 959451  
+##            5370142.02.1:  595                      Max.   :1115750  
+##            (Other)     :25275                                       
+##    POP_DENSIT       
+##  Min.   :    2.591  
+##  1st Qu.:  254.658  
+##  Median : 1511.957  
+##  Mean   : 1890.627  
+##  3rd Qu.: 2807.857  
+##  Max.   :14234.286  
+## </code></pre>
+</div>
+<div id="spatial-moving-averages-and-simulation" class="section level2">
+<h2><span class="header-section-number">23.5</span> Spatial moving averages and simulation</h2>
+<p>Last practice/activity you learned about spatial weights matrices as a way to define proximity in the analysis of area data. You also used spatial moving averages to explore spatial patterns in area data.</p>
+<p>Lets briefly revisit these notions. Here, you create a spatial weights matrix for Hamilton CMA census tracts:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Hamilton_CT.nb &lt;-<span class="st"> </span><span class="kw">poly2nb</span>(<span class="dt">pl =</span> Hamilton_CT)
+Hamilton_CT.w &lt;-<span class="st"> </span><span class="kw">nb2listw</span>(Hamilton_CT.nb)</code></pre></div>
+<p>The spatial moving averages are calculated as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">POP_DENSIT.sma &lt;-<span class="st"> </span><span class="kw">lag.listw</span>(Hamilton_CT.w, Hamilton_CT$POP_DENSIT)</code></pre></div>
+<p>Let’s append the spatial moving averages to our dataframes, in the <code>SpatialPolygonsDataFrame</code> and the tidied version of it both:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Hamilton_CT$POP_DENSIT.sma &lt;-<span class="st"> </span>POP_DENSIT.sma
+Hamilton_CT.t &lt;-<span class="st"> </span><span class="kw">left_join</span>(Hamilton_CT.t, <span class="kw">data.frame</span>(<span class="dt">TRACT =</span> Hamilton_CT$TRACT, POP_DENSIT.sma))</code></pre></div>
+<pre><code>## Joining, by = &quot;TRACT&quot;</code></pre>
+<pre><code>## Warning: Column `TRACT` joining character vector and factor, coercing into
+## character vector</code></pre>
+<p>The spatial moving average can be used in two ways to explore the spatial pattern of an area variable: as a smoother and by means of a scatterplot, combined with the original variable.</p>
+<div id="spatial-moving-average-as-a-smoother" class="section level3">
+<h3><span class="header-section-number">23.5.1</span> Spatial moving average as a smoother</h3>
+<p>First, when mapped, it is essentially a smoothing technique, in that it reduces the amount of variability to make it easier to distinguish the overall pattern.</p>
+<p>This can be illustrated with the help of a little simulation.</p>
+<p>To simulate a random spatial variable, we can randomize the observations that we already have, reassigning them at random to areas in the system. This is accomplished as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">POP_DENSITs1 &lt;-<span class="st"> </span><span class="kw">sample</span>(Hamilton_CT$POP_DENSIT)</code></pre></div>
+<p>Calculate the spatial moving average for this randomized variable:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">POP_DENSITs1.sma &lt;-<span class="st"> </span><span class="kw">lag.listw</span>(Hamilton_CT.w, POP_DENSITs1)</code></pre></div>
+<p>Once that you know how to randomize the variable, simulate a total of eight variables, and calculate their spatial moving averages:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">POP_DENSITs2 &lt;-<span class="st"> </span><span class="kw">sample</span>(Hamilton_CT$POP_DENSIT)
+POP_DENSITs2.sma &lt;-<span class="st"> </span><span class="kw">lag.listw</span>(Hamilton_CT.w, POP_DENSITs2)
+POP_DENSITs3 &lt;-<span class="st"> </span><span class="kw">sample</span>(Hamilton_CT$POP_DENSIT)
+POP_DENSITs3.sma &lt;-<span class="st"> </span><span class="kw">lag.listw</span>(Hamilton_CT.w, POP_DENSITs3)
+POP_DENSITs4 &lt;-<span class="st"> </span><span class="kw">sample</span>(Hamilton_CT$POP_DENSIT)
+POP_DENSITs4.sma &lt;-<span class="st"> </span><span class="kw">lag.listw</span>(Hamilton_CT.w, POP_DENSITs4)
+POP_DENSITs5 &lt;-<span class="st"> </span><span class="kw">sample</span>(Hamilton_CT$POP_DENSIT)
+POP_DENSITs5.sma &lt;-<span class="st"> </span><span class="kw">lag.listw</span>(Hamilton_CT.w, POP_DENSITs5)
+POP_DENSITs6 &lt;-<span class="st"> </span><span class="kw">sample</span>(Hamilton_CT$POP_DENSIT)
+POP_DENSITs6.sma &lt;-<span class="st"> </span><span class="kw">lag.listw</span>(Hamilton_CT.w, POP_DENSITs6)
+POP_DENSITs7 &lt;-<span class="st"> </span><span class="kw">sample</span>(Hamilton_CT$POP_DENSIT)
+POP_DENSITs7.sma &lt;-<span class="st"> </span><span class="kw">lag.listw</span>(Hamilton_CT.w, POP_DENSITs7)
+POP_DENSITs8 &lt;-<span class="st"> </span><span class="kw">sample</span>(Hamilton_CT$POP_DENSIT)
+POP_DENSITs8.sma &lt;-<span class="st"> </span><span class="kw">lag.listw</span>(Hamilton_CT.w, POP_DENSITs8)</code></pre></div>
+<p>Now, append the spatial moving averages to the dataframes:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Hamilton_CT$POP_DENSITs1 &lt;-<span class="st"> </span>POP_DENSITs1
+Hamilton_CT$POP_DENSITs1.sma &lt;-<span class="st"> </span>POP_DENSITs1.sma
+Hamilton_CT$POP_DENSITs2 &lt;-<span class="st"> </span>POP_DENSITs2
+Hamilton_CT$POP_DENSITs2.sma &lt;-<span class="st"> </span>POP_DENSITs2.sma
+Hamilton_CT$POP_DENSITs3 &lt;-<span class="st"> </span>POP_DENSITs3
+Hamilton_CT$POP_DENSITs3.sma &lt;-<span class="st"> </span>POP_DENSITs3.sma
+Hamilton_CT$POP_DENSITs4 &lt;-<span class="st"> </span>POP_DENSITs4
+Hamilton_CT$POP_DENSITs4.sma &lt;-<span class="st"> </span>POP_DENSITs4.sma
+Hamilton_CT$POP_DENSITs5 &lt;-<span class="st"> </span>POP_DENSITs5
+Hamilton_CT$POP_DENSITs5.sma &lt;-<span class="st"> </span>POP_DENSITs5.sma
+Hamilton_CT$POP_DENSITs6 &lt;-<span class="st"> </span>POP_DENSITs6
+Hamilton_CT$POP_DENSITs6.sma &lt;-<span class="st"> </span>POP_DENSITs6.sma
+Hamilton_CT$POP_DENSITs7 &lt;-<span class="st"> </span>POP_DENSITs7
+Hamilton_CT$POP_DENSITs7.sma &lt;-<span class="st"> </span>POP_DENSITs7.sma
+Hamilton_CT$POP_DENSITs8 &lt;-<span class="st"> </span>POP_DENSITs8
+Hamilton_CT$POP_DENSITs8.sma &lt;-<span class="st"> </span>POP_DENSITs8.sma
+Hamilton_CT.t &lt;-<span class="st"> </span><span class="kw">left_join</span>(Hamilton_CT.t, 
+                           <span class="kw">data.frame</span>(<span class="dt">TRACT =</span> Hamilton_CT$TRACT, 
+                                      POP_DENSITs1, POP_DENSITs1.sma,
+                                      POP_DENSITs2, POP_DENSITs2.sma,
+                                      POP_DENSITs3, POP_DENSITs3.sma,
+                                      POP_DENSITs4, POP_DENSITs4.sma,
+                                      POP_DENSITs5, POP_DENSITs5.sma,
+                                      POP_DENSITs6, POP_DENSITs6.sma,
+                                      POP_DENSITs7, POP_DENSITs7.sma,
+                                      POP_DENSITs8, POP_DENSITs8.sma))</code></pre></div>
+<pre><code>## Joining, by = &quot;TRACT&quot;</code></pre>
+<pre><code>## Warning: Column `TRACT` joining character vector and factor, coercing into
+## character vector</code></pre>
+<p>Now, create choropleth maps of the empirical variable and the eight simulated variables (don’t worry too much here about the mechanics of creating and plotting the maps). First tidy the data for convenience:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Hamilton_CT.t &lt;-<span class="st"> </span>Hamilton_CT.t %&gt;%
+<span class="st">  </span><span class="kw">melt</span>(<span class="dt">id.vars =</span> <span class="kw">c</span>(<span class="st">&quot;long&quot;</span>, <span class="st">&quot;lat&quot;</span>, <span class="st">&quot;order&quot;</span>, <span class="st">&quot;hole&quot;</span>, <span class="st">&quot;piece&quot;</span>, <span class="st">&quot;group&quot;</span>, <span class="st">&quot;TRACT&quot;</span>, <span class="st">&quot;ID&quot;</span>, <span class="st">&quot;POP_DENSIT&quot;</span>, <span class="st">&quot;POP_DENSITs1&quot;</span>, <span class="st">&quot;POP_DENSITs2&quot;</span>, <span class="st">&quot;POP_DENSITs3&quot;</span>, <span class="st">&quot;POP_DENSITs4&quot;</span>, <span class="st">&quot;POP_DENSITs5&quot;</span>, <span class="st">&quot;POP_DENSITs6&quot;</span>, <span class="st">&quot;POP_DENSITs7&quot;</span>, <span class="st">&quot;POP_DENSITs8&quot;</span>)) %&gt;%
+<span class="st">  </span><span class="kw">rename</span>(<span class="dt">Map.SMA =</span> variable, <span class="dt">SMA =</span> value) </code></pre></div>
+<p>And then plot using <code>facet_wrap</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> Hamilton_CT.t, 
+       <span class="kw">aes</span>(<span class="dt">x =</span> long, <span class="dt">y =</span> lat, <span class="dt">group =</span> group,
+           <span class="dt">fill =</span> <span class="kw">cut_number</span>(SMA, <span class="dv">5</span>))) +<span class="st">   </span>
+<span class="st">  </span><span class="kw">geom_polygon</span>() +<span class="st">  </span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_blank</span>(), <span class="dt">axis.text.y =</span> <span class="kw">element_blank</span>()) +
+<span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette =</span> <span class="st">&quot;YlOrRd&quot;</span>) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">coord_equal</span>() +<span class="st"> </span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(~<span class="st"> </span><span class="kw">as.numeric</span>(Map.SMA), <span class="dt">ncol =</span> <span class="dv">3</span>, <span class="dt">nrow =</span> <span class="dv">3</span>) +<span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">fill =</span> <span class="st">&quot;Pop Den SMA&quot;</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-328-1.png" width="672" /></p>
+<p>The empirical variable is map number 1 above. Maps 2 through 9 are simulated variables. Would you say the map of the empirical variable is fairly different from the map of the simulated variables? What are the key differences?</p>
+<p>Perhaps similar insights could be derived from randomizing the original population density variable, instead of the spatial moving average. An additional advantage of the spatial moving average is its use in the development of scatterplots.</p>
+</div>
+<div id="spatial-moving-average-scatterplots" class="section level3">
+<h3><span class="header-section-number">23.5.2</span> Spatial moving average scatterplots</h3>
+<p>Let us explore the use of spatial moving average scatterplots (again, do not worry too much about the mechanics of how create these plots).</p>
+<p>Reorganize the data for convenience:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_scatterplots &lt;-<span class="st">  </span><span class="kw">rbind</span>(<span class="kw">data.frame</span>(<span class="kw">select</span>(Hamilton_CT@data, 
+                                            <span class="dt">Density =</span> POP_DENSIT, 
+                                            <span class="dt">SMA =</span> POP_DENSIT.sma), 
+                                     <span class="dt">Type =</span> <span class="st">&quot;Empirical&quot;</span>),
+                          <span class="kw">data.frame</span>(<span class="kw">select</span>(Hamilton_CT@data, 
+                                            <span class="dt">Density =</span> POP_DENSITs1,
+                                            <span class="dt">SMA =</span> POP_DENSITs1.sma), 
+                                     <span class="dt">Type =</span> <span class="st">&quot;Sim 1&quot;</span>),
+                          <span class="kw">data.frame</span>(<span class="kw">select</span>(Hamilton_CT@data, 
+                                            <span class="dt">Density =</span> POP_DENSITs2, 
+                                            <span class="dt">SMA =</span> POP_DENSITs2.sma), 
+                                     <span class="dt">Type =</span> <span class="st">&quot;Sim 2&quot;</span>),
+                          <span class="kw">data.frame</span>(<span class="kw">select</span>(Hamilton_CT@data, 
+                                            <span class="dt">Density =</span> POP_DENSITs3,
+                                            <span class="dt">SMA =</span> POP_DENSITs3.sma), 
+                                     <span class="dt">Type =</span> <span class="st">&quot;Sim 3&quot;</span>),
+                          <span class="kw">data.frame</span>(<span class="kw">select</span>(Hamilton_CT@data, 
+                                            <span class="dt">Density =</span> POP_DENSITs4,
+                                            <span class="dt">SMA =</span> POP_DENSITs4.sma), 
+                                     <span class="dt">Type =</span> <span class="st">&quot;Sim 4&quot;</span>),
+                          <span class="kw">data.frame</span>(<span class="kw">select</span>(Hamilton_CT@data, 
+                                            <span class="dt">Density =</span> POP_DENSITs5,
+                                            <span class="dt">SMA =</span> POP_DENSITs5.sma), 
+                                     <span class="dt">Type =</span> <span class="st">&quot;Sim 5&quot;</span>),
+                          <span class="kw">data.frame</span>(<span class="kw">select</span>(Hamilton_CT@data, 
+                                            <span class="dt">Density =</span> POP_DENSITs6,
+                                            <span class="dt">SMA =</span> POP_DENSITs6.sma), 
+                                     <span class="dt">Type =</span> <span class="st">&quot;Sim 6&quot;</span>),
+                          <span class="kw">data.frame</span>(<span class="kw">select</span>(Hamilton_CT@data, 
+                                            <span class="dt">Density =</span> POP_DENSITs7, 
+                                            <span class="dt">SMA =</span> POP_DENSITs7.sma), 
+                                     <span class="dt">Type =</span> <span class="st">&quot;Sim 7&quot;</span>),
+                          <span class="kw">data.frame</span>(<span class="kw">select</span>(Hamilton_CT@data, 
+                                            <span class="dt">Density =</span> POP_DENSITs8,
+                                            <span class="dt">SMA =</span> POP_DENSITs8.sma), 
+                                     <span class="dt">Type =</span> <span class="st">&quot;Sim 8&quot;</span>))</code></pre></div>
+<p>Create the scatterplot of the empirical population density and its spatial moving average, and the scatterplots of the simulated variables and their spatial moving averages for comparison (the plots include the 45 degree line):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> df_scatterplots, <span class="kw">aes</span>(<span class="dt">x =</span> Density, <span class="dt">y =</span> SMA, <span class="dt">color =</span> Type)) +
+<span class="st">  </span><span class="kw">geom_point</span>() +
+<span class="st">  </span><span class="kw">geom_abline</span>(<span class="dt">slope =</span> <span class="dv">1</span>, <span class="dt">intercept =</span> <span class="dv">0</span>) +
+<span class="st">  </span><span class="kw">coord_equal</span>() +
+<span class="st">  </span><span class="kw">facet_wrap</span>(~<span class="st"> </span>Type, <span class="dt">ncol =</span> <span class="dv">3</span>, <span class="dt">nrow =</span> <span class="dv">3</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-330-1.png" width="672" /></p>
+<p>What difference do you see between the empirical and simulated variables in these scatterplots?</p>
+<p>Fitting a line to the scatterplots (i.e., adding a regression line), makes the difference between the empirical and simulated variables easier to appreciate. This line would take the following form, with <span class="math inline">\(\beta\)</span> as the slope of the line, and <span class="math inline">\(\alpha\)</span> the intercept: <span class="math display">\[
+\overline{x_i} =\alpha + \beta x_i
+\]</span></p>
+<p>Plot the scatterplots with fitted lines:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> df_scatterplots, <span class="kw">aes</span>(<span class="dt">x =</span> Density, <span class="dt">y =</span> SMA, <span class="dt">color =</span> Type)) +
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>) +
+<span class="st">  </span><span class="kw">geom_abline</span>(<span class="dt">slope =</span> <span class="dv">1</span>, <span class="dt">intercept =</span> <span class="dv">0</span>, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) +
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>) +
+<span class="st">  </span><span class="kw">coord_equal</span>() +
+<span class="st">  </span><span class="kw">facet_wrap</span>(~<span class="st"> </span>Type, <span class="dt">ncol =</span> <span class="dv">3</span>, <span class="dt">nrow =</span> <span class="dv">3</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-331-1.png" width="672" /></p>
+<p>You will notice that the slope of the line tends to be flat in the simulated variables; this is to be expected, since these variables are spatially random: <em>the values of the variable at <span class="math inline">\(i\)</span> are independent of the values of their local means!</em>. In other words, the possibility of a non-random spatial pattern is low.</p>
+<p>The empirical variable, on the other hand, has a slope that is much closer to the 45 degree line. This indicates that the values of the variable at <span class="math inline">\(i\)</span> are not independent of their local means: in other words, <span class="math inline">\(x_i\)</span> is correlated with <span class="math inline">\(\overline{x_i}\)</span>, and the possibility of a non-random pattern is high. This phenomenon is called <em>spatial autocorrelation</em>.</p>
+</div>
+</div>
+<div id="spatial-autocorrelation-and-morans-i-coefficient" class="section level2">
+<h2><span class="header-section-number">23.6</span> Spatial autocorrelation and Moran’s I coefficient</h2>
+<p>As seen above, the spatial moving average can provide evidence of the phenomenon of spatial autocorrelation, that is, when a variable displays spatial patterns whereby values at <span class="math inline">\(i\)</span> are not independent of the values of the variable in their neighborhood.</p>
+<p>A convenient modification to the concept of the spatial moving average is as follows. Instead of using the variable <span class="math inline">\(x\)</span> for the calculation of the spatial moving average, we first center it on the global mean: <span class="math display">\[
+z_i = x_i - \overline{x}
+\]</span></p>
+<p>In this way, the values of <span class="math inline">\(z_i\)</span> are given in <em>deviations from the mean</em>. By forcing the variable to be centered on the mean, the slope of the fit line is forced to pass through the origin.</p>
+<p>Calculate the mean-centered version of POP_DENSIT, and then its spatial moving average:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_mean_center_scatterplot &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">transmute</span>(Hamilton_CT@data, 
+            <span class="dt">Density_z =</span> POP_DENSIT -<span class="st"> </span><span class="kw">mean</span>(POP_DENSIT), 
+            <span class="dt">SMA_z =</span> <span class="kw">lag.listw</span>(Hamilton_CT.w, Density_z))</code></pre></div>
+<p>Compare the following two plots. You will see that they are identical, but in the mean-centered one the origin of the axes coincides with the means of <span class="math inline">\(x\)</span> and the spatial moving average:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sc1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> <span class="kw">subset</span>(df_scatterplots, Type ==<span class="st"> &quot;Empirical&quot;</span>), 
+       <span class="kw">aes</span>(<span class="dt">x =</span> Density, <span class="dt">y =</span> SMA)) +
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>) +
+<span class="st">  </span><span class="kw">geom_abline</span>(<span class="dt">slope =</span> <span class="dv">1</span>, <span class="dt">intercept =</span> <span class="dv">0</span>, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) +
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>) +
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Population Density&quot;</span>) +
+<span class="st">  </span><span class="kw">coord_equal</span>()
+sc2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> df_mean_center_scatterplot, 
+       <span class="kw">aes</span>(<span class="dt">x =</span> Density_z, <span class="dt">y =</span> SMA_z)) +
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>) +
+<span class="st">  </span><span class="kw">geom_abline</span>(<span class="dt">slope =</span> <span class="dv">1</span>, <span class="dt">intercept =</span> <span class="dv">0</span>, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) +
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">formula =</span> y ~<span class="st"> </span>x<span class="dv">-1</span>) +
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Mean-Centered Population Density&quot;</span>) +
+<span class="st">  </span><span class="kw">coord_equal</span>()
+<span class="kw">grid.arrange</span>(sc1, sc2, <span class="dt">ncol =</span> <span class="dv">1</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-333-1.png" width="672" /></p>
+<p>Notice what happens when the variable <span class="math inline">\(z_i\)</span> multiplies its spatial moving average: <span class="math display">\[
+z_i\overline{z_i} = z_i\sum_{j=1}^n{w_{ij}^{st}z_j}
+\]</span></p>
+<p>When <span class="math inline">\(z_i\)</span> is above its mean, it is a positive value and negative otherwise. Likewise, when <span class="math inline">\(\overline{z_i}\)</span> is above its mean, it is a positive value, and negative otherwise.</p>
+<p>There are four posibilities with respect to the combinations of (relatively) high and low values.</p>
+<ol style="list-style-type: decimal">
+<li>Quadrant 1 (high &amp; high):</li>
+</ol>
+<p>If <span class="math inline">\(z_i\)</span> is above the mean, it is a relatively high value in the distribution (signed positive). If its neighbors are also relatively high values, the spatial moving average will be above the mean, and also signed positive. Their product will be positive (positive times positive equals positive).</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Quadrant 2 (low &amp; high):</li>
+</ol>
+<p>If <span class="math inline">\(z_i\)</span> is below the mean, it is a relatively low value in the distribution (signed negative). If its neighbors in contrast are relatively high values, the spatial moving average will be above the mean, and signed positive. Their product will be negative (negative times positive equals negative).</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Quadrant 3 (low &amp; low):</li>
+</ol>
+<p>If <span class="math inline">\(z_i\)</span> is below the mean, it is a relatively low value in the distribution (signed negative). If its neighbors are also relatively low values, the spatial moving average will be below the mean, and also signed negative. Their product will be positive (negative times negative equals positive).</p>
+<ol start="4" style="list-style-type: decimal">
+<li>Quadrant 4:</li>
+</ol>
+<p>If <span class="math inline">\(z_i\)</span> is above the mean, it is a relatively high value in the distribution (signed positive). If its neighbors are relatively low values, the spatial moving average will be below the mean, and signed negative. Their product will be negative (positive times negative equals negative).</p>
+<p>These four quadrants are shown in the following plot:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> df_mean_center_scatterplot, 
+       <span class="kw">aes</span>(<span class="dt">x =</span> Density_z, <span class="dt">y =</span> SMA_z)) +
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">color =</span> <span class="st">&quot;gray&quot;</span>) +
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) +
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>) +
+<span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">label =</span> <span class="st">&quot;Q1: Positive&quot;</span>, <span class="dt">x=</span> <span class="dv">2000</span>, <span class="dt">y =</span> <span class="dv">2500</span>) +
+<span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">label =</span> <span class="st">&quot;Q4: Negative&quot;</span>, <span class="dt">x=</span> <span class="dv">2000</span>, <span class="dt">y =</span> -<span class="dv">2500</span>) +
+<span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">label =</span> <span class="st">&quot;Q2: Negative&quot;</span>, <span class="dt">x=</span> -<span class="dv">2000</span>, <span class="dt">y =</span> <span class="dv">2500</span>) +
+<span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">label =</span> <span class="st">&quot;Q3: Positive&quot;</span>, <span class="dt">x=</span> -<span class="dv">2000</span>, <span class="dt">y =</span> -<span class="dv">2500</span>) +
+<span class="st">  </span><span class="kw">coord_equal</span>()</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-334-1.png" width="672" /></p>
+<p>Lets say that we add all such products: <span class="math display">\[
+\sum_{i=1}^n{z_i\overline{z_i}} = \sum_{i=1}^n{z_i\sum_{j=1}^n{w_{ij}^{st}z_j}}
+\]</span></p>
+<p>The more such products are positive, meaning more dots in Quadrants 1 and 3 in the scatterplot, the larger (and positive) the total sum will be. Likewise, as more such products are negative, meaning more dots in Quadrants 2 and 4, the larger (but negative!) the total sum will be.</p>
+<p>Either case would be indicative of a pattern.</p>
+<p>If the sum is positive, this would suggest that high &amp; high values tend to be together, while low &amp; low values also tend to be together.</p>
+<p>In contrast, if the sum is negative, this would suggest that high values tend to be surrounded by low values, and viceversa.</p>
+</div>
+<div id="morans-i-and-morans-scatterplot" class="section level2">
+<h2><span class="header-section-number">23.7</span> Moran’s I and Moran’s scatterplot</h2>
+<p>Based on the discussion above, lets define the following coefficient, called <em>Moran’s I</em>: <span class="math display">\[
+I = \frac{\sum_{i=1}^n{z_i\sum_{j=1}^n{w_{ij}^{st}z_j}}}{\sum_{i=1}^{n}{z_i^2}}
+\]</span></p>
+<p>The numerator in this expression is the sum of the products described above. The denominator is the variance of variable <span class="math inline">\(x_i\)</span>, and is used here to scale Moran’s I so that it is contained roughly in the interval <span class="math inline">\((-1, 1)\)</span> (the exact bounds depend on the characteristics of the zoning system).</p>
+<p>Moran’s I is a coefficient of <em>spatial autocorrelation</em>.</p>
+<p>We can calculate Moran’s I as follows (notice how it is the sum of the products of <span class="math inline">\(z\)</span> by its spatial moving average, divided by the variance):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(df_mean_center_scatterplot$Density_z *<span class="st"> </span>df_mean_center_scatterplot$SMA_z) /<span class="st"> </span><span class="kw">sum</span>(df_mean_center_scatterplot$Density_z^<span class="dv">2</span>)</code></pre></div>
+<pre><code>## [1] 0.5179736</code></pre>
+<p>Since the value is positive, and relatively high, this would suggest a non-random spatial pattern of similar values (i.e., high &amp; high and low &amp; low).</p>
+<p>Moran’s I is implemented in R in the <code>spdep</code> package, which makes its calculation easy, since you do not have to go manually through the process of calculating the spatial moving averages, etc.</p>
+<p>The function <code>moran</code> requires as input arguments a variable, a set of spatial weights, the number of zones (<span class="math inline">\(n\)</span>), and the total sum of all weights (termed <span class="math inline">\(S_0\)</span>) - which in the case of row-standardized spatial weights is equal to the number of zones. Therefore:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mc &lt;-<span class="st"> </span><span class="kw">moran</span>(Hamilton_CT$POP_DENSIT, Hamilton_CT.w, <span class="dt">n =</span> <span class="dv">188</span>, <span class="dt">S0 =</span>  <span class="dv">188</span>)
+mc$I</code></pre></div>
+<pre><code>## [1] 0.5179736</code></pre>
+<p>You can verify that this matches the value you calculated above. The kind of scatterplots that we used above (called <em>Moran’s scatterplots</em>) can also be created easily by means of the <code>moran.plot</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mp &lt;-<span class="st"> </span><span class="kw">moran.plot</span>(Hamilton_CT$POP_DENSIT, Hamilton_CT.w)</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-337-1.png" width="672" /></p>
+</div>
+<div id="hypothesis-testing-for-spatial-autocorrelation" class="section level2">
+<h2><span class="header-section-number">23.8</span> Hypothesis testing for spatial autocorrelation</h2>
+<p>As usual, we need some criterion to decide whether the pattern is random.</p>
+<p>Moran’s I can be used to develop a test of hypothesis. The expected value of Moran’s I under the null hypothesis of spatial independence and its variance have been derived.</p>
+<p>A test for autocorrelation based on Moran’s I is implemented in the <code>spdep</code> package:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">moran.test</span>(Hamilton_CT$POP_DENSIT, Hamilton_CT.w)</code></pre></div>
+<pre><code>## 
+##  Moran I test under randomisation
+## 
+## data:  Hamilton_CT$POP_DENSIT  
+## weights: Hamilton_CT.w    
+## 
+## Moran I statistic standard deviate = 12.722, p-value &lt; 2.2e-16
+## alternative hypothesis: greater
+## sample estimates:
+## Moran I statistic       Expectation          Variance 
+##       0.517973553      -0.005347594       0.001691977</code></pre>
+<p>The null hypothesis is of spatial independence. The p-value is interpreted as the probability of making a mistake by rejecting the null hypothesis. In the present case, the p-value is such a small number that we can reject the null hypothesis with a high degree of confidence.</p>
+<p>Moran’s I and Moran’s scatterplots are amongst the most widely used tools in the analysis of spatial area data.</p>
+<p>This concludes Practice 11.</p>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="introduction-to-r.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="area-data-ii-activity.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="area-data-iii-activity.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

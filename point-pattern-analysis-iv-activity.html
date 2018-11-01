@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="introduction-to-r.html">
+<link rel="prev" href="point-pattern-analysis-iv.html">
+<link rel="next" href="point-pattern-analysis-v.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -386,27 +386,105 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Practical Data Analysis for the Spatial Sciences in R</h1>
-<h4 class="author"><em>Antonio Paez</em></h4>
-<h4 class="date"><em>2018-05-07</em></h4>
+<div id="point-pattern-analysis-iv-activity" class="section level1">
+<h1><span class="header-section-number">15</span> Point Pattern Analysis IV-Activity</h1>
+<div id="practice-questions-4" class="section level2">
+<h2><span class="header-section-number">15.1</span> Practice questions</h2>
+<p>Answer the following questions:</p>
+<ol style="list-style-type: decimal">
+<li>What does the <span class="math inline">\(\hat{G}\)</span>-function measure?</li>
+<li>What does the <span class="math inline">\(\hat{F}\)</span>-function measure?</li>
+<li>How do these two functions relate to one another?</li>
+<li>Describe the intution behind the <span class="math inline">\(\hat{K}\)</span>-function.</li>
+<li>How does the <span class="math inline">\(\hat{K}\)</span>-function capture patterns at multiple scales?</li>
+</ol>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>This book introduces data analysis for applied spatial scientists. These could be geographers, earth scientists, environmental scientists, planners, or others who work with georeferenced datasets.</p>
-<p>My aim with this book has been to introduce key concepts and techniques in the analysis of spatial data in an intuitive way. While there are more advanced treatments of many of these topics, this book should be appealing to students or others who are approaching this topic for the first time.</p>
-<p>The book is organized thematically following the cannonical approach seen, for instance, in [BAILEY &amp; GATRELL] and [UNWIN]. This approach is to conceptualize data by their unit of support.</p>
-<p>Each chapter covers a topic that builds on previous material. In this way, this is not necessarily meant as a reference (there are better books for that). The chapters are followed by an activity.</p>
-<p>I have used these materials for teaching spatial data analysis in different settings. In a flipped classroom setting, the chapters are used as practice material by the students before class. The activity is then completed in class, with the instructor providing support and motivating some discussion. Used in a traditional lecture style, the materials provide structure and visual aids. The activities can be completed by the students as homework or during lab time.</p>
+<div id="learning-objectives-13" class="section level2">
+<h2><span class="header-section-number">15.2</span> Learning objectives</h2>
+<p>In this activity, you will:</p>
+<ol style="list-style-type: decimal">
+<li>Explore a dataset using single scale distance-based techniques.</li>
+<li>Explore the characteristics of a point pattern at multiple scales.</li>
+<li>Discuss ways to evaluate how confident you are that a pattern is random.</li>
+</ol>
+</div>
+<div id="suggested-reading-11" class="section level2">
+<h2><span class="header-section-number">15.3</span> Suggested reading</h2>
+<p>O’Sullivan D and Unwin D (2010) Geographic Information Analysis, 2nd Edition, Chapter 5. John Wiley &amp; Sons: New Jersey.</p>
+</div>
+<div id="preliminaries-13" class="section level2">
+<h2><span class="header-section-number">15.4</span> Preliminaries</h2>
+<p>For this activity you will need the following:</p>
+<ul>
+<li><p>This R markdown notebook.</p></li>
+<li><p>A dataset called <code>Toronto Business Points.RData</code>.</p></li>
+</ul>
+<p>It is good practice to clear the working space to make sure that you do not have extraneous items there when you begin your work. The command in R to clear the workspace is <code>rm</code> (for “remove”), followed by a list of items to be removed. To clear the workspace from <em>all</em> objects, do the following:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</code></pre></div>
+<p>Note that <code>ls()</code> lists all objects currently on the worspace.</p>
+<p>Load the libraries you will use in this activity. In addition to <code>tidyverse</code>, you will need <code>spatstat</code>, a package designed for the analysis of point patterns (you can learn about <code>spatstat</code> <a href="https://cran.r-project.org/web/packages/spatstat/vignettes/getstart.pdf">here</a> and <a href="http://spatstat.org/resources/spatstatJSSpaper.pdf">here</a>):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(spatstat)</code></pre></div>
+<p>Begin by loading the data that you will use in this activity:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="st">&quot;Toronto Business Points.RData&quot;</span>)</code></pre></div>
+<p>If you inspect your workspace, you will see that the following <code>ppp</code> objects are there:</p>
+<ul>
+<li><code>Fast_Food.ppp</code></li>
+<li><code>Gas_Stands.ppp</code></li>
+<li><code>Paez_Mart.ppp</code></li>
+</ul>
+<p>These are locations of fast food restaurants and gas stands in Toronto (data are from 2008). Paez Mart on the other hand is my project to cover Toronto with convenience stores. The points are the planned locations of the stores.</p>
+<p>Please note that the exact same data are provided in dataframe formand that <code>Toronto</code> is the city boundary. You do not need to use these dataframes for the present activity.</p>
+<p>You can check the contents of <code>ppp</code> objects by means of <code>summary</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(Fast_Food.ppp)</code></pre></div>
+<pre><code>## Marked planar point pattern:  614 points
+## Average intensity 8663.712 points per square unit
+## 
+## Coordinates are given to 6 decimal places
+## 
+## Multitype:
+##           frequency proportion intensity
+## Chicken          82  0.1335505  1157.043
+## Hamburger       209  0.3403909  2949.048
+## Pizza           164  0.2671010  2314.086
+## Sub             159  0.2589577  2243.534
+## 
+## Window: polygonal boundary
+## 10 separate polygons (no holes)
+##             vertices        area relative.area
+## polygon 1       4185 7.05052e-02      9.95e-01
+## polygon 2        600 2.82935e-04      3.99e-03
+## polygon 3        193 2.64610e-05      3.73e-04
+## polygon 4         28 2.96067e-06      4.18e-05
+## polygon 5         52 1.59304e-05      2.25e-04
+## polygon 6         67 1.76751e-05      2.49e-04
+## polygon 7         41 9.31149e-06      1.31e-04
+## polygon 8         30 4.78946e-06      6.76e-05
+## polygon 9         36 3.77806e-06      5.33e-05
+## polygon 10         8 1.23483e-06      1.74e-05
+## enclosing rectangle: [-79.6393, -79.11547] x [43.58107, 43.85539] units
+## Window area = 0.0708703 square units
+## Fraction of frame area: 0.493</code></pre>
+</div>
+<div id="activity-6" class="section level2">
+<h2><span class="header-section-number">15.5</span> Activity</h2>
+<ol style="list-style-type: decimal">
+<li><p>Plot the empirical F-function for all fast food establishments (pooled) and then for each type of establishment (i.e, “Chicken”, “Hamburger”, “Pizza”, “Sub”).</p></li>
+<li><p>Discuss your results with a fellow student. Is there evidence of clustering/regularity?</p></li>
+<li><p>Plot the empirical K-function for all fast food establishments (pooled) and then for each type of establishment (i.e, “Chicken”, “Hamburger”, “Pizza”, “Sub”).</p></li>
+<li><p>What can you say about patterns at multiple-scales based on point 4 above?</p></li>
+<li><p>How confident are you to make a decision whether the patterns are not random? What could you do to assess your confidence in making a decision whether the patterns are random? Explain.</p></li>
+</ol>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="introduction-to-r.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="point-pattern-analysis-iv.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="point-pattern-analysis-v.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
