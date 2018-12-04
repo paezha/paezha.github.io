@@ -25,7 +25,7 @@
 <meta name="author" content="Antonio Paez">
 
 
-<meta name="date" content="2018-11-01">
+<meta name="date" content="2018-12-03">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="index.html">
-
+<link rel="next" href="introduction-to-mapping-in-r.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -47,6 +47,21 @@
 
 
 
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.2/leaflet.js"></script>
+<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.css" rel="stylesheet" />
+<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.Default.css" rel="stylesheet" />
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.js"></script>
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.freezable.js"></script>
+<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.layersupport.js"></script>
+<script src="libs/lfx-heat-0.1.0/lfx-heat-prod.js"></script>
+<script src="libs/lfx-heat-0.1.0/lfx-heat-bindings.js"></script>
 
 
 <style type="text/css">
@@ -100,15 +115,25 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
-<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
-<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#learning-objectives"><i class="fa fa-check"></i><b>1.1</b> Learning objectives</a></li>
-<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#rstudio-window"><i class="fa fa-check"></i><b>1.2</b> RStudio Window</a></li>
-<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#some-basic-operations"><i class="fa fa-check"></i><b>1.3</b> Some basic operations</a></li>
-<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#data-classes-in-r"><i class="fa fa-check"></i><b>1.4</b> Data Classes in R</a></li>
-<li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#data-types-in-r"><i class="fa fa-check"></i><b>1.5</b> Data Types in R</a></li>
-<li class="chapter" data-level="1.6" data-path="introduction.html"><a href="introduction.html#indexing-and-data-transformations"><i class="fa fa-check"></i><b>1.6</b> Indexing and Data Transformations</a></li>
-<li class="chapter" data-level="1.7" data-path="introduction.html"><a href="introduction.html#visualization"><i class="fa fa-check"></i><b>1.7</b> Visualization</a></li>
-<li class="chapter" data-level="1.8" data-path="introduction.html"><a href="introduction.html#creating-a-simple-map"><i class="fa fa-check"></i><b>1.8</b> Creating a simple map</a></li>
+<li class="chapter" data-level="1" data-path="basic-operations-in-r.html"><a href="basic-operations-in-r.html"><i class="fa fa-check"></i><b>1</b> Basic Operations in R</a><ul>
+<li class="chapter" data-level="1.1" data-path="basic-operations-in-r.html"><a href="basic-operations-in-r.html#learning-objectives"><i class="fa fa-check"></i><b>1.1</b> Learning objectives</a></li>
+<li class="chapter" data-level="1.2" data-path="basic-operations-in-r.html"><a href="basic-operations-in-r.html#rstudio-window"><i class="fa fa-check"></i><b>1.2</b> RStudio Window</a></li>
+<li class="chapter" data-level="1.3" data-path="basic-operations-in-r.html"><a href="basic-operations-in-r.html#some-basic-operations"><i class="fa fa-check"></i><b>1.3</b> Some basic operations</a></li>
+<li class="chapter" data-level="1.4" data-path="basic-operations-in-r.html"><a href="basic-operations-in-r.html#data-classes-in-r"><i class="fa fa-check"></i><b>1.4</b> Data Classes in R</a></li>
+<li class="chapter" data-level="1.5" data-path="basic-operations-in-r.html"><a href="basic-operations-in-r.html#data-types-in-r"><i class="fa fa-check"></i><b>1.5</b> Data Types in R</a></li>
+<li class="chapter" data-level="1.6" data-path="basic-operations-in-r.html"><a href="basic-operations-in-r.html#indexing-and-data-transformations"><i class="fa fa-check"></i><b>1.6</b> Indexing and Data Transformations</a></li>
+<li class="chapter" data-level="1.7" data-path="basic-operations-in-r.html"><a href="basic-operations-in-r.html#visualization"><i class="fa fa-check"></i><b>1.7</b> Visualization</a></li>
+<li class="chapter" data-level="1.8" data-path="basic-operations-in-r.html"><a href="basic-operations-in-r.html#creating-a-simple-map"><i class="fa fa-check"></i><b>1.8</b> Creating a simple map</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction-to-mapping-in-r.html"><a href="introduction-to-mapping-in-r.html"><i class="fa fa-check"></i><b>2</b> Introduction to Mapping in R</a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-mapping-in-r.html"><a href="introduction-to-mapping-in-r.html#learning-objectives-1"><i class="fa fa-check"></i><b>2.1</b> Learning objectives</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-mapping-in-r.html"><a href="introduction-to-mapping-in-r.html#preliminaries"><i class="fa fa-check"></i><b>2.2</b> Preliminaries</a></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-mapping-in-r.html"><a href="introduction-to-mapping-in-r.html#packages"><i class="fa fa-check"></i><b>2.3</b> Packages</a></li>
+<li class="chapter" data-level="2.4" data-path="introduction-to-mapping-in-r.html"><a href="introduction-to-mapping-in-r.html#exploring-dataframes-and-a-simple-proportional-symbols-map"><i class="fa fa-check"></i><b>2.4</b> Exploring dataframes and a simple proportional symbols map</a></li>
+<li class="chapter" data-level="2.5" data-path="introduction-to-mapping-in-r.html"><a href="introduction-to-mapping-in-r.html#improving-on-the-proportional-symbols-map"><i class="fa fa-check"></i><b>2.5</b> Improving on the proportional symbols map</a></li>
+<li class="chapter" data-level="2.6" data-path="introduction-to-mapping-in-r.html"><a href="introduction-to-mapping-in-r.html#some-simple-spatial-analysis"><i class="fa fa-check"></i><b>2.6</b> Some simple spatial analysis</a></li>
+<li class="chapter" data-level="2.7" data-path="introduction-to-mapping-in-r.html"><a href="introduction-to-mapping-in-r.html#other-resources"><i class="fa fa-check"></i><b>2.7</b> Other resources</a></li>
+<li class="chapter" data-level="2.8" data-path="introduction-to-mapping-in-r.html"><a href="introduction-to-mapping-in-r.html#references"><i class="fa fa-check"></i><b>2.8</b> References</a></li>
 </ul></li>
 </ul>
 
@@ -127,8 +152,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="introduction" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
+<div id="basic-operations-in-r" class="section level1">
+<h1><span class="header-section-number">Chapter 1</span> Basic Operations in R</h1>
 <p>NOTE: This is an <a href="http://rmarkdown.rstudio.com">R Markdown</a> Notebook. When you execute code within the notebook, the results appear beneath the code.</p>
 <p>Now that you have installed R and RStudio we can begin with an overview of basic operations and data structures in this computing language. Please note that this document you are reading, called an R Notebook, is an example of what is called “literate programming”, a style of document that uses code to illustrate a discussion, as opposed to the traditional programming style that uses natural language to discuss/document the code. It flips around the usual technical writing approach to make it more intuitive and accessible.</p>
 <p>Whenever you see a chunk of code as follows, you can run it (by clicking the ‘play’ icon on the top right corner) to see the results. Try it!</p>
@@ -297,35 +322,36 @@ Longitude &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="o
 <p>This package works by layering a series of objects, beginning with a blank plot, to which we can add things. The command to create a plot is <code>ggplot()</code>. This command accepts different arguments. For instance, we can pass data to it in the form of a data frame. We can also indicate different <em>aesthetic</em> values, that is, the things that we wish to plot. None of this is plotted, though, until we indicate which kind of <em>geom</em> or geometric object we wish to plot.</p>
 <p>For a bar chart, we would use the following instructions:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> Cities, <span class="kw">aes</span>(<span class="dt">x =</span> Name, <span class="dt">y =</span> Population)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&#39;identity&#39;</span>)</code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p><img src="01-Reading-Basic-Operations-and-Data-Structures_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 <p>Let us break down these instructions. We are asking <code>ggplot2</code> to create a plot that will use the data frame <code>Cities</code>. Furthermore, we tell it to use the values of <code>Names</code> in the x-axis, and the values of <code>Population</code> in the y-axis. Run the following chunk:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> Cities, <span class="kw">aes</span>(<span class="dt">x =</span> Name, <span class="dt">y =</span> Population))</code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<p><img src="01-Reading-Basic-Operations-and-Data-Structures_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 <p>Notice how <code>ggplot2</code> creates a blank plot, but it has yet to actually render any of the population information in there. We layer elements on a plot by using the <code>+</code> sign. It is only when we tell the package to add some geometric element that it renders something on the plot. In the previous case, we told <code>ggplot2</code> to draw bars (by using the <code>geom_bar</code> command). The argument of <code>geom_bar</code> was <code>stat = 'identity'</code>, to indicate that the data for the y-axis was to be used ‘as-is’ without further statistical transformations.</p>
 <p>There are many different geoms that can be used in <code>ggplot2</code>. You can always consult the help/tutorial files by typing <code>??ggplot2</code> in the console. See:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">??ggplot2</code></pre></div>
+<pre><code>## starting httpd help server ... done</code></pre>
 </div>
 <div id="creating-a-simple-map" class="section level2">
 <h2><span class="header-section-number">1.8</span> Creating a simple map</h2>
 <p>We will see how maps are used in spatial statistical analysis. The simplest one that can be created is a so-called <em>dot map</em> that displays the location of an event of interest. A dot map is, in fact, simply a scatterplot of the coordinates of events. We can use ggplot2 to create a simple dot map of the cities in your simple dataset. For this, we create a ggplot object, and for the x and y aesthetics we use the coordinates. The geometric element that we want to render is a point:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> Cities, <span class="kw">aes</span>(<span class="dt">x =</span> Longitude, <span class="dt">y =</span> Latitude)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p><img src="01-Reading-Basic-Operations-and-Data-Structures_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 <p>This is a simple dot map that simply shows the locations of the cities. We can add labels by means of the geometric element text:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> Cities, <span class="kw">aes</span>(<span class="dt">x =</span> Longitude, <span class="dt">y =</span> Latitude)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> Name))</code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<p><img src="01-Reading-Basic-Operations-and-Data-Structures_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
 <p>A <em>proportional symbol map</em> changes the size of the symbols to add information to the plot. To create a proportional symbol map, we add to the aesthetics the instruction to use some variable for the size of the symbols:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> Cities, <span class="kw">aes</span>(<span class="dt">x =</span> Longitude, <span class="dt">y =</span> Latitude)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">size =</span> Population)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> Name))</code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p><img src="01-Reading-Basic-Operations-and-Data-Structures_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
 <p>And fix the position of the labels by adding a vertical justification to the text (<code>vjust</code>) and expanding the limits of the plot (<code>expand_limits</code>):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> Cities, <span class="kw">aes</span>(<span class="dt">x =</span> Longitude, <span class="dt">y =</span> Latitude)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">size =</span> Population)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> Name), <span class="dt">vjust =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">expand_limits</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="op">-</span><span class="fl">80.7</span>, <span class="op">-</span><span class="fl">79.2</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="fl">43.2</span>, <span class="fl">43.7</span>))</code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<p><img src="01-Reading-Basic-Operations-and-Data-Structures_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
 <p>You have now created a relatively simple proportional symbols map! You can see that creating a plot is simply a matter of instructing R (through ggplot2) to complete a series of instructions:</p>
 <ul>
 <li><p>Create a <code>ggplot2</code> object using a dataset, which will render stuff at locations given by variable1 and variable 2: <code>ggplot(data = dataset, aes(x = variable1, y = variable2))</code></p></li>
 <li><p>Add stuff to the plot. For instance, to add points use <code>geom_point</code>, to add lines use <code>geom_line</code>, and so on.</p></li>
 </ul>
 <p>Check the <code>ggplot2</code> <a href="https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf">Cheat Sheet</a> for more information on how to use this package.</p>
-<p>A last note. Many other visualization alternatives (for instance, Excel) provide point-and-click functions for creating plots. In contrast, ggplot2 in R requires that the plot be created by meticulously instructing the package what to do. While this is more laborious, it also means that you have complete control over the creation of plots, which in turn allows you to create more flexible and inventive visuals.</p>
+<p>A last note. Many other visualization alternatives (for instance, Excel) provide point-and-click functions for creating plots. In contrast, <code>ggplot2</code> in R requires that the plot be created by meticulously instructing the package what to do. While this is more laborious, it also means that you have complete control over the creation of plots, which in turn allows you to create more flexible and inventive visuals.</p>
 <p>This concludes your basic overview of basic operations and data structures in R. You will have an opportunity to learn more about creating maps in R with your reading.</p>
 
 </div>
@@ -335,8 +361,8 @@ Longitude &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="o
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="introduction-to-mapping-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
