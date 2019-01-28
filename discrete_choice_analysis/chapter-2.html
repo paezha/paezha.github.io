@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chapter 3 Fundamental concepts | Discrete Choice Analysis with R</title>
+  <meta name="description" content="These notes were created by Antonio Paez as a resource for teaching a graduate discrete choice analysis course (GEOG 738) at McMaster University.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Chapter 3 Fundamental concepts | Discrete Choice Analysis with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="These notes were created by Antonio Paez as a resource for teaching a graduate discrete choice analysis course (GEOG 738) at McMaster University." />
+  <meta name="github-repo" content="paezha/Discrete-Choice-Analysis-with-R" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Fundamental concepts | Discrete Choice Analysis with R" />
+  
+  <meta name="twitter:description" content="These notes were created by Antonio Paez as a resource for teaching a graduate discrete choice analysis course (GEOG 738) at McMaster University." />
+  
+
+<meta name="author" content="Antonio Paez">
+
+
+<meta name="date" content="2019-01-27">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="chapter-1.html">
+<link rel="next" href="references.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#choices-choices-choices"><i class="fa fa-check"></i>Choices choices choices</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#plan"><i class="fa fa-check"></i>Plan</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#audience"><i class="fa fa-check"></i>Audience</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#requisites"><i class="fa fa-check"></i>Requisites</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html"><i class="fa fa-check"></i><b>1</b> Preliminaries: Installing R and RStudio</a><ul>
+<li class="chapter" data-level="1.1" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#introduction"><i class="fa fa-check"></i><b>1.1</b> Introduction</a></li>
+<li class="chapter" data-level="1.2" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#learning-objectives"><i class="fa fa-check"></i><b>1.2</b> Learning Objectives</a></li>
+<li class="chapter" data-level="1.3" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#r-the-open-statistical-computing-project"><i class="fa fa-check"></i><b>1.3</b> R: The Open Statistical Computing Project</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#what-is-r"><i class="fa fa-check"></i><b>1.3.1</b> What is R?</a></li>
+<li class="chapter" data-level="1.3.2" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#the-rstudio-ide"><i class="fa fa-check"></i><b>1.3.2</b> The RStudio IDE</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#packages-in-r"><i class="fa fa-check"></i><b>1.4</b> Packages in R</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="chapter-1.html"><a href="chapter-1.html"><i class="fa fa-check"></i><b>2</b> Data and stuff</a><ul>
+<li class="chapter" data-level="2.1" data-path="chapter-1.html"><a href="chapter-1.html#what-are-models"><i class="fa fa-check"></i><b>2.1</b> What are models?</a></li>
+<li class="chapter" data-level="2.2" data-path="chapter-1.html"><a href="chapter-1.html#how-to-use-this-note"><i class="fa fa-check"></i><b>2.2</b> How to use this note</a></li>
+<li class="chapter" data-level="2.3" data-path="chapter-1.html"><a href="chapter-1.html#learning-objectives-1"><i class="fa fa-check"></i><b>2.3</b> Learning objectives</a></li>
+<li class="chapter" data-level="2.4" data-path="chapter-1.html"><a href="chapter-1.html#suggested-readings"><i class="fa fa-check"></i><b>2.4</b> Suggested readings</a></li>
+<li class="chapter" data-level="2.5" data-path="chapter-1.html"><a href="chapter-1.html#ways-of-measuring-stuff"><i class="fa fa-check"></i><b>2.5</b> Ways of measuring stuff</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="chapter-1.html"><a href="chapter-1.html#categorical"><i class="fa fa-check"></i><b>2.5.1</b> Categorical</a></li>
+<li class="chapter" data-level="2.5.2" data-path="chapter-1.html"><a href="chapter-1.html#quantitative"><i class="fa fa-check"></i><b>2.5.2</b> Quantitative</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="chapter-1.html"><a href="chapter-1.html#importing-data"><i class="fa fa-check"></i><b>2.6</b> Importing data</a></li>
+<li class="chapter" data-level="2.7" data-path="chapter-1.html"><a href="chapter-1.html#data-classes-in-r"><i class="fa fa-check"></i><b>2.7</b> Data Classes in R</a></li>
+<li class="chapter" data-level="2.8" data-path="chapter-1.html"><a href="chapter-1.html#more-on-indexing-and-data-manipulation"><i class="fa fa-check"></i><b>2.8</b> More on indexing and data manipulation</a></li>
+<li class="chapter" data-level="2.9" data-path="chapter-1.html"><a href="chapter-1.html#visualization"><i class="fa fa-check"></i><b>2.9</b> Visualization</a></li>
+<li class="chapter" data-level="2.10" data-path="chapter-1.html"><a href="chapter-1.html#exercise"><i class="fa fa-check"></i><b>2.10</b> Exercise</a><ul>
+<li class="chapter" data-level="2.10.1" data-path="chapter-1.html"><a href="chapter-1.html#questions"><i class="fa fa-check"></i><b>2.10.1</b> Questions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="chapter-2.html"><a href="chapter-2.html"><i class="fa fa-check"></i><b>3</b> Fundamental concepts</a><ul>
+<li class="chapter" data-level="3.1" data-path="chapter-2.html"><a href="chapter-2.html#why-modelling-choices"><i class="fa fa-check"></i><b>3.1</b> Why modelling choices?</a></li>
+<li class="chapter" data-level="3.2" data-path="chapter-2.html"><a href="chapter-2.html#how-to-use-this-note-1"><i class="fa fa-check"></i><b>3.2</b> How to use this note</a></li>
+<li class="chapter" data-level="3.3" data-path="chapter-2.html"><a href="chapter-2.html#learning-objectives-2"><i class="fa fa-check"></i><b>3.3</b> Learning objectives</a></li>
+<li class="chapter" data-level="3.4" data-path="chapter-2.html"><a href="chapter-2.html#suggested-readings-1"><i class="fa fa-check"></i><b>3.4</b> Suggested readings</a></li>
+<li class="chapter" data-level="3.5" data-path="chapter-2.html"><a href="chapter-2.html#preliminaries"><i class="fa fa-check"></i><b>3.5</b> Preliminaries</a></li>
+<li class="chapter" data-level="3.6" data-path="chapter-2.html"><a href="chapter-2.html#utility-maximization"><i class="fa fa-check"></i><b>3.6</b> Utility maximization</a></li>
+<li class="chapter" data-level="3.7" data-path="chapter-2.html"><a href="chapter-2.html#what-about-those-random-terms"><i class="fa fa-check"></i><b>3.7</b> What about those random terms?</a></li>
+<li class="chapter" data-level="3.8" data-path="chapter-2.html"><a href="chapter-2.html#probability-distribution-functions-pdfs"><i class="fa fa-check"></i><b>3.8</b> Probability distribution functions (PDFs)</a></li>
+<li class="chapter" data-level="3.9" data-path="chapter-2.html"><a href="chapter-2.html#a-simple-random-utility-discrete-choice-model"><i class="fa fa-check"></i><b>3.9</b> A simple random utility discrete choice model</a></li>
+<li class="chapter" data-level="3.10" data-path="chapter-2.html"><a href="chapter-2.html#other-choice-mechanisms"><i class="fa fa-check"></i><b>3.10</b> Other choice mechanisms</a></li>
+<li class="chapter" data-level="3.11" data-path="chapter-2.html"><a href="chapter-2.html#exercise-1"><i class="fa fa-check"></i><b>3.11</b> Exercise</a><ul>
+<li class="chapter" data-level="3.11.1" data-path="chapter-2.html"><a href="chapter-2.html#questions-1"><i class="fa fa-check"></i><b>3.11.1</b> Questions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Discrete Choice Analysis with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="chapter-2" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Fundamental concepts</h1>
+<blockquote>
+<p>“Ignorance gives one a large range of probabilities.”</p>
+<p>— George Eliot</p>
+</blockquote>
+<div id="why-modelling-choices" class="section level2">
+<h2><span class="header-section-number">3.1</span> Why modelling choices?</h2>
+<p>In <a href="chapter-1.html#chapter-1">2</a> we discussed in a general fashion the use of models. There, we argued that modelling is an activity that helps us to isolate in a systematic way certain aspects of a process or thing, by way of abstraction and generalization. There are many kinds of models: analog (like sculptures, maquettes, scale models), conceptual (like mental maps), and mathematical/statistical models.</p>
+<p>The raw materials of mathematical/statistical models are observations about the process or thing of interest, usually measurements that provide <em>data</em>. The tools are the statistical and mathematical techniques used to convert data into <em>information</em>. And the technical expertise is the knowledge and ability of the modeler to use the appropriate tools to the data, in order to extract as much information as possible, given the characteristics of the data and the process or thing.</p>
+<p>Modelling choices is simply a specialized field in the much broader field of mathematical and statistical modelling. The task of modelling choices is in many way similar to the modelling of limited-dependent and qualitative variables in statistics <span class="citation">(Maddala <a href="#ref-Maddala1983limited">1983</a>)</span>, however it is distinguished from models in that field by a strong behavioral foundations. Indeed, where statistical models deal with probabilities of an item of interest being in a certain state, choice modelling deals with the probability of an agent <em>choosing</em> an alternative. This is a subtle but important difference that we will highlight in due course. For the time being, it is sufficient to say that to model choices we need a conceptual model first on which to build the rest of the apparatus required for applied choice modelling.</p>
+<p>Before delving into the technical details, we can pause for a philosophical moment to think about human behavior and decision-making. There are different perspectives on human behavior.</p>
+<p>Some schools of thought affirm that events are predetermined. A famous thought experiment <a href="https://en.wikipedia.org/wiki/Laplace%27s_demon">Laplace’s Demon</a>, is as follows:</p>
+<blockquote>
+<p>We may regard the present state of the universe as the effect of its past and the cause of its future. An intellect [Laplace’s Deman] which at a certain moment would know all forces that set nature in motion, and all positions of all items of which nature is composed, if this intellect were also vast enough to submit these data to analysis, it would embrace in a single formula the movements of the greatest bodies of the universe and those of the tiniest atom; for such an intellect nothing would be uncertain and the future just like the past would be present before its eyes.</p>
+</blockquote>
+<blockquote>
+<p>— Pierre Simon Laplace, A Philosophical Essay on Probabilities</p>
+</blockquote>
+<p>Some schools of sociological thought <span class="citation">(see for example the discussion in Degenne and Fors‚ <a href="#ref-Degenne1999social">1999</a>)</span> see social interactions as a predominant, and even a determinant, factor that affects behavior. In their more extreme form, structuralism views social networks as structures that limit the ability of the individual to exercise independent agency, and therefore determine behavior.</p>
+<p>Laplace’s Demon and other forms of causal determinism assume that all preceding events set the conditions for present and future events via immutable rules. Nowadays determinism is not seriously considered for several reasons, of which it is useful to highlight two:</p>
+<ol style="list-style-type: decimal">
+<li>The practical impossibility of knowing at a certain moment all forces that set nature in motion, as well as the positions of all of nature’s items.</li>
+</ol>
+<p>With respect to physical processes, the <a href="https://en.wikipedia.org/wiki/Uncertainty_principl">uncertainty principle</a> of quantum physics put paid to the notion that we can know all that there is to know about the fundamental items of nature. In terms of human behavior, this is complicated by the inability of an external observer to know the state of mind of a person who acts. On the other hand, it is possible that existing social structures influence behavior <span class="citation">(and there is now a wealth of literature that makes this argument; see A. Páez and Scott <a href="#ref-Paez2007social">2007</a>)</span>. However, social determinism seems as implausible as physical determinism, for similar reasons: the difficulties of knowing the state of a system with complete omniscience.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>The assumption of immutable rules.</li>
+</ol>
+<p>This assumption has been challenged by studies that suggest some important physical constants can change with the age of the universe <span class="citation">(Webb et al. <a href="#ref-webb2001further">2001</a>)</span>. In terms of human behavior, the assumption is even more problematic, if for no other reason that humans can in general act in a contrarian way simply to demonstrate that there are no immutable social rules. This is only one of many reasons why behavioral detection <span class="citation">(for instance, in airports; Kirschenbaum <a href="#ref-Kirschenbaum2013cost">2013</a>)</span> is problematic: if one knows the rules used for profiling, acting otherwise renders profiling ineffective.</p>
+<p>Does this mean that the state of the universe is not determined by the past? Not at all. For all we know, from the perspective of a hypothetical all-knowing being, it is. However, in practical terms, and for the reasons described briefly above, we humble non-all-knowing beigns, cannot rely on determinism for making statements about the state of the universe. In particular, we will make a distinction that is useful as part of developing a conceptual model of choice-making: 1) that there is an observer who typically lacks all relevant information about a choice process (let alone about the state of the universe); and 2) that the rules of decision making are not completely known and/or humans can, for idiosincratic reasons, alter them at whim.</p>
+</div>
+<div id="how-to-use-this-note-1" class="section level2">
+<h2><span class="header-section-number">3.2</span> How to use this note</h2>
+<p>Remember that the source for the document you are reading is an R Notebook. Throughout the notes, you will find examples of code in segments of text called <em>chunks</em>. This is an example of a chunk:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="st">&quot;Well, hello there, Juan de Dios!&quot;</span>)</code></pre></div>
+<pre><code>## [1] &quot;Well, hello there, Juan de Dios!&quot;</code></pre>
+<p>If you are working with the Notebook version of the document, you can run the code by clicking the ‘play’ icon on the top right corner of the chunk. If you are reading the web-book version of the document, you will often see that the code has already been executed. You can still try it by copying and pasting into your R or RStudio console.</p>
+</div>
+<div id="learning-objectives-2" class="section level2">
+<h2><span class="header-section-number">3.3</span> Learning objectives</h2>
+<p>In this practice, you will learn about:</p>
+<ol style="list-style-type: decimal">
+<li>Choice mechanisms: Utility maximization.</li>
+<li>Probabilities and integration.</li>
+<li>How to derive a simple choice model.</li>
+<li>Other choice mechanisms.</li>
+</ol>
+</div>
+<div id="suggested-readings-1" class="section level2">
+<h2><span class="header-section-number">3.4</span> Suggested readings</h2>
+<ul>
+<li>Ben-Akiva, M. Lerman, <span class="citation">(<a href="#ref-Benakiva1985discrete">1985</a>)</span> Discrete Choice Analysis: Theory and Applications to Travel Demand, <strong>Chapter 3</strong>, MIT Press.</li>
+<li>Hensher, D.A., Rose, J.M., Greene, W.H <span class="citation">(<a href="#ref-hensher2005applied">2005</a>)</span> Applied Choice Analysis: A Primer, <strong>Chapter 3</strong>, Cambridge University Press.</li>
+<li>Ortuzar JD, Willumsen LG <span class="citation">(<a href="#ref-Ortuzar2011modelling">2011</a>)</span> Modelling Transport, Fourth Edition, <strong>Chapter 7</strong>, John Wiley and Sons.</li>
+</ul>
+</div>
+<div id="preliminaries" class="section level2">
+<h2><span class="header-section-number">3.5</span> Preliminaries</h2>
+<p>Load the packages used in this section:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(evd)</code></pre></div>
+</div>
+<div id="utility-maximization" class="section level2">
+<h2><span class="header-section-number">3.6</span> Utility maximization</h2>
+<p>We will begin by defining a conceptual model of choice based on neo-classical economics, fundamentally consumer choice. The conceptual framework in neo-classical economics is based on the concept of <em>utility</em>.</p>
+<p>What is utility?</p>
+<p>In simple terms, utility is a summary indicator of the pleasure, usefulness, enjoyment, or attractiveness associated with making a choice (for instance, buying a new phone).</p>
+<p>Lets begin by positing a very simple choice situation, in which a decision maker chooses between one of two different <em>alternatives</em>. These alternatives constitute the <em>choice set</em>, and provide the context for the decision-making process. Imagine then that this simple choice example is as follows:</p>
+<ul>
+<li>Alternative 1: Do nothing (keep using current phone)</li>
+<li>Alternative 2: Buy new phone (for simplicity, think of a generic model).</li>
+</ul>
+<p>Further, assume that each alternative can be described by means of a vector of <em>attributes</em> <span class="math inline">\(X\)</span> as follows: <span class="math display">\[
+X = [x_1, x_2, \dots, x_k]
+\]</span></p>
+<p>The attributes describe each alternative in a way that is relevant to the decision maker. In the present example, two relevant attributes are the cost of each alternative and the characteristics of the current and new phones, for instance, their download speeds. In this way, the two choices can be described by their attributes as follows: <span class="math display">\[
+\begin{array}{cc}
+\text{Do-Nothing:} &amp; X_A = [\text{cost}_{\text{Do-Nothing}}, \text{ speed}_{\text{New-Phone}}]\\
+\text{New-Phone:} &amp; X_B = [\text{cost}_{\text{New-Phone}}, \text{ speed}_{\text{New-Phone}}]\\
+\end{array} 
+\]</span> If the decision-maker currently owns a phone that is fully paid, the out-of-pocket cost of doing nothing would be zero. Buying a new phone, on the other hand, would have a positive (and possibly substantial cost). The new phone, on the other hand is faster than the older, currently owned model.</p>
+<p>The decision-maker can likewise be described by a vector of attributes, say <span class="math inline">\(Z\)</span>: <span class="math display">\[
+Z = [z_1, z_2, \dots, z_k]
+\]</span> Suppose for example, that decision-maker <span class="math inline">\(i\)</span> can be described in terms of their income, as follows: <span class="math display">\[
+Z_i = [\text{income}_i]
+\]</span> The attributes of the decision maker help to capture heterogeneities in behavior: for instance, a decision-maker with a lower income may be more sensitive to cost, since buying a new phone is relatively more expensive.</p>
+<p>A utility function is a way of summarizing the attributes of the choices and the attributes of the decision-makers in a single quantity, which is what the decision-maker is trying to maximize. We assume that each course of action gives this consumer a level of <em>utility</em>: in other words, he will be more or less happy with each alternative, taking into account their characteristics and his own condition or status: <span class="math display">\[
+\begin{array}{c}
+U_{i, \text{Do-Nothing}} = U(\text{cost}_{\text{Do-Nothing}}, \text{ speed}_{\text{Do-Nothing}}, \text{ income}_i)\\
+U_{i, \text{New-Phone}} = U(\text{cost}_{\text{New-Phone}}, \text{ speed}_{\text{New-Phone}}, \text{ income}_i)\\
+\end{array} 
+\]</span></p>
+<p>Notice that the utility function is specific to a decision maker <span class="math inline">\(i\)</span> and an alternative.</p>
+<p>Here we define a decision-making rule. The decision-maker considers the utility of the alternatives, and chooses the one that gives the highest utility. In other words decision-maker <span class="math inline">\(i\)</span> will choose to keep the current phone if: <span class="math display">\[
+U_{i,\text{Do-Nothing}} &gt; U_{i,\text{New-Phone}},
+\]</span> If the reverse is true, then the decision-maker will choose to buy a new phone (in the case of a tie, the decision-maker is indifferent between the two alternatives).</p>
+<p>We assume that decision-makers are rational and that they do an analysis of the costs and the benefits of each alternative before making the choice. The analyst, however, may fail to observe all aspects of the decision making process. For instance, a decision-maker may need faster speeds because she lacks internet at home. Or a decision-maker just received a large gift from a relative. Or younger people may be more willing to buy new phones than older people. The analyst may observe a decision-maker with a relatively low income buying a new phone. While income alone would have suggested that the decision-maker would be better off keeping the old phone, the analyst has no way of knowing the idiosyncratic factor of the gift.</p>
+<p>For this reason, it is convenient to decompose the utility into 1) a systematic component, that is, the part that explains the decision-makers’ response to the attributes of the alternative; and 2) a random component, which captures other aspects of the decision making process that the analyst did not observe: <span class="math display">\[
+\begin{array}{c}
+U_A = V_A + \epsilon_A\\
+U_B = V_B + \epsilon_B\\
+\end{array} 
+\]</span></p>
+<p>The random part of the function is called the <em>random utility</em>. If there was no uncertainty at all, if we knew precisely all there is to know about the decision-making process, we would have that <span class="math inline">\(\epsilon_{\text{Do-Nothing}}\)</span> and <span class="math inline">\(\epsilon_{\text{New-Phone}}\)</span>. Accordingly, <span class="math inline">\(U_{\text{Do-Nothing}} = V_{\text{Do-Nothing}}\)</span> and <span class="math inline">\(U_{\text{New-Phone}} = V_{\text{New-Phone}}\)</span>, and we could predict with complete certainty the choice. However, the presence of the random components means that we cannot be certain whether <span class="math inline">\(U_A &gt; U_B\)</span>.</p>
+<p>While this is unfortunate, the presence of the random terms does allow us to make a probabilistic statement, such as: <span class="math display">\[
+P_{\text{Do-Nothing}} = P(U_{\text{Do-Nothing}} &gt; U_{\text{New-Phone}})
+\]</span></p>
+<p>In other words, the probability of doing nothing equals the probability that the utility of doing nothing is greater than the utility of buying a new phone. After rearranging things, this is equivalent to: <span class="math display">\[
+P_{\text{Do-Nothing}} = P(V_{\text{Do-Nothing}} - V_{\text{New-Phone}} &lt; \epsilon_{\text{New-Phone}} - \epsilon_{\text{Do-Nothing}})
+\]</span></p>
+<p>The expression above is the foundation of random utility modelling. Before we make more progress, however, we have to answer an important question.</p>
+</div>
+<div id="what-about-those-random-terms" class="section level2">
+<h2><span class="header-section-number">3.7</span> What about those random terms?</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(evd)</code></pre></div>
+<p>A probabilistic expression is clearly better than being unable to say anything at all regarding choices. To make this expression of practical use, we must assume some distribution for the random terms. Which means that we need to define some probability distribution function.</p>
+</div>
+<div id="probability-distribution-functions-pdfs" class="section level2">
+<h2><span class="header-section-number">3.8</span> Probability distribution functions (PDFs)</h2>
+<p>A candidate for a probability distribution function is any function that satisfies the following two conditions: <span class="math display">\[
+\begin{array}{l}
+\text{Condition 1: }f(x)\ge 0\text{ for all }x\\
+\text{Condition 2: }\int_{-\infty}^{\infty}f(x)dx=1\\
+\end{array} 
+\]</span></p>
+<p>These two conditions say that the function must take values of at least zero for the interval of <span class="math inline">\(x\)</span> of interest, and that the area under the curve (that is what the integral means) must equal 1.</p>
+<p>Lets use an example to illustrate these properties. We will define the following function: <span class="math display">\[
+f(x) = \left\{
+        \begin{array}{lc}
+            0 &amp; \quad x \le -L \\
+            \frac{1}{2L} &amp; \quad -L&gt; x &gt; L \\
+            0 &amp; \quad x \ge L \\
+        \end{array}
+    \right.
+\]</span></p>
+<p>This function is shown in Figure <a href="chapter-2.html#fig:fig-uniform-distribution">3.1</a> below, with <span class="math inline">\(L=2\)</span>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define a function</span>
+uniform &lt;-<span class="st"> </span><span class="cf">function</span>(x, L) 
+  <span class="kw">ifelse</span>( x <span class="op">&lt;=</span><span class="st"> </span><span class="op">-</span>L, <span class="dv">0</span>,
+  <span class="kw">ifelse</span>( x <span class="op">&gt;</span><span class="st"> </span><span class="op">-</span>L <span class="op">&amp;</span><span class="st"> </span>x <span class="op">&lt;=</span><span class="st"> </span>L, <span class="dv">1</span><span class="op">/</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>L), <span class="dv">0</span> ))
+
+<span class="co"># Define parameter L for the distribution</span>
+L &lt;-<span class="st"> </span><span class="dv">2</span>
+
+<span class="co"># Create a data frame for plotting</span>
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="op">-</span>(L<span class="op">+</span><span class="dv">1</span>), <span class="dt">to =</span> L<span class="op">+</span><span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">y =</span> <span class="kw">uniform</span>(x, L))
+
+<span class="co"># Plot</span>
+<span class="kw">ggplot</span>(<span class="dt">data =</span> df, <span class="kw">aes</span>(x, y)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_area</span>(<span class="dt">fill =</span> <span class="st">&quot;orange&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span><span class="op">/</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>L) <span class="op">+</span><span class="st"> </span><span class="fl">0.2</span> <span class="op">*</span><span class="st"> </span><span class="dv">1</span><span class="op">/</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>L))) <span class="op">+</span><span class="st"> </span><span class="co"># Set the limits of the y axis</span>
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add y axis</span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add x axis</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;f(x)&quot;</span>) <span class="co"># Label the y axis</span></code></pre></div>
+<div class="figure"><span id="fig:fig-uniform-distribution"></span>
+<img src="bookdown-demo_files/figure-html/fig-uniform-distribution-1.png" alt="\label{fig:fig-uniform-distribution}Uniform distribution" width="672" />
+<p class="caption">
+Figure 3.1: Uniform distribution
+</p>
+</div>
+<p>It is easy to see that the value of the function is always equal to or greater than zero. You can also verify that the area under the curve in this case is simply the area of the rectangle <span class="math inline">\(b \times h\)</span>, where the base of the rectangle is <span class="math inline">\(b = L - (-L)\)</span> and the height is <span class="math inline">\(h=\frac{1}{2L}\)</span>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(L <span class="op">-</span><span class="st"> </span>(<span class="op">-</span>L)) <span class="op">/</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>L)</code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p>If you are working with the R Notebook file, try changing the value of the parameter <span class="math inline">\(L\)</span> to see what happens! What is the implication of larger values of L? And of smaller values of L?</p>
+<p>Since the function above satisfies the two necessary conditions, we conclude that it is a valid probability distribution function. In fact, it turns out to be a form of the uniform probability distribution function, which more generally is defined as: <span class="math display">\[
+f(x) = \left\{
+        \begin{array}{lc}
+            0 &amp; \quad x \le b \\
+            \frac{1}{a - b} &amp; \quad b&gt; x &gt; a \\
+            0 &amp; \quad x \ge a \\
+        \end{array}
+    \right.
+\]</span></p>
+<p>Given a probability distribution function, we can calculate the probability of a random variable <span class="math inline">\(x\)</span> being contained in a defined interval. For instance, the probability of <span class="math inline">\(x &lt; -L\)</span> is zero, since the area under the curve in that case is zero. The probability of <span class="math inline">\(x \le X\)</span> is: <span class="math display">\[
+\int_{-\infty}^{X}f(x)dx
+\]</span></p>
+<p>In the case of our uniform distribution function, this is simply the area of the rectangle defined by the limits of the integral:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define L</span>
+L &lt;-<span class="st"> </span><span class="dv">2</span>
+
+<span class="co"># Define an upper limit for calculating the probability</span>
+X &lt;-<span class="st"> </span><span class="dv">0</span>
+
+<span class="co"># Create a data frame for plotting</span>
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="op">-</span>(L<span class="op">+</span><span class="dv">1</span>), <span class="dt">to =</span> L<span class="op">+</span><span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">y =</span> <span class="kw">uniform</span>(x, L))
+df_p &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="op">-</span>(L<span class="op">+</span><span class="dv">1</span>), <span class="dt">to =</span> X, <span class="dt">by =</span> <span class="fl">0.01</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">y =</span> <span class="kw">uniform</span>(x, L))
+
+<span class="co"># Plot</span>
+<span class="kw">ggplot</span>(<span class="dt">data =</span> df, <span class="kw">aes</span>(x, y)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_area</span>(<span class="dt">fill =</span> <span class="st">&quot;orange&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Plot distribution function</span>
+<span class="st">  </span><span class="kw">geom_area</span>(<span class="dt">data =</span> df_p, <span class="dt">fill =</span> <span class="st">&quot;orange&quot;</span>, <span class="dt">alpha =</span> <span class="dv">1</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Plot area under the curve</span>
+<span class="st">  </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span><span class="op">/</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>L) <span class="op">+</span><span class="st"> </span><span class="fl">0.2</span> <span class="op">*</span><span class="st"> </span><span class="dv">1</span><span class="op">/</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>L))) <span class="op">+</span><span class="st"> </span><span class="co"># Set the limits of the y axis</span>
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add y axis</span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add x axis</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;f(x)&quot;</span>) <span class="co"># Label the y axis</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
+<p>What is the probability that <span class="math inline">\(x \le 0\)</span>? Try changing the upper limit to see what happens. How does the value of the area under the curve change?</p>
+<p>Associated to a probability distribution function we can define a cumulative distribution function <span class="math inline">\(F_X(x) = P(x \le X)\)</span>, which maps how the probability changes as we change the interval. The cumulative distribution function of our uniform distribution is as follows: <span class="math display">\[
+F(x) = \left\{
+        \begin{array}{lc}
+            0 &amp; \quad x \le -L \\
+            \frac{x + L}{2L} &amp; \quad -L&gt; x &gt; L \\
+            1 &amp; \quad x \ge L \\
+        \end{array}
+    \right.
+\]</span></p>
+<p>The cumulative distribution function for our uniform distribution appears in Figure <a href="chapter-2.html#fig:fig-uniform-cumulative-distribution">3.2</a>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define the cumulative distribution function</span>
+cuniform &lt;-<span class="st"> </span><span class="cf">function</span>(x, L) 
+  <span class="kw">ifelse</span>( x <span class="op">&lt;=</span><span class="st"> </span><span class="op">-</span>L, <span class="dv">0</span>,
+  <span class="kw">ifelse</span>( x <span class="op">&gt;</span><span class="st"> </span><span class="op">-</span>L <span class="op">&amp;</span><span class="st"> </span>x <span class="op">&lt;=</span><span class="st"> </span>L, (x <span class="op">+</span><span class="st"> </span>L)<span class="op">/</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span>L), <span class="dv">1</span> ))
+
+<span class="co"># Define L</span>
+L &lt;-<span class="st"> </span><span class="dv">2</span>
+
+<span class="co"># Create a data frame for plotting</span>
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="op">-</span>(L<span class="op">+</span><span class="dv">1</span>), <span class="dt">to =</span> L<span class="op">+</span><span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">y =</span> <span class="kw">cuniform</span>(x, L))
+
+<span class="co"># Plot</span>
+<span class="kw">ggplot</span>(<span class="dt">data =</span> df, <span class="kw">aes</span>(x, y)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_step</span>(<span class="dt">color =</span> <span class="st">&quot;orange&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Plot cumulative distribution function</span>
+<span class="st">  </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span><span class="co"># Set the limits of the y axis</span>
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add y axis</span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add x axis</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;F(x)&quot;</span>) <span class="co"># Label the y axis</span></code></pre></div>
+<div class="figure"><span id="fig:fig-uniform-cumulative-distribution"></span>
+<img src="bookdown-demo_files/figure-html/fig-uniform-cumulative-distribution-1.png" alt="\label{fig:fig-uniform-cumulative-distribution}Uniform cumulative distribution function" width="672" />
+<p class="caption">
+Figure 3.2: Uniform cumulative distribution function
+</p>
+</div>
+<p>As you can see, the probability of <span class="math inline">\(x \le -L\)</span> is zero, the probability of <span class="math inline">\(x \le 0\)</span> is 0.5, and the probability of <span class="math inline">\(x \le L\)</span> is one.</p>
+<p>Lets consider a second example, with a function as follows: <span class="math display">\[
+f(x) = \left\{
+        \begin{array}{lc}
+            0 &amp; \quad x \le 0 \\
+            2x &amp; \quad 0 &gt; x &gt; 1 \\
+            0 &amp; \quad x \ge 1 \\
+        \end{array}
+    \right.
+\]</span> This function is shown in Figure <a href="chapter-2.html#fig:fig-linear-distribution">3.3</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define a function</span>
+linear &lt;-<span class="st"> </span><span class="cf">function</span>(x) 
+  <span class="kw">ifelse</span>( x <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">0</span>,
+  <span class="kw">ifelse</span>( x <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>x <span class="op">&lt;=</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">2</span> <span class="op">*</span><span class="st"> </span>x, <span class="dv">0</span> ))
+
+<span class="co"># Create a data frame for plotting</span>
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">y =</span> <span class="kw">linear</span>(x))
+
+<span class="co"># Plot</span>
+<span class="kw">ggplot</span>(<span class="dt">data =</span> df, <span class="kw">aes</span>(x, y)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_area</span>(<span class="dt">fill =</span> <span class="st">&quot;orange&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">2</span>)) <span class="op">+</span><span class="st"> </span><span class="co"># Set the limits of the y axis</span>
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add y axis</span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add x axis</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;f(x)&quot;</span>) <span class="co"># Label the y axis</span></code></pre></div>
+<div class="figure"><span id="fig:fig-linear-distribution"></span>
+<img src="bookdown-demo_files/figure-html/fig-linear-distribution-1.png" alt="\label{fig:fig-linear-distribution}Cubic distribution" width="672" />
+<p class="caption">
+Figure 3.3: Cubic distribution
+</p>
+</div>
+<p>Clearly, <span class="math inline">\(f(x) \ge 0\)</span> for all values of <span class="math inline">\(x\)</span> in the interval <span class="math inline">\(0 \le x \le 1\)</span>. We can verify that the area under the curve is 1. In this case the area is that of a triangle, i.e., <span class="math inline">\(\frac{b \times h}{2}\)</span>. Since the base of the triange is <span class="math inline">\(b=1\)</span> and the height is <span class="math inline">\(h=2\)</span>, we see that the area under the curve is 1.</p>
+<p>Since this is a valid probability distribution function, we can use it to calculate the probability of <span class="math inline">\(x \le X\)</span> as above. The area under the curve when <span class="math inline">\(x \le X\)</span> is given by: <span class="math display">\[
+F(x) = \left\{
+        \begin{array}{lc}
+            0 &amp; \quad x \le 0 \\
+            \frac{x \times 2x}{2} = x^2 &amp; \quad 0 &gt; x &gt; 1 \\
+            1 &amp; \quad x \ge 1 \\
+        \end{array}
+    \right.
+\]</span></p>
+<p>The plot of the cumulative distribution function in this case is shown in Figure <a href="chapter-2.html#fig:fig-linear-cumulative-distribution">3.4</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define a function</span>
+clinear &lt;-<span class="st"> </span><span class="cf">function</span>(x) 
+  <span class="kw">ifelse</span>( x <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">0</span>,
+  <span class="kw">ifelse</span>( x <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>x <span class="op">&lt;=</span><span class="st"> </span><span class="dv">1</span>, x<span class="op">^</span><span class="dv">2</span>, <span class="dv">1</span> ))
+
+<span class="co"># Create a data frame for plotting</span>
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="op">-</span><span class="fl">0.2</span>, <span class="dt">to =</span> <span class="fl">1.2</span>, <span class="dt">by =</span> <span class="fl">0.001</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">y =</span> <span class="kw">clinear</span>(x))
+
+<span class="co"># Plot</span>
+<span class="kw">ggplot</span>(<span class="dt">data =</span> df, <span class="kw">aes</span>(x, y)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_step</span>(<span class="dt">color =</span> <span class="st">&quot;orange&quot;</span>) <span class="op">+</span><span class="st">  </span><span class="co"># Plot cumulative distribution function</span>
+<span class="st">  </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span><span class="co"># Set the limits of the y axis</span>
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add y axis</span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add x axis</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;f(x)&quot;</span>) <span class="co"># Label the y axis</span></code></pre></div>
+<div class="figure"><span id="fig:fig-linear-cumulative-distribution"></span>
+<img src="bookdown-demo_files/figure-html/fig-linear-cumulative-distribution-1.png" alt="\label{fig:fig-linear-cumulative-distribution}Linear cumulative distribution function" width="672" />
+<p class="caption">
+Figure 3.4: Linear cumulative distribution function
+</p>
+</div>
+<p>It should be clear from the examples above that calculating probabilities is nothing more than finding the area under the curve of a function. When the function is relatively simple, as the uniform or the linear distributions that we used for the examples, calculating the areas is also straightforward, since the functions describe simple geometric shapes. When the function is more involved, that becomes less straighforward. For example, consider the following function: <span class="math display">\[
+f(x) = \left\{
+        \begin{array}{lc}
+            0 &amp; \quad x \le 0 \\
+            4x^3 &amp; \quad 0 &gt; x &gt; 1 \\
+            0 &amp; \quad x \ge 1 \\
+        \end{array}
+    \right.
+\]</span> This function is plotted in Figure <a href="chapter-2.html#fig:fig-cubic-distribution">3.5</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define a function</span>
+cubic &lt;-<span class="st"> </span><span class="cf">function</span>(x) 
+  <span class="kw">ifelse</span>( x <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">0</span>,
+  <span class="kw">ifelse</span>( x <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>x <span class="op">&lt;=</span><span class="st"> </span><span class="dv">1</span>, <span class="dv">4</span> <span class="op">*</span><span class="st"> </span>x<span class="op">^</span><span class="dv">3</span>, <span class="dv">0</span> ))
+
+<span class="co"># Create a data frame for plotting</span>
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">y =</span> <span class="kw">cubic</span>(x))
+
+<span class="co"># Plot</span>
+<span class="kw">ggplot</span>(<span class="dt">data =</span> df, <span class="kw">aes</span>(x, y)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_area</span>(<span class="dt">fill =</span> <span class="st">&quot;orange&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">4</span>)) <span class="op">+</span><span class="st"> </span><span class="co"># Set the limits of the y axis</span>
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add y axis</span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add x axis</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;f(x)&quot;</span>) <span class="co"># Label the y axis</span></code></pre></div>
+<div class="figure"><span id="fig:fig-cubic-distribution"></span>
+<img src="bookdown-demo_files/figure-html/fig-cubic-distribution-1.png" alt="\label{fig:fig-cubic-distribution}Cubic distribution" width="672" />
+<p class="caption">
+Figure 3.5: Cubic distribution
+</p>
+</div>
+<p>Unlike the rectangle of the uniform distribution and the triangle of the linear distribution, the area under the curve for this distribution needs to be obtained by integration as follows (do not worry if ): <span class="math display">\[
+\int_{0}^{1}4x^3dx =4\Big[\frac{x^4}{4} \Big]_{0}^{1} = \Big[x^4 \Big]_{0}^{1} = 1^4-0 = 1
+\]</span> This shows that the function is a valid probability distribution function. However, the integration makes things more interesting, to say the least! Fortunately, for most applied discrete choice analysis we do not need to solve integrals manually (the monster minds have already done this for us!). The key here is to remember: given a valid probability distribution function <strong>the probability that a random variable <span class="math inline">\(x \le X\)</span> is the area under the curve in the interval <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(X\)</span></strong>.</p>
+</div>
+<div id="a-simple-random-utility-discrete-choice-model" class="section level2">
+<h2><span class="header-section-number">3.9</span> A simple random utility discrete choice model</h2>
+<p>We are now ready to deploy a probability distribution function to the probability of choosing an alternative. Returning to our binary choice example, lets assume that the difference in the random utility terms follows the uniform distribution with parameters <span class="math inline">\(-L\)</span> and <span class="math inline">\(L\)</span>, that is: <span class="math display">\[
+\epsilon_{\text{New-Phone}} - \epsilon_{\text{Do-Nothing}} \sim U(-L, L)
+\]</span></p>
+<p>The probability of choosing the “do-nothing alternative” is: <span class="math display">\[
+P_{\text{Do-Nothing}} = P(V_{\text{Do-Nothing}} - V_{\text{New-Phone}} &lt; \epsilon_{\text{New-Phone}} - \epsilon_{\text{Do-Nothing}})
+\]</span></p>
+<p>Since we know the probabilities of a random variable being less than a certain value in the uniform distribution, we have that: <span class="math display">\[
+P_{\text{Do-Nothing}} = \left\{
+        \begin{array}{lc}
+            0 &amp; \quad V_{\text{Do-Nothing}} - V_{\text{New-Phone}} \le -L \\
+            \frac{V_{\text{Do-Nothing}} - V_{\text{New-Phone}} + L}{2L} &amp; \quad -L&gt; V_{\text{Do-Nothing}} - V_{\text{New-Phone}} &gt; L \\
+            1 &amp; \quad V_{\text{Do-Nothing}} - V_{\text{New-Phone}} \ge L \\
+        \end{array}
+    \right.
+\]</span></p>
+<p>Lets unpack this expression.</p>
+<p>When the systematic utility of a new phone is greater than the systematic utility of doing nothing, the difference between these two terms is negative. The more negative this value is, the lower the probability of doing nothing. When the difference is more negative than <span class="math inline">\(-L\)</span>, the probability of doing nothing becomes zero.</p>
+<p>When the systematic utility of a new phone is identical to the systematic utility of doing nothing, the difference between these two terms is zero, in which case the probability of doing nothing is <span class="math inline">\(0.5\)</span>. In other words, there is a 50% chance that the decision maker will do nothing.</p>
+<p>Finally, when the systematic utility of a new phone is less than the systematic utility of doing nothing, the difference between these two terms is positive. The more the more positive this value is, the higher the probability of doing nothing. When the difference is greater than <span class="math inline">\(L\)</span>, the probability of doing nothing becomes one.</p>
+<p>Now, since the choice set is an exhaustive collection of courses of action, it follows that the probability of the two courses of action must add up to one (the decision-maker does nothing OR buys a new phone): <span class="math display">\[
+P_{\text{Do-Nothing}} + P_{\text{New-Phone}} = 1
+\]</span></p>
+<p>This implies that once we know the probability of doing nothing, the probability of buying a new phone is simply the complement: <span class="math display">\[
+P_{\text{New-Phone}} = 1 - P_{\text{Do-Nothing}}
+\]</span></p>
+<p>These probabilities are a discrete choice model. In fact, this is called the linear probability model <span class="citation">(see Ben-Akiva and Lerman <a href="#ref-Benakiva1985discrete">1985</a>, 66–68)</span>. Other models can be obtained by selecting different probability distribution functions, as we will see in later chapters. The procedure followed here will be the same, even if the probability distribution function selected for the model is different: given a valid probability distribution function, and given the systematic utilities of the alternatives, it is possible to evaluate the probabilistic statement associated with the choice of an alternative.</p>
+<p>One final note, before discussing other choice mechanisms. The simple example used here was for binary choice, i.e., for a situation with only two alternatives. This was done for convenience of exposition, and we will see how the same ideas generalize for situations with more than two alternatives, that is, for multinomial choice situations.</p>
+</div>
+<div id="other-choice-mechanisms" class="section level2">
+<h2><span class="header-section-number">3.10</span> Other choice mechanisms</h2>
+<p>Utility maximization is only one of several plausible mechanisms. The utility functions assume that trade-offs among different attributes are possible; for example, the way the utility functions were formulated assumes that a decision-maker is willing to pay more for higher download speeds. While such trade-offs are plausible in many situations, other choice mechanisms could exist in other cases. Ortuzar and Willumsen <span class="citation">(<a href="#ref-Ortuzar2011modelling">2011</a>, Fourth Edition:241–43)</span>.</p>
+<p>For example, a user who is shopping for smartphones may have low tolerance for download speeds below a certain threshold, or may have a budget limit that prevents her from considering certain models. Some alternatives from the choice set may be eliminated or ranked based on some dominant attribute. This kind of choice mechanism is called <em>lexicographic</em> choice, or elimination by attributes.</p>
+<p>Another plausible choice mechanism is a form of satisficing behavior. Again, a user shopping for a smartphone might find a model that does not maximize her utility, but that is otherwise satisfactory. For example, the decision-maker may consider that the additional time spent finding an even better model is not worth her while, so she stops her search at a suboptimal point.</p>
+<p>Another choice mechanism seen recently in the literature is regret-minimization <span class="citation">(<span class="citeproc-not-found" data-reference-id="Chorus2010new"><strong>???</strong></span>)</span>.</p>
+<p>In addition to these various mechanisms, it is possible that a decision-maker deploys combinations of them: for example, lexicographic choice to reduce the number of alternatives in a choice set, followed by utility maximization or regret minimization. Despite progress on these models, utility maximization remains the most widely used approach for the analysis of discrete choices.</p>
+</div>
+<div id="exercise-1" class="section level2">
+<h2><span class="header-section-number">3.11</span> Exercise</h2>
+<p>Answer the following questions.</p>
+<div id="questions-1" class="section level3">
+<h3><span class="header-section-number">3.11.1</span> Questions</h3>
+<ol style="list-style-type: decimal">
+<li><p>Define utility.</p></li>
+<li><p>Describe in your own words the behavior described by utility maximization.</p></li>
+<li><p>What conditions are necessary for a function to be a valid probability distribution function?</p></li>
+</ol>
+<p>Consider the function shown in Figure <a href="chapter-2.html#fig:fig-triangle">3.6</a>. This is called the triangle or tent function.</p>
+<div class="figure"><span id="fig:fig-triangle"></span>
+<img src="02-Figure-1.jpg" alt="\label{fig:fig-triangle}Triangle (or tent) function" width="640" />
+<p class="caption">
+Figure 3.6: Triangle (or tent) function
+</p>
+</div>
+<ol start="4" style="list-style-type: decimal">
+<li>Show that the triangle function in the figure is a valid probability distribution function.</li>
+</ol>
+<p>Next, consider the following utility functions for two alternatives, namely <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>: <span class="math display">\[
+\begin{array}{c}
+U_i = V_i + \epsilon_i\\
+U_j = V_j + \epsilon_j\\
+\end{array}
+\]</span></p>
+<p>Assume that the difference between the error terms below follows the triangle distribution: <span class="math display">\[
+\epsilon_q = \epsilon_i - \epsilon_j
+\]</span></p>
+<ol start="5" style="list-style-type: decimal">
+<li>Parting from the assumption above, derive a binary choice model for the probability of selecting alternative <span class="math inline">\(j\)</span>.</li>
+</ol>
+
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-Maddala1983limited">
+<p>Maddala, G. S. 1983. <em>Limited-Dependent and Qualitative Variables in Econometrics</em>. Book. Cambridge: Cambridge University Press.</p>
+</div>
+<div id="ref-Degenne1999social">
+<p>Degenne, A., and M. Fors‚. 1999. <em>Introducing Social Networks</em>. Book. Introducing Statistical Methods. London: SAGE Publications.</p>
+</div>
+<div id="ref-Paez2007social">
+<p>Páez, A., and D. M. Scott. 2007. “Social Influence on Travel Behavior: A Simulation Example of the Decision to Telecommute.” Journal Article. <em>Environment and Planning A</em> 39 (3): 647–65. <a href="ISI:000245598400010
+C:/Papers/Environment and Planning A/Environment and Planning A (2007) 39 (3) 647-665.pdf" class="uri">ISI:000245598400010
+<div id="ref-webb2001further">
+<p>Webb, John K, MT Murphy, VV Flambaum, VA Dzuba, JD Barrow, CW Churchill, JX Prochaska, and AM Wolfe. 2001. “Further Evidence for Cosmological Evolution of the Fine Structure Constant.” <em>Physical Review Letters</em> 87 (9). APS: 091301.</p>
+</div>
+<div id="ref-Kirschenbaum2013cost">
+<p>Kirschenbaum, Alan (Avi). 2013. “The Cost of Airport Security: The Passenger Dilemma.” <em>Journal of Air Transport Management</em> 30: 39–45. doi:<a href="https://doi.org/https://doi.org/10.1016/j.jairtraman.2013.05.002">https://doi.org/10.1016/j.jairtraman.2013.05.002</a>.</p>
+</div>
+<div id="ref-Benakiva1985discrete">
+<p>Ben-Akiva, M., and S. R. Lerman. 1985. <em>Discrete Choice Analysis: Theory and Applications to Travel Demand</em>. Book. Cambridge: The MIT Press.</p>
+</div>
+<div id="ref-hensher2005applied">
+<p>Hensher, David A, John M Rose, and William H Greene. 2005. <em>Applied Choice Analysis: A Primer</em>. Cambridge University Press.</p>
+</div>
+<div id="ref-Ortuzar2011modelling">
+<p>Ortúzar, J. D., and L. G. Willumsen. 2011. <em>Modelling Transport</em>. Book. Vol. Fourth Edition. New York: Wiley.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="chapter-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/02-Fundamental-Concepts.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
