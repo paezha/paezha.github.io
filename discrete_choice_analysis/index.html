@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Discrete Choice Analysis with R</title>
+  <title>An Introduction to Discrete Choice Analysis</title>
   <meta name="description" content="These notes were created by Antonio Paez as a resource for teaching a graduate discrete choice analysis course (GEOG 738) at McMaster University.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Discrete Choice Analysis with R" />
+  <meta property="og:title" content="An Introduction to Discrete Choice Analysis" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="paezha/Discrete-Choice-Analysis-with-R" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Discrete Choice Analysis with R" />
+  <meta name="twitter:title" content="An Introduction to Discrete Choice Analysis" />
   
   <meta name="twitter:description" content="These notes were created by Antonio Paez as a resource for teaching a graduate discrete choice analysis course (GEOG 738) at McMaster University." />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Antonio Paez">
 
 
-<meta name="date" content="2019-01-27">
+<meta name="date" content="2019-02-04">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,7 +33,7 @@
   
   
 
-<link rel="next" href="preliminaries-installing-r-and-rstudio.html">
+<link rel="next" href="price-mechanisms.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -105,50 +105,67 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#choices-choices-choices"><i class="fa fa-check"></i>Choices choices choices</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#plan"><i class="fa fa-check"></i>Plan</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#audience"><i class="fa fa-check"></i>Audience</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#requisites"><i class="fa fa-check"></i>Requisites</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#choices-choices-choices"><i class="fa fa-check"></i>Choices, choices, choices</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html"><i class="fa fa-check"></i><b>1</b> Preliminaries: Installing R and RStudio</a><ul>
-<li class="chapter" data-level="1.1" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#introduction"><i class="fa fa-check"></i><b>1.1</b> Introduction</a></li>
-<li class="chapter" data-level="1.2" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#learning-objectives"><i class="fa fa-check"></i><b>1.2</b> Learning Objectives</a></li>
-<li class="chapter" data-level="1.3" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#r-the-open-statistical-computing-project"><i class="fa fa-check"></i><b>1.3</b> R: The Open Statistical Computing Project</a><ul>
-<li class="chapter" data-level="1.3.1" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#what-is-r"><i class="fa fa-check"></i><b>1.3.1</b> What is R?</a></li>
-<li class="chapter" data-level="1.3.2" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#the-rstudio-ide"><i class="fa fa-check"></i><b>1.3.2</b> The RStudio IDE</a></li>
+<li class="chapter" data-level="1" data-path="price-mechanisms.html"><a href="price-mechanisms.html"><i class="fa fa-check"></i><b>1</b> Price Mechanisms</a><ul>
+<li class="chapter" data-level="" data-path="price-mechanisms.html"><a href="price-mechanisms.html#plan"><i class="fa fa-check"></i>Plan</a></li>
+<li class="chapter" data-level="" data-path="price-mechanisms.html"><a href="price-mechanisms.html#audience"><i class="fa fa-check"></i>Audience</a></li>
+<li class="chapter" data-level="" data-path="price-mechanisms.html"><a href="price-mechanisms.html#requisites"><i class="fa fa-check"></i>Requisites</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#packages-in-r"><i class="fa fa-check"></i><b>1.4</b> Packages in R</a></li>
+<li class="chapter" data-level="2" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html"><i class="fa fa-check"></i><b>2</b> Preliminaries: Installing R and RStudio</a><ul>
+<li class="chapter" data-level="2.1" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#introduction"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#learning-objectives"><i class="fa fa-check"></i><b>2.2</b> Learning Objectives</a></li>
+<li class="chapter" data-level="2.3" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#r-the-open-statistical-computing-project"><i class="fa fa-check"></i><b>2.3</b> R: The Open Statistical Computing Project</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#what-is-r"><i class="fa fa-check"></i><b>2.3.1</b> What is R?</a></li>
+<li class="chapter" data-level="2.3.2" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#the-rstudio-ide"><i class="fa fa-check"></i><b>2.3.2</b> The RStudio IDE</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="chapter-1.html"><a href="chapter-1.html"><i class="fa fa-check"></i><b>2</b> Data and stuff</a><ul>
-<li class="chapter" data-level="2.1" data-path="chapter-1.html"><a href="chapter-1.html#what-are-models"><i class="fa fa-check"></i><b>2.1</b> What are models?</a></li>
-<li class="chapter" data-level="2.2" data-path="chapter-1.html"><a href="chapter-1.html#how-to-use-this-note"><i class="fa fa-check"></i><b>2.2</b> How to use this note</a></li>
-<li class="chapter" data-level="2.3" data-path="chapter-1.html"><a href="chapter-1.html#learning-objectives-1"><i class="fa fa-check"></i><b>2.3</b> Learning objectives</a></li>
-<li class="chapter" data-level="2.4" data-path="chapter-1.html"><a href="chapter-1.html#suggested-readings"><i class="fa fa-check"></i><b>2.4</b> Suggested readings</a></li>
-<li class="chapter" data-level="2.5" data-path="chapter-1.html"><a href="chapter-1.html#ways-of-measuring-stuff"><i class="fa fa-check"></i><b>2.5</b> Ways of measuring stuff</a><ul>
-<li class="chapter" data-level="2.5.1" data-path="chapter-1.html"><a href="chapter-1.html#categorical"><i class="fa fa-check"></i><b>2.5.1</b> Categorical</a></li>
-<li class="chapter" data-level="2.5.2" data-path="chapter-1.html"><a href="chapter-1.html#quantitative"><i class="fa fa-check"></i><b>2.5.2</b> Quantitative</a></li>
+<li class="chapter" data-level="2.4" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#packages-in-r"><i class="fa fa-check"></i><b>2.4</b> Packages in R</a></li>
 </ul></li>
-<li class="chapter" data-level="2.6" data-path="chapter-1.html"><a href="chapter-1.html#importing-data"><i class="fa fa-check"></i><b>2.6</b> Importing data</a></li>
-<li class="chapter" data-level="2.7" data-path="chapter-1.html"><a href="chapter-1.html#data-classes-in-r"><i class="fa fa-check"></i><b>2.7</b> Data Classes in R</a></li>
-<li class="chapter" data-level="2.8" data-path="chapter-1.html"><a href="chapter-1.html#more-on-indexing-and-data-manipulation"><i class="fa fa-check"></i><b>2.8</b> More on indexing and data manipulation</a></li>
-<li class="chapter" data-level="2.9" data-path="chapter-1.html"><a href="chapter-1.html#visualization"><i class="fa fa-check"></i><b>2.9</b> Visualization</a></li>
-<li class="chapter" data-level="2.10" data-path="chapter-1.html"><a href="chapter-1.html#exercise"><i class="fa fa-check"></i><b>2.10</b> Exercise</a><ul>
-<li class="chapter" data-level="2.10.1" data-path="chapter-1.html"><a href="chapter-1.html#questions"><i class="fa fa-check"></i><b>2.10.1</b> Questions</a></li>
+<li class="chapter" data-level="3" data-path="chapter-1.html"><a href="chapter-1.html"><i class="fa fa-check"></i><b>3</b> Data and stuff</a><ul>
+<li class="chapter" data-level="3.1" data-path="chapter-1.html"><a href="chapter-1.html#what-are-models"><i class="fa fa-check"></i><b>3.1</b> What are models?</a></li>
+<li class="chapter" data-level="3.2" data-path="chapter-1.html"><a href="chapter-1.html#how-to-use-this-note"><i class="fa fa-check"></i><b>3.2</b> How to use this note</a></li>
+<li class="chapter" data-level="3.3" data-path="chapter-1.html"><a href="chapter-1.html#learning-objectives-1"><i class="fa fa-check"></i><b>3.3</b> Learning objectives</a></li>
+<li class="chapter" data-level="3.4" data-path="chapter-1.html"><a href="chapter-1.html#suggested-readings"><i class="fa fa-check"></i><b>3.4</b> Suggested readings</a></li>
+<li class="chapter" data-level="3.5" data-path="chapter-1.html"><a href="chapter-1.html#ways-of-measuring-stuff"><i class="fa fa-check"></i><b>3.5</b> Ways of measuring stuff</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="chapter-1.html"><a href="chapter-1.html#categorical"><i class="fa fa-check"></i><b>3.5.1</b> Categorical</a></li>
+<li class="chapter" data-level="3.5.2" data-path="chapter-1.html"><a href="chapter-1.html#quantitative"><i class="fa fa-check"></i><b>3.5.2</b> Quantitative</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="chapter-1.html"><a href="chapter-1.html#importing-data"><i class="fa fa-check"></i><b>3.6</b> Importing data</a></li>
+<li class="chapter" data-level="3.7" data-path="chapter-1.html"><a href="chapter-1.html#data-classes-in-r"><i class="fa fa-check"></i><b>3.7</b> Data Classes in R</a></li>
+<li class="chapter" data-level="3.8" data-path="chapter-1.html"><a href="chapter-1.html#more-on-indexing-and-data-manipulation"><i class="fa fa-check"></i><b>3.8</b> More on indexing and data manipulation</a></li>
+<li class="chapter" data-level="3.9" data-path="chapter-1.html"><a href="chapter-1.html#visualization"><i class="fa fa-check"></i><b>3.9</b> Visualization</a></li>
+<li class="chapter" data-level="3.10" data-path="chapter-1.html"><a href="chapter-1.html#exercise"><i class="fa fa-check"></i><b>3.10</b> Exercise</a><ul>
+<li class="chapter" data-level="3.10.1" data-path="chapter-1.html"><a href="chapter-1.html#questions"><i class="fa fa-check"></i><b>3.10.1</b> Questions</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="chapter-2.html"><a href="chapter-2.html"><i class="fa fa-check"></i><b>3</b> Fundamental concepts</a><ul>
-<li class="chapter" data-level="3.1" data-path="chapter-2.html"><a href="chapter-2.html#why-modelling-choices"><i class="fa fa-check"></i><b>3.1</b> Why modelling choices?</a></li>
-<li class="chapter" data-level="3.2" data-path="chapter-2.html"><a href="chapter-2.html#how-to-use-this-note-1"><i class="fa fa-check"></i><b>3.2</b> How to use this note</a></li>
-<li class="chapter" data-level="3.3" data-path="chapter-2.html"><a href="chapter-2.html#learning-objectives-2"><i class="fa fa-check"></i><b>3.3</b> Learning objectives</a></li>
-<li class="chapter" data-level="3.4" data-path="chapter-2.html"><a href="chapter-2.html#suggested-readings-1"><i class="fa fa-check"></i><b>3.4</b> Suggested readings</a></li>
-<li class="chapter" data-level="3.5" data-path="chapter-2.html"><a href="chapter-2.html#preliminaries"><i class="fa fa-check"></i><b>3.5</b> Preliminaries</a></li>
-<li class="chapter" data-level="3.6" data-path="chapter-2.html"><a href="chapter-2.html#utility-maximization"><i class="fa fa-check"></i><b>3.6</b> Utility maximization</a></li>
-<li class="chapter" data-level="3.7" data-path="chapter-2.html"><a href="chapter-2.html#what-about-those-random-terms"><i class="fa fa-check"></i><b>3.7</b> What about those random terms?</a></li>
-<li class="chapter" data-level="3.8" data-path="chapter-2.html"><a href="chapter-2.html#probability-distribution-functions-pdfs"><i class="fa fa-check"></i><b>3.8</b> Probability distribution functions (PDFs)</a></li>
-<li class="chapter" data-level="3.9" data-path="chapter-2.html"><a href="chapter-2.html#a-simple-random-utility-discrete-choice-model"><i class="fa fa-check"></i><b>3.9</b> A simple random utility discrete choice model</a></li>
-<li class="chapter" data-level="3.10" data-path="chapter-2.html"><a href="chapter-2.html#other-choice-mechanisms"><i class="fa fa-check"></i><b>3.10</b> Other choice mechanisms</a></li>
-<li class="chapter" data-level="3.11" data-path="chapter-2.html"><a href="chapter-2.html#exercise-1"><i class="fa fa-check"></i><b>3.11</b> Exercise</a><ul>
-<li class="chapter" data-level="3.11.1" data-path="chapter-2.html"><a href="chapter-2.html#questions-1"><i class="fa fa-check"></i><b>3.11.1</b> Questions</a></li>
+<li class="chapter" data-level="4" data-path="chapter-2.html"><a href="chapter-2.html"><i class="fa fa-check"></i><b>4</b> Fundamental concepts</a><ul>
+<li class="chapter" data-level="4.1" data-path="chapter-2.html"><a href="chapter-2.html#why-modelling-choices"><i class="fa fa-check"></i><b>4.1</b> Why modelling choices?</a></li>
+<li class="chapter" data-level="4.2" data-path="chapter-2.html"><a href="chapter-2.html#how-to-use-this-note-1"><i class="fa fa-check"></i><b>4.2</b> How to use this note</a></li>
+<li class="chapter" data-level="4.3" data-path="chapter-2.html"><a href="chapter-2.html#learning-objectives-2"><i class="fa fa-check"></i><b>4.3</b> Learning objectives</a></li>
+<li class="chapter" data-level="4.4" data-path="chapter-2.html"><a href="chapter-2.html#suggested-readings-1"><i class="fa fa-check"></i><b>4.4</b> Suggested readings</a></li>
+<li class="chapter" data-level="4.5" data-path="chapter-2.html"><a href="chapter-2.html#preliminaries"><i class="fa fa-check"></i><b>4.5</b> Preliminaries</a></li>
+<li class="chapter" data-level="4.6" data-path="chapter-2.html"><a href="chapter-2.html#utility-maximization"><i class="fa fa-check"></i><b>4.6</b> Utility maximization</a></li>
+<li class="chapter" data-level="4.7" data-path="chapter-2.html"><a href="chapter-2.html#what-about-those-random-terms"><i class="fa fa-check"></i><b>4.7</b> What about those random terms?</a></li>
+<li class="chapter" data-level="4.8" data-path="chapter-2.html"><a href="chapter-2.html#probability-distribution-functions-pdfs"><i class="fa fa-check"></i><b>4.8</b> Probability distribution functions (PDFs)</a></li>
+<li class="chapter" data-level="4.9" data-path="chapter-2.html"><a href="chapter-2.html#a-simple-random-utility-discrete-choice-model"><i class="fa fa-check"></i><b>4.9</b> A simple random utility discrete choice model</a></li>
+<li class="chapter" data-level="4.10" data-path="chapter-2.html"><a href="chapter-2.html#other-choice-mechanisms"><i class="fa fa-check"></i><b>4.10</b> Other choice mechanisms</a></li>
+<li class="chapter" data-level="4.11" data-path="chapter-2.html"><a href="chapter-2.html#exercise-1"><i class="fa fa-check"></i><b>4.11</b> Exercise</a><ul>
+<li class="chapter" data-level="4.11.1" data-path="chapter-2.html"><a href="chapter-2.html#questions-1"><i class="fa fa-check"></i><b>4.11.1</b> Questions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="chapter-3.html"><a href="chapter-3.html"><i class="fa fa-check"></i><b>5</b> Logit</a><ul>
+<li class="chapter" data-level="5.1" data-path="chapter-3.html"><a href="chapter-3.html#modelling-choices"><i class="fa fa-check"></i><b>5.1</b> Modelling choices</a></li>
+<li class="chapter" data-level="5.2" data-path="chapter-3.html"><a href="chapter-3.html#how-to-use-this-note-2"><i class="fa fa-check"></i><b>5.2</b> How to use this note</a></li>
+<li class="chapter" data-level="5.3" data-path="chapter-3.html"><a href="chapter-3.html#learning-objectives-3"><i class="fa fa-check"></i><b>5.3</b> Learning objectives</a></li>
+<li class="chapter" data-level="5.4" data-path="chapter-3.html"><a href="chapter-3.html#suggested-readings-2"><i class="fa fa-check"></i><b>5.4</b> Suggested readings</a></li>
+<li class="chapter" data-level="5.5" data-path="chapter-3.html"><a href="chapter-3.html#preliminaries-1"><i class="fa fa-check"></i><b>5.5</b> Preliminaries</a></li>
+<li class="chapter" data-level="5.6" data-path="chapter-3.html"><a href="chapter-3.html#once-again-those-random-terms"><i class="fa fa-check"></i><b>5.6</b> Once again those random terms</a></li>
+<li class="chapter" data-level="5.7" data-path="chapter-3.html"><a href="chapter-3.html#now-about-those-parameters-mu-and-sigma"><i class="fa fa-check"></i><b>5.7</b> Now, about those parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>…</a></li>
+<li class="chapter" data-level="5.8" data-path="chapter-3.html"><a href="chapter-3.html#multinomial-logit"><i class="fa fa-check"></i><b>5.8</b> Multinomial logit</a></li>
+<li class="chapter" data-level="5.9" data-path="chapter-3.html"><a href="chapter-3.html#properties-of-the-logit-model"><i class="fa fa-check"></i><b>5.9</b> Properties of the logit model</a></li>
+<li class="chapter" data-level="5.10" data-path="chapter-3.html"><a href="chapter-3.html#revisiting-the-systematic-utilities"><i class="fa fa-check"></i><b>5.10</b> Revisiting the systematic utilities</a></li>
+<li class="chapter" data-level="5.11" data-path="chapter-3.html"><a href="chapter-3.html#exercise-2"><i class="fa fa-check"></i><b>5.11</b> Exercise</a><ul>
+<li class="chapter" data-level="5.11.1" data-path="chapter-3.html"><a href="chapter-3.html#questions-2"><i class="fa fa-check"></i><b>5.11.1</b> Questions</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -164,7 +181,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Discrete Choice Analysis with R</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">An Introduction to Discrete Choice Analysis</a>
           </h1>
         </div>
 
@@ -173,9 +190,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="header">
-<h1 class="title">Discrete Choice Analysis with R</h1>
+<h1 class="title">An Introduction to Discrete Choice Analysis</h1>
+<h2 class="subtitle"><em>A Course in R</em></h2>
 <p class="author"><em>Antonio Paez</em></p>
-<p class="date"><em>2019-01-27</em></p>
+<p class="date"><em>2019-02-04</em></p>
 </div>
 <div id="preface" class="section level1 unnumbered">
 <h1>Preface</h1>
@@ -193,30 +211,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>— Jean-Paul Sartre</p>
 </blockquote>
 <div id="choices-choices-choices" class="section level2 unnumbered">
-<h2>Choices choices choices</h2>
-<p>The field of spatial statistics has experienced phenomenal growth in the past 20 years.</p>
-<p>From being a niche subdiscipline in quantitative geography, statistics, regional science, and ecology at the beginning of the 1990s, it is now a mainstay of applications in a multitude of fields, including medical imaging, remote sensing, civil engineering, geology, statistics and probability, spatial epidemiology, end ecology, to name just a few disciplines.</p>
-<p>The growth in research and applications in spatial statistics has been in good measure fueled by the explosive growth in geotechnologies: technologies for sensing and describing the natural, social, and built environments on Earth. An outcome of this is that spatial data are, to an unprecedented level, within the reach of multitudes. Hardware and software have become cheaper and increasingly powerful, and we have transitioned from a data poor environment (in all respects, but particularly in terms of spatial data) to a data rich environment. Twenty years ago, for instance, technical skills in spatial analysis included tasks such as digitizing. As a Masters student, I spent many boring hours digitizing paper maps before I could do any analysis on our single-seat (and relatively expensive) Geographic Information System (GIS). I was more or less a freak: altough there was an institutional push to adopt GIS, relatively few in my academic environment saw the value of spending hours doing what nowadays we would think of as low-level technical work. Surely, the time of a Master student, let alone a professional researcher or business analyst, is now more valuable than that. Indeed, very little time is spent anymore in such tasks low-level tasks, as data increasingly are collected and disseminated in a digital format. Instead, there is a huge appetite for what could be called the <em>brainware</em> of spatial analysis, the intelligence counterpart of the hardware, software, and data provided by geotechnologies.</p>
-<p>So what is spatial statistics?</p>
-<p>Very quickly, I will define spatial statistics as the application of statistical techniques to data that have geographical references - in other words, to the statistical analysis of maps.</p>
-<p>Like statistics more generally, spatial statistics is interested in hypothesis testing and inference. What distiguishes it as a branch of the broader field of statistics is its explicit interest in situations where data are not independent from each other (like throws of a dice) but rather display systemic associations. These associations, when seen through the lens of cartography, can manifest themselves as patterns of similarities (birds of a feather flock together) or disimilarities (repulsion due spatial competition among firms) - as two common examples of spatial patterns.</p>
-<p>Spatial statistics covers a broad array of techniques for the analysis of spatial patterns, including testing whether patterns are random or not, and a wide variety of modelling approaches as well. These tools enhance the brainware of analysts by allowing them to identify and possibly model patterns for inferring processes and/or for making spatial predictions.</p>
-</div>
-<div id="plan" class="section level2 unnumbered">
-<h2>Plan</h2>
-<p>The plan with these notes is to introduce discrete choice analysis in an intuitive way. To achieve this, I use examples and coding, lots of coding. There are some classical references, for instance Ben-Akiva and Lerman [REF:1985] and Train [REF:], and then more specialized books such as Hensher et al. [REF:Stated Choice]. While these notes should be appealing to students or others who are approaching this topic for the first time, I strongly encourage becoming acquainted with these books. In particular, I have relied heavily on Train’s text to organize the present notes, and thus the notes follow a thematic approach, moving from the fundamentals, introducing the logit model, and then by families of models, i.e., GEV, probit, etc.</p>
-<p>Each section covers a topic that builds on previous material. At the moment, my aim is that every section is followed by an activity.</p>
-<p>I have used the materials presented in this texts (in different incarnations) for teaching discrete choice analysis in different settings. Primarily, these notes have been used in the course <strong>GEOG 738</strong> <em>Discrete Choice Analysis</em> at McMaster University. This course is a full (Canadian) graduate term, which typically means 11 or 12 weeks of classes. The course is organized as a 2-hour seminar that is offered once per week. Accordingly, each section is designed to cover very approximately the material that I am used to cover in a 2 hour seminar.</p>
-<p>As I continue to work on these notes, I hope to be able to add optional (or bonus) chapters, that could be used 1) to extend a course on spatial statistics beyond the 13 week horizon of the Canadian term, or 2) to offer more advanced material to interested readers.</p>
-</div>
-<div id="audience" class="section level2 unnumbered">
-<h2>Audience</h2>
-<p>The notes were designed for a graduate course in geography, but are not necessarily limited to use by geographers, and could be a valuable resource to graduate students and others interested in discrete choice analysis and applications in economics, planning, transportation engineering, public health, etc. The prerequisites are an introductory college/university level course on multivariate statistics, ideally covering the fundamentals of probability theory and hypothesis testing. Working knowledge of multivariate linear regression analysis is a bonus but not strictly required.</p>
-</div>
-<div id="requisites" class="section level2 unnumbered">
-<h2>Requisites</h2>
-<p>To fully benefit from this text, up-to-date copies of <a href="https://cran.r-project.org/">R</a> and <a href="https://www.rstudio.com/">RStudio</a> are highly recommended. There are different packages that implement discrete choice methods in <code>R</code>. I will particularly rely on the packages <a href="https://CRAN.R-project.org/package=mlogit"><code>mlogit</code></a> and <a href="https://CRAN.R-project.org/package=gmnl"><code>gmnl</code></a>.</p>
-
+<h2>Choices, choices, choices</h2>
+<p>We are what we choose or we choose what we are. The choices we make have important implications for how we interact with the world. We live in a time when resources continue to become increasingly scarce. In this context, the way people make choices is informative about their preferences and where collectively we are going. This includes routine activities, such as deciding how to travel for everyday purposes, for instance walking or cycling, driving, or using transit. Or longer term decision, such as whether to contract more expensive but environmentally less damaging low impact energy sources; buy hybrid, electric, or gasoline vehicles; the frequency with which they travel by plane; to live in a distant suburb where rent is low, or in a central city where space is at a premium; and many others.</p>
+<p>Understanding decision-making is also important so that the world, or more accurately the social institutions that collectively represent us in our interactions with the world, can better accommodate and possibly even nudge our preferences towards socially desirable outcomes. What tradeoffs are members of the public willing to contemplate when choosing alternative mobility? Is it the range of vehicles? Their price? The time it takes to charge an electric vehicle? The satisfaction of being green? Should governments subdidize purchases of efficient heating? If so, what is the effect of a certain amount in subsidy? Do consumers prefer more range in electric vehicles, and how much are they willing to pay for it? Does the tradoff justify the increase in production cost?</p>
+<p>These questions are important as governments and businesses try to understand the way the public will respond to taxation, programs, engineering, or production decisions.</p>
+<p>In simple terms, discrete choice analysis is a way to understand behavior when there are implicit markets, and in this way it represents a form of hedonic price analysis.</p>
+<p>What are prices? In very general terms a price is a quantity offered in payment for one unit of a good or service. Early economies were based on bartering, a system of exchange that is limited use in even moderately complex economic systems. For instance, imagine a moderately sophisticated economy where people already have ceased being generalists to become specialists of some sort. Someone who spends time making shoes probably has limited time to tend chickens or understand the law of the land.</p>
+<p>Imagine that you make and sell shoes. People need shoes and may be willing to offer some quantity of something in exchange for them. The person who breeds chicken maybe willing to offer one chicken for a pair of shoes. Is that a fair price? How can you determine whether that exchange is sensible?</p>
+<p>Imagine now that you need a divorce, and a lawyer’s services are required for this. How many shoes should you offer the lawyer for a divorce? And what if the lawyer already has shoes?? Maybe the lawyer would prefer to be paid in chickens…</p>
+<p>The situation is further complicated by the reliance of bartering on some kind of trust system: as a seller, in a bartering system, there are no simple ways of ensuring the quality of the exchange! For instance, what if the lawyer is a crook, or the farmer gives you diseased chickens for your top-notch, high-quality shoes? In small systems, where agents can recognize each other, trust is enforced by reputation - if the lawyer is crooked, or the farmer is known to feed lead to the poultry, other actors can avoid transactions with them. If your shoes fall apart in the first rain, people will begin to avoid doing business with you!</p>
+<p>As these simple examples illustrate, bartering is a complicated way of setting prices, and this becomes increasingly complex (except in very exceptional situations) when an economy produces hundreds, thousands, or even more different products and services.</p>
+<p>(An interesting exception is the time when Pepsico bartered with the Soviet Union; <a href="https://www.nytimes.com/1990/04/09/business/international-report-pepsi-will-be-bartered-for-ships-vodka-deal-with-soviets.html">see this news item from 1990</a>. In this case, Pepsi-Cola was bartered for ships and vodka. Why did barter make sense in this situation? Hint: the ruble was not freely traded on world currency markets.)</p>
+<p>Far from being the root of all evil, it is almost certain that no complex economy can exist without the invention of money. The complexities of bartering explain why monetary systems were invented: the need for a common standard for exchange. Instead of needing to figure out how many shoes is worth a chicken and how many chickens a divorce, everything is measured using the same metric: shells, squares of deer skin, rupees, pesos, or dollars.</p>
 </div>
 </div>
             </section>
@@ -225,7 +231,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         </div>
       </div>
 
-<a href="preliminaries-installing-r-and-rstudio.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="price-mechanisms.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
