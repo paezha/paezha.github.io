@@ -25,14 +25,14 @@
 <meta name="author" content="Antonio Paez">
 
 
-<meta name="date" content="2019-02-04">
+<meta name="date" content="2019-02-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="chapter-3.html">
+<link rel="prev" href="chapter-4.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -48,6 +48,14 @@
 
 
 
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.8.0.9000/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.41.3/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.41.3/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -168,6 +176,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.11.1" data-path="chapter-3.html"><a href="chapter-3.html#questions-2"><i class="fa fa-check"></i><b>5.11.1</b> Questions</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="chapter-4.html"><a href="chapter-4.html"><i class="fa fa-check"></i><b>6</b> Practical specification and estimation</a><ul>
+<li class="chapter" data-level="6.1" data-path="chapter-4.html"><a href="chapter-4.html#theory-and-practice"><i class="fa fa-check"></i><b>6.1</b> Theory and practice</a></li>
+<li class="chapter" data-level="6.2" data-path="chapter-4.html"><a href="chapter-4.html#how-to-use-this-note-3"><i class="fa fa-check"></i><b>6.2</b> How to use this note</a></li>
+<li class="chapter" data-level="6.3" data-path="chapter-4.html"><a href="chapter-4.html#learning-objectives-4"><i class="fa fa-check"></i><b>6.3</b> Learning objectives</a></li>
+<li class="chapter" data-level="6.4" data-path="chapter-4.html"><a href="chapter-4.html#suggested-readings-3"><i class="fa fa-check"></i><b>6.4</b> Suggested readings</a></li>
+<li class="chapter" data-level="6.5" data-path="chapter-4.html"><a href="chapter-4.html#preliminaries-2"><i class="fa fa-check"></i><b>6.5</b> Preliminaries</a></li>
+<li class="chapter" data-level="6.6" data-path="chapter-4.html"><a href="chapter-4.html#the-anatomy-of-utility-functions"><i class="fa fa-check"></i><b>6.6</b> The anatomy of utility functions</a></li>
+<li class="chapter" data-level="6.7" data-path="chapter-4.html"><a href="chapter-4.html#example-specifying-the-utility-functions"><i class="fa fa-check"></i><b>6.7</b> Example: Specifying the utility functions</a></li>
+<li class="chapter" data-level="6.8" data-path="chapter-4.html"><a href="chapter-4.html#estimation"><i class="fa fa-check"></i><b>6.8</b> Estimation</a></li>
+<li class="chapter" data-level="6.9" data-path="chapter-4.html"><a href="chapter-4.html#example-a-logit-model-of-mode-choice"><i class="fa fa-check"></i><b>6.9</b> Example: A logit model of mode choice</a></li>
+<li class="chapter" data-level="6.10" data-path="chapter-4.html"><a href="chapter-4.html#comparing-models-mcfaddens-rho2"><i class="fa fa-check"></i><b>6.10</b> Comparing models: McFadden’s <span class="math inline">\(\rho^2\)</span></a></li>
+<li class="chapter" data-level="6.11" data-path="chapter-4.html"><a href="chapter-4.html#comparing-models-the-likelihood-ratio-test"><i class="fa fa-check"></i><b>6.11</b> Comparing models: the likelihood ratio test</a></li>
+<li class="chapter" data-level="6.12" data-path="chapter-4.html"><a href="chapter-4.html#exercise-3"><i class="fa fa-check"></i><b>6.12</b> Exercise</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -194,16 +216,42 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <div id="refs" class="references">
 <div>
+<p>Akerlof, G. A. 1997. “Social Distance and Social Decisions.” Journal Article. <em>Econometrica</em> 65 (5): 1005–27. <a href="ISI:A1997XT90600001
+C:/Papers/Econometrica/Econometrica (1997) 65 (5) 1005-1027.pdf" class="uri">ISI:A1997XT90600001
+C:/Papers/Econometrica/Econometrica (1997) 65 (5) 1005-1027.pdf</a>.</p>
+</div>
+<div>
 <p>Albert, Jim, and Maria Rizzo. 2012. <em>R by Example</em>. Springer Science &amp; Business Media.</p>
+</div>
+<div>
+<p>Axhausen, K. 2005. “Social Networks and Travel: Some Hypotheses.” Book Section. In <em>Social Aspects of Sustainable Transport: Transatlantic Perspectives</em>, edited by K. Donaghy, S. Poppelreuter, and G. Rudinger, 90–108. Aldershot: Ashgate Publishing.</p>
+</div>
+<div>
+<p>Axhausen, K. W. 2008. “Social Networks, Mobility Biographies, and Travel: Survey Challenges.” Journal Article. <em>Environment and Planning B-Planning &amp; Design</em> 35 (6): 981–96. <a href="ISI:000261734600004
+C:/Papers/Environment and Planning B/EPB (2008) 35 (6) 981-996.pdf
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3547633/pdf/nihms429217.pdf" class="uri">ISI:000261734600004
+C:/Papers/Environment and Planning B/EPB (2008) 35 (6) 981-996.pdf
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3547633/pdf/nihms429217.pdf</a>.</p>
 </div>
 <div>
 <p>Ben-Akiva, M., and S. R. Lerman. 1985. <em>Discrete Choice Analysis: Theory and Applications to Travel Demand</em>. Book. Cambridge: The MIT Press.</p>
 </div>
 <div>
+<p>Berg, P. van den, T. A. Arentze, and H. J. P. Timmermans. 2009. “Size and Composition of Ego-Centered Social Networks and Their Effect on Geographic Distance and Contact Frequency.” Journal Article. <em>Transportation Research Record</em>, no. 2135: 1–9. <a href="ISI:000274591300002" class="uri">ISI:000274591300002</a>.</p>
+</div>
+<div>
 <p>Bhat, C. R., and V. Pulugurta. 1998. “A Comparison of Two Alternative Behavioral Choice Mechanisms for Household Auto Ownership Decisions.” Journal Article. <em>Transportation Research Part B</em> 32 (1): 61–75.</p>
 </div>
 <div>
+<p>Carrasco, J. A., B. Hogan, B. Wellman, and E. J. Miller. 2008. “Collecting Social Network Data to Study Social Activity-Travel Behavior: An Egocentric Approach.” Journal Article. <em>Environment and Planning B-Planning &amp; Design</em> 35 (6): 961–80. <a href="ISI:000261734600003
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3547633/pdf/nihms429217.pdf" class="uri">ISI:000261734600003
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3547633/pdf/nihms429217.pdf</a>.</p>
+</div>
+<div>
 <p>Casetti, E. 1972. “Generating Models by the Expansion Method: Applications to Geographic Research.” Journal Article. <em>Geographical Analysis</em> 4 (1): 81–91.</p>
+</div>
+<div>
+<p>Chen, Y., and H. S. Mahmassani. 2016. “Use of Social Networking Data to Explore Activity and Destination Choice Behavior in Two Metropolitan Areas.” Journal Article. <em>Transportation Research Record</em>, no. 2566: 71–82. doi:<a href="https://doi.org/10.3141/2566-08">10.3141/2566-08</a>.</p>
 </div>
 <div>
 <p>Chorus, Caspar G. 2010. “A New Model of Random Regret Minimization.” <em>Eurpean Journal of Transport Infrastructure Research</em> 10 (2): 181–96.</p>
@@ -215,7 +263,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Degenne, A., and M. Fors‚. 1999. <em>Introducing Social Networks</em>. Book. Introducing Statistical Methods. London: SAGE Publications.</p>
 </div>
 <div>
+<p>Dugundji, E. R., and L. Gulyas. 2013. “Structure and Emergence in a Nested Logit Model with Social and Spatial Interactions.” Journal Article. <em>Computational and Mathematical Organization Theory</em> 19 (2): 151–203. doi:<a href="https://doi.org/10.1007/s10588-013-9157-y">10.1007/s10588-013-9157-y</a>.</p>
+</div>
+<div>
+<p>Dugundji, E. R., and J. L. Walker. 2005. “Discrete Choice with Social and Spatial Network Interdependencies - an Empirical Example Using Mixed Generalized Extreme Value Models with Field and Panel Effects.” Journal Article. <em>Transportation Research Record</em> 1921: 70–78. <a href="ISI:000236203700009
+C:/Papers/Transportation Research Record/1921 70-78 Dugundji and Walker.pdf" class="uri">ISI:000236203700009
+C:/Papers/Transportation Research Record/1921 70-78 Dugundji and Walker.pdf</a>.</p>
+</div>
+<div>
+<p>Goetzke, F., and T. Rave. 2011. “Bicycle Use in Germany: Explaining Differences Between Municipalities with Social Network Effects.” Journal Article. <em>Urban Studies</em> 48 (2): 427–37. doi:<a href="https://doi.org/10.1177/0042098009360681">10.1177/0042098009360681</a>.</p>
+</div>
+<div>
 <p>Hensher, David A, John M Rose, and William H Greene. 2005. <em>Applied Choice Analysis: A Primer</em>. Cambridge University Press.</p>
+</div>
+<div>
+<p>Kamargianni, M., M. Ben-Akiva, and A. Polydoropoulou. 2014. “Incorporating Social Interaction into Hybrid Choice Models.” Journal Article. <em>Transportation</em> 41 (6): 1263–85. doi:<a href="https://doi.org/10.1007/s11116-014-9550-5">10.1007/s11116-014-9550-5</a>.</p>
 </div>
 <div>
 <p>Kirschenbaum, Alan (Avi). 2013. “The Cost of Airport Security: The Passenger Dilemma.” <em>Journal of Air Transport Management</em> 30: 39–45. doi:<a href="https://doi.org/https://doi.org/10.1016/j.jairtraman.2013.05.002">https://doi.org/10.1016/j.jairtraman.2013.05.002</a>.</p>
@@ -227,6 +289,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Maddala, G. S. 1983. <em>Limited-Dependent and Qualitative Variables in Econometrics</em>. Book. Cambridge: Cambridge University Press.</p>
 </div>
 <div>
+<p>Matous, P. 2017. “Complementarity and Substitution Between Physical and Virtual Travel for Instrumental Information Sharing in Remote Rural Regions: A Social Network Approach.” Journal Article. <em>Transportation Research Part a-Policy and Practice</em> 99: 61–79. doi:<a href="https://doi.org/10.1016/j.tra.2017.02.010">10.1016/j.tra.2017.02.010</a>.</p>
+</div>
+<div>
+<p>McFadden, D. 2001. “Economic Choices.” Journal Article. <em>American Economic Review</em> 91 (3): 351–78. doi:<a href="https://doi.org/10.1257/aer.91.3.351">10.1257/aer.91.3.351</a>.</p>
+</div>
+<div>
 <p>Ortúzar, J. D., and L. G. Willumsen. 2011. <em>Modelling Transport</em>. Book. Vol. Fourth Edition. New York: Wiley.</p>
 </div>
 <div>
@@ -236,6 +304,9 @@ C:/Papers/Environment and Planning A/Environment and Planning A (2007) 39 (3) 64
 </div>
 <div>
 <p>Sarrias, Mauricio, and Ricardo Daziano. 2017. “Multinomial Logit Models with Continuous and Discrete Individual Heterogeneity in R: The gmnl Package.” <em>Journal of Statistical Software</em> 79 (2): 1–46. doi:<a href="https://doi.org/10.18637/jss.v079.i02">10.18637/jss.v079.i02</a>.</p>
+</div>
+<div>
+<p>Scott, D. M., I. Dam, A. Paez, and R. D. Wilton. 2012. “Investigating the Effects of Social Influence on the Choice to Telework.” Journal Article. <em>Environment and Planning A</em> 44 (5): 1016–31. doi:<a href="https://doi.org/10.1068/a43223">10.1068/a43223</a>.</p>
 </div>
 <div>
 <p>Train, K. 2009. <em>Discrete Choice Methods with Simulation</em>. Book. 2nd Edition. Cambridge: Cambridge University Press.</p>
@@ -259,7 +330,7 @@ C:/Papers/Environment and Planning A/Environment and Planning A (2007) 39 (3) 64
           </div>
         </div>
       </div>
-<a href="chapter-3.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chapter-4.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>
