@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Chapter 5 Logit | An Introduction to Discrete Choice Analysis</title>
+  <title>Chapter 4 Logit | An Introduction to Discrete Choice Analysis</title>
   <meta name="description" content="These notes were created by Antonio Paez as a resource for teaching a graduate discrete choice analysis course (GEOG 738) at McMaster University.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Chapter 5 Logit | An Introduction to Discrete Choice Analysis" />
+  <meta property="og:title" content="Chapter 4 Logit | An Introduction to Discrete Choice Analysis" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="paezha/Discrete-Choice-Analysis-with-R" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 Logit | An Introduction to Discrete Choice Analysis" />
+  <meta name="twitter:title" content="Chapter 4 Logit | An Introduction to Discrete Choice Analysis" />
   
   <meta name="twitter:description" content="These notes were created by Antonio Paez as a resource for teaching a graduate discrete choice analysis course (GEOG 738) at McMaster University." />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Antonio Paez">
 
 
-<meta name="date" content="2019-02-10">
+<meta name="date" content="2019-02-25">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -54,8 +54,8 @@
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.41.3/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.41.3/plotly-latest.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.42.5/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.42.5/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -114,81 +114,106 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#choices-choices-choices"><i class="fa fa-check"></i>Choices, choices, choices</a></li>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#price-mechanisms"><i class="fa fa-check"></i><b>0.1</b> Price Mechanisms</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#plan"><i class="fa fa-check"></i>Plan</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#audience"><i class="fa fa-check"></i>Audience</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#requisites"><i class="fa fa-check"></i>Requisites</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="price-mechanisms.html"><a href="price-mechanisms.html"><i class="fa fa-check"></i><b>1</b> Price Mechanisms</a><ul>
-<li class="chapter" data-level="" data-path="price-mechanisms.html"><a href="price-mechanisms.html#plan"><i class="fa fa-check"></i>Plan</a></li>
-<li class="chapter" data-level="" data-path="price-mechanisms.html"><a href="price-mechanisms.html#audience"><i class="fa fa-check"></i>Audience</a></li>
-<li class="chapter" data-level="" data-path="price-mechanisms.html"><a href="price-mechanisms.html#requisites"><i class="fa fa-check"></i>Requisites</a></li>
+<li class="chapter" data-level="1" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html"><i class="fa fa-check"></i><b>1</b> Preliminaries: Installing R and RStudio</a><ul>
+<li class="chapter" data-level="1.1" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#introduction"><i class="fa fa-check"></i><b>1.1</b> Introduction</a></li>
+<li class="chapter" data-level="1.2" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#learning-objectives"><i class="fa fa-check"></i><b>1.2</b> Learning Objectives</a></li>
+<li class="chapter" data-level="1.3" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#r-the-open-statistical-computing-project"><i class="fa fa-check"></i><b>1.3</b> R: The Open Statistical Computing Project</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#what-is-r"><i class="fa fa-check"></i><b>1.3.1</b> What is R?</a></li>
+<li class="chapter" data-level="1.3.2" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#the-rstudio-ide"><i class="fa fa-check"></i><b>1.3.2</b> The RStudio IDE</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html"><i class="fa fa-check"></i><b>2</b> Preliminaries: Installing R and RStudio</a><ul>
-<li class="chapter" data-level="2.1" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#introduction"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
-<li class="chapter" data-level="2.2" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#learning-objectives"><i class="fa fa-check"></i><b>2.2</b> Learning Objectives</a></li>
-<li class="chapter" data-level="2.3" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#r-the-open-statistical-computing-project"><i class="fa fa-check"></i><b>2.3</b> R: The Open Statistical Computing Project</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#what-is-r"><i class="fa fa-check"></i><b>2.3.1</b> What is R?</a></li>
-<li class="chapter" data-level="2.3.2" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#the-rstudio-ide"><i class="fa fa-check"></i><b>2.3.2</b> The RStudio IDE</a></li>
+<li class="chapter" data-level="1.4" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#packages-in-r"><i class="fa fa-check"></i><b>1.4</b> Packages in R</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#packages-in-r"><i class="fa fa-check"></i><b>2.4</b> Packages in R</a></li>
+<li class="chapter" data-level="2" data-path="chapter-1.html"><a href="chapter-1.html"><i class="fa fa-check"></i><b>2</b> Data and stuff</a><ul>
+<li class="chapter" data-level="2.1" data-path="chapter-1.html"><a href="chapter-1.html#what-are-models"><i class="fa fa-check"></i><b>2.1</b> What are models?</a></li>
+<li class="chapter" data-level="2.2" data-path="chapter-1.html"><a href="chapter-1.html#how-to-use-this-note"><i class="fa fa-check"></i><b>2.2</b> How to use this note</a></li>
+<li class="chapter" data-level="2.3" data-path="chapter-1.html"><a href="chapter-1.html#learning-objectives-1"><i class="fa fa-check"></i><b>2.3</b> Learning objectives</a></li>
+<li class="chapter" data-level="2.4" data-path="chapter-1.html"><a href="chapter-1.html#suggested-readings"><i class="fa fa-check"></i><b>2.4</b> Suggested readings</a></li>
+<li class="chapter" data-level="2.5" data-path="chapter-1.html"><a href="chapter-1.html#ways-of-measuring-stuff"><i class="fa fa-check"></i><b>2.5</b> Ways of measuring stuff</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="chapter-1.html"><a href="chapter-1.html#categorical"><i class="fa fa-check"></i><b>2.5.1</b> Categorical</a></li>
+<li class="chapter" data-level="2.5.2" data-path="chapter-1.html"><a href="chapter-1.html#quantitative"><i class="fa fa-check"></i><b>2.5.2</b> Quantitative</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="chapter-1.html"><a href="chapter-1.html"><i class="fa fa-check"></i><b>3</b> Data and stuff</a><ul>
-<li class="chapter" data-level="3.1" data-path="chapter-1.html"><a href="chapter-1.html#what-are-models"><i class="fa fa-check"></i><b>3.1</b> What are models?</a></li>
-<li class="chapter" data-level="3.2" data-path="chapter-1.html"><a href="chapter-1.html#how-to-use-this-note"><i class="fa fa-check"></i><b>3.2</b> How to use this note</a></li>
-<li class="chapter" data-level="3.3" data-path="chapter-1.html"><a href="chapter-1.html#learning-objectives-1"><i class="fa fa-check"></i><b>3.3</b> Learning objectives</a></li>
-<li class="chapter" data-level="3.4" data-path="chapter-1.html"><a href="chapter-1.html#suggested-readings"><i class="fa fa-check"></i><b>3.4</b> Suggested readings</a></li>
-<li class="chapter" data-level="3.5" data-path="chapter-1.html"><a href="chapter-1.html#ways-of-measuring-stuff"><i class="fa fa-check"></i><b>3.5</b> Ways of measuring stuff</a><ul>
-<li class="chapter" data-level="3.5.1" data-path="chapter-1.html"><a href="chapter-1.html#categorical"><i class="fa fa-check"></i><b>3.5.1</b> Categorical</a></li>
-<li class="chapter" data-level="3.5.2" data-path="chapter-1.html"><a href="chapter-1.html#quantitative"><i class="fa fa-check"></i><b>3.5.2</b> Quantitative</a></li>
-</ul></li>
-<li class="chapter" data-level="3.6" data-path="chapter-1.html"><a href="chapter-1.html#importing-data"><i class="fa fa-check"></i><b>3.6</b> Importing data</a></li>
-<li class="chapter" data-level="3.7" data-path="chapter-1.html"><a href="chapter-1.html#data-classes-in-r"><i class="fa fa-check"></i><b>3.7</b> Data Classes in R</a></li>
-<li class="chapter" data-level="3.8" data-path="chapter-1.html"><a href="chapter-1.html#more-on-indexing-and-data-manipulation"><i class="fa fa-check"></i><b>3.8</b> More on indexing and data manipulation</a></li>
-<li class="chapter" data-level="3.9" data-path="chapter-1.html"><a href="chapter-1.html#visualization"><i class="fa fa-check"></i><b>3.9</b> Visualization</a></li>
-<li class="chapter" data-level="3.10" data-path="chapter-1.html"><a href="chapter-1.html#exercise"><i class="fa fa-check"></i><b>3.10</b> Exercise</a><ul>
-<li class="chapter" data-level="3.10.1" data-path="chapter-1.html"><a href="chapter-1.html#questions"><i class="fa fa-check"></i><b>3.10.1</b> Questions</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="chapter-2.html"><a href="chapter-2.html"><i class="fa fa-check"></i><b>4</b> Fundamental concepts</a><ul>
-<li class="chapter" data-level="4.1" data-path="chapter-2.html"><a href="chapter-2.html#why-modelling-choices"><i class="fa fa-check"></i><b>4.1</b> Why modelling choices?</a></li>
-<li class="chapter" data-level="4.2" data-path="chapter-2.html"><a href="chapter-2.html#how-to-use-this-note-1"><i class="fa fa-check"></i><b>4.2</b> How to use this note</a></li>
-<li class="chapter" data-level="4.3" data-path="chapter-2.html"><a href="chapter-2.html#learning-objectives-2"><i class="fa fa-check"></i><b>4.3</b> Learning objectives</a></li>
-<li class="chapter" data-level="4.4" data-path="chapter-2.html"><a href="chapter-2.html#suggested-readings-1"><i class="fa fa-check"></i><b>4.4</b> Suggested readings</a></li>
-<li class="chapter" data-level="4.5" data-path="chapter-2.html"><a href="chapter-2.html#preliminaries"><i class="fa fa-check"></i><b>4.5</b> Preliminaries</a></li>
-<li class="chapter" data-level="4.6" data-path="chapter-2.html"><a href="chapter-2.html#utility-maximization"><i class="fa fa-check"></i><b>4.6</b> Utility maximization</a></li>
-<li class="chapter" data-level="4.7" data-path="chapter-2.html"><a href="chapter-2.html#what-about-those-random-terms"><i class="fa fa-check"></i><b>4.7</b> What about those random terms?</a></li>
-<li class="chapter" data-level="4.8" data-path="chapter-2.html"><a href="chapter-2.html#probability-distribution-functions-pdfs"><i class="fa fa-check"></i><b>4.8</b> Probability distribution functions (PDFs)</a></li>
-<li class="chapter" data-level="4.9" data-path="chapter-2.html"><a href="chapter-2.html#a-simple-random-utility-discrete-choice-model"><i class="fa fa-check"></i><b>4.9</b> A simple random utility discrete choice model</a></li>
-<li class="chapter" data-level="4.10" data-path="chapter-2.html"><a href="chapter-2.html#other-choice-mechanisms"><i class="fa fa-check"></i><b>4.10</b> Other choice mechanisms</a></li>
-<li class="chapter" data-level="4.11" data-path="chapter-2.html"><a href="chapter-2.html#exercise-1"><i class="fa fa-check"></i><b>4.11</b> Exercise</a><ul>
-<li class="chapter" data-level="4.11.1" data-path="chapter-2.html"><a href="chapter-2.html#questions-1"><i class="fa fa-check"></i><b>4.11.1</b> Questions</a></li>
+<li class="chapter" data-level="2.6" data-path="chapter-1.html"><a href="chapter-1.html#importing-data"><i class="fa fa-check"></i><b>2.6</b> Importing data</a></li>
+<li class="chapter" data-level="2.7" data-path="chapter-1.html"><a href="chapter-1.html#data-classes-in-r"><i class="fa fa-check"></i><b>2.7</b> Data Classes in R</a></li>
+<li class="chapter" data-level="2.8" data-path="chapter-1.html"><a href="chapter-1.html#more-on-indexing-and-data-manipulation"><i class="fa fa-check"></i><b>2.8</b> More on indexing and data manipulation</a></li>
+<li class="chapter" data-level="2.9" data-path="chapter-1.html"><a href="chapter-1.html#visualization"><i class="fa fa-check"></i><b>2.9</b> Visualization</a></li>
+<li class="chapter" data-level="2.10" data-path="chapter-1.html"><a href="chapter-1.html#exercise"><i class="fa fa-check"></i><b>2.10</b> Exercise</a><ul>
+<li class="chapter" data-level="2.10.1" data-path="chapter-1.html"><a href="chapter-1.html#questions"><i class="fa fa-check"></i><b>2.10.1</b> Questions</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="chapter-3.html"><a href="chapter-3.html"><i class="fa fa-check"></i><b>5</b> Logit</a><ul>
-<li class="chapter" data-level="5.1" data-path="chapter-3.html"><a href="chapter-3.html#modelling-choices"><i class="fa fa-check"></i><b>5.1</b> Modelling choices</a></li>
-<li class="chapter" data-level="5.2" data-path="chapter-3.html"><a href="chapter-3.html#how-to-use-this-note-2"><i class="fa fa-check"></i><b>5.2</b> How to use this note</a></li>
-<li class="chapter" data-level="5.3" data-path="chapter-3.html"><a href="chapter-3.html#learning-objectives-3"><i class="fa fa-check"></i><b>5.3</b> Learning objectives</a></li>
-<li class="chapter" data-level="5.4" data-path="chapter-3.html"><a href="chapter-3.html#suggested-readings-2"><i class="fa fa-check"></i><b>5.4</b> Suggested readings</a></li>
-<li class="chapter" data-level="5.5" data-path="chapter-3.html"><a href="chapter-3.html#preliminaries-1"><i class="fa fa-check"></i><b>5.5</b> Preliminaries</a></li>
-<li class="chapter" data-level="5.6" data-path="chapter-3.html"><a href="chapter-3.html#once-again-those-random-terms"><i class="fa fa-check"></i><b>5.6</b> Once again those random terms</a></li>
-<li class="chapter" data-level="5.7" data-path="chapter-3.html"><a href="chapter-3.html#now-about-those-parameters-mu-and-sigma"><i class="fa fa-check"></i><b>5.7</b> Now, about those parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>…</a></li>
-<li class="chapter" data-level="5.8" data-path="chapter-3.html"><a href="chapter-3.html#multinomial-logit"><i class="fa fa-check"></i><b>5.8</b> Multinomial logit</a></li>
-<li class="chapter" data-level="5.9" data-path="chapter-3.html"><a href="chapter-3.html#properties-of-the-logit-model"><i class="fa fa-check"></i><b>5.9</b> Properties of the logit model</a></li>
-<li class="chapter" data-level="5.10" data-path="chapter-3.html"><a href="chapter-3.html#revisiting-the-systematic-utilities"><i class="fa fa-check"></i><b>5.10</b> Revisiting the systematic utilities</a></li>
-<li class="chapter" data-level="5.11" data-path="chapter-3.html"><a href="chapter-3.html#exercise-2"><i class="fa fa-check"></i><b>5.11</b> Exercise</a><ul>
-<li class="chapter" data-level="5.11.1" data-path="chapter-3.html"><a href="chapter-3.html#questions-2"><i class="fa fa-check"></i><b>5.11.1</b> Questions</a></li>
+<li class="chapter" data-level="3" data-path="chapter-2.html"><a href="chapter-2.html"><i class="fa fa-check"></i><b>3</b> Fundamental concepts</a><ul>
+<li class="chapter" data-level="3.1" data-path="chapter-2.html"><a href="chapter-2.html#why-modelling-choices"><i class="fa fa-check"></i><b>3.1</b> Why modelling choices?</a></li>
+<li class="chapter" data-level="3.2" data-path="chapter-2.html"><a href="chapter-2.html#how-to-use-this-note-1"><i class="fa fa-check"></i><b>3.2</b> How to use this note</a></li>
+<li class="chapter" data-level="3.3" data-path="chapter-2.html"><a href="chapter-2.html#learning-objectives-2"><i class="fa fa-check"></i><b>3.3</b> Learning objectives</a></li>
+<li class="chapter" data-level="3.4" data-path="chapter-2.html"><a href="chapter-2.html#suggested-readings-1"><i class="fa fa-check"></i><b>3.4</b> Suggested readings</a></li>
+<li class="chapter" data-level="3.5" data-path="chapter-2.html"><a href="chapter-2.html#preliminaries"><i class="fa fa-check"></i><b>3.5</b> Preliminaries</a></li>
+<li class="chapter" data-level="3.6" data-path="chapter-2.html"><a href="chapter-2.html#utility-maximization"><i class="fa fa-check"></i><b>3.6</b> Utility maximization</a></li>
+<li class="chapter" data-level="3.7" data-path="chapter-2.html"><a href="chapter-2.html#what-about-those-random-terms"><i class="fa fa-check"></i><b>3.7</b> What about those random terms?</a></li>
+<li class="chapter" data-level="3.8" data-path="chapter-2.html"><a href="chapter-2.html#probability-distribution-functions-pdfs"><i class="fa fa-check"></i><b>3.8</b> Probability distribution functions (PDFs)</a></li>
+<li class="chapter" data-level="3.9" data-path="chapter-2.html"><a href="chapter-2.html#a-simple-random-utility-discrete-choice-model"><i class="fa fa-check"></i><b>3.9</b> A simple random utility discrete choice model</a></li>
+<li class="chapter" data-level="3.10" data-path="chapter-2.html"><a href="chapter-2.html#other-choice-mechanisms"><i class="fa fa-check"></i><b>3.10</b> Other choice mechanisms</a></li>
+<li class="chapter" data-level="3.11" data-path="chapter-2.html"><a href="chapter-2.html#exercise-1"><i class="fa fa-check"></i><b>3.11</b> Exercise</a><ul>
+<li class="chapter" data-level="3.11.1" data-path="chapter-2.html"><a href="chapter-2.html#questions-1"><i class="fa fa-check"></i><b>3.11.1</b> Questions</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="chapter-4.html"><a href="chapter-4.html"><i class="fa fa-check"></i><b>6</b> Practical specification and estimation</a><ul>
-<li class="chapter" data-level="6.1" data-path="chapter-4.html"><a href="chapter-4.html#theory-and-practice"><i class="fa fa-check"></i><b>6.1</b> Theory and practice</a></li>
-<li class="chapter" data-level="6.2" data-path="chapter-4.html"><a href="chapter-4.html#how-to-use-this-note-3"><i class="fa fa-check"></i><b>6.2</b> How to use this note</a></li>
-<li class="chapter" data-level="6.3" data-path="chapter-4.html"><a href="chapter-4.html#learning-objectives-4"><i class="fa fa-check"></i><b>6.3</b> Learning objectives</a></li>
-<li class="chapter" data-level="6.4" data-path="chapter-4.html"><a href="chapter-4.html#suggested-readings-3"><i class="fa fa-check"></i><b>6.4</b> Suggested readings</a></li>
-<li class="chapter" data-level="6.5" data-path="chapter-4.html"><a href="chapter-4.html#preliminaries-2"><i class="fa fa-check"></i><b>6.5</b> Preliminaries</a></li>
-<li class="chapter" data-level="6.6" data-path="chapter-4.html"><a href="chapter-4.html#the-anatomy-of-utility-functions"><i class="fa fa-check"></i><b>6.6</b> The anatomy of utility functions</a></li>
-<li class="chapter" data-level="6.7" data-path="chapter-4.html"><a href="chapter-4.html#example-specifying-the-utility-functions"><i class="fa fa-check"></i><b>6.7</b> Example: Specifying the utility functions</a></li>
-<li class="chapter" data-level="6.8" data-path="chapter-4.html"><a href="chapter-4.html#estimation"><i class="fa fa-check"></i><b>6.8</b> Estimation</a></li>
-<li class="chapter" data-level="6.9" data-path="chapter-4.html"><a href="chapter-4.html#example-a-logit-model-of-mode-choice"><i class="fa fa-check"></i><b>6.9</b> Example: A logit model of mode choice</a></li>
-<li class="chapter" data-level="6.10" data-path="chapter-4.html"><a href="chapter-4.html#comparing-models-mcfaddens-rho2"><i class="fa fa-check"></i><b>6.10</b> Comparing models: McFadden’s <span class="math inline">\(\rho^2\)</span></a></li>
-<li class="chapter" data-level="6.11" data-path="chapter-4.html"><a href="chapter-4.html#comparing-models-the-likelihood-ratio-test"><i class="fa fa-check"></i><b>6.11</b> Comparing models: the likelihood ratio test</a></li>
-<li class="chapter" data-level="6.12" data-path="chapter-4.html"><a href="chapter-4.html#exercise-3"><i class="fa fa-check"></i><b>6.12</b> Exercise</a></li>
+<li class="chapter" data-level="4" data-path="chapter-3.html"><a href="chapter-3.html"><i class="fa fa-check"></i><b>4</b> Logit</a><ul>
+<li class="chapter" data-level="4.1" data-path="chapter-3.html"><a href="chapter-3.html#modelling-choices"><i class="fa fa-check"></i><b>4.1</b> Modelling choices</a></li>
+<li class="chapter" data-level="4.2" data-path="chapter-3.html"><a href="chapter-3.html#how-to-use-this-note-2"><i class="fa fa-check"></i><b>4.2</b> How to use this note</a></li>
+<li class="chapter" data-level="4.3" data-path="chapter-3.html"><a href="chapter-3.html#learning-objectives-3"><i class="fa fa-check"></i><b>4.3</b> Learning objectives</a></li>
+<li class="chapter" data-level="4.4" data-path="chapter-3.html"><a href="chapter-3.html#suggested-readings-2"><i class="fa fa-check"></i><b>4.4</b> Suggested readings</a></li>
+<li class="chapter" data-level="4.5" data-path="chapter-3.html"><a href="chapter-3.html#preliminaries-1"><i class="fa fa-check"></i><b>4.5</b> Preliminaries</a></li>
+<li class="chapter" data-level="4.6" data-path="chapter-3.html"><a href="chapter-3.html#once-again-those-random-terms"><i class="fa fa-check"></i><b>4.6</b> Once again those random terms</a></li>
+<li class="chapter" data-level="4.7" data-path="chapter-3.html"><a href="chapter-3.html#now-about-those-parameters-mu-and-sigma"><i class="fa fa-check"></i><b>4.7</b> Now, about those parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>…</a></li>
+<li class="chapter" data-level="4.8" data-path="chapter-3.html"><a href="chapter-3.html#multinomial-logit"><i class="fa fa-check"></i><b>4.8</b> Multinomial logit</a></li>
+<li class="chapter" data-level="4.9" data-path="chapter-3.html"><a href="chapter-3.html#properties-of-the-logit-model"><i class="fa fa-check"></i><b>4.9</b> Properties of the logit model</a></li>
+<li class="chapter" data-level="4.10" data-path="chapter-3.html"><a href="chapter-3.html#revisiting-the-systematic-utilities"><i class="fa fa-check"></i><b>4.10</b> Revisiting the systematic utilities</a></li>
+<li class="chapter" data-level="4.11" data-path="chapter-3.html"><a href="chapter-3.html#exercise-2"><i class="fa fa-check"></i><b>4.11</b> Exercise</a><ul>
+<li class="chapter" data-level="4.11.1" data-path="chapter-3.html"><a href="chapter-3.html#questions-2"><i class="fa fa-check"></i><b>4.11.1</b> Questions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="chapter-4.html"><a href="chapter-4.html"><i class="fa fa-check"></i><b>5</b> Practical specification and estimation</a><ul>
+<li class="chapter" data-level="5.1" data-path="chapter-4.html"><a href="chapter-4.html#theory-and-practice"><i class="fa fa-check"></i><b>5.1</b> Theory and practice</a></li>
+<li class="chapter" data-level="5.2" data-path="chapter-4.html"><a href="chapter-4.html#how-to-use-this-note-3"><i class="fa fa-check"></i><b>5.2</b> How to use this note</a></li>
+<li class="chapter" data-level="5.3" data-path="chapter-4.html"><a href="chapter-4.html#learning-objectives-4"><i class="fa fa-check"></i><b>5.3</b> Learning objectives</a></li>
+<li class="chapter" data-level="5.4" data-path="chapter-4.html"><a href="chapter-4.html#suggested-readings-3"><i class="fa fa-check"></i><b>5.4</b> Suggested readings</a></li>
+<li class="chapter" data-level="5.5" data-path="chapter-4.html"><a href="chapter-4.html#preliminaries-2"><i class="fa fa-check"></i><b>5.5</b> Preliminaries</a></li>
+<li class="chapter" data-level="5.6" data-path="chapter-4.html"><a href="chapter-4.html#the-anatomy-of-utility-functions"><i class="fa fa-check"></i><b>5.6</b> The anatomy of utility functions</a></li>
+<li class="chapter" data-level="5.7" data-path="chapter-4.html"><a href="chapter-4.html#example-specifying-the-utility-functions"><i class="fa fa-check"></i><b>5.7</b> Example: Specifying the utility functions</a></li>
+<li class="chapter" data-level="5.8" data-path="chapter-4.html"><a href="chapter-4.html#estimation"><i class="fa fa-check"></i><b>5.8</b> Estimation</a></li>
+<li class="chapter" data-level="5.9" data-path="chapter-4.html"><a href="chapter-4.html#example-a-logit-model-of-mode-choice"><i class="fa fa-check"></i><b>5.9</b> Example: A logit model of mode choice</a></li>
+<li class="chapter" data-level="5.10" data-path="chapter-4.html"><a href="chapter-4.html#comparing-models-mcfaddens-rho2"><i class="fa fa-check"></i><b>5.10</b> Comparing models: McFadden’s <span class="math inline">\(\rho^2\)</span></a></li>
+<li class="chapter" data-level="5.11" data-path="chapter-4.html"><a href="chapter-4.html#comparing-models-the-likelihood-ratio-test"><i class="fa fa-check"></i><b>5.11</b> Comparing models: the likelihood ratio test</a></li>
+<li class="chapter" data-level="5.12" data-path="chapter-4.html"><a href="chapter-4.html#exercise-3"><i class="fa fa-check"></i><b>5.12</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="chapter-5.html"><a href="chapter-5.html"><i class="fa fa-check"></i><b>6</b> Behavioral insights from choice models</a><ul>
+<li class="chapter" data-level="6.1" data-path="chapter-5.html"><a href="chapter-5.html#inferring-and-forecasting-behavior"><i class="fa fa-check"></i><b>6.1</b> Inferring and forecasting behavior</a></li>
+<li class="chapter" data-level="6.2" data-path="chapter-5.html"><a href="chapter-5.html#how-to-use-this-note-4"><i class="fa fa-check"></i><b>6.2</b> How to use this note</a></li>
+<li class="chapter" data-level="6.3" data-path="chapter-5.html"><a href="chapter-5.html#learning-objectives-5"><i class="fa fa-check"></i><b>6.3</b> Learning objectives</a></li>
+<li class="chapter" data-level="6.4" data-path="chapter-5.html"><a href="chapter-5.html#suggested-readings-4"><i class="fa fa-check"></i><b>6.4</b> Suggested readings</a></li>
+<li class="chapter" data-level="6.5" data-path="chapter-5.html"><a href="chapter-5.html#preliminaries-3"><i class="fa fa-check"></i><b>6.5</b> Preliminaries</a></li>
+<li class="chapter" data-level="6.6" data-path="chapter-5.html"><a href="chapter-5.html#the-meaning-of-the-coefficients"><i class="fa fa-check"></i><b>6.6</b> The meaning of the coefficients</a></li>
+<li class="chapter" data-level="6.7" data-path="chapter-5.html"><a href="chapter-5.html#marginal-effects"><i class="fa fa-check"></i><b>6.7</b> Marginal effects</a><ul>
+<li class="chapter" data-level="6.7.1" data-path="chapter-5.html"><a href="chapter-5.html#direct-marginal-effects"><i class="fa fa-check"></i><b>6.7.1</b> Direct marginal effects</a></li>
+<li class="chapter" data-level="6.7.2" data-path="chapter-5.html"><a href="chapter-5.html#cross-marginal-effects"><i class="fa fa-check"></i><b>6.7.2</b> Cross-marginal effects</a></li>
+</ul></li>
+<li class="chapter" data-level="6.8" data-path="chapter-5.html"><a href="chapter-5.html#elasticity"><i class="fa fa-check"></i><b>6.8</b> Elasticity</a><ul>
+<li class="chapter" data-level="6.8.1" data-path="chapter-5.html"><a href="chapter-5.html#direct-point-elasticity"><i class="fa fa-check"></i><b>6.8.1</b> Direct-point elasticity</a></li>
+<li class="chapter" data-level="6.8.2" data-path="chapter-5.html"><a href="chapter-5.html#cross-point-elasticity"><i class="fa fa-check"></i><b>6.8.2</b> Cross-point elasticity</a></li>
+</ul></li>
+<li class="chapter" data-level="6.9" data-path="chapter-5.html"><a href="chapter-5.html#calculating-elasticities-based-on-an-mlogit-model"><i class="fa fa-check"></i><b>6.9</b> Calculating elasticities based on an <code>mlogit</code> model</a><ul>
+<li class="chapter" data-level="6.9.1" data-path="chapter-5.html"><a href="chapter-5.html#computing-the-marginal-effects"><i class="fa fa-check"></i><b>6.9.1</b> Computing the marginal effects</a></li>
+</ul></li>
+<li class="chapter" data-level="6.10" data-path="chapter-5.html"><a href="chapter-5.html#a-note-about-attributes-in-dummy-format"><i class="fa fa-check"></i><b>6.10</b> A note about attributes in dummy format</a></li>
+<li class="chapter" data-level="6.11" data-path="chapter-5.html"><a href="chapter-5.html#willingness-to-pay-and-discount-rate"><i class="fa fa-check"></i><b>6.11</b> Willingness to pay and discount rate</a></li>
+<li class="chapter" data-level="6.12" data-path="chapter-5.html"><a href="chapter-5.html#simulating-market-changes"><i class="fa fa-check"></i><b>6.12</b> Simulating market changes</a><ul>
+<li class="chapter" data-level="6.12.1" data-path="chapter-5.html"><a href="chapter-5.html#incentives"><i class="fa fa-check"></i><b>6.12.1</b> Incentives</a></li>
+<li class="chapter" data-level="6.12.2" data-path="chapter-5.html"><a href="chapter-5.html#introduction-of-a-new-system"><i class="fa fa-check"></i><b>6.12.2</b> Introduction of a new system</a></li>
+</ul></li>
+<li class="chapter" data-level="6.13" data-path="chapter-5.html"><a href="chapter-5.html#exercise-4"><i class="fa fa-check"></i><b>6.13</b> Exercise</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -212,27 +237,27 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="chapter-3" class="section level1">
-<h1><span class="header-section-number">Chapter 5</span> Logit</h1>
+<h1><span class="header-section-number">Chapter 4</span> Logit</h1>
 <blockquote>
 <p>“I believe that we do not know anything for certain, but everything probably.”</p>
 <p>— Christiaan Huygens</p>
 </blockquote>
 <div id="modelling-choices" class="section level2">
-<h2><span class="header-section-number">5.1</span> Modelling choices</h2>
-<p>In Chapter <a href="chapter-2.html#chapter-2">4</a> a conceptual framework was described to model choice-making behavior. This framework is based on the economic notion of <em>utility</em>, basically that which decision-makers wish to maximize when making choices. The concept of utility has many flaws - key among them that it is not directly observable. If utility could be measured directly by an external observer (or analyst), behavior would seem deterministic. However, unlike Laplace’s Demon, an external observer with only human capabilities has limited knowledge of the conditions under which choices are made, if for no other reason that she cannot possibly know the frame of mind of the decision-maker at the moment when choices are made.</p>
+<h2><span class="header-section-number">4.1</span> Modelling choices</h2>
+<p>In Chapter <a href="chapter-2.html#chapter-2">3</a> a conceptual framework was described to model choice-making behavior. This framework is based on the economic notion of <em>utility</em>, basically that which decision-makers wish to maximize when making choices. The concept of utility has many flaws - key among them that it is not directly observable. If utility could be measured directly by an external observer (or analyst), behavior would seem deterministic. However, unlike Laplace’s Demon, an external observer with only human capabilities has limited knowledge of the conditions under which choices are made, if for no other reason that she cannot possibly know the frame of mind of the decision-maker at the moment when choices are made.</p>
 <p>A way to implement the conceptual framework unders such conditions involved an acknowledgement that although the decision-maker tries to maximize his utility, some part of it will look random to the observer - therefore the term <em>random utility modelling</em>. This allows the analyst to make probabilitistic statements about the behavior of decision-makers. Accordingly, the analyst does not know with certainty the outcome of a choice process, but can quantify her uncertainty in a fairly precise way.</p>
-<p>Based on these concepts, Chapter <a href="chapter-2.html#chapter-2">4</a> concluded by deriving a simple model for discrete choices, namely the lineary probability model <span class="citation">(see Ben-Akiva and Lerman <a href="#ref-Benakiva1985discrete">1985</a>, 66–68)</span>. This model is useful for illustrative purposes. However, it suffers from an important limitation: the linear probabilities are a stepwise function, which makes their mathematical treatment unfun, and also imply that certain outcome are certain (i.e., it can return probabilities of exactly one or exactly zero). This would preclude certain behaviors, which seems a somewhat arrogant thing to do on the part of the analyst. A better approach would be to allow any behavior, but assign very small probabilities to more extreme choices.</p>
+<p>Based on these concepts, Chapter <a href="chapter-2.html#chapter-2">3</a> concluded by deriving a simple model for discrete choices, namely the lineary probability model <span class="citation">(see Ben-Akiva and Lerman <a href="#ref-Benakiva1985discrete">1985</a>, 66–68)</span>. This model is useful for illustrative purposes. However, it suffers from an important limitation: the linear probabilities are a stepwise function, which makes their mathematical treatment unfun, and also imply that certain outcome are certain (i.e., it can return probabilities of exactly one or exactly zero). This would preclude certain behaviors, which seems a somewhat arrogant thing to do on the part of the analyst. A better approach would be to allow any behavior, but assign very small probabilities to more extreme choices.</p>
 <p>In this chapter we will revisit those random utility terms to derive an alternative to the linear probability model. This will be the <em>logit</em> model, one of the most popular models in discrete choice analysis for reasons that will be discussed below.</p>
 </div>
 <div id="how-to-use-this-note-2" class="section level2">
-<h2><span class="header-section-number">5.2</span> How to use this note</h2>
+<h2><span class="header-section-number">4.2</span> How to use this note</h2>
 <p>Remember that the source for the document you are reading is an R Notebook. Throughout the notes, you will find examples of code in segments of text called <em>chunks</em>. This is an example of a chunk:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="st">&quot;Hello, Dr. Train&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;Hello, Dr. Train&quot;</code></pre>
 <p>If you are working with the Notebook version of the document, you can run the code by clicking the ‘play’ icon on the top right corner of the chunk. If you are reading the web-book version of the document, you will often see that the code has already been executed. You can still try it by copying and pasting into your R or RStudio console.</p>
 </div>
 <div id="learning-objectives-3" class="section level2">
-<h2><span class="header-section-number">5.3</span> Learning objectives</h2>
+<h2><span class="header-section-number">4.3</span> Learning objectives</h2>
 <p>In this practice, you will learn about:</p>
 <ol style="list-style-type: decimal">
 <li>The Extreme Value distribution.</li>
@@ -242,7 +267,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ol>
 </div>
 <div id="suggested-readings-2" class="section level2">
-<h2><span class="header-section-number">5.4</span> Suggested readings</h2>
+<h2><span class="header-section-number">4.4</span> Suggested readings</h2>
 <ul>
 <li>Ben-Akiva, M. Lerman, <span class="citation">(<a href="#ref-Benakiva1985discrete">1985</a>)</span> Discrete Choice Analysis: Theory and Applications to Travel Demand, <strong>Chapters 4 and 5</strong>, MIT Press.</li>
 <li>Hensher, D.A., Rose, J.M., Greene, W.H <span class="citation">(<a href="#ref-hensher2005applied">2005</a>)</span> Applied Choice Analysis: A Primer, <strong>Chapter 10</strong>, Cambridge University Press.</li>
@@ -251,15 +276,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 </div>
 <div id="preliminaries-1" class="section level2">
-<h2><span class="header-section-number">5.5</span> Preliminaries</h2>
+<h2><span class="header-section-number">4.5</span> Preliminaries</h2>
 <p>Load the packages used in this section:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(evd)</code></pre></div>
 </div>
 <div id="once-again-those-random-terms" class="section level2">
-<h2><span class="header-section-number">5.6</span> Once again those random terms</h2>
+<h2><span class="header-section-number">4.6</span> Once again those random terms</h2>
 <p>Recall that in order to implement the probabilitistic statement at the heart of a discrete choice model requires the analyst to make assumptions about the random utility terms. Previously, a number of probability distributions were explored, and one in particular (the uniform distribution) was used to derive a simple discrete choice model. But, is the uniform distribution an appropriate choice for the purpose of modeling the random utility?</p>
-<p>The uniform distribution (and some of the other stepwise distributions seen in Chapter <a href="chapter-2.html#chapter-2">4</a>) are useful to illustrate the concept of probability, and more specifically the need to calculate the area under the curve of the distribution. The area under the curve of the uniform distribution is simply the area of a rectangle, which makes this extremely simple. On the other hand, it precludes certain outcomes, which limits its practical usefulness.</p>
+<p>The uniform distribution (and some of the other stepwise distributions seen in Chapter <a href="chapter-2.html#chapter-2">3</a>) are useful to illustrate the concept of probability, and more specifically the need to calculate the area under the curve of the distribution. The area under the curve of the uniform distribution is simply the area of a rectangle, which makes this extremely simple. On the other hand, it precludes certain outcomes, which limits its practical usefulness.</p>
 <p>The reality is that, since the utility is in principle unobservable, there is little theoretical support for any specific distribution of the random utility terms. For this reason, the choice of distribution tends to be very pragmatic, particularly attending the convenience for estimation purposes, i.e., retrieving parameters from a sample of observations. The parameters include the parameters used in the systematic utility function <span class="math inline">\(U_{ij}\)</span> (more on this later), as well as any parameters needed for the distribution itself. For instance, the uniform distribution is defined by two parameters, <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>: <span class="math display">\[
 f(x) = \left\{
         \begin{array}{lc}
@@ -274,7 +299,7 @@ f(x) = \left\{
 f(x; \mu,\sigma) = e^{-(x + e^{-(x-\mu)/\sigma})}
 \]</span></p>
 <p>The EV Type I distribution has two parameters, namely <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>, which determine the location (i.e., the center) and the dispersion of the distribution, respectively.</p>
-<p>The shape of this distribution is shown in Figure <a href="chapter-3.html#fig:fig-evi-distribution">5.1</a> with <span class="math inline">\(\mu = 0\)</span> and <span class="math inline">\(\sigma = 1\)</span>:</p>
+<p>The shape of this distribution is shown in Figure <a href="chapter-3.html#fig:fig-evi-distribution">4.1</a> with <span class="math inline">\(\mu = 0\)</span> and <span class="math inline">\(\sigma = 1\)</span>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define parameters for the distribution</span>
 mu &lt;-<span class="st"> </span><span class="dv">0</span>
 sigma &lt;-<span class="st"> </span><span class="dv">1</span>
@@ -292,7 +317,7 @@ df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class=
 <div class="figure"><span id="fig:fig-evi-distribution"></span>
 <img src="bookdown-demo_files/figure-html/fig-evi-distribution-1.png" alt="\label{fig:fig-evi-distribution}Extreme Value Type I distribution" width="672" />
 <p class="caption">
-Figure 5.1: Extreme Value Type I distribution
+Figure 4.1: Extreme Value Type I distribution
 </p>
 </div>
 <p>If you are working with the R Notebook, you can try changing the parameters to see how the function behaves (remember to adjust the limits if you change the center of the distribution!).</p>
@@ -302,7 +327,7 @@ X - Y \sim \text{Logistic}(\alpha_X - \alpha_Y,\sigma)
 <p>If we define the difference of the random utility terms as <span class="math inline">\(\epsilon_n = \epsilon_j - \epsilon_k\)</span>, the logistic distribution, in turn, is defined as follows: <span class="math display">\[
 f(x; \mu,\sigma) = \frac{e^{-(x-\mu)/\sigma}}{\sigma(1 + e^{-(x-\mu)/\sigma})^2}
 \]</span></p>
-<p>Whereas the EV Type I distribution was not symmetric, the shape of the logistic distribution is. The logistic distribution is, in fact, similar to the normal distribution but it has fatter tails, which means that the probability of extreme values is higher. This is illustrated in Figure <a href="chapter-3.html#fig:fig-logistic-normal-distribution">5.2</a>:</p>
+<p>Whereas the EV Type I distribution was not symmetric, the shape of the logistic distribution is. The logistic distribution is, in fact, similar to the normal distribution but it has fatter tails, which means that the probability of extreme values is higher. This is illustrated in Figure <a href="chapter-3.html#fig:fig-logistic-normal-distribution">4.2</a>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define parameters for the distribution</span>
 mu &lt;-<span class="st"> </span><span class="dv">0</span>
 sigma &lt;-<span class="st"> </span><span class="dv">1</span>
@@ -322,7 +347,7 @@ df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class=
 <div class="figure"><span id="fig:fig-logistic-normal-distribution"></span>
 <img src="bookdown-demo_files/figure-html/fig-logistic-normal-distribution-1.png" alt="\label{fig:fig-logistic-normal-distribution}Comparison of the logistic (blue) and normal (grey) distributions" width="672" />
 <p class="caption">
-Figure 5.2: Comparison of the logistic (blue) and normal (grey) distributions
+Figure 4.2: Comparison of the logistic (blue) and normal (grey) distributions
 </p>
 </div>
 <p>Since the probability expression is given in terms of the difference of the random utilities, if we assume that the random terms <span class="math inline">\(\epsilon\)</span> follow the EV Type I distribution, their difference (i.e., <span class="math inline">\(\epsilon_n = \epsilon_j - \epsilon_i\)</span>) follows the logistic distribution. As before, the area under the curve of the function needs to be calculated to obtain a probability. Unfortunately, this needs to be done by integration. Fortunately, this integral has an analytical solution, or so-called <em>closed form</em>: <span class="math display">\[
@@ -333,7 +358,7 @@ P_j = P(V_j - V_k \le \epsilon_n) = \frac{1}{1 + e^{-(\epsilon_n-\mu)/\sigma}} =
 \]</span></p>
 <p>Which, after some manipulation, can be rewritten as: <span class="math display">\[
 P_j = P(V_j - V_k \le \epsilon_n) = \frac{e^{V_j/\sigma}}{e^{V_j/\sigma} + e^{(V_k+\mu)/\sigma}}
-\]</span> The above is called the <em>logit probability</em> and the resulting model is called the <em>logit model</em>. As seen, the probability of choosing alternative <span class="math inline">\(j\)</span> is the area under the curve of the logistic distribution function, as seen in Figure <a href="chapter-3.html#fig:fig-logistic-distribution">5.3</a> (assuming <span class="math inline">\(mu = 0\)</span> and <span class="math inline">\(\sigma = 1\)</span>):</p>
+\]</span> The above is called the <em>logit probability</em> and the resulting model is called the <em>logit model</em>. As seen, the probability of choosing alternative <span class="math inline">\(j\)</span> is the area under the curve of the logistic distribution function, as seen in Figure <a href="chapter-3.html#fig:fig-logistic-distribution">4.3</a> (assuming <span class="math inline">\(mu = 0\)</span> and <span class="math inline">\(\sigma = 1\)</span>):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define parameters for the distribution</span>
 mu &lt;-<span class="st"> </span><span class="dv">0</span>
 sigma &lt;-<span class="st"> </span><span class="dv">1</span>
@@ -359,11 +384,11 @@ df_p &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span clas
 <div class="figure"><span id="fig:fig-logistic-distribution"></span>
 <img src="bookdown-demo_files/figure-html/fig-logistic-distribution-1.png" alt="\label{fig:fig-logistic-distribution}Logit probability" width="672" />
 <p class="caption">
-Figure 5.3: Logit probability
+Figure 4.3: Logit probability
 </p>
 </div>
 <p>Try changing the upper limit in the figure above to explore the behavior of the logit probability. What is the probability of choosing <span class="math inline">\(j\)</span> when <span class="math inline">\(V_j - V_k = 0\)</span>? What is the probability of choosing <span class="math inline">\(j\)</span> when <span class="math inline">\(V_j &gt;&gt; V_k\)</span>? And when <span class="math inline">\(V_j &lt;&lt; V_k\)</span>? Is this as expected?</p>
-<p>The cumulative distribution function is shown in Figure <a href="chapter-3.html#fig:fig-logistic-cumulative-distribution">5.4</a>. Notice that this function tends asymptotically to 0 when <span class="math inline">\(x\)</span> tends to <span class="math inline">\(-\infty\)</span> and to 1 when <span class="math inline">\(x\)</span> tends to <span class="math inline">\(\infty\)</span>. This function never assigns values of exactly 0 or exactly 1.</p>
+<p>The cumulative distribution function is shown in Figure <a href="chapter-3.html#fig:fig-logistic-cumulative-distribution">4.4</a>. Notice that this function tends asymptotically to 0 when <span class="math inline">\(x\)</span> tends to <span class="math inline">\(-\infty\)</span> and to 1 when <span class="math inline">\(x\)</span> tends to <span class="math inline">\(\infty\)</span>. This function never assigns values of exactly 0 or exactly 1.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a data frame for plotting</span>
 df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="op">-</span><span class="dv">5</span>, <span class="dt">to =</span> <span class="dv">5</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">y =</span> <span class="kw">plogis</span>(x))
 
@@ -379,15 +404,15 @@ logit_plot <span class="op">+</span>
 <div class="figure"><span id="fig:fig-logistic-cumulative-distribution"></span>
 <img src="bookdown-demo_files/figure-html/fig-logistic-cumulative-distribution-1.png" alt="\label{fig:fig-logistic-cumulative-distribution}Linear cumulative distribution function" width="672" />
 <p class="caption">
-Figure 5.4: Linear cumulative distribution function
+Figure 4.4: Linear cumulative distribution function
 </p>
 </div>
-<p>The logit probability exhibits a shape usually called a <a href="https://en.wikipedia.org/wiki/Sigmoid_function"><em>sigmoid</em></a> (for its resemblance to the letter “s”). This shape is shared by most other discrete choice models - the uniform distribution in Chapter <a href="chapter-2.html#chapter-2">4</a>, for instance, resembled an angular letter “s”, whereas the linear and quadratic distribution functions started to display the non-linear aspect of the logit probability function. Sigmoid functions are of interest in many fields. The study of technology adoption is a case in point; new technologies are initially adopted slowly, then go through a rapid growth stage, before reaching saturation. Population growth is often represented by similar curves, with population growing slowly, then explosively, before reaching a carrying capacity limit.</p>
+<p>The logit probability exhibits a shape usually called a <a href="https://en.wikipedia.org/wiki/Sigmoid_function"><em>sigmoid</em></a> (for its resemblance to the letter “s”). This shape is shared by most other discrete choice models - the uniform distribution in Chapter <a href="chapter-2.html#chapter-2">3</a>, for instance, resembled an angular letter “s”, whereas the linear and quadratic distribution functions started to display the non-linear aspect of the logit probability function. Sigmoid functions are of interest in many fields. The study of technology adoption is a case in point; new technologies are initially adopted slowly, then go through a rapid growth stage, before reaching saturation. Population growth is often represented by similar curves, with population growing slowly, then explosively, before reaching a carrying capacity limit.</p>
 <p>In the case of discrete choice analysis, the shape of the function is interesting from a policy perspective. In the vast majority of cities in North America, for example, the two main modes of transportation are cars and transit. However, the shares of transit tend to be very low, sometimes lower than 10% or even 5%. This suggests that the underlying probabilities of choosing transit at the individual level are very low too.</p>
-<p>Suppose that the logit curve in Figure <a href="chapter-3.html#fig:fig-logistic-cumulative-distribution">5.4</a> is for the probability of choosing transit. If the initial probability of choosing transit is low, large increases in the utility of transit result in relatively modest gains in probability (see solid blue line in Figure <a href="chapter-3.html#fig:fig-logistic-shape-implication">5.5</a>). If the starting probability of transit had been instead 0.5, an identical increase in the utility of transit would result in a much larger gain in the probability (see dashed red line in Figure <a href="chapter-3.html#fig:fig-logistic-shape-implication">5.5</a>).</p>
+<p>Suppose that the logit curve in Figure <a href="chapter-3.html#fig:fig-logistic-cumulative-distribution">4.4</a> is for the probability of choosing transit. If the initial probability of choosing transit is low, large increases in the utility of transit result in relatively modest gains in probability (see solid blue line in Figure <a href="chapter-3.html#fig:fig-logistic-shape-implication">4.5</a>). If the starting probability of transit had been instead 0.5, an identical increase in the utility of transit would result in a much larger gain in the probability (see dashed red line in Figure <a href="chapter-3.html#fig:fig-logistic-shape-implication">4.5</a>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">logit_plot <span class="op">+</span>
 <span class="st">  </span><span class="kw">xlab</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(V[transit], <span class="st">&quot; - &quot;</span>, V[car], <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))) <span class="op">+</span><span class="st"> </span><span class="co"># Label the x axis</span>
-<span class="st">  </span><span class="kw">ylab</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(P[j]))) <span class="op">+</span><span class="st"> </span><span class="co"># Label the y axis</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(P[transit]))) <span class="op">+</span><span class="st"> </span><span class="co"># Label the y axis</span>
 <span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;segment&quot;</span>, <span class="dt">x =</span> <span class="op">-</span><span class="fl">3.75</span>, <span class="dt">xend =</span> <span class="op">-</span><span class="fl">2.5</span>, <span class="dt">y =</span> <span class="fl">0.024</span>, <span class="dt">yend =</span> <span class="fl">0.024</span>, <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">linetype =</span> <span class="st">&quot;solid&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;segment&quot;</span>, <span class="dt">x =</span> <span class="op">-</span><span class="fl">2.5</span>, <span class="dt">xend =</span> <span class="op">-</span><span class="fl">2.5</span>, <span class="dt">y =</span> <span class="fl">0.024</span>, <span class="dt">yend =</span> <span class="fl">0.075</span>, <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">linetype =</span> <span class="st">&quot;solid&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;segment&quot;</span>, <span class="dt">x =</span> <span class="dv">0</span>, <span class="dt">xend =</span> <span class="fl">1.25</span>, <span class="dt">y =</span> <span class="fl">0.5</span>, <span class="dt">yend =</span> <span class="fl">0.5</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">+</span>
@@ -395,14 +420,14 @@ Figure 5.4: Linear cumulative distribution function
 <div class="figure"><span id="fig:fig-logistic-shape-implication"></span>
 <img src="bookdown-demo_files/figure-html/fig-logistic-shape-implication-1.png" alt="\label{fig:fig-logistic-shape-implication}Implication of the sigmoid shape" width="672" />
 <p class="caption">
-Figure 5.5: Implication of the sigmoid shape
+Figure 4.5: Implication of the sigmoid shape
 </p>
 </div>
 <p>The implication is that when the penetration of an alternative (think transit, hybrid vehicles, clean energy, and other new technologies) is still low, the incentives needed to raise the probabilities need to be very strong even for modest gains. When penetration has increased, the incentives may be eased since their impact is now more than proportional, until reaching saturation, where again large gains in utility result in modest increases in the probability of adoption.</p>
 </div>
 <div id="now-about-those-parameters-mu-and-sigma" class="section level2">
-<h2><span class="header-section-number">5.7</span> Now, about those parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>…</h2>
-<p>Figure <a href="chapter-3.html#fig:fig-logistic-distribution">5.3</a> above was created assuming that <span class="math inline">\(\mu=0\)</span> and <span class="math inline">\(\sigma=1\)</span>. Can we really set these values in such an arbitrary fashion? The answer is no and yes.</p>
+<h2><span class="header-section-number">4.7</span> Now, about those parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>…</h2>
+<p>Figure <a href="chapter-3.html#fig:fig-logistic-distribution">4.3</a> above was created assuming that <span class="math inline">\(\mu=0\)</span> and <span class="math inline">\(\sigma=1\)</span>. Can we really set these values in such an arbitrary fashion? The answer is no and yes.</p>
 <p>In the case of the centering parameter <span class="math inline">\(\mu\)</span>, setting it arbitrarily to zero is not appropriate. The reason is that we can think of this parameter as being key to calculating the difference between the systematic utilities. As seen above, the logit probability is: <span class="math display">\[
 P_j = P(V_j - V_k \le \epsilon_n) = \frac{1}{1 + e^{-(V_j-V_k-\mu)/\sigma}}
 \]</span></p>
@@ -436,14 +461,14 @@ P_j = P(V_j - V_k \le \epsilon_n) = \frac{1}{1 + e^{-(V_j-V_k)}} = \frac{e^{V_j}
 \]</span></p>
 </div>
 <div id="multinomial-logit" class="section level2">
-<h2><span class="header-section-number">5.8</span> Multinomial logit</h2>
+<h2><span class="header-section-number">4.8</span> Multinomial logit</h2>
 <p>The logit model above was derived assuming a choice set with only two alternatives. This, of course, is very restrictive, and there are many situations where more than two alternatives are of interest. Fortunately, a multinomial version of the logit model can be derived without much difficulty, and it also results in a closed form expression, as follows: <span class="math display">\[
 P_j = P(V_j - V_k \le \epsilon_n) = \frac{e^{V_j}}{\sum_k^Je^{V_k}}
 \]</span></p>
 <p>Notice that in this case there are <span class="math inline">\(J-1\)</span> parameters <span class="math inline">\(\mu\)</span> that are absorbed by all but one of the utility functions. As before, it does not matter which utility is selected to act as the reference, since the signs (and magnitudes) of the centering parameters adjust accordingly. More on this later.</p>
 </div>
 <div id="properties-of-the-logit-model" class="section level2">
-<h2><span class="header-section-number">5.9</span> Properties of the logit model</h2>
+<h2><span class="header-section-number">4.9</span> Properties of the logit model</h2>
 <p>The logit model is the workhorse of discrete choice analysis, in good measure because of its closed form which does not require numerical evaluation of the integrals involved in calculating probabilities (i.e., the “area under the curve”, although in multinomial situations this actually is a volume under the surface!)</p>
 <p>One important property of the logit model is the way it handles substitution patterns. Consider the ratio of odds for any two alternatives according to the multinomial logit model: <span class="math display">\[
 \frac{P_j}{P_m}=\frac{\frac{e^{V_j}}{\sum_ke^{V_k}}}{\frac{e^{V_m}}{\sum_ke^{V_k}}} =\frac{e^{V_j}}{e^{V_m}} =e^{V_j - V_m}
@@ -522,9 +547,9 @@ P^1_m = \frac{5}{7}(1 - P^1_{sb}) = \Big(\frac{5}{7}\Big)\Big(\frac{1}{2}\Big) =
 <p>As will become clear in later chapters, much work in the field of discrete choice analysis has been concerned with the latter.</p>
 </div>
 <div id="revisiting-the-systematic-utilities" class="section level2">
-<h2><span class="header-section-number">5.10</span> Revisiting the systematic utilities</h2>
+<h2><span class="header-section-number">4.10</span> Revisiting the systematic utilities</h2>
 <p>Much of the discussion above has concentrated on the random utility; however, specifying the systematic utility is key.</p>
-<p>Recall that the utility is a function of the attributes of the alternatives and possibly the attributes of the decision-makers to allow the model to capture heterogeneity in decision-making styles by individuals. the utility function is a convenient way of summarizing all those attributes. Think again of the example of buying a new phone (see Chapter <a href="chapter-2.html#chapter-2">4</a>). In that simple example, the utilities were a function of three attributes, namely cost, speed, and income - to which we can add the random utility: <span class="math display">\[
+<p>Recall that the utility is a function of the attributes of the alternatives and possibly the attributes of the decision-makers to allow the model to capture heterogeneity in decision-making styles by individuals. the utility function is a convenient way of summarizing all those attributes. Think again of the example of buying a new phone (see Chapter <a href="chapter-2.html#chapter-2">3</a>). In that simple example, the utilities were a function of three attributes, namely cost, speed, and income - to which we can add the random utility: <span class="math display">\[
 \begin{array}{c}
 U_{i, \text{Do-Nothing}} = U(\text{cost}_{\text{Do-Nothing}}, \text{ speed}_{\text{Do-Nothing}}, \text{ income}_i) = V(\text{cost}_{\text{Do-Nothing}}, \text{ speed}_{\text{Do-Nothing}}, \text{ income}_i) + \epsilon_{i, \text{Do-Nothing}}\\
 U_{i, \text{New-Phone}} = U(\text{cost}_{\text{New-Phone}}, \text{ speed}_{\text{New-Phone}}, \text{ income}_i) = V(\text{cost}_{\text{New-Phone}}, \text{ speed}_{\text{New-Phone}}, \text{ income}_i) + \epsilon_{i, \text{New-Phone}}\\
@@ -589,10 +614,10 @@ V_{\text{Do-Nothing}} - V_{\text{New-Phone}} =\\
 <p>Specifying the utility functions is more art than technique. We will return to this when we begin the practice of model estimation.</p>
 </div>
 <div id="exercise-2" class="section level2">
-<h2><span class="header-section-number">5.11</span> Exercise</h2>
+<h2><span class="header-section-number">4.11</span> Exercise</h2>
 <p>Answer the following questions.</p>
 <div id="questions-2" class="section level3">
-<h3><span class="header-section-number">5.11.1</span> Questions</h3>
+<h3><span class="header-section-number">4.11.1</span> Questions</h3>
 <ol style="list-style-type: decimal">
 <li><p>What do we mean when we say that the logit probability has a closed form?</p></li>
 <li><p>Why is it that we can set the dispersion parameter in the logit probabilities to one?</p></li>

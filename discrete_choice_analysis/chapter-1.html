@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Chapter 3 Data and stuff | An Introduction to Discrete Choice Analysis</title>
+  <title>Chapter 2 Data and stuff | An Introduction to Discrete Choice Analysis</title>
   <meta name="description" content="These notes were created by Antonio Paez as a resource for teaching a graduate discrete choice analysis course (GEOG 738) at McMaster University.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Chapter 3 Data and stuff | An Introduction to Discrete Choice Analysis" />
+  <meta property="og:title" content="Chapter 2 Data and stuff | An Introduction to Discrete Choice Analysis" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="paezha/Discrete-Choice-Analysis-with-R" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 3 Data and stuff | An Introduction to Discrete Choice Analysis" />
+  <meta name="twitter:title" content="Chapter 2 Data and stuff | An Introduction to Discrete Choice Analysis" />
   
   <meta name="twitter:description" content="These notes were created by Antonio Paez as a resource for teaching a graduate discrete choice analysis course (GEOG 738) at McMaster University." />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Antonio Paez">
 
 
-<meta name="date" content="2019-02-10">
+<meta name="date" content="2019-02-25">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -54,8 +54,8 @@
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.41.3/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.41.3/plotly-latest.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.42.5/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.42.5/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -114,81 +114,106 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#choices-choices-choices"><i class="fa fa-check"></i>Choices, choices, choices</a></li>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#price-mechanisms"><i class="fa fa-check"></i><b>0.1</b> Price Mechanisms</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#plan"><i class="fa fa-check"></i>Plan</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#audience"><i class="fa fa-check"></i>Audience</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#requisites"><i class="fa fa-check"></i>Requisites</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="price-mechanisms.html"><a href="price-mechanisms.html"><i class="fa fa-check"></i><b>1</b> Price Mechanisms</a><ul>
-<li class="chapter" data-level="" data-path="price-mechanisms.html"><a href="price-mechanisms.html#plan"><i class="fa fa-check"></i>Plan</a></li>
-<li class="chapter" data-level="" data-path="price-mechanisms.html"><a href="price-mechanisms.html#audience"><i class="fa fa-check"></i>Audience</a></li>
-<li class="chapter" data-level="" data-path="price-mechanisms.html"><a href="price-mechanisms.html#requisites"><i class="fa fa-check"></i>Requisites</a></li>
+<li class="chapter" data-level="1" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html"><i class="fa fa-check"></i><b>1</b> Preliminaries: Installing R and RStudio</a><ul>
+<li class="chapter" data-level="1.1" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#introduction"><i class="fa fa-check"></i><b>1.1</b> Introduction</a></li>
+<li class="chapter" data-level="1.2" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#learning-objectives"><i class="fa fa-check"></i><b>1.2</b> Learning Objectives</a></li>
+<li class="chapter" data-level="1.3" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#r-the-open-statistical-computing-project"><i class="fa fa-check"></i><b>1.3</b> R: The Open Statistical Computing Project</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#what-is-r"><i class="fa fa-check"></i><b>1.3.1</b> What is R?</a></li>
+<li class="chapter" data-level="1.3.2" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#the-rstudio-ide"><i class="fa fa-check"></i><b>1.3.2</b> The RStudio IDE</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html"><i class="fa fa-check"></i><b>2</b> Preliminaries: Installing R and RStudio</a><ul>
-<li class="chapter" data-level="2.1" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#introduction"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
-<li class="chapter" data-level="2.2" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#learning-objectives"><i class="fa fa-check"></i><b>2.2</b> Learning Objectives</a></li>
-<li class="chapter" data-level="2.3" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#r-the-open-statistical-computing-project"><i class="fa fa-check"></i><b>2.3</b> R: The Open Statistical Computing Project</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#what-is-r"><i class="fa fa-check"></i><b>2.3.1</b> What is R?</a></li>
-<li class="chapter" data-level="2.3.2" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#the-rstudio-ide"><i class="fa fa-check"></i><b>2.3.2</b> The RStudio IDE</a></li>
+<li class="chapter" data-level="1.4" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#packages-in-r"><i class="fa fa-check"></i><b>1.4</b> Packages in R</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#packages-in-r"><i class="fa fa-check"></i><b>2.4</b> Packages in R</a></li>
+<li class="chapter" data-level="2" data-path="chapter-1.html"><a href="chapter-1.html"><i class="fa fa-check"></i><b>2</b> Data and stuff</a><ul>
+<li class="chapter" data-level="2.1" data-path="chapter-1.html"><a href="chapter-1.html#what-are-models"><i class="fa fa-check"></i><b>2.1</b> What are models?</a></li>
+<li class="chapter" data-level="2.2" data-path="chapter-1.html"><a href="chapter-1.html#how-to-use-this-note"><i class="fa fa-check"></i><b>2.2</b> How to use this note</a></li>
+<li class="chapter" data-level="2.3" data-path="chapter-1.html"><a href="chapter-1.html#learning-objectives-1"><i class="fa fa-check"></i><b>2.3</b> Learning objectives</a></li>
+<li class="chapter" data-level="2.4" data-path="chapter-1.html"><a href="chapter-1.html#suggested-readings"><i class="fa fa-check"></i><b>2.4</b> Suggested readings</a></li>
+<li class="chapter" data-level="2.5" data-path="chapter-1.html"><a href="chapter-1.html#ways-of-measuring-stuff"><i class="fa fa-check"></i><b>2.5</b> Ways of measuring stuff</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="chapter-1.html"><a href="chapter-1.html#categorical"><i class="fa fa-check"></i><b>2.5.1</b> Categorical</a></li>
+<li class="chapter" data-level="2.5.2" data-path="chapter-1.html"><a href="chapter-1.html#quantitative"><i class="fa fa-check"></i><b>2.5.2</b> Quantitative</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="chapter-1.html"><a href="chapter-1.html"><i class="fa fa-check"></i><b>3</b> Data and stuff</a><ul>
-<li class="chapter" data-level="3.1" data-path="chapter-1.html"><a href="chapter-1.html#what-are-models"><i class="fa fa-check"></i><b>3.1</b> What are models?</a></li>
-<li class="chapter" data-level="3.2" data-path="chapter-1.html"><a href="chapter-1.html#how-to-use-this-note"><i class="fa fa-check"></i><b>3.2</b> How to use this note</a></li>
-<li class="chapter" data-level="3.3" data-path="chapter-1.html"><a href="chapter-1.html#learning-objectives-1"><i class="fa fa-check"></i><b>3.3</b> Learning objectives</a></li>
-<li class="chapter" data-level="3.4" data-path="chapter-1.html"><a href="chapter-1.html#suggested-readings"><i class="fa fa-check"></i><b>3.4</b> Suggested readings</a></li>
-<li class="chapter" data-level="3.5" data-path="chapter-1.html"><a href="chapter-1.html#ways-of-measuring-stuff"><i class="fa fa-check"></i><b>3.5</b> Ways of measuring stuff</a><ul>
-<li class="chapter" data-level="3.5.1" data-path="chapter-1.html"><a href="chapter-1.html#categorical"><i class="fa fa-check"></i><b>3.5.1</b> Categorical</a></li>
-<li class="chapter" data-level="3.5.2" data-path="chapter-1.html"><a href="chapter-1.html#quantitative"><i class="fa fa-check"></i><b>3.5.2</b> Quantitative</a></li>
-</ul></li>
-<li class="chapter" data-level="3.6" data-path="chapter-1.html"><a href="chapter-1.html#importing-data"><i class="fa fa-check"></i><b>3.6</b> Importing data</a></li>
-<li class="chapter" data-level="3.7" data-path="chapter-1.html"><a href="chapter-1.html#data-classes-in-r"><i class="fa fa-check"></i><b>3.7</b> Data Classes in R</a></li>
-<li class="chapter" data-level="3.8" data-path="chapter-1.html"><a href="chapter-1.html#more-on-indexing-and-data-manipulation"><i class="fa fa-check"></i><b>3.8</b> More on indexing and data manipulation</a></li>
-<li class="chapter" data-level="3.9" data-path="chapter-1.html"><a href="chapter-1.html#visualization"><i class="fa fa-check"></i><b>3.9</b> Visualization</a></li>
-<li class="chapter" data-level="3.10" data-path="chapter-1.html"><a href="chapter-1.html#exercise"><i class="fa fa-check"></i><b>3.10</b> Exercise</a><ul>
-<li class="chapter" data-level="3.10.1" data-path="chapter-1.html"><a href="chapter-1.html#questions"><i class="fa fa-check"></i><b>3.10.1</b> Questions</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="chapter-2.html"><a href="chapter-2.html"><i class="fa fa-check"></i><b>4</b> Fundamental concepts</a><ul>
-<li class="chapter" data-level="4.1" data-path="chapter-2.html"><a href="chapter-2.html#why-modelling-choices"><i class="fa fa-check"></i><b>4.1</b> Why modelling choices?</a></li>
-<li class="chapter" data-level="4.2" data-path="chapter-2.html"><a href="chapter-2.html#how-to-use-this-note-1"><i class="fa fa-check"></i><b>4.2</b> How to use this note</a></li>
-<li class="chapter" data-level="4.3" data-path="chapter-2.html"><a href="chapter-2.html#learning-objectives-2"><i class="fa fa-check"></i><b>4.3</b> Learning objectives</a></li>
-<li class="chapter" data-level="4.4" data-path="chapter-2.html"><a href="chapter-2.html#suggested-readings-1"><i class="fa fa-check"></i><b>4.4</b> Suggested readings</a></li>
-<li class="chapter" data-level="4.5" data-path="chapter-2.html"><a href="chapter-2.html#preliminaries"><i class="fa fa-check"></i><b>4.5</b> Preliminaries</a></li>
-<li class="chapter" data-level="4.6" data-path="chapter-2.html"><a href="chapter-2.html#utility-maximization"><i class="fa fa-check"></i><b>4.6</b> Utility maximization</a></li>
-<li class="chapter" data-level="4.7" data-path="chapter-2.html"><a href="chapter-2.html#what-about-those-random-terms"><i class="fa fa-check"></i><b>4.7</b> What about those random terms?</a></li>
-<li class="chapter" data-level="4.8" data-path="chapter-2.html"><a href="chapter-2.html#probability-distribution-functions-pdfs"><i class="fa fa-check"></i><b>4.8</b> Probability distribution functions (PDFs)</a></li>
-<li class="chapter" data-level="4.9" data-path="chapter-2.html"><a href="chapter-2.html#a-simple-random-utility-discrete-choice-model"><i class="fa fa-check"></i><b>4.9</b> A simple random utility discrete choice model</a></li>
-<li class="chapter" data-level="4.10" data-path="chapter-2.html"><a href="chapter-2.html#other-choice-mechanisms"><i class="fa fa-check"></i><b>4.10</b> Other choice mechanisms</a></li>
-<li class="chapter" data-level="4.11" data-path="chapter-2.html"><a href="chapter-2.html#exercise-1"><i class="fa fa-check"></i><b>4.11</b> Exercise</a><ul>
-<li class="chapter" data-level="4.11.1" data-path="chapter-2.html"><a href="chapter-2.html#questions-1"><i class="fa fa-check"></i><b>4.11.1</b> Questions</a></li>
+<li class="chapter" data-level="2.6" data-path="chapter-1.html"><a href="chapter-1.html#importing-data"><i class="fa fa-check"></i><b>2.6</b> Importing data</a></li>
+<li class="chapter" data-level="2.7" data-path="chapter-1.html"><a href="chapter-1.html#data-classes-in-r"><i class="fa fa-check"></i><b>2.7</b> Data Classes in R</a></li>
+<li class="chapter" data-level="2.8" data-path="chapter-1.html"><a href="chapter-1.html#more-on-indexing-and-data-manipulation"><i class="fa fa-check"></i><b>2.8</b> More on indexing and data manipulation</a></li>
+<li class="chapter" data-level="2.9" data-path="chapter-1.html"><a href="chapter-1.html#visualization"><i class="fa fa-check"></i><b>2.9</b> Visualization</a></li>
+<li class="chapter" data-level="2.10" data-path="chapter-1.html"><a href="chapter-1.html#exercise"><i class="fa fa-check"></i><b>2.10</b> Exercise</a><ul>
+<li class="chapter" data-level="2.10.1" data-path="chapter-1.html"><a href="chapter-1.html#questions"><i class="fa fa-check"></i><b>2.10.1</b> Questions</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="chapter-3.html"><a href="chapter-3.html"><i class="fa fa-check"></i><b>5</b> Logit</a><ul>
-<li class="chapter" data-level="5.1" data-path="chapter-3.html"><a href="chapter-3.html#modelling-choices"><i class="fa fa-check"></i><b>5.1</b> Modelling choices</a></li>
-<li class="chapter" data-level="5.2" data-path="chapter-3.html"><a href="chapter-3.html#how-to-use-this-note-2"><i class="fa fa-check"></i><b>5.2</b> How to use this note</a></li>
-<li class="chapter" data-level="5.3" data-path="chapter-3.html"><a href="chapter-3.html#learning-objectives-3"><i class="fa fa-check"></i><b>5.3</b> Learning objectives</a></li>
-<li class="chapter" data-level="5.4" data-path="chapter-3.html"><a href="chapter-3.html#suggested-readings-2"><i class="fa fa-check"></i><b>5.4</b> Suggested readings</a></li>
-<li class="chapter" data-level="5.5" data-path="chapter-3.html"><a href="chapter-3.html#preliminaries-1"><i class="fa fa-check"></i><b>5.5</b> Preliminaries</a></li>
-<li class="chapter" data-level="5.6" data-path="chapter-3.html"><a href="chapter-3.html#once-again-those-random-terms"><i class="fa fa-check"></i><b>5.6</b> Once again those random terms</a></li>
-<li class="chapter" data-level="5.7" data-path="chapter-3.html"><a href="chapter-3.html#now-about-those-parameters-mu-and-sigma"><i class="fa fa-check"></i><b>5.7</b> Now, about those parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>…</a></li>
-<li class="chapter" data-level="5.8" data-path="chapter-3.html"><a href="chapter-3.html#multinomial-logit"><i class="fa fa-check"></i><b>5.8</b> Multinomial logit</a></li>
-<li class="chapter" data-level="5.9" data-path="chapter-3.html"><a href="chapter-3.html#properties-of-the-logit-model"><i class="fa fa-check"></i><b>5.9</b> Properties of the logit model</a></li>
-<li class="chapter" data-level="5.10" data-path="chapter-3.html"><a href="chapter-3.html#revisiting-the-systematic-utilities"><i class="fa fa-check"></i><b>5.10</b> Revisiting the systematic utilities</a></li>
-<li class="chapter" data-level="5.11" data-path="chapter-3.html"><a href="chapter-3.html#exercise-2"><i class="fa fa-check"></i><b>5.11</b> Exercise</a><ul>
-<li class="chapter" data-level="5.11.1" data-path="chapter-3.html"><a href="chapter-3.html#questions-2"><i class="fa fa-check"></i><b>5.11.1</b> Questions</a></li>
+<li class="chapter" data-level="3" data-path="chapter-2.html"><a href="chapter-2.html"><i class="fa fa-check"></i><b>3</b> Fundamental concepts</a><ul>
+<li class="chapter" data-level="3.1" data-path="chapter-2.html"><a href="chapter-2.html#why-modelling-choices"><i class="fa fa-check"></i><b>3.1</b> Why modelling choices?</a></li>
+<li class="chapter" data-level="3.2" data-path="chapter-2.html"><a href="chapter-2.html#how-to-use-this-note-1"><i class="fa fa-check"></i><b>3.2</b> How to use this note</a></li>
+<li class="chapter" data-level="3.3" data-path="chapter-2.html"><a href="chapter-2.html#learning-objectives-2"><i class="fa fa-check"></i><b>3.3</b> Learning objectives</a></li>
+<li class="chapter" data-level="3.4" data-path="chapter-2.html"><a href="chapter-2.html#suggested-readings-1"><i class="fa fa-check"></i><b>3.4</b> Suggested readings</a></li>
+<li class="chapter" data-level="3.5" data-path="chapter-2.html"><a href="chapter-2.html#preliminaries"><i class="fa fa-check"></i><b>3.5</b> Preliminaries</a></li>
+<li class="chapter" data-level="3.6" data-path="chapter-2.html"><a href="chapter-2.html#utility-maximization"><i class="fa fa-check"></i><b>3.6</b> Utility maximization</a></li>
+<li class="chapter" data-level="3.7" data-path="chapter-2.html"><a href="chapter-2.html#what-about-those-random-terms"><i class="fa fa-check"></i><b>3.7</b> What about those random terms?</a></li>
+<li class="chapter" data-level="3.8" data-path="chapter-2.html"><a href="chapter-2.html#probability-distribution-functions-pdfs"><i class="fa fa-check"></i><b>3.8</b> Probability distribution functions (PDFs)</a></li>
+<li class="chapter" data-level="3.9" data-path="chapter-2.html"><a href="chapter-2.html#a-simple-random-utility-discrete-choice-model"><i class="fa fa-check"></i><b>3.9</b> A simple random utility discrete choice model</a></li>
+<li class="chapter" data-level="3.10" data-path="chapter-2.html"><a href="chapter-2.html#other-choice-mechanisms"><i class="fa fa-check"></i><b>3.10</b> Other choice mechanisms</a></li>
+<li class="chapter" data-level="3.11" data-path="chapter-2.html"><a href="chapter-2.html#exercise-1"><i class="fa fa-check"></i><b>3.11</b> Exercise</a><ul>
+<li class="chapter" data-level="3.11.1" data-path="chapter-2.html"><a href="chapter-2.html#questions-1"><i class="fa fa-check"></i><b>3.11.1</b> Questions</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="chapter-4.html"><a href="chapter-4.html"><i class="fa fa-check"></i><b>6</b> Practical specification and estimation</a><ul>
-<li class="chapter" data-level="6.1" data-path="chapter-4.html"><a href="chapter-4.html#theory-and-practice"><i class="fa fa-check"></i><b>6.1</b> Theory and practice</a></li>
-<li class="chapter" data-level="6.2" data-path="chapter-4.html"><a href="chapter-4.html#how-to-use-this-note-3"><i class="fa fa-check"></i><b>6.2</b> How to use this note</a></li>
-<li class="chapter" data-level="6.3" data-path="chapter-4.html"><a href="chapter-4.html#learning-objectives-4"><i class="fa fa-check"></i><b>6.3</b> Learning objectives</a></li>
-<li class="chapter" data-level="6.4" data-path="chapter-4.html"><a href="chapter-4.html#suggested-readings-3"><i class="fa fa-check"></i><b>6.4</b> Suggested readings</a></li>
-<li class="chapter" data-level="6.5" data-path="chapter-4.html"><a href="chapter-4.html#preliminaries-2"><i class="fa fa-check"></i><b>6.5</b> Preliminaries</a></li>
-<li class="chapter" data-level="6.6" data-path="chapter-4.html"><a href="chapter-4.html#the-anatomy-of-utility-functions"><i class="fa fa-check"></i><b>6.6</b> The anatomy of utility functions</a></li>
-<li class="chapter" data-level="6.7" data-path="chapter-4.html"><a href="chapter-4.html#example-specifying-the-utility-functions"><i class="fa fa-check"></i><b>6.7</b> Example: Specifying the utility functions</a></li>
-<li class="chapter" data-level="6.8" data-path="chapter-4.html"><a href="chapter-4.html#estimation"><i class="fa fa-check"></i><b>6.8</b> Estimation</a></li>
-<li class="chapter" data-level="6.9" data-path="chapter-4.html"><a href="chapter-4.html#example-a-logit-model-of-mode-choice"><i class="fa fa-check"></i><b>6.9</b> Example: A logit model of mode choice</a></li>
-<li class="chapter" data-level="6.10" data-path="chapter-4.html"><a href="chapter-4.html#comparing-models-mcfaddens-rho2"><i class="fa fa-check"></i><b>6.10</b> Comparing models: McFadden’s <span class="math inline">\(\rho^2\)</span></a></li>
-<li class="chapter" data-level="6.11" data-path="chapter-4.html"><a href="chapter-4.html#comparing-models-the-likelihood-ratio-test"><i class="fa fa-check"></i><b>6.11</b> Comparing models: the likelihood ratio test</a></li>
-<li class="chapter" data-level="6.12" data-path="chapter-4.html"><a href="chapter-4.html#exercise-3"><i class="fa fa-check"></i><b>6.12</b> Exercise</a></li>
+<li class="chapter" data-level="4" data-path="chapter-3.html"><a href="chapter-3.html"><i class="fa fa-check"></i><b>4</b> Logit</a><ul>
+<li class="chapter" data-level="4.1" data-path="chapter-3.html"><a href="chapter-3.html#modelling-choices"><i class="fa fa-check"></i><b>4.1</b> Modelling choices</a></li>
+<li class="chapter" data-level="4.2" data-path="chapter-3.html"><a href="chapter-3.html#how-to-use-this-note-2"><i class="fa fa-check"></i><b>4.2</b> How to use this note</a></li>
+<li class="chapter" data-level="4.3" data-path="chapter-3.html"><a href="chapter-3.html#learning-objectives-3"><i class="fa fa-check"></i><b>4.3</b> Learning objectives</a></li>
+<li class="chapter" data-level="4.4" data-path="chapter-3.html"><a href="chapter-3.html#suggested-readings-2"><i class="fa fa-check"></i><b>4.4</b> Suggested readings</a></li>
+<li class="chapter" data-level="4.5" data-path="chapter-3.html"><a href="chapter-3.html#preliminaries-1"><i class="fa fa-check"></i><b>4.5</b> Preliminaries</a></li>
+<li class="chapter" data-level="4.6" data-path="chapter-3.html"><a href="chapter-3.html#once-again-those-random-terms"><i class="fa fa-check"></i><b>4.6</b> Once again those random terms</a></li>
+<li class="chapter" data-level="4.7" data-path="chapter-3.html"><a href="chapter-3.html#now-about-those-parameters-mu-and-sigma"><i class="fa fa-check"></i><b>4.7</b> Now, about those parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>…</a></li>
+<li class="chapter" data-level="4.8" data-path="chapter-3.html"><a href="chapter-3.html#multinomial-logit"><i class="fa fa-check"></i><b>4.8</b> Multinomial logit</a></li>
+<li class="chapter" data-level="4.9" data-path="chapter-3.html"><a href="chapter-3.html#properties-of-the-logit-model"><i class="fa fa-check"></i><b>4.9</b> Properties of the logit model</a></li>
+<li class="chapter" data-level="4.10" data-path="chapter-3.html"><a href="chapter-3.html#revisiting-the-systematic-utilities"><i class="fa fa-check"></i><b>4.10</b> Revisiting the systematic utilities</a></li>
+<li class="chapter" data-level="4.11" data-path="chapter-3.html"><a href="chapter-3.html#exercise-2"><i class="fa fa-check"></i><b>4.11</b> Exercise</a><ul>
+<li class="chapter" data-level="4.11.1" data-path="chapter-3.html"><a href="chapter-3.html#questions-2"><i class="fa fa-check"></i><b>4.11.1</b> Questions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="chapter-4.html"><a href="chapter-4.html"><i class="fa fa-check"></i><b>5</b> Practical specification and estimation</a><ul>
+<li class="chapter" data-level="5.1" data-path="chapter-4.html"><a href="chapter-4.html#theory-and-practice"><i class="fa fa-check"></i><b>5.1</b> Theory and practice</a></li>
+<li class="chapter" data-level="5.2" data-path="chapter-4.html"><a href="chapter-4.html#how-to-use-this-note-3"><i class="fa fa-check"></i><b>5.2</b> How to use this note</a></li>
+<li class="chapter" data-level="5.3" data-path="chapter-4.html"><a href="chapter-4.html#learning-objectives-4"><i class="fa fa-check"></i><b>5.3</b> Learning objectives</a></li>
+<li class="chapter" data-level="5.4" data-path="chapter-4.html"><a href="chapter-4.html#suggested-readings-3"><i class="fa fa-check"></i><b>5.4</b> Suggested readings</a></li>
+<li class="chapter" data-level="5.5" data-path="chapter-4.html"><a href="chapter-4.html#preliminaries-2"><i class="fa fa-check"></i><b>5.5</b> Preliminaries</a></li>
+<li class="chapter" data-level="5.6" data-path="chapter-4.html"><a href="chapter-4.html#the-anatomy-of-utility-functions"><i class="fa fa-check"></i><b>5.6</b> The anatomy of utility functions</a></li>
+<li class="chapter" data-level="5.7" data-path="chapter-4.html"><a href="chapter-4.html#example-specifying-the-utility-functions"><i class="fa fa-check"></i><b>5.7</b> Example: Specifying the utility functions</a></li>
+<li class="chapter" data-level="5.8" data-path="chapter-4.html"><a href="chapter-4.html#estimation"><i class="fa fa-check"></i><b>5.8</b> Estimation</a></li>
+<li class="chapter" data-level="5.9" data-path="chapter-4.html"><a href="chapter-4.html#example-a-logit-model-of-mode-choice"><i class="fa fa-check"></i><b>5.9</b> Example: A logit model of mode choice</a></li>
+<li class="chapter" data-level="5.10" data-path="chapter-4.html"><a href="chapter-4.html#comparing-models-mcfaddens-rho2"><i class="fa fa-check"></i><b>5.10</b> Comparing models: McFadden’s <span class="math inline">\(\rho^2\)</span></a></li>
+<li class="chapter" data-level="5.11" data-path="chapter-4.html"><a href="chapter-4.html#comparing-models-the-likelihood-ratio-test"><i class="fa fa-check"></i><b>5.11</b> Comparing models: the likelihood ratio test</a></li>
+<li class="chapter" data-level="5.12" data-path="chapter-4.html"><a href="chapter-4.html#exercise-3"><i class="fa fa-check"></i><b>5.12</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="chapter-5.html"><a href="chapter-5.html"><i class="fa fa-check"></i><b>6</b> Behavioral insights from choice models</a><ul>
+<li class="chapter" data-level="6.1" data-path="chapter-5.html"><a href="chapter-5.html#inferring-and-forecasting-behavior"><i class="fa fa-check"></i><b>6.1</b> Inferring and forecasting behavior</a></li>
+<li class="chapter" data-level="6.2" data-path="chapter-5.html"><a href="chapter-5.html#how-to-use-this-note-4"><i class="fa fa-check"></i><b>6.2</b> How to use this note</a></li>
+<li class="chapter" data-level="6.3" data-path="chapter-5.html"><a href="chapter-5.html#learning-objectives-5"><i class="fa fa-check"></i><b>6.3</b> Learning objectives</a></li>
+<li class="chapter" data-level="6.4" data-path="chapter-5.html"><a href="chapter-5.html#suggested-readings-4"><i class="fa fa-check"></i><b>6.4</b> Suggested readings</a></li>
+<li class="chapter" data-level="6.5" data-path="chapter-5.html"><a href="chapter-5.html#preliminaries-3"><i class="fa fa-check"></i><b>6.5</b> Preliminaries</a></li>
+<li class="chapter" data-level="6.6" data-path="chapter-5.html"><a href="chapter-5.html#the-meaning-of-the-coefficients"><i class="fa fa-check"></i><b>6.6</b> The meaning of the coefficients</a></li>
+<li class="chapter" data-level="6.7" data-path="chapter-5.html"><a href="chapter-5.html#marginal-effects"><i class="fa fa-check"></i><b>6.7</b> Marginal effects</a><ul>
+<li class="chapter" data-level="6.7.1" data-path="chapter-5.html"><a href="chapter-5.html#direct-marginal-effects"><i class="fa fa-check"></i><b>6.7.1</b> Direct marginal effects</a></li>
+<li class="chapter" data-level="6.7.2" data-path="chapter-5.html"><a href="chapter-5.html#cross-marginal-effects"><i class="fa fa-check"></i><b>6.7.2</b> Cross-marginal effects</a></li>
+</ul></li>
+<li class="chapter" data-level="6.8" data-path="chapter-5.html"><a href="chapter-5.html#elasticity"><i class="fa fa-check"></i><b>6.8</b> Elasticity</a><ul>
+<li class="chapter" data-level="6.8.1" data-path="chapter-5.html"><a href="chapter-5.html#direct-point-elasticity"><i class="fa fa-check"></i><b>6.8.1</b> Direct-point elasticity</a></li>
+<li class="chapter" data-level="6.8.2" data-path="chapter-5.html"><a href="chapter-5.html#cross-point-elasticity"><i class="fa fa-check"></i><b>6.8.2</b> Cross-point elasticity</a></li>
+</ul></li>
+<li class="chapter" data-level="6.9" data-path="chapter-5.html"><a href="chapter-5.html#calculating-elasticities-based-on-an-mlogit-model"><i class="fa fa-check"></i><b>6.9</b> Calculating elasticities based on an <code>mlogit</code> model</a><ul>
+<li class="chapter" data-level="6.9.1" data-path="chapter-5.html"><a href="chapter-5.html#computing-the-marginal-effects"><i class="fa fa-check"></i><b>6.9.1</b> Computing the marginal effects</a></li>
+</ul></li>
+<li class="chapter" data-level="6.10" data-path="chapter-5.html"><a href="chapter-5.html#a-note-about-attributes-in-dummy-format"><i class="fa fa-check"></i><b>6.10</b> A note about attributes in dummy format</a></li>
+<li class="chapter" data-level="6.11" data-path="chapter-5.html"><a href="chapter-5.html#willingness-to-pay-and-discount-rate"><i class="fa fa-check"></i><b>6.11</b> Willingness to pay and discount rate</a></li>
+<li class="chapter" data-level="6.12" data-path="chapter-5.html"><a href="chapter-5.html#simulating-market-changes"><i class="fa fa-check"></i><b>6.12</b> Simulating market changes</a><ul>
+<li class="chapter" data-level="6.12.1" data-path="chapter-5.html"><a href="chapter-5.html#incentives"><i class="fa fa-check"></i><b>6.12.1</b> Incentives</a></li>
+<li class="chapter" data-level="6.12.2" data-path="chapter-5.html"><a href="chapter-5.html#introduction-of-a-new-system"><i class="fa fa-check"></i><b>6.12.2</b> Introduction of a new system</a></li>
+</ul></li>
+<li class="chapter" data-level="6.13" data-path="chapter-5.html"><a href="chapter-5.html#exercise-4"><i class="fa fa-check"></i><b>6.13</b> Exercise</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -212,7 +237,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="chapter-1" class="section level1">
-<h1><span class="header-section-number">Chapter 3</span> Data and stuff</h1>
+<h1><span class="header-section-number">Chapter 2</span> Data and stuff</h1>
 <blockquote>
 <p>“Essentially, all models are wrong, but some are useful.”</p>
 <p>— George E.P. Box</p>
@@ -222,7 +247,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>— Daniel Keys Moran</p>
 </blockquote>
 <div id="what-are-models" class="section level2">
-<h2><span class="header-section-number">3.1</span> What are models?</h2>
+<h2><span class="header-section-number">2.1</span> What are models?</h2>
 <p>Model building requires three things:</p>
 <ol style="list-style-type: decimal">
 <li><p>Raw materials.</p></li>
@@ -231,18 +256,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ol>
 <p>This is true whether the model is physical (for instance a sculpture), conceptual (a mental map), or statistical/mathematical (the gravity model or a regression model).</p>
 <p>In the case of a sculpture, the raw materials can be marble, wood, or clay; the tools chisels, mallet, and spatula; and the technique the mastery of the sculptor when working with the tools and the materials. Anyone can try sculpture, and most people can create sculptures. These kind of models are evaluated by their aesthetic value, not necessarily their usefulness. But if the scultpure is poorly balanced and falls and breaks, then its value is limited by its structural integrity - the skill of the sculptor matters even if only in this sense.</p>
-<p>In the case of a mental map, the raw materials are ideas, the tools are a drawing surface and tools for writing, or maybe an app, and the technical expertise is the ability of the modeler to organize ideas in a useful way. There are useful conceptual models, and conceptual models that are anything but. Figure <a href="chapter-1.html#fig:fig-conceptual-models">3.1</a> shows two example of conceptual models.</p>
+<p>In the case of a mental map, the raw materials are ideas, the tools are a drawing surface and tools for writing, or maybe an app, and the technical expertise is the ability of the modeler to organize ideas in a useful way. There are useful conceptual models, and conceptual models that are anything but. Figure <a href="chapter-1.html#fig:fig-conceptual-models">2.1</a> shows two example of conceptual models.</p>
 <div class="figure"><span id="fig:fig-conceptual-models"></span>
 <img src="01-Figure-1.jpg" alt="\label{fig:fig-conceptual-models}Two Examples of Conceptual Models" width="640" />
 <p class="caption">
-Figure 3.1: Two Examples of Conceptual Models
+Figure 2.1: Two Examples of Conceptual Models
 </p>
 </div>
 <p>In the case of mathematical/statistical models, the raw materials are data; the tools are descriptive statistics and statistical plots, and various forms of regression analysis; and the technical expertise is the ability of the modeler to select tools that are appropriate to the data, and to convince the data to “speak”: in other words, to extract information from the data. As Moran said in the aphorism quoted at the top of this section: you can have data without information, but no information without data. Technical mastery is the degree to which a modeller can obtain information from data that is useful, accurate, and precise, to the extent that the raw materials permit.</p>
 <p>Before moving on to the technical skills required for modeling, it is important to understand the raw materials and the tools. The objective of this note is to introduce some important concerning data and data manipulation, and some useful tools.</p>
 </div>
 <div id="how-to-use-this-note" class="section level2">
-<h2><span class="header-section-number">3.2</span> How to use this note</h2>
+<h2><span class="header-section-number">2.2</span> How to use this note</h2>
 <p>The source for the document you are reading is an R Notebook. Notebooks are a form “literate programming”, a style of document that uses code to illustrate a discussion, as opposed to the traditional programming style that uses natural language to discuss/document the code. It flips around the usual technical writing approach to make it more intuitive and accessible.</p>
 <p>Throughout the notes, you will find examples of code in segments of text called <em>chunks</em>. This is an example of a chunk:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="st">&quot;Hello, Discrete Choice Analysis!&quot;</span>)</code></pre></div>
@@ -250,7 +275,7 @@ Figure 3.1: Two Examples of Conceptual Models
 <p>If you are working with the Notebook version of the document, you can run the code by clicking the ‘play’ icon on the top right corner of the chunk. If you are reading the web-book version of the document, you will often see that the code has already been executed. You can still try it by copying and pasting into your R or RStudio console. Whichever way you are working, you might want to give it a try now! You will see that the chunk of code above instructed R (and trough R the computer) to <code>print</code> (or display on the screen) some text.</p>
 </div>
 <div id="learning-objectives-1" class="section level2">
-<h2><span class="header-section-number">3.3</span> Learning objectives</h2>
+<h2><span class="header-section-number">2.3</span> Learning objectives</h2>
 <p>In this practice, you will learn about:</p>
 <ol style="list-style-type: decimal">
 <li>Different ways to measure stuff.</li>
@@ -261,13 +286,14 @@ Figure 3.1: Two Examples of Conceptual Models
 </ol>
 </div>
 <div id="suggested-readings" class="section level2">
-<h2><span class="header-section-number">3.4</span> Suggested readings</h2>
+<h2><span class="header-section-number">2.4</span> Suggested readings</h2>
 <ul>
 <li>Grolemund, G., Wickham, H. <span class="citation">(<a href="#ref-wickham2016r">2016</a>)</span> R for Data Science, <strong>Chapters 3-5</strong>, O’Reilly Media.</li>
+<li>Wickham, H. <span class="citation">(<a href="#ref-Wickham2016ggplot">2016</a>)</span> ggplot2: Elegant Graphics for Data Analysis, <strong>Chapters 2-3</strong>, Springer: New York.</li>
 </ul>
 </div>
 <div id="ways-of-measuring-stuff" class="section level2">
-<h2><span class="header-section-number">3.5</span> Ways of measuring stuff</h2>
+<h2><span class="header-section-number">2.5</span> Ways of measuring stuff</h2>
 <p>Previously we said that data are the raw material for modeling, but we did not say precisely what we meant by ‘data’. You probably already have a working understanding of what ‘data’ means, but nonetheless lets begin with a definition. According to Mirriam-Webster, <a href="https://www.merriam-webster.com/dictionary/data">data</a> are:</p>
 <blockquote>
 <p>factual information (such as measurements or statistics) used as a basis for reasoning, discussion, or calculation</p>
@@ -287,7 +313,7 @@ Figure 3.1: Two Examples of Conceptual Models
 <p>Generally, there are multiple ways of measuring something, but not all of them are necessarily appropriate, partly because the scales of measurement may result in some loss of information. The interpretation of a measurement, as well, depends on what the scale is.</p>
 <p>Two broad scales of measurement are as follows:</p>
 <div id="categorical" class="section level3">
-<h3><span class="header-section-number">3.5.1</span> Categorical</h3>
+<h3><span class="header-section-number">2.5.1</span> Categorical</h3>
 <p>Categorical measurements assign a label or category to the thing being measured. For example, a way to measure different brands of peanut butter could be to measure their sugar content, their fat content, their consistency, and so on, and in this way describe what makes each brand unique. A different way to do this would be to label one brand “Spooky” and another “Peter’s”. This has the effect of reducing a lot of information to a much simpler category. Is this loss of information inappropriate? Well, it really depends on what is the intended use of data! Categorical measurements are interesting because they may tell us something about the power of brands!</p>
 <p>Within the class of categorical variables there are two distinct scales of measurement:</p>
 <ul>
@@ -297,7 +323,7 @@ Figure 3.1: Two Examples of Conceptual Models
 <p>Sometimes, different measurement scales might represent different behavioral mechanisms, as Bhat and Pulugurta discuss in their comparison of categorical and ordinal measurements for vehicle ownership <span class="citation">(Bhat and Pulugurta <a href="#ref-Bhat1998comparison">1998</a>)</span>.</p>
 </div>
 <div id="quantitative" class="section level3">
-<h3><span class="header-section-number">3.5.2</span> Quantitative</h3>
+<h3><span class="header-section-number">2.5.2</span> Quantitative</h3>
 <p>Quantitative measurements assign a number to an attribute, and the number quantifies the presence of the attribute. Within this class of variables, there are also two ways of measuring things.</p>
 <ul>
 <li><p>Interval scale. A quantity can be assigned to an attribute, the values follow an order, and their differences can be computed and remain constant. Temperature is typically measured in interval scale. The difference between <span class="math inline">\(10\,^{\circ}\mathrm{C}\)</span> and <span class="math inline">\(11\,^{\circ}\mathrm{C}\)</span> is the same as the difference between <span class="math inline">\(25\,^{\circ}\mathrm{C}\)</span> and <span class="math inline">\(26\,^{\circ}\mathrm{C}\)</span>. The intervals are meaningful. However, <span class="math inline">\(0\,^{\circ}\mathrm{C}\)</span> does not imply the absence of temperature! Which is why measurements in Celsius and Farenheit do not coincide at zero. The lack of a natural zero for these scales means that the <em>ratios</em> between two values are not meaningful: <span class="math inline">\(4\,^{\circ}\mathrm{C}\)</span> is not twice as hot as <span class="math inline">\(2\,^{\circ}\mathrm{C}\)</span>, and <span class="math inline">\(-12\,^{\circ}\mathrm{C}\)</span> is not four times as cold as <span class="math inline">\(-3\,^{\circ}\mathrm{C}\)</span>.</p></li>
@@ -307,7 +333,7 @@ Figure 3.1: Two Examples of Conceptual Models
 </div>
 </div>
 <div id="importing-data" class="section level2">
-<h2><span class="header-section-number">3.6</span> Importing data</h2>
+<h2><span class="header-section-number">2.6</span> Importing data</h2>
 <p>There are several different ways of importing data in R. For this example, we will use part of a dataset that was analyzed by Whalen et al. <span class="citation">(<a href="#ref-Whalen2013">2013</a>)</span>.</p>
 <p>At the very beginning, it is good practice to clear the workspace, to ensure that there are no extraneous items there. The workspace is where objects reside in memory during a session with R. The function for removing variables from the workspace is <code>rm()</code>. Another useful function is `<code>ls</code>, which retrieves a list of things in the workspace. So essentially we are asking R to remove all things in the workspace:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</code></pre></div>
@@ -423,7 +449,7 @@ Figure 3.1: Two Examples of Conceptual Models
 <p>For example, the variable <code>choice</code> measures the use of one mode of transportation. There are four values in this scale: 1 through 4, with each indicating one of “Cycle”, “Walk”, “Car”, or “HSR” (the local transit agency in Hamilton, ON, Canada, where these data were collected). Check the results of the summary. What does it mean to say that the mean of choice is 2.618? Does this number make sense?</p>
 </div>
 <div id="data-classes-in-r" class="section level2">
-<h2><span class="header-section-number">3.7</span> Data Classes in R</h2>
+<h2><span class="header-section-number">2.7</span> Data Classes in R</h2>
 <p>To understand why 2.618 of mode of transportation is not an appropriate summary measure for the variable <code>mode</code>, we need to know that R can work with different data classes, which include the following:</p>
 <ul>
 <li>Numerical</li>
@@ -462,7 +488,7 @@ Figure 3.1: Two Examples of Conceptual Models
 <pre><code>## [1] &quot;numeric&quot;</code></pre>
 </div>
 <div id="more-on-indexing-and-data-manipulation" class="section level2">
-<h2><span class="header-section-number">3.8</span> More on indexing and data manipulation</h2>
+<h2><span class="header-section-number">2.8</span> More on indexing and data manipulation</h2>
 <p>Indexing is a way of making reference to elements in a data object. There are numerous indexing methods in R that are appropriate for specific objects. Tables such as <code>mc_mode_choice</code> (called <em>data frames</em>) can be indexed in a few different ways. For example the next three chunks are equivalent in that they call the second column (<code>choice</code>) and in that column the second element:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mc_mode_choice[<span class="dv">2</span>, <span class="dv">2</span>]</code></pre></div>
 <pre><code>## # A tibble: 1 x 1
@@ -524,7 +550,7 @@ Figure 3.1: Two Examples of Conceptual Models
 <p>The grammar of data manipulation in <code>dplyr</code> is a powerful way of working with data in an intuitive way. We will find other aspects of this, but for the time being you are welcome to consult more about <a href="https://dplyr.tidyverse.org/"><code>dplyr</code> here</a></p>
 </div>
 <div id="visualization" class="section level2">
-<h2><span class="header-section-number">3.9</span> Visualization</h2>
+<h2><span class="header-section-number">2.9</span> Visualization</h2>
 <p>The last item in this section is related to visualization. Humans are very much visual creatures, and much can be learned from <em>seeing</em> the data. For example, the data frame, in essence a table, is informative in many ways, but not particularly conducive to observe trends or regularities in the data. The summary statistics are also informative, but partial, and do not convey information to the same effect as a statistical plot.</p>
 <p>Take the following list of summary statistics:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(time.Active.clean)</code></pre></div>
@@ -588,9 +614,9 @@ Figure 3.1: Two Examples of Conceptual Models
 <p>A last note. Many other visualization alternatives (for instance, Excel) provide point-and-click functions for creating plots. In contrast, ggplot2 in R requires that the plot be created by meticulously instructing the package what to do. While this is more laborious, it also means that you have complete control over the creation of plots, which in turn allows you to create more flexible and creative visuals.</p>
 </div>
 <div id="exercise" class="section level2">
-<h2><span class="header-section-number">3.10</span> Exercise</h2>
+<h2><span class="header-section-number">2.10</span> Exercise</h2>
 <div id="questions" class="section level3">
-<h3><span class="header-section-number">3.10.1</span> Questions</h3>
+<h3><span class="header-section-number">2.10.1</span> Questions</h3>
 <ol style="list-style-type: decimal">
 <li><p>Define “model”.</p></li>
 <li><p>Why are models on a 1-to-1 scale undesirable?</p></li>
@@ -613,6 +639,9 @@ Figure 3.1: Two Examples of Conceptual Models
 <div id="refs" class="references">
 <div id="ref-wickham2016r">
 <p>Wickham, Hadley, and Garrett Grolemund. 2016. <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</em>. “ O’Reilly Media, Inc.”</p>
+</div>
+<div id="ref-Wickham2016ggplot">
+<p>Hadley, Wickham. 2016. <em>Ggplot2: Elegant Graphics for Data Analysis</em>. Book. New York, NY: Springer Science+Business Media, LLC.</p>
 </div>
 <div id="ref-Tuckey1977">
 <p>Tuckey, JW. 1977. <em>Exploratory Data Analysis</em>. Reading, Massachussets: Addison-Wesley Publishing Company.</p>

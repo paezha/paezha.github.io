@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Chapter 4 Fundamental concepts | An Introduction to Discrete Choice Analysis</title>
+  <title>Chapter 3 Fundamental concepts | An Introduction to Discrete Choice Analysis</title>
   <meta name="description" content="These notes were created by Antonio Paez as a resource for teaching a graduate discrete choice analysis course (GEOG 738) at McMaster University.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Chapter 4 Fundamental concepts | An Introduction to Discrete Choice Analysis" />
+  <meta property="og:title" content="Chapter 3 Fundamental concepts | An Introduction to Discrete Choice Analysis" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="paezha/Discrete-Choice-Analysis-with-R" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Fundamental concepts | An Introduction to Discrete Choice Analysis" />
+  <meta name="twitter:title" content="Chapter 3 Fundamental concepts | An Introduction to Discrete Choice Analysis" />
   
   <meta name="twitter:description" content="These notes were created by Antonio Paez as a resource for teaching a graduate discrete choice analysis course (GEOG 738) at McMaster University." />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Antonio Paez">
 
 
-<meta name="date" content="2019-02-10">
+<meta name="date" content="2019-02-25">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -54,8 +54,8 @@
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.41.3/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.41.3/plotly-latest.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.42.5/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.42.5/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -114,81 +114,106 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#choices-choices-choices"><i class="fa fa-check"></i>Choices, choices, choices</a></li>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#price-mechanisms"><i class="fa fa-check"></i><b>0.1</b> Price Mechanisms</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#plan"><i class="fa fa-check"></i>Plan</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#audience"><i class="fa fa-check"></i>Audience</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#requisites"><i class="fa fa-check"></i>Requisites</a></li>
 </ul></li>
-<li class="chapter" data-level="1" data-path="price-mechanisms.html"><a href="price-mechanisms.html"><i class="fa fa-check"></i><b>1</b> Price Mechanisms</a><ul>
-<li class="chapter" data-level="" data-path="price-mechanisms.html"><a href="price-mechanisms.html#plan"><i class="fa fa-check"></i>Plan</a></li>
-<li class="chapter" data-level="" data-path="price-mechanisms.html"><a href="price-mechanisms.html#audience"><i class="fa fa-check"></i>Audience</a></li>
-<li class="chapter" data-level="" data-path="price-mechanisms.html"><a href="price-mechanisms.html#requisites"><i class="fa fa-check"></i>Requisites</a></li>
+<li class="chapter" data-level="1" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html"><i class="fa fa-check"></i><b>1</b> Preliminaries: Installing R and RStudio</a><ul>
+<li class="chapter" data-level="1.1" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#introduction"><i class="fa fa-check"></i><b>1.1</b> Introduction</a></li>
+<li class="chapter" data-level="1.2" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#learning-objectives"><i class="fa fa-check"></i><b>1.2</b> Learning Objectives</a></li>
+<li class="chapter" data-level="1.3" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#r-the-open-statistical-computing-project"><i class="fa fa-check"></i><b>1.3</b> R: The Open Statistical Computing Project</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#what-is-r"><i class="fa fa-check"></i><b>1.3.1</b> What is R?</a></li>
+<li class="chapter" data-level="1.3.2" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#the-rstudio-ide"><i class="fa fa-check"></i><b>1.3.2</b> The RStudio IDE</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html"><i class="fa fa-check"></i><b>2</b> Preliminaries: Installing R and RStudio</a><ul>
-<li class="chapter" data-level="2.1" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#introduction"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
-<li class="chapter" data-level="2.2" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#learning-objectives"><i class="fa fa-check"></i><b>2.2</b> Learning Objectives</a></li>
-<li class="chapter" data-level="2.3" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#r-the-open-statistical-computing-project"><i class="fa fa-check"></i><b>2.3</b> R: The Open Statistical Computing Project</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#what-is-r"><i class="fa fa-check"></i><b>2.3.1</b> What is R?</a></li>
-<li class="chapter" data-level="2.3.2" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#the-rstudio-ide"><i class="fa fa-check"></i><b>2.3.2</b> The RStudio IDE</a></li>
+<li class="chapter" data-level="1.4" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#packages-in-r"><i class="fa fa-check"></i><b>1.4</b> Packages in R</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="preliminaries-installing-r-and-rstudio.html"><a href="preliminaries-installing-r-and-rstudio.html#packages-in-r"><i class="fa fa-check"></i><b>2.4</b> Packages in R</a></li>
+<li class="chapter" data-level="2" data-path="chapter-1.html"><a href="chapter-1.html"><i class="fa fa-check"></i><b>2</b> Data and stuff</a><ul>
+<li class="chapter" data-level="2.1" data-path="chapter-1.html"><a href="chapter-1.html#what-are-models"><i class="fa fa-check"></i><b>2.1</b> What are models?</a></li>
+<li class="chapter" data-level="2.2" data-path="chapter-1.html"><a href="chapter-1.html#how-to-use-this-note"><i class="fa fa-check"></i><b>2.2</b> How to use this note</a></li>
+<li class="chapter" data-level="2.3" data-path="chapter-1.html"><a href="chapter-1.html#learning-objectives-1"><i class="fa fa-check"></i><b>2.3</b> Learning objectives</a></li>
+<li class="chapter" data-level="2.4" data-path="chapter-1.html"><a href="chapter-1.html#suggested-readings"><i class="fa fa-check"></i><b>2.4</b> Suggested readings</a></li>
+<li class="chapter" data-level="2.5" data-path="chapter-1.html"><a href="chapter-1.html#ways-of-measuring-stuff"><i class="fa fa-check"></i><b>2.5</b> Ways of measuring stuff</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="chapter-1.html"><a href="chapter-1.html#categorical"><i class="fa fa-check"></i><b>2.5.1</b> Categorical</a></li>
+<li class="chapter" data-level="2.5.2" data-path="chapter-1.html"><a href="chapter-1.html#quantitative"><i class="fa fa-check"></i><b>2.5.2</b> Quantitative</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="chapter-1.html"><a href="chapter-1.html"><i class="fa fa-check"></i><b>3</b> Data and stuff</a><ul>
-<li class="chapter" data-level="3.1" data-path="chapter-1.html"><a href="chapter-1.html#what-are-models"><i class="fa fa-check"></i><b>3.1</b> What are models?</a></li>
-<li class="chapter" data-level="3.2" data-path="chapter-1.html"><a href="chapter-1.html#how-to-use-this-note"><i class="fa fa-check"></i><b>3.2</b> How to use this note</a></li>
-<li class="chapter" data-level="3.3" data-path="chapter-1.html"><a href="chapter-1.html#learning-objectives-1"><i class="fa fa-check"></i><b>3.3</b> Learning objectives</a></li>
-<li class="chapter" data-level="3.4" data-path="chapter-1.html"><a href="chapter-1.html#suggested-readings"><i class="fa fa-check"></i><b>3.4</b> Suggested readings</a></li>
-<li class="chapter" data-level="3.5" data-path="chapter-1.html"><a href="chapter-1.html#ways-of-measuring-stuff"><i class="fa fa-check"></i><b>3.5</b> Ways of measuring stuff</a><ul>
-<li class="chapter" data-level="3.5.1" data-path="chapter-1.html"><a href="chapter-1.html#categorical"><i class="fa fa-check"></i><b>3.5.1</b> Categorical</a></li>
-<li class="chapter" data-level="3.5.2" data-path="chapter-1.html"><a href="chapter-1.html#quantitative"><i class="fa fa-check"></i><b>3.5.2</b> Quantitative</a></li>
-</ul></li>
-<li class="chapter" data-level="3.6" data-path="chapter-1.html"><a href="chapter-1.html#importing-data"><i class="fa fa-check"></i><b>3.6</b> Importing data</a></li>
-<li class="chapter" data-level="3.7" data-path="chapter-1.html"><a href="chapter-1.html#data-classes-in-r"><i class="fa fa-check"></i><b>3.7</b> Data Classes in R</a></li>
-<li class="chapter" data-level="3.8" data-path="chapter-1.html"><a href="chapter-1.html#more-on-indexing-and-data-manipulation"><i class="fa fa-check"></i><b>3.8</b> More on indexing and data manipulation</a></li>
-<li class="chapter" data-level="3.9" data-path="chapter-1.html"><a href="chapter-1.html#visualization"><i class="fa fa-check"></i><b>3.9</b> Visualization</a></li>
-<li class="chapter" data-level="3.10" data-path="chapter-1.html"><a href="chapter-1.html#exercise"><i class="fa fa-check"></i><b>3.10</b> Exercise</a><ul>
-<li class="chapter" data-level="3.10.1" data-path="chapter-1.html"><a href="chapter-1.html#questions"><i class="fa fa-check"></i><b>3.10.1</b> Questions</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="chapter-2.html"><a href="chapter-2.html"><i class="fa fa-check"></i><b>4</b> Fundamental concepts</a><ul>
-<li class="chapter" data-level="4.1" data-path="chapter-2.html"><a href="chapter-2.html#why-modelling-choices"><i class="fa fa-check"></i><b>4.1</b> Why modelling choices?</a></li>
-<li class="chapter" data-level="4.2" data-path="chapter-2.html"><a href="chapter-2.html#how-to-use-this-note-1"><i class="fa fa-check"></i><b>4.2</b> How to use this note</a></li>
-<li class="chapter" data-level="4.3" data-path="chapter-2.html"><a href="chapter-2.html#learning-objectives-2"><i class="fa fa-check"></i><b>4.3</b> Learning objectives</a></li>
-<li class="chapter" data-level="4.4" data-path="chapter-2.html"><a href="chapter-2.html#suggested-readings-1"><i class="fa fa-check"></i><b>4.4</b> Suggested readings</a></li>
-<li class="chapter" data-level="4.5" data-path="chapter-2.html"><a href="chapter-2.html#preliminaries"><i class="fa fa-check"></i><b>4.5</b> Preliminaries</a></li>
-<li class="chapter" data-level="4.6" data-path="chapter-2.html"><a href="chapter-2.html#utility-maximization"><i class="fa fa-check"></i><b>4.6</b> Utility maximization</a></li>
-<li class="chapter" data-level="4.7" data-path="chapter-2.html"><a href="chapter-2.html#what-about-those-random-terms"><i class="fa fa-check"></i><b>4.7</b> What about those random terms?</a></li>
-<li class="chapter" data-level="4.8" data-path="chapter-2.html"><a href="chapter-2.html#probability-distribution-functions-pdfs"><i class="fa fa-check"></i><b>4.8</b> Probability distribution functions (PDFs)</a></li>
-<li class="chapter" data-level="4.9" data-path="chapter-2.html"><a href="chapter-2.html#a-simple-random-utility-discrete-choice-model"><i class="fa fa-check"></i><b>4.9</b> A simple random utility discrete choice model</a></li>
-<li class="chapter" data-level="4.10" data-path="chapter-2.html"><a href="chapter-2.html#other-choice-mechanisms"><i class="fa fa-check"></i><b>4.10</b> Other choice mechanisms</a></li>
-<li class="chapter" data-level="4.11" data-path="chapter-2.html"><a href="chapter-2.html#exercise-1"><i class="fa fa-check"></i><b>4.11</b> Exercise</a><ul>
-<li class="chapter" data-level="4.11.1" data-path="chapter-2.html"><a href="chapter-2.html#questions-1"><i class="fa fa-check"></i><b>4.11.1</b> Questions</a></li>
+<li class="chapter" data-level="2.6" data-path="chapter-1.html"><a href="chapter-1.html#importing-data"><i class="fa fa-check"></i><b>2.6</b> Importing data</a></li>
+<li class="chapter" data-level="2.7" data-path="chapter-1.html"><a href="chapter-1.html#data-classes-in-r"><i class="fa fa-check"></i><b>2.7</b> Data Classes in R</a></li>
+<li class="chapter" data-level="2.8" data-path="chapter-1.html"><a href="chapter-1.html#more-on-indexing-and-data-manipulation"><i class="fa fa-check"></i><b>2.8</b> More on indexing and data manipulation</a></li>
+<li class="chapter" data-level="2.9" data-path="chapter-1.html"><a href="chapter-1.html#visualization"><i class="fa fa-check"></i><b>2.9</b> Visualization</a></li>
+<li class="chapter" data-level="2.10" data-path="chapter-1.html"><a href="chapter-1.html#exercise"><i class="fa fa-check"></i><b>2.10</b> Exercise</a><ul>
+<li class="chapter" data-level="2.10.1" data-path="chapter-1.html"><a href="chapter-1.html#questions"><i class="fa fa-check"></i><b>2.10.1</b> Questions</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="chapter-3.html"><a href="chapter-3.html"><i class="fa fa-check"></i><b>5</b> Logit</a><ul>
-<li class="chapter" data-level="5.1" data-path="chapter-3.html"><a href="chapter-3.html#modelling-choices"><i class="fa fa-check"></i><b>5.1</b> Modelling choices</a></li>
-<li class="chapter" data-level="5.2" data-path="chapter-3.html"><a href="chapter-3.html#how-to-use-this-note-2"><i class="fa fa-check"></i><b>5.2</b> How to use this note</a></li>
-<li class="chapter" data-level="5.3" data-path="chapter-3.html"><a href="chapter-3.html#learning-objectives-3"><i class="fa fa-check"></i><b>5.3</b> Learning objectives</a></li>
-<li class="chapter" data-level="5.4" data-path="chapter-3.html"><a href="chapter-3.html#suggested-readings-2"><i class="fa fa-check"></i><b>5.4</b> Suggested readings</a></li>
-<li class="chapter" data-level="5.5" data-path="chapter-3.html"><a href="chapter-3.html#preliminaries-1"><i class="fa fa-check"></i><b>5.5</b> Preliminaries</a></li>
-<li class="chapter" data-level="5.6" data-path="chapter-3.html"><a href="chapter-3.html#once-again-those-random-terms"><i class="fa fa-check"></i><b>5.6</b> Once again those random terms</a></li>
-<li class="chapter" data-level="5.7" data-path="chapter-3.html"><a href="chapter-3.html#now-about-those-parameters-mu-and-sigma"><i class="fa fa-check"></i><b>5.7</b> Now, about those parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>…</a></li>
-<li class="chapter" data-level="5.8" data-path="chapter-3.html"><a href="chapter-3.html#multinomial-logit"><i class="fa fa-check"></i><b>5.8</b> Multinomial logit</a></li>
-<li class="chapter" data-level="5.9" data-path="chapter-3.html"><a href="chapter-3.html#properties-of-the-logit-model"><i class="fa fa-check"></i><b>5.9</b> Properties of the logit model</a></li>
-<li class="chapter" data-level="5.10" data-path="chapter-3.html"><a href="chapter-3.html#revisiting-the-systematic-utilities"><i class="fa fa-check"></i><b>5.10</b> Revisiting the systematic utilities</a></li>
-<li class="chapter" data-level="5.11" data-path="chapter-3.html"><a href="chapter-3.html#exercise-2"><i class="fa fa-check"></i><b>5.11</b> Exercise</a><ul>
-<li class="chapter" data-level="5.11.1" data-path="chapter-3.html"><a href="chapter-3.html#questions-2"><i class="fa fa-check"></i><b>5.11.1</b> Questions</a></li>
+<li class="chapter" data-level="3" data-path="chapter-2.html"><a href="chapter-2.html"><i class="fa fa-check"></i><b>3</b> Fundamental concepts</a><ul>
+<li class="chapter" data-level="3.1" data-path="chapter-2.html"><a href="chapter-2.html#why-modelling-choices"><i class="fa fa-check"></i><b>3.1</b> Why modelling choices?</a></li>
+<li class="chapter" data-level="3.2" data-path="chapter-2.html"><a href="chapter-2.html#how-to-use-this-note-1"><i class="fa fa-check"></i><b>3.2</b> How to use this note</a></li>
+<li class="chapter" data-level="3.3" data-path="chapter-2.html"><a href="chapter-2.html#learning-objectives-2"><i class="fa fa-check"></i><b>3.3</b> Learning objectives</a></li>
+<li class="chapter" data-level="3.4" data-path="chapter-2.html"><a href="chapter-2.html#suggested-readings-1"><i class="fa fa-check"></i><b>3.4</b> Suggested readings</a></li>
+<li class="chapter" data-level="3.5" data-path="chapter-2.html"><a href="chapter-2.html#preliminaries"><i class="fa fa-check"></i><b>3.5</b> Preliminaries</a></li>
+<li class="chapter" data-level="3.6" data-path="chapter-2.html"><a href="chapter-2.html#utility-maximization"><i class="fa fa-check"></i><b>3.6</b> Utility maximization</a></li>
+<li class="chapter" data-level="3.7" data-path="chapter-2.html"><a href="chapter-2.html#what-about-those-random-terms"><i class="fa fa-check"></i><b>3.7</b> What about those random terms?</a></li>
+<li class="chapter" data-level="3.8" data-path="chapter-2.html"><a href="chapter-2.html#probability-distribution-functions-pdfs"><i class="fa fa-check"></i><b>3.8</b> Probability distribution functions (PDFs)</a></li>
+<li class="chapter" data-level="3.9" data-path="chapter-2.html"><a href="chapter-2.html#a-simple-random-utility-discrete-choice-model"><i class="fa fa-check"></i><b>3.9</b> A simple random utility discrete choice model</a></li>
+<li class="chapter" data-level="3.10" data-path="chapter-2.html"><a href="chapter-2.html#other-choice-mechanisms"><i class="fa fa-check"></i><b>3.10</b> Other choice mechanisms</a></li>
+<li class="chapter" data-level="3.11" data-path="chapter-2.html"><a href="chapter-2.html#exercise-1"><i class="fa fa-check"></i><b>3.11</b> Exercise</a><ul>
+<li class="chapter" data-level="3.11.1" data-path="chapter-2.html"><a href="chapter-2.html#questions-1"><i class="fa fa-check"></i><b>3.11.1</b> Questions</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="chapter-4.html"><a href="chapter-4.html"><i class="fa fa-check"></i><b>6</b> Practical specification and estimation</a><ul>
-<li class="chapter" data-level="6.1" data-path="chapter-4.html"><a href="chapter-4.html#theory-and-practice"><i class="fa fa-check"></i><b>6.1</b> Theory and practice</a></li>
-<li class="chapter" data-level="6.2" data-path="chapter-4.html"><a href="chapter-4.html#how-to-use-this-note-3"><i class="fa fa-check"></i><b>6.2</b> How to use this note</a></li>
-<li class="chapter" data-level="6.3" data-path="chapter-4.html"><a href="chapter-4.html#learning-objectives-4"><i class="fa fa-check"></i><b>6.3</b> Learning objectives</a></li>
-<li class="chapter" data-level="6.4" data-path="chapter-4.html"><a href="chapter-4.html#suggested-readings-3"><i class="fa fa-check"></i><b>6.4</b> Suggested readings</a></li>
-<li class="chapter" data-level="6.5" data-path="chapter-4.html"><a href="chapter-4.html#preliminaries-2"><i class="fa fa-check"></i><b>6.5</b> Preliminaries</a></li>
-<li class="chapter" data-level="6.6" data-path="chapter-4.html"><a href="chapter-4.html#the-anatomy-of-utility-functions"><i class="fa fa-check"></i><b>6.6</b> The anatomy of utility functions</a></li>
-<li class="chapter" data-level="6.7" data-path="chapter-4.html"><a href="chapter-4.html#example-specifying-the-utility-functions"><i class="fa fa-check"></i><b>6.7</b> Example: Specifying the utility functions</a></li>
-<li class="chapter" data-level="6.8" data-path="chapter-4.html"><a href="chapter-4.html#estimation"><i class="fa fa-check"></i><b>6.8</b> Estimation</a></li>
-<li class="chapter" data-level="6.9" data-path="chapter-4.html"><a href="chapter-4.html#example-a-logit-model-of-mode-choice"><i class="fa fa-check"></i><b>6.9</b> Example: A logit model of mode choice</a></li>
-<li class="chapter" data-level="6.10" data-path="chapter-4.html"><a href="chapter-4.html#comparing-models-mcfaddens-rho2"><i class="fa fa-check"></i><b>6.10</b> Comparing models: McFadden’s <span class="math inline">\(\rho^2\)</span></a></li>
-<li class="chapter" data-level="6.11" data-path="chapter-4.html"><a href="chapter-4.html#comparing-models-the-likelihood-ratio-test"><i class="fa fa-check"></i><b>6.11</b> Comparing models: the likelihood ratio test</a></li>
-<li class="chapter" data-level="6.12" data-path="chapter-4.html"><a href="chapter-4.html#exercise-3"><i class="fa fa-check"></i><b>6.12</b> Exercise</a></li>
+<li class="chapter" data-level="4" data-path="chapter-3.html"><a href="chapter-3.html"><i class="fa fa-check"></i><b>4</b> Logit</a><ul>
+<li class="chapter" data-level="4.1" data-path="chapter-3.html"><a href="chapter-3.html#modelling-choices"><i class="fa fa-check"></i><b>4.1</b> Modelling choices</a></li>
+<li class="chapter" data-level="4.2" data-path="chapter-3.html"><a href="chapter-3.html#how-to-use-this-note-2"><i class="fa fa-check"></i><b>4.2</b> How to use this note</a></li>
+<li class="chapter" data-level="4.3" data-path="chapter-3.html"><a href="chapter-3.html#learning-objectives-3"><i class="fa fa-check"></i><b>4.3</b> Learning objectives</a></li>
+<li class="chapter" data-level="4.4" data-path="chapter-3.html"><a href="chapter-3.html#suggested-readings-2"><i class="fa fa-check"></i><b>4.4</b> Suggested readings</a></li>
+<li class="chapter" data-level="4.5" data-path="chapter-3.html"><a href="chapter-3.html#preliminaries-1"><i class="fa fa-check"></i><b>4.5</b> Preliminaries</a></li>
+<li class="chapter" data-level="4.6" data-path="chapter-3.html"><a href="chapter-3.html#once-again-those-random-terms"><i class="fa fa-check"></i><b>4.6</b> Once again those random terms</a></li>
+<li class="chapter" data-level="4.7" data-path="chapter-3.html"><a href="chapter-3.html#now-about-those-parameters-mu-and-sigma"><i class="fa fa-check"></i><b>4.7</b> Now, about those parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>…</a></li>
+<li class="chapter" data-level="4.8" data-path="chapter-3.html"><a href="chapter-3.html#multinomial-logit"><i class="fa fa-check"></i><b>4.8</b> Multinomial logit</a></li>
+<li class="chapter" data-level="4.9" data-path="chapter-3.html"><a href="chapter-3.html#properties-of-the-logit-model"><i class="fa fa-check"></i><b>4.9</b> Properties of the logit model</a></li>
+<li class="chapter" data-level="4.10" data-path="chapter-3.html"><a href="chapter-3.html#revisiting-the-systematic-utilities"><i class="fa fa-check"></i><b>4.10</b> Revisiting the systematic utilities</a></li>
+<li class="chapter" data-level="4.11" data-path="chapter-3.html"><a href="chapter-3.html#exercise-2"><i class="fa fa-check"></i><b>4.11</b> Exercise</a><ul>
+<li class="chapter" data-level="4.11.1" data-path="chapter-3.html"><a href="chapter-3.html#questions-2"><i class="fa fa-check"></i><b>4.11.1</b> Questions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="chapter-4.html"><a href="chapter-4.html"><i class="fa fa-check"></i><b>5</b> Practical specification and estimation</a><ul>
+<li class="chapter" data-level="5.1" data-path="chapter-4.html"><a href="chapter-4.html#theory-and-practice"><i class="fa fa-check"></i><b>5.1</b> Theory and practice</a></li>
+<li class="chapter" data-level="5.2" data-path="chapter-4.html"><a href="chapter-4.html#how-to-use-this-note-3"><i class="fa fa-check"></i><b>5.2</b> How to use this note</a></li>
+<li class="chapter" data-level="5.3" data-path="chapter-4.html"><a href="chapter-4.html#learning-objectives-4"><i class="fa fa-check"></i><b>5.3</b> Learning objectives</a></li>
+<li class="chapter" data-level="5.4" data-path="chapter-4.html"><a href="chapter-4.html#suggested-readings-3"><i class="fa fa-check"></i><b>5.4</b> Suggested readings</a></li>
+<li class="chapter" data-level="5.5" data-path="chapter-4.html"><a href="chapter-4.html#preliminaries-2"><i class="fa fa-check"></i><b>5.5</b> Preliminaries</a></li>
+<li class="chapter" data-level="5.6" data-path="chapter-4.html"><a href="chapter-4.html#the-anatomy-of-utility-functions"><i class="fa fa-check"></i><b>5.6</b> The anatomy of utility functions</a></li>
+<li class="chapter" data-level="5.7" data-path="chapter-4.html"><a href="chapter-4.html#example-specifying-the-utility-functions"><i class="fa fa-check"></i><b>5.7</b> Example: Specifying the utility functions</a></li>
+<li class="chapter" data-level="5.8" data-path="chapter-4.html"><a href="chapter-4.html#estimation"><i class="fa fa-check"></i><b>5.8</b> Estimation</a></li>
+<li class="chapter" data-level="5.9" data-path="chapter-4.html"><a href="chapter-4.html#example-a-logit-model-of-mode-choice"><i class="fa fa-check"></i><b>5.9</b> Example: A logit model of mode choice</a></li>
+<li class="chapter" data-level="5.10" data-path="chapter-4.html"><a href="chapter-4.html#comparing-models-mcfaddens-rho2"><i class="fa fa-check"></i><b>5.10</b> Comparing models: McFadden’s <span class="math inline">\(\rho^2\)</span></a></li>
+<li class="chapter" data-level="5.11" data-path="chapter-4.html"><a href="chapter-4.html#comparing-models-the-likelihood-ratio-test"><i class="fa fa-check"></i><b>5.11</b> Comparing models: the likelihood ratio test</a></li>
+<li class="chapter" data-level="5.12" data-path="chapter-4.html"><a href="chapter-4.html#exercise-3"><i class="fa fa-check"></i><b>5.12</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="chapter-5.html"><a href="chapter-5.html"><i class="fa fa-check"></i><b>6</b> Behavioral insights from choice models</a><ul>
+<li class="chapter" data-level="6.1" data-path="chapter-5.html"><a href="chapter-5.html#inferring-and-forecasting-behavior"><i class="fa fa-check"></i><b>6.1</b> Inferring and forecasting behavior</a></li>
+<li class="chapter" data-level="6.2" data-path="chapter-5.html"><a href="chapter-5.html#how-to-use-this-note-4"><i class="fa fa-check"></i><b>6.2</b> How to use this note</a></li>
+<li class="chapter" data-level="6.3" data-path="chapter-5.html"><a href="chapter-5.html#learning-objectives-5"><i class="fa fa-check"></i><b>6.3</b> Learning objectives</a></li>
+<li class="chapter" data-level="6.4" data-path="chapter-5.html"><a href="chapter-5.html#suggested-readings-4"><i class="fa fa-check"></i><b>6.4</b> Suggested readings</a></li>
+<li class="chapter" data-level="6.5" data-path="chapter-5.html"><a href="chapter-5.html#preliminaries-3"><i class="fa fa-check"></i><b>6.5</b> Preliminaries</a></li>
+<li class="chapter" data-level="6.6" data-path="chapter-5.html"><a href="chapter-5.html#the-meaning-of-the-coefficients"><i class="fa fa-check"></i><b>6.6</b> The meaning of the coefficients</a></li>
+<li class="chapter" data-level="6.7" data-path="chapter-5.html"><a href="chapter-5.html#marginal-effects"><i class="fa fa-check"></i><b>6.7</b> Marginal effects</a><ul>
+<li class="chapter" data-level="6.7.1" data-path="chapter-5.html"><a href="chapter-5.html#direct-marginal-effects"><i class="fa fa-check"></i><b>6.7.1</b> Direct marginal effects</a></li>
+<li class="chapter" data-level="6.7.2" data-path="chapter-5.html"><a href="chapter-5.html#cross-marginal-effects"><i class="fa fa-check"></i><b>6.7.2</b> Cross-marginal effects</a></li>
+</ul></li>
+<li class="chapter" data-level="6.8" data-path="chapter-5.html"><a href="chapter-5.html#elasticity"><i class="fa fa-check"></i><b>6.8</b> Elasticity</a><ul>
+<li class="chapter" data-level="6.8.1" data-path="chapter-5.html"><a href="chapter-5.html#direct-point-elasticity"><i class="fa fa-check"></i><b>6.8.1</b> Direct-point elasticity</a></li>
+<li class="chapter" data-level="6.8.2" data-path="chapter-5.html"><a href="chapter-5.html#cross-point-elasticity"><i class="fa fa-check"></i><b>6.8.2</b> Cross-point elasticity</a></li>
+</ul></li>
+<li class="chapter" data-level="6.9" data-path="chapter-5.html"><a href="chapter-5.html#calculating-elasticities-based-on-an-mlogit-model"><i class="fa fa-check"></i><b>6.9</b> Calculating elasticities based on an <code>mlogit</code> model</a><ul>
+<li class="chapter" data-level="6.9.1" data-path="chapter-5.html"><a href="chapter-5.html#computing-the-marginal-effects"><i class="fa fa-check"></i><b>6.9.1</b> Computing the marginal effects</a></li>
+</ul></li>
+<li class="chapter" data-level="6.10" data-path="chapter-5.html"><a href="chapter-5.html#a-note-about-attributes-in-dummy-format"><i class="fa fa-check"></i><b>6.10</b> A note about attributes in dummy format</a></li>
+<li class="chapter" data-level="6.11" data-path="chapter-5.html"><a href="chapter-5.html#willingness-to-pay-and-discount-rate"><i class="fa fa-check"></i><b>6.11</b> Willingness to pay and discount rate</a></li>
+<li class="chapter" data-level="6.12" data-path="chapter-5.html"><a href="chapter-5.html#simulating-market-changes"><i class="fa fa-check"></i><b>6.12</b> Simulating market changes</a><ul>
+<li class="chapter" data-level="6.12.1" data-path="chapter-5.html"><a href="chapter-5.html#incentives"><i class="fa fa-check"></i><b>6.12.1</b> Incentives</a></li>
+<li class="chapter" data-level="6.12.2" data-path="chapter-5.html"><a href="chapter-5.html#introduction-of-a-new-system"><i class="fa fa-check"></i><b>6.12.2</b> Introduction of a new system</a></li>
+</ul></li>
+<li class="chapter" data-level="6.13" data-path="chapter-5.html"><a href="chapter-5.html#exercise-4"><i class="fa fa-check"></i><b>6.13</b> Exercise</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -212,14 +237,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="chapter-2" class="section level1">
-<h1><span class="header-section-number">Chapter 4</span> Fundamental concepts</h1>
+<h1><span class="header-section-number">Chapter 3</span> Fundamental concepts</h1>
 <blockquote>
 <p>“Ignorance gives one a large range of probabilities.”</p>
 <p>— George Eliot</p>
 </blockquote>
 <div id="why-modelling-choices" class="section level2">
-<h2><span class="header-section-number">4.1</span> Why modelling choices?</h2>
-<p>In Chapter <a href="chapter-1.html#chapter-1">3</a> we discussed in a general fashion the use of models. There, we argued that modelling is an activity that helps us to isolate in a systematic way certain aspects of a process or thing, by way of abstraction and generalization. There are many kinds of models: analog (like sculptures, maquettes, scale models), conceptual (like mental maps), and mathematical/statistical models.</p>
+<h2><span class="header-section-number">3.1</span> Why modelling choices?</h2>
+<p>In Chapter <a href="chapter-1.html#chapter-1">2</a> we discussed in a general fashion the use of models. There, we argued that modelling is an activity that helps us to isolate in a systematic way certain aspects of a process or thing, by way of abstraction and generalization. There are many kinds of models: analog (like sculptures, maquettes, scale models), conceptual (like mental maps), and mathematical/statistical models.</p>
 <p>The raw materials of mathematical/statistical models are observations about the process or thing of interest, usually measurements that provide <em>data</em>. The tools are the statistical and mathematical techniques used to convert data into <em>information</em>. And the technical expertise is the knowledge and ability of the modeler to use the appropriate tools to the data, in order to extract as much information as possible, given the characteristics of the data and the process or thing.</p>
 <p>Modelling choices is simply a specialized field in the much broader field of mathematical and statistical modelling. The task of modelling choices is in many way similar to the modelling of limited-dependent and qualitative variables in statistics <span class="citation">(Maddala <a href="#ref-Maddala1983limited">1983</a>)</span>, however it is distinguished from models in that field by a strong behavioral foundations. Indeed, where statistical models deal with probabilities of an item of interest being in a certain state, choice modelling deals with the probability of an agent <em>choosing</em> an alternative. This is a subtle but important difference that we will highlight in due course. For the time being, it is sufficient to say that to model choices we need a conceptual model first on which to build the rest of the apparatus required for applied choice modelling.</p>
 <p>Before delving into the technical details, we can pause for a philosophical moment to think about human behavior and decision-making. There are different perspectives on human behavior.</p>
@@ -243,14 +268,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Does this mean that the state of the universe is not determined by the past? Not at all. For all we know, from the perspective of a hypothetical all-knowing being, it is. However, in practical terms, and for the reasons described briefly above, we humble non-all-knowing beigns, cannot rely on determinism for making statements about the state of the universe. In particular, we will make a distinction that is useful as part of developing a conceptual model of choice-making: 1) that there is an observer who typically lacks all relevant information about a choice process (let alone about the state of the universe); and 2) that the rules of decision making are not completely known and/or humans can, for idiosincratic reasons, alter them at whim.</p>
 </div>
 <div id="how-to-use-this-note-1" class="section level2">
-<h2><span class="header-section-number">4.2</span> How to use this note</h2>
+<h2><span class="header-section-number">3.2</span> How to use this note</h2>
 <p>Remember that the source for the document you are reading is an R Notebook. Throughout the notes, you will find examples of code in segments of text called <em>chunks</em>. This is an example of a chunk:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="st">&quot;Hola, Juan de Dios!&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;Hola, Juan de Dios!&quot;</code></pre>
 <p>If you are working with the Notebook version of the document, you can run the code by clicking the ‘play’ icon on the top right corner of the chunk. If you are reading the web-book version of the document, you will often see that the code has already been executed. You can still try it by copying and pasting into your R or RStudio console.</p>
 </div>
 <div id="learning-objectives-2" class="section level2">
-<h2><span class="header-section-number">4.3</span> Learning objectives</h2>
+<h2><span class="header-section-number">3.3</span> Learning objectives</h2>
 <p>In this practice, you will learn about:</p>
 <ol style="list-style-type: decimal">
 <li>Choice mechanisms: Utility maximization.</li>
@@ -260,7 +285,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ol>
 </div>
 <div id="suggested-readings-1" class="section level2">
-<h2><span class="header-section-number">4.4</span> Suggested readings</h2>
+<h2><span class="header-section-number">3.4</span> Suggested readings</h2>
 <ul>
 <li>Ben-Akiva, M. Lerman, <span class="citation">(<a href="#ref-Benakiva1985discrete">1985</a>)</span> Discrete Choice Analysis: Theory and Applications to Travel Demand, <strong>Chapter 3</strong>, MIT Press.</li>
 <li>Hensher, D.A., Rose, J.M., Greene, W.H <span class="citation">(<a href="#ref-hensher2005applied">2005</a>)</span> Applied Choice Analysis: A Primer, <strong>Chapter 3</strong>, Cambridge University Press.</li>
@@ -268,13 +293,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 </div>
 <div id="preliminaries" class="section level2">
-<h2><span class="header-section-number">4.5</span> Preliminaries</h2>
+<h2><span class="header-section-number">3.5</span> Preliminaries</h2>
 <p>Load the packages used in this section:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(evd)</code></pre></div>
 </div>
 <div id="utility-maximization" class="section level2">
-<h2><span class="header-section-number">4.6</span> Utility maximization</h2>
+<h2><span class="header-section-number">3.6</span> Utility maximization</h2>
 <p>We will begin by defining a conceptual model of choice based on neo-classical economics, fundamentally consumer choice. The conceptual framework in neo-classical economics is based on the concept of <em>utility</em>.</p>
 <p>What is utility?</p>
 <p>In simple terms, utility is a summary indicator of the pleasure, usefulness, enjoyment, or attractiveness associated with making a choice (for instance, buying a new phone).</p>
@@ -324,13 +349,13 @@ P_{\text{Do-Nothing}} = P(V_{\text{Do-Nothing}} - V_{\text{New-Phone}} &lt; \eps
 <p>The expression above is the foundation of random utility modelling. Before we make more progress, however, we have to answer an important question.</p>
 </div>
 <div id="what-about-those-random-terms" class="section level2">
-<h2><span class="header-section-number">4.7</span> What about those random terms?</h2>
+<h2><span class="header-section-number">3.7</span> What about those random terms?</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="kw">library</span>(evd)</code></pre></div>
 <p>A probabilistic expression is clearly better than being unable to say anything at all regarding choices. To make this expression of practical use, we must assume some distribution for the random terms. Which means that we need to define some probability distribution function.</p>
 </div>
 <div id="probability-distribution-functions-pdfs" class="section level2">
-<h2><span class="header-section-number">4.8</span> Probability distribution functions (PDFs)</h2>
+<h2><span class="header-section-number">3.8</span> Probability distribution functions (PDFs)</h2>
 <p>A candidate for a probability distribution function is any function that satisfies the following two conditions: <span class="math display">\[
 \begin{array}{l}
 \text{Condition 1: }f(x)\ge 0\text{ for all }x\\
@@ -347,7 +372,7 @@ f(x) = \left\{
         \end{array}
     \right.
 \]</span></p>
-<p>This function is shown in Figure <a href="chapter-2.html#fig:fig-uniform-distribution">4.1</a> below, with <span class="math inline">\(L=2\)</span>:</p>
+<p>This function is shown in Figure <a href="chapter-2.html#fig:fig-uniform-distribution">3.1</a> below, with <span class="math inline">\(L=2\)</span>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define a function</span>
 uniform &lt;-<span class="st"> </span><span class="cf">function</span>(x, L) 
   <span class="kw">ifelse</span>( x <span class="op">&lt;=</span><span class="st"> </span><span class="op">-</span>L, <span class="dv">0</span>,
@@ -369,7 +394,7 @@ df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class=
 <div class="figure"><span id="fig:fig-uniform-distribution"></span>
 <img src="bookdown-demo_files/figure-html/fig-uniform-distribution-1.png" alt="\label{fig:fig-uniform-distribution}Uniform distribution" width="672" />
 <p class="caption">
-Figure 4.1: Uniform distribution
+Figure 3.1: Uniform distribution
 </p>
 </div>
 <p>It is easy to see that the value of the function is always equal to or greater than zero. You can also verify that the area under the curve in this case is simply the area of the rectangle <span class="math inline">\(b \times h\)</span>, where the base of the rectangle is <span class="math inline">\(b = L - (-L)\)</span> and the height is <span class="math inline">\(h=\frac{1}{2L}\)</span>:</p>
@@ -418,7 +443,7 @@ F(x) = \left\{
         \end{array}
     \right.
 \]</span></p>
-<p>The cumulative distribution function for our uniform distribution appears in Figure <a href="chapter-2.html#fig:fig-uniform-cumulative-distribution">4.2</a>:</p>
+<p>The cumulative distribution function for our uniform distribution appears in Figure <a href="chapter-2.html#fig:fig-uniform-cumulative-distribution">3.2</a>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define the cumulative distribution function</span>
 cuniform &lt;-<span class="st"> </span><span class="cf">function</span>(x, L) 
   <span class="kw">ifelse</span>( x <span class="op">&lt;=</span><span class="st"> </span><span class="op">-</span>L, <span class="dv">0</span>,
@@ -440,7 +465,7 @@ df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class=
 <div class="figure"><span id="fig:fig-uniform-cumulative-distribution"></span>
 <img src="bookdown-demo_files/figure-html/fig-uniform-cumulative-distribution-1.png" alt="\label{fig:fig-uniform-cumulative-distribution}Uniform cumulative distribution function" width="672" />
 <p class="caption">
-Figure 4.2: Uniform cumulative distribution function
+Figure 3.2: Uniform cumulative distribution function
 </p>
 </div>
 <p>As you can see, the probability of <span class="math inline">\(x \le -L\)</span> is zero, the probability of <span class="math inline">\(x \le 0\)</span> is 0.5, and the probability of <span class="math inline">\(x \le L\)</span> is one.</p>
@@ -452,7 +477,7 @@ f(x) = \left\{
             0 &amp; \quad x \ge 1 \\
         \end{array}
     \right.
-\]</span> This function is shown in Figure <a href="chapter-2.html#fig:fig-linear-distribution">4.3</a>.</p>
+\]</span> This function is shown in Figure <a href="chapter-2.html#fig:fig-linear-distribution">3.3</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define a function</span>
 linear &lt;-<span class="st"> </span><span class="cf">function</span>(x) 
   <span class="kw">ifelse</span>( x <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">0</span>,
@@ -471,7 +496,7 @@ df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class=
 <div class="figure"><span id="fig:fig-linear-distribution"></span>
 <img src="bookdown-demo_files/figure-html/fig-linear-distribution-1.png" alt="\label{fig:fig-linear-distribution}Cubic distribution" width="672" />
 <p class="caption">
-Figure 4.3: Cubic distribution
+Figure 3.3: Cubic distribution
 </p>
 </div>
 <p>Clearly, <span class="math inline">\(f(x) \ge 0\)</span> for all values of <span class="math inline">\(x\)</span> in the interval <span class="math inline">\(0 \le x \le 1\)</span>. We can verify that the area under the curve is 1. In this case the area is that of a triangle, i.e., <span class="math inline">\(\frac{b \times h}{2}\)</span>. Since the base of the triange is <span class="math inline">\(b=1\)</span> and the height is <span class="math inline">\(h=2\)</span>, we see that the area under the curve is 1.</p>
@@ -484,7 +509,7 @@ F(x) = \left\{
         \end{array}
     \right.
 \]</span></p>
-<p>The plot of the cumulative distribution function in this case is shown in Figure <a href="chapter-2.html#fig:fig-linear-cumulative-distribution">4.4</a>.</p>
+<p>The plot of the cumulative distribution function in this case is shown in Figure <a href="chapter-2.html#fig:fig-linear-cumulative-distribution">3.4</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define a function</span>
 clinear &lt;-<span class="st"> </span><span class="cf">function</span>(x) 
   <span class="kw">ifelse</span>( x <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">0</span>,
@@ -503,7 +528,7 @@ df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class=
 <div class="figure"><span id="fig:fig-linear-cumulative-distribution"></span>
 <img src="bookdown-demo_files/figure-html/fig-linear-cumulative-distribution-1.png" alt="\label{fig:fig-linear-cumulative-distribution}Linear cumulative distribution function" width="672" />
 <p class="caption">
-Figure 4.4: Linear cumulative distribution function
+Figure 3.4: Linear cumulative distribution function
 </p>
 </div>
 <p>It should be clear from the examples above that calculating probabilities is nothing more than finding the area under the curve of a function. When the function is relatively simple, as the uniform or the linear distributions that we used for the examples, calculating the areas is also straightforward, since the functions describe simple geometric shapes. When the function is more involved, that becomes less straighforward. For example, consider the following function: <span class="math display">\[
@@ -514,7 +539,7 @@ f(x) = \left\{
             0 &amp; \quad x \ge 0 \\
         \end{array}
     \right.
-\]</span> This function is plotted in Figure <a href="chapter-2.html#fig:fig-cubic-distribution">4.5</a>.</p>
+\]</span> This function is plotted in Figure <a href="chapter-2.html#fig:fig-cubic-distribution">3.5</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define a function</span>
 cubic &lt;-<span class="st"> </span><span class="cf">function</span>(x) 
   <span class="kw">ifelse</span>( x <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">0</span>,
@@ -533,7 +558,7 @@ df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class=
 <div class="figure"><span id="fig:fig-cubic-distribution"></span>
 <img src="bookdown-demo_files/figure-html/fig-cubic-distribution-1.png" alt="\label{fig:fig-cubic-distribution}Cubic distribution" width="672" />
 <p class="caption">
-Figure 4.5: Cubic distribution
+Figure 3.5: Cubic distribution
 </p>
 </div>
 <p>Unlike the rectangle of the uniform distribution and the triangle of the linear distribution, the area under the curve for this distribution needs to be obtained by integration as follows (do not worry if ): <span class="math display">\[
@@ -541,7 +566,7 @@ Figure 4.5: Cubic distribution
 \]</span> This shows that the function is a valid probability distribution function. However, the integration makes things more interesting, to say the least! Fortunately, for most applied discrete choice analysis we do not need to solve integrals manually (the monster minds have already done this for us!). The key here is to remember: given a valid probability distribution function <strong>the probability that a random variable <span class="math inline">\(x \le X\)</span> is the area under the curve in the interval <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(X\)</span></strong>.</p>
 </div>
 <div id="a-simple-random-utility-discrete-choice-model" class="section level2">
-<h2><span class="header-section-number">4.9</span> A simple random utility discrete choice model</h2>
+<h2><span class="header-section-number">3.9</span> A simple random utility discrete choice model</h2>
 <p>We are now ready to deploy a probability distribution function to the probability of choosing an alternative. Returning to our binary choice example, lets assume that the difference in the random utility terms follows the uniform distribution with parameters <span class="math inline">\(-L\)</span> and <span class="math inline">\(L\)</span>, that is: <span class="math display">\[
 \epsilon_{\text{New-Phone}} - \epsilon_{\text{Do-Nothing}} \sim U(-L, L)
 \]</span></p>
@@ -571,7 +596,7 @@ P_{\text{New-Phone}} = 1 - P_{\text{Do-Nothing}}
 <p>One final note, before discussing other choice mechanisms. The simple example used here was for binary choice, i.e., for a situation with only two alternatives. This was done for convenience of exposition, and we will see how the same ideas generalize for situations with more than two alternatives, that is, for multinomial choice situations.</p>
 </div>
 <div id="other-choice-mechanisms" class="section level2">
-<h2><span class="header-section-number">4.10</span> Other choice mechanisms</h2>
+<h2><span class="header-section-number">3.10</span> Other choice mechanisms</h2>
 <p>Utility maximization is only one of several plausible mechanisms. The utility functions assume that trade-offs among different attributes are possible; for example, the way the utility functions were formulated assumes that a decision-maker is willing to pay more for higher download speeds. While such trade-offs are plausible in many situations, other choice mechanisms could exist in other cases. Ortuzar and Willumsen <span class="citation">(<a href="#ref-Ortuzar2011modelling">2011</a>, Fourth Edition:241–43)</span>.</p>
 <p>For example, a user who is shopping for smartphones may have low tolerance for download speeds below a certain threshold, or may have a budget limit that prevents her from considering certain models. Some alternatives from the choice set may be eliminated or ranked based on some dominant attribute. This kind of choice mechanism is called <em>lexicographic</em> choice, or elimination by attributes.</p>
 <p>Another plausible choice mechanism is a form of satisficing behavior. Again, a user shopping for a smartphone might find a model that does not maximize her utility, but that is otherwise satisfactory. For example, the decision-maker may consider that the additional time spent finding an even better model is not worth her while, so she stops her search at a suboptimal point.</p>
@@ -579,20 +604,20 @@ P_{\text{New-Phone}} = 1 - P_{\text{Do-Nothing}}
 <p>In addition to these various mechanisms, it is possible that a decision-maker deploys combinations of them: for example, lexicographic choice to reduce the number of alternatives in a choice set, followed by utility maximization or regret minimization. Despite progress on these models, utility maximization remains the most widely used approach for the analysis of discrete choices.</p>
 </div>
 <div id="exercise-1" class="section level2">
-<h2><span class="header-section-number">4.11</span> Exercise</h2>
+<h2><span class="header-section-number">3.11</span> Exercise</h2>
 <p>Answer the following questions.</p>
 <div id="questions-1" class="section level3">
-<h3><span class="header-section-number">4.11.1</span> Questions</h3>
+<h3><span class="header-section-number">3.11.1</span> Questions</h3>
 <ol style="list-style-type: decimal">
 <li><p>Define utility.</p></li>
 <li><p>Describe in your own words the behavior described by utility maximization.</p></li>
 <li><p>What conditions are necessary for a function to be a valid probability distribution function?</p></li>
 </ol>
-<p>Consider the function shown in Figure <a href="chapter-2.html#fig:fig-triangle">4.6</a>. This is called the triangle or tent function.</p>
+<p>Consider the function shown in Figure <a href="chapter-2.html#fig:fig-triangle">3.6</a>. This is called the triangle or tent function.</p>
 <div class="figure"><span id="fig:fig-triangle"></span>
 <img src="02-Figure-1.jpg" alt="\label{fig:fig-triangle}Triangle (or tent) function" width="640" />
 <p class="caption">
-Figure 4.6: Triangle (or tent) function
+Figure 3.6: Triangle (or tent) function
 </p>
 </div>
 <ol start="4" style="list-style-type: decimal">
