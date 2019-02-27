@@ -25,7 +25,7 @@
 <meta name="author" content="Antonio Paez">
 
 
-<meta name="date" content="2019-02-25">
+<meta name="date" content="2019-02-27">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -535,24 +535,24 @@ NA
 <p>The argument <code>varying</code> lets the function know that the variables in the columns 3 through 13 in the dataframe are alternative-specific, and therefore vary across utility functions. Once that the format of the table has been changed from “wide” to “long”, the number of rows changes from <span class="math inline">\(900\)</span> (the number of decision makers) to <span class="math inline">\(4500\)</span>: this is the number of decision makers (<span class="math inline">\(900\)</span>) times the number of alternatives (<span class="math inline">\(5\)</span>).</p>
 <p>Before estimating an initial model, we need to define the utility functions that we wish to estimate. Since there are five alternatives, we define the following five functions (with heat pump as the reference level): <span class="math display">\[
 \begin{array}{ccc}
-V_{\text{ec}} = &amp; \beta_{ec} &amp; + \beta_1\text{ic.ec}\\
+V_{\text{ec}} = &amp; 0 &amp; + \beta_1\text{ic.ec}\\
 V_{\text{er}} = &amp; \beta_{er} &amp; + \beta_1\text{ic.er}\\
 V_{\text{gc}} = &amp; \beta_{gc} &amp; + \beta_1\text{ic.gc}\\
 V_{\text{gr}} = &amp; \beta_{gr} &amp; + \beta_1\text{ic.gr}\\
-V_{\text{hp}} = &amp; 0 &amp; + \beta_1\text{ic.hp}\\
+V_{\text{hp}} = &amp; \beta_{hp} &amp; + \beta_1\text{ic.hp}\\
 \end{array}
 \]</span></p>
-<p>These functions include only the instalation cost of the systems (ic). The <code>mlogit</code> function can be used to estimate this model (call this Model 1), using the heat pump system as the reference level:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod1 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic, H, <span class="dt">reflevel =</span> <span class="st">&quot;hp&quot;</span>)
+<p>These functions include only the instalation cost of the systems (ic). The <code>mlogit</code> function can be used to estimate this model (call this Model 1), using the electric central system (“ec”) as the reference level:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod1 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic, H, <span class="dt">reflevel =</span> <span class="st">&quot;ec&quot;</span>)
 <span class="kw">summary</span>(mod1)</code></pre></div>
 <pre><code>## 
 ## Call:
-## mlogit(formula = depvar ~ ic, data = H, reflevel = &quot;hp&quot;, method = &quot;nr&quot;, 
+## mlogit(formula = depvar ~ ic, data = H, reflevel = &quot;ec&quot;, method = &quot;nr&quot;, 
 ##     print.level = 0)
 ## 
 ## Frequencies of alternatives:
-##       hp       ec       er       gc       gr 
-## 0.055556 0.071111 0.093333 0.636667 0.143333 
+##       ec       er       gc       gr       hp 
+## 0.071111 0.093333 0.636667 0.143333 0.055556 
 ## 
 ## nr method
 ## 6 iterations, 0h:0m:0s 
@@ -561,10 +561,10 @@ V_{\text{hp}} = &amp; 0 &amp; + \beta_1\text{ic.hp}\\
 ## 
 ## Coefficients :
 ##                   Estimate  Std. Error z-value  Pr(&gt;|z|)    
-## ec:(intercept) -0.12259544  0.23188795 -0.5287  0.597025    
-## er:(intercept)  0.41421727  0.18279484  2.2660  0.023450 *  
-## gc:(intercept)  1.99617817  0.21689525  9.2034 &lt; 2.2e-16 ***
-## gr:(intercept)  0.74161404  0.18261558  4.0611 4.885e-05 ***
+## er:(intercept)  0.53681271  0.19194838  2.7967  0.005164 ** 
+## gc:(intercept)  2.11877361  0.13413083 15.7963 &lt; 2.2e-16 ***
+## gr:(intercept)  0.86420949  0.16435236  5.2583 1.454e-07 ***
+## hp:(intercept)  0.12259544  0.23188795  0.5287  0.597025    
 ## ic             -0.00168108  0.00061843 -2.7183  0.006561 ** 
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
@@ -642,16 +642,16 @@ ic_max<span class="op">$</span>region &lt;-<span class="st"> </span><span class=
 <p>If we quickly examine the dataframe with the minimum installation costs:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(ic_min, <span class="dv">10</span>)</code></pre></div>
 <pre><code>##      idcase depvar income agehed rooms region alt     ic     oc chid
-## 1.ec      1  FALSE      7     25     6 valley  ec 532.32 553.34    1
-## 1.er      1  FALSE      7     25     6 valley  er 469.61 505.60    1
-## 1.gc      1   TRUE      7     25     6 valley  gc 546.82 199.69    1
-## 1.gr      1  FALSE      7     25     6 valley  gr 431.83 151.72    1
-## 1.hp      1  FALSE      7     25     6 valley  hp 574.94 237.88    1
-## 2.ec      2  FALSE      5     60     5 scostl  ec 532.32 520.24    2
-## 2.er      2  FALSE      5     60     5 scostl  er 469.61 486.49    2
-## 2.gc      2   TRUE      5     60     5 scostl  gc 546.82 168.66    2
-## 2.gr      2  FALSE      5     60     5 scostl  gr 431.83 168.66    2
-## 2.hp      2  FALSE      5     60     5 scostl  hp 574.94 199.19    2</code></pre>
+## 1.ec      1  FALSE      7     25     6 valley  ec 469.61 553.34    1
+## 1.er      1  FALSE      7     25     6 valley  er 546.82 505.60    1
+## 1.gc      1   TRUE      7     25     6 valley  gc 431.83 199.69    1
+## 1.gr      1  FALSE      7     25     6 valley  gr 574.94 151.72    1
+## 1.hp      1  FALSE      7     25     6 valley  hp 532.32 237.88    1
+## 2.ec      2  FALSE      5     60     5 scostl  ec 469.61 520.24    2
+## 2.er      2  FALSE      5     60     5 scostl  er 546.82 486.49    2
+## 2.gc      2   TRUE      5     60     5 scostl  gc 431.83 168.66    2
+## 2.gr      2  FALSE      5     60     5 scostl  gr 574.94 168.66    2
+## 2.hp      2  FALSE      5     60     5 scostl  hp 532.32 199.19    2</code></pre>
 <p>We can see that we have simulated a dataset that includes the minimum installation cost of every system for each of four regions. We did not modify any of the other variables the age, income</p>
 <p>Given the different values of installation cost (at min, mean, and max), we can predict the probabilities as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p_mod1_ic_min &lt;-<span class="st"> </span><span class="kw">predict</span>(mod1, <span class="dt">newdata =</span> ic_min)
@@ -725,10 +725,114 @@ Probability
 <tbody>
 <tr>
 <td style="text-align:left;">
-hp
+ec
 </td>
 <td style="text-align:left;">
 Electric Central
+</td>
+<td style="text-align:right;">
+469.61
+</td>
+<td style="text-align:right;">
+0.070
+</td>
+<td style="text-align:right;">
+824.543
+</td>
+<td style="text-align:right;">
+0.071
+</td>
+<td style="text-align:right;">
+1230.5
+</td>
+<td style="text-align:right;">
+0.072
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+er
+</td>
+<td style="text-align:left;">
+Electric Room
+</td>
+<td style="text-align:right;">
+546.82
+</td>
+<td style="text-align:right;">
+0.105
+</td>
+<td style="text-align:right;">
+983.928
+</td>
+<td style="text-align:right;">
+0.093
+</td>
+<td style="text-align:right;">
+1496.3
+</td>
+<td style="text-align:right;">
+0.078
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+gc
+</td>
+<td style="text-align:left;">
+Gas Central
+</td>
+<td style="text-align:right;">
+431.83
+</td>
+<td style="text-align:right;">
+0.617
+</td>
+<td style="text-align:right;">
+776.827
+</td>
+<td style="text-align:right;">
+0.639
+</td>
+<td style="text-align:right;">
+1158.9
+</td>
+<td style="text-align:right;">
+0.672
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+gr
+</td>
+<td style="text-align:left;">
+Gas Room
+</td>
+<td style="text-align:right;">
+574.94
+</td>
+<td style="text-align:right;">
+0.138
+</td>
+<td style="text-align:right;">
+921.770
+</td>
+<td style="text-align:right;">
+0.143
+</td>
+<td style="text-align:right;">
+1344.0
+</td>
+<td style="text-align:right;">
+0.140
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hp
+</td>
+<td style="text-align:left;">
+Heat Pump
 </td>
 <td style="text-align:right;">
 532.32
@@ -740,117 +844,13 @@ Electric Central
 1046.481
 </td>
 <td style="text-align:right;">
-0.078
+0.055
 </td>
 <td style="text-align:right;">
 1679.8
 </td>
 <td style="text-align:right;">
-0.084
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-ec
-</td>
-<td style="text-align:left;">
-Electric Room
-</td>
-<td style="text-align:right;">
-469.61
-</td>
-<td style="text-align:right;">
-0.067
-</td>
-<td style="text-align:right;">
-824.543
-</td>
-<td style="text-align:right;">
-0.056
-</td>
-<td style="text-align:right;">
-1230.5
-</td>
-<td style="text-align:right;">
-0.042
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-er
-</td>
-<td style="text-align:left;">
-Gas Central
-</td>
-<td style="text-align:right;">
-546.82
-</td>
-<td style="text-align:right;">
-0.128
-</td>
-<td style="text-align:right;">
-983.928
-</td>
-<td style="text-align:right;">
-0.139
-</td>
-<td style="text-align:right;">
-1496.3
-</td>
-<td style="text-align:right;">
-0.154
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-gc
-</td>
-<td style="text-align:left;">
-Gas Room
-</td>
-<td style="text-align:right;">
-431.83
-</td>
-<td style="text-align:right;">
-0.546
-</td>
-<td style="text-align:right;">
-776.827
-</td>
-<td style="text-align:right;">
-0.518
-</td>
-<td style="text-align:right;">
-1158.9
-</td>
-<td style="text-align:right;">
-0.479
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-gr
-</td>
-<td style="text-align:left;">
-Heat Pump
-</td>
-<td style="text-align:right;">
-574.94
-</td>
-<td style="text-align:right;">
-0.189
-</td>
-<td style="text-align:right;">
-921.770
-</td>
-<td style="text-align:right;">
-0.209
-</td>
-<td style="text-align:right;">
-1344.0
-</td>
-<td style="text-align:right;">
-0.241
+0.038
 </td>
 </tr>
 </tbody>
@@ -965,54 +965,54 @@ E^{P_{in}}_{x_{ink}} = -\beta_{jk}x_{jnk}P_{jn}
 <p>The marginal effects can be computed by means of the <code>effects</code> function. This function takes four arguments, as follows: an <code>mlogit</code> model, the name of the covariate (or attribute) that we wish to examine, the type of effect, and the data for calculating the effects.</p>
 <p>For the marginal effects, the “type” of the effect is “(r)elative” for the probability and “(a)bsolute”&quot; for the covariate. In the case of the marginal effects at the minimum values of cost we use <code>mod0</code> (our <code>mlogit</code> model object), indicate the covariate of interest (<code>ic</code> for installation cost), the type of effect (“ra”), and the input data:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">effects</span>(mod1, <span class="dt">covariate =</span> <span class="st">&quot;ic&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;ra&quot;</span>, <span class="dt">data =</span> ic_min[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,])</code></pre></div>
-<pre><code>##               hp            ec            er            gc            gr
-## hp  0.0001129499 -0.0015681305  0.0001129499  0.0001129499  0.0001129499
-## ec  0.0002146862  0.0002146862 -0.0014663941  0.0002146862  0.0002146862
-## er  0.0009172153  0.0009172153  0.0009172153 -0.0007638651  0.0009172153
-## gc  0.0003173754  0.0003173754  0.0003173755  0.0003173755 -0.0013637049
-## gr -0.0015622268  0.0001188536  0.0001188535  0.0001188536  0.0001188536</code></pre>
+<pre><code>##               ec            er            gc            gr            hp
+## ec -0.0015641293  0.0001169511  0.0001169511  0.0001169511  0.0001169511
+## er  0.0001756990 -0.0015053814  0.0001756990  0.0001756990  0.0001756990
+## gc  0.0010369517  0.0010369517 -0.0006441287  0.0010369517  0.0010369517
+## gr  0.0002325016  0.0002325016  0.0002325016 -0.0014485788  0.0002325016
+## hp  0.0001189771  0.0001189771  0.0001189771  0.0001189770 -0.0015621033</code></pre>
 <p>The values on the diagonal of the table above are the direct marginal effects, whereas other values are the cross-marginal effects.</p>
 <p>The marginal effects at the mean values (sometimes called <em>MEM</em>, i.e., marginal effects at the mean) are:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">effects</span>(mod1, <span class="dt">covariate =</span> <span class="st">&quot;ic&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;ra&quot;</span>, <span class="dt">data =</span> ic_mean[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,])</code></pre></div>
-<pre><code>##               hp            ec            er            gc            gr
-## hp  0.0000941469 -0.0015869335  9.414689e-05  9.414689e-05  9.414689e-05
-## ec  0.0002338697  0.0002338697 -1.447211e-03  2.338697e-04  2.338697e-04
-## er  0.0008702555  0.0008702555  8.702555e-04 -8.108249e-04  8.702554e-04
-## gc  0.0003515587  0.0003515587  3.515587e-04  3.515587e-04 -1.329522e-03
-## gr -0.0015498308  0.0001312496  1.312496e-04  1.312496e-04  1.312496e-04</code></pre>
+<pre><code>##               ec            er            gc            gr            hp
+## ec -1.562008e-03  1.190728e-04  1.190728e-04  1.190728e-04  0.0001190728
+## er  1.558057e-04 -1.525275e-03  1.558056e-04  1.558056e-04  0.0001558056
+## gc  1.073548e-03  1.073548e-03 -6.075323e-04  1.073548e-03  0.0010735481
+## gr  2.399663e-04  2.399663e-04  2.399663e-04 -1.441114e-03  0.0002399663
+## hp  9.268762e-05  9.268762e-05  9.268762e-05  9.268762e-05 -0.0015883927</code></pre>
 <p>And the marginal effects at the maximum values are:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">effects</span>(mod1, <span class="dt">covariate =</span> <span class="st">&quot;ic&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;ra&quot;</span>, <span class="dt">data =</span> ic_max[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,])</code></pre></div>
-<pre><code>##               hp            ec            er            gc            gr
-## hp  7.107308e-05 -0.0016100073  7.107309e-05  0.0000710731  7.107308e-05
-## ec  2.587418e-04  0.0002587418 -1.422338e-03  0.0002587418  2.587418e-04
-## er  8.050952e-04  0.0008050952  8.050952e-04 -0.0008759852  8.050952e-04
-## gc  4.048809e-04  0.0004048809  4.048809e-04  0.0004048809 -1.276199e-03
-## gr -1.539791e-03  0.0001412895  1.412895e-04  0.0001412895  1.412895e-04</code></pre>
+<pre><code>##               ec            er            gc            gr            hp
+## ec -1.560758e-03  1.203225e-04  1.203225e-04  0.0001203225  0.0001203225
+## er  1.316513e-04 -1.549429e-03  1.316514e-04  0.0001316513  0.0001316514
+## gc  1.129256e-03  1.129256e-03 -5.518241e-04  0.0011292563  0.0011292563
+## gr  2.359411e-04  2.359411e-04  2.359412e-04 -0.0014451392  0.0002359412
+## hp  6.390908e-05  6.390909e-05  6.390909e-05  0.0000639091 -0.0016171713</code></pre>
 <p>You can verify that, with some small rounding error, they correspond to the values calculated previously.</p>
 <p>As well, the direct-point and cross-point elasticities can be calculated using the <code>effects</code> function, however in this case the type of the effects is <em>relative</em> both for the probability and for the covariate.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">effects</span>(mod1, <span class="dt">covariate =</span> <span class="st">&quot;ic&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;rr&quot;</span>, <span class="dt">data =</span> ic_min[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,])</code></pre></div>
-<pre><code>##             hp          ec          er          gc          gr
-## hp  0.06012549 -0.83474723  0.06012549  0.06012549  0.06012549
-## ec  0.10081880  0.10081880 -0.68863335  0.10081881  0.10081881
-## er  0.50155165  0.50155165  0.50155166 -0.41769672  0.50155166
-## gc  0.13705224  0.13705224  0.13705224  0.13705225 -0.58888869
-## gr -0.89818668  0.06833366  0.06833366  0.06833366  0.06833367</code></pre>
+<pre><code>##             ec          er          gc          gr          hp
+## ec -0.73453075  0.05492140  0.05492140  0.05492140  0.05492140
+## er  0.09607572 -0.82317265  0.09607573  0.09607572  0.09607572
+## gc  0.44778685  0.44778685 -0.27815410  0.44778684  0.44778685
+## gr  0.13367447  0.13367447  0.13367448 -0.83284588  0.13367448
+## hp  0.06333387  0.06333387  0.06333387  0.06333386 -0.83153884</code></pre>
 <p>The values on the diagonal of the table above are the direct-point elasticities, whereas other values are the cross-point elasticities.</p>
 <p>The effects can be calculated at various levels of the covariate of interest, for instance the mean and max:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">effects</span>(mod1, <span class="dt">covariate =</span> <span class="st">&quot;ic&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;rr&quot;</span>, <span class="dt">data =</span> ic_mean[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,])</code></pre></div>
-<pre><code>##             hp         ec          er          gc          gr
-## hp  0.09852297 -1.6606961  0.09852296  0.09852296  0.09852296
-## ec  0.19283575  0.1928357 -1.19328812  0.19283574  0.19283574
-## er  0.85626873  0.8562687  0.85626873 -0.79779334  0.85626872
-## gc  0.27310017  0.2731002  0.27310016  0.27310017 -1.03280775
-## gr -1.42858789  0.1209820  0.12098199  0.12098199  0.12098199</code></pre>
+<pre><code>##             ec          er          gc          gr          hp
+## ec -1.28794317  0.09818068  0.09818067  0.09818069  0.09818068
+## er  0.15330155 -1.50076056  0.15330153  0.15330154  0.15330154
+## gc  0.83396070  0.83396069 -0.47194728  0.83396070  0.83396070
+## gr  0.22119376  0.22119375  0.22119375 -1.32837610  0.22119376
+## hp  0.09699586  0.09699586  0.09699586  0.09699586 -1.66222324</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">effects</span>(mod1, <span class="dt">covariate =</span> <span class="st">&quot;ic&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;rr&quot;</span>, <span class="dt">data =</span> ic_max[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,])</code></pre></div>
-<pre><code>##            hp         ec         er         gc         gr
-## hp  0.1193886 -2.7044902  0.1193886  0.1193886  0.1193886
-## ec  0.3183818  0.3183818 -1.7501875  0.3183818  0.3183818
-## er  1.2046639  1.2046639  1.2046639 -1.3107367  1.2046639
-## gc  0.4692164  0.4692164  0.4692164  0.4692164 -1.4789876
-## gr -2.0694789  0.1898931  0.1898931  0.1898931  0.1898931</code></pre>
+<pre><code>##            ec         er         gc         gr         hp
+## ec -1.9205126  0.1480568  0.1480568  0.1480568  0.1480568
+## er  0.1969899 -2.3184107  0.1969899  0.1969899  0.1969899
+## gc  1.3086951  1.3086951 -0.6395089  1.3086951  1.3086951
+## gr  0.3171049  0.3171049  0.3171049 -1.9422671  0.3171049
+## hp  0.1073545  0.1073545  0.1073545  0.1073545 -2.7165243</code></pre>
 </div>
 </div>
 <div id="a-note-about-attributes-in-dummy-format" class="section level2">
@@ -1074,11 +1074,11 @@ M^{P_{in}}_{x_{ink}} = P_{in}(x_{ink} = 1) - P_{in}(x_{ink} = 0)
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p_region_ic_mean &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Region =</span> <span class="kw">c</span>(<span class="st">&quot;valley&quot;</span>, <span class="st">&quot;scostl&quot;</span>, <span class="st">&quot;mountn&quot;</span>, <span class="st">&quot;ncostl&quot;</span>),
                                <span class="kw">predict</span>(mod2, <span class="dt">newdata =</span> ic_mean, <span class="dt">outcome =</span> <span class="ot">FALSE</span>))
 p_region_ic_mean</code></pre></div>
-<pre><code>##   Region         ec        er        gc        gr         hp
-## 1 valley 0.05749661 0.1081198 0.6128034 0.1586858 0.06289438
-## 2 scostl 0.05924060 0.1528221 0.4593999 0.2356499 0.09288751
-## 3 mountn 0.05695193 0.1502288 0.4813975 0.2185366 0.09288515
-## 4 ncostl 0.05395499 0.1495514 0.4909560 0.2294155 0.07612211</code></pre>
+<pre><code>##   Region         ec         er        gc        gr         hp
+## 1 valley 0.06893601 0.06868371 0.7167905 0.1032603 0.04232956
+## 2 scostl 0.07709246 0.10537150 0.5832442 0.1664375 0.06785436
+## 3 mountn 0.07330246 0.10244901 0.6044788 0.1526602 0.06710956
+## 4 ncostl 0.06922558 0.10166470 0.6145323 0.1597530 0.05482440</code></pre>
 <p>The first row contains the probabilities of the different systems for valley (the reference region), and then for each of the three other regions.</p>
 <p>The marginal effects of changing from the valley to other regions are:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data.frame</span> (<span class="dt">Effect =</span> <span class="kw">c</span>(<span class="st">&quot;valley to scostl&quot;</span>, <span class="st">&quot;valley to mountn&quot;</span>, <span class="st">&quot;valley to ncostl&quot;</span>),
@@ -1086,13 +1086,13 @@ p_region_ic_mean</code></pre></div>
                    p_region_ic_mean[<span class="dv">3</span>, <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>] <span class="op">-</span><span class="st"> </span>p_region_ic_mean[<span class="dv">1</span>, <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>],
                    p_region_ic_mean[<span class="dv">4</span>, <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>] <span class="op">-</span><span class="st"> </span>p_region_ic_mean[<span class="dv">1</span>, <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>]))</code></pre></div>
 <pre><code>##             Effect           ec         er         gc         gr
-## 2 valley to scostl  0.001743990 0.04470229 -0.1534036 0.07696417
-## 3 valley to mountn -0.000544681 0.04210896 -0.1314059 0.05985088
-## 4 valley to ncostl -0.003541622 0.04143163 -0.1218475 0.07072971
+## 2 valley to scostl 0.0081564496 0.03668779 -0.1335463 0.06317722
+## 3 valley to mountn 0.0043664503 0.03376531 -0.1123117 0.04939991
+## 4 valley to ncostl 0.0002895745 0.03298099 -0.1022582 0.05649277
 ##           hp
-## 2 0.02999313
-## 3 0.02999077
-## 4 0.01322773</code></pre>
+## 2 0.02552480
+## 3 0.02478000
+## 4 0.01249484</code></pre>
 </div>
 <div id="willingness-to-pay-and-discount-rate" class="section level2">
 <h2><span class="header-section-number">6.11</span> Willingness to pay and discount rate</h2>
@@ -1102,24 +1102,24 @@ p_region_ic_mean</code></pre></div>
 </blockquote>
 <p>To answer this question, we first need an appropriate choice model, that is, one that includes both installation <em>and</em> annual operation costs. The following utility functions are one possible model specification (with heat pump as the reference level): <span class="math display">\[
 \begin{array}{ccc}
-V_{\text{ec}} = &amp; \beta_{ec} &amp; + \beta_1\text{ic.ec} + \beta_2\text{oc.ec}\\
+V_{\text{ec}} = &amp; 0 &amp; + \beta_1\text{ic.ec} + \beta_2\text{oc.ec}\\
 V_{\text{er}} = &amp; \beta_{er} &amp; + \beta_1\text{ic.er} + \beta_2\text{oc.er}\\
 V_{\text{gc}} = &amp; \beta_{gc} &amp; + \beta_1\text{ic.gc} + \beta_2\text{oc.gc}\\
 V_{\text{gr}} = &amp; \beta_{gr} &amp; + \beta_1\text{ic.gr} + \beta_2\text{oc.gr}\\
-V_{\text{hp}} = &amp; 0 &amp; + \beta_1\text{ic.hp} + \beta_2\text{oc.hp}\\
+V_{\text{hp}} = &amp; \beta_{hp} &amp; + \beta_1\text{ic.hp} + \beta_2\text{oc.hp}\\
 \end{array}
 \]</span></p>
 <p>The model can be reestimated using these constants. The option <code>reflevel</code> is used to select the alternative that will work as reference (call this Model 3):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod3 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H, <span class="dt">reflevel =</span> <span class="st">&quot;hp&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod3 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H, <span class="dt">reflevel =</span> <span class="st">&quot;ec&quot;</span>)
 <span class="kw">summary</span>(mod3)</code></pre></div>
 <pre><code>## 
 ## Call:
-## mlogit(formula = depvar ~ ic + oc, data = H, reflevel = &quot;hp&quot;, 
+## mlogit(formula = depvar ~ ic + oc, data = H, reflevel = &quot;ec&quot;, 
 ##     method = &quot;nr&quot;, print.level = 0)
 ## 
 ## Frequencies of alternatives:
-##       hp       ec       er       gc       gr 
-## 0.055556 0.071111 0.093333 0.636667 0.143333 
+##       ec       er       gc       gr       hp 
+## 0.071111 0.093333 0.636667 0.143333 0.055556 
 ## 
 ## nr method
 ## 6 iterations, 0h:0m:0s 
@@ -1128,10 +1128,10 @@ V_{\text{hp}} = &amp; 0 &amp; + \beta_1\text{ic.hp} + \beta_2\text{oc.hp}\\
 ## 
 ## Coefficients :
 ##                   Estimate  Std. Error z-value  Pr(&gt;|z|)    
-## ec:(intercept)  1.65884594  0.44841936  3.6993 0.0002162 ***
-## er:(intercept)  1.85343697  0.36195509  5.1206 3.045e-07 ***
-## gc:(intercept)  1.71097930  0.22674214  7.5459 4.485e-14 ***
-## gr:(intercept)  0.30826328  0.20659222  1.4921 0.1356640    
+## er:(intercept)  0.19459102  0.20424212  0.9527 0.3407184    
+## gc:(intercept)  0.05213336  0.46598878  0.1119 0.9109210    
+## gr:(intercept) -1.35058266  0.50715442 -2.6631 0.0077434 ** 
+## hp:(intercept) -1.65884594  0.44841936 -3.6993 0.0002162 ***
 ## ic             -0.00153315  0.00062086 -2.4694 0.0135333 *  
 ## oc             -0.00699637  0.00155408 -4.5019 6.734e-06 ***
 ## ---
@@ -1143,7 +1143,7 @@ V_{\text{hp}} = &amp; 0 &amp; + \beta_1\text{ic.hp} + \beta_2\text{oc.hp}\\
 <p>So, how is this model used to understand consumer preferences? Recall that the question is at what rate are consumers willing to pay for installation relative to operation.</p>
 <p>The coefficients of the model provide useful information. Suppose that we would like to know at what rate consumers would be willing to trade one aspect of the good for another, whithout compromising the utility they derive from it. In effect we would like to know how changes in one attribute relate to changes in the other. In the present case, we want to know how installation costs change with respect to operation costs, while mainting the utility (i.e., the change in utility is zero):</p>
 <p><span class="math display">\[
-\partial U = 0 = \beta_1\partial ic + \beta_2\partial oc
+\partial U = 0 = \beta_1\partial ic + \beta_{2}\partial oc
 \]</span></p>
 <p>It follows then that:</p>
 <p><span class="math display">\[
@@ -1173,9 +1173,9 @@ r = \frac{1}{4.56} = 0.219 = 21.9\%
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data.frame</span>(<span class="dt">Policy =</span> <span class="kw">c</span>(<span class="st">&quot;Do nothing&quot;</span>, <span class="st">&quot;15% rebate&quot;</span>),
            <span class="kw">rbind</span>(<span class="kw">apply</span>(<span class="kw">predict</span>(mod3, <span class="dt">newdata =</span> H), <span class="dv">2</span>, mean),
                  <span class="kw">apply</span>(<span class="kw">predict</span>(mod3, <span class="dt">newdata =</span> H_rebate), <span class="dv">2</span>, mean)))</code></pre></div>
-<pre><code>##       Policy         hp         ec         er        gc        gr
-## 1 Do nothing 0.05555556 0.07111111 0.09333333 0.6366667 0.1433333
-## 2 15% rebate 0.06941196 0.07009125 0.09199196 0.6272957 0.1412092</code></pre>
+<pre><code>##       Policy         ec         er        gc        gr         hp
+## 1 Do nothing 0.07111111 0.09333333 0.6366667 0.1433333 0.05555556
+## 2 15% rebate 0.07009125 0.09199196 0.6272957 0.1412092 0.06941196</code></pre>
 </div>
 <div id="introduction-of-a-new-system" class="section level3">
 <h3><span class="header-section-number">6.12.2</span> Introduction of a new system</h3>
@@ -1214,8 +1214,8 @@ P &lt;-<span class="st"> </span><span class="kw">transmute</span>(P, <span class
 ## 0.04977350 0.06311578 0.08347713 0.57145108 0.12855080 0.10363170</code></pre>
 <p>The new technology is estimated to have a penetration rate of approximately <span class="math inline">\(10.4\%\)</span>. Compare to the original proportions of the systems:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">apply</span>(<span class="kw">fitted</span>(mod1, <span class="dt">outcome =</span> <span class="ot">FALSE</span>), <span class="dv">2</span>, mean)</code></pre></div>
-<pre><code>##         hp         ec         er         gc         gr 
-## 0.05555556 0.07111111 0.09333333 0.63666667 0.14333333</code></pre>
+<pre><code>##         ec         er         gc         gr         hp 
+## 0.07111111 0.09333333 0.63666667 0.14333333 0.05555556</code></pre>
 <p>Can you discern the patterns of substitution here? Are these patterns of substitution reasonable?</p>
 </div>
 </div>
