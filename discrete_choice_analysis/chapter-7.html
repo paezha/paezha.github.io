@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>An Introduction to Discrete Choice Analysis</title>
+  <title>Chapter 8 Non-Proportional Substitution Patterns I: The Probit Model | An Introduction to Discrete Choice Analysis</title>
   <meta name="description" content="These notes were created by Antonio Paez as a resource for teaching a graduate discrete choice analysis course (GEOG 738) at McMaster University.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="An Introduction to Discrete Choice Analysis" />
+  <meta property="og:title" content="Chapter 8 Non-Proportional Substitution Patterns I: The Probit Model | An Introduction to Discrete Choice Analysis" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="paezha/Discrete-Choice-Analysis-with-R" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="An Introduction to Discrete Choice Analysis" />
+  <meta name="twitter:title" content="Chapter 8 Non-Proportional Substitution Patterns I: The Probit Model | An Introduction to Discrete Choice Analysis" />
   
   <meta name="twitter:description" content="These notes were created by Antonio Paez as a resource for teaching a graduate discrete choice analysis course (GEOG 738) at McMaster University." />
   
@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="preliminaries-installing-r-and-rstudio.html">
+<link rel="prev" href="chapter-6.html">
+<link rel="next" href="chapter-8.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -279,82 +279,198 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">An Introduction to Discrete Choice Analysis</h1>
-<h2 class="subtitle"><em>A Course in R</em></h2>
-<p class="author"><em>Antonio Paez</em></p>
-<p class="date"><em>2019-03-24</em></p>
-</div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
+<div id="chapter-7" class="section level1">
+<h1><span class="header-section-number">Chapter 8</span> Non-Proportional Substitution Patterns I: The Probit Model</h1>
 <blockquote>
-<p>‘Would you tell me, please, which way I ought to go from here?’</p>
-<p>‘That depends a good deal on where you want to get to,’ said the Cat.</p>
-<p>‘I don’t much care where -’ said Alice.</p>
-<p>‘Then it doesn’t matter which way you go,’ said the Cat.</p>
-<p>‘- so long as I get SOMEWHERE,’ Alice added as an explanation.</p>
-<p>‘Oh, you’re sure to do that,’ said the Cat, ‘if you only walk long enough.’</p>
-<p>— Lewis Carroll, Alice in Wonderland</p>
+<p>“Perfectionism means that you try not to leave so much mess to clean up.”</p>
+<p>— Anne Lamott, Bird by Bird: Some Instructions on Writing and Life</p>
 </blockquote>
 <blockquote>
-<p>“We are our choices.”</p>
-<p>— Jean-Paul Sartre</p>
+<p>“Perfection’s unattainable but it isn’t unapproachable.”</p>
+<p>— Peter Watts, Blindsight</p>
 </blockquote>
-<div id="choices-choices-choices" class="section level2 unnumbered">
-<h2>Choices, choices, choices</h2>
-<p>We are what we choose or we choose what we are. The choices we make have important implications for how we interact with the world. We live in a time when resources continue to become increasingly scarce. In this context, the way people make choices is informative about their preferences and where collectively we are going. This includes routine activities, such as deciding how to travel for everyday purposes, for instance walking or cycling, driving, or using transit. Or longer term decision, such as whether to contract more expensive but environmentally less damaging low impact energy sources; buy hybrid, electric, or gasoline vehicles; the frequency with which they travel by plane; to live in a distant suburb where rent is low, or in a central city where space is at a premium; and many others.</p>
-<p>Understanding decision-making is also important so that the world, or more accurately the social institutions that collectively represent us in our interactions with the world, can better accommodate and possibly even nudge our preferences towards socially desirable outcomes. What tradeoffs are members of the public willing to contemplate when choosing alternative mobility? Is it the range of vehicles? Their price? The time it takes to charge an electric vehicle? The satisfaction of being green? Should governments subdidize purchases of efficient heating? If so, what is the effect of a certain amount in subsidy? Do consumers prefer more range in electric vehicles, and how much are they willing to pay for it? Does the tradoff justify the increase in production cost?</p>
-<p>These questions are important as governments and businesses try to understand the way the public will respond to taxation, programs, engineering, or production decisions.</p>
-<p>In simple terms, discrete choice analysis is a way to understand behavior when there are implicit markets, and in this way it represents a form of hedonic price analysis.</p>
-<p>What are prices? In very general terms a price is a quantity offered in payment for one unit of a good or service. Early economies were based on bartering, a system of exchange that is limited use in even moderately complex economic systems. For instance, imagine a moderately sophisticated economy where people already have ceased being generalists to become specialists of some sort. Someone who spends time making shoes probably has limited time to tend chickens or understand the law of the land.</p>
-<p>Imagine that you make and sell shoes. People need shoes and may be willing to offer some quantity of something in exchange for them. The person who breeds chicken maybe willing to offer one chicken for a pair of shoes. Is that a fair price? How can you determine whether that exchange is sensible?</p>
-<p>Imagine now that you need a divorce, and a lawyer’s services are required for this. How many shoes should you offer the lawyer for a divorce? And what if the lawyer already has shoes?? Maybe the lawyer would prefer to be paid in chickens…</p>
-<p>The situation is further complicated by the reliance of bartering on some kind of trust system: as a seller, in a bartering system, there are no simple ways of ensuring the quality of the exchange! For instance, what if the lawyer is a crook, or the farmer gives you diseased chickens for your top-notch, high-quality shoes? In small systems, where agents can recognize each other, trust is enforced by reputation - if the lawyer is crooked, or the farmer is known to feed lead to the poultry, other actors can avoid transactions with them. If your shoes fall apart in the first rain, people will begin to avoid doing business with you!</p>
-<p>As these simple examples illustrate, bartering is a complicated way of setting prices, and this becomes increasingly complex (except in very exceptional situations) when an economy produces hundreds, thousands, or even more different products and services.</p>
-<p>(An interesting exception is the time when Pepsico bartered with the Soviet Union; <a href="https://www.nytimes.com/1990/04/09/business/international-report-pepsi-will-be-bartered-for-ships-vodka-deal-with-soviets.html">see this news item from 1990</a>. In this case, Pepsi-Cola was bartered for ships and vodka. Why did barter make sense in this situation? Hint: the ruble was not freely traded on world currency markets.)</p>
-<p>Far from being the root of all evil, it is almost certain that no complex economy can exist without the invention of money. The complexities of bartering explain why monetary systems were invented: the need for a common standard for exchange. Instead of needing to figure out how many shoes is worth a chicken and how many chickens a divorce, everything is measured using the same metric: shells, squares of deer skin, rupees, pesos, or dollars.</p>
+<div id="more-flexible-substitution-patterns" class="section level2">
+<h2><span class="header-section-number">8.1</span> More flexible substitution patterns</h2>
+<p><strong>NOTE</strong> This chapter is work in progress and is not yet complete.</p>
+<p>In Chapter <a href="chapter-6.html#chapter-6">7</a> the topic of non-proportional substitution was discussed, and a method for deriving logit models using the Generalized Extreme Value method was presented. In this chapter, an alternative model for more flexible substitution patterns is introduced. This model is based on the use of the normal distribution for the random utility, instead of the extreme value distribution. The model is called <em>multinomial probit</em> and can be used to represent arbitrary substitution patterns. On the downside, the model is technically and computationally more demanding.</p>
 </div>
-<div id="price-mechanisms" class="section level2 unnumbered">
-<h2>Price Mechanisms</h2>
-<p>The limitations of bartering explain the necessity of monetary systems. A common currency frees the maker of shoes from the need to calculate in chickens the cost of his divorce. But it does not explain how prices are set in the common currency.</p>
-<p>Price mechanisms depend to a large extent of the institutional framework. Several such frameworks exist.</p>
-<p>For example, in a centrally planned economy, prices for goods or services are set by a designated agent. This could be the Elder of the Village. The Elder of the village decides how many rupees people should pay for your shoes (alternatively, how much you can charge for a pair of shoes), and how much you should pay a lawyer for each hour of work. Everyone in this kind of setup prays that the Elder of the Village knows what he is doing, and the potential for mistakes clearly is far from negligible. In the Soviet Union prices were set using so called <em>material balances</em>, balancing the inputs to the planned outputs. This approach was not successful for several reasons, including ideological limitations to the mathematical tools used to calculate balances, and the inherent limitations of such planning, which does not allow for deviations from the plan (what if you end up needing <em>two</em> divorces instead of only one or none?).</p>
-<p>In a free market economy, on the other hand, prices are left to float with no intervention from central planning agencies. There are voluminous literature explaining how this system can allocate resources efficiently. Prices, in this context, are signals of how desirable a good or service is, and how much of it is available.</p>
-<p>Economists explain this relationship using a relationship between demand and supply.</p>
-<p>The basic assumption (which happens to hold in many cases) is that the level of demand for a good or service (the quantity that consumers are willing to purchase) declines as the price increases. On the side of producers/providers of goods and services, the level of supply (the quantity that they are willing to produce) increases with price. Demand and supply, then, are influenced by price, but they do not happen in isolation - rather, they interact to set prices. A consumer cannot single-handedly demand that a good/service be sold at a certain (i.e., low) price when many consumers are willing to pay a somewhat higher price for the same (otherwise I would have bought my Nintendo Switch at 50 dollars). Likewise, a producer/provider cannot expect to set a high price for a good/service when other producers are willing to sell at a lower price. (There are aberrant situations, of course. Monopolies and cartels can manipulate prices on behalf of producers, whereas single-payer health care manipulates prices in favor of patients.)</p>
-<p>The intersection of the supply and demand curves determines simultaneously prices <em>and</em> the quantity of a good/service produced/consumed. Since prices “float”, they can adjust to changes in supply and/or demand. In Figure 1, for example, when demand for a good or service (say divorces) increases, there is an incentive for lawyers to work more hours. Since there is a limited number of hours that lawyers can work (there is scarcity), this is reflected in a higher price, since those who can afford it will be willing to pay more for a scarce but desirable service.</p>
-<div class="figure">
-<img src="Supply-Demand.png" alt="Fig 1. Supply and Demand Relationship" />
-<p class="caption">Fig 1. Supply and Demand Relationship</p>
+<div id="how-to-use-this-note-6" class="section level2">
+<h2><span class="header-section-number">8.2</span> How to use this note</h2>
+<p>Remember that the source for the document you are reading is an R Notebook. Throughout the notes, you will find examples of code in segments of text called <em>chunks</em>. This is an example of a chunk:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="st">&quot;If you are always trying to be normal, you will never know how amazing you can be.&quot;</span>)</code></pre></div>
+<pre><code>## [1] &quot;If you are always trying to be normal, you will never know how amazing you can be.&quot;</code></pre>
+<p>If you are working with the Notebook version of the document, you can run the code by clicking the ‘play’ icon on the top right corner of the chunk. If you are reading the web-book version of the document, you will often see that the code has already been executed. You can still try it by copying and pasting into your R or RStudio console.</p>
 </div>
-<p>A third system is a mixed economy, where prices are left to float but within limits or with other corrective mechanisms, such as subsidies or taxes.</p>
-<p>The most familiar situation for most of us is price mechanisms in free or mixed economies. An underlying assumption is that a market exists for the good or service, that is, a medium where goods or services can be exchanged. Markets exist for many things: for milk, for bread, for insurance, and for complex financial instruments that no one really understands, such as derivatives. Markets do not explicitly exist for composite products or services, and therefore the willingnes to pay of consumers for <em>elements</em> of a specific good.</p>
-<p>Imagine, for instance, a good such as an automobile. Automobiles are composite goods in the sense that, even if their purpose is to provide transportation, they can do this in many different ways to satisfy a diversity of needs or tastes: with variations in leg room, acceleration, and fuel consumption, to name a few. Pricing mechanisms for the whole leave the question of willingness to pay for specific components in the dark. Are consumers willing to pay more or less for extra leg room, more spacious seats, or horsepower? The markets for each of these items are implicit in the market for automobiles.</p>
-<p>In fact, hedonic price analysis analysis was invented by an economist named <a href="http://www.econ.wayne.edu/agoodman/research/pubs/Deep/Court-JUE.pdf">Andrew Court</a> to address such an issue. Court was an economist for the Automobile Manufacturers’ Association in Detroit from 1930 to 1940. He realized that price indexing procedures were not satisfactory for describing the relative importance of various components of automobiles in determining their price. This in turn was important to understand consumer preferences and to differentiate products.</p>
-<p>Court used the term “hedonic” to express the usefulness and desirability (related to pleasure) that consumers attach to different aspects of a composite product. Although he invented his method in the late 1930s, it lay dormant for approximately twenty years until it was popularized by <a href="https://www.nber.org/chapters/c5976.pdf">Zvi Griliches</a> in the 1960s, with work on fertilizers and automobiles. Later on, <a href="https://www.journals.uchicago.edu/doi/pdfplus/10.1086/260169">Sherwin Rosen</a> explained implicit markets within an economic foundation of supply and demand in equilibrium - that is, not just as willingness to pay on the side of consumers, but also as the result of decisions by producers. In brief, Rosen explained how the differentiated hedonic price function represents the envelope of a family of “value” functions (willingness to pay) and a family of offer functions (willingess to sell).</p>
-<p>Since then, many uses have been found for hedonic price analysis, with applications ranging from the pricing of <a href="https://www.aeaweb.org/articles?id=10.1257/aer.91.2.268">computers</a>, <a href="https://www.tandfonline.com/doi/abs/10.1080/00036840600993924">personal digital assistants</a>, and <a href="https://www.tandfonline.com/doi/abs/10.1080/09571269908718165">wine</a> to <a href="https://pubsonline.informs.org/doi/abs/10.1287/mnsc.48.4.534">online purchases</a> and <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1744-7976.2006.00053.x">farmland</a>.</p>
-<p>The field of discrete choice analysis is concerned with the analysis of implicit markets when the outcome of the choice process is discrete. This requires a few things:</p>
-<p>DESCRIBE THE CONDITIONS FOR A PROCESS TO BE A CHOICE.</p>
+<div id="learning-objectives-7" class="section level2">
+<h2><span class="header-section-number">8.3</span> Learning objectives</h2>
+<p>In this practice, you will learn about:</p>
+<ol style="list-style-type: decimal">
+<li>The probit model.</li>
+<li>Identification of parameters.</li>
+<li>Estimation of the model.</li>
+</ol>
 </div>
-<div id="plan" class="section level2 unnumbered">
-<h2>Plan</h2>
-<p>The plan with these notes is to introduce discrete choice analysis in an intuitive way. To achieve this, I use examples and coding, lots of coding. There are some classical references, for instance Ben-Akiva and Lerman <span class="citation">(<a href="#ref-Benakiva1985discrete">1985</a>)</span> and Train <span class="citation">(<a href="#ref-Train2009discrete">2009</a>)</span>, and then more specialized books such as Louviere et al. <span class="citation">(<a href="#ref-Louviere2000stated">2000</a>)</span>. Other books cover discrete choice analysis as one component of modelling systems <span class="citation">(such as transportation; see Ortúzar and Willumsen <a href="#ref-Ortuzar2011modelling">2011</a>)</span>, or cover related topics but from a statistical perspective <span class="citation">(Maddala <a href="#ref-Maddala1983limited">1983</a>)</span>. The present notes should be appealing to students or others who are approaching this topic for the first time, I strongly encourage readers to become acquainted with these books if they have not already.</p>
-<p>Each author organizes topics in a way that is logical to them. Some texts begin with a coverage of fundamental mathematics, probability, and statistics. Others with an introduction to a substantive topic (e.g., the context of travel demand analysis). In the book <em>Applied Choice Analysis: A Primer</em> by Hensher et al. <span class="citation">(<a href="#ref-hensher2005applied">2005</a>)</span>, the title of Chapter 10 is “Getting Started Modeling”. Train <span class="citation">(<a href="#ref-Train2009discrete">2009</a>)</span>, in contrast, begins by discussing the properties of discrete choice models and discussing the logit model right away.</p>
-<p>For presentation I have in the past relied heavily on Train’s book to organize my graduate seminar. I find this style of presentation sufficiently intuitive, when combined with some relevant topics introduced at key points. For example, I find that it makes sense to have a discussion of specification and estimation of models after introducing the logit model. In this way, the details of specifying utility functions can be presented in the context of an operational model. Readers will notice that this notes tend to follow Train closely, using a thematic approach, moving from the fundamentals, introducing the logit model, and then by families of models, i.e., GEV, probit, and so on.</p>
-<p>Beginning early in the text, readers are asked to get their hands dirty with code. This is a very deliberate decision. Most books on discrete choice analysis are software-independent, meaning that they cover the topics without making reference to a particular statistical package for analysis. Others rely for presentation on a specific software. For instance, Hensher et al. <span class="citation">(<a href="#ref-hensher2005applied">2005</a>)</span> refer extensively to the software <code>NLOGIT</code>, a software package sold by <a href="http://www.limdep.com/">Econometric Software, Inc.</a>. Yet other packages were originally developed independently of a statistical computing project. One example is Michel Bierlaire’s <a href="http://biogeme.epfl.ch/">BIOGEME</a>. Not being associated with a statistical computing project means that synergies with other packages cannot be realized. Newer versions of BIOGEME now exist written almost exclusively in Python and that allow the package to benefit from the Python Data Analysis Library <a href="https://pandas.pydata.org/">Pandas</a>.</p>
-<p>For this text, I have chosen <code>R</code>. <code>R</code> is a generalist statistical language with a very broad user base. I personally find <code>R</code> more accessible than Python, for example, as an introduction to statistical and data analysis computing, particularly with the support of a good Interactive Development Environment such as <a href="https://www.rstudio.com/">RStudio</a>.</p>
-<p>Packages (the fundamental units of shareable code in <code>R</code>) benefit from the synergyes of many developers and users sharing their code in a transparent and open way. Ten years ago it would have been very difficult to write a book on discrete choice modelling based on <code>R</code>: the earliest version of Croissant’s <code>mlogit</code> package <span class="citation">(Y. Croissant <a href="#ref-Croissant2019mlogit">2018</a>)</span> dates from 2009; the earliest version of Sarrias and Daziano’s <code>gmnl</code> package <span class="citation">(Sarrias and Daziano <a href="#ref-Sarrias2017multinomial">2017</a>)</span> dates from 2015. Secondly, <code>R</code> and related packages are free. It is my conviction that research can be accelerated by the generous contributions of developers who graciously share their code with the world. By doing this, they help to maintain the cost of research low, and thus enable more people around the world to engage in it. That said, there is a potential disadvantage: unlike more established (especially commercial) packages that have been kicking around for years if not decades, newer <code>R</code> packages may still have some limitations. To mention one, the current versions of the packages <code>mlogit</code> and <code>gmnl</code> are implemented exclusively for universal choice set, in other words, under the assumption that all alternatives are available to all decision-makers. There are situations, For example, suppose</p>
-<p>My plan for this text, therefore, is to cover a topic in each section that builds on previous material. I have used the materials presented in these notes (in different incarnations) for teaching discrete choice analysis in different settings. Primarily, these notes have been used in the course <strong>GEOG 738</strong> <em>Discrete Choice Analysis</em> at McMaster University. This course is a full (Canadian) graduate term, which typically means 11 or 12 weeks of classes. The course is organized as a 2-hour seminar that is offered once per week. Accordingly, each section is designed to cover very approximately the material that I am used to cover in a 2 hour seminar.</p>
-<p>As I continue to work on these notes, I hope to be able to add optional (or bonus) chapters, that could be used 1) to extend a course on discrete choice analysis beyond the 12 week horizon of the Canadian graduate school term, and/or 2) to offer more advanced material to interested readers.</p>
+<div id="suggested-readings-6" class="section level2">
+<h2><span class="header-section-number">8.4</span> Suggested readings</h2>
+<ul>
+<li>Ben-Akiva, M. Lerman, <span class="citation">(<a href="#ref-Benakiva1985discrete">1985</a>)</span> Discrete Choice Analysis: Theory and Applications to Travel Demand, <strong>Chapter 5, pp. 128-129</strong>, MIT Press.</li>
+<li>Ortuzar JD, Willumsen LG <span class="citation">(<a href="#ref-Ortuzar2011modelling">2011</a>)</span> Modelling Transport, Fourth Edition, <strong>Chapter 7, pp. 248-250</strong>, John Wiley and Sons.</li>
+<li>Train <span class="citation">(<a href="#ref-Train2009discrete">2009</a>)</span> Discrete Choice Methods with Simulation, Second Edition, <strong>Chapter 5</strong>, Cambridge University Press.</li>
+</ul>
 </div>
-<div id="audience" class="section level2 unnumbered">
-<h2>Audience</h2>
-<p>The notes were designed for a graduate course in geography, but are not necessarily limited to geographers, and could indeed be a valuable resource to graduate students and others interested in discrete choice analysis and applications in economics, planning, transportation engineering, public health, etc. The prerequisites are an introductory college/university level course on multivariate statistics, ideally covering the fundamentals of probability theory and hypothesis testing. Working knowledge of multivariate linear regression analysis is a bonus but not strictly required.</p>
+<div id="preliminaries-5" class="section level2">
+<h2><span class="header-section-number">8.5</span> Preliminaries</h2>
+<p>Load the packages used in this section:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(mlogit)
+<span class="kw">library</span>(kableExtra)</code></pre></div>
+<p>Load the dataset used in this section (from the <code>mlogit</code> package):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;Heating&quot;</span>)</code></pre></div>
+<p>The dataset is in “wide” form, which means that there is one record per decision making unit (i.e. per household), so we need to change the data to “long” format:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">H &lt;-<span class="st"> </span><span class="kw">mlogit.data</span>(Heating, <span class="dt">shape =</span> <span class="st">&quot;wide&quot;</span>, <span class="dt">choice =</span> <span class="st">&quot;depvar&quot;</span>, <span class="dt">varying =</span> <span class="kw">c</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">12</span>))</code></pre></div>
+<p>This is the same dataset used in the preceding chapter with five heating systems:</p>
+<ul>
+<li>Gas Central (gc)</li>
+<li>Gas Room (gr)</li>
+<li>Electric Central (ec)</li>
+<li>Electric Room (er)</li>
+<li>Heat Pump (hp)</li>
+</ul>
+<p>This dataset was used to illustrate the nested logit model. The results before suggested that there was a strong correlation among central systems and room-based systems, and therefore a nested logit model was an improvement over the multinomial logit model.</p>
 </div>
-<div id="requisites" class="section level2 unnumbered">
-<h2>Requisites</h2>
-<p>This book is not a course to learn <code>R</code>. The language is introduced progressively, and assumes that readers are computer-literate and have possible done some basic coding in the past. For readers who wish to learn <code>R</code> there are other sources such as Wickham and Grolemund <span class="citation">(<a href="#ref-wickham2016r">2016</a>)</span>(<a href="https://r4ds.had.co.nz/" class="uri">https://r4ds.had.co.nz/</a>) or Albert and Rizzo <span class="citation">(Albert and Rizzo <a href="#ref-Albert2012r">2012</a>)</span>.</p>
-<p>To fully benefit from this text, up-to-date copies of <a href="https://cran.r-project.org/">R</a> and <a href="https://www.rstudio.com/">RStudio</a> are highly recommended. There are different packages that implement discrete choice methods in <code>R</code>. I will particularly rely on the packages <a href="https://CRAN.R-project.org/package=mlogit"><code>mlogit</code></a> and <a href="https://CRAN.R-project.org/package=gmnl"><code>gmnl</code></a>.</p>
+<div id="probit-model" class="section level2">
+<h2><span class="header-section-number">8.6</span> Probit model</h2>
+<p>Assume that the choice problem of decision-maker <span class="math inline">\(n\)</span> consists of <span class="math inline">\(J\)</span> alternatives, and that the utility of each alternative is decomposed in two parts, a systematic utility <span class="math inline">\(V\)</span> and a random utility <span class="math inline">\(\epsilon\)</span>, as follows: <span class="math display">\[
+U_{n1} = V_{n1} + \epsilon_{n1}\\
+\cdots\\
+U_{nj} = V_{nj} + \epsilon_{nj}\\
+\cdots\\
+U_{nJ} = V_{nJ} + \epsilon_{nJ}
+\]</span> The random utility terms can be collected as follows: <span class="math display">\[
+\epsilon_n = [\epsilon_1, \cdots, \epsilon_j, \cdots, \epsilon_J] 
+\]</span></p>
+<p>Previously, the logit model was derived based on the assumption that the random utility terms <span class="math inline">\(\epsilon_j\)</span> were Extreme Value Type I. Now, the assumption is that the vector of random utilities <span class="math inline">\(\epsilon_n\)</span> follows the normal distribution with a mean vector of zero and a covariance matrix <span class="math inline">\(\Sigma_n\)</span> that can be a function of variables specific to a decision-maker. The probability distribution function is: <span class="math display">\[
+\phi(\epsilon_n)=\frac{1}{(2\pi)^{J/2}|\Sigma_n|^{1/2}}e^{-\frac{1}{2}\epsilon_n^T\Sigma_n^{-1}\epsilon_n}
+\]</span></p>
+<p>As before, the probability of choosing alternative <span class="math inline">\(j\)</span> is given by the following expression: <span class="math display">\[
+P_j=P(U_j\ge U_k;\forall k\ne j)
+\]</span></p>
+<p>Since the probability is a function of the difference in utilities, it is possible to define the following expressions for differences with respect to the utility of the alternative whose probability we wish to calculate (i.e., <span class="math inline">\(j\)</span>): <span class="math display">\[
+\tilde{U}_{nkj}=U_{nk} - U_{nj}
+\]</span></p>
+<p>which implies: <span class="math display">\[
+\tilde{V}_{nkj}=V_{nk} - V_{nj}\\
+\tilde{\epsilon}_{nkj} = \epsilon_{nk} - \epsilon_{nj}
+\]</span></p>
+<p>In this case, the probability expression becomes: <span class="math display">\[
+P_j=P(U_{nkj}\le 0;\forall k\ne j)
+\]</span></p>
+<p><span class="math display">\[
+\phi(\tilde{\epsilon}_n)=\frac{1}{(2\pi)^{J/2}|\tilde{\Sigma}_n|^{1/2}}e^{-\frac{1}{2}\tilde{\epsilon}_n^T\tilde{\Sigma}_n^{-1}\tilde{\epsilon}_n}
+\]</span></p>
+<p>Now we are ready to estimate a multinomial logit model (we called this Model 3 in Chapter <a href="chapter-3.html#chapter-3">4</a>):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod3 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H, <span class="dt">reflevel =</span> <span class="st">&quot;ec&quot;</span>)
+<span class="kw">summary</span>(mod3)</code></pre></div>
+<pre><code>## 
+## Call:
+## mlogit(formula = depvar ~ ic + oc, data = H, reflevel = &quot;ec&quot;, 
+##     method = &quot;nr&quot;, print.level = 0)
+## 
+## Frequencies of alternatives:
+##       ec       er       gc       gr       hp 
+## 0.071111 0.093333 0.636667 0.143333 0.055556 
+## 
+## nr method
+## 6 iterations, 0h:0m:0s 
+## g&#39;(-H)^-1g = 9.58E-06 
+## successive function values within tolerance limits 
+## 
+## Coefficients :
+##                   Estimate  Std. Error z-value  Pr(&gt;|z|)    
+## er:(intercept)  0.19459102  0.20424212  0.9527 0.3407184    
+## gc:(intercept)  0.05213336  0.46598878  0.1119 0.9109210    
+## gr:(intercept) -1.35058266  0.50715442 -2.6631 0.0077434 ** 
+## hp:(intercept) -1.65884594  0.44841936 -3.6993 0.0002162 ***
+## ic             -0.00153315  0.00062086 -2.4694 0.0135333 *  
+## oc             -0.00699637  0.00155408 -4.5019 6.734e-06 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Log-Likelihood: -1008.2
+## McFadden R^2:  0.013691 
+## Likelihood ratio test : chisq = 27.99 (p.value = 8.3572e-07)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nl2 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H,
+             <span class="dt">nests =</span> <span class="kw">list</span>(<span class="dt">room =</span> <span class="kw">c</span>( <span class="st">&#39;er&#39;</span>, <span class="st">&#39;gr&#39;</span>), <span class="dt">central =</span> <span class="kw">c</span>(<span class="st">&#39;ec&#39;</span>, <span class="st">&#39;gc&#39;</span>, <span class="st">&#39;hp&#39;</span>)),
+             <span class="dt">un.nest.el =</span> <span class="ot">TRUE</span>, <span class="dt">steptol =</span> <span class="fl">1e-12</span>)
+<span class="kw">summary</span>(nl2)</code></pre></div>
+<pre><code>## 
+## Call:
+## mlogit(formula = depvar ~ ic + oc, data = H, nests = list(room = c(&quot;er&quot;, 
+##     &quot;gr&quot;), central = c(&quot;ec&quot;, &quot;gc&quot;, &quot;hp&quot;)), un.nest.el = TRUE, 
+##     steptol = 1e-12)
+## 
+## Frequencies of alternatives:
+##       ec       er       gc       gr       hp 
+## 0.071111 0.093333 0.636667 0.143333 0.055556 
+## 
+## bfgs method
+## 19 iterations, 0h:0m:0s 
+## g&#39;(-H)^-1g = 0.0443 
+## successive function values within tolerance limits 
+## 
+## Coefficients :
+##                   Estimate  Std. Error  z-value  Pr(&gt;|z|)    
+## er:(intercept) -1.1290e+00  7.8672e-02 -14.3508 &lt; 2.2e-16 ***
+## gc:(intercept) -1.0474e-02  1.5358e-02  -0.6820 0.4952521    
+## gr:(intercept) -1.1817e+00  8.0048e-02 -14.7628 &lt; 2.2e-16 ***
+## hp:(intercept) -4.5459e-02  1.5516e-02  -2.9298 0.0033921 ** 
+## ic             -8.3899e-05  2.5826e-05  -3.2486 0.0011598 ** 
+## oc             -2.2841e-04  5.9509e-05  -3.8383 0.0001239 ***
+## iv              2.7374e-02  3.2338e-03   8.4649 &lt; 2.2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Log-Likelihood: -1003.5
+## McFadden R^2:  0.018329 
+## Likelihood ratio test : chisq = 37.473 (p.value = 3.6549e-08)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prob1 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H, <span class="dt">reflevel =</span> <span class="st">&quot;ec&quot;</span>, <span class="dt">probit =</span> <span class="ot">TRUE</span>, <span class="dt">R=</span><span class="dv">100</span>)
+<span class="kw">summary</span>(prob1)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prob2 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H, <span class="dt">reflevel =</span> <span class="st">&quot;ec&quot;</span>, <span class="dt">probit =</span> <span class="ot">TRUE</span>,
+                <span class="dt">constPar=</span><span class="kw">c</span>(<span class="st">&#39;hp.hp&#39;</span>, <span class="st">&quot;gr.hp&quot;</span>, <span class="st">&quot;gr.gr&quot;</span>, <span class="st">&quot;gc.gr&quot;</span>, <span class="st">&quot;gc.gc&quot;</span>, <span class="st">&quot;er.hp&quot;</span>))
+<span class="kw">summary</span>(prob2)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prob3 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H, <span class="dt">reflevel =</span> <span class="st">&quot;ec&quot;</span>, <span class="dt">probit =</span> <span class="ot">TRUE</span>,
+                <span class="dt">constPar=</span><span class="kw">c</span>(<span class="st">&quot;er.er&quot;</span>, <span class="st">&quot;gr.hp&quot;</span>, <span class="st">&quot;gc.gr&quot;</span>, <span class="st">&quot;er.hp&quot;</span>, <span class="st">&quot;er.gc&quot;</span>), <span class="dt">R =</span> <span class="dv">50</span>)
+<span class="kw">summary</span>(prob3)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">L1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">4</span>)
+L1[<span class="op">!</span><span class="kw">upper.tri</span>(L1)] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="kw">coef</span>(prob3)[<span class="dv">7</span>], <span class="dv">0</span>, <span class="kw">coef</span>(prob3)[<span class="dv">8</span>], <span class="dv">0</span>, <span class="kw">coef</span>(prob3)[<span class="dv">9</span><span class="op">:</span><span class="dv">10</span>], <span class="dv">0</span>, <span class="kw">coef</span>(prob3)[<span class="dv">11</span>])
+L1</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">L1 <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(L1)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">L1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">4</span>)
+L1[<span class="op">!</span><span class="kw">upper.tri</span>(L1)] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">coef</span>(prob1)[<span class="dv">7</span><span class="op">:</span><span class="dv">15</span>])
+L1</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">L1 <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(L1)</code></pre></div>
+<p>To simulate this scenario, we begin by copying the input dataframe:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">H_rebate &lt;-<span class="st"> </span>H</code></pre></div>
+<p>In the new dataframe that will simulate the rebate, replacing the cost of installation as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">H_rebate[H_rebate<span class="op">$</span>alt <span class="op">==</span><span class="st"> &quot;gc&quot;</span>, <span class="st">&quot;ic&quot;</span>] &lt;-<span class="st"> </span><span class="fl">1.15</span> <span class="op">*</span><span class="st"> </span>H_rebate[H_rebate<span class="op">$</span>alt <span class="op">==</span><span class="st"> &quot;gc&quot;</span>, <span class="st">&quot;ic&quot;</span>]</code></pre></div>
+<p>We can calculate the market shares of the “do nothing” and “rebate” policies and compare their shares (which are the mean values of the predictions):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data.frame</span>(<span class="dt">Policy =</span> <span class="kw">c</span>(<span class="st">&quot;Do nothing&quot;</span>, <span class="st">&quot;15% rebate&quot;</span>),
+           <span class="kw">rbind</span>(<span class="kw">apply</span>(<span class="kw">predict</span>(mod3, <span class="dt">newdata =</span> H), <span class="dv">2</span>, mean),
+                 <span class="kw">apply</span>(<span class="kw">predict</span>(mod3, <span class="dt">newdata =</span> H_rebate), <span class="dv">2</span>, mean)))</code></pre></div>
+<p>Nested logit:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data.frame</span>(<span class="dt">Policy =</span> <span class="kw">c</span>(<span class="st">&quot;Do nothing&quot;</span>, <span class="st">&quot;15% rebate&quot;</span>),
+           <span class="kw">rbind</span>(<span class="kw">apply</span>(<span class="kw">predict</span>(nl2, <span class="dt">newdata =</span> H), <span class="dv">2</span>, mean),
+                 <span class="kw">apply</span>(<span class="kw">predict</span>(nl2, <span class="dt">newdata =</span> H_rebate), <span class="dv">2</span>, mean)))</code></pre></div>
+<p>Probit:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data.frame</span>(<span class="dt">Policy =</span> <span class="kw">c</span>(<span class="st">&quot;Do nothing&quot;</span>, <span class="st">&quot;15% rebate&quot;</span>),
+           <span class="kw">rbind</span>(<span class="kw">apply</span>(<span class="kw">predict</span>(prob3, <span class="dt">newdata =</span> H), <span class="dv">2</span>, mean),
+                 <span class="kw">apply</span>(<span class="kw">predict</span>(prob3, <span class="dt">newdata =</span> H_rebate), <span class="dv">2</span>, mean)))</code></pre></div>
+</div>
+<div id="exercise-6" class="section level2">
+<h2><span class="header-section-number">8.7</span> Exercise</h2>
+<ol style="list-style-type: decimal">
+<li></li>
+</ol>
 
 </div>
 </div>
@@ -363,32 +479,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="ref-Benakiva1985discrete">
 <p>Ben-Akiva, M., and S. R. Lerman. 1985. <em>Discrete Choice Analysis: Theory and Applications to Travel Demand</em>. Book. Cambridge: The MIT Press.</p>
 </div>
-<div id="ref-Train2009discrete">
-<p>Train, K. 2009. <em>Discrete Choice Methods with Simulation</em>. Book. 2nd Edition. Cambridge: Cambridge University Press.</p>
-</div>
-<div id="ref-Louviere2000stated">
-<p>Louviere, Jordan J, David A Hensher, and Joffre D Swait. 2000. <em>Stated Choice Methods: Analysis and Applications</em>. Cambridge University Press.</p>
-</div>
 <div id="ref-Ortuzar2011modelling">
 <p>Ortúzar, J. D., and L. G. Willumsen. 2011. <em>Modelling Transport</em>. Book. Vol. Fourth Edition. New York: Wiley.</p>
 </div>
-<div id="ref-Maddala1983limited">
-<p>Maddala, G. S. 1983. <em>Limited-Dependent and Qualitative Variables in Econometrics</em>. Book. Cambridge: Cambridge University Press.</p>
-</div>
-<div id="ref-hensher2005applied">
-<p>Hensher, David A, John M Rose, and William H Greene. 2005. <em>Applied Choice Analysis: A Primer</em>. Cambridge University Press.</p>
-</div>
-<div id="ref-Croissant2019mlogit">
-<p>Croissant, Yves. 2018. <em>Mlogit: Multinomial Logit Models</em>. <a href="https://CRAN.R-project.org/package=mlogit" class="uri">https://CRAN.R-project.org/package=mlogit</a>.</p>
-</div>
-<div id="ref-Sarrias2017multinomial">
-<p>Sarrias, Mauricio, and Ricardo Daziano. 2017. “Multinomial Logit Models with Continuous and Discrete Individual Heterogeneity in R: The gmnl Package.” <em>Journal of Statistical Software</em> 79 (2): 1–46. doi:<a href="https://doi.org/10.18637/jss.v079.i02">10.18637/jss.v079.i02</a>.</p>
-</div>
-<div id="ref-wickham2016r">
-<p>Wickham, Hadley, and Garrett Grolemund. 2016. <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</em>. “ O’Reilly Media, Inc.”</p>
-</div>
-<div id="ref-Albert2012r">
-<p>Albert, Jim, and Maria Rizzo. 2012. <em>R by Example</em>. Springer Science &amp; Business Media.</p>
+<div id="ref-Train2009discrete">
+<p>Train, K. 2009. <em>Discrete Choice Methods with Simulation</em>. Book. 2nd Edition. Cambridge: Cambridge University Press.</p>
 </div>
 </div>
             </section>
@@ -396,8 +491,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-
-<a href="preliminaries-installing-r-and-rstudio.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="chapter-6.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chapter-8.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -427,7 +522,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/07-Non-Proportional-Substitution-Probit.Rmd",
 "text": "Edit"
 },
 "history": {
