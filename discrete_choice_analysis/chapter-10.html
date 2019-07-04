@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Chapter 10 Dealing with Heterogeneity II: The Latent Class Logit Model | An Introduction to Discrete Choice Analysis</title>
+  <title>Chapter 11 Ordinal and Ranked Responses | An Introduction to Discrete Choice Analysis</title>
   <meta name="description" content="These notes were created by Antonio Paez as a resource for teaching a graduate discrete choice analysis course (GEOG 738) at McMaster University.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Chapter 10 Dealing with Heterogeneity II: The Latent Class Logit Model | An Introduction to Discrete Choice Analysis" />
+  <meta property="og:title" content="Chapter 11 Ordinal and Ranked Responses | An Introduction to Discrete Choice Analysis" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="paezha/Discrete-Choice-Analysis-with-R" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 10 Dealing with Heterogeneity II: The Latent Class Logit Model | An Introduction to Discrete Choice Analysis" />
+  <meta name="twitter:title" content="Chapter 11 Ordinal and Ranked Responses | An Introduction to Discrete Choice Analysis" />
   
   <meta name="twitter:description" content="These notes were created by Antonio Paez as a resource for teaching a graduate discrete choice analysis course (GEOG 738) at McMaster University." />
   
@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="chapter-8.html">
-<link rel="next" href="chapter-10.html">
+<link rel="prev" href="chapter-9.html">
+<link rel="next" href="references.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -307,22 +307,25 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="chapter-9" class="section level1">
-<h1><span class="header-section-number">Chapter 10</span> Dealing with Heterogeneity II: The Latent Class Logit Model</h1>
+<div id="chapter-10" class="section level1">
+<h1><span class="header-section-number">Chapter 11</span> Ordinal and Ranked Responses</h1>
 <blockquote>
-<p>“Byrdes of on kynde and color flok and flye together.”</p>
-<p>— William Turner, The Rescuing of Romish Fox</p>
+<p>“I can’t rank anything. I mean, how could anyone possibly say what their favourite piece of music is? I don’t have the ability or the desire to categorise things of that nature.”</p>
+<p>— Charlie Brooker</p>
 </blockquote>
-<div id="preliminaries-7" class="section level2">
-<h2><span class="header-section-number">10.1</span> Preliminaries</h2>
+<div id="preliminaries-8" class="section level2">
+<h2><span class="header-section-number">11.1</span> Preliminaries</h2>
 <p>Load the packages used in this section:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
-<span class="kw">library</span>(mlogit)
-<span class="kw">library</span>(gmnl)
+<span class="co">#library(mlogit)</span>
+<span class="co">#library(gmnl)</span>
 <span class="kw">library</span>(kableExtra)
 <span class="kw">library</span>(gridExtra)</code></pre></div>
 <p>Load the dataset used in this chapter, from the <code>mlogit</code> package:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;RiskyTransport&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;mlogit&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readxl)</code></pre></div>
+<pre><code>## Warning: package &#39;readxl&#39; was built under R version 3.5.3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Individual_DA_Data_Built_Environment &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;Raw/Examples/Sense of Community/Individual+DA Data+Built Environment.xls&quot;</span>)
+<span class="kw">View</span>(Individual_DA_Data_Built_Environment)</code></pre></div>
 <p>This dataset is from a study reported by Leon and Miguel <span class="citation">(<a href="#ref-Leon2017risky">2017</a>)</span> on the transportation choices of individuals travelling to and from the airport in Freetown, Sierra Leone. This airport is not on the mainland, and the alternatives for travel are ferry, hovercraft, helicopter, and water taxi. Information about the number of fatalities due to accidents by each of these modes allowed the researchers to calculate the mortality risk by mode.</p>
 <p>The choice set is not balanced, meaning that not all alternatives were available to all individuals surveyed for this study. This is due to the seasonality or occasional unavailability of some modes. For the example in this chapter, we will extract a subset of observations for those individuals who had the four alternatives available as part of their choice set. To do this, we identify all respondents with four modes:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_available &lt;-<span class="st"> </span>RiskyTransport <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(chid) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">no_rows =</span> <span class="kw">length</span>(chid)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(no_rows <span class="op">==</span><span class="st"> </span><span class="dv">4</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(chid)</code></pre></div>
@@ -507,19 +510,19 @@ Hovercraft
 <p>Next, we use <code>mlogit.data</code> to format the table for use with <code>mlogit</code> and <code>gmnl</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">RT &lt;-<span class="st"> </span><span class="kw">mlogit.data</span>(RT, <span class="dt">shape =</span> <span class="st">&quot;long&quot;</span>, <span class="dt">choice =</span> <span class="st">&quot;choice&quot;</span>, <span class="dt">alt.var =</span> <span class="st">&quot;mode&quot;</span>, <span class="dt">id.var =</span> <span class="st">&quot;id&quot;</span>)</code></pre></div>
 </div>
-<div id="more-on-taste-variation" class="section level2">
-<h2><span class="header-section-number">10.2</span> More on taste variation</h2>
+<div id="more-on-taste-variation-1" class="section level2">
+<h2><span class="header-section-number">11.2</span> More on taste variation</h2>
 <p>Chapter <a href="chapter-8.html#chapter-8">9</a> introduced the mixed logit model, a technique useful to model taste variation. In this chapter, a variation on the theme will be introduced, namely the latent class logit model. We will see how the latent class model is related to the mixed logit model.</p>
 </div>
-<div id="how-to-use-this-note-8" class="section level2">
-<h2><span class="header-section-number">10.3</span> How to use this note</h2>
+<div id="how-to-use-this-note-9" class="section level2">
+<h2><span class="header-section-number">11.3</span> How to use this note</h2>
 <p>Remember that the source for the document you are reading is an R Notebook. Throughout the notes, you will find examples of code in segments of text called <em>chunks</em>. This is an example of a chunk:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="st">&quot;Ignorance is the foundation of absolute power&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;Ignorance is the foundation of absolute power&quot;</code></pre>
 <p>If you are working with the Notebook version of the document, you can run the code by clicking the ‘play’ icon on the top right corner of the chunk. If you are reading the web-book version of the document, you will often see that the code has already been executed. You can still try it by copying and pasting into your R or RStudio console.</p>
 </div>
-<div id="learning-objectives-9" class="section level2">
-<h2><span class="header-section-number">10.4</span> Learning objectives</h2>
+<div id="learning-objectives-10" class="section level2">
+<h2><span class="header-section-number">11.4</span> Learning objectives</h2>
 <p>In this practice, you will learn about:</p>
 <ol style="list-style-type: decimal">
 <li>A framework for modeling taste variations.</li>
@@ -527,15 +530,15 @@ Hovercraft
 <li>Behavioral insights of the latent class logit model.</li>
 </ol>
 </div>
-<div id="suggested-readings-8" class="section level2">
-<h2><span class="header-section-number">10.5</span> Suggested readings</h2>
+<div id="suggested-readings-9" class="section level2">
+<h2><span class="header-section-number">11.5</span> Suggested readings</h2>
 <ul>
 <li>Louviere, J.J., Hensher, D.A., Swait, J.D. <span class="citation">(<a href="#ref-Louviere2000stated">2000</a>)</span> Stated Choice Methods: Analysis and Application, <strong>Chapter 6, pp. 205-206</strong>, Cambridge University Press.</li>
 <li>Train <span class="citation">(<a href="#ref-Train2009discrete">2009</a>)</span> Discrete Choice Methods with Simulation, Second Edition, <strong>Chapter 6 pp. 135-136</strong>, Cambridge University Press.</li>
 </ul>
 </div>
-<div id="latent-class-logit" class="section level2">
-<h2><span class="header-section-number">10.6</span> Latent class logit</h2>
+<div id="latent-class-logit-1" class="section level2">
+<h2><span class="header-section-number">11.6</span> Latent class logit</h2>
 <p>To motivate the discussion, we begin by estimating a base model with two alternative-specific attributes, namely cost and risk.</p>
 <p>The utility function for individual <span class="math inline">\(n\)</span> and mode <span class="math inline">\(i\)</span> is as follows: <span class="math display">\[
 V_{ni} = \beta_{cost} cost_i + \beta_{risk} {risk}_i
@@ -624,15 +627,15 @@ P_{ni} = \sum_q^Q P_{ni|q} = \sum_q^Q p_q\frac{e^{V_{niq}}}{\sum_k e^{V_{nkq}}}
 p_q = \frac{e^{\gamma_q}}{\sum_{z=1}^Qe^{\gamma_z}}
 \]</span> with <span class="math inline">\(\gamma_1=0\)</span>.</p>
 </div>
-<div id="estimation-2" class="section level2">
-<h2><span class="header-section-number">10.7</span> Estimation</h2>
+<div id="estimation-3" class="section level2">
+<h2><span class="header-section-number">11.7</span> Estimation</h2>
 <p>The log-likelihood function of the latent class logit model is this: <span class="math display">\[
 l = \sum_nln\Big[\sum_q p_q(\prod_i P_{ni}^{y_{ni}})\Big]
 \]</span> where <span class="math inline">\(y_{ni}\)</span> is an indicator variable that takes the value of one if decision maker <span class="math inline">\(n\)</span> chose alternative <span class="math inline">\(i\)</span>, and zero otherwise.</p>
 <p>The log-likelihood function can be maximized using conventional optimization techniques, contingent on the selection of the number of latent classes <span class="math inline">\(Q\)</span>.</p>
 </div>
-<div id="properties-of-the-latent-class-logit-model" class="section level2">
-<h2><span class="header-section-number">10.8</span> Properties of the latent class logit model</h2>
+<div id="properties-of-the-latent-class-logit-model-1" class="section level2">
+<h2><span class="header-section-number">11.8</span> Properties of the latent class logit model</h2>
 <p>Among the properties of the latent class logit, two are of interest.</p>
 <p>The first one can be illustrated by means of the odds-ratio of two alternatives, say <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span>: <span class="math display">\[
 \frac{P_{ni}}{P_{nj}} = \frac{\sum_q^Q p_q\frac{e^{V_{niq}}}{\sum_k e^{V_{nkq}}}}{\sum_q^Q p_q\frac{e^{V_{njq}}}{\sum_k e^{V_{nkq}}}}
@@ -654,8 +657,8 @@ CAIC = k[ln(n)+1]-2\hat{l}
 RL = e^{\frac{AIC_{min}-AIC_q}{2}}
 \]</span> The interpretation of the relative likelihood is as being proportional to the probability that the model with <span class="math inline">\(q\)</span> classes minimizes the estimated information loss.</p>
 </div>
-<div id="empirical-example" class="section level2">
-<h2><span class="header-section-number">10.9</span> Empirical example</h2>
+<div id="empirical-example-1" class="section level2">
+<h2><span class="header-section-number">11.9</span> Empirical example</h2>
 <p>Here we revisit the empirical example. To estimate latent class models we use the package <code>gmnl</code>. This package uses a similar syntax for specifying multi-part formulas as <code>mlogit</code>. In particular, the parts of a formula are: <span class="math display">\[
 \begin{array}{cr}
 choice &amp; \sim&amp; \text{alternative attributes with generic coefficients } |\\
@@ -718,7 +721,7 @@ df &lt;-<span class="st"> </span><span class="kw">full_join</span>(mnl0.summary,
                             <span class="st">&quot;; Latent Class (Q=2) = &quot;</span>, <span class="kw">round</span>(lc3<span class="op">$</span>logLik<span class="op">$</span>maximum, <span class="dt">digits =</span> <span class="dv">3</span>))))</code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-188">Table 10.1: </span>Base models: multinomial logit (MNL), latent class Q = 2 (LC2), latent class Q = 3 (LC3)
+<span id="tab:unnamed-chunk-217">Table 11.1: </span>Base models: multinomial logit (MNL), latent class Q = 2 (LC2), latent class Q = 3 (LC3)
 </caption>
 <thead>
 <tr>
@@ -987,8 +990,8 @@ p_1 = 1 - p_2
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.numeric</span>(<span class="kw">exp</span>(<span class="kw">coef</span>(lc2)[<span class="st">&quot;(class)2&quot;</span>])<span class="op">/</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(<span class="kw">coef</span>(lc2)[<span class="st">&quot;(class)2&quot;</span>])))</code></pre></div>
 <pre><code>## [1] 0.6036399</code></pre>
 </div>
-<div id="adding-individual-level-attributes" class="section level2">
-<h2><span class="header-section-number">10.10</span> Adding individual-level attributes</h2>
+<div id="adding-individual-level-attributes-1" class="section level2">
+<h2><span class="header-section-number">11.10</span> Adding individual-level attributes</h2>
 <p>A question when doing this kind of analysis is, to what extent can the inclusion of individual-level attributes capture the variations in taste.</p>
 <p>Here, we revisit the models after adding covariates. There are two multinomial logit models. In one, we introduce the same covariate to all but one utility function (MNL-COV), and in a second model the covariate is used to expand the coefficients of the alternative-level attributes as follows: <span class="math display">\[
 V_{ni} = (b_{cost} + b_{cost:dwage}dwage_n)cost_i + (b_{risk} + b_{risk:dwage}dwage_n)risk_i
@@ -1028,7 +1031,7 @@ df &lt;-<span class="st"> </span><span class="kw">full_join</span>(mnl.cov.summa
                             <span class="st">&quot;; MNL-EXP = &quot;</span>, <span class="kw">round</span>(mnl.exp<span class="op">$</span>logLik[<span class="dv">1</span>], <span class="dt">digits =</span> <span class="dv">3</span>))))</code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-195">Table 10.2: </span>Models: multinomial logit with covariates (MNL-COV) and multinomial logit with expanded coefficients (MNL-EXP)
+<span id="tab:unnamed-chunk-224">Table 11.2: </span>Models: multinomial logit with covariates (MNL-COV) and multinomial logit with expanded coefficients (MNL-EXP)
 </caption>
 <thead>
 <tr>
@@ -1208,8 +1211,8 @@ NA
 <pre><code>## [1] 1.983059e-06</code></pre>
 <p>Clearly, latent class model LC2 is still the best candidate for fit.</p>
 </div>
-<div id="adding-variables-to-the-latent-class-selection-model" class="section level2">
-<h2><span class="header-section-number">10.11</span> Adding variables to the latent class selection model</h2>
+<div id="adding-variables-to-the-latent-class-selection-model-1" class="section level2">
+<h2><span class="header-section-number">11.11</span> Adding variables to the latent class selection model</h2>
 <p>The latent class model can accommodate individual level attributes in the class selection model. The model thus becomes: <span class="math display">\[
 p_q = \frac{e^{\gamma&#39;_q x_i}}{\sum_{z=1}^Qe^{\gamma&#39;_z x_i}}
 \]</span> where now <span class="math inline">\(\gamma_q\)</span> is a vector of size <span class="math inline">\(1 \times h\)</span> and <span class="math inline">\(x_1\)</span> is a vector of <span class="math inline">\(h\)</span> individual-level attributes. As before, <span class="math inline">\(\gamma_1 = 0\)</span>.</p>
@@ -1224,7 +1227,7 @@ p_q = \frac{e^{\gamma&#39;_q x_i}}{\sum_{z=1}^Qe^{\gamma&#39;_z x_i}}
 <pre><code>## Estimating LC model</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(lc2.cov)</code></pre></div>
 <pre><code>## 
-## Model estimated on: Thu Jul 04 4:09:59 AM 2019 
+## Model estimated on: Thu Jul 04 4:10:06 AM 2019 
 ## 
 ## Call:
 ## gmnl(formula = choice ~ cost + risk | 0 | 0 | 0 | dwage, data = RT, 
@@ -1235,7 +1238,7 @@ p_q = \frac{e^{\gamma&#39;_q x_i}}{\sum_{z=1}^Qe^{\gamma&#39;_z x_i}}
 ## Helicopter  WaterTaxi      Ferry Hovercraft 
 ##   0.003125   0.403125   0.459375   0.134375 
 ## 
-## The estimation took: 0h:0m:2s 
+## The estimation took: 0h:0m:3s 
 ## 
 ## Coefficients:
 ##                Estimate Std. Error z-value  Pr(&gt;|z|)    
@@ -1278,11 +1281,11 @@ df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="s
 <span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Probability of class membership&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="dv">25</span>, <span class="dt">y =</span> <span class="fl">0.22</span>, <span class="dt">label =</span> <span class="st">&quot;Class 1&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="dv">250</span>, <span class="dt">y =</span> <span class="fl">0.75</span>, <span class="dt">label =</span> <span class="st">&quot;Class 2&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>)</code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-203-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-232-1.png" width="672" /></p>
 <p>The plot indicates that individuals with lower declared wages have a higher probability of being in class 1, which is risk-averse. This tends to decline quite rapidly as declared wage increases, and overall most members of the population tend to be risk-averse.</p>
 </div>
-<div id="exercise-8" class="section level2">
-<h2><span class="header-section-number">10.12</span> Exercise</h2>
+<div id="exercise-9" class="section level2">
+<h2><span class="header-section-number">11.12</span> Exercise</h2>
 <p>Load the following dataset (used in this chapter):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;RiskyTransport&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;mlogit&quot;</span>)</code></pre></div>
 <p>Select individuals who had access to all four modes of transportation:</p>
@@ -1322,8 +1325,8 @@ RT &lt;-<span class="st"> </span><span class="kw">inner_join</span>(RiskyTranspo
           </div>
         </div>
       </div>
-<a href="chapter-8.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="chapter-10.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="chapter-9.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -1353,7 +1356,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/09-Dealing-with-Heterogeneity-Latent-Class.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/10-Ordinal-Ranked.Rmd",
 "text": "Edit"
 },
 "history": {
