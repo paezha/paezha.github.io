@@ -299,7 +299,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" title="1">n &lt;-<span class="st"> </span><span class="dv">1000</span> <span class="co"># Number of people tossing the coin one time.</span></a>
 <a class="sourceLine" id="cb155-2" title="2">coin_flips &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> n, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)</a>
 <a class="sourceLine" id="cb155-3" title="3"><span class="kw">sum</span>(coin_flips)<span class="op">/</span>n</a></code></pre></div>
-<pre><code>## [1] 0.494</code></pre>
+<pre><code>## [1] 0.488</code></pre>
 <p>What happens if you change the <code>size</code> to 0, and why?</p>
 <p>The binomial function is an example of a <em>discrete</em> probability distribution function, because it can take only one of a discrete (limited) number of values (i.e., 0 and 1).</p>
 <p>Other random probability distribution functions are for <em>continuous</em> variables, variables that can take any value within a predefined range. The most famous of this distributions is the <em>normal distribution</em>, which you may know also as the <em>bell curve</em>. This probability distribution is attributed to Gauss (see <a href="https://link.springer.com/referenceworkentry/10.1007/978-0-387-32833-1_285">here</a>).</p>
@@ -307,10 +307,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The following function reports a value taken at random from a normal distribution with <code>mean</code> zero and standard deviation <code>sd</code> of one. Execute this chunk repeatedly to see what happens:</p>
 <div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" title="1"><span class="co"># This function generates random numbers based on the normal distribution conditional on the given arguments, i.e., the mean and the standard deviation `sd`. </span></a>
 <a class="sourceLine" id="cb157-2" title="2"><span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</a></code></pre></div>
-<pre><code>## [1] 2.001293</code></pre>
+<pre><code>## [1] -1.077087</code></pre>
 <p>Let’s say that the average height of men in Canada is 170.7 cm and the standard deviation is 7 cm. The heigh of a random person in this population would be:</p>
 <div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" title="1"><span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dt">mean =</span> <span class="fl">170.7</span>, <span class="dt">sd =</span> <span class="dv">7</span>)</a></code></pre></div>
-<pre><code>## [1] 175.5118</code></pre>
+<pre><code>## [1] 171.6193</code></pre>
 <p>And the distribution of heights of <code>n</code> men in this population would be:</p>
 <div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb161-1" title="1"><span class="co">#Creating a data frame using the random numbers generated from n=1000 people. The results in the data frame are then plotted using ggplot. The end result is a distribution of heights of 1000 men. You are able to see which heights are most common out of the sample.</span></a>
 <a class="sourceLine" id="cb161-2" title="2">n &lt;-<span class="st"> </span><span class="dv">1000</span></a>
