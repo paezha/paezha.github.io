@@ -112,3 +112,11 @@ It is also possible to suggest edits to the text, and it only requires a GitHub 
 I would like to express my gratitude to the Paul R. MacPherson Institute for Leadership, Innovation and Excellence in Teaching. The Institute supported, through its Student Partners program, my work with some amazing student partners. As part of this program, I worked with Mr. Rajveer Ubhi in the Fall of 2018 and Winter of 2019 organizing all the materials for the text, documenting the code, and ensuring that it satisfied student needs. I also had the opportunity to work with Ms. Megan Coad and Ms. Alexis Polidoro in the Fall of 2019 and Winter of 2020. As former students of the course, Ms. Coad and Polidoro helped to develop a set of mini-lectures to accompany the materials, continued to document the code, and tested the activities. In the Winter 2020 they will also accompany me in the classroom to work directly with new students when we offer the course again. Dr. Anastasios Dardas helped develop illustrative applications that helped us understand the value of interactivity in delivering many of the contents.
 
 Working with these wonderful individuals has been a pleasure, and I am grateful for their contributions to this effort.
+
+## Versioning {-}
+
+These notes were developed using the following version of `R`:
+```{r echo=FALSE}
+R.version
+```
+
