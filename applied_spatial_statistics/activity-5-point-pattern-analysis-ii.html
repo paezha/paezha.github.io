@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 1 Preliminaries: Installing R and RStudio | Applied Spatial Statistics with R</title>
+  <title>Chapter 11 Activity 5: Point Pattern Analysis II | Applied Spatial Statistics with R</title>
   <meta name="description" content="This book was created as a resource for teaching applied spatial statistics at McMaster University by Antonio Paez, with support from Anastassios Dardas and Rajveer Ubhi." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 1 Preliminaries: Installing R and RStudio | Applied Spatial Statistics with R" />
+  <meta property="og:title" content="Chapter 11 Activity 5: Point Pattern Analysis II | Applied Spatial Statistics with R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="paezha.github.io/applied_spatial_statistics" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 1 Preliminaries: Installing R and RStudio | Applied Spatial Statistics with R" />
+  <meta name="twitter:title" content="Chapter 11 Activity 5: Point Pattern Analysis II | Applied Spatial Statistics with R" />
   
   <meta name="twitter:description" content="This book was created as a resource for teaching applied spatial statistics at McMaster University by Antonio Paez, with support from Anastassios Dardas and Rajveer Ubhi." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="basic-operations-and-data-structures-in-r.html"/>
+<link rel="prev" href="point-pattern-analysis-ii.html"/>
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -264,89 +264,183 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="preliminaries-installing-r-and-rstudio" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> Preliminaries: Installing <code>R</code> and RStudio</h1>
-<div id="introduction" class="section level2">
-<h2><span class="header-section-number">1.1</span> Introduction</h2>
-<p>Statistical analysis is the study of the properties of a dataset. There are different aspects of statistical analysis, and they often require that we work with data that are messy. According to Wickham and Grolemund <span class="citation">(<a href="#ref-Wickham2016r" role="doc-biblioref">2016</a>)</span>, computer-assisted data analysis includes the steps outlined in Figure <a href="preliminaries-installing-r-and-rstudio.html#fig:data-analysis-process">1.1</a>.</p>
-<p>First, the data are imported to a suitable software application. This can include data from primary sources (suppose that you collected coordinates using a GPS) or from secondary sources (the Census of Canada). Data will likely be text tables, or an Excel file, among other possible formats. Before data can be analyzed, they need to be tidied. This means that the data need to be arranged in such a way that they match the process that you are interested in. For instance, a travel survey can be organized so that each row is a traveler, or as an alternative so that each row is a trip.</p>
-<p>Once that data are tidy, Exploratory Data Analysis (EDA) and/or its geographical extension Exploratory Spatial Data Analysis (ESDA) can be conducted. This involves transforming the raw data into information. Examples of transformations include calculating the mean and the standard deviation. Visualization is also part of this exploratory exercise. In EDA this could be creating a histogram or a scatterplot. Mapping is a key visualization technique in spatial statistics.</p>
-<p>Modeling is a process that further extracts information from the data, typically by looking at relationships between multiple variables.</p>
-<p>All of the tasks mentioned above, and many more, can be handled easily in a variety of software applications. For this course, you will use the statistical computing language <code>R</code>.</p>
-<div class="figure"><span id="fig:data-analysis-process"></span>
-<img src="00-Figure-1.png" alt="\label{fig:data-analysis-process} The process of doing data analysis (from Wickham and Grolemund, 2016)" width="293" />
-<p class="caption">
-Figure 1.1:  The process of doing data analysis (from Wickham and Grolemund, 2016)
-</p>
-</div>
-</div>
-<div id="learning-objectives" class="section level2">
-<h2><span class="header-section-number">1.2</span> Learning Objectives</h2>
-<p>In this reading, you will learn:</p>
+<div id="activity-5-point-pattern-analysis-ii" class="section level1">
+<h1><span class="header-section-number">Chapter 11</span> Activity 5: Point Pattern Analysis II</h1>
+<p>Remember, you can download the source file for this activity from <a href="https://github.com/paezha/Spatial-Statistics-Course">here</a>.</p>
+<div id="practice-questions-2" class="section level2">
+<h2><span class="header-section-number">11.1</span> Practice questions</h2>
+<p>Answer the following questions:</p>
 <ol style="list-style-type: decimal">
-<li>How to install <code>R</code>.</li>
-<li>About the RStudio Interactive Development Environment.</li>
-<li>About packages in <code>R</code>.</li>
+<li>How does the quadrat-based test of independence respond to a small number of quadrats?</li>
+<li>How does the quadrat-based test of independence respond to a large number of quadrats?</li>
+<li>What are the limitations of quadrat analysis?</li>
+<li>What is a kernel function?</li>
+<li>How does the bandwidth affect a kernel function?</li>
 </ol>
 </div>
-<div id="r-the-open-statistical-computing-project" class="section level2">
-<h2><span class="header-section-number">1.3</span> <code>R</code>: The Open Statistical Computing Project</h2>
-<div id="what-is-r" class="section level3">
-<h3><span class="header-section-number">1.3.1</span> What is <code>R</code>?</h3>
-<p><code>R</code> is an open-source language for statistical computing. It was created by Ross Ihaka and Robert Gentleman at the University of Auckland, in New Zealand, as a way to offer their students an accessible, no-cost tool for their courses. <code>R</code> is now maintained by the <code>R</code> Development Core Team, and is developed by hundreds of contributors around the globe. <code>R</code> is an attractive alternative to other software applications for data analysis (e.g., Microsoft Excel, STATA) due to its open-source character (i.e., it is free), its flexibility, and large and dedicated user community. The presence of a very active community of developers and users, especially in an open context, means if there is something you want to do (for instance, linear regression), it is very likely that someone has already developed functionality for it in <code>R</code>.</p>
-<p>A good way to think about <code>R</code> is as a core package, to which a library, consisting of additional packages, can be attached to increase its functionality. <code>R</code> can be downloaded for free at:</p>
-<pre><code>https://cran.rstudio.com/</code></pre>
-<p><code>R</code> comes with a built-in console (a user graphical interface), but better alternatives to the basic interface exist, including RStudio, an Integrated Development Environment, or IDE for short. RStudio can also be downloaded for free, by visiting the website:</p>
-<pre><code>https://www.rstudio.com/products/rstudio/download/</code></pre>
-<p><code>R</code> requires you to work using the command line, which is going to be unfamiliar to many of you accustomed to user-friendly graphical interfaces. Do not fear. People worked for a long time using the command line, or even more cumbersomely, using punched cards in early computers. Graphical user interfaces are convenient, but they have a major drawback, namely their inflexibility. A program that functions based on graphical user interfaces allows you to do only what is hard-coded in the user interface. Command line, as we will see, is somewhat more involved, but provides much more flexibility in operation, and it frees you from the constraints inherent in a point-and-click system.</p>
-<p>Go ahead. Install <code>R</code> and RStudio in your computer. (If you are at McMaster working in the GIS lab, you will find that these have already been installed there).</p>
-<p>Before introducing some basic functionality in <code>R</code>, lets quickly take a tour of the RStudio IDE.</p>
+<div id="learning-objectives-10" class="section level2">
+<h2><span class="header-section-number">11.2</span> Learning objectives</h2>
+<p>In this activity, you will:</p>
+<ol style="list-style-type: decimal">
+<li>Explore a dataset using quadrats and kernel density.</li>
+<li>Experiment with different parameters (number/size of kernels and bandwidths).</li>
+<li>Discuss the impacts of selecting different parameters.</li>
+<li>Hypothesize about the underlying spatial process based on your analysis.</li>
+</ol>
 </div>
-<div id="the-rstudio-ide" class="section level3">
-<h3><span class="header-section-number">1.3.2</span> The RStudio IDE</h3>
-<p>The RStudio IDE provides a very complete interface to interact with the language <code>R</code>, and do much more in addition. It consists of a window with several panes. Some panes include, in addition, several tabs. There are the usual drop-down menus for common operations, such as creating new files, saving, common commands for editing, etc. See Figure <a href="preliminaries-installing-r-and-rstudio.html#fig:RStudio-IDE">1.2</a> below.</p>
-<div class="figure"><span id="fig:RStudio-IDE"></span>
-<img src="00-Figure-2.png" alt="\label{fig:RStudio-IDE}The RStudio IDE" width="1920" />
-<p class="caption">
-Figure 1.2: The RStudio IDE
-</p>
+<div id="suggested-reading-3" class="section level2">
+<h2><span class="header-section-number">11.3</span> Suggested reading</h2>
+<p>O’Sullivan D and Unwin D (2010) Geographic Information Analysis, 2nd Edition, Chapter 5. John Wiley &amp; Sons: New Jersey.</p>
 </div>
-<p>The editor pane allows you to open and work with text and other files, where you can write instructions that can be passed on to the program. Writing something in the editor does not execute any instructions, it merely records them for possible future use. In fact, much of what is written in the editor will not be instructions, but rather comments, discussion, and other text that is useful to understand code.</p>
-<p>The console pane is where instructions are passed on to the program. When an instruction is typed (or copied and pasted) there, <code>R</code> will understand that it needs to do something. The instructions must be written in a way that <code>R</code> understands, otherwise errors will occur. If you have typed instructions in the editor, you can use “ctrl-Enter” (in Windows) or “cmd-Enter” (in Mac) to send to the console and execute.</p>
-<p>The environment is where all data that is currently in memory is reported. The History tab acts like a log: it keeps track of the instructions that have been executed in the console.</p>
-<p>The last pane includes a number of useful tabs. The File tab allows you to navigate your computer, change the working directory, see what files are where, and so on. The Plot tab is where plots are rendered, when instructions require R to do so. The Packages tab allows you to manage packages, which as mentioned above, are pieces of code that can augment the functionality of <code>R</code>. The Help tab is where you can consult the documentation for functions/packages/see examples, and so on. The Viewer tab is for displaying local web content, for instance, to preview a Notebook (more on Notebooks soon).</p>
-<p>This brief introduction should have allowed you to install both <code>R</code> and RStudio. The next thing that you will need is a library of <em>packages</em>.</p>
+<div id="preliminaries-8" class="section level2">
+<h2><span class="header-section-number">11.4</span> Preliminaries</h2>
+<p>For this activity you will need the following:</p>
+<ul>
+<li><p>An R markdown notebook version of this document (the source file).</p></li>
+<li><p>A package called <code>geog4ga3</code>.</p></li>
+</ul>
+<p>It is good practice to clear the working space to make sure that you do not have extraneous items there when you begin your work. The command in R to clear the workspace is <code>rm</code> (for “remove”), followed by a list of items to be removed. To clear the workspace from <em>all</em> objects, do the following:</p>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb261-1" title="1"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</a></code></pre></div>
+<p>Note that <code>ls()</code> lists all objects currently on the worspace.</p>
+<p>Load the libraries you will use in this activity. In addition to <code>tidyverse</code>, you will need <code>spatstat</code>, a package designed for the analysis of point patterns (you can learn about <code>spatstat</code> <a href="https://cran.r-project.org/web/packages/spatstat/vignettes/getstart.pdf">here</a> and <a href="http://spatstat.org/resources/spatstatJSSpaper.pdf">here</a>):</p>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb262-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb262-2" title="2"><span class="kw">library</span>(spatstat)</a>
+<a class="sourceLine" id="cb262-3" title="3"><span class="kw">library</span>(geog4ga3)</a></code></pre></div>
+<pre><code>## Warning: replacing previous import &#39;plotly::filter&#39; by &#39;stats::filter&#39; when
+## loading &#39;geog4ga3&#39;</code></pre>
+<pre><code>## Warning: replacing previous import &#39;dplyr::lag&#39; by &#39;stats::lag&#39; when loading
+## &#39;geog4ga3&#39;</code></pre>
+<p>In the practice that preceded this activity, you learned about the concepts of intensity and density, about quadrats, and also how to create density maps.
+Begin by loading the data that you will use in this activity:</p>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb265-1" title="1"><span class="kw">data</span>(<span class="st">&quot;bear_df&quot;</span>)</a></code></pre></div>
+<p>This dataset was sourced from the Scandinavia Bear Project, a Swedish-Noruegian collaboration that aims to study the ecology of brown bears, to provide decision makers with evidence to support bear management, and to provide information regarding bears to the public. You can learn more about this project <a href="http://bearproject.info/about-the-project/">here</a>.</p>
+<p>The project involves tagging bears with GPS units, so that their movements can be tracked.</p>
+<p>The dataset includes coordinates of one bear’s movement over a period of several weeksin 2004. The dataset was originally taken from the <code>adehabitatLT</code> package but was somewhat simplified for this activity. Instead of full date and time information, the point pattern is marked more simply as “Day Time” and “Night Time”, to distinguish between diurnal and nocturnal activity of the bear.</p>
+<p>Summarize the contents of this dataframe:</p>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb266-1" title="1"><span class="kw">summary</span>(bear_df)</a></code></pre></div>
+<pre><code>##        x                y                  marks    
+##  Min.   :515743   Min.   :6812138   Day Time  :502  
+##  1st Qu.:518995   1st Qu.:6813396   Night Time:498  
+##  Median :519526   Median :6816724                   
+##  Mean   :519321   Mean   :6816474                   
+##  3rd Qu.:519983   3rd Qu.:6818111                   
+##  Max.   :522999   Max.   :6821440</code></pre>
+<p>The Min. and Max. of <code>x</code> and <code>y</code> give us an idea of the region covered by this dataset. We can use these values to approximate a window for the region (as an experiment, you could try changing these values to create regions of different sizes):</p>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb268-1" title="1">W &lt;-<span class="st"> </span><span class="kw">owin</span>(<span class="dt">xrange =</span> <span class="kw">c</span>(<span class="dv">515000</span>, <span class="dv">523500</span>), <span class="dt">yrange =</span> <span class="kw">c</span>(<span class="dv">6812000</span>, <span class="dv">6822000</span>))</a></code></pre></div>
+<p>Next, we can convert the dataframe into a <code>ppp</code>-class object suitable for analysis using the package <code>spatstat</code>:</p>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb269-1" title="1">bear.ppp &lt;-<span class="st"> </span><span class="kw">as.ppp</span>(bear_df, <span class="dt">W =</span> W)</a></code></pre></div>
+<p>You can check the contents of the <code>ppp</code> object by means of <code>summary</code>:</p>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb270-1" title="1"><span class="kw">summary</span>(bear.ppp)</a></code></pre></div>
+<pre><code>## Marked planar point pattern:  1000 points
+## Average intensity 1.176471e-05 points per square unit
+## 
+## Coordinates are given to 1 decimal place
+## i.e. rounded to the nearest multiple of 0.1 units
+## 
+## Multitype:
+##            frequency proportion    intensity
+## Day Time         502      0.502 5.905882e-06
+## Night Time       498      0.498 5.858824e-06
+## 
+## Window: rectangle = [515000, 523500] x [6812000, 6822000] units
+##                     (8500 x 10000 units)
+## Window area = 8.5e+07 square units</code></pre>
+<p>Now that you have loaded the dataframe and converted to a <code>ppp</code> object, you are ready for the next activity.</p>
 </div>
-</div>
-<div id="packages-in-r" class="section level2">
-<h2><span class="header-section-number">1.4</span> Packages in R</h2>
-<p>According to Wickham <span class="citation">(<a href="#ref-wickham2015rpackages" role="doc-biblioref">2015</a>)</span> packages are the basic units of reproducible code in the <code>R</code> multiverse. Packages allow a developer to create a self-contained unit of code that often is meant to achieve some task. For instance, there are packages in <code>R</code> that specialize in statistical techniques, such as <a href="https://cran.r-project.org/web/packages/cluster/index.html">cluster analysis</a>, <a href="https://cran.r-project.org/web/packages/ggplot2/index.html">visualization</a>, or <a href="https://cran.r-project.org/web/packages/dplyr/">data manipulation</a>. Some packages can be miscellaneous tools, or contain mostly datasets. Packages are a very convenient way of maintaining code, data, and documentation, and also of sharing all these resources.</p>
-<p>Packages can be obtained from different sources (including making them!). One of the reasons why <code>R</code> has become so successful is the relative facility with which packages can be distributed. A package that I use frequently is called <code>tidyverse</code> <span class="citation">(Wickham <a href="#ref-Wickham2017tidyverse" role="doc-biblioref">2017</a>)</span>. The <code>tidyverse</code> is a collection of functions for data manipulation, analysis, and visualization. This package can be downloaded and installed in your personal library of <code>R</code> packages by using the function <code>install.packages</code>, as follows:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;tidyverse&quot;</span>)</a></code></pre></div>
-<p>The function <code>install.packages</code> retrieves packages from the <a href="https://cran.r-project.org/">Comprehensive R Archive Network</a>, or CRAN for short. CRAN is a collection of sites (accessible via the internet) that carry identical materials for distribution for R.</p>
-<p>There are other ways of distributing packages. For instance, throughout this book you will make use of a package called <code>geog4ga3</code> that contains a collection of datasets and functions used in the readings or activities. This package is not on CRAN, but instead can be obtained from GitHub, a repository and versioning system. To retrieve packages from GitHub you need a function called <code>install_github</code>, which in turn is part of the package <code>devtools</code>.</p>
-<p>To download and install the package <code>geog4ga3</code>, you need first to download and install <code>devtools</code> as follows:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</a></code></pre></div>
-<p>Once that a package has been downloaded and installed, it needs to be loaded into a session to be available to use. I find it useful to think of packages that I download as “books” that I place in my personal “bookshelf”. Some “books” I obtain from the central library (i.e., CRAN), while others are shared by friends, and some I have even written myself. Once that the “books” are in my “bookshelf” they are part of my own personal <em>library</em>. This means that they are available for use. Next time I want to use a “book” from my library, I need to retrieve it from the bookshelf. This is similar to taking the book and opening it on my desk: now all the magic contained in the package is available for use!</p>
-<p>Similarly, once that the book is in my library, I do not need to retrieve it again from the bookstore - a package, once installed, does not need to be installed again (it might need updates, but that is a different matter).</p>
-<p>This analogy suggests that I can have many packages in my library, only some of which I may need at any specific time for a task. To retrieve a package (i.e., a book) from the library, so that we can use it, the function <code>library</code> is invoked as in this example:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">library</span>(devtools)</a></code></pre></div>
-<p>This allows you to use all the functions in the package <code>devtools</code>. In particular, at this point you want to use a function that allows you to retrieve other packages! With the functionality of <code>devtools::install_github</code> you can download and install the companion package for the book by running the following instruction:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">install_github</span>(<span class="st">&quot;paezha/Spatial-Statistics-Course&quot;</span>, <span class="dt">subdir=</span><span class="st">&quot;geog4ga3&quot;</span>)</a></code></pre></div>
-<p>This will install the package (i.e., put it in your library) so that you can also benefit from its functionality.</p>
+<div id="activity-3" class="section level2">
+<h2><span class="header-section-number">11.5</span> Activity</h2>
+<p>*1. Analyze the point pattern for the movements of the bear using quadrat and kernel density methods. Experiment with different quadrat sizes and kernel bandwidths.</p>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Explain your choice of parameters (quadrat sizes and kernel bandwidths) to a fellow student.</p></li>
+<li><p>Decide whether these patterns are random, and support your decision.</p></li>
+<li><p>Do you see differences in the activity patterns of the bear by time of day? What could explain those differences, if any?</p></li>
+<li><p>Discuss the limitations of your conclusions, and of quadrat/kernel (density-based) approaches more generally.</p></li>
+</ol>
 
-</div>
-</div>
-<h3>References</h3>
 <div id="refs" class="references">
-<div id="ref-wickham2015rpackages">
+<div>
+<p>Anselin, Luc. 1988. <em>Spatial Econometrics: Methods and Models</em>. Book. Dordrecht: Kluwer.</p>
+</div>
+<div>
+<p>———. 1995. “Local Indicators of Spatial Association - Lisa.” Journal Article. <em>Geographical Analysis</em> 27: 93–115.</p>
+</div>
+<div>
+<p>Baddeley, Adrian, Ege Rubak, and Rolf Turner. 2016. <em>Spatial Point Patterns: Methodology and Applications with R</em>. Book. Chapman; Hall/CRC.</p>
+</div>
+<div>
+<p>Bailey, T. C., and A. C. Gatrell. 1995. <em>Interactive Spatial Data Analysis</em>. Book. Essex: Addison Wesley Longman.</p>
+</div>
+<div>
+<p>Bivand, R. S., E. J. Pebesma, and V. Gómez-Rubio. 2008. <em>Applied Spatial Data Analysis with R</em>. Book. New York: Springer Science+Business Media.</p>
+</div>
+<div>
+<p>Brunsdon, C., A. S. Fotheringham, and M. E. Charlton. 1996. “Geographically Weighted Regression: A Method for Exploring Spatial Nonstationarity.” Journal Article. <em>Geographical Analysis</em> 28 (4): 281–98. <a href="ISI:A1996VL03500001">ISI:A1996VL03500001</a>.</p>
+</div>
+<div>
+<p>Brunsdon, Chris, and Lex Comber. 2015. <em>An Introduction to R for Spatial Analysis and Mapping</em>. Book. Sage.</p>
+</div>
+<div>
+<p>Cressie, N. A. C. 1993. <em>Statistics for Spatial Data</em>. Book. Wiley Series in Probability and Mathematical Statistics. New York: John Wiley &amp; Sons.</p>
+</div>
+<div>
+<p>Fotheringham, A. S., and C. Brunsdon. 1999. “Local Forms of Spatial Analysis.” Journal Article. <em>Geographical Analysis</em> 31 (4): 340–58.</p>
+</div>
+<div>
+<p>Getis, A., and J. K. Ord. 1992. “The Analysis of Spatial Association by Use of Distance Statistics.” Journal Article. <em>Geographical Analysis</em> 24 (3): 189–206. <a href="ISI:A1992JF93400001%0AC:/Papers/Geographical%20Analysis/Geographical%20Analysis%20(1992)%2024%20(3)%20189-206.pdf">ISI:A1992JF93400001
+C:/Papers/Geographical Analysis/Geographical Analysis (1992) 24 (3) 189-206.pdf</a>.</p>
+</div>
+<div>
+<p>Geyer, Charles J, and Jesper Møller. 1994. “Simulation Procedures and Likelihood Inference for Spatial Point Processes.” <em>Scandinavian Journal of Statistics</em>, 359–73.</p>
+</div>
+<div>
+<p>Griffith, D. A. 1988. <em>Advanced Spatial Statistics: Special Topics in the Exploration of Quantitative Spatial Data Series</em>. Book. Dordrecht: Kluwer.</p>
+</div>
+<div>
+<p>Haining, R. 1990. <em>Spatial Data Analysis in the Social and Environmental Sciences</em>. Book. Cambridge: Cambridge University Press.</p>
+</div>
+<div>
+<p>Lloyd, Christopher D. 2010. <em>Local Models for Spatial Analysis</em>. CRC press.</p>
+</div>
+<div>
+<p>Lovelace, Robin, Jacub Nowosad, and Jannes Muenchow. 2019. <em>Geocomputation with R</em>. Book. CRC Press.</p>
+</div>
+<div>
+<p>McElreath, Richard. 2016. <em>Statistical Rethinking: A Bayesian Course with Examples in R and Stan</em>. Book. Vol. 122. CRC Press.</p>
+</div>
+<div>
+<p>McGrew Jr, J Chapman, and Charles B Monroe. 2009. <em>An Introduction to Statistical Problem Solving in Geography</em>. Book. 2nd. Edition. Long Grove, Illinois: Waveland Press.</p>
+</div>
+<div>
+<p>Moller, Jesper, and Rasmus Plenge Waagepetersen. 2003. <em>Statistical Inference and Simulation for Spatial Point Processes</em>. Chapman; Hall/CRC.</p>
+</div>
+<div>
+<p>O’Sullivan, David, and David Unwin. 2010. <em>Geographic Information Analysis</em>. Book. 2nd. Edition. Hoboken, New Jersey: John Wiley &amp; Sons.</p>
+</div>
+<div>
+<p>Plant, Richard E. 2012. <em>Spatial Data Analysis in Ecology and Agriculture Using R</em>. Book. cRc Press.</p>
+</div>
+<div>
+<p>Rey, S. J. 2009. “Show Me the Code: Spatial Analysis and Open Source.” Journal Article. <em>Journal of Geographical Systems</em> 11 (2): 191–207. <a href="ISI:000266249500007">ISI:000266249500007</a>.</p>
+</div>
+<div>
+<p>Tomlin, C Dana. 1990. <em>A Map Algebra</em>. Harvard Graduate School of Design Cambridge, MA.</p>
+</div>
+<div>
+<p>Tong, Daoqin, and Alan T. Murray. 2012. “Spatial Optimization in Geography.” Journal Article. <em>Annals of the Association of American Geographers</em> 102 (6): 1290–1309. <a href="https://doi.org/10.1080/00045608.2012.685044">https://doi.org/10.1080/00045608.2012.685044</a>.</p>
+</div>
+<div>
 <p>Wickham, Hadley. 2015. <em>R Packages: Organize, Test, Document, and Share Your Code</em>. " O’Reilly Media, Inc.".</p>
 </div>
-<div id="ref-Wickham2017tidyverse">
-<p>Wickham, Hadley. 2017. <em>Tidyverse: Easily Install and Load the ’Tidyverse’</em>. <a href="https://CRAN.R-project.org/package=tidyverse">https://CRAN.R-project.org/package=tidyverse</a>.</p>
+<div>
+<p>———. 2017. <em>Tidyverse: Easily Install and Load the ’Tidyverse’</em>. <a href="https://CRAN.R-project.org/package=tidyverse">https://CRAN.R-project.org/package=tidyverse</a>.</p>
 </div>
-<div id="ref-Wickham2016r">
+<div>
 <p>Wickham, Hadley, and Garrett Grolemund. 2016. <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</em>. " O’Reilly Media, Inc.".</p>
+</div>
+<div>
+<p>With, Kimberly A, and Anthony W King. 1997. “The Use and Misuse of Neutral Landscape Models in Ecology.” <em>Oikos</em>, 219–29.</p>
+</div>
+</div>
 </div>
 </div>
             </section>
@@ -354,8 +448,8 @@ Figure 1.2: The RStudio IDE
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="basic-operations-and-data-structures-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="point-pattern-analysis-ii.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -386,7 +480,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/paezha/paezha.github.io/tree/master/applied_spatial_statistics/00-Installation.Rmd",
+"link": "https://github.com/paezha/paezha.github.io/tree/master/applied_spatial_statistics/11-Activity-Point-Pattern-Analysis-II.Rmd",
 "text": "Edit"
 },
 "history": {
