@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 8 Activity 3: Maps as Processes | Applied Spatial Statistics with R</title>
+  <title>Chapter 4 Activity 1: Statistical Maps I | Applied Spatial Statistics with R</title>
   <meta name="description" content="This book was created as a resource for teaching applied spatial statistics at McMaster University by Antonio Paez, with support from Anastassios Dardas and Rajveer Ubhi." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 8 Activity 3: Maps as Processes | Applied Spatial Statistics with R" />
+  <meta property="og:title" content="Chapter 4 Activity 1: Statistical Maps I | Applied Spatial Statistics with R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="paezha.github.io/applied_spatial_statistics" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 8 Activity 3: Maps as Processes | Applied Spatial Statistics with R" />
+  <meta name="twitter:title" content="Chapter 4 Activity 1: Statistical Maps I | Applied Spatial Statistics with R" />
   
   <meta name="twitter:description" content="This book was created as a resource for teaching applied spatial statistics at McMaster University by Antonio Paez, with support from Anastassios Dardas and Rajveer Ubhi." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html"/>
-<link rel="next" href="point-pattern-analysis-i.html"/>
+<link rel="prev" href="introduction-to-mapping-in-r.html"/>
+<link rel="next" href="mapping-in-r-continued.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -271,52 +271,117 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="activity-3-maps-as-processes" class="section level1">
-<h1><span class="header-section-number">Chapter 8</span> Activity 3: Maps as Processes</h1>
+<div id="activity-1-statistical-maps-i" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Activity 1: Statistical Maps I</h1>
 <p>Remember, you can download the source file for this activity from <a href="https://github.com/paezha/Spatial-Statistics-Course">here</a>.</p>
-<div id="practice-questions" class="section level2">
-<h2><span class="header-section-number">8.1</span> Practice Questions</h2>
+<div id="housekeeping-questions" class="section level2">
+<h2><span class="header-section-number">4.1</span> Housekeeping Questions</h2>
 <p>Answer the following questions:</p>
 <ol style="list-style-type: decimal">
-<li>What is a Geographic Information System?</li>
-<li>What distinguishes a statistical map from other types of mapping techniques?</li>
-<li>What is a null landscape?</li>
+<li><p>What are the office hours of your instructor this term?</p></li>
+<li><p>How are assignments graded?</p></li>
+<li><p>What is the policy for late assignments in this course?</p></li>
 </ol>
 </div>
-<div id="learning-objectives-7" class="section level2">
-<h2><span class="header-section-number">8.2</span> Learning Objectives</h2>
-<p>In this activity, you will:</p>
+<div id="learning-objectives-3" class="section level2">
+<h2><span class="header-section-number">4.2</span> Learning Objectives</h2>
+<p>In this activity you will:</p>
 <ol style="list-style-type: decimal">
-<li>Simulate landscapes using various types of processes.</li>
-<li>Discuss the difference between random and non-random landscapes.</li>
-<li>Think about ways to decide whether a landscape is random.</li>
+<li>Discuss statistical maps and what makes them interesting.</li>
 </ol>
 </div>
-<div id="suggested-reading-1" class="section level2">
-<h2><span class="header-section-number">8.3</span> Suggested Reading</h2>
-<p>O’Sullivan D and Unwin D (2010) Geographic Information Analysis, 2nd Edition, Chapter 4. John Wiley &amp; Sons: New Jersey.</p>
-</div>
-<div id="preliminaries-5" class="section level2">
-<h2><span class="header-section-number">8.4</span> Preliminaries</h2>
+<div id="preliminaries-1" class="section level2">
+<h2><span class="header-section-number">4.3</span> Preliminaries</h2>
+<p>In the practice that preceded this activity, you used <code>ggmap</code> to create a proportional symbol map, a mapping technique used in spatial statistics for visualization of geocoded event information. As well, you implemented a simple technique called kernel analysis to the map to explore the distribution of events in the case of the cholera outbreak of Soho in London in 1854. Geocoded events are often called <em>point patterns</em>, so with the cholera data you were working with a point pattern.</p>
+<p>In this activity, we will map another type of spatial data, called <em>areal data</em>. Areas are often administrative or political jurisdictions.</p>
 <p>For this activity you will need the following:</p>
 <ul>
 <li><p>An R markdown notebook version of this document (the source file).</p></li>
 <li><p>A package called <code>geog4ga3</code>.</p></li>
 </ul>
 <p>It is good practice to clear the working space to make sure that you do not have extraneous items there when you begin your work. The command in R to clear the workspace is <code>rm</code> (for “remove”), followed by a list of items to be removed. To clear the workspace from <em>all</em> objects, do the following:</p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" title="1"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</a></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" title="1"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</a></code></pre></div>
 <p>Note that <code>ls()</code> lists all objects currently on the worspace.</p>
 <p>Load the libraries you will use in this activity:</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" title="1"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
-<p>In the practice that preceded this activity, you learned how to simulate null landscapes and spatial processes.</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb105-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb105-2" title="2"><span class="kw">library</span>(sf)</a>
+<a class="sourceLine" id="cb105-3" title="3"><span class="kw">library</span>(geog4ga3)</a></code></pre></div>
+<pre><code>## Warning: replacing previous import &#39;plotly::filter&#39; by &#39;stats::filter&#39; when
+## loading &#39;geog4ga3&#39;</code></pre>
+<pre><code>## Warning: replacing previous import &#39;dplyr::lag&#39; by &#39;stats::lag&#39; when loading
+## &#39;geog4ga3&#39;</code></pre>
 </div>
-<div id="activity-2" class="section level2">
-<h2><span class="header-section-number">8.5</span> Activity</h2>
-<p>*1. Simulate and plot a landscape using a random, stochastic, or deterministic process. It is your choice whether to simulate a point pattern or a continuous variable. Identify the key parameters that make a landscape more or less random. Repeat several times changing those parameters.</p>
+<div id="creating-a-simple-thematic-map" class="section level2">
+<h2><span class="header-section-number">4.4</span> Creating a simple thematic map</h2>
+<p>If you successfully loaded package <code>geog4ga3</code> a dataset called <code>HamiltonDAs</code> should be available for analysis:</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb108-1" title="1"><span class="kw">data</span>(HamiltonDAs)</a></code></pre></div>
+<p>Check the class of this object:</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb109-1" title="1"><span class="kw">class</span>(HamiltonDAs)</a></code></pre></div>
+<pre><code>## [1] &quot;sf&quot;         &quot;data.frame&quot;</code></pre>
+<p>As you can see, this is an object of class <code>sf</code>, which stands for <em>simple features</em>. Objects of this class are used in the R package <code>sf</code> (see <a href="https://cran.r-project.org/web/packages/sf/vignettes/sf1.html">here</a>) to implement standards for <a href="https://en.wikipedia.org/wiki/Simple_Features">spatial objects</a>.</p>
+<p>You can examine the contents of the dataset by means of <code>head</code> (which will show the top rows):</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb111-1" title="1"><span class="kw">head</span>(HamiltonDAs)</a></code></pre></div>
+<pre><code>## Simple feature collection with 6 features and 7 fields
+## geometry type:  MULTIPOLYGON
+## dimension:      XY
+## bbox:           xmin: 563306.2 ymin: 4777681 xmax: 610844.5 ymax: 4793682
+## epsg (SRID):    26917
+## proj4string:    +proj=utm +zone=17 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
+##     ID GTA06       VAR1      VAR2      VAR3      VAR4      VAR5
+## 1 2671  5030 0.74650172 0.2596975 0.6361925 0.2290084 0.7223464
+## 2 2716  5077 0.78107142 0.4413119 0.5690740 0.8997258 0.4163702
+## 3 2710  5071 0.78824936 0.4632757 0.4197216 0.1619401 0.3052948
+## 4 2745  5108 0.82064933 0.6365193 0.9504535 0.4992477 0.6046399
+## 5 2810  5177 0.09131849 0.4455965 0.3539603 0.4919869 0.6366968
+## 6 2740  5103 0.22257665 0.6288826 0.1341962 0.6635202 0.4429712
+##                         geometry
+## 1 MULTIPOLYGON (((605123.4 47...
+## 2 MULTIPOLYGON (((606814 4784...
+## 3 MULTIPOLYGON (((605293 4785...
+## 4 MULTIPOLYGON (((607542.7 47...
+## 5 MULTIPOLYGON (((564681.8 47...
+## 6 MULTIPOLYGON (((574373.4 47...</code></pre>
+<p>Or obtain the summary statistics by means of <code>summary</code>:</p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb113-1" title="1"><span class="kw">summary</span>(HamiltonDAs)</a></code></pre></div>
+<pre><code>##        ID          GTA06          VAR1             VAR2             VAR3       
+##  2299   :  1   4050   :  1   Min.   :0.0000   Min.   :0.0000   Min.   :0.0000  
+##  2300   :  1   4051   :  1   1st Qu.:0.3680   1st Qu.:0.3800   1st Qu.:0.3521  
+##  2301   :  1   4052   :  1   Median :0.5345   Median :0.4937   Median :0.5699  
+##  2302   :  1   4053   :  1   Mean   :0.5241   Mean   :0.4966   Mean   :0.5548  
+##  2303   :  1   4054   :  1   3rd Qu.:0.6938   3rd Qu.:0.6091   3rd Qu.:0.7378  
+##  2304   :  1   4055   :  1   Max.   :1.0000   Max.   :1.0000   Max.   :1.0000  
+##  (Other):291   (Other):291                                                     
+##       VAR4             VAR5                 geometry  
+##  Min.   :0.0000   Min.   :0.0000   MULTIPOLYGON :297  
+##  1st Qu.:0.2989   1st Qu.:0.2998   epsg:26917   :  0  
+##  Median :0.5476   Median :0.4810   +proj=utm ...:  0  
+##  Mean   :0.5325   Mean   :0.5001                      
+##  3rd Qu.:0.7894   3rd Qu.:0.6915                      
+##  Max.   :1.0000   Max.   :1.0000                      
+## </code></pre>
+<p>The above will include a column for the geometry of the spatial features.</p>
+<p>The dataframe includes all <em>Dissemination Areas</em> (or DAs for short) for the Hamilton Census Metropolitan Arean in Canada. DAs are a type of geography used by the Census of Canada, in fact the smallest geography that is publicly available.</p>
+<p>To create a siple map we can use <code>ggplot2</code>, which previously we used to map points. Now, the geom for objects of class <code>sf</code> can be used to plot areas. To create such a map, we layer a geom object of type <code>sf</code> on a <code>ggplot2</code> object. For instance, to plot the DAs:</p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb115-1" title="1"><span class="co">#head(HamiltonDAs)</span></a>
+<a class="sourceLine" id="cb115-2" title="2"><span class="kw">ggplot</span>(HamiltonDAs) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb115-3" title="3"><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">fill =</span> <span class="st">&quot;gray&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">alpha =</span> <span class="fl">.3</span>, <span class="dt">size =</span> <span class="fl">.3</span>)</a></code></pre></div>
+<p><img src="03-Activity-Statistical-Maps_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>We selected color “black” for the polygons, with a transparency alpha = 0.3 (alpha = 0 is completely transparent, alpha = 1 is completely opaque, try it!), and line size 0.3.</p>
+<p>This map only shows the DAs, which is nice. However, as you saw in the summary of the dataframe above, in addition to the geometric information, a set of (generic) variables is also included, called VAR1, VAR2,…, VAR5.</p>
+<p>Thematic maps can be created using these variables. The next chunk of code plots the DAs and adds info. The <code>fill</code> argument is used to select a variable to color the polygons. The function <code>cut_number</code> is used to classify the values of the variable in <span class="math inline">\(k\)</span> groups of equal size, in this case 5 (notice that the lines of the polygons are still black). The <code>scale_fill_brewer</code> function can be used to select different <em>palettes</em> or coloring schemes):</p>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb116-1" title="1"><span class="kw">ggplot</span>(HamiltonDAs) <span class="op">+</span></a>
+<a class="sourceLine" id="cb116-2" title="2"><span class="st">  </span><span class="kw">geom_sf</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> <span class="kw">cut_number</span>(HamiltonDAs<span class="op">$</span>VAR1, <span class="dv">5</span>)), <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">size =</span> <span class="fl">.3</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb116-3" title="3"><span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette =</span> <span class="st">&quot;Reds&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb116-4" title="4"><span class="st">  </span><span class="kw">coord_sf</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb116-5" title="5"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">fill =</span> <span class="st">&quot;Variable&quot;</span>)</a></code></pre></div>
+<p><img src="03-Activity-Statistical-Maps_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Now you have seen how to create a thematic map with polygons (areal data), you are ready for the following activity.</p>
+</div>
+<div id="activity" class="section level2">
+<h2><span class="header-section-number">4.5</span> Activity</h2>
+<p>*1. Create thematic maps for variables VAR1 through VAR5 in the dataframe <code>HamiltonDAs</code>. Remember that you can introduce new chunks of code.</p>
 <ol start="2" style="list-style-type: decimal">
-<li><p>Recreate any one of the maps you created and share the map with a fellow student. Ask them to guess whether the map is random or non-random.</p></li>
-<li><p>Repeat step 2 several times (depending on time, between two and four times).</p></li>
-<li><p>Propose one or more ways to decide whether a landscape is random, and explain your reasoning. The approach does not need to be the same for point patterns and continuous variables!</p></li>
+<li>Imagine that these maps were found, and for some reason the variables were not labeled. They may represent income, or population density, or something else. Which of the five maps you just created is more interesting? Rank the five maps from most to least interesting. Explain the reasons for your ranking.</li>
 </ol>
 
 </div>
@@ -326,8 +391,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="point-pattern-analysis-i.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="introduction-to-mapping-in-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="mapping-in-r-continued.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -358,7 +423,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/paezha/paezha.github.io/tree/master/applied_spatial_statistics/07-Activity-Maps-as-Processes.Rmd",
+"link": "https://github.com/paezha/paezha.github.io/tree/master/applied_spatial_statistics/03-Activity-Statistical-Maps.Rmd",
 "text": "Edit"
 },
 "history": {
