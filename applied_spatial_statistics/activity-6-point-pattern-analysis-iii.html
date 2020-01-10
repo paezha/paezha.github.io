@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 8 Activity 3: Maps as Processes | Applied Spatial Statistics with R</title>
+  <title>Chapter 14 Activity 6: Point Pattern Analysis III | Applied Spatial Statistics with R</title>
   <meta name="description" content="This book was created as a resource for teaching applied spatial statistics at McMaster University by Antonio Paez, with support from Anastassios Dardas and Rajveer Ubhi." />
   <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 8 Activity 3: Maps as Processes | Applied Spatial Statistics with R" />
+  <meta property="og:title" content="Chapter 14 Activity 6: Point Pattern Analysis III | Applied Spatial Statistics with R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="paezha.github.io/applied_spatial_statistics" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 8 Activity 3: Maps as Processes | Applied Spatial Statistics with R" />
+  <meta name="twitter:title" content="Chapter 14 Activity 6: Point Pattern Analysis III | Applied Spatial Statistics with R" />
   
   <meta name="twitter:description" content="This book was created as a resource for teaching applied spatial statistics at McMaster University by Antonio Paez, with support from Anastassios Dardas and Rajveer Ubhi." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html"/>
-<link rel="next" href="point-pattern-analysis-i.html"/>
+<link rel="prev" href="point-pattern-analysis-iii.html"/>
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -286,55 +286,205 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="activity-3-maps-as-processes" class="section level1">
-<h1><span class="header-section-number">Chapter 8</span> Activity 3: Maps as Processes</h1>
+<div id="activity-6-point-pattern-analysis-iii" class="section level1">
+<h1><span class="header-section-number">Chapter 14</span> Activity 6: Point Pattern Analysis III</h1>
 <p>Remember, you can download the source file for this activity from <a href="https://github.com/paezha/Spatial-Statistics-Course">here</a>.</p>
-<div id="practice-questions" class="section level2">
-<h2><span class="header-section-number">8.1</span> Practice Questions</h2>
+<div id="practice-questions-3" class="section level2">
+<h2><span class="header-section-number">14.1</span> Practice questions</h2>
 <p>Answer the following questions:</p>
 <ol style="list-style-type: decimal">
-<li>What is a Geographic Information System?</li>
-<li>What distinguishes a statistical map from other types of mapping techniques?</li>
-<li>What is a null landscape?</li>
+<li>List and explain two limitations of quadrat analysis.</li>
+<li>What is clustering? What could explain a clustering in a set of events?</li>
+<li>What is regularity? What could explain it?</li>
+<li>Describe the concept of nearest neighbors.</li>
+<li>What is a cumulative distribution function?</li>
 </ol>
 </div>
-<div id="learning-objectives-7" class="section level2">
-<h2><span class="header-section-number">8.2</span> Learning Objectives</h2>
+<div id="learning-objectives-13" class="section level2">
+<h2><span class="header-section-number">14.2</span> Learning objectives</h2>
 <p>In this activity, you will:</p>
 <ol style="list-style-type: decimal">
-<li>Simulate landscapes using various types of processes.</li>
-<li>Discuss the difference between random and non-random landscapes.</li>
-<li>Think about ways to decide whether a landscape is random.</li>
+<li>Explore a dataset using distance-based approaches.</li>
+<li>Compare the characteristics of different types of patterns.</li>
+<li>Discuss ways to evaluate how confident you are that a pattern is random.</li>
 </ol>
 </div>
-<div id="suggested-reading-1" class="section level2">
-<h2><span class="header-section-number">8.3</span> Suggested Reading</h2>
-<p>O’Sullivan D and Unwin D (2010) Geographic Information Analysis, 2nd Edition, Chapter 4. John Wiley &amp; Sons: New Jersey.</p>
+<div id="suggested-reading-4" class="section level2">
+<h2><span class="header-section-number">14.3</span> Suggested reading</h2>
+<p>O’Sullivan D and Unwin D (2010) Geographic Information Analysis, 2nd Edition, Chapter 5. John Wiley &amp; Sons: New Jersey.</p>
 </div>
-<div id="preliminaries-5" class="section level2">
-<h2><span class="header-section-number">8.4</span> Preliminaries</h2>
+<div id="preliminaries-11" class="section level2">
+<h2><span class="header-section-number">14.4</span> Preliminaries</h2>
 <p>For this activity you will need the following:</p>
 <ul>
 <li><p>An R markdown notebook version of this document (the source file).</p></li>
 <li><p>A package called <code>geog4ga3</code>.</p></li>
 </ul>
 <p>It is good practice to clear the working space to make sure that you do not have extraneous items there when you begin your work. The command in R to clear the workspace is <code>rm</code> (for “remove”), followed by a list of items to be removed. To clear the workspace from <em>all</em> objects, do the following:</p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" title="1"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</a></code></pre></div>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb312-1" title="1"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</a></code></pre></div>
 <p>Note that <code>ls()</code> lists all objects currently on the worspace.</p>
-<p>Load the libraries you will use in this activity:</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" title="1"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
-<p>In the practice that preceded this activity, you learned how to simulate null landscapes and spatial processes.</p>
+<p>Load the libraries you will use in this activity. In addition to <code>tidyverse</code>, you will need <code>spatstat</code>, a package designed for the analysis of point patterns (you can learn about <code>spatstat</code> <a href="https://cran.r-project.org/web/packages/spatstat/vignettes/getstart.pdf">here</a> and <a href="http://spatstat.org/resources/spatstatJSSpaper.pdf">here</a>):</p>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb313-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb313-2" title="2"><span class="kw">library</span>(spatstat)</a>
+<a class="sourceLine" id="cb313-3" title="3"><span class="kw">library</span>(maptools) <span class="co"># Needed to convert `SpatialPolygons` into `owin` object</span></a>
+<a class="sourceLine" id="cb313-4" title="4"><span class="kw">library</span>(sf)</a>
+<a class="sourceLine" id="cb313-5" title="5"><span class="kw">library</span>(geog4ga3)</a></code></pre></div>
+<pre><code>## Warning: replacing previous import &#39;plotly::filter&#39; by &#39;stats::filter&#39; when
+## loading &#39;geog4ga3&#39;</code></pre>
+<pre><code>## Warning: replacing previous import &#39;dplyr::lag&#39; by &#39;stats::lag&#39; when loading
+## &#39;geog4ga3&#39;</code></pre>
+<p>In the practice that preceded this activity, you learned about the concepts of intensity and density, about quadrats, and also how to create density maps. For this practice, you will use the data that you first encountered in Activity 4, that is, the business locations in Toronto.</p>
+<p>Begin by reading the geospatial files, namely the city boundary of Toronto. You need the <code>sf</code> object, which will be converted into a <code>spatstat</code> window object:</p>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb316-1" title="1"><span class="kw">data</span>(<span class="st">&quot;Toronto&quot;</span>)</a></code></pre></div>
+<p>Convert the <code>sf</code> object to an <code>owin</code> object (via <code>SpatialPolygons</code>, hence <code>as(x, "Spatial")</code>:</p>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb317-1" title="1">Toronto.owin &lt;-<span class="st"> </span><span class="kw">as.owin</span>(<span class="kw">as</span>(Toronto, <span class="st">&quot;Spatial&quot;</span>)) <span class="co"># Requires `maptools` package</span></a></code></pre></div>
+<p>Next the data that you will use in this activity needs to be loaded. Each dataframe is converted into a <code>ppp</code> object using the <code>as.ppp</code> function, again after extracting the coordinates of the events from the <code>sf</code> object:</p>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb318-1" title="1"><span class="kw">data</span>(<span class="st">&quot;Fast_Food&quot;</span>)</a>
+<a class="sourceLine" id="cb318-2" title="2">Fast_Food.ppp &lt;-<span class="st"> </span><span class="kw">as.ppp</span>(<span class="kw">st_coordinates</span>(Fast_Food), <span class="dt">W =</span> Toronto.owin)</a>
+<a class="sourceLine" id="cb318-3" title="3"><span class="co"># Add the classes of fast food to the ppp object:</span></a>
+<a class="sourceLine" id="cb318-4" title="4"><span class="kw">marks</span>(Fast_Food.ppp) &lt;-<span class="st"> </span>Fast_Food<span class="op">$</span>Class</a>
+<a class="sourceLine" id="cb318-5" title="5"></a>
+<a class="sourceLine" id="cb318-6" title="6"><span class="kw">data</span>(<span class="st">&quot;Gas_Stands&quot;</span>)</a>
+<a class="sourceLine" id="cb318-7" title="7">Gas_Stands.ppp &lt;-<span class="st"> </span><span class="kw">as.ppp</span>(<span class="kw">st_coordinates</span>(Gas_Stands), <span class="dt">W =</span> Toronto.owin)</a>
+<a class="sourceLine" id="cb318-8" title="8"></a>
+<a class="sourceLine" id="cb318-9" title="9"><span class="kw">data</span>(<span class="st">&quot;Paez_Mart&quot;</span>)</a>
+<a class="sourceLine" id="cb318-10" title="10">Paez_Mart.ppp &lt;-<span class="st"> </span><span class="kw">as.ppp</span>(<span class="kw">st_coordinates</span>(Paez_Mart), <span class="dt">W =</span> Toronto.owin)</a></code></pre></div>
+<p>If you inspect your workspace, you will see that the following <code>ppp</code> objects are there:</p>
+<ul>
+<li><code>Fast_Food.ppp</code></li>
+<li><code>Gas_Stands.ppp</code></li>
+<li><code>Paez_Mart.ppp</code></li>
+</ul>
+<p>These are locations of fast food restaurants and gas stands in Toronto (data are from 2008). Paez Mart on the other hand is a project to cover Toronto with convenience stores. The points are the planned locations of the stores.</p>
+<p>You can check the contents of <code>ppp</code> objects by means of <code>summary</code>:</p>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb319-1" title="1"><span class="kw">summary</span>(Fast_Food.ppp)</a></code></pre></div>
+<pre><code>## Marked planar point pattern:  614 points
+## Average intensity 9.681378e-07 points per square unit
+## 
+## Coordinates are given to 1 decimal place
+## i.e. rounded to the nearest multiple of 0.1 units
+## 
+## Multitype:
+##           frequency proportion    intensity
+## Chicken          82  0.1335505 1.292953e-07
+## Hamburger       209  0.3403909 3.295453e-07
+## Pizza           164  0.2671010 2.585906e-07
+## Sub             159  0.2589577 2.507067e-07
+## 
+## Window: polygonal boundary
+## 10 separate polygons (no holes)
+##             vertices        area relative.area
+## polygon 1       4185 630935000.0      9.95e-01
+## polygon 2        600   2536260.0      4.00e-03
+## polygon 3        193    237206.0      3.74e-04
+## polygon 4         28     26539.7      4.18e-05
+## polygon 5         52    142793.0      2.25e-04
+## polygon 6         67    158439.0      2.50e-04
+## polygon 7         41     83470.2      1.32e-04
+## polygon 8         30     42934.1      6.77e-05
+## polygon 9         36     33866.6      5.34e-05
+## polygon 10         8     11069.2      1.75e-05
+## enclosing rectangle: [609550.5, 651611.8] x [4826375, 4857439] units
+##                      (42060 x 31060 units)
+## Window area = 634207000 square units
+## Fraction of frame area: 0.485</code></pre>
+<p>Now that you have the data that you need in the right format, you are ready for the next activity.</p>
 </div>
-<div id="activity-2" class="section level2">
-<h2><span class="header-section-number">8.5</span> Activity</h2>
-<p><strong>NOTE</strong>: Activities include technical “how to” tasks/questions. Usually, these ask you to organize data, create a plot, and so on in support of analysis and interpretation. These tasks are indicated by a star (*).</p>
-<p>1.* Simulate and plot a landscape using a random, stochastic, or deterministic process. It is your choice whether to simulate a point pattern or a continuous variable. Identify the key parameters that make a landscape more or less random. Repeat several times changing those parameters.</p>
-<ol start="2" style="list-style-type: decimal">
-<li><p>Recreate any one of the maps you created and share the map with a fellow student. Ask them to guess whether the map is random or non-random.</p></li>
-<li><p>Repeat step 2 several times (depending on time, between two and four times).</p></li>
-<li><p>Propose one or more ways to decide whether a landscape is random, and explain your reasoning. The approach does not need to be the same for point patterns and continuous variables!</p></li>
+<div id="activity-5" class="section level2">
+<h2><span class="header-section-number">14.5</span> Activity</h2>
+<p>1.* Calculate the event-to-event distances to nearest neighbors using the function <code>nndist()</code>. Do this for all fast food establishments (pooled) and then for each type of establishment (i.e, “Chicken”, “Hamburger”, “Pizza”, “Sub”).</p>
+<p>2.* Create Stienen diagrams using the distance vectors obtained in Step 1.</p>
+<p>3.* Plot the empirical G-function for all fast food establishments (pooled) and then for each type of establishment (i.e, “Chicken”, “Hamburger”, “Pizza”, “Sub”).</p>
+<ol start="4" style="list-style-type: decimal">
+<li><p>Discuss the diagrams that you created in Question 2 with a fellow student.</p></li>
+<li><p>Is there evidence of clustering/regularity?</p></li>
+<li><p>How confident are you to make a decision whether the patterns are not random? What could you do to assess your confidence in making a decision whether the patterns are random? Explain.</p></li>
 </ol>
 
+<div id="refs" class="references">
+<div>
+<p>Anselin, Luc. 1988. <em>Spatial Econometrics: Methods and Models</em>. Book. Dordrecht: Kluwer.</p>
+</div>
+<div>
+<p>———. 1995. “Local Indicators of Spatial Association - Lisa.” Journal Article. <em>Geographical Analysis</em> 27: 93–115.</p>
+</div>
+<div>
+<p>Baddeley, Adrian, Ege Rubak, and Rolf Turner. 2016. <em>Spatial Point Patterns: Methodology and Applications with R</em>. Book. Chapman; Hall/CRC.</p>
+</div>
+<div>
+<p>Bailey, T. C., and A. C. Gatrell. 1995. <em>Interactive Spatial Data Analysis</em>. Book. Essex: Addison Wesley Longman.</p>
+</div>
+<div>
+<p>Bivand, R. S., E. J. Pebesma, and V. Gómez-Rubio. 2008. <em>Applied Spatial Data Analysis with R</em>. Book. New York: Springer Science+Business Media.</p>
+</div>
+<div>
+<p>Brunsdon, C., A. S. Fotheringham, and M. E. Charlton. 1996. “Geographically Weighted Regression: A Method for Exploring Spatial Nonstationarity.” Journal Article. <em>Geographical Analysis</em> 28 (4): 281–98. <a href="ISI:A1996VL03500001">ISI:A1996VL03500001</a>.</p>
+</div>
+<div>
+<p>Brunsdon, Chris, and Lex Comber. 2015. <em>An Introduction to R for Spatial Analysis and Mapping</em>. Book. Sage.</p>
+</div>
+<div>
+<p>Cressie, N. A. C. 1993. <em>Statistics for Spatial Data</em>. Book. Wiley Series in Probability and Mathematical Statistics. New York: John Wiley &amp; Sons.</p>
+</div>
+<div>
+<p>Fotheringham, A. S., and C. Brunsdon. 1999. “Local Forms of Spatial Analysis.” Journal Article. <em>Geographical Analysis</em> 31 (4): 340–58.</p>
+</div>
+<div>
+<p>Getis, A., and J. K. Ord. 1992. “The Analysis of Spatial Association by Use of Distance Statistics.” Journal Article. <em>Geographical Analysis</em> 24 (3): 189–206. <a href="ISI:A1992JF93400001%0AC:/Papers/Geographical%20Analysis/Geographical%20Analysis%20(1992)%2024%20(3)%20189-206.pdf">ISI:A1992JF93400001
+C:/Papers/Geographical Analysis/Geographical Analysis (1992) 24 (3) 189-206.pdf</a>.</p>
+</div>
+<div>
+<p>Geyer, Charles J, and Jesper Møller. 1994. “Simulation Procedures and Likelihood Inference for Spatial Point Processes.” <em>Scandinavian Journal of Statistics</em>, 359–73.</p>
+</div>
+<div>
+<p>Griffith, D. A. 1988. <em>Advanced Spatial Statistics: Special Topics in the Exploration of Quantitative Spatial Data Series</em>. Book. Dordrecht: Kluwer.</p>
+</div>
+<div>
+<p>Haining, R. 1990. <em>Spatial Data Analysis in the Social and Environmental Sciences</em>. Book. Cambridge: Cambridge University Press.</p>
+</div>
+<div>
+<p>Lloyd, Christopher D. 2010. <em>Local Models for Spatial Analysis</em>. CRC press.</p>
+</div>
+<div>
+<p>Lovelace, Robin, Jacub Nowosad, and Jannes Muenchow. 2019. <em>Geocomputation with R</em>. Book. CRC Press.</p>
+</div>
+<div>
+<p>McElreath, Richard. 2016. <em>Statistical Rethinking: A Bayesian Course with Examples in R and Stan</em>. Book. Vol. 122. CRC Press.</p>
+</div>
+<div>
+<p>McGrew Jr, J Chapman, and Charles B Monroe. 2009. <em>An Introduction to Statistical Problem Solving in Geography</em>. Book. 2nd. Edition. Long Grove, Illinois: Waveland Press.</p>
+</div>
+<div>
+<p>Moller, Jesper, and Rasmus Plenge Waagepetersen. 2003. <em>Statistical Inference and Simulation for Spatial Point Processes</em>. Chapman; Hall/CRC.</p>
+</div>
+<div>
+<p>O’Sullivan, David, and David Unwin. 2010. <em>Geographic Information Analysis</em>. Book. 2nd. Edition. Hoboken, New Jersey: John Wiley &amp; Sons.</p>
+</div>
+<div>
+<p>Plant, Richard E. 2012. <em>Spatial Data Analysis in Ecology and Agriculture Using R</em>. Book. cRc Press.</p>
+</div>
+<div>
+<p>Rey, S. J. 2009. “Show Me the Code: Spatial Analysis and Open Source.” Journal Article. <em>Journal of Geographical Systems</em> 11 (2): 191–207. <a href="ISI:000266249500007">ISI:000266249500007</a>.</p>
+</div>
+<div>
+<p>Tomlin, C Dana. 1990. <em>A Map Algebra</em>. Harvard Graduate School of Design Cambridge, MA.</p>
+</div>
+<div>
+<p>Tong, Daoqin, and Alan T. Murray. 2012. “Spatial Optimization in Geography.” Journal Article. <em>Annals of the Association of American Geographers</em> 102 (6): 1290–1309. <a href="https://doi.org/10.1080/00045608.2012.685044">https://doi.org/10.1080/00045608.2012.685044</a>.</p>
+</div>
+<div>
+<p>Wickham, Hadley. 2015. <em>R Packages: Organize, Test, Document, and Share Your Code</em>. " O’Reilly Media, Inc.".</p>
+</div>
+<div>
+<p>———. 2017. <em>Tidyverse: Easily Install and Load the ’Tidyverse’</em>. <a href="https://CRAN.R-project.org/package=tidyverse">https://CRAN.R-project.org/package=tidyverse</a>.</p>
+</div>
+<div>
+<p>Wickham, Hadley, and Garrett Grolemund. 2016. <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</em>. " O’Reilly Media, Inc.".</p>
+</div>
+<div>
+<p>With, Kimberly A, and Anthony W King. 1997. “The Use and Misuse of Neutral Landscape Models in Ecology.” <em>Oikos</em>, 219–29.</p>
+</div>
+</div>
 </div>
 </div>
             </section>
@@ -342,8 +492,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="point-pattern-analysis-i.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="point-pattern-analysis-iii.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -374,7 +524,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/paezha/paezha.github.io/tree/master/applied_spatial_statistics/07-Activity-Maps-as-Processes.Rmd",
+"link": "https://github.com/paezha/paezha.github.io/tree/master/applied_spatial_statistics/13-Activity-Point-Pattern-Analysis-III.Rmd",
 "text": "Edit"
 },
 "history": {

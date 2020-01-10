@@ -24,7 +24,7 @@
 <meta name="author" content="Antonio Paez" />
 
 
-<meta name="date" content="2020-01-09" />
+<meta name="date" content="2020-01-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -254,6 +254,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.4" data-path="activity-5-point-pattern-analysis-ii.html"><a href="activity-5-point-pattern-analysis-ii.html#preliminaries-9"><i class="fa fa-check"></i><b>12.4</b> Preliminaries</a></li>
 <li class="chapter" data-level="12.5" data-path="activity-5-point-pattern-analysis-ii.html"><a href="activity-5-point-pattern-analysis-ii.html#activity-4"><i class="fa fa-check"></i><b>12.5</b> Activity</a></li>
 </ul></li>
+<li class="chapter" data-level="13" data-path="point-pattern-analysis-iii.html"><a href="point-pattern-analysis-iii.html"><i class="fa fa-check"></i><b>13</b> Point Pattern Analysis III</a><ul>
+<li class="chapter" data-level="13.1" data-path="point-pattern-analysis-iii.html"><a href="point-pattern-analysis-iii.html#learning-objectives-12"><i class="fa fa-check"></i><b>13.1</b> Learning Objectives</a></li>
+<li class="chapter" data-level="13.2" data-path="point-pattern-analysis-iii.html"><a href="point-pattern-analysis-iii.html#suggested-readings-5"><i class="fa fa-check"></i><b>13.2</b> Suggested Readings</a></li>
+<li class="chapter" data-level="13.3" data-path="point-pattern-analysis-iii.html"><a href="point-pattern-analysis-iii.html#preliminaries-10"><i class="fa fa-check"></i><b>13.3</b> Preliminaries</a></li>
+<li class="chapter" data-level="13.4" data-path="point-pattern-analysis-iii.html"><a href="point-pattern-analysis-iii.html#motivation"><i class="fa fa-check"></i><b>13.4</b> Motivation</a></li>
+<li class="chapter" data-level="13.5" data-path="point-pattern-analysis-iii.html"><a href="point-pattern-analysis-iii.html#nearest-neighbors"><i class="fa fa-check"></i><b>13.5</b> Nearest Neighbors</a></li>
+<li class="chapter" data-level="13.6" data-path="point-pattern-analysis-iii.html"><a href="point-pattern-analysis-iii.html#g-function"><i class="fa fa-check"></i><b>13.6</b> <span class="math inline">\(G\)</span>-function</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="activity-6-point-pattern-analysis-iii.html"><a href="activity-6-point-pattern-analysis-iii.html"><i class="fa fa-check"></i><b>14</b> Activity 6: Point Pattern Analysis III</a><ul>
+<li class="chapter" data-level="14.1" data-path="activity-6-point-pattern-analysis-iii.html"><a href="activity-6-point-pattern-analysis-iii.html#practice-questions-3"><i class="fa fa-check"></i><b>14.1</b> Practice questions</a></li>
+<li class="chapter" data-level="14.2" data-path="activity-6-point-pattern-analysis-iii.html"><a href="activity-6-point-pattern-analysis-iii.html#learning-objectives-13"><i class="fa fa-check"></i><b>14.2</b> Learning objectives</a></li>
+<li class="chapter" data-level="14.3" data-path="activity-6-point-pattern-analysis-iii.html"><a href="activity-6-point-pattern-analysis-iii.html#suggested-reading-4"><i class="fa fa-check"></i><b>14.3</b> Suggested reading</a></li>
+<li class="chapter" data-level="14.4" data-path="activity-6-point-pattern-analysis-iii.html"><a href="activity-6-point-pattern-analysis-iii.html#preliminaries-11"><i class="fa fa-check"></i><b>14.4</b> Preliminaries</a></li>
+<li class="chapter" data-level="14.5" data-path="activity-6-point-pattern-analysis-iii.html"><a href="activity-6-point-pattern-analysis-iii.html#activity-5"><i class="fa fa-check"></i><b>14.5</b> Activity</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -333,14 +348,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="activity-1" class="section level2">
 <h2><span class="header-section-number">6.5</span> Activity</h2>
-<p>*1. Create thematic maps for variables VAR1 through VAR3 in the dataframe <code>missing_df</code>.</p>
-<p>*2. Plot all three point patterns.</p>
+<p><strong>NOTE</strong>: Activities include technical “how to” tasks/questions. Usually, these ask you to organize data, create a plot, and so on in support of analysis and interpretation. These tasks are indicated by a star (*).</p>
+<p>1.* Create thematic maps for variables VAR1 through VAR3 in the dataframe <code>missing_df</code>.</p>
+<p>2.* Plot all three point patterns.</p>
 <ol start="3" style="list-style-type: decimal">
-<li>Suppose that you were tasked with estimating the value of a variable for the locations where those were not measured. For instance, you could be a realtor, and you need to assess the value of a property, and the only information available is the published values of other properties in the region. As an alternative, you could be an environmental scientist, and you need to estimate what the concentration of a contaminant at a site, based on previous measurements at other sites in the region.</li>
-</ol>
-<p>Propose one or more ways to guess those missing values, and explain your reasoning. The approach does not need to be the same for all variables!</p>
-<ol start="4" style="list-style-type: decimal">
-<li>Imagine that you are a public health official and you need to plan services to the public. If you were asked to guess where the next event would emerge, where would be your guess in each map? Explain your answer.</li>
+<li><p>Suppose that you were tasked with estimating the value of a variable for the locations where those were not measured. For instance, you could be a realtor, and you need to assess the value of a property, and the only information available is the published values of other properties in the region. As an alternative, you could be an environmental scientist, and you need to estimate what the concentration of a contaminant at a site, based on previous measurements at other sites in the region. Propose one or more ways to guess those missing values, and explain your reasoning. The approach does not need to be the same for all variables!</p></li>
+<li><p>Imagine that you are a public health official and you need to plan services to the public. If you were asked to guess where the next event would emerge, where would be your guess in each map? Explain your answer.</p></li>
 </ol>
 
 </div>
