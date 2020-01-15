@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Logit | An Introduction to Discrete Choice Analysis</title>
-  <meta name="description" content="These notes were created by Antonio Paez as a resource for teaching a graduate discrete choice analysis course (GEOG 738) at McMaster University.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="These notes were created by Antonio Paez as a resource for teaching a graduate discrete choice analysis course (GEOG 738) at McMaster University." />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Logit | An Introduction to Discrete Choice Analysis" />
   <meta property="og:type" content="book" />
@@ -22,18 +21,18 @@
   <meta name="twitter:description" content="These notes were created by Antonio Paez as a resource for teaching a graduate discrete choice analysis course (GEOG 738) at McMaster University." />
   
 
-<meta name="author" content="Antonio Paez">
+<meta name="author" content="Antonio Paez" />
 
 
-<meta name="date" content="2019-07-04">
+<meta name="date" content="2020-01-15" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="chapter-2.html">
-<link rel="next" href="chapter-4.html">
+<link rel="prev" href="chapter-2.html"/>
+<link rel="next" href="chapter-4.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -41,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -49,51 +51,76 @@
 
 
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.49.4/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.49.4/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -138,7 +165,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.5.2" data-path="chapter-1.html"><a href="chapter-1.html#quantitative"><i class="fa fa-check"></i><b>2.5.2</b> Quantitative</a></li>
 </ul></li>
 <li class="chapter" data-level="2.6" data-path="chapter-1.html"><a href="chapter-1.html#importing-data"><i class="fa fa-check"></i><b>2.6</b> Importing data</a></li>
-<li class="chapter" data-level="2.7" data-path="chapter-1.html"><a href="chapter-1.html#data-classes-in-r"><i class="fa fa-check"></i><b>2.7</b> Data Classes in R</a></li>
+<li class="chapter" data-level="2.7" data-path="chapter-1.html"><a href="chapter-1.html#data-classes-in-r"><i class="fa fa-check"></i><b>2.7</b> Data Classes in <code>R</code></a></li>
 <li class="chapter" data-level="2.8" data-path="chapter-1.html"><a href="chapter-1.html#more-on-indexing-and-data-manipulation"><i class="fa fa-check"></i><b>2.8</b> More on indexing and data manipulation</a></li>
 <li class="chapter" data-level="2.9" data-path="chapter-1.html"><a href="chapter-1.html#visualization"><i class="fa fa-check"></i><b>2.9</b> Visualization</a></li>
 <li class="chapter" data-level="2.10" data-path="chapter-1.html"><a href="chapter-1.html#exercise"><i class="fa fa-check"></i><b>2.10</b> Exercise</a><ul>
@@ -317,13 +344,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">4.1</span> Modelling choices</h2>
 <p>In Chapter <a href="chapter-2.html#chapter-2">3</a> a conceptual framework was described to model choice-making behavior. This framework is based on the economic notion of <em>utility</em>, basically that which decision-makers wish to maximize when making choices. The concept of utility has many flaws - key among them that it is not directly observable. If utility could be measured directly by an external observer (or analyst), behavior would seem deterministic. However, unlike Laplace’s Demon, an external observer with only human capabilities has limited knowledge of the conditions under which choices are made, if for no other reason that she cannot possibly know the frame of mind of the decision-maker at the moment when choices are made.</p>
 <p>A way to implement the conceptual framework unders such conditions involved an acknowledgement that although the decision-maker tries to maximize his utility, some part of it will look random to the observer - therefore the term <em>random utility modelling</em>. This allows the analyst to make probabilitistic statements about the behavior of decision-makers. Accordingly, the analyst does not know with certainty the outcome of a choice process, but can quantify her uncertainty in a fairly precise way.</p>
-<p>Based on these concepts, Chapter <a href="chapter-2.html#chapter-2">3</a> concluded by deriving a simple model for discrete choices, namely the lineary probability model <span class="citation">(see Ben-Akiva and Lerman <a href="#ref-Benakiva1985discrete">1985</a>, 66–68)</span>. This model is useful for illustrative purposes. However, it suffers from an important limitation: the linear probabilities are a stepwise function, which makes their mathematical treatment unfun, and also imply that certain outcome are certain (i.e., it can return probabilities of exactly one or exactly zero). This would preclude certain behaviors, which seems a somewhat arrogant thing to do on the part of the analyst. A better approach would be to allow any behavior, but assign very small probabilities to more extreme choices.</p>
+<p>Based on these concepts, Chapter <a href="chapter-2.html#chapter-2">3</a> concluded by deriving a simple model for discrete choices, namely the lineary probability model <span class="citation">(see Ben-Akiva and Lerman <a href="#ref-Benakiva1985discrete" role="doc-biblioref">1985</a>, 66–68)</span>. This model is useful for illustrative purposes. However, it suffers from an important limitation: the linear probabilities are a stepwise function, which makes their mathematical treatment unfun, and also imply that certain outcome are certain (i.e., it can return probabilities of exactly one or exactly zero). This would preclude certain behaviors, which seems a somewhat arrogant thing to do on the part of the analyst. A better approach would be to allow any behavior, but assign very small probabilities to more extreme choices.</p>
 <p>In this chapter we will revisit those random utility terms to derive an alternative to the linear probability model. This will be the <em>logit</em> model, one of the most popular models in discrete choice analysis for reasons that will be discussed below.</p>
 </div>
 <div id="how-to-use-this-note-2" class="section level2">
 <h2><span class="header-section-number">4.2</span> How to use this note</h2>
 <p>Remember that the source for the document you are reading is an R Notebook. Throughout the notes, you will find examples of code in segments of text called <em>chunks</em>. This is an example of a chunk:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="st">&quot;Hello, Dr. Train&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" title="1"><span class="kw">print</span>(<span class="st">&quot;Hello, Dr. Train&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;Hello, Dr. Train&quot;</code></pre>
 <p>If you are working with the Notebook version of the document, you can run the code by clicking the ‘play’ icon on the top right corner of the chunk. If you are reading the web-book version of the document, you will often see that the code has already been executed. You can still try it by copying and pasting into your R or RStudio console.</p>
 </div>
@@ -340,24 +367,25 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="suggested-readings-2" class="section level2">
 <h2><span class="header-section-number">4.4</span> Suggested readings</h2>
 <ul>
-<li>Ben-Akiva, M. Lerman, <span class="citation">(<a href="#ref-Benakiva1985discrete">1985</a>)</span> Discrete Choice Analysis: Theory and Applications to Travel Demand, <strong>Chapters 4 and 5</strong>, MIT Press.</li>
-<li>Hensher, D.A., Rose, J.M., Greene, W.H <span class="citation">(<a href="#ref-hensher2005applied">2005</a>)</span> Applied Choice Analysis: A Primer, <strong>Chapter 10</strong>, Cambridge University Press.</li>
-<li>Ortuzar JD, Willumsen LG <span class="citation">(<a href="#ref-Ortuzar2011modelling">2011</a>)</span> Modelling Transport, Fourth Edition, <strong>Chapter 7</strong>, John Wiley and Sons.</li>
-<li>Louviere, J.J., Hensher, D.A., Swait, J.D. <span class="citation">(<a href="#ref-Louviere2000stated">2000</a>)</span> Stated Choice Methods: Analysis and Application, <strong>Chapter 3, pp. 199-205</strong>, Cambridge University Press.</li>
-<li>Train <span class="citation">(<a href="#ref-Train2009discrete">2009</a>)</span> Discrete Choice Methods with Simulation, Second Edition, <strong>Chapter 3</strong>, Cambridge University Press.</li>
+<li>Ben-Akiva, M. Lerman, <span class="citation">(<a href="#ref-Benakiva1985discrete" role="doc-biblioref">1985</a>)</span> Discrete Choice Analysis: Theory and Applications to Travel Demand, <strong>Chapters 4 and 5</strong>, MIT Press.</li>
+<li>Hensher, D.A., Rose, J.M., Greene, W.H <span class="citation">(<a href="#ref-hensher2005applied" role="doc-biblioref">2005</a>)</span> Applied Choice Analysis: A Primer, <strong>Chapter 10</strong>, Cambridge University Press.</li>
+<li>Ortuzar JD, Willumsen LG <span class="citation">(<a href="#ref-Ortuzar2011modelling" role="doc-biblioref">2011</a>)</span> Modelling Transport, Fourth Edition, <strong>Chapter 7</strong>, John Wiley and Sons.</li>
+<li>Louviere, J.J., Hensher, D.A., Swait, J.D. <span class="citation">(<a href="#ref-Louviere2000stated" role="doc-biblioref">2000</a>)</span> Stated Choice Methods: Analysis and Application, <strong>Chapter 3, pp. 199-205</strong>, Cambridge University Press.</li>
+<li>Train <span class="citation">(<a href="#ref-Train2009discrete" role="doc-biblioref">2009</a>)</span> Discrete Choice Methods with Simulation, Second Edition, <strong>Chapter 3</strong>, Cambridge University Press.</li>
 </ul>
 </div>
 <div id="preliminaries-1" class="section level2">
 <h2><span class="header-section-number">4.5</span> Preliminaries</h2>
 <p>Load the packages used in this section:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
-<span class="kw">library</span>(evd)</code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb77-2" title="2"><span class="kw">library</span>(evd)</a></code></pre></div>
 </div>
 <div id="once-again-those-random-terms" class="section level2">
 <h2><span class="header-section-number">4.6</span> Once again those random terms</h2>
 <p>Recall that in order to implement the probabilitistic statement at the heart of a discrete choice model requires the analyst to make assumptions about the random utility terms. Previously, a number of probability distributions were explored, and one in particular (the uniform distribution) was used to derive a simple discrete choice model. But, is the uniform distribution an appropriate choice for the purpose of modeling the random utility?</p>
 <p>The uniform distribution (and some of the other stepwise distributions seen in Chapter <a href="chapter-2.html#chapter-2">3</a>) are useful to illustrate the concept of probability, and more specifically the need to calculate the area under the curve of the distribution. The area under the curve of the uniform distribution is simply the area of a rectangle, which makes this extremely simple. On the other hand, it precludes certain outcomes, which limits its practical usefulness.</p>
-<p>The reality is that, since the utility is in principle unobservable, there is little theoretical support for any specific distribution of the random utility terms. For this reason, the choice of distribution tends to be very pragmatic, particularly attending the convenience for estimation purposes, i.e., retrieving parameters from a sample of observations. The parameters include the parameters used in the systematic utility function <span class="math inline">\(U_{ij}\)</span> (more on this later), as well as any parameters needed for the distribution itself. For instance, the uniform distribution is defined by two parameters, <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>: <span class="math display">\[
+<p>The reality is that, since the utility is in principle unobservable, there is little theoretical support for any specific distribution of the random utility terms. For this reason, the choice of distribution tends to be very pragmatic, particularly attending the convenience for estimation purposes, i.e., retrieving parameters from a sample of observations. The parameters include the parameters used in the systematic utility function <span class="math inline">\(U_{ij}\)</span> (more on this later), as well as any parameters needed for the distribution itself. For instance, the uniform distribution is defined by two parameters, <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>:
+<span class="math display">\[
 f(x) = \left\{
         \begin{array}{lc}
             0 &amp; \quad x \le b \\
@@ -367,25 +395,26 @@ f(x) = \left\{
     \right.
 \]</span></p>
 <p>These parameters define the <em>dispersion</em> of the distribution. The dispersion controls the shape of the distribution, in this case how wide or narrow it is. The greater the difference between <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> the greater the range of values with non-zero probability, but the lower the probability for a constant interval of values. These two parameters also determine the <em>center</em> of the distribution. In this way, the uniform distribution is centered at <span class="math inline">\(\frac{a-b}{2}\)</span>. Other distributions also have parameters that determine their shape and position.</p>
-<p>A convenient choice of distribution is the Extreme Value type I (EV Type I) probability distribution function. This function is defined as: <span class="math display">\[
+<p>A convenient choice of distribution is the Extreme Value type I (EV Type I) probability distribution function. This function is defined as:
+<span class="math display">\[
 f(x; \mu,\sigma) = e^{-(x + e^{-(x-\mu)/\sigma})}
 \]</span></p>
 <p>The EV Type I distribution has two parameters, namely <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>, which determine the location (i.e., the center) and the dispersion of the distribution, respectively.</p>
 <p>The shape of this distribution is shown in Figure <a href="chapter-3.html#fig:fig-evi-distribution">4.1</a> with <span class="math inline">\(\mu = 0\)</span> and <span class="math inline">\(\sigma = 1\)</span>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define parameters for the distribution</span>
-mu &lt;-<span class="st"> </span><span class="dv">0</span>
-sigma &lt;-<span class="st"> </span><span class="dv">1</span>
-
-<span class="co"># Create a data frame for plotting</span>
-df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="op">-</span><span class="dv">5</span>, <span class="dt">to =</span> <span class="dv">5</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">y =</span> <span class="kw">dgumbel</span>(x, <span class="dt">loc =</span> mu, <span class="dt">scale =</span> sigma))
-
-<span class="co"># Plot</span>
-<span class="kw">ggplot</span>(<span class="dt">data =</span> df, <span class="kw">aes</span>(x, y)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_area</span>(<span class="dt">fill =</span> <span class="st">&quot;orange&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
-<span class="st">  </span><span class="co">#ylim(c(0, 1/(2 * L) + 0.2 * 1/(2 * L))) + # Set the limits of the y axis</span>
-<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add y axis</span>
-<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add x axis</span>
-<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;f(x)&quot;</span>) <span class="co"># Label the y axis</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" title="1"><span class="co"># Define parameters for the distribution</span></a>
+<a class="sourceLine" id="cb78-2" title="2">mu &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb78-3" title="3">sigma &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb78-4" title="4"></a>
+<a class="sourceLine" id="cb78-5" title="5"><span class="co"># Create a data frame for plotting</span></a>
+<a class="sourceLine" id="cb78-6" title="6">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">-5</span>, <span class="dt">to =</span> <span class="dv">5</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">y =</span> <span class="kw">dgumbel</span>(x, <span class="dt">loc =</span> mu, <span class="dt">scale =</span> sigma))</a>
+<a class="sourceLine" id="cb78-7" title="7"></a>
+<a class="sourceLine" id="cb78-8" title="8"><span class="co"># Plot</span></a>
+<a class="sourceLine" id="cb78-9" title="9"><span class="kw">ggplot</span>(<span class="dt">data =</span> df, <span class="kw">aes</span>(x, y)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb78-10" title="10"><span class="st">  </span><span class="kw">geom_area</span>(<span class="dt">fill =</span> <span class="st">&quot;orange&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb78-11" title="11"><span class="st">  </span><span class="co">#ylim(c(0, 1/(2 * L) + 0.2 * 1/(2 * L))) + # Set the limits of the y axis</span></a>
+<a class="sourceLine" id="cb78-12" title="12"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add y axis</span></a>
+<a class="sourceLine" id="cb78-13" title="13"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add x axis</span></a>
+<a class="sourceLine" id="cb78-14" title="14"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;f(x)&quot;</span>) <span class="co"># Label the y axis</span></a></code></pre></div>
 <div class="figure"><span id="fig:fig-evi-distribution"></span>
 <img src="bookdown-demo_files/figure-html/fig-evi-distribution-1.png" alt="\label{fig:fig-evi-distribution}Extreme Value Type I distribution" width="672" />
 <p class="caption">
@@ -393,66 +422,72 @@ Figure 4.1: Extreme Value Type I distribution
 </p>
 </div>
 <p>If you are working with the R Notebook, you can try changing the parameters to see how the function behaves (remember to adjust the limits if you change the center of the distribution!).</p>
-<p>The EV Type I has a very interesting property: the difference of two EV Type I distributions follows the logistic distribution. In other words, if <span class="math inline">\(X \sim \text{EVI}(\alpha_Y,\sigma)\)</span> and <span class="math inline">\(Z \sim \text{EVI}(\alpha_Z,\sigma)\)</span>, then: <span class="math display">\[
+<p>The EV Type I has a very interesting property: the difference of two EV Type I distributions follows the logistic distribution. In other words, if <span class="math inline">\(X \sim \text{EVI}(\alpha_Y,\sigma)\)</span> and <span class="math inline">\(Z \sim \text{EVI}(\alpha_Z,\sigma)\)</span>, then:
+<span class="math display">\[
 X - Y \sim \text{Logistic}(\alpha_X - \alpha_Y,\sigma)
 \]</span></p>
-<p>If we define the difference of the random utility terms as <span class="math inline">\(\epsilon_n = \epsilon_j - \epsilon_k\)</span>, the logistic distribution, in turn, is defined as follows: <span class="math display">\[
+<p>If we define the difference of the random utility terms as <span class="math inline">\(\epsilon_n = \epsilon_j - \epsilon_k\)</span>, the logistic distribution, in turn, is defined as follows:
+<span class="math display">\[
 f(x; \mu,\sigma) = \frac{e^{-(x-\mu)/\sigma}}{\sigma(1 + e^{-(x-\mu)/\sigma})^2}
 \]</span></p>
 <p>Whereas the EV Type I distribution was not symmetric, the shape of the logistic distribution is. The logistic distribution is, in fact, similar to the normal distribution but it has fatter tails, which means that the probability of extreme values is higher. This is illustrated in Figure <a href="chapter-3.html#fig:fig-logistic-normal-distribution">4.2</a>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define parameters for the distribution</span>
-mu &lt;-<span class="st"> </span><span class="dv">0</span>
-sigma &lt;-<span class="st"> </span><span class="dv">1</span>
-
-<span class="co"># Create a data frame for plotting</span>
-df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="op">-</span><span class="dv">5</span>, <span class="dt">to =</span> <span class="dv">5</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">logistic =</span> <span class="kw">dlogis</span>(x, <span class="dt">location =</span> mu, <span class="dt">scale =</span> sigma), <span class="dt">normal =</span> <span class="kw">dnorm</span>(x, <span class="dt">mean =</span> mu, <span class="dt">sd =</span> sigma))
-
-<span class="co"># Plot</span>
-<span class="kw">ggplot</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_area</span>(<span class="dt">data =</span> df, <span class="kw">aes</span>(x, logistic), <span class="dt">fill =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_area</span>(<span class="dt">data =</span> df, <span class="kw">aes</span>(x, normal), <span class="dt">fill =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
-<span class="st">  </span><span class="co">#ylim(c(0, 1/(2 * L) + 0.2 * 1/(2 * L))) + # Set the limits of the y axis</span>
-<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add y axis</span>
-<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add x axis</span>
-<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;f(x)&quot;</span>) <span class="co"># Label the y axis</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" title="1"><span class="co"># Define parameters for the distribution</span></a>
+<a class="sourceLine" id="cb79-2" title="2">mu &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb79-3" title="3">sigma &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb79-4" title="4"></a>
+<a class="sourceLine" id="cb79-5" title="5"><span class="co"># Create a data frame for plotting</span></a>
+<a class="sourceLine" id="cb79-6" title="6">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">-5</span>, <span class="dt">to =</span> <span class="dv">5</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb79-7" title="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">logistic =</span> <span class="kw">dlogis</span>(x, <span class="dt">location =</span> mu, <span class="dt">scale =</span> sigma), <span class="dt">normal =</span> <span class="kw">dnorm</span>(x, <span class="dt">mean =</span> mu, <span class="dt">sd =</span> sigma))</a>
+<a class="sourceLine" id="cb79-8" title="8"></a>
+<a class="sourceLine" id="cb79-9" title="9"><span class="co"># Plot</span></a>
+<a class="sourceLine" id="cb79-10" title="10"><span class="kw">ggplot</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb79-11" title="11"><span class="st">  </span><span class="kw">geom_area</span>(<span class="dt">data =</span> df, <span class="kw">aes</span>(x, logistic), <span class="dt">fill =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb79-12" title="12"><span class="st">    </span><span class="kw">geom_area</span>(<span class="dt">data =</span> df, <span class="kw">aes</span>(x, normal), <span class="dt">fill =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb79-13" title="13"><span class="st">  </span><span class="co">#ylim(c(0, 1/(2 * L) + 0.2 * 1/(2 * L))) + # Set the limits of the y axis</span></a>
+<a class="sourceLine" id="cb79-14" title="14"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add y axis</span></a>
+<a class="sourceLine" id="cb79-15" title="15"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add x axis</span></a>
+<a class="sourceLine" id="cb79-16" title="16"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;f(x)&quot;</span>) <span class="co"># Label the y axis</span></a></code></pre></div>
 <div class="figure"><span id="fig:fig-logistic-normal-distribution"></span>
 <img src="bookdown-demo_files/figure-html/fig-logistic-normal-distribution-1.png" alt="\label{fig:fig-logistic-normal-distribution}Comparison of the logistic (blue) and normal (grey) distributions" width="672" />
 <p class="caption">
 Figure 4.2: Comparison of the logistic (blue) and normal (grey) distributions
 </p>
 </div>
-<p>Since the probability expression is given in terms of the difference of the random utilities, if we assume that the random terms <span class="math inline">\(\epsilon\)</span> follow the EV Type I distribution, their difference (i.e., <span class="math inline">\(\epsilon_n = \epsilon_j - \epsilon_i\)</span>) follows the logistic distribution. As before, the area under the curve of the function needs to be calculated to obtain a probability. Unfortunately, this needs to be done by integration. Fortunately, this integral has an analytical solution, or so-called <em>closed form</em>: <span class="math display">\[
+<p>Since the probability expression is given in terms of the difference of the random utilities, if we assume that the random terms <span class="math inline">\(\epsilon\)</span> follow the EV Type I distribution, their difference (i.e., <span class="math inline">\(\epsilon_n = \epsilon_j - \epsilon_i\)</span>) follows the logistic distribution. As before, the area under the curve of the function needs to be calculated to obtain a probability. Unfortunately, this needs to be done by integration. Fortunately, this integral has an analytical solution, or so-called <em>closed form</em>:
+<span class="math display">\[
 F(x; \mu,\sigma) = \frac{1}{1 + e^{-(\epsilon_n-\mu)/\sigma}}
 \]</span></p>
-<p>Accordingly, the probability expression is as follows: <span class="math display">\[
+<p>Accordingly, the probability expression is as follows:
+<span class="math display">\[
 P_j = P(V_j - V_k \le \epsilon_n) = \frac{1}{1 + e^{-(\epsilon_n-\mu)/\sigma}} = \frac{1}{1 + e^{-(V_j-V_k-\mu)/\sigma}}
 \]</span></p>
-<p>Which, after some manipulation, can be rewritten as: <span class="math display">\[
+<p>Which, after some manipulation, can be rewritten as:
+<span class="math display">\[
 P_j = P(V_j - V_k \le \epsilon_n) = \frac{e^{V_j/\sigma}}{e^{V_j/\sigma} + e^{(V_k+\mu)/\sigma}}
-\]</span> The above is called the <em>logit probability</em> and the resulting model is called the <em>logit model</em>. As seen, the probability of choosing alternative <span class="math inline">\(j\)</span> is the area under the curve of the logistic distribution function, as seen in Figure <a href="chapter-3.html#fig:fig-logistic-distribution">4.3</a> (assuming <span class="math inline">\(mu = 0\)</span> and <span class="math inline">\(\sigma = 1\)</span>):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define parameters for the distribution</span>
-mu &lt;-<span class="st"> </span><span class="dv">0</span>
-sigma &lt;-<span class="st"> </span><span class="dv">1</span>
-
-<span class="co"># Define an upper limit for calculating the probability</span>
-X &lt;-<span class="st"> </span><span class="op">-</span><span class="dv">1</span>
-
-<span class="co"># Create data frames for plotting</span>
-df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="op">-</span><span class="dv">5</span>, <span class="dt">to =</span> <span class="dv">5</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">y =</span> <span class="kw">dlogis</span>(x, <span class="dt">location =</span> mu, <span class="dt">scale =</span> sigma))
-df_p &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="op">-</span><span class="dv">5</span>, <span class="dt">to =</span> X, <span class="dt">by =</span> <span class="fl">0.01</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">y =</span> <span class="kw">dlogis</span>(x, <span class="dt">location =</span> mu, <span class="dt">scale =</span> sigma))
-
-<span class="co"># Plot</span>
-<span class="kw">ggplot</span>(<span class="dt">data =</span> df, <span class="kw">aes</span>(x, y)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_area</span>(<span class="dt">fill =</span> <span class="st">&quot;orange&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Plot distribution function</span>
-<span class="st">  </span><span class="kw">geom_area</span>(<span class="dt">data =</span> df_p, <span class="dt">fill =</span> <span class="st">&quot;orange&quot;</span>, <span class="dt">alpha =</span> <span class="dv">1</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Plot area under the curve</span>
-<span class="st">  </span><span class="co">#ylim(c(0, 1/(2 * L) + 0.2 * 1/(2 * L))) + # Set the limits of the y axis</span>
-<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add y axis</span>
-<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add x axis</span>
-<span class="st">  </span><span class="kw">xlab</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(epsilon[n]))) <span class="op">+</span><span class="st"> </span><span class="co"># Label the y axis</span>
-<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;f(x)&quot;</span>) <span class="co"># Label the y axis</span></code></pre></div>
+\]</span>
+The above is called the <em>logit probability</em> and the resulting model is called the <em>logit model</em>. As seen, the probability of choosing alternative <span class="math inline">\(j\)</span> is the area under the curve of the logistic distribution function, as seen in Figure <a href="chapter-3.html#fig:fig-logistic-distribution">4.3</a> (assuming <span class="math inline">\(mu = 0\)</span> and <span class="math inline">\(\sigma = 1\)</span>):</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" title="1"><span class="co"># Define parameters for the distribution</span></a>
+<a class="sourceLine" id="cb80-2" title="2">mu &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb80-3" title="3">sigma &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb80-4" title="4"></a>
+<a class="sourceLine" id="cb80-5" title="5"><span class="co"># Define an upper limit for calculating the probability</span></a>
+<a class="sourceLine" id="cb80-6" title="6">X &lt;-<span class="st"> </span><span class="dv">-1</span></a>
+<a class="sourceLine" id="cb80-7" title="7"></a>
+<a class="sourceLine" id="cb80-8" title="8"><span class="co"># Create data frames for plotting</span></a>
+<a class="sourceLine" id="cb80-9" title="9">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">-5</span>, <span class="dt">to =</span> <span class="dv">5</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb80-10" title="10"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">y =</span> <span class="kw">dlogis</span>(x, <span class="dt">location =</span> mu, <span class="dt">scale =</span> sigma))</a>
+<a class="sourceLine" id="cb80-11" title="11">df_p &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">-5</span>, <span class="dt">to =</span> X, <span class="dt">by =</span> <span class="fl">0.01</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb80-12" title="12"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">y =</span> <span class="kw">dlogis</span>(x, <span class="dt">location =</span> mu, <span class="dt">scale =</span> sigma))</a>
+<a class="sourceLine" id="cb80-13" title="13"></a>
+<a class="sourceLine" id="cb80-14" title="14"><span class="co"># Plot</span></a>
+<a class="sourceLine" id="cb80-15" title="15"><span class="kw">ggplot</span>(<span class="dt">data =</span> df, <span class="kw">aes</span>(x, y)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb80-16" title="16"><span class="st">  </span><span class="kw">geom_area</span>(<span class="dt">fill =</span> <span class="st">&quot;orange&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Plot distribution function</span></a>
+<a class="sourceLine" id="cb80-17" title="17"><span class="st">  </span><span class="kw">geom_area</span>(<span class="dt">data =</span> df_p, <span class="dt">fill =</span> <span class="st">&quot;orange&quot;</span>, <span class="dt">alpha =</span> <span class="dv">1</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Plot area under the curve</span></a>
+<a class="sourceLine" id="cb80-18" title="18"><span class="st">  </span><span class="co">#ylim(c(0, 1/(2 * L) + 0.2 * 1/(2 * L))) + # Set the limits of the y axis</span></a>
+<a class="sourceLine" id="cb80-19" title="19"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add y axis</span></a>
+<a class="sourceLine" id="cb80-20" title="20"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add x axis</span></a>
+<a class="sourceLine" id="cb80-21" title="21"><span class="st">  </span><span class="kw">xlab</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(epsilon[n]))) <span class="op">+</span><span class="st"> </span><span class="co"># Label the y axis</span></a>
+<a class="sourceLine" id="cb80-22" title="22"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;f(x)&quot;</span>) <span class="co"># Label the y axis</span></a></code></pre></div>
 <div class="figure"><span id="fig:fig-logistic-distribution"></span>
 <img src="bookdown-demo_files/figure-html/fig-logistic-distribution-1.png" alt="\label{fig:fig-logistic-distribution}Logit probability" width="672" />
 <p class="caption">
@@ -461,18 +496,18 @@ Figure 4.3: Logit probability
 </div>
 <p>Try changing the upper limit in the figure above to explore the behavior of the logit probability. What is the probability of choosing <span class="math inline">\(j\)</span> when <span class="math inline">\(V_j - V_k = 0\)</span>? What is the probability of choosing <span class="math inline">\(j\)</span> when <span class="math inline">\(V_j &gt;&gt; V_k\)</span>? And when <span class="math inline">\(V_j &lt;&lt; V_k\)</span>? Is this as expected?</p>
 <p>The cumulative distribution function is shown in Figure <a href="chapter-3.html#fig:fig-logistic-cumulative-distribution">4.4</a>. Notice that this function tends asymptotically to 0 when <span class="math inline">\(x\)</span> tends to <span class="math inline">\(-\infty\)</span> and to 1 when <span class="math inline">\(x\)</span> tends to <span class="math inline">\(\infty\)</span>. This function never assigns values of exactly 0 or exactly 1.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a data frame for plotting</span>
-df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="op">-</span><span class="dv">5</span>, <span class="dt">to =</span> <span class="dv">5</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">y =</span> <span class="kw">plogis</span>(x))
-
-<span class="co"># Plot</span>
-logit_plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> df, <span class="kw">aes</span>(x, y)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">color =</span> <span class="st">&quot;orange&quot;</span>) <span class="op">+</span><span class="st">  </span><span class="co"># Plot cumulative distribution function</span>
-<span class="st">  </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span><span class="co"># Set the limits of the y axis</span>
-<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add y axis</span>
-<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>) <span class="co"># Add x axis</span>
-logit_plot <span class="op">+</span>
-<span class="st">  </span><span class="kw">xlab</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(V[j], <span class="st">&quot; - &quot;</span>, V[k], <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))) <span class="op">+</span><span class="st">  </span><span class="co"># Label the x axis</span>
-<span class="st">  </span><span class="kw">ylab</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(P[j]))) <span class="co"># Label the y axis</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" title="1"><span class="co"># Create a data frame for plotting</span></a>
+<a class="sourceLine" id="cb81-2" title="2">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">-5</span>, <span class="dt">to =</span> <span class="dv">5</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">y =</span> <span class="kw">plogis</span>(x))</a>
+<a class="sourceLine" id="cb81-3" title="3"></a>
+<a class="sourceLine" id="cb81-4" title="4"><span class="co"># Plot</span></a>
+<a class="sourceLine" id="cb81-5" title="5">logit_plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> df, <span class="kw">aes</span>(x, y)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb81-6" title="6"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">color =</span> <span class="st">&quot;orange&quot;</span>) <span class="op">+</span><span class="st">  </span><span class="co"># Plot cumulative distribution function</span></a>
+<a class="sourceLine" id="cb81-7" title="7"><span class="st">  </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span><span class="co"># Set the limits of the y axis</span></a>
+<a class="sourceLine" id="cb81-8" title="8"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add y axis</span></a>
+<a class="sourceLine" id="cb81-9" title="9"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>) <span class="co"># Add x axis</span></a>
+<a class="sourceLine" id="cb81-10" title="10">logit_plot <span class="op">+</span></a>
+<a class="sourceLine" id="cb81-11" title="11"><span class="st">  </span><span class="kw">xlab</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(V[j], <span class="st">&quot; - &quot;</span>, V[k], <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))) <span class="op">+</span><span class="st">  </span><span class="co"># Label the x axis</span></a>
+<a class="sourceLine" id="cb81-12" title="12"><span class="st">  </span><span class="kw">ylab</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(P[j]))) <span class="co"># Label the y axis</span></a></code></pre></div>
 <div class="figure"><span id="fig:fig-logistic-cumulative-distribution"></span>
 <img src="bookdown-demo_files/figure-html/fig-logistic-cumulative-distribution-1.png" alt="\label{fig:fig-logistic-cumulative-distribution}Linear cumulative distribution function" width="672" />
 <p class="caption">
@@ -482,13 +517,13 @@ Figure 4.4: Linear cumulative distribution function
 <p>The logit probability exhibits a shape usually called a <a href="https://en.wikipedia.org/wiki/Sigmoid_function"><em>sigmoid</em></a> (for its resemblance to the letter “s”). This shape is shared by most other discrete choice models - the uniform distribution in Chapter <a href="chapter-2.html#chapter-2">3</a>, for instance, resembled an angular letter “s”, whereas the linear and quadratic distribution functions started to display the non-linear aspect of the logit probability function. Sigmoid functions are of interest in many fields. The study of technology adoption is a case in point; new technologies are initially adopted slowly, then go through a rapid growth stage, before reaching saturation. Population growth is often represented by similar curves, with population growing slowly, then explosively, before reaching a carrying capacity limit.</p>
 <p>In the case of discrete choice analysis, the shape of the function is interesting from a policy perspective. In the vast majority of cities in North America, for example, the two main modes of transportation are cars and transit. However, the shares of transit tend to be very low, sometimes lower than 10% or even 5%. This suggests that the underlying probabilities of choosing transit at the individual level are very low too.</p>
 <p>Suppose that the logit curve in Figure <a href="chapter-3.html#fig:fig-logistic-cumulative-distribution">4.4</a> is for the probability of choosing transit. If the initial probability of choosing transit is low, large increases in the utility of transit result in relatively modest gains in probability (see solid blue line in Figure <a href="chapter-3.html#fig:fig-logistic-shape-implication">4.5</a>). If the starting probability of transit had been instead 0.5, an identical increase in the utility of transit would result in a much larger gain in the probability (see dashed red line in Figure <a href="chapter-3.html#fig:fig-logistic-shape-implication">4.5</a>).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">logit_plot <span class="op">+</span>
-<span class="st">  </span><span class="kw">xlab</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(V[transit], <span class="st">&quot; - &quot;</span>, V[car], <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))) <span class="op">+</span><span class="st"> </span><span class="co"># Label the x axis</span>
-<span class="st">  </span><span class="kw">ylab</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(P[transit]))) <span class="op">+</span><span class="st"> </span><span class="co"># Label the y axis</span>
-<span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;segment&quot;</span>, <span class="dt">x =</span> <span class="op">-</span><span class="fl">3.75</span>, <span class="dt">xend =</span> <span class="op">-</span><span class="fl">2.5</span>, <span class="dt">y =</span> <span class="fl">0.024</span>, <span class="dt">yend =</span> <span class="fl">0.024</span>, <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">linetype =</span> <span class="st">&quot;solid&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;segment&quot;</span>, <span class="dt">x =</span> <span class="op">-</span><span class="fl">2.5</span>, <span class="dt">xend =</span> <span class="op">-</span><span class="fl">2.5</span>, <span class="dt">y =</span> <span class="fl">0.024</span>, <span class="dt">yend =</span> <span class="fl">0.075</span>, <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">linetype =</span> <span class="st">&quot;solid&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;segment&quot;</span>, <span class="dt">x =</span> <span class="dv">0</span>, <span class="dt">xend =</span> <span class="fl">1.25</span>, <span class="dt">y =</span> <span class="fl">0.5</span>, <span class="dt">yend =</span> <span class="fl">0.5</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;segment&quot;</span>, <span class="dt">x =</span> <span class="fl">1.25</span>, <span class="dt">xend =</span> <span class="fl">1.25</span>, <span class="dt">y =</span> <span class="fl">0.5</span>, <span class="dt">yend =</span> <span class="fl">0.77</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1">logit_plot <span class="op">+</span></a>
+<a class="sourceLine" id="cb82-2" title="2"><span class="st">  </span><span class="kw">xlab</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(V[transit], <span class="st">&quot; - &quot;</span>, V[car], <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))) <span class="op">+</span><span class="st"> </span><span class="co"># Label the x axis</span></a>
+<a class="sourceLine" id="cb82-3" title="3"><span class="st">  </span><span class="kw">ylab</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(P[transit]))) <span class="op">+</span><span class="st"> </span><span class="co"># Label the y axis</span></a>
+<a class="sourceLine" id="cb82-4" title="4"><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;segment&quot;</span>, <span class="dt">x =</span> <span class="fl">-3.75</span>, <span class="dt">xend =</span> <span class="fl">-2.5</span>, <span class="dt">y =</span> <span class="fl">0.024</span>, <span class="dt">yend =</span> <span class="fl">0.024</span>, <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">linetype =</span> <span class="st">&quot;solid&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb82-5" title="5"><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;segment&quot;</span>, <span class="dt">x =</span> <span class="fl">-2.5</span>, <span class="dt">xend =</span> <span class="fl">-2.5</span>, <span class="dt">y =</span> <span class="fl">0.024</span>, <span class="dt">yend =</span> <span class="fl">0.075</span>, <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">linetype =</span> <span class="st">&quot;solid&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb82-6" title="6"><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;segment&quot;</span>, <span class="dt">x =</span> <span class="dv">0</span>, <span class="dt">xend =</span> <span class="fl">1.25</span>, <span class="dt">y =</span> <span class="fl">0.5</span>, <span class="dt">yend =</span> <span class="fl">0.5</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb82-7" title="7"><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;segment&quot;</span>, <span class="dt">x =</span> <span class="fl">1.25</span>, <span class="dt">xend =</span> <span class="fl">1.25</span>, <span class="dt">y =</span> <span class="fl">0.5</span>, <span class="dt">yend =</span> <span class="fl">0.77</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:fig-logistic-shape-implication"></span>
 <img src="bookdown-demo_files/figure-html/fig-logistic-shape-implication-1.png" alt="\label{fig:fig-logistic-shape-implication}Implication of the sigmoid shape" width="672" />
 <p class="caption">
@@ -500,41 +535,49 @@ Figure 4.5: Implication of the sigmoid shape
 <div id="now-about-those-parameters-mu-and-sigma" class="section level2">
 <h2><span class="header-section-number">4.7</span> Now, about those parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>…</h2>
 <p>Figure <a href="chapter-3.html#fig:fig-logistic-distribution">4.3</a> above was created assuming that <span class="math inline">\(\mu=0\)</span> and <span class="math inline">\(\sigma=1\)</span>. Can we really set these values in such an arbitrary fashion? The answer is no and yes.</p>
-<p>In the case of the centering parameter <span class="math inline">\(\mu\)</span>, setting it arbitrarily to zero is not appropriate. The reason is that we can think of this parameter as being key to calculating the difference between the systematic utilities. As seen above, the logit probability is: <span class="math display">\[
+<p>In the case of the centering parameter <span class="math inline">\(\mu\)</span>, setting it arbitrarily to zero is not appropriate. The reason is that we can think of this parameter as being key to calculating the difference between the systematic utilities. As seen above, the logit probability is:
+<span class="math display">\[
 P_j = P(V_j - V_k \le \epsilon_n) = \frac{1}{1 + e^{-(V_j-V_k-\mu)/\sigma}}
 \]</span></p>
-<p>Assume that we let one of the utility functions absorb <span class="math inline">\(\mu\)</span>, that is we let either: <span class="math display">\[
+<p>Assume that we let one of the utility functions absorb <span class="math inline">\(\mu\)</span>, that is we let either:
+<span class="math display">\[
 V^*_k = V_k + \mu
 \]</span></p>
-<p>or: <span class="math display">\[
+<p>or:
+<span class="math display">\[
 V^*_j = V_j - \mu
 \]</span></p>
-<p>It does not really matter which utility function we choose to absorb <span class="math inline">\(\mu\)</span> (the only thing that changes is the sign). For convenience, we will say that it is <span class="math inline">\(V_k\)</span>, in which case the logit probability can be written as: <span class="math display">\[
+<p>It does not really matter which utility function we choose to absorb <span class="math inline">\(\mu\)</span> (the only thing that changes is the sign). For convenience, we will say that it is <span class="math inline">\(V_k\)</span>, in which case the logit probability can be written as:
+<span class="math display">\[
 P_j = P(V_j - V^*_k \le \epsilon_n) = \frac{1}{1 + e^{-(V_j-V^*_k)/\sigma}}
 \]</span></p>
 <p>The difference in other words depends on the value of <span class="math inline">\(\mu\)</span>. When <span class="math inline">\(\mu\)</span> is a large positive number, the effect is to increase the utility of alternative <span class="math inline">\(k\)</span> (or conversely, since it would enter with a negative sign in <span class="math inline">\(V^*_j\)</span>, it would decrease the utility of alternative <span class="math inline">\(j\)</span>). When <span class="math inline">\(\mu\)</span> is a large negative number, the effect is to <em>increase</em> the utility of <span class="math inline">\(j\)</span> - or alternatively to reduce the utility of <span class="math inline">\(k\)</span>. For this reason we do not want to arbitrarily set the value of <span class="math inline">\(\mu\)</span> to zero, because this parameter contains information about the relative differences between <span class="math inline">\(V_j\)</span> and <span class="math inline">\(V_k\)</span>. The utility function that does not contain the centering parameter <span class="math inline">\(\mu\)</span> is called the <em>reference</em> function.</p>
 <p>For simplicity of presentation, I will drop the notation <span class="math inline">\(V^*\)</span> and will assume henceforth that one of the utility functions has absorbed parameter <span class="math inline">\(\mu\)</span>.</p>
-<p>Now, with respect to the dispersion parameter <span class="math inline">\(\sigma\)</span>, this parameter is common to the two utility functions in the logit probability and, as it turns out, it <em>can</em> be arbitrarily set to one. Consider two utility functions as follows: <span class="math display">\[
+<p>Now, with respect to the dispersion parameter <span class="math inline">\(\sigma\)</span>, this parameter is common to the two utility functions in the logit probability and, as it turns out, it <em>can</em> be arbitrarily set to one. Consider two utility functions as follows:
+<span class="math display">\[
 V_j - V_k
 \]</span></p>
-<p>Multiplying (alternatively dividing) by a constant greater than zero changes the <em>magnitude</em> of their difference, since: <span class="math display">\[
+<p>Multiplying (alternatively dividing) by a constant greater than zero changes the <em>magnitude</em> of their difference, since:
+<span class="math display">\[
 \theta(V_j - V_k) = \theta V_j - \theta V_k 
 \]</span></p>
 <p>In other words, mutliplying two quantities by a positive constant changes the cardinality of the difference. If you are working with the R Notebook, you might want to try changing the value of <code>theta</code> below, keeping in mind that the value must be <strong>greater than zero</strong>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">V_j &lt;-<span class="st"> </span><span class="op">-</span><span class="dv">4</span>
-V_k &lt;-<span class="st"> </span><span class="dv">8</span>
-theta &lt;-<span class="st"> </span><span class="fl">0.8</span>
-
-theta <span class="op">*</span><span class="st"> </span>V_j <span class="op">-</span><span class="st"> </span>theta <span class="op">*</span><span class="st"> </span>V_k </code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" title="1">V_j &lt;-<span class="st"> </span><span class="dv">-4</span></a>
+<a class="sourceLine" id="cb83-2" title="2">V_k &lt;-<span class="st"> </span><span class="dv">8</span></a>
+<a class="sourceLine" id="cb83-3" title="3">theta &lt;-<span class="st"> </span><span class="fl">0.8</span></a>
+<a class="sourceLine" id="cb83-4" title="4"></a>
+<a class="sourceLine" id="cb83-5" title="5">theta <span class="op">*</span><span class="st"> </span>V_j <span class="op">-</span><span class="st"> </span>theta <span class="op">*</span><span class="st"> </span>V_k </a></code></pre></div>
 <pre><code>## [1] -9.6</code></pre>
 <p>You will notice that the difference changes as you change the value of <code>theta</code>. But what about the sign?</p>
-<p>On the other hand, multiplying two quantities by a positive constant does not affect their <em>ordinality</em>. That is, if <span class="math inline">\(V_j &gt; V_k\)</span> then it is always true that <span class="math inline">\(\theta V_j &gt; \theta V_k\)</span>. Recall the decision making rule: an alternative is chosen if its utility is greater than that of the competing alternatives. The rule is purely ordinal, it does not matter if the difference between them is small or large - in other words, their cardinality is irrelevant. This is convenient because it allows us to simplify the logit probability as follows, by arbitrarily setting <span class="math inline">\(\sigma=1\)</span>: <span class="math display">\[
+<p>On the other hand, multiplying two quantities by a positive constant does not affect their <em>ordinality</em>. That is, if <span class="math inline">\(V_j &gt; V_k\)</span> then it is always true that <span class="math inline">\(\theta V_j &gt; \theta V_k\)</span>. Recall the decision making rule: an alternative is chosen if its utility is greater than that of the competing alternatives. The rule is purely ordinal, it does not matter if the difference between them is small or large - in other words, their cardinality is irrelevant. This is convenient because it allows us to simplify the logit probability as follows, by arbitrarily setting <span class="math inline">\(\sigma=1\)</span>:
+<span class="math display">\[
 P_j = P(V_j - V_k \le \epsilon_n) = \frac{1}{1 + e^{-(V_j-V_k)}} = \frac{e^{V_j}}{e^{V_j} + e^{V_k}}
 \]</span></p>
 </div>
 <div id="multinomial-logit" class="section level2">
 <h2><span class="header-section-number">4.8</span> Multinomial logit</h2>
-<p>The logit model above was derived assuming a choice set with only two alternatives. This, of course, is very restrictive, and there are many situations where more than two alternatives are of interest. Fortunately, a multinomial version of the logit model can be derived without much difficulty, and it also results in a closed form expression, as follows: <span class="math display">\[
+<p>The logit model above was derived assuming a choice set with only two alternatives. This, of course, is very restrictive, and there are many situations where more than two alternatives are of interest. Fortunately, a multinomial version of the logit model can be derived without much difficulty, and it also results in a closed form expression, as follows:
+<span class="math display">\[
 P_j = P(V_j - V_k \le \epsilon_n) = \frac{e^{V_j}}{\sum_k^Je^{V_k}}
 \]</span></p>
 <p>Notice that in this case there are <span class="math inline">\(J-1\)</span> parameters <span class="math inline">\(\mu\)</span> that are absorbed by all but one of the utility functions. As before, it does not matter which utility is selected to act as the reference, since the signs (and magnitudes) of the centering parameters adjust accordingly. More on this later.</p>
@@ -542,14 +585,17 @@ P_j = P(V_j - V_k \le \epsilon_n) = \frac{e^{V_j}}{\sum_k^Je^{V_k}}
 <div id="properties-of-the-logit-model" class="section level2">
 <h2><span class="header-section-number">4.9</span> Properties of the logit model</h2>
 <p>The logit model is the workhorse of discrete choice analysis, in good measure because of its closed form which does not require numerical evaluation of the integrals involved in calculating probabilities (i.e., the “area under the curve”, although in multinomial situations this actually is a volume under the surface!)</p>
-<p>One important property of the logit model is the way it handles substitution patterns. Consider the ratio of odds for any two alternatives according to the multinomial logit model: <span class="math display">\[
+<p>One important property of the logit model is the way it handles substitution patterns. Consider the ratio of odds for any two alternatives according to the multinomial logit model:
+<span class="math display">\[
 \frac{P_j}{P_m}=\frac{\frac{e^{V_j}}{\sum_ke^{V_k}}}{\frac{e^{V_m}}{\sum_ke^{V_k}}} =\frac{e^{V_j}}{e^{V_m}} =e^{V_j - V_m}
 \]</span></p>
-<p>As seen, the ratio of the odds of <span class="math inline">\(P_j\)</span> to <span class="math inline">\(P_m\)</span> depends only on the difference in the utilities of alternatives <span class="math inline">\(j\)</span> and <span class="math inline">\(m\)</span> and nothing more. Furthermore, recall that the choice set is by design an exhaustive set of possible alternatives, and therefore the sum of the probabilities over this set is one: <span class="math display">\[
+<p>As seen, the ratio of the odds of <span class="math inline">\(P_j\)</span> to <span class="math inline">\(P_m\)</span> depends only on the difference in the utilities of alternatives <span class="math inline">\(j\)</span> and <span class="math inline">\(m\)</span> and nothing more. Furthermore, recall that the choice set is by design an exhaustive set of possible alternatives, and therefore the sum of the probabilities over this set is one:
+<span class="math display">\[
 P_1 + P_2+\cdots+P_J=1
 \]</span></p>
 <p>The above means that if the probability of choosing one alternative, say <span class="math inline">\(j\)</span>, increases, then the probabilities of choosing some or all of the other alternatives must decline. But since the ratio of odds for any two alternatives is independent of other alternatives in the choice set, the way the probabilities change depends on the change on the probability that triggered the adjustments. This property is called, quite fittingly, <em>independence from irrelevant alternatives</em> or IIA.</p>
-<p>Suppose, for instance, that a choice set consists of three alternatives products, say margarine (<span class="math inline">\(m\)</span>) by Naturally, and salted butter butter (<span class="math inline">\(sb\)</span>) and low-sodium butter (<span class="math inline">\(lb\)</span>) by Happy Farms. The initial probabilities of choosing these alternatives are as follows: <span class="math display">\[
+<p>Suppose, for instance, that a choice set consists of three alternatives products, say margarine (<span class="math inline">\(m\)</span>) by Naturally, and salted butter butter (<span class="math inline">\(sb\)</span>) and low-sodium butter (<span class="math inline">\(lb\)</span>) by Happy Farms. The initial probabilities of choosing these alternatives are as follows:
+<span class="math display">\[
 \left\{
         \begin{array}{ll}
             P^0_{m}=&amp;\frac{1}{3}\\
@@ -558,21 +604,28 @@ P_1 + P_2+\cdots+P_J=1
         \end{array}
     \right.
 \]</span></p>
-<p>Next, suppose that a change in the attribute set of salted butter (<span class="math inline">\(sb\)</span>), for instance a reduction in price, leads to an increase in the probability of choosing this product. Now the probability of choosing salted butter is: <span class="math display">\[
+<p>Next, suppose that a change in the attribute set of salted butter (<span class="math inline">\(sb\)</span>), for instance a reduction in price, leads to an increase in the probability of choosing this product. Now the probability of choosing salted butter is:
+<span class="math display">\[
 P^1_{sb}=\frac{1}{2}
 \]</span></p>
-<p>How do the other probabilities change? On the one hand, we know that the sum of the new probabilities must be one: <span class="math display">\[
+<p>How do the other probabilities change? On the one hand, we know that the sum of the new probabilities must be one:
+<span class="math display">\[
 P^1_{m} + P^1_{sb} + P^1_{lb} = 1
 \]</span></p>
-<p>Since the attributes of margarine and low-sodium butter did not change, we know that their utilities remain unchanged, and therefore: <span class="math display">\[
+<p>Since the attributes of margarine and low-sodium butter did not change, we know that their utilities remain unchanged, and therefore:
+<span class="math display">\[
 \frac{P^1_{m}}{P^1_{lb}} = \frac{\frac{1}{3}}{\frac{1}{3}} = 1
 \]</span></p>
-<p>In other words, the probability of <span class="math inline">\(P^1_m = P^1_{lb}\)</span>. Substituting: <span class="math display">\[
+<p>In other words, the probability of <span class="math inline">\(P^1_m = P^1_{lb}\)</span>. Substituting:
+<span class="math display">\[
 P^1_{m} + P^1_{sb} + P^1_{lb} = 2P^1_{m} + P^1_{sb} = 1
 \]</span></p>
-<p>Solving for <span class="math inline">\(P^1_lb\)</span>: <span class="math display">\[
+<p>Solving for <span class="math inline">\(P^1_lb\)</span>:
+<span class="math display">\[
 P^1_m = \frac{1 - P^1_{sb}}{2} = \frac{1 - \frac{1}{2}}{2} = \frac{1}{4}
-\]</span> Therefore the new probabilities are: <span class="math display">\[
+\]</span>
+Therefore the new probabilities are:
+<span class="math display">\[
 \left\{
         \begin{array}{ll}
             P^1_{m}=&amp;\frac{1}{4}\\
@@ -582,7 +635,8 @@ P^1_m = \frac{1 - P^1_{sb}}{2} = \frac{1 - \frac{1}{2}}{2} = \frac{1}{4}
     \right.
 \]</span></p>
 <p>Notice that the increase in probability of choosing sunflower-based margarine draws proportionally from the other alternatives (i.e., butter and olive oil-based margarine) - in fact, 12.5% from each. Does this result make sense? What is now the market share of Happy Farms-brand line of butter?</p>
-<p>The property of Independence from Irrelevant Alternatives leads to proportional substitution patterns. Consider the following initial probabilities: <span class="math display">\[
+<p>The property of Independence from Irrelevant Alternatives leads to proportional substitution patterns. Consider the following initial probabilities:
+<span class="math display">\[
 \left\{
         \begin{array}{ll}
             P^0_{m}=0.5\\
@@ -590,12 +644,17 @@ P^1_m = \frac{1 - P^1_{sb}}{2} = \frac{1 - \frac{1}{2}}{2} = \frac{1}{4}
             P^0_{lb}=0.2\\
         \end{array}
     \right.
-\]</span> The new probability of <span class="math inline">\(sb\)</span> changes to <span class="math inline">\(P^1_{sb}=0.5\)</span>. Following the same logic: <span class="math display">\[
+\]</span>
+The new probability of <span class="math inline">\(sb\)</span> changes to <span class="math inline">\(P^1_{sb}=0.5\)</span>. Following the same logic:
+<span class="math display">\[
 \frac{P^1_{m}}{P^1_{lb}} = \frac{0.5}{0.2} = \frac{5}{2} 
-\]</span> And: <span class="math display">\[
+\]</span>
+And:
+<span class="math display">\[
 P^1_m = \frac{5}{7}(1 - P^1_{sb}) = \Big(\frac{5}{7}\Big)\Big(\frac{1}{2}\Big) = \frac{5}{14} = 0.3571
 \]</span></p>
-<p>So the final probabilities are: <span class="math display">\[
+<p>So the final probabilities are:
+<span class="math display">\[
 \left\{
         \begin{array}{ll}
             P^1_{m}=\frac{5}{14}=0.3571\\
@@ -604,7 +663,8 @@ P^1_m = \frac{5}{7}(1 - P^1_{sb}) = \Big(\frac{5}{7}\Big)\Big(\frac{1}{2}\Big) =
         \end{array}
     \right.
 \]</span></p>
-<p>Now, the increase in <span class="math inline">\(P1_{sb}\)</span> to <span class="math inline">\(1/2\)</span> from <span class="math inline">\(P^0_{sb}=1/5\)</span> is drawing <em>more</em> from <span class="math inline">\(P^0_m\)</span> than from <span class="math inline">\(P^0_{lb}\)</span>. However, the pattern of substitution is still proportional, as it can be verified: <span class="math display">\[
+<p>Now, the increase in <span class="math inline">\(P1_{sb}\)</span> to <span class="math inline">\(1/2\)</span> from <span class="math inline">\(P^0_{sb}=1/5\)</span> is drawing <em>more</em> from <span class="math inline">\(P^0_m\)</span> than from <span class="math inline">\(P^0_{lb}\)</span>. However, the pattern of substitution is still proportional, as it can be verified:
+<span class="math display">\[
 \begin{array}{ll}
   \frac{P^1_{m}}{P^0_{m}}=\frac{\frac{5}{14}}{\frac{1}{2}}=\frac{10}{14}\\
   \frac{P^1_{lb}}{P^0_{lb}}=\frac{\frac{2}{14}}{\frac{2}{10}}=\frac{10}{14}\\
@@ -621,62 +681,80 @@ P^1_m = \frac{5}{7}(1 - P^1_{sb}) = \Big(\frac{5}{7}\Big)\Big(\frac{1}{2}\Big) =
 <div id="revisiting-the-systematic-utilities" class="section level2">
 <h2><span class="header-section-number">4.10</span> Revisiting the systematic utilities</h2>
 <p>Much of the discussion above has concentrated on the random utility; however, specifying the systematic utility is key.</p>
-<p>Recall that the utility is a function of the attributes of the alternatives and possibly the attributes of the decision-makers to allow the model to capture heterogeneity in decision-making styles by individuals. the utility function is a convenient way of summarizing all those attributes. Think again of the example of buying a new phone (see Chapter <a href="chapter-2.html#chapter-2">3</a>). In that simple example, the utilities were a function of three attributes, namely cost, speed, and income - to which we can add the random utility: <span class="math display">\[
+<p>Recall that the utility is a function of the attributes of the alternatives and possibly the attributes of the decision-makers to allow the model to capture heterogeneity in decision-making styles by individuals. the utility function is a convenient way of summarizing all those attributes. Think again of the example of buying a new phone (see Chapter <a href="chapter-2.html#chapter-2">3</a>). In that simple example, the utilities were a function of three attributes, namely cost, speed, and income - to which we can add the random utility:
+<span class="math display">\[
 \begin{array}{c}
 U_{i, \text{Do-Nothing}} = U(\text{cost}_{\text{Do-Nothing}}, \text{ speed}_{\text{Do-Nothing}}, \text{ income}_i) = V(\text{cost}_{\text{Do-Nothing}}, \text{ speed}_{\text{Do-Nothing}}, \text{ income}_i) + \epsilon_{i, \text{Do-Nothing}}\\
 U_{i, \text{New-Phone}} = U(\text{cost}_{\text{New-Phone}}, \text{ speed}_{\text{New-Phone}}, \text{ income}_i) = V(\text{cost}_{\text{New-Phone}}, \text{ speed}_{\text{New-Phone}}, \text{ income}_i) + \epsilon_{i, \text{New-Phone}}\\
 \end{array} 
 \]</span></p>
-<p>A common way of specifying the systematic utility is as linear-in-parameters, something that will be familiar to users of regression analysis: <span class="math display">\[
+<p>A common way of specifying the systematic utility is as linear-in-parameters, something that will be familiar to users of regression analysis:
+<span class="math display">\[
 \begin{array}{c}
 V(\text{cost}_{\text{Do-Nothing}}, \text{ speed}_{\text{Do-Nothing}}, \text{ income}_i) = \beta_1\text{cost}_{\text{Do-Nothing}} + \beta_2\text{ speed}_{\text{Do-Nothing}} + \beta_3\text{ income}_i\\
 V(\text{cost}_{\text{New-Phone}}, \text{ speed}_{\text{New-Phone}}, \text{ income}_i) = \mu + \beta_1\text{cost}_{\text{New-Phone}} + \beta_2\text{ speed}_{\text{New-Phone}} + \beta_3\text{ income}_i\\
 \end{array} 
-\]</span> Notice how the location parameter of the logistic function is absorbed by one of the utility functions!</p>
-<p>The additive form of the utilities reflects a compensatory choice-making strategy: higher costs may be offset by higher speeds, for example. An important consideration is the way attributes enter the utility functions. Recall that one way of writing the logit probability was: <span class="math display">\[
+\]</span>
+Notice how the location parameter of the logistic function is absorbed by one of the utility functions!</p>
+<p>The additive form of the utilities reflects a compensatory choice-making strategy: higher costs may be offset by higher speeds, for example. An important consideration is the way attributes enter the utility functions. Recall that one way of writing the logit probability was:
+<span class="math display">\[
 P_j = \frac{1}{1 + e^{-(V_j-V_k)}}
-\]</span> This formulation makes it clear that the probability is a function of the differences between utilities (this remains true in the multinomial logit, even if it is not as clear to see). Now consider what happens when the differences in utility are calculated: <span class="math display">\[
+\]</span>
+This formulation makes it clear that the probability is a function of the differences between utilities (this remains true in the multinomial logit, even if it is not as clear to see). Now consider what happens when the differences in utility are calculated:
+<span class="math display">\[
 V_{i,\text{Do-Nothing}} - V_{i,\text{New-Phone}}= \beta_1\text{cost}_{i,\text{Do-Nothing}} + \beta_2\text{ speed}_{i,\text{Do-Nothing}} + \beta_3\text{income}_i - \mu - \beta_1\text{cost}_{i,\text{New-Phone}} - \beta_1\text{speed}_{\text{i, New-Phone}} - \beta_1\text{income}_i\\ 
 = \beta_1(\text{cost}_{i, \text{Do-Nothing}} - \text{cost}_{i, \text{New-Phone}}) + \beta_2(\text{ speed}_{i, \text{Do-Nothing}} - \text{ speed}_{i, \text{New-Phone}}) + \beta_3(\text{ income}_i - \text{ income}_i) - \mu
-\]</span> The income attribute vanishes!</p>
+\]</span>
+The income attribute vanishes!</p>
 <p>It is useful to distinguish between attributes that vary across utility functions and those that do not. Level of service attributes, those that describe the alternatives, generally vary by utility function - indeed, it is those attributes that help discriminate between alternatives. In this instance, income is invariant across utility functions. Personal attributes of the decision-makers, in general, are invariant across utility functions.</p>
-<p>The most common way of dealing with attributes that are constant across utility functions is to select one utility to act as a reference and set that attribute to zero there. This is illustrated below: <span class="math display">\[
+<p>The most common way of dealing with attributes that are constant across utility functions is to select one utility to act as a reference and set that attribute to zero there. This is illustrated below:
+<span class="math display">\[
 \begin{array}{c}
 V_{\text{Do-Nothing}} = \beta_1\text{cost}_{\text{Do-Nothing}} + \beta_2\text{ speed}_{\text{Do-Nothing}} + \beta_3(0)\\
 V_{\text{New-Phone}} = \mu + \beta_1\text{cost}_{\text{New-Phone}} + \beta_2\text{ speed}_{\text{New-Phone}} + \beta_3\text{ income}_i\\
 \end{array} 
-\]</span> The difference in utilities then becomes: <span class="math display">\[
+\]</span>
+The difference in utilities then becomes:
+<span class="math display">\[
 V_{i,\text{Do-Nothing}} - V_{i,\text{New-Phone}}= \beta_1(\text{cost}_{i, \text{Do-Nothing}} - \text{cost}_{i, \text{New-Phone}}) + \beta_2(\text{ speed}_{i, \text{Do-Nothing}} - \text{ speed}_{i, \text{New-Phone}}) - \beta_3(\text{ income}_i) - \mu
-\]</span> When the effect of income is positive (i.e., <span class="math inline">\(\beta_3&gt;0\)</span>) higher incomes reduce the probability of doing nothing, and when the effect of income is negative (i.e., <span class="math inline">\(\beta_3&lt;0\)</span>) higher incomes reduce the probability of buying a new phone. The effect of income is relative to the reference alternative. When there are more than two alternatives, the attribute can be entered in all but the reference utility, as shown next: <span class="math display">\[
+\]</span>
+When the effect of income is positive (i.e., <span class="math inline">\(\beta_3&gt;0\)</span>) higher incomes reduce the probability of doing nothing, and when the effect of income is negative (i.e., <span class="math inline">\(\beta_3&lt;0\)</span>) higher incomes reduce the probability of buying a new phone. The effect of income is relative to the reference alternative. When there are more than two alternatives, the attribute can be entered in all but the reference utility, as shown next:
+<span class="math display">\[
 \begin{array}{llll}
 V_{\text{Do-Nothing}} = &amp;0 &amp;+ 0 &amp;+ \beta_1\text{cost}_{\text{Do-Nothing}} &amp;+ \beta_2\text{ speed}_{\text{Do-Nothing}} &amp;+ \beta_3(0)&amp; + \beta_4(0) \\
 V_{\text{uPhone}} = &amp;\mu_{\text{uPhone}} &amp;+ 0 &amp;+ \beta_1\text{cost}_{\text{uPhone}} &amp;+ \beta_2\text{ speed}_{\text{uPhone}} &amp;+ \beta_3\text{ income}_i &amp; + \beta_4(0)\\
 V_{\text{zPhone}} = &amp;0 &amp;+ \mu_{\text{zPhone}} &amp;+ \beta_1\text{cost}_{\text{zPhone}} &amp;+ \beta_2\text{ speed}_{\text{zPhone}} &amp;+ \beta_3(0) &amp;+ \beta_4\text{ income}_i\\
 \end{array} 
-\]</span> The above also illustrates how location parameters are absorbed by <span class="math inline">\(J-1\)</span> utility functions.</p>
-<p>Another way to introduce attributes that do not vary across utility functions is reminiscent of Casetti’s expansion method <span class="citation">(Casetti <a href="#ref-Casetti1972expansion">1972</a>)</span>. The expansion method is a systematic approach to introduce variable interactions that proceeds by defining an initial model whose coefficients are subsequently expanded using contextual variables. Suppose that the initial model is comprised of the utility functions with only level of service variables: <span class="math display">\[
+\]</span>
+The above also illustrates how location parameters are absorbed by <span class="math inline">\(J-1\)</span> utility functions.</p>
+<p>Another way to introduce attributes that do not vary across utility functions is reminiscent of Casetti’s expansion method <span class="citation">(Casetti <a href="#ref-Casetti1972expansion" role="doc-biblioref">1972</a>)</span>. The expansion method is a systematic approach to introduce variable interactions that proceeds by defining an initial model whose coefficients are subsequently expanded using contextual variables. Suppose that the initial model is comprised of the utility functions with only level of service variables:
+<span class="math display">\[
 \begin{array}{c}
 V_{\text{Do-Nothing}} = \beta_1\text{cost}_{\text{Do-Nothing}} + \beta_2\text{ speed}_{\text{Do-Nothing}}\\
 V_{\text{New-Phone}} = \mu + \beta_1\text{cost}_{\text{New-Phone}} + \beta_2\text{ speed}_{\text{New-Phone}}\\
 \end{array}
 \]</span></p>
-<p>The coefficients are expanded by a contextual variable, in this case income: <span class="math display">\[
+<p>The coefficients are expanded by a contextual variable, in this case income:
+<span class="math display">\[
 \beta_1 = \beta_{11} + \beta_{12}\text{income}_i\\
 \beta_2 = \beta_{21} + \beta_{22}\text{income}_i
 \]</span></p>
-<p>Substituting the expanded coefficients in the initial model: <span class="math display">\[
+<p>Substituting the expanded coefficients in the initial model:
+<span class="math display">\[
 \begin{array}{c}
 V_{\text{Do-Nothing}} = (\beta_{11} + \beta_{12}\text{income}_i)\text{cost}_{\text{Do-Nothing}} + (\beta_{21} + \beta_{22}\text{income}_i)\text{ speed}_{\text{Do-Nothing}}\\
 V_{\text{New-Phone}} = \mu + (\beta_{11} + \beta_{12}\text{income}_i)\text{cost}_{\text{New-Phone}} + (\beta_{21} + \beta_{22}\text{income}_i)\text{ speed}_{\text{New-Phone}}\\
 \end{array}
 \]</span></p>
-<p>The expanded model then becomes: <span class="math display">\[
+<p>The expanded model then becomes:
+<span class="math display">\[
 \begin{array}{c}
 V_{\text{Do-Nothing}} = \beta_{11}\text{cost}_{\text{Do-Nothing}} + \beta_{12}\text{income}_i\cdot\text{cost}_{\text{Do-Nothing}} + \beta_{21}\text{ speed}_{\text{Do-Nothing}} + \beta_{22}\text{income}_i\cdot\text{ speed}_{\text{Do-Nothing}}\\
 V_{\text{New-Phone}} = \mu + \beta_{11}\text{cost}_{\text{New-Phone}} + \beta_{12}\text{income}_i\cdot\text{cost}_{\text{New-Phone}} + \beta_{21}\text{ speed}_{\text{New-Phone}} + \beta_{22}\text{income}_i\cdot\text{ speed}_{\text{New-Phone}}\\
 \end{array}
 \]</span></p>
-<p>The difference of the two utilities in turn is: <span class="math display">\[
+<p>The difference of the two utilities in turn is:
+<span class="math display">\[
 \begin{array}{l}
 V_{\text{Do-Nothing}} - V_{\text{New-Phone}} =\\
 \beta_{11}(\text{cost}_{\text{Do-Nothing}} - \text{cost}_{\text{New-Phone}}) + \beta_{12}\text{income}_i\cdot(\text{cost}_{\text{Do-Nothing}} - \text{cost}_{\text{New-Phone}} ) \\
@@ -694,7 +772,8 @@ V_{\text{Do-Nothing}} - V_{\text{New-Phone}} =\\
 <li><p>What do we mean when we say that the logit probability has a closed form?</p></li>
 <li><p>Why is it that we can set the dispersion parameter in the logit probabilities to one?</p></li>
 </ol>
-<p>Suppose that a choice set consists of two alternatives, travel by car (<span class="math inline">\(c\)</span>) and travel by blue bus (<span class="math inline">\(bb\)</span>). The utilities of these two modes are the same, that is: <span class="math display">\[
+<p>Suppose that a choice set consists of two alternatives, travel by car (<span class="math inline">\(c\)</span>) and travel by blue bus (<span class="math inline">\(bb\)</span>). The utilities of these two modes are the same, that is:
+<span class="math display">\[
 V_c = V_{bb}
 \]</span></p>
 <ol start="3" style="list-style-type: decimal">
@@ -714,20 +793,20 @@ V_c = V_{bb}
 <div id="ref-Benakiva1985discrete">
 <p>Ben-Akiva, M., and S. R. Lerman. 1985. <em>Discrete Choice Analysis: Theory and Applications to Travel Demand</em>. Book. Cambridge: The MIT Press.</p>
 </div>
+<div id="ref-Casetti1972expansion">
+<p>Casetti, E. 1972. “Generating Models by the Expansion Method: Applications to Geographic Research.” Journal Article. <em>Geographical Analysis</em> 4 (1): 81–91.</p>
+</div>
 <div id="ref-hensher2005applied">
 <p>Hensher, David A, John M Rose, and William H Greene. 2005. <em>Applied Choice Analysis: A Primer</em>. Cambridge University Press.</p>
-</div>
-<div id="ref-Ortuzar2011modelling">
-<p>Ortúzar, J. D., and L. G. Willumsen. 2011. <em>Modelling Transport</em>. Book. Vol. Fourth Edition. New York: Wiley.</p>
 </div>
 <div id="ref-Louviere2000stated">
 <p>Louviere, Jordan J, David A Hensher, and Joffre D Swait. 2000. <em>Stated Choice Methods: Analysis and Applications</em>. Cambridge University Press.</p>
 </div>
+<div id="ref-Ortuzar2011modelling">
+<p>Ortúzar, J. D., and L. G. Willumsen. 2011. <em>Modelling Transport</em>. Book. Vol. Fourth Edition. New York: Wiley.</p>
+</div>
 <div id="ref-Train2009discrete">
 <p>Train, K. 2009. <em>Discrete Choice Methods with Simulation</em>. Book. 2nd Edition. Cambridge: Cambridge University Press.</p>
-</div>
-<div id="ref-Casetti1972expansion">
-<p>Casetti, E. 1972. “Generating Models by the Expansion Method: Applications to Geographic Research.” Journal Article. <em>Geographical Analysis</em> 4 (1): 81–91.</p>
 </div>
 </div>
             </section>
@@ -741,11 +820,13 @@ V_c = V_{bb}
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -753,12 +834,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -770,6 +850,10 @@ gitbook.start({
 "text": "Edit"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -786,10 +870,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

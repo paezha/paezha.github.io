@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 7 Non-Proportional Substitution Patterns I: Generalized Extreme Value Models | An Introduction to Discrete Choice Analysis</title>
-  <meta name="description" content="These notes were created by Antonio Paez as a resource for teaching a graduate discrete choice analysis course (GEOG 738) at McMaster University.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="These notes were created by Antonio Paez as a resource for teaching a graduate discrete choice analysis course (GEOG 738) at McMaster University." />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 7 Non-Proportional Substitution Patterns I: Generalized Extreme Value Models | An Introduction to Discrete Choice Analysis" />
   <meta property="og:type" content="book" />
@@ -22,18 +21,18 @@
   <meta name="twitter:description" content="These notes were created by Antonio Paez as a resource for teaching a graduate discrete choice analysis course (GEOG 738) at McMaster University." />
   
 
-<meta name="author" content="Antonio Paez">
+<meta name="author" content="Antonio Paez" />
 
 
-<meta name="date" content="2019-07-04">
+<meta name="date" content="2020-01-15" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="chapter-5.html">
-<link rel="next" href="chapter-7.html">
+<link rel="prev" href="chapter-5.html"/>
+<link rel="next" href="chapter-7.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -41,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -49,51 +51,76 @@
 
 
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.49.4/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.49.4/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -138,7 +165,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.5.2" data-path="chapter-1.html"><a href="chapter-1.html#quantitative"><i class="fa fa-check"></i><b>2.5.2</b> Quantitative</a></li>
 </ul></li>
 <li class="chapter" data-level="2.6" data-path="chapter-1.html"><a href="chapter-1.html#importing-data"><i class="fa fa-check"></i><b>2.6</b> Importing data</a></li>
-<li class="chapter" data-level="2.7" data-path="chapter-1.html"><a href="chapter-1.html#data-classes-in-r"><i class="fa fa-check"></i><b>2.7</b> Data Classes in R</a></li>
+<li class="chapter" data-level="2.7" data-path="chapter-1.html"><a href="chapter-1.html#data-classes-in-r"><i class="fa fa-check"></i><b>2.7</b> Data Classes in <code>R</code></a></li>
 <li class="chapter" data-level="2.8" data-path="chapter-1.html"><a href="chapter-1.html#more-on-indexing-and-data-manipulation"><i class="fa fa-check"></i><b>2.8</b> More on indexing and data manipulation</a></li>
 <li class="chapter" data-level="2.9" data-path="chapter-1.html"><a href="chapter-1.html#visualization"><i class="fa fa-check"></i><b>2.9</b> Visualization</a></li>
 <li class="chapter" data-level="2.10" data-path="chapter-1.html"><a href="chapter-1.html#exercise"><i class="fa fa-check"></i><b>2.10</b> Exercise</a><ul>
@@ -324,22 +351,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="preliminaries-4" class="section level2">
 <h2><span class="header-section-number">7.1</span> Preliminaries</h2>
 <p>Begin by loading the packages used in this chapter:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
-<span class="kw">library</span>(mlogit)
-<span class="kw">library</span>(kableExtra)</code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb220-2" title="2"><span class="kw">library</span>(mlogit)</a>
+<a class="sourceLine" id="cb220-3" title="3"><span class="kw">library</span>(kableExtra)</a></code></pre></div>
 <p>And, we also need to load the dataset used in this section (from the <code>mlogit</code> package):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;Heating&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb221-1" title="1"><span class="kw">data</span>(<span class="st">&quot;Heating&quot;</span>)</a></code></pre></div>
 <p>The dataset is in “wide” form, which means that there is one record per decision making unit (i.e. per household), so we need to change the data to “long” format:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">H &lt;-<span class="st"> </span><span class="kw">mlogit.data</span>(Heating, <span class="dt">shape =</span> <span class="st">&quot;wide&quot;</span>, <span class="dt">choice =</span> <span class="st">&quot;depvar&quot;</span>, <span class="dt">varying =</span> <span class="kw">c</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">12</span>))</code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb222-1" title="1">H &lt;-<span class="st"> </span><span class="kw">mlogit.data</span>(Heating, <span class="dt">shape =</span> <span class="st">&quot;wide&quot;</span>, <span class="dt">choice =</span> <span class="st">&quot;depvar&quot;</span>, <span class="dt">varying =</span> <span class="kw">c</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">12</span>))</a></code></pre></div>
 </div>
 <div id="the-limits-of-perfection" class="section level2">
 <h2><span class="header-section-number">7.2</span> The limits of perfection</h2>
 <p>The multinomial logit model is the workhorse of discrete choice analysis. As seen in the preceding chapters, it is a model that is intuitive, and moreover, its closed analytical form makes it simple and convenient to estimate.</p>
-<p>When originally developed by Luce <span class="citation">(Luce <a href="#ref-Luce1959individual">1959</a>; cited in Train <a href="#ref-Train2009discrete">2009</a>)</span>, the logit model was based on the axiom of Independence of Irrelevant Alternatives. As discussed in Chapter <a href="chapter-3.html#chapter-3">4</a>, this property of the logit model implies <em>proportional substitution patterns</em>.</p>
+<p>When originally developed by Luce <span class="citation">(Luce <a href="#ref-Luce1959individual" role="doc-biblioref">1959</a>; cited in Train <a href="#ref-Train2009discrete" role="doc-biblioref">2009</a>)</span>, the logit model was based on the axiom of Independence of Irrelevant Alternatives. As discussed in Chapter <a href="chapter-3.html#chapter-3">4</a>, this property of the logit model implies <em>proportional substitution patterns</em>.</p>
 <p>To illustrate this, lets revisit the model estimated in Chapter <a href="chapter-5.html#chapter-5">6</a>. This was a model of the choice of heating systems, with five different systems, namely Gas Central (gc), Gas Room (gr), Electric Central (ec), Electric Room (er), and Heat Pump (hp).</p>
 <p>Now we are ready to estimate a multinomial logit model (we called this Model 3 in Chapter <a href="chapter-3.html#chapter-3">4</a>):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod3 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H, <span class="dt">reflevel =</span> <span class="st">&quot;ec&quot;</span>)
-<span class="kw">summary</span>(mod3)</code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb223-1" title="1">mod3 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H, <span class="dt">reflevel =</span> <span class="st">&quot;ec&quot;</span>)</a>
+<a class="sourceLine" id="cb223-2" title="2"><span class="kw">summary</span>(mod3)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## mlogit(formula = depvar ~ ic + oc, data = H, reflevel = &quot;ec&quot;, 
@@ -370,83 +397,83 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## Likelihood ratio test : chisq = 27.99 (p.value = 8.3572e-07)</code></pre>
 <p>To explore the patterns of substitution according to this model, we will simulate the adoption rates of the systems after removing one system at the time.</p>
 <p>To simulate this situation, we begin by creating a model matrix based on Model 3:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(mod3)</code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb225-1" title="1">X &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(mod3)</a></code></pre></div>
 <p>Then, we remove each one of the alternatives at a time:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">alt &lt;-<span class="st"> </span><span class="kw">index</span>(H)<span class="op">$</span>alt
-Xmec &lt;-<span class="st"> </span>X[alt <span class="op">!=</span><span class="st"> &quot;ec&quot;</span>,]
-Xmer &lt;-<span class="st"> </span>X[alt <span class="op">!=</span><span class="st"> &quot;er&quot;</span>,]
-Xmgc &lt;-<span class="st"> </span>X[alt <span class="op">!=</span><span class="st"> &quot;gc&quot;</span>,]
-Xmgr &lt;-<span class="st"> </span>X[alt <span class="op">!=</span><span class="st"> &quot;gr&quot;</span>,]
-Xmhp &lt;-<span class="st"> </span>X[alt <span class="op">!=</span><span class="st"> &quot;hp&quot;</span>,]</code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb226-1" title="1">alt &lt;-<span class="st"> </span><span class="kw">index</span>(H)<span class="op">$</span>alt</a>
+<a class="sourceLine" id="cb226-2" title="2">Xmec &lt;-<span class="st"> </span>X[alt <span class="op">!=</span><span class="st"> &quot;ec&quot;</span>,]</a>
+<a class="sourceLine" id="cb226-3" title="3">Xmer &lt;-<span class="st"> </span>X[alt <span class="op">!=</span><span class="st"> &quot;er&quot;</span>,]</a>
+<a class="sourceLine" id="cb226-4" title="4">Xmgc &lt;-<span class="st"> </span>X[alt <span class="op">!=</span><span class="st"> &quot;gc&quot;</span>,]</a>
+<a class="sourceLine" id="cb226-5" title="5">Xmgr &lt;-<span class="st"> </span>X[alt <span class="op">!=</span><span class="st"> &quot;gr&quot;</span>,]</a>
+<a class="sourceLine" id="cb226-6" title="6">Xmhp &lt;-<span class="st"> </span>X[alt <span class="op">!=</span><span class="st"> &quot;hp&quot;</span>,]</a></code></pre></div>
 <p>We also want to identify the unique choice ids to reduce the number of choice situations for each decision-maker (from five alternatives to four):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Unique identifiers by decision-maker</span>
-chid &lt;-<span class="st"> </span><span class="kw">index</span>(H)<span class="op">$</span>chid
-<span class="co"># Remove the fifth identifier for each decision-maker</span>
-chid &lt;-<span class="st"> </span>chid[<span class="op">-</span><span class="kw">seq</span>(<span class="dv">1</span>, <span class="kw">length</span>(chid), <span class="dv">5</span>)]</code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb227-1" title="1"><span class="co"># Unique identifiers by decision-maker</span></a>
+<a class="sourceLine" id="cb227-2" title="2">chid &lt;-<span class="st"> </span><span class="kw">index</span>(H)<span class="op">$</span>chid</a>
+<a class="sourceLine" id="cb227-3" title="3"><span class="co"># Remove the fifth identifier for each decision-maker</span></a>
+<a class="sourceLine" id="cb227-4" title="4">chid &lt;-<span class="st"> </span>chid[<span class="op">-</span><span class="kw">seq</span>(<span class="dv">1</span>, <span class="kw">length</span>(chid), <span class="dv">5</span>)]</a></code></pre></div>
 <p>Based on the above, we can calculate the expression <span class="math inline">\(e^{X\beta}\)</span> and the sum, which are needed to compute the logit probabilities:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># After removing ec</span>
-exp_Xb_mec &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">exp</span>(Xmec <span class="op">%*%</span><span class="st"> </span><span class="kw">coef</span>(mod3)))
-sum_exp_Xb_mec &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">tapply</span>(exp_Xb_mec, <span class="kw">sort</span>(chid), sum))
-P_mec &lt;-<span class="st"> </span>exp_Xb_mec <span class="op">/</span><span class="st"> </span>sum_exp_Xb_mec[<span class="kw">sort</span>(chid)]
-
-<span class="co"># After removing er</span>
-exp_Xb_mer &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">exp</span>(Xmer <span class="op">%*%</span><span class="st"> </span><span class="kw">coef</span>(mod3)))
-sum_exp_Xb_mer &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">tapply</span>(exp_Xb_mer, <span class="kw">sort</span>(chid), sum))
-P_mer &lt;-<span class="st"> </span>exp_Xb_mer <span class="op">/</span><span class="st"> </span>sum_exp_Xb_mer[<span class="kw">sort</span>(chid)]
-
-<span class="co"># After removing gc</span>
-exp_Xb_mgc &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">exp</span>(Xmgc <span class="op">%*%</span><span class="st"> </span><span class="kw">coef</span>(mod3)))
-sum_exp_Xb_mgc &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">tapply</span>(exp_Xb_mgc, <span class="kw">sort</span>(chid), sum))
-P_mgc &lt;-<span class="st"> </span>exp_Xb_mgc <span class="op">/</span><span class="st"> </span>sum_exp_Xb_mgc[<span class="kw">sort</span>(chid)]
-
-<span class="co"># After removing gr</span>
-exp_Xb_mgr &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">exp</span>(Xmgr <span class="op">%*%</span><span class="st"> </span><span class="kw">coef</span>(mod3)))
-sum_exp_Xb_mgr &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">tapply</span>(exp_Xb_mgr, <span class="kw">sort</span>(chid), sum))
-P_mgr &lt;-<span class="st"> </span>exp_Xb_mgr <span class="op">/</span><span class="st"> </span>sum_exp_Xb_mgr[<span class="kw">sort</span>(chid)]
-
-<span class="co"># After removing hp</span>
-exp_Xb_mhp &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">exp</span>(Xmhp <span class="op">%*%</span><span class="st"> </span><span class="kw">coef</span>(mod3)))
-sum_exp_Xb_mhp &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">tapply</span>(exp_Xb_mhp, <span class="kw">sort</span>(chid), sum))
-P_mhp &lt;-<span class="st"> </span>exp_Xb_mhp <span class="op">/</span><span class="st"> </span>sum_exp_Xb_mhp[<span class="kw">sort</span>(chid)]</code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb228-1" title="1"><span class="co"># After removing ec</span></a>
+<a class="sourceLine" id="cb228-2" title="2">exp_Xb_mec &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">exp</span>(Xmec <span class="op">%*%</span><span class="st"> </span><span class="kw">coef</span>(mod3)))</a>
+<a class="sourceLine" id="cb228-3" title="3">sum_exp_Xb_mec &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">tapply</span>(exp_Xb_mec, <span class="kw">sort</span>(chid), sum))</a>
+<a class="sourceLine" id="cb228-4" title="4">P_mec &lt;-<span class="st"> </span>exp_Xb_mec <span class="op">/</span><span class="st"> </span>sum_exp_Xb_mec[<span class="kw">sort</span>(chid)]</a>
+<a class="sourceLine" id="cb228-5" title="5"></a>
+<a class="sourceLine" id="cb228-6" title="6"><span class="co"># After removing er</span></a>
+<a class="sourceLine" id="cb228-7" title="7">exp_Xb_mer &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">exp</span>(Xmer <span class="op">%*%</span><span class="st"> </span><span class="kw">coef</span>(mod3)))</a>
+<a class="sourceLine" id="cb228-8" title="8">sum_exp_Xb_mer &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">tapply</span>(exp_Xb_mer, <span class="kw">sort</span>(chid), sum))</a>
+<a class="sourceLine" id="cb228-9" title="9">P_mer &lt;-<span class="st"> </span>exp_Xb_mer <span class="op">/</span><span class="st"> </span>sum_exp_Xb_mer[<span class="kw">sort</span>(chid)]</a>
+<a class="sourceLine" id="cb228-10" title="10"></a>
+<a class="sourceLine" id="cb228-11" title="11"><span class="co"># After removing gc</span></a>
+<a class="sourceLine" id="cb228-12" title="12">exp_Xb_mgc &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">exp</span>(Xmgc <span class="op">%*%</span><span class="st"> </span><span class="kw">coef</span>(mod3)))</a>
+<a class="sourceLine" id="cb228-13" title="13">sum_exp_Xb_mgc &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">tapply</span>(exp_Xb_mgc, <span class="kw">sort</span>(chid), sum))</a>
+<a class="sourceLine" id="cb228-14" title="14">P_mgc &lt;-<span class="st"> </span>exp_Xb_mgc <span class="op">/</span><span class="st"> </span>sum_exp_Xb_mgc[<span class="kw">sort</span>(chid)]</a>
+<a class="sourceLine" id="cb228-15" title="15"></a>
+<a class="sourceLine" id="cb228-16" title="16"><span class="co"># After removing gr</span></a>
+<a class="sourceLine" id="cb228-17" title="17">exp_Xb_mgr &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">exp</span>(Xmgr <span class="op">%*%</span><span class="st"> </span><span class="kw">coef</span>(mod3)))</a>
+<a class="sourceLine" id="cb228-18" title="18">sum_exp_Xb_mgr &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">tapply</span>(exp_Xb_mgr, <span class="kw">sort</span>(chid), sum))</a>
+<a class="sourceLine" id="cb228-19" title="19">P_mgr &lt;-<span class="st"> </span>exp_Xb_mgr <span class="op">/</span><span class="st"> </span>sum_exp_Xb_mgr[<span class="kw">sort</span>(chid)]</a>
+<a class="sourceLine" id="cb228-20" title="20"></a>
+<a class="sourceLine" id="cb228-21" title="21"><span class="co"># After removing hp</span></a>
+<a class="sourceLine" id="cb228-22" title="22">exp_Xb_mhp &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">exp</span>(Xmhp <span class="op">%*%</span><span class="st"> </span><span class="kw">coef</span>(mod3)))</a>
+<a class="sourceLine" id="cb228-23" title="23">sum_exp_Xb_mhp &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">tapply</span>(exp_Xb_mhp, <span class="kw">sort</span>(chid), sum))</a>
+<a class="sourceLine" id="cb228-24" title="24">P_mhp &lt;-<span class="st"> </span>exp_Xb_mhp <span class="op">/</span><span class="st"> </span>sum_exp_Xb_mhp[<span class="kw">sort</span>(chid)]</a></code></pre></div>
 <p>We can convert the vector of logit probabilities to a matrix, so that each row contains the choice probabilities for a household:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># After removing ec</span>
-P_mec &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(P_mec, <span class="dt">ncol =</span> <span class="dv">4</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>))
-P_mec &lt;-<span class="st"> </span><span class="kw">transmute</span>(P_mec, <span class="dt">ec =</span> <span class="ot">NA</span>, <span class="dt">er =</span> P_mec[, <span class="dv">1</span>], <span class="dt">gc =</span> P_mec[, <span class="dv">2</span>], <span class="dt">gr =</span> P_mec[, <span class="dv">3</span>], <span class="dt">hp =</span> P_mec[, <span class="dv">4</span>])
-
-<span class="co"># After removing er</span>
-P_mer &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(P_mer, <span class="dt">ncol =</span> <span class="dv">4</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>))
-P_mer &lt;-<span class="st"> </span><span class="kw">transmute</span>(P_mer, <span class="dt">ec =</span> P_mer[, <span class="dv">1</span>], <span class="dt">er =</span> <span class="ot">NA</span>, <span class="dt">gc =</span> P_mer[, <span class="dv">2</span>], <span class="dt">gr =</span> P_mer[, <span class="dv">3</span>], <span class="dt">hp =</span> P_mer[, <span class="dv">4</span>])
-
-<span class="co"># After removing gc</span>
-P_mgc &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(P_mgc, <span class="dt">ncol =</span> <span class="dv">4</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>))
-P_mgc &lt;-<span class="st"> </span><span class="kw">transmute</span>(P_mgc, <span class="dt">ec =</span> P_mgc[, <span class="dv">1</span>], <span class="dt">er =</span> P_mgc[, <span class="dv">2</span>], <span class="dt">gc =</span> <span class="ot">NA</span>, <span class="dt">gr =</span> P_mgc[, <span class="dv">3</span>], <span class="dt">hp =</span> P_mgc[, <span class="dv">4</span>])
-
-<span class="co"># After removing gr</span>
-P_mgr &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(P_mgr, <span class="dt">ncol =</span> <span class="dv">4</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>))
-P_mgr &lt;-<span class="st"> </span><span class="kw">transmute</span>(P_mgr, <span class="dt">ec =</span> P_mgr[, <span class="dv">1</span>], <span class="dt">er =</span> P_mgr[, <span class="dv">2</span>], <span class="dt">gc =</span> P_mgr[, <span class="dv">3</span>], <span class="dt">gr =</span> <span class="ot">NA</span>, <span class="dt">hp =</span> P_mgr[, <span class="dv">4</span>])
-
-<span class="co"># After removing hp</span>
-P_mhp &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(P_mhp, <span class="dt">ncol =</span> <span class="dv">4</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>))
-P_mhp &lt;-<span class="st"> </span><span class="kw">transmute</span>(P_mhp, <span class="dt">ec =</span> P_mhp[, <span class="dv">1</span>], <span class="dt">er =</span> P_mhp[, <span class="dv">2</span>], <span class="dt">gc =</span> P_mhp[, <span class="dv">3</span>], <span class="dt">gr =</span> P_mhp[, <span class="dv">4</span>], <span class="dt">hp =</span> <span class="ot">NA</span>)</code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb229-1" title="1"><span class="co"># After removing ec</span></a>
+<a class="sourceLine" id="cb229-2" title="2">P_mec &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(P_mec, <span class="dt">ncol =</span> <span class="dv">4</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb229-3" title="3">P_mec &lt;-<span class="st"> </span><span class="kw">transmute</span>(P_mec, <span class="dt">ec =</span> <span class="ot">NA</span>, <span class="dt">er =</span> P_mec[, <span class="dv">1</span>], <span class="dt">gc =</span> P_mec[, <span class="dv">2</span>], <span class="dt">gr =</span> P_mec[, <span class="dv">3</span>], <span class="dt">hp =</span> P_mec[, <span class="dv">4</span>])</a>
+<a class="sourceLine" id="cb229-4" title="4"></a>
+<a class="sourceLine" id="cb229-5" title="5"><span class="co"># After removing er</span></a>
+<a class="sourceLine" id="cb229-6" title="6">P_mer &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(P_mer, <span class="dt">ncol =</span> <span class="dv">4</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb229-7" title="7">P_mer &lt;-<span class="st"> </span><span class="kw">transmute</span>(P_mer, <span class="dt">ec =</span> P_mer[, <span class="dv">1</span>], <span class="dt">er =</span> <span class="ot">NA</span>, <span class="dt">gc =</span> P_mer[, <span class="dv">2</span>], <span class="dt">gr =</span> P_mer[, <span class="dv">3</span>], <span class="dt">hp =</span> P_mer[, <span class="dv">4</span>])</a>
+<a class="sourceLine" id="cb229-8" title="8"></a>
+<a class="sourceLine" id="cb229-9" title="9"><span class="co"># After removing gc</span></a>
+<a class="sourceLine" id="cb229-10" title="10">P_mgc &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(P_mgc, <span class="dt">ncol =</span> <span class="dv">4</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb229-11" title="11">P_mgc &lt;-<span class="st"> </span><span class="kw">transmute</span>(P_mgc, <span class="dt">ec =</span> P_mgc[, <span class="dv">1</span>], <span class="dt">er =</span> P_mgc[, <span class="dv">2</span>], <span class="dt">gc =</span> <span class="ot">NA</span>, <span class="dt">gr =</span> P_mgc[, <span class="dv">3</span>], <span class="dt">hp =</span> P_mgc[, <span class="dv">4</span>])</a>
+<a class="sourceLine" id="cb229-12" title="12"></a>
+<a class="sourceLine" id="cb229-13" title="13"><span class="co"># After removing gr</span></a>
+<a class="sourceLine" id="cb229-14" title="14">P_mgr &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(P_mgr, <span class="dt">ncol =</span> <span class="dv">4</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb229-15" title="15">P_mgr &lt;-<span class="st"> </span><span class="kw">transmute</span>(P_mgr, <span class="dt">ec =</span> P_mgr[, <span class="dv">1</span>], <span class="dt">er =</span> P_mgr[, <span class="dv">2</span>], <span class="dt">gc =</span> P_mgr[, <span class="dv">3</span>], <span class="dt">gr =</span> <span class="ot">NA</span>, <span class="dt">hp =</span> P_mgr[, <span class="dv">4</span>])</a>
+<a class="sourceLine" id="cb229-16" title="16"></a>
+<a class="sourceLine" id="cb229-17" title="17"><span class="co"># After removing hp</span></a>
+<a class="sourceLine" id="cb229-18" title="18">P_mhp &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(P_mhp, <span class="dt">ncol =</span> <span class="dv">4</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb229-19" title="19">P_mhp &lt;-<span class="st"> </span><span class="kw">transmute</span>(P_mhp, <span class="dt">ec =</span> P_mhp[, <span class="dv">1</span>], <span class="dt">er =</span> P_mhp[, <span class="dv">2</span>], <span class="dt">gc =</span> P_mhp[, <span class="dv">3</span>], <span class="dt">gr =</span> P_mhp[, <span class="dv">4</span>], <span class="dt">hp =</span> <span class="ot">NA</span>)</a></code></pre></div>
 <p>Given the above, we can summarize the choice probabilities in the form of adoption rates. The table below shows the original adoption rates (when no alternative was removed) and for the different situations of interest, after removing each alternative:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Alternative =</span> <span class="kw">c</span>(<span class="st">&quot;None&quot;</span>, <span class="st">&quot;ec&quot;</span>, <span class="st">&quot;er&quot;</span>, <span class="st">&quot;gc&quot;</span>, <span class="st">&quot;gr&quot;</span>, <span class="st">&quot;hp&quot;</span> ),
-  <span class="kw">rbind</span>(<span class="kw">apply</span>(<span class="kw">fitted</span>(mod3, <span class="dt">outcome =</span> <span class="ot">FALSE</span>), <span class="dv">2</span>, mean),
-        <span class="kw">apply</span>(P_mec, <span class="dv">2</span>, mean),
-        <span class="kw">apply</span>(P_mer, <span class="dv">2</span>, mean),
-        <span class="kw">apply</span>(P_mgc, <span class="dv">2</span>, mean),
-        <span class="kw">apply</span>(P_mgr, <span class="dv">2</span>, mean),
-        <span class="kw">apply</span>(P_mhp, <span class="dv">2</span>, mean))
-)
-
-df <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">kable</span>(<span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Alternative Removed&quot;</span>,
-                      <span class="st">&quot;ec&quot;</span>,
-                      <span class="st">&quot;er&quot;</span>,
-                      <span class="st">&quot;gc&quot;</span>,
-                      <span class="st">&quot;gr&quot;</span>,
-                      <span class="st">&quot;hp&quot;</span>),
-        <span class="dt">digits =</span> <span class="dv">2</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">kable_styling</span>()</code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" title="1">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Alternative =</span> <span class="kw">c</span>(<span class="st">&quot;None&quot;</span>, <span class="st">&quot;ec&quot;</span>, <span class="st">&quot;er&quot;</span>, <span class="st">&quot;gc&quot;</span>, <span class="st">&quot;gr&quot;</span>, <span class="st">&quot;hp&quot;</span> ),</a>
+<a class="sourceLine" id="cb230-2" title="2">  <span class="kw">rbind</span>(<span class="kw">apply</span>(<span class="kw">fitted</span>(mod3, <span class="dt">outcome =</span> <span class="ot">FALSE</span>), <span class="dv">2</span>, mean),</a>
+<a class="sourceLine" id="cb230-3" title="3">        <span class="kw">apply</span>(P_mec, <span class="dv">2</span>, mean),</a>
+<a class="sourceLine" id="cb230-4" title="4">        <span class="kw">apply</span>(P_mer, <span class="dv">2</span>, mean),</a>
+<a class="sourceLine" id="cb230-5" title="5">        <span class="kw">apply</span>(P_mgc, <span class="dv">2</span>, mean),</a>
+<a class="sourceLine" id="cb230-6" title="6">        <span class="kw">apply</span>(P_mgr, <span class="dv">2</span>, mean),</a>
+<a class="sourceLine" id="cb230-7" title="7">        <span class="kw">apply</span>(P_mhp, <span class="dv">2</span>, mean))</a>
+<a class="sourceLine" id="cb230-8" title="8">)</a>
+<a class="sourceLine" id="cb230-9" title="9"></a>
+<a class="sourceLine" id="cb230-10" title="10">df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb230-11" title="11"><span class="st">  </span><span class="kw">kable</span>(<span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Alternative Removed&quot;</span>,</a>
+<a class="sourceLine" id="cb230-12" title="12">                      <span class="st">&quot;ec&quot;</span>,</a>
+<a class="sourceLine" id="cb230-13" title="13">                      <span class="st">&quot;er&quot;</span>,</a>
+<a class="sourceLine" id="cb230-14" title="14">                      <span class="st">&quot;gc&quot;</span>,</a>
+<a class="sourceLine" id="cb230-15" title="15">                      <span class="st">&quot;gr&quot;</span>,</a>
+<a class="sourceLine" id="cb230-16" title="16">                      <span class="st">&quot;hp&quot;</span>),</a>
+<a class="sourceLine" id="cb230-17" title="17">        <span class="dt">digits =</span> <span class="dv">2</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb230-18" title="18"><span class="st">  </span><span class="kw">kable_styling</span>()</a></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -608,7 +635,7 @@ Figure 7.1: Three Examples of Choice Structures
 <div id="how-to-use-this-note-5" class="section level2">
 <h2><span class="header-section-number">7.3</span> How to use this note</h2>
 <p>Remember that the source for the document you are reading is an R Notebook. Throughout the notes, you will find examples of code in segments of text called <em>chunks</em>. This is an example of a chunk:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="st">&quot;Do NOT believe a word Gwyneth Paltrow says. Repeat. DO NOT BELIEVE HER.&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb231-1" title="1"><span class="kw">print</span>(<span class="st">&quot;Do NOT believe a word Gwyneth Paltrow says. Repeat. DO NOT BELIEVE HER.&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;Do NOT believe a word Gwyneth Paltrow says. Repeat. DO NOT BELIEVE HER.&quot;</code></pre>
 <p>If you are working with the Notebook version of the document, you can run the code by clicking the ‘play’ icon on the top right corner of the chunk. If you are reading the web-book version of the document, you will often see that the code has already been executed. You can still try it by copying and pasting into your R or RStudio console.</p>
 </div>
@@ -625,85 +652,102 @@ Figure 7.1: Three Examples of Choice Structures
 <div id="suggested-readings-5" class="section level2">
 <h2><span class="header-section-number">7.5</span> Suggested readings</h2>
 <ul>
-<li>Ben-Akiva, M. Lerman, <span class="citation">(<a href="#ref-Benakiva1985discrete">1985</a>)</span> Discrete Choice Analysis: Theory and Applications to Travel Demand, <strong>Chapter 5, pp. 126-128 and Chapter 10, pp. 285-299</strong>, MIT Press.</li>
-<li>Hensher, D.A., Rose, J.M., Greene, W.H <span class="citation">(<a href="#ref-hensher2005applied">2005</a>)</span> Applied Choice Analysis: A Primer, <strong>Chapters 13 and 14</strong>, Cambridge University Press.</li>
-<li>Louviere, J.J., Hensher, D.A., Swait, J.D. <span class="citation">(<a href="#ref-Louviere2000stated">2000</a>)</span> Stated Choice Methods: Analysis and Application, <strong>Chapter 6</strong>, Cambridge University Press.</li>
-<li>Ortuzar JD, Willumsen LG <span class="citation">(<a href="#ref-Ortuzar2011modelling">2011</a>)</span> Modelling Transport, Fourth Edition, <strong>Chapter 2, pp. 43-44 and </strong>, John Wiley and Sons.</li>
-<li>Train <span class="citation">(<a href="#ref-Train2009discrete">2009</a>)</span> Discrete Choice Methods with Simulation, Second Edition, <strong>Chapter 4</strong>, Cambridge University Press.</li>
+<li>Ben-Akiva, M. Lerman, <span class="citation">(<a href="#ref-Benakiva1985discrete" role="doc-biblioref">1985</a>)</span> Discrete Choice Analysis: Theory and Applications to Travel Demand, <strong>Chapter 5, pp. 126-128 and Chapter 10, pp. 285-299</strong>, MIT Press.</li>
+<li>Hensher, D.A., Rose, J.M., Greene, W.H <span class="citation">(<a href="#ref-hensher2005applied" role="doc-biblioref">2005</a>)</span> Applied Choice Analysis: A Primer, <strong>Chapters 13 and 14</strong>, Cambridge University Press.</li>
+<li>Louviere, J.J., Hensher, D.A., Swait, J.D. <span class="citation">(<a href="#ref-Louviere2000stated" role="doc-biblioref">2000</a>)</span> Stated Choice Methods: Analysis and Application, <strong>Chapter 6</strong>, Cambridge University Press.</li>
+<li>Ortuzar JD, Willumsen LG <span class="citation">(<a href="#ref-Ortuzar2011modelling" role="doc-biblioref">2011</a>)</span> Modelling Transport, Fourth Edition, <strong>Chapter 2, pp. 43-44 and </strong>, John Wiley and Sons.</li>
+<li>Train <span class="citation">(<a href="#ref-Train2009discrete" role="doc-biblioref">2009</a>)</span> Discrete Choice Methods with Simulation, Second Edition, <strong>Chapter 4</strong>, Cambridge University Press.</li>
 </ul>
 </div>
 <div id="generalized-extreme-value-models-a-recipe-for-deriving-discrete-choice-models" class="section level2">
 <h2><span class="header-section-number">7.6</span> Generalized Extreme Value models: a recipe for deriving discrete choice models</h2>
-<p>McFadden’s Generalized Extreme Value model <span class="citation">(or GEV, for short; McFadden <a href="#ref-McFadden1978modelling">1978</a>)</span> is a general approach to derive discrete choice models. In this sense, it is not a single model, but rather a recipe for deriving discrete choice models based on the Extreme Value distribution. The definition of the model is discussed here, along with a preliminary example <span class="citation">(see Ben-Akiva and Lerman <a href="#ref-Benakiva1985discrete">1985</a>, 126–27)</span>. Then, we will see how the GEV recipe can be used to derive models with nested structures such as shown in Figure <a href="chapter-6.html#fig:fig-choice-structures">7.1</a>.</p>
-<p>For simplicity, we will postulate that: <span class="math display">\[
+<p>McFadden’s Generalized Extreme Value model <span class="citation">(or GEV, for short; McFadden <a href="#ref-McFadden1978modelling" role="doc-biblioref">1978</a>)</span> is a general approach to derive discrete choice models. In this sense, it is not a single model, but rather a recipe for deriving discrete choice models based on the Extreme Value distribution. The definition of the model is discussed here, along with a preliminary example <span class="citation">(see Ben-Akiva and Lerman <a href="#ref-Benakiva1985discrete" role="doc-biblioref">1985</a>, 126–27)</span>. Then, we will see how the GEV recipe can be used to derive models with nested structures such as shown in Figure <a href="chapter-6.html#fig:fig-choice-structures">7.1</a>.</p>
+<p>For simplicity, we will postulate that:
+<span class="math display">\[
 y_j=e^{V_j} \text{ , for }j=1,2,\cdots,J
-\]</span> where <span class="math inline">\(J\)</span> is the number of alternatives. Notice that: <span class="math display">\[
+\]</span>
+where <span class="math inline">\(J\)</span> is the number of alternatives. Notice that:
+<span class="math display">\[
 y_1\ge0, y_2\ge0, \cdots,y_{J}\ge0
 \]</span></p>
-<p>We will define a function <span class="math inline">\(G\)</span> as follows: <span class="math display">\[
+<p>We will define a function <span class="math inline">\(G\)</span> as follows:
+<span class="math display">\[
 G(y_1,y_2, \cdots,y_{J})
 \]</span></p>
 <p>Function <span class="math inline">\(G\)</span> must satisfy the following conditions:</p>
 <ol style="list-style-type: decimal">
 <li><p><span class="math inline">\(G\)</span> is non-negative.</p></li>
-<li><p><span class="math inline">\(G\)</span> is a homogeneous function of degree one. This means that multiplying every <span class="math inline">\(y_j\)</span> by a factor <span class="math inline">\(\alpha\)</span> is identical to multiplying <span class="math inline">\(G\)</span> by <span class="math inline">\(\alpha\)</span>: <span class="math display">\[
+<li><p><span class="math inline">\(G\)</span> is a homogeneous function of degree one. This means that multiplying every <span class="math inline">\(y_j\)</span> by a factor <span class="math inline">\(\alpha\)</span> is identical to multiplying <span class="math inline">\(G\)</span> by <span class="math inline">\(\alpha\)</span>:
+<span class="math display">\[
 G(\alpha y_1, \alpha y_1, \cdots, \alpha y_{J_n}) = \alpha G(y_1, y_2, \cdots, y_{J_n})
 \]</span></p></li>
-<li><p>When any one of <span class="math inline">\(y_i\)</span> grows without bound, <span class="math inline">\(G\)</span> does too: <span class="math display">\[
+<li><p>When any one of <span class="math inline">\(y_i\)</span> grows without bound, <span class="math inline">\(G\)</span> does too:
+<span class="math display">\[
 \lim_{y_j \to \infty}G(y_1,y_2,\cdots,y_{J_n})=\infty \text{, for all }y_j
 \]</span></p></li>
-<li><p>The cross-partial derivatives of the function <span class="math inline">\(G\)</span> change signs in a specific way, alternating between non-positive and non-negative for higher order derivatives: <span class="math display">\[
+<li><p>The cross-partial derivatives of the function <span class="math inline">\(G\)</span> change signs in a specific way, alternating between non-positive and non-negative for higher order derivatives:
+<span class="math display">\[
 \begin{array}{c}
-   G_j = \frac{\partial G}{\partial y_j}\ge0 \text{, for all }j\\
-   G_{jl} = \frac{\partial G}{\partial y_j\partial y_l}\le0 \text{, for all }l\ne j\\   
-   G_{jlm} = \frac{\partial G}{\partial y_j\partial y_l\partial y_m}\ge0 \text{, for any }m\ne l \ne j\\  
+G_j = \frac{\partial G}{\partial y_j}\ge0 \text{, for all }j\\
+G_{jl} = \frac{\partial G}{\partial y_j\partial y_l}\le0 \text{, for all }l\ne j\\   
+G_{jlm} = \frac{\partial G}{\partial y_j\partial y_l\partial y_m}\ge0 \text{, for any }m\ne l \ne j\\  
 \end{array}   
 \]</span></p></li>
 </ol>
-<p>A function that satisfies these conditions leads to the following choice probability: <span class="math display">\[
+<p>A function that satisfies these conditions leads to the following choice probability:
+<span class="math display">\[
 P_i = y_i\frac{G_i}{G}
 \]</span></p>
-<p>Train <span class="citation">(<a href="#ref-Train2009discrete">2009</a>)</span> notes that the conditions above lack any evident behavioral intuition. While this means that any function <span class="math inline">\(G\)</span> that satisfies them is a legitimate discrete choice probability. On the other hand, the lack of evident intuitions means that someone who is trying to develop a model also lacks guidance in terms of how to translate a desired correlation structure into a function <span class="math inline">\(G\)</span>, a limitation that research by Daly and Bierlaire <span class="citation">(<a href="#ref-Daly2003general">2003</a>)</span> aimed to address.</p>
+<p>Train <span class="citation">(<a href="#ref-Train2009discrete" role="doc-biblioref">2009</a>)</span> notes that the conditions above lack any evident behavioral intuition. While this means that any function <span class="math inline">\(G\)</span> that satisfies them is a legitimate discrete choice probability. On the other hand, the lack of evident intuitions means that someone who is trying to develop a model also lacks guidance in terms of how to translate a desired correlation structure into a function <span class="math inline">\(G\)</span>, a limitation that research by Daly and Bierlaire <span class="citation">(<a href="#ref-Daly2003general" role="doc-biblioref">2003</a>)</span> aimed to address.</p>
 <p>For the above reason, we will not be concerned with the particular meaning of the conditions, but rather will see how the GEV framework has been employed to derive various discrete choice models.</p>
-<p>We begin in this section with the following function: <span class="math display">\[
+<p>We begin in this section with the following function:
+<span class="math display">\[
 G = \sum_{j=1}^{J}y_j
 \]</span></p>
 <p>This function satisfies the conditions to be a GEV model, since:</p>
 <ol style="list-style-type: decimal">
 <li><p><span class="math inline">\(G\)</span> is always non-negative as long as <span class="math inline">\(y_j\)</span> is non-negative for every <span class="math inline">\(j\)</span>.</p></li>
-<li><p>The function is homogeneous of degree one, since: <span class="math display">\[
+<li><p>The function is homogeneous of degree one, since:
+<span class="math display">\[
 G(\alpha y_1, \alpha y_1, \cdots, \alpha y_{J}) = \sum_{j=1}^{J}(\alpha y_j) = \alpha \sum_{j=1}^{J}y_j = \alpha G(y_1,y_1, \cdots,y_{J})
 \]</span></p></li>
 <li><p><span class="math inline">\(G\)</span> grows unbounded if any <span class="math inline">\(y_j\)</span> grows unbounded; and</p></li>
 </ol>
-<p>The first derivative of thiss satisty the condition since: <span class="math display">\[
+<p>The first derivative of thiss satisty the condition since:
+<span class="math display">\[
 \begin{array}{c}
    \frac{\partial G}{\partial y_j} =1\\
    \frac{\partial G}{\partial y_j\partial y_l}=0\\  
 \end{array}   
 \]</span></p>
 <p>The first partial derivative is 1, which satisfies the non-negativity condition. All higher order derivatives are zero, which are non-positive and non-negative as required.</p>
-<p>Given this function, we can substitute in the choice probability expression: <span class="math display">\[
+<p>Given this function, we can substitute in the choice probability expression:
+<span class="math display">\[
 P_i = y_i\frac{G_i}{G}=\frac{y_i}{\sum_{j=1}^{J}y_j}
 \]</span></p>
-<p>And since: <span class="math display">\[
+<p>And since:
+<span class="math display">\[
 y_j = e^{V_j}
 \]</span></p>
-<p>It follows then that: <span class="math display">\[
+<p>It follows then that:
+<span class="math display">\[
 P_i =\frac{e^{V_i}}{\sum_{j=1}^{J_n}e^{V_j}}
-\]</span> which is simply the multinomial logit model.</p>
+\]</span>
+which is simply the multinomial logit model.</p>
 <p>As this illustrates, the multinomial logit is a particular case of a GEV model. Next, we will see how a model with nesting structures is derived.</p>
 </div>
 <div id="nested-logit-model" class="section level2">
 <h2><span class="header-section-number">7.7</span> Nested Logit model</h2>
 <p>The nested logit model is derived following the GEV modelling approach by assuming that the <span class="math inline">\(J\)</span> alternatives are uniquely allocated to one class the alternatives, called a nest. There are <span class="math inline">\(S\)</span> nests <span class="math inline">\(B_s\)</span> (<span class="math inline">\(s=1,3,\cdots,S\)</span>).</p>
-<p>Based on the above, we can define the following function: <span class="math display">\[
+<p>Based on the above, we can define the following function:
+<span class="math display">\[
 G=\sum_{s=1}^S \Big(\sum_{j \in B_s}y_j^{1/\lambda_s} \Big)^{\lambda_s}
 \]</span></p>
 <p>We can verify that this function satisfies the conditions to be a GEV model:</p>
 <ol style="list-style-type: decimal">
 <li><p><span class="math inline">\(G\)</span> is always non-negative since <span class="math inline">\(y_j\)</span> is non-negative for every <span class="math inline">\(j\)</span>.</p></li>
-<li><p>The function is homogeneous of degree one, since: <span class="math display">\[
+<li><p>The function is homogeneous of degree one, since:
+<span class="math display">\[
 \begin{eqnarray*}
   G(\alpha y_1, \alpha y_2, \cdots, \alpha y_{J})  &amp;=&amp; \\
   &amp; &amp;\sum_{s=1}^S \Big(\sum_{j \in B_s}(\alpha y)_j^{1/\lambda_s} \Big)^{\lambda_s} = \\
@@ -715,17 +759,21 @@ G=\sum_{s=1}^S \Big(\sum_{j \in B_s}y_j^{1/\lambda_s} \Big)^{\lambda_s}
 \]</span></p></li>
 <li><p><span class="math inline">\(G\)</span> grows unbounded if any <span class="math inline">\(y_j\)</span> grows unbounded <em>as long as</em> <span class="math inline">\(0 \le \lambda_s \le 1\)</span> for all <span class="math inline">\(s\)</span>; and</p></li>
 </ol>
-<p>The first derivative of this function for <span class="math inline">\(j\)</span> in nest <span class="math inline">\(B_t\)</span> is: <span class="math display">\[
+<p>The first derivative of this function for <span class="math inline">\(j\)</span> in nest <span class="math inline">\(B_t\)</span> is:
+<span class="math display">\[
 \begin{eqnarray*}
   \frac{\partial G}{\partial y_i}  &amp;=&amp; \lambda_t \Big(\sum_{j \in B_t}y_j^{1/\lambda_t} \Big)^{\lambda_t - 1} \frac{1}{\lambda_t} y_i^{1/\lambda_t - 1}= \\
   &amp; &amp;y_i^{1/\lambda_t - 1} \Big(\sum_{j \in B_t}y_j^{1/\lambda_t} \Big)^{\lambda_t - 1} 
 \end{eqnarray*}
-\]</span> This derivative is always non-negative, since <span class="math inline">\(y_j\)</span> is non-negative for all <span class="math inline">\(j\)</span>.</p>
-<p>The second partial derivative is: <span class="math display">\[
+\]</span>
+This derivative is always non-negative, since <span class="math inline">\(y_j\)</span> is non-negative for all <span class="math inline">\(j\)</span>.</p>
+<p>The second partial derivative is:
+<span class="math display">\[
 \frac{\partial G}{\partial y_i \partial y_l}= y_i^{1/\lambda_t - 1}\frac{\partial}{\partial y_l} \Big(\sum_{j \in B_t}y_j^{1/\lambda_t} \Big)^{\lambda_t - 1}
 \]</span></p>
 <p>When <span class="math inline">\(y_l\)</span> is not part of nest <span class="math inline">\(B_t\)</span> the second derivative is zero, which satisfies the non-positive condition.</p>
-<p>When <span class="math inline">\(y_l\)</span> is part of nest <span class="math inline">\(B_t\)</span> the second derivative is: <span class="math display">\[
+<p>When <span class="math inline">\(y_l\)</span> is part of nest <span class="math inline">\(B_t\)</span> the second derivative is:
+<span class="math display">\[
 \begin{eqnarray*}
 \frac{\partial G}{\partial y_i \partial y_l} &amp;=&amp; y_i^{1/\lambda_t - 1}\frac{\partial}{\partial y_l} \Big(\sum_{j \in B_t}y_j^{1/\lambda_t} \Big)^{\lambda_t - 1}\\
 &amp;=&amp;(\lambda_t - 1)y_i^{1/\lambda_t - 1}\Big(\sum_{j \in B_t}y_j^{1/\lambda_t} \Big)^{\lambda_t - 2} \frac{1}{\lambda_t} y_l^{1/\lambda_t-1}\\
@@ -733,35 +781,42 @@ G=\sum_{s=1}^S \Big(\sum_{j \in B_s}y_j^{1/\lambda_s} \Big)^{\lambda_s}
 \end{eqnarray*}
 \]</span></p>
 <p>Since <span class="math inline">\(0 \le \lambda_s \le 1\)</span>, the term <span class="math inline">\(\frac{\lambda_s - 1}{\lambda_s}\)</span> is at most zero, which again satisfies the non-positive condition. Higher order derivatives satisfy the required conditions.</p>
-<p>Since <span class="math inline">\(G\)</span> is a valid function for the GEV recipe, we have that: <span class="math display">\[
+<p>Since <span class="math inline">\(G\)</span> is a valid function for the GEV recipe, we have that:
+<span class="math display">\[
 \begin{eqnarray*}
 P_i &amp;=&amp; y_i\frac{y_i^{1/\lambda_t - 1} \Big(\sum_{j \in B_t}y_j^{1/\lambda_t} \Big)^{\lambda_t - 1}}{\sum_{s=1}^S \Big(\sum_{j \in B_s}y_j^{1/\lambda_s} \Big)^{\lambda_s}}\\
 &amp;=&amp;\frac{y_i^{\lambda_t/\lambda_t}y_i^{1/\lambda_t - 1} \Big(\sum_{j \in B_t}y_j^{1/\lambda_t} \Big)^{\lambda_t - 1}}{\sum_{s=1}^S \Big(\sum_{j \in B_s}y_j^{1/\lambda_s} \Big)^{\lambda_s}}\\
 &amp;=&amp;\frac{y_i^{1/\lambda_t} \Big(\sum_{j \in B_t}y_j^{1/\lambda_t} \Big)^{\lambda_t - 1}}{\sum_{s=1}^S \Big(\sum_{j \in B_s}y_j^{1/\lambda_s} \Big)^{\lambda_s}}\\
 \end{eqnarray*}
 \]</span></p>
-<p>Replacing <span class="math inline">\(y_j = e^{V_j}\)</span> gives the expression for the choice probability of the nested model: <span class="math display">\[
+<p>Replacing <span class="math inline">\(y_j = e^{V_j}\)</span> gives the expression for the choice probability of the nested model:
+<span class="math display">\[
 P_i = \frac{e^{V_i/\lambda_t} \Big(\sum_{j \in B_s}e^{V_j/\lambda_t} \Big)^{\lambda_t - 1}}{\sum_{s=1}^S \Big(\sum_{j \in B_s}e^{V_j/\lambda_s} \Big)^{\lambda_s}}
 \]</span></p>
 <p>Superficially, the probability of the nested model resembles the multinomial probability, but the differences are important. One of the examples of nesting in Figure <a href="chapter-6.html#fig:fig-choice-structures">7.1</a> can help to unpack the probability of the nested model.</p>
-<p>Suppose that there are <span class="math inline">\(S=2\)</span> nests, namely central (“c”) and room (“r”). The probability of choosing an alternative in the nest “central”, say Electric Central, is: <span class="math display">\[
+<p>Suppose that there are <span class="math inline">\(S=2\)</span> nests, namely central (“c”) and room (“r”). The probability of choosing an alternative in the nest “central”, say Electric Central, is:
+<span class="math display">\[
 P_{ec} = \frac{e^{V_{ec}/\lambda_{c}}(e^{V_{ec}/\lambda_{c}}+e^{V_{gc}/\lambda_{c}}+e^{V_{hp}/\lambda_{c}})^{\lambda_c-1}}
 {(e^{V_{ec}/\lambda_{c}}+e^{V_{gc}/\lambda_{c}}+e^{V_{hp}/\lambda_{c}})^{\lambda_c}+(e^{V_{er}/\lambda_{r}}+e^{V_{gr}/\lambda_{r}}+e^{V_{hp}/\lambda_{r}})^{\lambda_r}}
 \]</span></p>
-<p>The probability of choosing another alternative in the nest “central”, say Gas Central, is: <span class="math display">\[
+<p>The probability of choosing another alternative in the nest “central”, say Gas Central, is:
+<span class="math display">\[
 P_{gc} = \frac{e^{V_{gc}/\lambda_{c}}(e^{V_{ec}/\lambda_{c}}+e^{V_{gc}/\lambda_{c}}+e^{V_{hp}/\lambda_{c}})^{\lambda_c-1}}
 {(e^{V_{ec}/\lambda_{c}}+e^{V_{gc}/\lambda_{c}}+e^{V_{hp}/\lambda_{c}})^{\lambda_c}+(e^{V_{er}/\lambda_{r}}+e^{V_{gr}/\lambda_{r}}+e^{V_{hp}/\lambda_{r}})^{\lambda_r}}
 \]</span></p>
-<p>Notice that the ratio of odds is: <span class="math display">\[
+<p>Notice that the ratio of odds is:
+<span class="math display">\[
 \frac{P_{ec}}{P_{gc}} = \frac{\frac{e^{V_{ec}/\lambda_{c}}(e^{V_{ec}/\lambda_{c}}+e^{V_{gc}/\lambda_{c}}+e^{V_{hp}/\lambda_{c}})^{\lambda_c-1}}
 {(e^{V_{ec}/\lambda_{c}}+e^{V_{gc}/\lambda_{c}}+e^{V_{hp}/\lambda_{c}})^{\lambda_c}+(e^{V_{er}/\lambda_{r}}+e^{V_{gr}/\lambda_{r}}+e^{V_{hp}/\lambda_{r}})^{\lambda_r}}}{\frac{e^{V_{gc}/\lambda_{c}}(e^{V_{ec}/\lambda_{c}}+e^{V_{gc}/\lambda_{c}}+e^{V_{hp}/\lambda_{c}})^{\lambda_c-1}}
 {(e^{V_{ec}/\lambda_{c}}+e^{V_{gc}/\lambda_{c}}+e^{V_{hp}/\lambda_{c}})^{\lambda_c}+(e^{V_{er}/\lambda_{r}}+e^{V_{gr}/\lambda_{r}}+e^{V_{hp}/\lambda_{r}})^{\lambda_r}}} = \frac{e^{V_{ec}/\lambda_{c}}}{e^{V_{gr}/\lambda_{r}}} = \frac{e^{V_{ec}}}{e^{V_{gc}}}
 \]</span></p>
-<p>As you can see, the ratio of odds is independent from other alternatives: this is the same as the multinomial logit model. In fact, substitution patterns <em>within</em> a nest are proportional, as they are in the case of the multinomial logit. This is not the case when the ratio of odds is for two alternatives in different nests. For example, the probability of choosing an alternative in the nest for room systems, say “er”, is: <span class="math display">\[
+<p>As you can see, the ratio of odds is independent from other alternatives: this is the same as the multinomial logit model. In fact, substitution patterns <em>within</em> a nest are proportional, as they are in the case of the multinomial logit. This is not the case when the ratio of odds is for two alternatives in different nests. For example, the probability of choosing an alternative in the nest for room systems, say “er”, is:
+<span class="math display">\[
 P_{er} = \frac{e^{V_{er}/\lambda_{r}}(e^{V_{ec}/\lambda_{r}}+e^{V_{gr}/\lambda_{r}}+e^{V_{hp}/\lambda_{r}})^{\lambda_r-1}}
 {(e^{V_{ec}/\lambda_{c}}+e^{V_{gc}/\lambda_{c}}+e^{V_{hp}/\lambda_{c}})^{\lambda_c-1}+(e^{V_{er}/\lambda_{r}}+e^{V_{gr}/\lambda_{r}}+e^{V_{hp}/\lambda_{c}})^{\lambda_r}}
 \]</span></p>
-<p>The ratio of odds for electric central and electric room is: <span class="math display">\[
+<p>The ratio of odds for electric central and electric room is:
+<span class="math display">\[
 \frac{P_{ec}}{P_{er}} = \frac{\frac{e^{V_{ec}/\lambda_{c}}(e^{V_{ec}/\lambda_{c}}+e^{V_{gc}/\lambda_{c}}+e^{V_{hp}/\lambda_{c}})^{\lambda_c-1}}
 {(e^{V_{ec}/\lambda_{c}}+e^{V_{gc}/\lambda_{c}}+e^{V_{hp}/\lambda_{c}})^{\lambda_c}+(e^{V_{er}/\lambda_{r}}+e^{V_{gc}/\lambda_{r}}+e^{V_{hp}/\lambda_{c}})^{\lambda_r}}}{\frac{e^{V_{er}/\lambda_{r}}(e^{V_{er}/\lambda_{r}}+e^{V_{gr}/\lambda_{r}}+e^{V_{hp}/\lambda_{r}})^{\lambda_r-1}}
 {(e^{V_{ec}/\lambda_{c}}+e^{V_{gc}/\lambda_{c}}+e^{V_{hp}/\lambda_{c}})^{\lambda_c}+(e^{V_{er}/\lambda_{r}}+e^{V_{gr}/\lambda_{r}}+e^{V_{hp}/\lambda_{r}})^{\lambda_r}}} =
@@ -773,28 +828,34 @@ P_{er} = \frac{e^{V_{er}/\lambda_{r}}(e^{V_{ec}/\lambda_{r}}+e^{V_{gr}/\lambda_{
 <h2><span class="header-section-number">7.8</span> Properties of the nested logit model</h2>
 <p>As seen above, the nested logit model behaves as the multinomial model within a nest (with proportional substitution), but between nests the patterns of substitution are not necessarily proportional.</p>
 <p>An intuitive way to think about the nested logit is in terms of <em>marginal</em> and <em>conditional</em> probabilities.</p>
-<p>Suppose that we decompose the systematic utility of the alternatives in the following way: <span class="math display">\[
+<p>Suppose that we decompose the systematic utility of the alternatives in the following way:
+<span class="math display">\[
 V_j = Z_j + W_s
-\]</span> where <span class="math inline">\(Z_j\)</span> are the attributes specific to the alternatives, whereas <span class="math inline">\(W_s\)</span> are attributes specific to nest <span class="math inline">\(s\)</span>. For example, imagine that central heating systems receive a flat subsidy of $100. Since the alternatives within the nest all share this attribute, and the model operates based on the difference in utilities, this subsidy is not useful to discriminate between alternatives in the “central” nest. However, the subsidy has potentially the effect of making alternatives in the “central” nest more attractive than alternatives in the “room” nest.</p>
-<p>Based on the above decomposition, we can rewrite the choice probabilities as follows: <span class="math display">\[
+\]</span>
+where <span class="math inline">\(Z_j\)</span> are the attributes specific to the alternatives, whereas <span class="math inline">\(W_s\)</span> are attributes specific to nest <span class="math inline">\(s\)</span>. For example, imagine that central heating systems receive a flat subsidy of $100. Since the alternatives within the nest all share this attribute, and the model operates based on the difference in utilities, this subsidy is not useful to discriminate between alternatives in the “central” nest. However, the subsidy has potentially the effect of making alternatives in the “central” nest more attractive than alternatives in the “room” nest.</p>
+<p>Based on the above decomposition, we can rewrite the choice probabilities as follows:
+<span class="math display">\[
 \begin{eqnarray*}
 P_i &amp;=&amp; \frac{e^{(Z_i + W_t)/\lambda_t} \Big(\sum_{j \in B_t}e^{(Z_j + W_t)/\lambda_t} \Big)^{-1}\Big(\sum_{j \in B_t}e^{(Z_j + W_t)/\lambda_t} \Big)^{\lambda_t}}{\sum_{s=1}^S \Big(\sum_{j \in B_s}e^{{Z_j + W_s}/\lambda_s} \Big)^{\lambda_s}} \\
 &amp;=&amp;\frac{e^{(Z_i + W_t)/\lambda_t} }{\sum_{j \in B_s}e^{(Z_j + W_t)/\lambda_t}}\frac{\Big(\sum_{j \in B_t}e^{(Z_j + W_t)/\lambda_t} \Big)^{\lambda_t}}{\sum_{s=1}^S \Big(\sum_{j \in B_s}e^{(Z_j + W_s)/\lambda_s} \Big)^{\lambda_s}}
 \end{eqnarray*}
 \]</span></p>
-<p>Lets now take the each term of the probability above in turn. The first term we are going to call the <em>conditional</em> probability: <span class="math display">\[
+<p>Lets now take the each term of the probability above in turn. The first term we are going to call the <em>conditional</em> probability:
+<span class="math display">\[
 P_{i|t} = \frac{e^{(Z_i + W_t)/\lambda_t} }{\sum_{j \in B_t}e^{(Z_j + W_t)/\lambda_t}}
 \]</span></p>
-We can rearrange this term as follows: $$
+<p>We can rearrange this term as follows:
+$$
 <span class="math display">\[\begin{eqnarray*}
   P_{i|t} &amp;=&amp; \frac{e^{(Z_i + W_s)/\lambda_t} }{\sum_{j \in B_t}e^{(Z_j + W_t)/\lambda_t}}\\
   &amp;=&amp;\frac{e^{Z_i/\lambda_t} e^{W_t/\lambda_t}}{\sum_{j \in B_t}e^{Z_j/\lambda_s} e^{W_t/\lambda_t}}\\
   &amp;=&amp;\frac{e^{Z_i/\lambda_t} e^{W_t/\lambda_t}}{ e^{W_t/\lambda_t}\Big(\sum_{j \in B_t}e^{Z_j/\lambda_t} \Big)}\\
   &amp;=&amp;\frac{e^{Z_i/\lambda_t}}{\sum_{j \in B_t}e^{Z_j/\lambda_t}}
-\end{eqnarray*}\]</span>
+\end{eqnarray*}\]</span></p>
 <p>$$</p>
 <p>The expression above is the probability of choosing alternative <span class="math inline">\(i\)</span> <em>conditional</em> on choosing nest <span class="math inline">\(t\)</span>.</p>
-<p>Now the second term, which we will call the marginal probability of choosing the nest <span class="math inline">\(t\)</span>: <span class="math display">\[
+<p>Now the second term, which we will call the marginal probability of choosing the nest <span class="math inline">\(t\)</span>:
+<span class="math display">\[
 \begin{eqnarray*}
   P_t &amp;=&amp;\frac{\Big(\sum_{j \in B_t}e^{(Z_j + W_t)/\lambda_t} \Big)^{\lambda_t}}{\sum_{s=1}^S \Big(\sum_{j \in B_s}e^{(Z_j + W_s)/\lambda_s} \Big)^{\lambda_s}}\\
   &amp;=&amp;\frac{\Big(\sum_{j \in B_t}e^{Z_j/\lambda_t} e^{W_t/\lambda_t} \Big)^{\lambda_t}}{\sum_{s=1}^S \Big(\sum_{j \in B_s}e^{(Z_j + W_s)/\lambda_s} \Big)^{\lambda_s}}\\
@@ -802,41 +863,50 @@ We can rearrange this term as follows: $$
   &amp;=&amp;\frac{e^{W_t}\Big(\sum_{j \in B_t} e^{Z_j/\lambda_t} \Big)^{\lambda_t}}{\sum_{s=1}^S e^{W_s}\Big(\sum_{j \in B_s}e^{Z_j/\lambda_s} \Big)^{\lambda_s}}\\
 \end{eqnarray*}
 \]</span></p>
-<p>For the last step, we make use of the following property of logarithms: <span class="math display">\[
+<p>For the last step, we make use of the following property of logarithms:
+<span class="math display">\[
 e^xb^c = e^{x+c\ln b}
 \]</span></p>
-<p>Therefore: <span class="math display">\[
+<p>Therefore:
+<span class="math display">\[
 \begin{eqnarray*}
   P_t &amp;=&amp;\frac{e^{W_t + \lambda_t\ln\Big(\sum_{j \in B_t} e^{Z_j/\lambda_t} \Big)}}{\sum_{s=1}^S e^{W_s+\lambda_s\ln\Big(\sum_{j \in B_s}e^{Z_j/\lambda_s} \Big)}}\\
   &amp;=&amp;\frac{e^{W_t + \lambda_tI_t}}{\sum_{s=1}^S e^{W_s+\lambda_sI_s}}
 \end{eqnarray*}  
-\]</span> with: <span class="math display">\[
+\]</span>
+with:
+<span class="math display">\[
 I_s = \ln\Big(\sum_{j \in B_s}e^{Z_j/\lambda_s} \Big)
-\]</span> <span class="math inline">\(I_s\)</span> is variously called the <em>logsum</em>, or <em>expected maximum utility</em> of a nest.</p>
-<p>It can be appreciated that the probability of choosing alternative <span class="math inline">\(i\)</span> in a nested model is the product of two multinomial logit models in the form of the marginal probability of choosing nest <span class="math inline">\(t\)</span> (sometimes called the upper model), and the probability of choosing <span class="math inline">\(i\)</span> <em>conditional</em> on choosing nest <span class="math inline">\(t\)</span>: <span class="math display">\[
+\]</span>
+<span class="math inline">\(I_s\)</span> is variously called the <em>logsum</em>, or <em>expected maximum utility</em> of a nest.</p>
+<p>It can be appreciated that the probability of choosing alternative <span class="math inline">\(i\)</span> in a nested model is the product of two multinomial logit models in the form of the marginal probability of choosing nest <span class="math inline">\(t\)</span> (sometimes called the upper model), and the probability of choosing <span class="math inline">\(i\)</span> <em>conditional</em> on choosing nest <span class="math inline">\(t\)</span>:
+<span class="math display">\[
 P_i = P_{i|t}\cdot P_t= \frac{e^{(Z_i + W_t)/\lambda_t} }{\sum_{j \in B_t}e^{(Z_j + W_t)/\lambda_t}}\ \cdot \frac{e^{W_t + \lambda_tI_t}}{\sum_{s=1}^S e^{W_s+\lambda_sI_s}}
 \]</span></p>
 <p>The role of parameters <span class="math inline">\(\lambda_s\)</span> is more intuitive in this formulation of the model. As noted above, <span class="math inline">\(\lambda_s\)</span> is bounded between zero and one. We can examine the limiting cases, as follows:</p>
 <ol style="list-style-type: decimal">
 <li><p>When <span class="math inline">\(\lambda_s &lt;0\)</span> for any <span class="math inline">\(s\)</span>, increases in the value of <span class="math inline">\(I_s\)</span> would actually decrease the probability of choosing that nest; a result that is inconsistent with utility maximization.</p></li>
 <li><p>When <span class="math inline">\(\lambda \to 0\)</span>, any changes in the value of <span class="math inline">\(I_s\)</span> would not change the probability of selecting that nest.</p></li>
-<li><p>When <span class="math inline">\(\lambda_s=1\)</span> for all <span class="math inline">\(s\)</span>, the choice probability becomes: <span class="math display">\[
+<li><p>When <span class="math inline">\(\lambda_s=1\)</span> for all <span class="math inline">\(s\)</span>, the choice probability becomes:
+<span class="math display">\[
 P_i = \frac{e^{V_j} \Big(\sum_{j \in B_s}e^{V_j} \Big)^{0}}{\sum_{s=1}^S \Big(\sum_{j \in B_s}e^{V_j} \Big)^{1}}=
 \frac{e^{V_j}}{\sum_{k=1}^J e^{V_k}}
 \]</span></p></li>
 </ol>
 <p>The model collapses the the multinomial logit model, since the denominator simply becomes the sum of <span class="math inline">\(e^{V_j}\)</span> for all alternatives across every nest! In fact, <span class="math inline">\(1-\lambda_s\)</span> is a measure of the correlation in the nest, so when <span class="math inline">\(\lambda=1\)</span> this indicates a correlation of zero.</p>
-<p>It is possible to test the hypothesis that a nesting parameter is identical to one, by means of a t-test, as follows: <span class="math display">\[
+<p>It is possible to test the hypothesis that a nesting parameter is identical to one, by means of a t-test, as follows:
+<span class="math display">\[
 t=\frac{\lambda_s-1}{\sigma_{\lambda_s}}
-\]</span> where <span class="math inline">\(\sigma_{\lambda_s}\)</span> is the standard deviation of the inclusive value.</p>
+\]</span>
+where <span class="math inline">\(\sigma_{\lambda_s}\)</span> is the standard deviation of the inclusive value.</p>
 </div>
 <div id="estimation-of-the-nested-logit-model" class="section level2">
 <h2><span class="header-section-number">7.9</span> Estimation of the nested logit model</h2>
 <p>The nested logit model can be estimated using <code>mlogit</code> by using additional argument in the <code>mlogit</code> function. We will illustrate this using the same example. The chunk of code below defines a formula with installation costs (ic) and operation costs (oc) as alternative specific variables with a generic coefficient. In addition, the nests are defined by means of a list. In this model, we define two nests that correspond to “room” systems (er and gr) and “central” systems (ec, gc, and hp). Call this model <code>nl1</code> for “nested logit 1”:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nl1 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H,
-             <span class="dt">nests =</span> <span class="kw">list</span>(<span class="dt">room =</span> <span class="kw">c</span>( <span class="st">&#39;er&#39;</span>, <span class="st">&#39;gr&#39;</span>), <span class="dt">central =</span> <span class="kw">c</span>(<span class="st">&#39;ec&#39;</span>, <span class="st">&#39;gc&#39;</span>, <span class="st">&#39;hp&#39;</span>)),
-             <span class="dt">steptol =</span> <span class="fl">1e-12</span>)
-<span class="kw">summary</span>(nl1)</code></pre></div>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb233-1" title="1">nl1 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H,</a>
+<a class="sourceLine" id="cb233-2" title="2">             <span class="dt">nests =</span> <span class="kw">list</span>(<span class="dt">room =</span> <span class="kw">c</span>( <span class="st">&#39;er&#39;</span>, <span class="st">&#39;gr&#39;</span>), <span class="dt">central =</span> <span class="kw">c</span>(<span class="st">&#39;ec&#39;</span>, <span class="st">&#39;gc&#39;</span>, <span class="st">&#39;hp&#39;</span>)),</a>
+<a class="sourceLine" id="cb233-3" title="3">             <span class="dt">steptol =</span> <span class="fl">1e-12</span>)</a>
+<a class="sourceLine" id="cb233-4" title="4"><span class="kw">summary</span>(nl1)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## mlogit(formula = depvar ~ ic + oc, data = H, nests = list(room = c(&quot;er&quot;, 
@@ -868,22 +938,22 @@ t=\frac{\lambda_s-1}{\sigma_{\lambda_s}}
 ## McFadden R^2:  0.01842 
 ## Likelihood ratio test : chisq = 37.66 (p.value = 1.3171e-07)</code></pre>
 <p>It can be seen that the coefficients for installation costs and operation costs are significant and have the expected signs. In addition, inclusive values are estimated for each nest. Both coefficients appear as significant; however, in this case, the z-value is calculated in reference to zero. As explained in the preceding section, however, in reality we should think of those coefficients as correlations (<span class="math inline">\(1-\lambda_s\)</span>). Accordingly, the correlations for the two nests are:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>nl1<span class="op">$</span>coefficients[<span class="st">&quot;iv:room&quot;</span>]</code></pre></div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb235-1" title="1"><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>nl1<span class="op">$</span>coefficients[<span class="st">&quot;iv:room&quot;</span>]</a></code></pre></div>
 <pre><code>##   iv:room 
 ## 0.9790318</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>nl1<span class="op">$</span>coefficients[<span class="st">&quot;iv:central&quot;</span>]</code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb237-1" title="1"><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>nl1<span class="op">$</span>coefficients[<span class="st">&quot;iv:central&quot;</span>]</a></code></pre></div>
 <pre><code>## iv:central 
 ##  0.9758055</code></pre>
 <p>Clearly, the correlations within the nests are very high. We can test whether the correlation is significant by means of the t-test discussed before:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(nl1<span class="op">$</span>coefficients[<span class="st">&quot;iv:room&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">vcov</span>(nl1)[<span class="st">&quot;iv:room&quot;</span>,<span class="st">&quot;iv:room&quot;</span>])</code></pre></div>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb239-1" title="1">(nl1<span class="op">$</span>coefficients[<span class="st">&quot;iv:room&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">vcov</span>(nl1)[<span class="st">&quot;iv:room&quot;</span>,<span class="st">&quot;iv:room&quot;</span>])</a></code></pre></div>
 <pre><code>##   iv:room 
 ## -418.0641</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(nl1<span class="op">$</span>coefficients[<span class="st">&quot;iv:central&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">vcov</span>(nl1)[<span class="st">&quot;iv:central&quot;</span>,<span class="st">&quot;iv:central&quot;</span>])</code></pre></div>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb241-1" title="1">(nl1<span class="op">$</span>coefficients[<span class="st">&quot;iv:central&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">vcov</span>(nl1)[<span class="st">&quot;iv:central&quot;</span>,<span class="st">&quot;iv:central&quot;</span>])</a></code></pre></div>
 <pre><code>## iv:central 
 ##  -108.1057</code></pre>
 <p>The cutoff value of the t-test at the 5% level of confidence is 1.96. The high values of the t-test indicate that the null hypothesis, i.e., <span class="math inline">\(\lambda_s=1\)</span> can be rejected.</p>
 <p>In addition, since the multinomial logit model is a special case of the nested logit model (when <span class="math inline">\(\lambda_s=1\)</span> for all <span class="math inline">\(s\)</span>), it is also possible to conduct a likelihood ratio test, as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lrtest</span>(mod3, nl1)</code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb243-1" title="1"><span class="kw">lrtest</span>(mod3, nl1)</a></code></pre></div>
 <pre><code>## Likelihood ratio test
 ## 
 ## Model 1: depvar ~ ic + oc
@@ -895,11 +965,11 @@ t=\frac{\lambda_s-1}{\sigma_{\lambda_s}}
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>The likelihood ratio test also indicates that the null hypothesis, i.e., that the nested logit collapses to the multinomial logit, can be rejected at a high level of confidence (<span class="math inline">\(p-val &lt; 0.01\)</span>).</p>
 <p>It is possible to impose some restrictions to the estimation of the parameters for the nests. The <code>mlogit</code> function allows an additional argument that forces all parameters <span class="math inline">\(lambda_s\)</span> to take identical values. The argument is <code>un.nest.el</code> (for “unique nest elasticity”), and when set to <code>TRUE</code> only one parameter will be estimated (call this Nested Logit Model 2, <code>nl2</code>):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nl2 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H,
-             <span class="dt">nests =</span> <span class="kw">list</span>(<span class="dt">room =</span> <span class="kw">c</span>( <span class="st">&#39;er&#39;</span>, <span class="st">&#39;gr&#39;</span>), <span class="dt">central =</span> <span class="kw">c</span>(<span class="st">&#39;ec&#39;</span>, <span class="st">&#39;gc&#39;</span>, <span class="st">&#39;hp&#39;</span>)),
-             <span class="dt">un.nest.el =</span> <span class="ot">TRUE</span>,
-             <span class="dt">steptol =</span> <span class="fl">1e-12</span>)
-<span class="kw">summary</span>(nl2)</code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb245-1" title="1">nl2 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H,</a>
+<a class="sourceLine" id="cb245-2" title="2">             <span class="dt">nests =</span> <span class="kw">list</span>(<span class="dt">room =</span> <span class="kw">c</span>( <span class="st">&#39;er&#39;</span>, <span class="st">&#39;gr&#39;</span>), <span class="dt">central =</span> <span class="kw">c</span>(<span class="st">&#39;ec&#39;</span>, <span class="st">&#39;gc&#39;</span>, <span class="st">&#39;hp&#39;</span>)),</a>
+<a class="sourceLine" id="cb245-3" title="3">             <span class="dt">un.nest.el =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb245-4" title="4">             <span class="dt">steptol =</span> <span class="fl">1e-12</span>)</a>
+<a class="sourceLine" id="cb245-5" title="5"><span class="kw">summary</span>(nl2)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## mlogit(formula = depvar ~ ic + oc, data = H, nests = list(room = c(&quot;er&quot;, 
@@ -936,169 +1006,169 @@ t=\frac{\lambda_s-1}{\sigma_{\lambda_s}}
 <h2><span class="header-section-number">7.10</span> Substitution patterns with the nested logit model</h2>
 <p>In this section we will revisit the substitution patterns, but now using the nested logit model. To simulate the substitution patterns we will remove each alternative in turn, to examine how the adoption rates change in response.</p>
 <p>We begin by copying the model matrix:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">X &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(nl2)</code></pre></div>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb247-1" title="1">X &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(nl2)</a></code></pre></div>
 <p>Using the model matrix, we can calculate the utilities of each alternative. Notice that each utility is divided by the coefficient of the inclusive value:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Electric central</span>
-exp_V_ec &lt;-<span class="st"> </span><span class="kw">exp</span>((X[alt <span class="op">==</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;ec&quot;</span>), <span class="st">&quot;oc&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">coef</span>(nl2)[<span class="st">&quot;oc&quot;</span>] <span class="op">+</span><span class="st"> </span>X[alt <span class="op">==</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;ec&quot;</span>), <span class="st">&quot;ic&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">coef</span>(nl2)[<span class="st">&quot;ic&quot;</span>]) <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>])
-
-<span class="co"># Gas central</span>
-exp_V_gc &lt;-<span class="st"> </span><span class="kw">exp</span>((<span class="kw">coef</span>(nl2)[<span class="st">&quot;gc:(intercept)&quot;</span>] <span class="op">+</span><span class="st"> </span>X[alt <span class="op">==</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;gc&quot;</span>), <span class="st">&quot;oc&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">coef</span>(nl2)[<span class="st">&quot;oc&quot;</span>] <span class="op">+</span><span class="st"> </span>X[alt <span class="op">==</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;gc&quot;</span>), <span class="st">&quot;ic&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">coef</span>(nl2)[<span class="st">&quot;ic&quot;</span>]) <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>])
-
-<span class="co"># Heat pump</span>
-exp_V_hp &lt;-<span class="st"> </span><span class="kw">exp</span>((<span class="kw">coef</span>(nl2)[<span class="st">&quot;hp:(intercept)&quot;</span>] <span class="op">+</span><span class="st"> </span>X[alt <span class="op">==</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;hp&quot;</span>), <span class="st">&quot;oc&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">coef</span>(nl2)[<span class="st">&quot;oc&quot;</span>] <span class="op">+</span><span class="st"> </span>X[alt <span class="op">==</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;hp&quot;</span>), <span class="st">&quot;ic&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">coef</span>(nl2)[<span class="st">&quot;ic&quot;</span>]) <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>])
-
-<span class="co"># Electric room</span>
-exp_V_er &lt;-<span class="st"> </span><span class="kw">exp</span>((<span class="kw">coef</span>(nl2)[<span class="st">&quot;er:(intercept)&quot;</span>] <span class="op">+</span><span class="st"> </span>X[alt <span class="op">==</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;er&quot;</span>), <span class="st">&quot;oc&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">coef</span>(nl2)[<span class="st">&quot;oc&quot;</span>] <span class="op">+</span><span class="st"> </span>X[alt <span class="op">==</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;er&quot;</span>), <span class="st">&quot;ic&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">coef</span>(nl2)[<span class="st">&quot;ic&quot;</span>]) <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>])
-
-<span class="co"># Gas room</span>
-exp_V_gr &lt;-<span class="st"> </span><span class="kw">exp</span>((<span class="kw">coef</span>(nl2)[<span class="st">&quot;gr:(intercept)&quot;</span>] <span class="op">+</span><span class="st"> </span>X[alt <span class="op">==</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;gr&quot;</span>), <span class="st">&quot;oc&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">coef</span>(nl2)[<span class="st">&quot;oc&quot;</span>] <span class="op">+</span><span class="st"> </span>X[alt <span class="op">==</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;gr&quot;</span>), <span class="st">&quot;ic&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">coef</span>(nl2)[<span class="st">&quot;ic&quot;</span>]) <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>])</code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb248-1" title="1"><span class="co"># Electric central</span></a>
+<a class="sourceLine" id="cb248-2" title="2">exp_V_ec &lt;-<span class="st"> </span><span class="kw">exp</span>((X[alt <span class="op">==</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;ec&quot;</span>), <span class="st">&quot;oc&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">coef</span>(nl2)[<span class="st">&quot;oc&quot;</span>] <span class="op">+</span><span class="st"> </span>X[alt <span class="op">==</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;ec&quot;</span>), <span class="st">&quot;ic&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">coef</span>(nl2)[<span class="st">&quot;ic&quot;</span>]) <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>])</a>
+<a class="sourceLine" id="cb248-3" title="3"></a>
+<a class="sourceLine" id="cb248-4" title="4"><span class="co"># Gas central</span></a>
+<a class="sourceLine" id="cb248-5" title="5">exp_V_gc &lt;-<span class="st"> </span><span class="kw">exp</span>((<span class="kw">coef</span>(nl2)[<span class="st">&quot;gc:(intercept)&quot;</span>] <span class="op">+</span><span class="st"> </span>X[alt <span class="op">==</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;gc&quot;</span>), <span class="st">&quot;oc&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">coef</span>(nl2)[<span class="st">&quot;oc&quot;</span>] <span class="op">+</span><span class="st"> </span>X[alt <span class="op">==</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;gc&quot;</span>), <span class="st">&quot;ic&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">coef</span>(nl2)[<span class="st">&quot;ic&quot;</span>]) <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>])</a>
+<a class="sourceLine" id="cb248-6" title="6"></a>
+<a class="sourceLine" id="cb248-7" title="7"><span class="co"># Heat pump</span></a>
+<a class="sourceLine" id="cb248-8" title="8">exp_V_hp &lt;-<span class="st"> </span><span class="kw">exp</span>((<span class="kw">coef</span>(nl2)[<span class="st">&quot;hp:(intercept)&quot;</span>] <span class="op">+</span><span class="st"> </span>X[alt <span class="op">==</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;hp&quot;</span>), <span class="st">&quot;oc&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">coef</span>(nl2)[<span class="st">&quot;oc&quot;</span>] <span class="op">+</span><span class="st"> </span>X[alt <span class="op">==</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;hp&quot;</span>), <span class="st">&quot;ic&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">coef</span>(nl2)[<span class="st">&quot;ic&quot;</span>]) <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>])</a>
+<a class="sourceLine" id="cb248-9" title="9"></a>
+<a class="sourceLine" id="cb248-10" title="10"><span class="co"># Electric room</span></a>
+<a class="sourceLine" id="cb248-11" title="11">exp_V_er &lt;-<span class="st"> </span><span class="kw">exp</span>((<span class="kw">coef</span>(nl2)[<span class="st">&quot;er:(intercept)&quot;</span>] <span class="op">+</span><span class="st"> </span>X[alt <span class="op">==</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;er&quot;</span>), <span class="st">&quot;oc&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">coef</span>(nl2)[<span class="st">&quot;oc&quot;</span>] <span class="op">+</span><span class="st"> </span>X[alt <span class="op">==</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;er&quot;</span>), <span class="st">&quot;ic&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">coef</span>(nl2)[<span class="st">&quot;ic&quot;</span>]) <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>])</a>
+<a class="sourceLine" id="cb248-12" title="12"></a>
+<a class="sourceLine" id="cb248-13" title="13"><span class="co"># Gas room</span></a>
+<a class="sourceLine" id="cb248-14" title="14">exp_V_gr &lt;-<span class="st"> </span><span class="kw">exp</span>((<span class="kw">coef</span>(nl2)[<span class="st">&quot;gr:(intercept)&quot;</span>] <span class="op">+</span><span class="st"> </span>X[alt <span class="op">==</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;gr&quot;</span>), <span class="st">&quot;oc&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">coef</span>(nl2)[<span class="st">&quot;oc&quot;</span>] <span class="op">+</span><span class="st"> </span>X[alt <span class="op">==</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;gr&quot;</span>), <span class="st">&quot;ic&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">coef</span>(nl2)[<span class="st">&quot;ic&quot;</span>]) <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>])</a></code></pre></div>
 <p>The conditional probabilities are the logit models within each nest:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Central, after removing ec</span>
-cp_mec_c &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">gc =</span> exp_V_gc <span class="op">/</span><span class="st"> </span>(exp_V_gc <span class="op">+</span><span class="st"> </span>exp_V_hp),
-                       <span class="dt">hp =</span> exp_V_hp <span class="op">/</span><span class="st"> </span>(exp_V_gc <span class="op">+</span><span class="st"> </span>exp_V_hp))
-<span class="co">#Central, after removing gc</span>
-cp_mgc_c &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">ec =</span> exp_V_ec <span class="op">/</span><span class="st"> </span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_hp),
-                       <span class="dt">hp =</span> exp_V_hp <span class="op">/</span><span class="st"> </span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_hp))
-<span class="co">#Central, after removing hp</span>
-cp_mhp_c &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">ec =</span> exp_V_ec <span class="op">/</span><span class="st"> </span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_gc),
-                       <span class="dt">gc =</span> exp_V_gc <span class="op">/</span><span class="st"> </span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_gc))
-
-<span class="co">#Room, after removing central</span>
-cp_mc_r &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">er =</span> exp_V_er <span class="op">/</span><span class="st"> </span>(exp_V_er <span class="op">+</span><span class="st"> </span>exp_V_gr),
-                       <span class="dt">gr =</span> exp_V_gr <span class="op">/</span><span class="st"> </span>(exp_V_er <span class="op">+</span><span class="st"> </span>exp_V_gr))
-
-
-<span class="co">#Room, after removing er</span>
-cp_mer_r &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">gr =</span> exp_V_gr <span class="op">/</span><span class="st"> </span>(exp_V_gr))
-<span class="co">#Room, after removing gr</span>
-cp_mgr_r &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">er =</span> exp_V_er <span class="op">/</span><span class="st"> </span>(exp_V_er))
-
-<span class="co">#Central, after removing room</span>
-cp_mr_c &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">ec =</span> exp_V_ec <span class="op">/</span><span class="st"> </span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_gc <span class="op">+</span><span class="st"> </span>exp_V_hp),
-                      <span class="dt">gc =</span> exp_V_gc <span class="op">/</span><span class="st"> </span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_gc <span class="op">+</span><span class="st"> </span>exp_V_hp),
-                      <span class="dt">hp =</span> exp_V_hp <span class="op">/</span><span class="st"> </span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_gc <span class="op">+</span><span class="st"> </span>exp_V_hp))</code></pre></div>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb249-1" title="1"><span class="co">#Central, after removing ec</span></a>
+<a class="sourceLine" id="cb249-2" title="2">cp_mec_c &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">gc =</span> exp_V_gc <span class="op">/</span><span class="st"> </span>(exp_V_gc <span class="op">+</span><span class="st"> </span>exp_V_hp),</a>
+<a class="sourceLine" id="cb249-3" title="3">                       <span class="dt">hp =</span> exp_V_hp <span class="op">/</span><span class="st"> </span>(exp_V_gc <span class="op">+</span><span class="st"> </span>exp_V_hp))</a>
+<a class="sourceLine" id="cb249-4" title="4"><span class="co">#Central, after removing gc</span></a>
+<a class="sourceLine" id="cb249-5" title="5">cp_mgc_c &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">ec =</span> exp_V_ec <span class="op">/</span><span class="st"> </span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_hp),</a>
+<a class="sourceLine" id="cb249-6" title="6">                       <span class="dt">hp =</span> exp_V_hp <span class="op">/</span><span class="st"> </span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_hp))</a>
+<a class="sourceLine" id="cb249-7" title="7"><span class="co">#Central, after removing hp</span></a>
+<a class="sourceLine" id="cb249-8" title="8">cp_mhp_c &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">ec =</span> exp_V_ec <span class="op">/</span><span class="st"> </span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_gc),</a>
+<a class="sourceLine" id="cb249-9" title="9">                       <span class="dt">gc =</span> exp_V_gc <span class="op">/</span><span class="st"> </span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_gc))</a>
+<a class="sourceLine" id="cb249-10" title="10"></a>
+<a class="sourceLine" id="cb249-11" title="11"><span class="co">#Room, after removing central</span></a>
+<a class="sourceLine" id="cb249-12" title="12">cp_mc_r &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">er =</span> exp_V_er <span class="op">/</span><span class="st"> </span>(exp_V_er <span class="op">+</span><span class="st"> </span>exp_V_gr),</a>
+<a class="sourceLine" id="cb249-13" title="13">                       <span class="dt">gr =</span> exp_V_gr <span class="op">/</span><span class="st"> </span>(exp_V_er <span class="op">+</span><span class="st"> </span>exp_V_gr))</a>
+<a class="sourceLine" id="cb249-14" title="14"></a>
+<a class="sourceLine" id="cb249-15" title="15"></a>
+<a class="sourceLine" id="cb249-16" title="16"><span class="co">#Room, after removing er</span></a>
+<a class="sourceLine" id="cb249-17" title="17">cp_mer_r &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">gr =</span> exp_V_gr <span class="op">/</span><span class="st"> </span>(exp_V_gr))</a>
+<a class="sourceLine" id="cb249-18" title="18"><span class="co">#Room, after removing gr</span></a>
+<a class="sourceLine" id="cb249-19" title="19">cp_mgr_r &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">er =</span> exp_V_er <span class="op">/</span><span class="st"> </span>(exp_V_er))</a>
+<a class="sourceLine" id="cb249-20" title="20"></a>
+<a class="sourceLine" id="cb249-21" title="21"><span class="co">#Central, after removing room</span></a>
+<a class="sourceLine" id="cb249-22" title="22">cp_mr_c &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">ec =</span> exp_V_ec <span class="op">/</span><span class="st"> </span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_gc <span class="op">+</span><span class="st"> </span>exp_V_hp),</a>
+<a class="sourceLine" id="cb249-23" title="23">                      <span class="dt">gc =</span> exp_V_gc <span class="op">/</span><span class="st"> </span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_gc <span class="op">+</span><span class="st"> </span>exp_V_hp),</a>
+<a class="sourceLine" id="cb249-24" title="24">                      <span class="dt">hp =</span> exp_V_hp <span class="op">/</span><span class="st"> </span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_gc <span class="op">+</span><span class="st"> </span>exp_V_hp))</a></code></pre></div>
 <p>The marginal probabilities are the logit probabilities of choosing a nest, given the expected maximum utility of each nest:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#After removing ec</span>
-mp_mec &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">central =</span> <span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_gc <span class="op">+</span><span class="st"> </span>exp_V_hp)) 
-                       <span class="op">/</span><span class="st"> </span>(<span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_gc <span class="op">+</span><span class="st"> </span>exp_V_hp)) <span class="op">+</span><span class="st"> </span>
-<span class="st">                            </span><span class="kw">exp</span>((<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_er <span class="op">+</span><span class="st"> </span>exp_V_gr)))),
-                       <span class="dt">room =</span> <span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_er <span class="op">+</span><span class="st"> </span>exp_V_gr)) <span class="op">/</span><span class="st"> </span>
-<span class="st">                         </span>(<span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_gc <span class="op">+</span><span class="st"> </span>exp_V_hp)) <span class="op">+</span><span class="st"> </span>
-<span class="st">                            </span><span class="kw">exp</span>((<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_er <span class="op">+</span><span class="st"> </span>exp_V_gr))))
-                       )
-<span class="co">#After removing gc</span>
-mp_mgc &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">central =</span> <span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_hp)) 
-                       <span class="op">/</span><span class="st"> </span>(<span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_hp)) <span class="op">+</span><span class="st"> </span>
-<span class="st">                            </span><span class="kw">exp</span>((<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_er <span class="op">+</span><span class="st"> </span>exp_V_gr)))),
-                       <span class="dt">room =</span> <span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_er <span class="op">+</span><span class="st"> </span>exp_V_gr)) <span class="op">/</span><span class="st"> </span>
-<span class="st">                         </span>(<span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_hp)) <span class="op">+</span><span class="st"> </span>
-<span class="st">                            </span><span class="kw">exp</span>((<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_er <span class="op">+</span><span class="st"> </span>exp_V_gr))))
-                       )
-
-<span class="co">#After removing hp</span>
-mp_mhp &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">central =</span> <span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_gc)) 
-                       <span class="op">/</span><span class="st"> </span>(<span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_gc)) <span class="op">+</span><span class="st"> </span>
-<span class="st">                            </span><span class="kw">exp</span>((<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_er <span class="op">+</span><span class="st"> </span>exp_V_gr)))),
-                       <span class="dt">room =</span> <span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_er <span class="op">+</span><span class="st"> </span>exp_V_gr)) <span class="op">/</span><span class="st"> </span>
-<span class="st">                         </span>(<span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_gc)) <span class="op">+</span><span class="st"> </span>
-<span class="st">                            </span><span class="kw">exp</span>((<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_er <span class="op">+</span><span class="st"> </span>exp_V_gr))))
-                       )
-
-<span class="co">#After removing er</span>
-mp_mer &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">central =</span> <span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_gc <span class="op">+</span><span class="st"> </span>exp_V_hp)) 
-                       <span class="op">/</span><span class="st"> </span>(<span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_gc <span class="op">+</span><span class="st"> </span>exp_V_hp)) <span class="op">+</span><span class="st"> </span>
-<span class="st">                            </span><span class="kw">exp</span>((<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_gr)))),
-                       <span class="dt">room =</span> <span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_gr)) <span class="op">/</span><span class="st"> </span>
-<span class="st">                         </span>(<span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_gc <span class="op">+</span><span class="st"> </span>exp_V_hp)) <span class="op">+</span><span class="st"> </span>
-<span class="st">                            </span><span class="kw">exp</span>((<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_gr))))
-                       )
-
-<span class="co">#After removing gr</span>
-mp_mgr &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">central =</span> <span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_gc <span class="op">+</span><span class="st"> </span>exp_V_hp)) 
-                       <span class="op">/</span><span class="st"> </span>(<span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_gc <span class="op">+</span><span class="st"> </span>exp_V_hp)) <span class="op">+</span><span class="st"> </span>
-<span class="st">                            </span><span class="kw">exp</span>((<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_er)))),
-                       <span class="dt">room =</span> <span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_er)) <span class="op">/</span><span class="st"> </span>
-<span class="st">                         </span>(<span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_gc <span class="op">+</span><span class="st"> </span>exp_V_hp)) <span class="op">+</span><span class="st"> </span>
-<span class="st">                            </span><span class="kw">exp</span>((<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_er))))
-                       )</code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb250-1" title="1"><span class="co">#After removing ec</span></a>
+<a class="sourceLine" id="cb250-2" title="2">mp_mec &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">central =</span> <span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_gc <span class="op">+</span><span class="st"> </span>exp_V_hp)) </a>
+<a class="sourceLine" id="cb250-3" title="3">                       <span class="op">/</span><span class="st"> </span>(<span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_gc <span class="op">+</span><span class="st"> </span>exp_V_hp)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb250-4" title="4"><span class="st">                            </span><span class="kw">exp</span>((<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_er <span class="op">+</span><span class="st"> </span>exp_V_gr)))),</a>
+<a class="sourceLine" id="cb250-5" title="5">                       <span class="dt">room =</span> <span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_er <span class="op">+</span><span class="st"> </span>exp_V_gr)) <span class="op">/</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb250-6" title="6"><span class="st">                         </span>(<span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_gc <span class="op">+</span><span class="st"> </span>exp_V_hp)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb250-7" title="7"><span class="st">                            </span><span class="kw">exp</span>((<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_er <span class="op">+</span><span class="st"> </span>exp_V_gr))))</a>
+<a class="sourceLine" id="cb250-8" title="8">                       )</a>
+<a class="sourceLine" id="cb250-9" title="9"><span class="co">#After removing gc</span></a>
+<a class="sourceLine" id="cb250-10" title="10">mp_mgc &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">central =</span> <span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_hp)) </a>
+<a class="sourceLine" id="cb250-11" title="11">                       <span class="op">/</span><span class="st"> </span>(<span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_hp)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb250-12" title="12"><span class="st">                            </span><span class="kw">exp</span>((<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_er <span class="op">+</span><span class="st"> </span>exp_V_gr)))),</a>
+<a class="sourceLine" id="cb250-13" title="13">                       <span class="dt">room =</span> <span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_er <span class="op">+</span><span class="st"> </span>exp_V_gr)) <span class="op">/</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb250-14" title="14"><span class="st">                         </span>(<span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_hp)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb250-15" title="15"><span class="st">                            </span><span class="kw">exp</span>((<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_er <span class="op">+</span><span class="st"> </span>exp_V_gr))))</a>
+<a class="sourceLine" id="cb250-16" title="16">                       )</a>
+<a class="sourceLine" id="cb250-17" title="17"></a>
+<a class="sourceLine" id="cb250-18" title="18"><span class="co">#After removing hp</span></a>
+<a class="sourceLine" id="cb250-19" title="19">mp_mhp &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">central =</span> <span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_gc)) </a>
+<a class="sourceLine" id="cb250-20" title="20">                       <span class="op">/</span><span class="st"> </span>(<span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_gc)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb250-21" title="21"><span class="st">                            </span><span class="kw">exp</span>((<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_er <span class="op">+</span><span class="st"> </span>exp_V_gr)))),</a>
+<a class="sourceLine" id="cb250-22" title="22">                       <span class="dt">room =</span> <span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_er <span class="op">+</span><span class="st"> </span>exp_V_gr)) <span class="op">/</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb250-23" title="23"><span class="st">                         </span>(<span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_gc)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb250-24" title="24"><span class="st">                            </span><span class="kw">exp</span>((<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_er <span class="op">+</span><span class="st"> </span>exp_V_gr))))</a>
+<a class="sourceLine" id="cb250-25" title="25">                       )</a>
+<a class="sourceLine" id="cb250-26" title="26"></a>
+<a class="sourceLine" id="cb250-27" title="27"><span class="co">#After removing er</span></a>
+<a class="sourceLine" id="cb250-28" title="28">mp_mer &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">central =</span> <span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_gc <span class="op">+</span><span class="st"> </span>exp_V_hp)) </a>
+<a class="sourceLine" id="cb250-29" title="29">                       <span class="op">/</span><span class="st"> </span>(<span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_gc <span class="op">+</span><span class="st"> </span>exp_V_hp)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb250-30" title="30"><span class="st">                            </span><span class="kw">exp</span>((<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_gr)))),</a>
+<a class="sourceLine" id="cb250-31" title="31">                       <span class="dt">room =</span> <span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_gr)) <span class="op">/</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb250-32" title="32"><span class="st">                         </span>(<span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_gc <span class="op">+</span><span class="st"> </span>exp_V_hp)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb250-33" title="33"><span class="st">                            </span><span class="kw">exp</span>((<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_gr))))</a>
+<a class="sourceLine" id="cb250-34" title="34">                       )</a>
+<a class="sourceLine" id="cb250-35" title="35"></a>
+<a class="sourceLine" id="cb250-36" title="36"><span class="co">#After removing gr</span></a>
+<a class="sourceLine" id="cb250-37" title="37">mp_mgr &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">central =</span> <span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_gc <span class="op">+</span><span class="st"> </span>exp_V_hp)) </a>
+<a class="sourceLine" id="cb250-38" title="38">                       <span class="op">/</span><span class="st"> </span>(<span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_gc <span class="op">+</span><span class="st"> </span>exp_V_hp)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb250-39" title="39"><span class="st">                            </span><span class="kw">exp</span>((<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_er)))),</a>
+<a class="sourceLine" id="cb250-40" title="40">                       <span class="dt">room =</span> <span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_er)) <span class="op">/</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb250-41" title="41"><span class="st">                         </span>(<span class="kw">exp</span>(<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_ec <span class="op">+</span><span class="st"> </span>exp_V_gc <span class="op">+</span><span class="st"> </span>exp_V_hp)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb250-42" title="42"><span class="st">                            </span><span class="kw">exp</span>((<span class="kw">coef</span>(nl2)[<span class="st">&quot;iv&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(exp_V_er))))</a>
+<a class="sourceLine" id="cb250-43" title="43">                       )</a></code></pre></div>
 <p>Once that the conditional and marginal choice probabilities for each case have been calculated, the choice probabilities are the product of the conditional and marginal probabilities:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#After removing ec</span>
-nlp_mec &lt;-<span class="st"> </span><span class="kw">data.frame</span>(cp_mec_c, cp_mc_r, mp_mec) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">transmute</span>(<span class="dt">p_ec =</span> <span class="ot">NA</span>,
-            <span class="dt">p_gc =</span> gc <span class="op">*</span><span class="st"> </span>central,
-            <span class="dt">p_hp =</span> hp <span class="op">*</span><span class="st"> </span>central,
-            <span class="dt">p_er =</span> er <span class="op">*</span><span class="st"> </span>room,
-            <span class="dt">p_gr =</span> gr <span class="op">*</span><span class="st"> </span>room)
-
-<span class="co">#After removing gc</span>
-nlp_mgc &lt;-<span class="st"> </span><span class="kw">data.frame</span>(cp_mgc_c, cp_mc_r, mp_mgc) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">transmute</span>(<span class="dt">p_ec =</span> ec <span class="op">*</span><span class="st"> </span>central,
-            <span class="dt">p_gc =</span> <span class="ot">NA</span>,
-            <span class="dt">p_hp =</span> hp <span class="op">*</span><span class="st"> </span>central,
-            <span class="dt">p_er =</span> er <span class="op">*</span><span class="st"> </span>room,
-            <span class="dt">p_gr =</span> gr <span class="op">*</span><span class="st"> </span>room)
-
-<span class="co">#After removing hp</span>
-nlp_mhp &lt;-<span class="st"> </span><span class="kw">data.frame</span>(cp_mhp_c, cp_mc_r, mp_mhp) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">transmute</span>(<span class="dt">p_ec =</span> ec <span class="op">*</span><span class="st"> </span>central,
-            <span class="dt">p_gc =</span> gc <span class="op">*</span><span class="st"> </span>central,
-            <span class="dt">p_hp =</span> <span class="ot">NA</span>,
-            <span class="dt">p_er =</span> er <span class="op">*</span><span class="st"> </span>room,
-            <span class="dt">p_gr =</span> gr <span class="op">*</span><span class="st"> </span>room)
-
-<span class="co">#After removing er</span>
-nlp_mer &lt;-<span class="st"> </span><span class="kw">data.frame</span>(cp_mr_c, cp_mer_r, mp_mer) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">transmute</span>(<span class="dt">p_ec =</span> ec <span class="op">*</span><span class="st"> </span>central,
-            <span class="dt">p_gc =</span> gc <span class="op">*</span><span class="st"> </span>central,
-            <span class="dt">p_hp =</span> hp <span class="op">*</span><span class="st"> </span>central,
-            <span class="dt">p_er =</span> <span class="ot">NA</span>,
-            <span class="dt">p_gr =</span> gr <span class="op">*</span><span class="st"> </span>room)
-
-<span class="co">#After removing gr</span>
-nlp_mgr &lt;-<span class="st"> </span><span class="kw">data.frame</span>(cp_mr_c, cp_mgr_r, mp_mgr) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">transmute</span>(<span class="dt">p_ec =</span> ec <span class="op">*</span><span class="st"> </span>central,
-            <span class="dt">p_gc =</span> gc <span class="op">*</span><span class="st"> </span>central,
-            <span class="dt">p_hp =</span> hp <span class="op">*</span><span class="st"> </span>central,
-            <span class="dt">p_er =</span> er <span class="op">*</span><span class="st"> </span>room,
-            <span class="dt">p_gr =</span> <span class="ot">NA</span>)</code></pre></div>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb251-1" title="1"><span class="co">#After removing ec</span></a>
+<a class="sourceLine" id="cb251-2" title="2">nlp_mec &lt;-<span class="st"> </span><span class="kw">data.frame</span>(cp_mec_c, cp_mc_r, mp_mec) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb251-3" title="3"><span class="st">  </span><span class="kw">transmute</span>(<span class="dt">p_ec =</span> <span class="ot">NA</span>,</a>
+<a class="sourceLine" id="cb251-4" title="4">            <span class="dt">p_gc =</span> gc <span class="op">*</span><span class="st"> </span>central,</a>
+<a class="sourceLine" id="cb251-5" title="5">            <span class="dt">p_hp =</span> hp <span class="op">*</span><span class="st"> </span>central,</a>
+<a class="sourceLine" id="cb251-6" title="6">            <span class="dt">p_er =</span> er <span class="op">*</span><span class="st"> </span>room,</a>
+<a class="sourceLine" id="cb251-7" title="7">            <span class="dt">p_gr =</span> gr <span class="op">*</span><span class="st"> </span>room)</a>
+<a class="sourceLine" id="cb251-8" title="8"></a>
+<a class="sourceLine" id="cb251-9" title="9"><span class="co">#After removing gc</span></a>
+<a class="sourceLine" id="cb251-10" title="10">nlp_mgc &lt;-<span class="st"> </span><span class="kw">data.frame</span>(cp_mgc_c, cp_mc_r, mp_mgc) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb251-11" title="11"><span class="st">  </span><span class="kw">transmute</span>(<span class="dt">p_ec =</span> ec <span class="op">*</span><span class="st"> </span>central,</a>
+<a class="sourceLine" id="cb251-12" title="12">            <span class="dt">p_gc =</span> <span class="ot">NA</span>,</a>
+<a class="sourceLine" id="cb251-13" title="13">            <span class="dt">p_hp =</span> hp <span class="op">*</span><span class="st"> </span>central,</a>
+<a class="sourceLine" id="cb251-14" title="14">            <span class="dt">p_er =</span> er <span class="op">*</span><span class="st"> </span>room,</a>
+<a class="sourceLine" id="cb251-15" title="15">            <span class="dt">p_gr =</span> gr <span class="op">*</span><span class="st"> </span>room)</a>
+<a class="sourceLine" id="cb251-16" title="16"></a>
+<a class="sourceLine" id="cb251-17" title="17"><span class="co">#After removing hp</span></a>
+<a class="sourceLine" id="cb251-18" title="18">nlp_mhp &lt;-<span class="st"> </span><span class="kw">data.frame</span>(cp_mhp_c, cp_mc_r, mp_mhp) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb251-19" title="19"><span class="st">  </span><span class="kw">transmute</span>(<span class="dt">p_ec =</span> ec <span class="op">*</span><span class="st"> </span>central,</a>
+<a class="sourceLine" id="cb251-20" title="20">            <span class="dt">p_gc =</span> gc <span class="op">*</span><span class="st"> </span>central,</a>
+<a class="sourceLine" id="cb251-21" title="21">            <span class="dt">p_hp =</span> <span class="ot">NA</span>,</a>
+<a class="sourceLine" id="cb251-22" title="22">            <span class="dt">p_er =</span> er <span class="op">*</span><span class="st"> </span>room,</a>
+<a class="sourceLine" id="cb251-23" title="23">            <span class="dt">p_gr =</span> gr <span class="op">*</span><span class="st"> </span>room)</a>
+<a class="sourceLine" id="cb251-24" title="24"></a>
+<a class="sourceLine" id="cb251-25" title="25"><span class="co">#After removing er</span></a>
+<a class="sourceLine" id="cb251-26" title="26">nlp_mer &lt;-<span class="st"> </span><span class="kw">data.frame</span>(cp_mr_c, cp_mer_r, mp_mer) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb251-27" title="27"><span class="st">  </span><span class="kw">transmute</span>(<span class="dt">p_ec =</span> ec <span class="op">*</span><span class="st"> </span>central,</a>
+<a class="sourceLine" id="cb251-28" title="28">            <span class="dt">p_gc =</span> gc <span class="op">*</span><span class="st"> </span>central,</a>
+<a class="sourceLine" id="cb251-29" title="29">            <span class="dt">p_hp =</span> hp <span class="op">*</span><span class="st"> </span>central,</a>
+<a class="sourceLine" id="cb251-30" title="30">            <span class="dt">p_er =</span> <span class="ot">NA</span>,</a>
+<a class="sourceLine" id="cb251-31" title="31">            <span class="dt">p_gr =</span> gr <span class="op">*</span><span class="st"> </span>room)</a>
+<a class="sourceLine" id="cb251-32" title="32"></a>
+<a class="sourceLine" id="cb251-33" title="33"><span class="co">#After removing gr</span></a>
+<a class="sourceLine" id="cb251-34" title="34">nlp_mgr &lt;-<span class="st"> </span><span class="kw">data.frame</span>(cp_mr_c, cp_mgr_r, mp_mgr) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb251-35" title="35"><span class="st">  </span><span class="kw">transmute</span>(<span class="dt">p_ec =</span> ec <span class="op">*</span><span class="st"> </span>central,</a>
+<a class="sourceLine" id="cb251-36" title="36">            <span class="dt">p_gc =</span> gc <span class="op">*</span><span class="st"> </span>central,</a>
+<a class="sourceLine" id="cb251-37" title="37">            <span class="dt">p_hp =</span> hp <span class="op">*</span><span class="st"> </span>central,</a>
+<a class="sourceLine" id="cb251-38" title="38">            <span class="dt">p_er =</span> er <span class="op">*</span><span class="st"> </span>room,</a>
+<a class="sourceLine" id="cb251-39" title="39">            <span class="dt">p_gr =</span> <span class="ot">NA</span>)</a></code></pre></div>
 <p>A quick sanity check can be conducted to ensure that the sum of probabilities for each decision-maker is one:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">rowSums</span>(nlp_mec, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb252-1" title="1"><span class="kw">summary</span>(<span class="kw">rowSums</span>(nlp_mec, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##       1       1       1       1       1       1</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">rowSums</span>(nlp_mgc, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb254-1" title="1"><span class="kw">summary</span>(<span class="kw">rowSums</span>(nlp_mgc, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##       1       1       1       1       1       1</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">rowSums</span>(nlp_mhp, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb256-1" title="1"><span class="kw">summary</span>(<span class="kw">rowSums</span>(nlp_mhp, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##       1       1       1       1       1       1</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">rowSums</span>(nlp_mer, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</code></pre></div>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb258-1" title="1"><span class="kw">summary</span>(<span class="kw">rowSums</span>(nlp_mer, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##       1       1       1       1       1       1</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(<span class="kw">rowSums</span>(nlp_mgr, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</code></pre></div>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb260-1" title="1"><span class="kw">summary</span>(<span class="kw">rowSums</span>(nlp_mgr, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##       1       1       1       1       1       1</code></pre>
 <p>Given the above, we can summarize the choice probabilities in the form of adoption rates. The table below shows the original adoption rates (when no alternative was removed) and for the different situations of interest, after removing each alternative:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Original adoption rates</span>
-p_o &lt;-<span class="st"> </span><span class="kw">apply</span>(<span class="kw">fitted</span>(nl2, <span class="dt">outcome =</span> <span class="ot">FALSE</span>), <span class="dv">2</span>, mean)
-
-df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Alternative =</span> <span class="kw">c</span>(<span class="st">&quot;None&quot;</span>, <span class="st">&quot;ec&quot;</span>, <span class="st">&quot;gc&quot;</span>, <span class="st">&quot;hp&quot;</span>, <span class="st">&quot;er&quot;</span>, <span class="st">&quot;gr&quot;</span> ),
-  <span class="kw">rbind</span>(<span class="kw">c</span>(p_o[<span class="st">&quot;ec&quot;</span>], p_o[<span class="st">&quot;gc&quot;</span>], p_o[<span class="st">&quot;hp&quot;</span>], p_o[<span class="st">&quot;er&quot;</span>], p_o[<span class="st">&quot;gr&quot;</span>]),
-        <span class="kw">apply</span>(nlp_mec, <span class="dv">2</span>, mean),
-        <span class="kw">apply</span>(nlp_mgc, <span class="dv">2</span>, mean),
-        <span class="kw">apply</span>(nlp_mhp, <span class="dv">2</span>, mean),
-        <span class="kw">apply</span>(nlp_mer, <span class="dv">2</span>, mean),
-        <span class="kw">apply</span>(nlp_mgr, <span class="dv">2</span>, mean))
-)
-
-df <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">kable</span>(<span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Alternative Removed&quot;</span>,
-                      <span class="st">&quot;ec&quot;</span>,
-                      <span class="st">&quot;gc&quot;</span>,
-                      <span class="st">&quot;hp&quot;</span>,
-                      <span class="st">&quot;er&quot;</span>,
-                      <span class="st">&quot;gr&quot;</span>),
-        <span class="dt">digits =</span> <span class="dv">2</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">kable_styling</span>()</code></pre></div>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb262-1" title="1"><span class="co"># Original adoption rates</span></a>
+<a class="sourceLine" id="cb262-2" title="2">p_o &lt;-<span class="st"> </span><span class="kw">apply</span>(<span class="kw">fitted</span>(nl2, <span class="dt">outcome =</span> <span class="ot">FALSE</span>), <span class="dv">2</span>, mean)</a>
+<a class="sourceLine" id="cb262-3" title="3"></a>
+<a class="sourceLine" id="cb262-4" title="4">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Alternative =</span> <span class="kw">c</span>(<span class="st">&quot;None&quot;</span>, <span class="st">&quot;ec&quot;</span>, <span class="st">&quot;gc&quot;</span>, <span class="st">&quot;hp&quot;</span>, <span class="st">&quot;er&quot;</span>, <span class="st">&quot;gr&quot;</span> ),</a>
+<a class="sourceLine" id="cb262-5" title="5">  <span class="kw">rbind</span>(<span class="kw">c</span>(p_o[<span class="st">&quot;ec&quot;</span>], p_o[<span class="st">&quot;gc&quot;</span>], p_o[<span class="st">&quot;hp&quot;</span>], p_o[<span class="st">&quot;er&quot;</span>], p_o[<span class="st">&quot;gr&quot;</span>]),</a>
+<a class="sourceLine" id="cb262-6" title="6">        <span class="kw">apply</span>(nlp_mec, <span class="dv">2</span>, mean),</a>
+<a class="sourceLine" id="cb262-7" title="7">        <span class="kw">apply</span>(nlp_mgc, <span class="dv">2</span>, mean),</a>
+<a class="sourceLine" id="cb262-8" title="8">        <span class="kw">apply</span>(nlp_mhp, <span class="dv">2</span>, mean),</a>
+<a class="sourceLine" id="cb262-9" title="9">        <span class="kw">apply</span>(nlp_mer, <span class="dv">2</span>, mean),</a>
+<a class="sourceLine" id="cb262-10" title="10">        <span class="kw">apply</span>(nlp_mgr, <span class="dv">2</span>, mean))</a>
+<a class="sourceLine" id="cb262-11" title="11">)</a>
+<a class="sourceLine" id="cb262-12" title="12"></a>
+<a class="sourceLine" id="cb262-13" title="13">df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb262-14" title="14"><span class="st">  </span><span class="kw">kable</span>(<span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Alternative Removed&quot;</span>,</a>
+<a class="sourceLine" id="cb262-15" title="15">                      <span class="st">&quot;ec&quot;</span>,</a>
+<a class="sourceLine" id="cb262-16" title="16">                      <span class="st">&quot;gc&quot;</span>,</a>
+<a class="sourceLine" id="cb262-17" title="17">                      <span class="st">&quot;hp&quot;</span>,</a>
+<a class="sourceLine" id="cb262-18" title="18">                      <span class="st">&quot;er&quot;</span>,</a>
+<a class="sourceLine" id="cb262-19" title="19">                      <span class="st">&quot;gr&quot;</span>),</a>
+<a class="sourceLine" id="cb262-20" title="20">        <span class="dt">digits =</span> <span class="dv">2</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb262-21" title="21"><span class="st">  </span><span class="kw">kable_styling</span>()</a></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1249,15 +1319,22 @@ NA
 </div>
 <div id="elasticities-of-the-nested-logit-model" class="section level2">
 <h2><span class="header-section-number">7.11</span> Elasticities of the nested logit model</h2>
-<p>Recall that the elasticity is the change in probability that results from a one percent change in some attribute. In the case of the multinomial logit model the direct-point elasticity was given by the following expression: <span class="math display">\[
+<p>Recall that the elasticity is the change in probability that results from a one percent change in some attribute. In the case of the multinomial logit model the direct-point elasticity was given by the following expression:
+<span class="math display">\[
 E^{P_{in}}_{x_{ink}} = \beta_{ik}x_{ink}(1-P_{in})
-\]</span> whereas the cross-point elasticity was: <span class="math display">\[
+\]</span>
+whereas the cross-point elasticity was:
+<span class="math display">\[
 E^{P_{in}}_{x_{ink}} = -\beta_{jk}x_{jnk}P_{jn}
-\]</span> In the case of the nested logit it is also possible to obtain expressions for the direct- and cross-point elasticity, however, these need to take into account the fact that substitution patterns are not proportional. In particular, the parameter of the inclusive value affects the probability of choosing a node and therefore any alternatives contained there.</p>
-<p>Accordingly, the direct-point elasticity in the case of a nested logit model is <span class="citation">(see Louviere, Hensher, and Swait <a href="#ref-Louviere2000stated">2000</a>, 148–49)</span>: <span class="math display">\[
+\]</span>
+In the case of the nested logit it is also possible to obtain expressions for the direct- and cross-point elasticity, however, these need to take into account the fact that substitution patterns are not proportional. In particular, the parameter of the inclusive value affects the probability of choosing a node and therefore any alternatives contained there.</p>
+<p>Accordingly, the direct-point elasticity in the case of a nested logit model is <span class="citation">(see Louviere, Hensher, and Swait <a href="#ref-Louviere2000stated" role="doc-biblioref">2000</a>, 148–49)</span>:
+<span class="math display">\[
 E^{P_{in}}_{x_{ink}} = \Bigg[(1-P_{t}) + \Big(\frac{1}{\lambda_t-1}\Big)(1-P_{i|t})\Bigg]\beta_{ik}x_{ink}
-\]</span> where <span class="math inline">\(P_t\)</span> is the marginal probability of choosing nest <span class="math inline">\(t\)</span> and <span class="math inline">\(P_{i|t}\)</span> is the probability of choosing <span class="math inline">\(i\)</span> conditional on choosing nest <span class="math inline">\(t\)</span>. Note that when an alternative is not nested, the conditional probability is one, and therefore the elasticity is identical to the elasticity of the multinomial logit model.</p>
-<p>The cross-elasticity for alternatives in a partition of the nest is: <span class="math display">\[
+\]</span>
+where <span class="math inline">\(P_t\)</span> is the marginal probability of choosing nest <span class="math inline">\(t\)</span> and <span class="math inline">\(P_{i|t}\)</span> is the probability of choosing <span class="math inline">\(i\)</span> conditional on choosing nest <span class="math inline">\(t\)</span>. Note that when an alternative is not nested, the conditional probability is one, and therefore the elasticity is identical to the elasticity of the multinomial logit model.</p>
+<p>The cross-elasticity for alternatives in a partition of the nest is:
+<span class="math display">\[
 E^{P_{in}}_{x_{ink}} = -\Bigg[P_{t} + \Big(\frac{1}{\lambda_t-1}\Big)P_{i|t}\Bigg]\beta_{ik}x_{ink}
 \]</span></p>
 </div>
@@ -1267,24 +1344,31 @@ E^{P_{in}}_{x_{ink}} = -\Bigg[P_{t} + \Big(\frac{1}{\lambda_t-1}\Big)P_{i|t}\Big
 <blockquote>
 <p>The blue bus-red bus paradox</p>
 </blockquote>
-<p>There are two initial models, car and blue buses, with systematic utility functions as follows: <span class="math display">\[
+<p>There are two initial models, car and blue buses, with systematic utility functions as follows:
+<span class="math display">\[
 V_{blue} = V_{car}
 \]</span></p>
-<p>According to the multinomial logit model, the probability of choosing either mode is 0.5, since: <span class="math display">\[
+<p>According to the multinomial logit model, the probability of choosing either mode is 0.5, since:
+<span class="math display">\[
 P_{car} = \frac{e^V_{car}}{e^V_{car} + e^V_{blue}} = \frac{e^V_{car}}{e^V_{car} + e^V_{car}} = \frac{1}{2} 
-\]</span> and: <span class="math display">\[
+\]</span>
+and:
+<span class="math display">\[
 P_{blue} = 1-P_{car}=\frac{1}{2}
 \]</span></p>
-<p>A new alternative is introduced. In fact, the new alternative is just some old blue buses painted red. Since consumers do not care about the color of buses, the utility of this new alternative is: <span class="math display">\[
+<p>A new alternative is introduced. In fact, the new alternative is just some old blue buses painted red. Since consumers do not care about the color of buses, the utility of this new alternative is:
+<span class="math display">\[
 V_{yellow}=V_{bus} = V_{car}
 \]</span></p>
-<p>The new choice probabilities are now: <span class="math display">\[
+<p>The new choice probabilities are now:
+<span class="math display">\[
 \begin{array}{c}
   P_{car} = \frac{e^V{car}}{e^V{car} + e^V{blue} + e^V{yellow}} = \frac{1}{3}\\
   P_{blue} = \frac{e^V{car}}{e^V{car} + e^V{blue} + e^V{yellow}} = \frac{1}{3}\\
   P_{yellow} = 1 - P_{car} - P_{blue} = \frac{1}{3}
 \end{array}
-\]</span> Proportional substitution patterns imply that the new mode (red bus) draws equally from the alternatives, i.e., car and blue buses. Clearly, this does not make sense. An enterpreneur could paint buses in many different colors and reduce the probability of choosing car to zero as a consequence.</p>
+\]</span>
+Proportional substitution patterns imply that the new mode (red bus) draws equally from the alternatives, i.e., car and blue buses. Clearly, this does not make sense. An enterpreneur could paint buses in many different colors and reduce the probability of choosing car to zero as a consequence.</p>
 <ol style="list-style-type: decimal">
 <li><p>Restate the blue bus-red bus situation as a nested model. What are the marginal and conditional probabilities of this model?</p></li>
 <li><p>Use model <code>nl2</code> in this chapter and calculate the direct-point elasticity at the mean values of the variables, for an increase in the installation costs of Gas Central systems.</p></li>
@@ -1302,14 +1386,11 @@ V_{yellow}=V_{bus} = V_{car}
 </div>
 <h3>References</h3>
 <div id="refs" class="references">
-<div id="ref-Luce1959individual">
-<p>Luce, R Duncan. 1959. <em>Individual Choice Behavior: A Theoretical Analysis</em>. New York: John Wiley; Sons.</p>
-</div>
-<div id="ref-Train2009discrete">
-<p>Train, K. 2009. <em>Discrete Choice Methods with Simulation</em>. Book. 2nd Edition. Cambridge: Cambridge University Press.</p>
-</div>
 <div id="ref-Benakiva1985discrete">
 <p>Ben-Akiva, M., and S. R. Lerman. 1985. <em>Discrete Choice Analysis: Theory and Applications to Travel Demand</em>. Book. Cambridge: The MIT Press.</p>
+</div>
+<div id="ref-Daly2003general">
+<p>Daly, Andrew, and Michel Bierlaire. 2003. “A General and Operational Representation of Gev Models.” <em>Department of Mathematics, EPFL, Lausanne, May</em>.</p>
 </div>
 <div id="ref-hensher2005applied">
 <p>Hensher, David A, John M Rose, and William H Greene. 2005. <em>Applied Choice Analysis: A Primer</em>. Cambridge University Press.</p>
@@ -1317,14 +1398,17 @@ V_{yellow}=V_{bus} = V_{car}
 <div id="ref-Louviere2000stated">
 <p>Louviere, Jordan J, David A Hensher, and Joffre D Swait. 2000. <em>Stated Choice Methods: Analysis and Applications</em>. Cambridge University Press.</p>
 </div>
-<div id="ref-Ortuzar2011modelling">
-<p>Ortúzar, J. D., and L. G. Willumsen. 2011. <em>Modelling Transport</em>. Book. Vol. Fourth Edition. New York: Wiley.</p>
+<div id="ref-Luce1959individual">
+<p>Luce, R Duncan. 1959. <em>Individual Choice Behavior: A Theoretical Analysis</em>. New York: John Wiley; Sons.</p>
 </div>
 <div id="ref-McFadden1978modelling">
 <p>McFadden, D. 1978. “Modelling the Choice of Residential Location.” Book Section. In <em>Spatial Interaction Theory and Planning Models</em>, edited by A. Karlqvist, L. Lundqvist, F. Snickars, and J. W. Weibull, 75–96. Amsterdam: North-Holland.</p>
 </div>
-<div id="ref-Daly2003general">
-<p>Daly, Andrew, and Michel Bierlaire. 2003. “A General and Operational Representation of Gev Models.” <em>Department of Mathematics, EPFL, Lausanne, May</em>.</p>
+<div id="ref-Ortuzar2011modelling">
+<p>Ortúzar, J. D., and L. G. Willumsen. 2011. <em>Modelling Transport</em>. Book. Vol. Fourth Edition. New York: Wiley.</p>
+</div>
+<div id="ref-Train2009discrete">
+<p>Train, K. 2009. <em>Discrete Choice Methods with Simulation</em>. Book. 2nd Edition. Cambridge: Cambridge University Press.</p>
 </div>
 </div>
             </section>
@@ -1338,11 +1422,13 @@ V_{yellow}=V_{bus} = V_{car}
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -1350,12 +1436,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -1367,6 +1452,10 @@ gitbook.start({
 "text": "Edit"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -1383,10 +1472,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

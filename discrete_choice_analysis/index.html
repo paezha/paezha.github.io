@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>An Introduction to Discrete Choice Analysis</title>
-  <meta name="description" content="These notes were created by Antonio Paez as a resource for teaching a graduate discrete choice analysis course (GEOG 738) at McMaster University.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="These notes were created by Antonio Paez as a resource for teaching a graduate discrete choice analysis course (GEOG 738) at McMaster University." />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
   <meta property="og:title" content="An Introduction to Discrete Choice Analysis" />
   <meta property="og:type" content="book" />
@@ -22,18 +21,18 @@
   <meta name="twitter:description" content="These notes were created by Antonio Paez as a resource for teaching a graduate discrete choice analysis course (GEOG 738) at McMaster University." />
   
 
-<meta name="author" content="Antonio Paez">
+<meta name="author" content="Antonio Paez" />
 
 
-<meta name="date" content="2019-07-04">
+<meta name="date" content="2020-01-15" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 
-<link rel="next" href="preliminaries-installing-r-and-rstudio.html">
+<link rel="next" href="preliminaries-installing-r-and-rstudio.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -41,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -49,51 +51,76 @@
 
 
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.49.4/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.49.4/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -138,7 +165,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.5.2" data-path="chapter-1.html"><a href="chapter-1.html#quantitative"><i class="fa fa-check"></i><b>2.5.2</b> Quantitative</a></li>
 </ul></li>
 <li class="chapter" data-level="2.6" data-path="chapter-1.html"><a href="chapter-1.html#importing-data"><i class="fa fa-check"></i><b>2.6</b> Importing data</a></li>
-<li class="chapter" data-level="2.7" data-path="chapter-1.html"><a href="chapter-1.html#data-classes-in-r"><i class="fa fa-check"></i><b>2.7</b> Data Classes in R</a></li>
+<li class="chapter" data-level="2.7" data-path="chapter-1.html"><a href="chapter-1.html#data-classes-in-r"><i class="fa fa-check"></i><b>2.7</b> Data Classes in <code>R</code></a></li>
 <li class="chapter" data-level="2.8" data-path="chapter-1.html"><a href="chapter-1.html#more-on-indexing-and-data-manipulation"><i class="fa fa-check"></i><b>2.8</b> More on indexing and data manipulation</a></li>
 <li class="chapter" data-level="2.9" data-path="chapter-1.html"><a href="chapter-1.html#visualization"><i class="fa fa-check"></i><b>2.9</b> Visualization</a></li>
 <li class="chapter" data-level="2.10" data-path="chapter-1.html"><a href="chapter-1.html#exercise"><i class="fa fa-check"></i><b>2.10</b> Exercise</a><ul>
@@ -311,7 +338,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1 class="title">An Introduction to Discrete Choice Analysis</h1>
 <h2 class="subtitle"><em>A Course in R</em></h2>
 <p class="author"><em>Antonio Paez</em></p>
-<p class="date"><em>2019-07-04</em></p>
+<p class="date"><em>2020-01-15</em></p>
 </div>
 <div id="preface" class="section level1 unnumbered">
 <h1>Preface</h1>
@@ -366,12 +393,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="plan" class="section level2 unnumbered">
 <h2>Plan</h2>
-<p>The plan with these notes is to introduce discrete choice analysis in an intuitive way. To achieve this, I use examples and coding, lots of coding. There are some classical references, for instance Ben-Akiva and Lerman <span class="citation">(<a href="#ref-Benakiva1985discrete">1985</a>)</span> and Train <span class="citation">(<a href="#ref-Train2009discrete">2009</a>)</span>, and then more specialized books such as Louviere et al. <span class="citation">(<a href="#ref-Louviere2000stated">2000</a>)</span>. Other books cover discrete choice analysis as one component of modelling systems <span class="citation">(such as transportation; see Ortúzar and Willumsen <a href="#ref-Ortuzar2011modelling">2011</a>)</span>, or cover related topics but from a statistical perspective <span class="citation">(Maddala <a href="#ref-Maddala1983limited">1983</a>)</span>. The present notes should be appealing to students or others who are approaching this topic for the first time, I strongly encourage readers to become acquainted with these books if they have not already.</p>
-<p>Each author organizes topics in a way that is logical to them. Some texts begin with a coverage of fundamental mathematics, probability, and statistics. Others with an introduction to a substantive topic (e.g., the context of travel demand analysis). In the book <em>Applied Choice Analysis: A Primer</em> by Hensher et al. <span class="citation">(<a href="#ref-hensher2005applied">2005</a>)</span>, the title of Chapter 10 is “Getting Started Modeling”. Train <span class="citation">(<a href="#ref-Train2009discrete">2009</a>)</span>, in contrast, begins by discussing the properties of discrete choice models and discussing the logit model right away.</p>
+<p>The plan with these notes is to introduce discrete choice analysis in an intuitive way. To achieve this, I use examples and coding, lots of coding. There are some classical references, for instance Ben-Akiva and Lerman <span class="citation">(<a href="#ref-Benakiva1985discrete" role="doc-biblioref">1985</a>)</span> and Train <span class="citation">(<a href="#ref-Train2009discrete" role="doc-biblioref">2009</a>)</span>, and then more specialized books such as Louviere et al. <span class="citation">(<a href="#ref-Louviere2000stated" role="doc-biblioref">2000</a>)</span>. Other books cover discrete choice analysis as one component of modelling systems <span class="citation">(such as transportation; see Ortúzar and Willumsen <a href="#ref-Ortuzar2011modelling" role="doc-biblioref">2011</a>)</span>, or cover related topics but from a statistical perspective <span class="citation">(Maddala <a href="#ref-Maddala1983limited" role="doc-biblioref">1983</a>)</span>. The present notes should be appealing to students or others who are approaching this topic for the first time, I strongly encourage readers to become acquainted with these books if they have not already.</p>
+<p>Each author organizes topics in a way that is logical to them. Some texts begin with a coverage of fundamental mathematics, probability, and statistics. Others with an introduction to a substantive topic (e.g., the context of travel demand analysis). In the book <em>Applied Choice Analysis: A Primer</em> by Hensher et al. <span class="citation">(<a href="#ref-hensher2005applied" role="doc-biblioref">2005</a>)</span>, the title of Chapter 10 is “Getting Started Modeling”. Train <span class="citation">(<a href="#ref-Train2009discrete" role="doc-biblioref">2009</a>)</span>, in contrast, begins by discussing the properties of discrete choice models and discussing the logit model right away.</p>
 <p>For presentation I have in the past relied heavily on Train’s book to organize my graduate seminar. I find this style of presentation sufficiently intuitive, when combined with some relevant topics introduced at key points. For example, I find that it makes sense to have a discussion of specification and estimation of models after introducing the logit model. In this way, the details of specifying utility functions can be presented in the context of an operational model. Readers will notice that this notes tend to follow Train closely, using a thematic approach, moving from the fundamentals, introducing the logit model, and then by families of models, i.e., GEV, probit, and so on.</p>
-<p>Beginning early in the text, readers are asked to get their hands dirty with code. This is a very deliberate decision. Most books on discrete choice analysis are software-independent, meaning that they cover the topics without making reference to a particular statistical package for analysis. Others rely for presentation on a specific software. For instance, Hensher et al. <span class="citation">(<a href="#ref-hensher2005applied">2005</a>)</span> refer extensively to the software <code>NLOGIT</code>, a software package sold by <a href="http://www.limdep.com/">Econometric Software, Inc.</a>. Yet other packages were originally developed independently of a statistical computing project. One example is Michel Bierlaire’s <a href="http://biogeme.epfl.ch/">BIOGEME</a>. Not being associated with a statistical computing project means that synergies with other packages cannot be realized. Newer versions of BIOGEME now exist written almost exclusively in Python and that allow the package to benefit from the Python Data Analysis Library <a href="https://pandas.pydata.org/">Pandas</a>.</p>
+<p>Beginning early in the text, readers are asked to get their hands dirty with code. This is a very deliberate decision. Most books on discrete choice analysis are software-independent, meaning that they cover the topics without making reference to a particular statistical package for analysis. Others rely for presentation on a specific software. For instance, Hensher et al. <span class="citation">(<a href="#ref-hensher2005applied" role="doc-biblioref">2005</a>)</span> refer extensively to the software <code>NLOGIT</code>, a software package sold by <a href="http://www.limdep.com/">Econometric Software, Inc.</a>. Yet other packages were originally developed independently of a statistical computing project. One example is Michel Bierlaire’s <a href="http://biogeme.epfl.ch/">BIOGEME</a>. Not being associated with a statistical computing project means that synergies with other packages cannot be realized. Newer versions of BIOGEME now exist written almost exclusively in Python and that allow the package to benefit from the Python Data Analysis Library <a href="https://pandas.pydata.org/">Pandas</a>.</p>
 <p>For this text, I have chosen <code>R</code>. <code>R</code> is a generalist statistical language with a very broad user base. I personally find <code>R</code> more accessible than Python, for example, as an introduction to statistical and data analysis computing, particularly with the support of a good Interactive Development Environment such as <a href="https://www.rstudio.com/">RStudio</a>.</p>
-<p>Packages (the fundamental units of shareable code in <code>R</code>) benefit from the synergyes of many developers and users sharing their code in a transparent and open way. Ten years ago it would have been very difficult to write a book on discrete choice modelling based on <code>R</code>: the earliest version of Croissant’s <code>mlogit</code> package <span class="citation">(Y. Croissant <a href="#ref-Croissant2019mlogit">2018</a>)</span> dates from 2009; the earliest version of Sarrias and Daziano’s <code>gmnl</code> package <span class="citation">(Sarrias and Daziano <a href="#ref-Sarrias2017multinomial">2017</a>)</span> dates from 2015. Secondly, <code>R</code> and related packages are free. It is my conviction that research can be accelerated by the generous contributions of developers who graciously share their code with the world. By doing this, they help to maintain the cost of research low, and thus enable more people around the world to engage in it. That said, there is a potential disadvantage: unlike more established (especially commercial) packages that have been kicking around for years if not decades, newer <code>R</code> packages may still have some limitations. To mention one, the current versions of the packages <code>mlogit</code> and <code>gmnl</code> are implemented exclusively for universal choice set, in other words, under the assumption that all alternatives are available to all decision-makers. There are situations, For example, suppose</p>
+<p>Packages (the fundamental units of shareable code in <code>R</code>) benefit from the synergyes of many developers and users sharing their code in a transparent and open way. Ten years ago it would have been very difficult to write a book on discrete choice modelling based on <code>R</code>: the earliest version of Croissant’s <code>mlogit</code> package <span class="citation">(Croissant <a href="#ref-Croissant2019mlogit" role="doc-biblioref">2018</a>)</span> dates from 2009; the earliest version of Sarrias and Daziano’s <code>gmnl</code> package <span class="citation">(Sarrias and Daziano <a href="#ref-Sarrias2017multinomial" role="doc-biblioref">2017</a>)</span> dates from 2015. Secondly, <code>R</code> and related packages are free. It is my conviction that research can be accelerated by the generous contributions of developers who graciously share their code with the world. By doing this, they help to maintain the cost of research low, and thus enable more people around the world to engage in it. That said, there is a potential disadvantage: unlike more established (especially commercial) packages that have been kicking around for years if not decades, newer <code>R</code> packages may still have some limitations. To mention one, the current versions of the packages <code>mlogit</code> and <code>gmnl</code> are implemented exclusively for universal choice set, in other words, under the assumption that all alternatives are available to all decision-makers. There are situations, For example, suppose</p>
 <p>My plan for this text, therefore, is to cover a topic in each section that builds on previous material. I have used the materials presented in these notes (in different incarnations) for teaching discrete choice analysis in different settings. Primarily, these notes have been used in the course <strong>GEOG 738</strong> <em>Discrete Choice Analysis</em> at McMaster University. This course is a full (Canadian) graduate term, which typically means 11 or 12 weeks of classes. The course is organized as a 2-hour seminar that is offered once per week. Accordingly, each section is designed to cover very approximately the material that I am used to cover in a 2 hour seminar.</p>
 <p>As I continue to work on these notes, I hope to be able to add optional (or bonus) chapters, that could be used 1) to extend a course on discrete choice analysis beyond the 12 week horizon of the Canadian graduate school term, and/or 2) to offer more advanced material to interested readers.</p>
 </div>
@@ -381,42 +408,42 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="requisites" class="section level2 unnumbered">
 <h2>Requisites</h2>
-<p>This book is not a course to learn <code>R</code>. The language is introduced progressively, and assumes that readers are computer-literate and have possible done some basic coding in the past. For readers who wish to learn <code>R</code> there are other sources such as Wickham and Grolemund <span class="citation">(<a href="#ref-wickham2016r">2016</a>)</span>(<a href="https://r4ds.had.co.nz/" class="uri">https://r4ds.had.co.nz/</a>) or Albert and Rizzo <span class="citation">(Albert and Rizzo <a href="#ref-Albert2012r">2012</a>)</span>.</p>
+<p>This book is not a course to learn <code>R</code>. The language is introduced progressively, and assumes that readers are computer-literate and have possible done some basic coding in the past. For readers who wish to learn <code>R</code> there are other sources such as Wickham and Grolemund <span class="citation">(<a href="#ref-wickham2016r" role="doc-biblioref">2016</a>)</span>(<a href="https://r4ds.had.co.nz/" class="uri">https://r4ds.had.co.nz/</a>) or Albert and Rizzo <span class="citation">(Albert and Rizzo <a href="#ref-Albert2012r" role="doc-biblioref">2012</a>)</span>.</p>
 <p>To fully benefit from this text, up-to-date copies of <a href="https://cran.r-project.org/">R</a> and <a href="https://www.rstudio.com/">RStudio</a> are highly recommended. There are different packages that implement discrete choice methods in <code>R</code>. I will particularly rely on the packages <a href="https://CRAN.R-project.org/package=mlogit"><code>mlogit</code></a> and <a href="https://CRAN.R-project.org/package=gmnl"><code>gmnl</code></a>.</p>
 
 </div>
 </div>
 <h3>References</h3>
 <div id="refs" class="references">
+<div id="ref-Albert2012r">
+<p>Albert, Jim, and Maria Rizzo. 2012. <em>R by Example</em>. Springer Science &amp; Business Media.</p>
+</div>
 <div id="ref-Benakiva1985discrete">
 <p>Ben-Akiva, M., and S. R. Lerman. 1985. <em>Discrete Choice Analysis: Theory and Applications to Travel Demand</em>. Book. Cambridge: The MIT Press.</p>
 </div>
-<div id="ref-Train2009discrete">
-<p>Train, K. 2009. <em>Discrete Choice Methods with Simulation</em>. Book. 2nd Edition. Cambridge: Cambridge University Press.</p>
-</div>
-<div id="ref-Louviere2000stated">
-<p>Louviere, Jordan J, David A Hensher, and Joffre D Swait. 2000. <em>Stated Choice Methods: Analysis and Applications</em>. Cambridge University Press.</p>
-</div>
-<div id="ref-Ortuzar2011modelling">
-<p>Ortúzar, J. D., and L. G. Willumsen. 2011. <em>Modelling Transport</em>. Book. Vol. Fourth Edition. New York: Wiley.</p>
-</div>
-<div id="ref-Maddala1983limited">
-<p>Maddala, G. S. 1983. <em>Limited-Dependent and Qualitative Variables in Econometrics</em>. Book. Cambridge: Cambridge University Press.</p>
+<div id="ref-Croissant2019mlogit">
+<p>Croissant, Yves. 2018. <em>Mlogit: Multinomial Logit Models</em>. <a href="https://CRAN.R-project.org/package=mlogit">https://CRAN.R-project.org/package=mlogit</a>.</p>
 </div>
 <div id="ref-hensher2005applied">
 <p>Hensher, David A, John M Rose, and William H Greene. 2005. <em>Applied Choice Analysis: A Primer</em>. Cambridge University Press.</p>
 </div>
-<div id="ref-Croissant2019mlogit">
-<p>Croissant, Yves. 2018. <em>Mlogit: Multinomial Logit Models</em>. <a href="https://CRAN.R-project.org/package=mlogit" class="uri">https://CRAN.R-project.org/package=mlogit</a>.</p>
+<div id="ref-Louviere2000stated">
+<p>Louviere, Jordan J, David A Hensher, and Joffre D Swait. 2000. <em>Stated Choice Methods: Analysis and Applications</em>. Cambridge University Press.</p>
+</div>
+<div id="ref-Maddala1983limited">
+<p>Maddala, G. S. 1983. <em>Limited-Dependent and Qualitative Variables in Econometrics</em>. Book. Cambridge: Cambridge University Press.</p>
+</div>
+<div id="ref-Ortuzar2011modelling">
+<p>Ortúzar, J. D., and L. G. Willumsen. 2011. <em>Modelling Transport</em>. Book. Vol. Fourth Edition. New York: Wiley.</p>
 </div>
 <div id="ref-Sarrias2017multinomial">
-<p>Sarrias, Mauricio, and Ricardo Daziano. 2017. “Multinomial Logit Models with Continuous and Discrete Individual Heterogeneity in R: The gmnl Package.” <em>Journal of Statistical Software</em> 79 (2): 1–46. doi:<a href="https://doi.org/10.18637/jss.v079.i02">10.18637/jss.v079.i02</a>.</p>
+<p>Sarrias, Mauricio, and Ricardo Daziano. 2017. “Multinomial Logit Models with Continuous and Discrete Individual Heterogeneity in R: The gmnl Package.” <em>Journal of Statistical Software</em> 79 (2): 1–46. <a href="https://doi.org/10.18637/jss.v079.i02">https://doi.org/10.18637/jss.v079.i02</a>.</p>
+</div>
+<div id="ref-Train2009discrete">
+<p>Train, K. 2009. <em>Discrete Choice Methods with Simulation</em>. Book. 2nd Edition. Cambridge: Cambridge University Press.</p>
 </div>
 <div id="ref-wickham2016r">
-<p>Wickham, Hadley, and Garrett Grolemund. 2016. <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</em>. “ O’Reilly Media, Inc.”</p>
-</div>
-<div id="ref-Albert2012r">
-<p>Albert, Jim, and Maria Rizzo. 2012. <em>R by Example</em>. Springer Science &amp; Business Media.</p>
+<p>Wickham, Hadley, and Garrett Grolemund. 2016. <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</em>. " O’Reilly Media, Inc.".</p>
 </div>
 </div>
             </section>
@@ -430,11 +457,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -442,12 +471,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -459,6 +487,10 @@ gitbook.start({
 "text": "Edit"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -475,10 +507,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

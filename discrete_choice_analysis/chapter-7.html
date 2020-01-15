@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 8 Non-Proportional Substitution Patterns I: The Probit Model | An Introduction to Discrete Choice Analysis</title>
-  <meta name="description" content="These notes were created by Antonio Paez as a resource for teaching a graduate discrete choice analysis course (GEOG 738) at McMaster University.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="These notes were created by Antonio Paez as a resource for teaching a graduate discrete choice analysis course (GEOG 738) at McMaster University." />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 8 Non-Proportional Substitution Patterns I: The Probit Model | An Introduction to Discrete Choice Analysis" />
   <meta property="og:type" content="book" />
@@ -22,18 +21,18 @@
   <meta name="twitter:description" content="These notes were created by Antonio Paez as a resource for teaching a graduate discrete choice analysis course (GEOG 738) at McMaster University." />
   
 
-<meta name="author" content="Antonio Paez">
+<meta name="author" content="Antonio Paez" />
 
 
-<meta name="date" content="2019-07-04">
+<meta name="date" content="2020-01-15" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="chapter-6.html">
-<link rel="next" href="chapter-8.html">
+<link rel="prev" href="chapter-6.html"/>
+<link rel="next" href="chapter-8.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -41,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -49,51 +51,76 @@
 
 
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.49.4/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.49.4/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -138,7 +165,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.5.2" data-path="chapter-1.html"><a href="chapter-1.html#quantitative"><i class="fa fa-check"></i><b>2.5.2</b> Quantitative</a></li>
 </ul></li>
 <li class="chapter" data-level="2.6" data-path="chapter-1.html"><a href="chapter-1.html#importing-data"><i class="fa fa-check"></i><b>2.6</b> Importing data</a></li>
-<li class="chapter" data-level="2.7" data-path="chapter-1.html"><a href="chapter-1.html#data-classes-in-r"><i class="fa fa-check"></i><b>2.7</b> Data Classes in R</a></li>
+<li class="chapter" data-level="2.7" data-path="chapter-1.html"><a href="chapter-1.html#data-classes-in-r"><i class="fa fa-check"></i><b>2.7</b> Data Classes in <code>R</code></a></li>
 <li class="chapter" data-level="2.8" data-path="chapter-1.html"><a href="chapter-1.html#more-on-indexing-and-data-manipulation"><i class="fa fa-check"></i><b>2.8</b> More on indexing and data manipulation</a></li>
 <li class="chapter" data-level="2.9" data-path="chapter-1.html"><a href="chapter-1.html#visualization"><i class="fa fa-check"></i><b>2.9</b> Visualization</a></li>
 <li class="chapter" data-level="2.10" data-path="chapter-1.html"><a href="chapter-1.html#exercise"><i class="fa fa-check"></i><b>2.10</b> Exercise</a><ul>
@@ -320,13 +347,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="preliminaries-5" class="section level2">
 <h2><span class="header-section-number">8.1</span> Preliminaries</h2>
 <p>Load the packages used in this section:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
-<span class="kw">library</span>(mlogit)
-<span class="kw">library</span>(kableExtra)</code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb263-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb263-2" title="2"><span class="kw">library</span>(mlogit)</a>
+<a class="sourceLine" id="cb263-3" title="3"><span class="kw">library</span>(kableExtra)</a></code></pre></div>
 <p>Load the dataset used in this section (from the <code>mlogit</code> package):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;Heating&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb264-1" title="1"><span class="kw">data</span>(<span class="st">&quot;Heating&quot;</span>)</a></code></pre></div>
 <p>The dataset is in “wide” form, which means that there is one record per decision making unit (i.e. per household), so we need to change the data to “long” format:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">H &lt;-<span class="st"> </span><span class="kw">mlogit.data</span>(Heating, <span class="dt">shape =</span> <span class="st">&quot;wide&quot;</span>, <span class="dt">choice =</span> <span class="st">&quot;depvar&quot;</span>, <span class="dt">varying =</span> <span class="kw">c</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">12</span>))</code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb265-1" title="1">H &lt;-<span class="st"> </span><span class="kw">mlogit.data</span>(Heating, <span class="dt">shape =</span> <span class="st">&quot;wide&quot;</span>, <span class="dt">choice =</span> <span class="st">&quot;depvar&quot;</span>, <span class="dt">varying =</span> <span class="kw">c</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">12</span>))</a></code></pre></div>
 <p>This is the same dataset used in the preceding chapter with five heating systems:</p>
 <ul>
 <li>Gas Central (gc)</li>
@@ -345,7 +372,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="how-to-use-this-note-6" class="section level2">
 <h2><span class="header-section-number">8.3</span> How to use this note</h2>
 <p>Remember that the source for the document you are reading is an R Notebook. Throughout the notes, you will find examples of code in segments of text called <em>chunks</em>. This is an example of a chunk:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="st">&quot;If you are always trying to be normal, you will never know how amazing you can be.&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb266-1" title="1"><span class="kw">print</span>(<span class="st">&quot;If you are always trying to be normal, you will never know how amazing you can be.&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;If you are always trying to be normal, you will never know how amazing you can be.&quot;</code></pre>
 <p>If you are working with the Notebook version of the document, you can run the code by clicking the ‘play’ icon on the top right corner of the chunk. If you are reading the web-book version of the document, you will often see that the code has already been executed. You can still try it by copying and pasting into your R or RStudio console.</p>
 </div>
@@ -361,44 +388,52 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="suggested-readings-6" class="section level2">
 <h2><span class="header-section-number">8.5</span> Suggested readings</h2>
 <ul>
-<li>Ben-Akiva, M. Lerman, <span class="citation">(<a href="#ref-Benakiva1985discrete">1985</a>)</span> Discrete Choice Analysis: Theory and Applications to Travel Demand, <strong>Chapter 5, pp. 128-129</strong>, MIT Press.</li>
-<li>Ortuzar JD, Willumsen LG <span class="citation">(<a href="#ref-Ortuzar2011modelling">2011</a>)</span> Modelling Transport, Fourth Edition, <strong>Chapter 7, pp. 248-250</strong>, John Wiley and Sons.</li>
-<li>Train <span class="citation">(<a href="#ref-Train2009discrete">2009</a>)</span> Discrete Choice Methods with Simulation, Second Edition, <strong>Chapter 5</strong>, Cambridge University Press.</li>
+<li>Ben-Akiva, M. Lerman, <span class="citation">(<a href="#ref-Benakiva1985discrete" role="doc-biblioref">1985</a>)</span> Discrete Choice Analysis: Theory and Applications to Travel Demand, <strong>Chapter 5, pp. 128-129</strong>, MIT Press.</li>
+<li>Ortuzar JD, Willumsen LG <span class="citation">(<a href="#ref-Ortuzar2011modelling" role="doc-biblioref">2011</a>)</span> Modelling Transport, Fourth Edition, <strong>Chapter 7, pp. 248-250</strong>, John Wiley and Sons.</li>
+<li>Train <span class="citation">(<a href="#ref-Train2009discrete" role="doc-biblioref">2009</a>)</span> Discrete Choice Methods with Simulation, Second Edition, <strong>Chapter 5</strong>, Cambridge University Press.</li>
 </ul>
 </div>
 <div id="probit-model" class="section level2">
 <h2><span class="header-section-number">8.6</span> Probit model</h2>
-<p>Assume that the choice problem of decision-maker <span class="math inline">\(n\)</span> consists of <span class="math inline">\(J\)</span> alternatives, and that the utility of each alternative is decomposed in two parts, a systematic utility <span class="math inline">\(V\)</span> and a random utility <span class="math inline">\(\epsilon\)</span>, as follows: <span class="math display">\[
+<p>Assume that the choice problem of decision-maker <span class="math inline">\(n\)</span> consists of <span class="math inline">\(J\)</span> alternatives, and that the utility of each alternative is decomposed in two parts, a systematic utility <span class="math inline">\(V\)</span> and a random utility <span class="math inline">\(\epsilon\)</span>, as follows:
+<span class="math display">\[
 U_{n1} = V_{n1} + \epsilon_{n1}\\
 \cdots\\
 U_{nj} = V_{nj} + \epsilon_{nj}\\
 \cdots\\
 U_{nJ} = V_{nJ} + \epsilon_{nJ}
-\]</span> The random utility terms can be collected as follows: <span class="math display">\[
+\]</span>
+The random utility terms can be collected as follows:
+<span class="math display">\[
 \epsilon_n = [\epsilon_1, \cdots, \epsilon_j, \cdots, \epsilon_J] 
 \]</span></p>
-<p>Previously, the logit model was derived based on the assumption that the random utility terms <span class="math inline">\(\epsilon_j\)</span> were Extreme Value Type I. Now, the assumption is that the vector of random utilities <span class="math inline">\(\epsilon_n\)</span> follows the normal distribution with a mean vector of zero and a covariance matrix <span class="math inline">\(\Sigma_n\)</span> that can be a function of variables specific to a decision-maker. The probability distribution function is: <span class="math display">\[
+<p>Previously, the logit model was derived based on the assumption that the random utility terms <span class="math inline">\(\epsilon_j\)</span> were Extreme Value Type I. Now, the assumption is that the vector of random utilities <span class="math inline">\(\epsilon_n\)</span> follows the normal distribution with a mean vector of zero and a covariance matrix <span class="math inline">\(\Sigma_n\)</span> that can be a function of variables specific to a decision-maker. The probability distribution function is:
+<span class="math display">\[
 \phi(\epsilon_n)=\frac{1}{(2\pi)^{J/2}|\Sigma_n|^{1/2}}e^{-\frac{1}{2}\epsilon_n^T\Sigma_n^{-1}\epsilon_n}
 \]</span></p>
-<p>As before, the probability of choosing alternative <span class="math inline">\(j\)</span> is given by the following expression: <span class="math display">\[
+<p>As before, the probability of choosing alternative <span class="math inline">\(j\)</span> is given by the following expression:
+<span class="math display">\[
 P_j=P(U_j\ge U_k;\forall k\ne j)
 \]</span></p>
-<p>Since the probability is a function of the difference in utilities, it is possible to define the following expressions for differences with respect to the utility of the alternative whose probability we wish to calculate (i.e., <span class="math inline">\(j\)</span>): <span class="math display">\[
+<p>Since the probability is a function of the difference in utilities, it is possible to define the following expressions for differences with respect to the utility of the alternative whose probability we wish to calculate (i.e., <span class="math inline">\(j\)</span>):
+<span class="math display">\[
 \tilde{U}_{nkj}=U_{nk} - U_{nj}
 \]</span></p>
-<p>which implies: <span class="math display">\[
+<p>which implies:
+<span class="math display">\[
 \tilde{V}_{nkj}=V_{nk} - V_{nj}\\
 \tilde{\epsilon}_{nkj} = \epsilon_{nk} - \epsilon_{nj}
 \]</span></p>
-<p>In this case, the probability expression becomes: <span class="math display">\[
+<p>In this case, the probability expression becomes:
+<span class="math display">\[
 P_j=P(U_{nkj}\le 0;\forall k\ne j)
 \]</span></p>
 <p><span class="math display">\[
 \phi(\tilde{\epsilon}_n)=\frac{1}{(2\pi)^{J/2}|\tilde{\Sigma}_n|^{1/2}}e^{-\frac{1}{2}\tilde{\epsilon}_n^T\tilde{\Sigma}_n^{-1}\tilde{\epsilon}_n}
 \]</span></p>
 <p>Now we are ready to estimate a multinomial logit model (we called this Model 3 in Chapter <a href="chapter-3.html#chapter-3">4</a>):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod3 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H, <span class="dt">reflevel =</span> <span class="st">&quot;ec&quot;</span>)
-<span class="kw">summary</span>(mod3)</code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb268-1" title="1">mod3 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H, <span class="dt">reflevel =</span> <span class="st">&quot;ec&quot;</span>)</a>
+<a class="sourceLine" id="cb268-2" title="2"><span class="kw">summary</span>(mod3)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## mlogit(formula = depvar ~ ic + oc, data = H, reflevel = &quot;ec&quot;, 
@@ -427,10 +462,10 @@ P_j=P(U_{nkj}\le 0;\forall k\ne j)
 ## Log-Likelihood: -1008.2
 ## McFadden R^2:  0.013691 
 ## Likelihood ratio test : chisq = 27.99 (p.value = 8.3572e-07)</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nl2 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H,
-             <span class="dt">nests =</span> <span class="kw">list</span>(<span class="dt">room =</span> <span class="kw">c</span>( <span class="st">&#39;er&#39;</span>, <span class="st">&#39;gr&#39;</span>), <span class="dt">central =</span> <span class="kw">c</span>(<span class="st">&#39;ec&#39;</span>, <span class="st">&#39;gc&#39;</span>, <span class="st">&#39;hp&#39;</span>)),
-             <span class="dt">un.nest.el =</span> <span class="ot">TRUE</span>, <span class="dt">steptol =</span> <span class="fl">1e-12</span>)
-<span class="kw">summary</span>(nl2)</code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb270-1" title="1">nl2 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H,</a>
+<a class="sourceLine" id="cb270-2" title="2">             <span class="dt">nests =</span> <span class="kw">list</span>(<span class="dt">room =</span> <span class="kw">c</span>( <span class="st">&#39;er&#39;</span>, <span class="st">&#39;gr&#39;</span>), <span class="dt">central =</span> <span class="kw">c</span>(<span class="st">&#39;ec&#39;</span>, <span class="st">&#39;gc&#39;</span>, <span class="st">&#39;hp&#39;</span>)),</a>
+<a class="sourceLine" id="cb270-3" title="3">             <span class="dt">un.nest.el =</span> <span class="ot">TRUE</span>, <span class="dt">steptol =</span> <span class="fl">1e-12</span>)</a>
+<a class="sourceLine" id="cb270-4" title="4"><span class="kw">summary</span>(nl2)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## mlogit(formula = depvar ~ ic + oc, data = H, nests = list(room = c(&quot;er&quot;, 
@@ -461,38 +496,38 @@ P_j=P(U_{nkj}\le 0;\forall k\ne j)
 ## Log-Likelihood: -1003.5
 ## McFadden R^2:  0.018329 
 ## Likelihood ratio test : chisq = 37.473 (p.value = 3.6549e-08)</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prob1 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H, <span class="dt">reflevel =</span> <span class="st">&quot;ec&quot;</span>, <span class="dt">probit =</span> <span class="ot">TRUE</span>, <span class="dt">R=</span><span class="dv">100</span>)
-<span class="kw">summary</span>(prob1)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prob2 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H, <span class="dt">reflevel =</span> <span class="st">&quot;ec&quot;</span>, <span class="dt">probit =</span> <span class="ot">TRUE</span>,
-                <span class="dt">constPar=</span><span class="kw">c</span>(<span class="st">&#39;hp.hp&#39;</span>, <span class="st">&quot;gr.hp&quot;</span>, <span class="st">&quot;gr.gr&quot;</span>, <span class="st">&quot;gc.gr&quot;</span>, <span class="st">&quot;gc.gc&quot;</span>, <span class="st">&quot;er.hp&quot;</span>))
-<span class="kw">summary</span>(prob2)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prob3 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H, <span class="dt">reflevel =</span> <span class="st">&quot;ec&quot;</span>, <span class="dt">probit =</span> <span class="ot">TRUE</span>,
-                <span class="dt">constPar=</span><span class="kw">c</span>(<span class="st">&quot;er.er&quot;</span>, <span class="st">&quot;gr.hp&quot;</span>, <span class="st">&quot;gc.gr&quot;</span>, <span class="st">&quot;er.hp&quot;</span>, <span class="st">&quot;er.gc&quot;</span>), <span class="dt">R =</span> <span class="dv">50</span>)
-<span class="kw">summary</span>(prob3)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">L1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">4</span>)
-L1[<span class="op">!</span><span class="kw">upper.tri</span>(L1)] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="kw">coef</span>(prob3)[<span class="dv">7</span>], <span class="dv">0</span>, <span class="kw">coef</span>(prob3)[<span class="dv">8</span>], <span class="dv">0</span>, <span class="kw">coef</span>(prob3)[<span class="dv">9</span><span class="op">:</span><span class="dv">10</span>], <span class="dv">0</span>, <span class="kw">coef</span>(prob3)[<span class="dv">11</span>])
-L1</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">L1 <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(L1)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">L1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">4</span>)
-L1[<span class="op">!</span><span class="kw">upper.tri</span>(L1)] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">coef</span>(prob1)[<span class="dv">7</span><span class="op">:</span><span class="dv">15</span>])
-L1</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">L1 <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(L1)</code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb272-1" title="1">prob1 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H, <span class="dt">reflevel =</span> <span class="st">&quot;ec&quot;</span>, <span class="dt">probit =</span> <span class="ot">TRUE</span>, <span class="dt">R=</span><span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb272-2" title="2"><span class="kw">summary</span>(prob1)</a></code></pre></div>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb273-1" title="1">prob2 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H, <span class="dt">reflevel =</span> <span class="st">&quot;ec&quot;</span>, <span class="dt">probit =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb273-2" title="2">                <span class="dt">constPar=</span><span class="kw">c</span>(<span class="st">&#39;hp.hp&#39;</span>, <span class="st">&quot;gr.hp&quot;</span>, <span class="st">&quot;gr.gr&quot;</span>, <span class="st">&quot;gc.gr&quot;</span>, <span class="st">&quot;gc.gc&quot;</span>, <span class="st">&quot;er.hp&quot;</span>))</a>
+<a class="sourceLine" id="cb273-3" title="3"><span class="kw">summary</span>(prob2)</a></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb274-1" title="1">prob3 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H, <span class="dt">reflevel =</span> <span class="st">&quot;ec&quot;</span>, <span class="dt">probit =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb274-2" title="2">                <span class="dt">constPar=</span><span class="kw">c</span>(<span class="st">&quot;er.er&quot;</span>, <span class="st">&quot;gr.hp&quot;</span>, <span class="st">&quot;gc.gr&quot;</span>, <span class="st">&quot;er.hp&quot;</span>, <span class="st">&quot;er.gc&quot;</span>), <span class="dt">R =</span> <span class="dv">50</span>)</a>
+<a class="sourceLine" id="cb274-3" title="3"><span class="kw">summary</span>(prob3)</a></code></pre></div>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb275-1" title="1">L1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb275-2" title="2">L1[<span class="op">!</span><span class="kw">upper.tri</span>(L1)] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="kw">coef</span>(prob3)[<span class="dv">7</span>], <span class="dv">0</span>, <span class="kw">coef</span>(prob3)[<span class="dv">8</span>], <span class="dv">0</span>, <span class="kw">coef</span>(prob3)[<span class="dv">9</span><span class="op">:</span><span class="dv">10</span>], <span class="dv">0</span>, <span class="kw">coef</span>(prob3)[<span class="dv">11</span>])</a>
+<a class="sourceLine" id="cb275-3" title="3">L1</a></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb276-1" title="1">L1 <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(L1)</a></code></pre></div>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb277-1" title="1">L1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb277-2" title="2">L1[<span class="op">!</span><span class="kw">upper.tri</span>(L1)] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">coef</span>(prob1)[<span class="dv">7</span><span class="op">:</span><span class="dv">15</span>])</a>
+<a class="sourceLine" id="cb277-3" title="3">L1</a></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb278-1" title="1">L1 <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(L1)</a></code></pre></div>
 <p>To simulate this scenario, we begin by copying the input dataframe:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">H_rebate &lt;-<span class="st"> </span>H</code></pre></div>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb279-1" title="1">H_rebate &lt;-<span class="st"> </span>H</a></code></pre></div>
 <p>In the new dataframe that will simulate the rebate, replacing the cost of installation as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">H_rebate[H_rebate<span class="op">$</span>alt <span class="op">==</span><span class="st"> &quot;gc&quot;</span>, <span class="st">&quot;ic&quot;</span>] &lt;-<span class="st"> </span><span class="fl">1.15</span> <span class="op">*</span><span class="st"> </span>H_rebate[H_rebate<span class="op">$</span>alt <span class="op">==</span><span class="st"> &quot;gc&quot;</span>, <span class="st">&quot;ic&quot;</span>]</code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb280-1" title="1">H_rebate[H_rebate<span class="op">$</span>alt <span class="op">==</span><span class="st"> &quot;gc&quot;</span>, <span class="st">&quot;ic&quot;</span>] &lt;-<span class="st"> </span><span class="fl">1.15</span> <span class="op">*</span><span class="st"> </span>H_rebate[H_rebate<span class="op">$</span>alt <span class="op">==</span><span class="st"> &quot;gc&quot;</span>, <span class="st">&quot;ic&quot;</span>]</a></code></pre></div>
 <p>We can calculate the market shares of the “do nothing” and “rebate” policies and compare their shares (which are the mean values of the predictions):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data.frame</span>(<span class="dt">Policy =</span> <span class="kw">c</span>(<span class="st">&quot;Do nothing&quot;</span>, <span class="st">&quot;15% rebate&quot;</span>),
-           <span class="kw">rbind</span>(<span class="kw">apply</span>(<span class="kw">predict</span>(mod3, <span class="dt">newdata =</span> H), <span class="dv">2</span>, mean),
-                 <span class="kw">apply</span>(<span class="kw">predict</span>(mod3, <span class="dt">newdata =</span> H_rebate), <span class="dv">2</span>, mean)))</code></pre></div>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb281-1" title="1"><span class="kw">data.frame</span>(<span class="dt">Policy =</span> <span class="kw">c</span>(<span class="st">&quot;Do nothing&quot;</span>, <span class="st">&quot;15% rebate&quot;</span>),</a>
+<a class="sourceLine" id="cb281-2" title="2">           <span class="kw">rbind</span>(<span class="kw">apply</span>(<span class="kw">predict</span>(mod3, <span class="dt">newdata =</span> H), <span class="dv">2</span>, mean),</a>
+<a class="sourceLine" id="cb281-3" title="3">                 <span class="kw">apply</span>(<span class="kw">predict</span>(mod3, <span class="dt">newdata =</span> H_rebate), <span class="dv">2</span>, mean)))</a></code></pre></div>
 <p>Nested logit:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data.frame</span>(<span class="dt">Policy =</span> <span class="kw">c</span>(<span class="st">&quot;Do nothing&quot;</span>, <span class="st">&quot;15% rebate&quot;</span>),
-           <span class="kw">rbind</span>(<span class="kw">apply</span>(<span class="kw">predict</span>(nl2, <span class="dt">newdata =</span> H), <span class="dv">2</span>, mean),
-                 <span class="kw">apply</span>(<span class="kw">predict</span>(nl2, <span class="dt">newdata =</span> H_rebate), <span class="dv">2</span>, mean)))</code></pre></div>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb282-1" title="1"><span class="kw">data.frame</span>(<span class="dt">Policy =</span> <span class="kw">c</span>(<span class="st">&quot;Do nothing&quot;</span>, <span class="st">&quot;15% rebate&quot;</span>),</a>
+<a class="sourceLine" id="cb282-2" title="2">           <span class="kw">rbind</span>(<span class="kw">apply</span>(<span class="kw">predict</span>(nl2, <span class="dt">newdata =</span> H), <span class="dv">2</span>, mean),</a>
+<a class="sourceLine" id="cb282-3" title="3">                 <span class="kw">apply</span>(<span class="kw">predict</span>(nl2, <span class="dt">newdata =</span> H_rebate), <span class="dv">2</span>, mean)))</a></code></pre></div>
 <p>Probit:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data.frame</span>(<span class="dt">Policy =</span> <span class="kw">c</span>(<span class="st">&quot;Do nothing&quot;</span>, <span class="st">&quot;15% rebate&quot;</span>),
-           <span class="kw">rbind</span>(<span class="kw">apply</span>(<span class="kw">predict</span>(prob3, <span class="dt">newdata =</span> H), <span class="dv">2</span>, mean),
-                 <span class="kw">apply</span>(<span class="kw">predict</span>(prob3, <span class="dt">newdata =</span> H_rebate), <span class="dv">2</span>, mean)))</code></pre></div>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb283-1" title="1"><span class="kw">data.frame</span>(<span class="dt">Policy =</span> <span class="kw">c</span>(<span class="st">&quot;Do nothing&quot;</span>, <span class="st">&quot;15% rebate&quot;</span>),</a>
+<a class="sourceLine" id="cb283-2" title="2">           <span class="kw">rbind</span>(<span class="kw">apply</span>(<span class="kw">predict</span>(prob3, <span class="dt">newdata =</span> H), <span class="dv">2</span>, mean),</a>
+<a class="sourceLine" id="cb283-3" title="3">                 <span class="kw">apply</span>(<span class="kw">predict</span>(prob3, <span class="dt">newdata =</span> H_rebate), <span class="dv">2</span>, mean)))</a></code></pre></div>
 </div>
 <div id="exercise-6" class="section level2">
 <h2><span class="header-section-number">8.7</span> Exercise</h2>
@@ -525,11 +560,13 @@ L1</code></pre></div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -537,12 +574,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -554,6 +590,10 @@ gitbook.start({
 "text": "Edit"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -570,10 +610,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

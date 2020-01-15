@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 9 Dealing with Heterogeneity I: The Mixed Logit Model | An Introduction to Discrete Choice Analysis</title>
-  <meta name="description" content="These notes were created by Antonio Paez as a resource for teaching a graduate discrete choice analysis course (GEOG 738) at McMaster University.">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="These notes were created by Antonio Paez as a resource for teaching a graduate discrete choice analysis course (GEOG 738) at McMaster University." />
+  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 9 Dealing with Heterogeneity I: The Mixed Logit Model | An Introduction to Discrete Choice Analysis" />
   <meta property="og:type" content="book" />
@@ -22,18 +21,18 @@
   <meta name="twitter:description" content="These notes were created by Antonio Paez as a resource for teaching a graduate discrete choice analysis course (GEOG 738) at McMaster University." />
   
 
-<meta name="author" content="Antonio Paez">
+<meta name="author" content="Antonio Paez" />
 
 
-<meta name="date" content="2019-07-04">
+<meta name="date" content="2020-01-15" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="chapter-7.html">
-<link rel="next" href="chapter-9.html">
+<link rel="prev" href="chapter-7.html"/>
+<link rel="next" href="chapter-9.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -41,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -49,51 +51,76 @@
 
 
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
 <script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.49.4/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.49.4/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -138,7 +165,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.5.2" data-path="chapter-1.html"><a href="chapter-1.html#quantitative"><i class="fa fa-check"></i><b>2.5.2</b> Quantitative</a></li>
 </ul></li>
 <li class="chapter" data-level="2.6" data-path="chapter-1.html"><a href="chapter-1.html#importing-data"><i class="fa fa-check"></i><b>2.6</b> Importing data</a></li>
-<li class="chapter" data-level="2.7" data-path="chapter-1.html"><a href="chapter-1.html#data-classes-in-r"><i class="fa fa-check"></i><b>2.7</b> Data Classes in R</a></li>
+<li class="chapter" data-level="2.7" data-path="chapter-1.html"><a href="chapter-1.html#data-classes-in-r"><i class="fa fa-check"></i><b>2.7</b> Data Classes in <code>R</code></a></li>
 <li class="chapter" data-level="2.8" data-path="chapter-1.html"><a href="chapter-1.html#more-on-indexing-and-data-manipulation"><i class="fa fa-check"></i><b>2.8</b> More on indexing and data manipulation</a></li>
 <li class="chapter" data-level="2.9" data-path="chapter-1.html"><a href="chapter-1.html#visualization"><i class="fa fa-check"></i><b>2.9</b> Visualization</a></li>
 <li class="chapter" data-level="2.10" data-path="chapter-1.html"><a href="chapter-1.html#exercise"><i class="fa fa-check"></i><b>2.10</b> Exercise</a><ul>
@@ -320,9 +347,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="preliminaries-6" class="section level2">
 <h2><span class="header-section-number">9.1</span> Preliminaries</h2>
 <p>Load the packages used in this section:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
-<span class="kw">library</span>(mlogit)
-<span class="kw">library</span>(gmnl)</code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb284-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb284-2" title="2"><span class="kw">library</span>(mlogit)</a>
+<a class="sourceLine" id="cb284-3" title="3"><span class="kw">library</span>(gmnl)</a></code></pre></div>
 <pre><code>## Loading required package: maxLik</code></pre>
 <pre><code>## Loading required package: miscTools</code></pre>
 <pre><code>## 
@@ -331,8 +358,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## 
 ## If you have questions, suggestions, or comments regarding the &#39;maxLik&#39; package, please use a forum or &#39;tracker&#39; at maxLik&#39;s R-Forge site:
 ## https://r-forge.r-project.org/projects/maxlik/</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(kableExtra)
-<span class="kw">library</span>(gridExtra)</code></pre></div>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb288-1" title="1"><span class="kw">library</span>(kableExtra)</a>
+<a class="sourceLine" id="cb288-2" title="2"><span class="kw">library</span>(gridExtra)</a></code></pre></div>
 <pre><code>## 
 ## Attaching package: &#39;gridExtra&#39;</code></pre>
 <pre><code>## The following object is masked from &#39;package:dplyr&#39;:
@@ -344,8 +371,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>The preceding chapters (Chapters <a href="chapter-6.html#chapter-6">7</a> and <a href="chapter-7.html#chapter-7">8</a>) were concerned with the IIA property of the logit model. As discussed there, when the specification of the model is incomplete, the presence of residual correlation can often lead to inappropriate - even nonsensical - substitution patterns. Accordingly, the GEV family of models (of which the nested logit is a member) and the multinomial probit model aimed at introducing more flexible substitution patterns. The nested logit model achieves this by inducing a hierarchical decision-making structure where alternatives within nests are correlated, whereas the multinomial probit model introduces a flexible, but technically demanding, covariance structure for multinomial choices.</p>
 <p>In this chapter, we introduce a second important issue in the analysis of discrete choices, namely taste variation or heterogeneity.</p>
 <p>To motivate the discussion, we will use a dataset from the <code>AER</code> package on the mode of transportation used by travelers traveling between Sydney and Melbourne:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;TravelMode&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;AER&quot;</span>)</code></pre></div>
-<p>This dataset is included in the <code>AER</code> package (Applied Econometrics with R) and is a companion to Greene’s popular econometrics textbook <span class="citation">(Greene <a href="#ref-Greene2003econometric">2003</a>)</span>. The dataset includes information about mode choices for individual travelers, namely travel by air, train, bus, or car. The following attributes about the alternatives are available:</p>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb291-1" title="1"><span class="kw">data</span>(<span class="st">&quot;TravelMode&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;AER&quot;</span>)</a></code></pre></div>
+<p>This dataset is included in the <code>AER</code> package (Applied Econometrics with R) and is a companion to Greene’s popular econometrics textbook <span class="citation">(Greene <a href="#ref-Greene2003econometric" role="doc-biblioref">2003</a>)</span>. The dataset includes information about mode choices for individual travelers, namely travel by air, train, bus, or car. The following attributes about the alternatives are available:</p>
 <ol style="list-style-type: decimal">
 <li>vcost: the vehicle cost component.</li>
 <li>travel: travel time in vehicle (in min).</li>
@@ -353,30 +380,30 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>gcost: a generalized cost measure.</li>
 </ol>
 <p>The median of these attributes as well as the proportion of choices by mode are summarized in the following table:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Proportion &lt;-<span class="st"> </span>TravelMode <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">filter</span>(choice <span class="op">==</span><span class="st"> &quot;yes&quot;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">select</span>(mode) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">group_by</span>(mode) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">no_rows =</span> <span class="kw">length</span>(mode))
-
-df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Mode =</span> <span class="kw">c</span>(<span class="st">&quot;air&quot;</span>, <span class="st">&quot;train&quot;</span>, <span class="st">&quot;bus&quot;</span>, <span class="st">&quot;car&quot;</span>),
-                 <span class="dt">vcost =</span> <span class="kw">c</span>(<span class="kw">median</span>(<span class="kw">filter</span>(TravelMode, mode <span class="op">==</span><span class="st"> &quot;air&quot;</span>)<span class="op">$</span>vcost), 
-                           <span class="kw">median</span>(<span class="kw">filter</span>(TravelMode, mode <span class="op">==</span><span class="st"> &quot;train&quot;</span>)<span class="op">$</span>vcost), 
-                           <span class="kw">median</span>(<span class="kw">filter</span>(TravelMode, mode <span class="op">==</span><span class="st"> &quot;bus&quot;</span>)<span class="op">$</span>vcost), 
-                           <span class="kw">median</span>(<span class="kw">filter</span>(TravelMode, mode <span class="op">==</span><span class="st"> &quot;car&quot;</span>)<span class="op">$</span>vcost)),
-                 <span class="dt">wait =</span> <span class="kw">c</span>(<span class="kw">median</span>(<span class="kw">filter</span>(TravelMode, mode <span class="op">==</span><span class="st"> &quot;air&quot;</span>)<span class="op">$</span>wait), 
-                          <span class="kw">median</span>(<span class="kw">filter</span>(TravelMode, mode <span class="op">==</span><span class="st"> &quot;train&quot;</span>)<span class="op">$</span>wait), 
-                          <span class="kw">median</span>(<span class="kw">filter</span>(TravelMode, mode <span class="op">==</span><span class="st"> &quot;bus&quot;</span>)<span class="op">$</span>wait), 
-                          <span class="kw">median</span>(<span class="kw">filter</span>(TravelMode, mode <span class="op">==</span><span class="st"> &quot;car&quot;</span>)<span class="op">$</span>wait)),
-                 <span class="dt">travel =</span> <span class="kw">c</span>(<span class="kw">median</span>(<span class="kw">filter</span>(TravelMode, mode <span class="op">==</span><span class="st"> &quot;air&quot;</span>)<span class="op">$</span>gcost), 
-                            <span class="kw">median</span>(<span class="kw">filter</span>(TravelMode, mode <span class="op">==</span><span class="st"> &quot;train&quot;</span>)<span class="op">$</span>gcost), 
-                            <span class="kw">median</span>(<span class="kw">filter</span>(TravelMode, mode <span class="op">==</span><span class="st"> &quot;bus&quot;</span>)<span class="op">$</span>gcost), 
-                            <span class="kw">median</span>(<span class="kw">filter</span>(TravelMode, mode <span class="op">==</span><span class="st"> &quot;car&quot;</span>)<span class="op">$</span>gcost)),
-                 <span class="dt">Proportion =</span> Proportion<span class="op">$</span>no_rows<span class="op">/</span>(<span class="kw">nrow</span>(TravelMode)<span class="op">/</span><span class="dv">4</span>)
-                 )
-df <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">kable</span>(<span class="dt">digits =</span> <span class="dv">3</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">kable_styling</span>()</code></pre></div>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb292-1" title="1">Proportion &lt;-<span class="st"> </span>TravelMode <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb292-2" title="2"><span class="st">  </span><span class="kw">filter</span>(choice <span class="op">==</span><span class="st"> &quot;yes&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb292-3" title="3"><span class="st">  </span><span class="kw">select</span>(mode) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb292-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(mode) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb292-5" title="5"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">no_rows =</span> <span class="kw">length</span>(mode))</a>
+<a class="sourceLine" id="cb292-6" title="6"></a>
+<a class="sourceLine" id="cb292-7" title="7">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Mode =</span> <span class="kw">c</span>(<span class="st">&quot;air&quot;</span>, <span class="st">&quot;train&quot;</span>, <span class="st">&quot;bus&quot;</span>, <span class="st">&quot;car&quot;</span>),</a>
+<a class="sourceLine" id="cb292-8" title="8">                 <span class="dt">vcost =</span> <span class="kw">c</span>(<span class="kw">median</span>(<span class="kw">filter</span>(TravelMode, mode <span class="op">==</span><span class="st"> &quot;air&quot;</span>)<span class="op">$</span>vcost), </a>
+<a class="sourceLine" id="cb292-9" title="9">                           <span class="kw">median</span>(<span class="kw">filter</span>(TravelMode, mode <span class="op">==</span><span class="st"> &quot;train&quot;</span>)<span class="op">$</span>vcost), </a>
+<a class="sourceLine" id="cb292-10" title="10">                           <span class="kw">median</span>(<span class="kw">filter</span>(TravelMode, mode <span class="op">==</span><span class="st"> &quot;bus&quot;</span>)<span class="op">$</span>vcost), </a>
+<a class="sourceLine" id="cb292-11" title="11">                           <span class="kw">median</span>(<span class="kw">filter</span>(TravelMode, mode <span class="op">==</span><span class="st"> &quot;car&quot;</span>)<span class="op">$</span>vcost)),</a>
+<a class="sourceLine" id="cb292-12" title="12">                 <span class="dt">wait =</span> <span class="kw">c</span>(<span class="kw">median</span>(<span class="kw">filter</span>(TravelMode, mode <span class="op">==</span><span class="st"> &quot;air&quot;</span>)<span class="op">$</span>wait), </a>
+<a class="sourceLine" id="cb292-13" title="13">                          <span class="kw">median</span>(<span class="kw">filter</span>(TravelMode, mode <span class="op">==</span><span class="st"> &quot;train&quot;</span>)<span class="op">$</span>wait), </a>
+<a class="sourceLine" id="cb292-14" title="14">                          <span class="kw">median</span>(<span class="kw">filter</span>(TravelMode, mode <span class="op">==</span><span class="st"> &quot;bus&quot;</span>)<span class="op">$</span>wait), </a>
+<a class="sourceLine" id="cb292-15" title="15">                          <span class="kw">median</span>(<span class="kw">filter</span>(TravelMode, mode <span class="op">==</span><span class="st"> &quot;car&quot;</span>)<span class="op">$</span>wait)),</a>
+<a class="sourceLine" id="cb292-16" title="16">                 <span class="dt">travel =</span> <span class="kw">c</span>(<span class="kw">median</span>(<span class="kw">filter</span>(TravelMode, mode <span class="op">==</span><span class="st"> &quot;air&quot;</span>)<span class="op">$</span>gcost), </a>
+<a class="sourceLine" id="cb292-17" title="17">                            <span class="kw">median</span>(<span class="kw">filter</span>(TravelMode, mode <span class="op">==</span><span class="st"> &quot;train&quot;</span>)<span class="op">$</span>gcost), </a>
+<a class="sourceLine" id="cb292-18" title="18">                            <span class="kw">median</span>(<span class="kw">filter</span>(TravelMode, mode <span class="op">==</span><span class="st"> &quot;bus&quot;</span>)<span class="op">$</span>gcost), </a>
+<a class="sourceLine" id="cb292-19" title="19">                            <span class="kw">median</span>(<span class="kw">filter</span>(TravelMode, mode <span class="op">==</span><span class="st"> &quot;car&quot;</span>)<span class="op">$</span>gcost)),</a>
+<a class="sourceLine" id="cb292-20" title="20">                 <span class="dt">Proportion =</span> Proportion<span class="op">$</span>no_rows<span class="op">/</span>(<span class="kw">nrow</span>(TravelMode)<span class="op">/</span><span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb292-21" title="21">                 )</a>
+<a class="sourceLine" id="cb292-22" title="22">df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb292-23" title="23"><span class="st">  </span><span class="kw">kable</span>(<span class="dt">digits =</span> <span class="dv">3</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb292-24" title="24"><span class="st">  </span><span class="kw">kable_styling</span>()</a></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -470,28 +497,28 @@ car
 </table>
 <p>In addition, there are two individual-level attributes, the income of the traveler (in 10,000s) and the size of the traveling party (number of people in party).</p>
 <p>The dataset is in “long” form, which means that there is one record per decision-making situation per decision-maker. Here, we format the dataframe in preparation for use with the packages <code>mlogit</code> and <code>gmnl</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">TM &lt;-<span class="st"> </span><span class="kw">mlogit.data</span>(TravelMode, <span class="dt">choice =</span> <span class="st">&quot;choice&quot;</span>, <span class="dt">shape =</span> <span class="st">&quot;long&quot;</span>,
-                  <span class="dt">alt.levels =</span> <span class="kw">c</span>(<span class="st">&quot;air&quot;</span>, <span class="st">&quot;train&quot;</span>, <span class="st">&quot;bus&quot;</span>, <span class="st">&quot;car&quot;</span>))</code></pre></div>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb293-1" title="1">TM &lt;-<span class="st"> </span><span class="kw">mlogit.data</span>(TravelMode, <span class="dt">choice =</span> <span class="st">&quot;choice&quot;</span>, <span class="dt">shape =</span> <span class="st">&quot;long&quot;</span>,</a>
+<a class="sourceLine" id="cb293-2" title="2">                  <span class="dt">alt.levels =</span> <span class="kw">c</span>(<span class="st">&quot;air&quot;</span>, <span class="st">&quot;train&quot;</span>, <span class="st">&quot;bus&quot;</span>, <span class="st">&quot;car&quot;</span>))</a></code></pre></div>
 <p>We then begin by estimating multinomial logit, nested logit, and multinomial probit models for the sample dataset. The code for estimating each of these models is as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mlogit)
-
-<span class="co">#Multinomial logit</span>
-mnl0 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(choice <span class="op">~</span><span class="st"> </span>vcost <span class="op">+</span><span class="st"> </span>travel <span class="op">+</span><span class="st"> </span>wait <span class="op">|</span><span class="st"> </span><span class="dv">1</span>,
-             <span class="dt">data =</span> TM)
-<span class="co">#summary(mnl0)</span>
-
-<span class="co">#Nested logit:</span>
-nl &lt;-<span class="st"> </span><span class="kw">mlogit</span>(choice <span class="op">~</span><span class="st"> </span>vcost <span class="op">+</span><span class="st"> </span>travel <span class="op">+</span><span class="st"> </span>wait <span class="op">|</span><span class="st"> </span><span class="dv">1</span>,
-             <span class="dt">data =</span> TM,
-             <span class="dt">nests =</span> <span class="kw">list</span>(<span class="dt">land =</span> <span class="kw">c</span>( <span class="st">&quot;car&quot;</span>, <span class="st">&quot;bus&quot;</span>, <span class="st">&quot;train&quot;</span>), <span class="dt">air =</span> <span class="kw">c</span>(<span class="st">&quot;air&quot;</span>)),
-             <span class="dt">un.nest.el =</span> <span class="ot">TRUE</span>)
-<span class="co">#summary(nl)</span>
-
-<span class="co">#Multinomial probit:</span>
-prbt &lt;-<span class="st"> </span><span class="kw">mlogit</span>(choice <span class="op">~</span><span class="st"> </span>vcost <span class="op">+</span><span class="st"> </span>travel <span class="op">+</span><span class="st"> </span>wait <span class="op">|</span><span class="st"> </span><span class="dv">1</span>,
-             <span class="dt">data =</span> TM,
-             <span class="dt">probit =</span> <span class="ot">TRUE</span>)
-<span class="co">#summary(prbt)</span></code></pre></div>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb294-1" title="1"><span class="kw">library</span>(mlogit)</a>
+<a class="sourceLine" id="cb294-2" title="2"></a>
+<a class="sourceLine" id="cb294-3" title="3"><span class="co">#Multinomial logit</span></a>
+<a class="sourceLine" id="cb294-4" title="4">mnl0 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(choice <span class="op">~</span><span class="st"> </span>vcost <span class="op">+</span><span class="st"> </span>travel <span class="op">+</span><span class="st"> </span>wait <span class="op">|</span><span class="st"> </span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb294-5" title="5">             <span class="dt">data =</span> TM)</a>
+<a class="sourceLine" id="cb294-6" title="6"><span class="co">#summary(mnl0)</span></a>
+<a class="sourceLine" id="cb294-7" title="7"></a>
+<a class="sourceLine" id="cb294-8" title="8"><span class="co">#Nested logit:</span></a>
+<a class="sourceLine" id="cb294-9" title="9">nl &lt;-<span class="st"> </span><span class="kw">mlogit</span>(choice <span class="op">~</span><span class="st"> </span>vcost <span class="op">+</span><span class="st"> </span>travel <span class="op">+</span><span class="st"> </span>wait <span class="op">|</span><span class="st"> </span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb294-10" title="10">             <span class="dt">data =</span> TM,</a>
+<a class="sourceLine" id="cb294-11" title="11">             <span class="dt">nests =</span> <span class="kw">list</span>(<span class="dt">land =</span> <span class="kw">c</span>( <span class="st">&quot;car&quot;</span>, <span class="st">&quot;bus&quot;</span>, <span class="st">&quot;train&quot;</span>), <span class="dt">air =</span> <span class="kw">c</span>(<span class="st">&quot;air&quot;</span>)),</a>
+<a class="sourceLine" id="cb294-12" title="12">             <span class="dt">un.nest.el =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb294-13" title="13"><span class="co">#summary(nl)</span></a>
+<a class="sourceLine" id="cb294-14" title="14"></a>
+<a class="sourceLine" id="cb294-15" title="15"><span class="co">#Multinomial probit:</span></a>
+<a class="sourceLine" id="cb294-16" title="16">prbt &lt;-<span class="st"> </span><span class="kw">mlogit</span>(choice <span class="op">~</span><span class="st"> </span>vcost <span class="op">+</span><span class="st"> </span>travel <span class="op">+</span><span class="st"> </span>wait <span class="op">|</span><span class="st"> </span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb294-17" title="17">             <span class="dt">data =</span> TM,</a>
+<a class="sourceLine" id="cb294-18" title="18">             <span class="dt">probit =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb294-19" title="19"><span class="co">#summary(prbt)</span></a></code></pre></div>
 Notice that the nesting structure places all land-based modes in a nest and air in a separate nest (you can try different nesting structures if you wish!).
 <div class="figure"><span id="fig:fig-nesting-structure"></span>
 <img src="08-Figure-1.jpg" alt="\label{fig:fig-nesting-structure}Nests in the nested logit model" width="640" />
@@ -500,41 +527,41 @@ Figure 9.1: Nests in the nested logit model
 </p>
 </div>
 <p>The results of these models are summarized in Table (<span class="citation">(<span class="citeproc-not-found" data-reference-id="table-base-models"><strong>???</strong></span>)</span>) below.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Estimate a constants only model to calculate McFadden&#39;s _adjusted_ rho2</span>
-mnl_null &lt;-<span class="st"> </span><span class="kw">mlogit</span>(choice <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,
-             <span class="dt">data =</span> TM)
-
-mnl0.summary &lt;-<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">data.frame</span>(<span class="kw">summary</span>(mnl0)<span class="op">$</span>CoefTable), <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">transmute</span>(Variable, Estimate, <span class="dt">pval =</span> <span class="st">`</span><span class="dt">Pr...z..</span><span class="st">`</span>)
-
-nl.summary &lt;-<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">data.frame</span>(<span class="kw">summary</span>(nl)<span class="op">$</span>CoefTable), <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">transmute</span>(Variable, Estimate, <span class="dt">pval =</span> <span class="st">`</span><span class="dt">Pr...z..</span><span class="st">`</span>)
-
-prbt.summary &lt;-<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">data.frame</span>(<span class="kw">summary</span>(prbt)<span class="op">$</span>CoefTable), <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">transmute</span>(Variable, Estimate, <span class="dt">pval =</span> <span class="st">`</span><span class="dt">Pr...z..</span><span class="st">`</span>)
-
-df_logit &lt;-<span class="st"> </span><span class="kw">full_join</span>(mnl0.summary, nl.summary, <span class="dt">by =</span> <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">full_join</span>(prbt.summary, <span class="dt">by =</span> <span class="st">&quot;Variable&quot;</span>)
-
-<span class="kw">kable</span>(df_logit, 
-      <span class="st">&quot;html&quot;</span>,
-      <span class="dt">digits =</span> <span class="dv">4</span>,
-      <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Variable&quot;</span>,
-                    <span class="st">&quot;Estimate&quot;</span>,
-                    <span class="st">&quot;p-value&quot;</span>,
-                    <span class="st">&quot;Estimate&quot;</span>,
-                    <span class="st">&quot;p-value&quot;</span>,
-                    <span class="st">&quot;Estimate&quot;</span>,
-                    <span class="st">&quot;p-value&quot;</span>),
-      <span class="dt">caption =</span> <span class="st">&quot;Base models: multinomial logit (MNL), nested logit (NL), multinomial probit (MNP)&quot;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">kable_styling</span>() <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">add_header_above</span>(<span class="kw">c</span>(<span class="st">&quot; &quot;</span> =<span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;MNL&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;NL&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;MNP&quot;</span> =<span class="st"> </span><span class="dv">2</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">footnote</span>(<span class="dt">general =</span> <span class="kw">c</span>(<span class="kw">paste0</span>(<span class="st">&quot;Log-Likelihood: MNL = &quot;</span>, <span class="kw">round</span>(mnl0<span class="op">$</span>logLik[<span class="dv">1</span>], <span class="dt">digits =</span> <span class="dv">3</span>),
-                            <span class="st">&quot;; NL = &quot;</span>, <span class="kw">round</span>(nl<span class="op">$</span>logLik[<span class="dv">1</span>], <span class="dt">digits =</span> <span class="dv">3</span>),
-                            <span class="st">&quot;; MNP = &quot;</span>, <span class="kw">round</span>(prbt<span class="op">$</span>logLik[<span class="dv">1</span>], <span class="dt">digits =</span> <span class="dv">3</span>)),
-                       <span class="kw">paste0</span>(<span class="st">&quot;McFadden Adjusted R^2: MNL = &quot;</span>, <span class="kw">round</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(mnl0<span class="op">$</span>logLik[<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span><span class="kw">nrow</span>(mnl0.summary)) <span class="op">/</span><span class="st"> </span>mnl_null<span class="op">$</span>logLik[<span class="dv">1</span>], <span class="dt">digits =</span> <span class="dv">3</span>),
-                              <span class="st">&quot;; NL = &quot;</span>, <span class="kw">round</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(nl<span class="op">$</span>logLik[<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span><span class="kw">nrow</span>(nl.summary)) <span class="op">/</span><span class="st"> </span>mnl_null<span class="op">$</span>logLik[<span class="dv">1</span>], <span class="dt">digits =</span> <span class="dv">3</span>),
-                              <span class="st">&quot;; MNP = &quot;</span>, <span class="kw">round</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(prbt<span class="op">$</span>logLik[<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span><span class="kw">nrow</span>(prbt.summary)) <span class="op">/</span><span class="st"> </span>mnl_null<span class="op">$</span>logLik[<span class="dv">1</span>], <span class="dt">digits =</span> <span class="dv">3</span>))))</code></pre></div>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb295-1" title="1"><span class="co"># Estimate a constants only model to calculate McFadden&#39;s _adjusted_ rho2</span></a>
+<a class="sourceLine" id="cb295-2" title="2">mnl_null &lt;-<span class="st"> </span><span class="kw">mlogit</span>(choice <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb295-3" title="3">             <span class="dt">data =</span> TM)</a>
+<a class="sourceLine" id="cb295-4" title="4"></a>
+<a class="sourceLine" id="cb295-5" title="5">mnl0.summary &lt;-<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">data.frame</span>(<span class="kw">summary</span>(mnl0)<span class="op">$</span>CoefTable), <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb295-6" title="6"><span class="st">  </span><span class="kw">transmute</span>(Variable, Estimate, <span class="dt">pval =</span> <span class="st">`</span><span class="dt">Pr...z..</span><span class="st">`</span>)</a>
+<a class="sourceLine" id="cb295-7" title="7"></a>
+<a class="sourceLine" id="cb295-8" title="8">nl.summary &lt;-<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">data.frame</span>(<span class="kw">summary</span>(nl)<span class="op">$</span>CoefTable), <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb295-9" title="9"><span class="st">  </span><span class="kw">transmute</span>(Variable, Estimate, <span class="dt">pval =</span> <span class="st">`</span><span class="dt">Pr...z..</span><span class="st">`</span>)</a>
+<a class="sourceLine" id="cb295-10" title="10"></a>
+<a class="sourceLine" id="cb295-11" title="11">prbt.summary &lt;-<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">data.frame</span>(<span class="kw">summary</span>(prbt)<span class="op">$</span>CoefTable), <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb295-12" title="12"><span class="st">  </span><span class="kw">transmute</span>(Variable, Estimate, <span class="dt">pval =</span> <span class="st">`</span><span class="dt">Pr...z..</span><span class="st">`</span>)</a>
+<a class="sourceLine" id="cb295-13" title="13"></a>
+<a class="sourceLine" id="cb295-14" title="14">df_logit &lt;-<span class="st"> </span><span class="kw">full_join</span>(mnl0.summary, nl.summary, <span class="dt">by =</span> <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb295-15" title="15"><span class="st">  </span><span class="kw">full_join</span>(prbt.summary, <span class="dt">by =</span> <span class="st">&quot;Variable&quot;</span>)</a>
+<a class="sourceLine" id="cb295-16" title="16"></a>
+<a class="sourceLine" id="cb295-17" title="17"><span class="kw">kable</span>(df_logit, </a>
+<a class="sourceLine" id="cb295-18" title="18">      <span class="st">&quot;html&quot;</span>,</a>
+<a class="sourceLine" id="cb295-19" title="19">      <span class="dt">digits =</span> <span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb295-20" title="20">      <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Variable&quot;</span>,</a>
+<a class="sourceLine" id="cb295-21" title="21">                    <span class="st">&quot;Estimate&quot;</span>,</a>
+<a class="sourceLine" id="cb295-22" title="22">                    <span class="st">&quot;p-value&quot;</span>,</a>
+<a class="sourceLine" id="cb295-23" title="23">                    <span class="st">&quot;Estimate&quot;</span>,</a>
+<a class="sourceLine" id="cb295-24" title="24">                    <span class="st">&quot;p-value&quot;</span>,</a>
+<a class="sourceLine" id="cb295-25" title="25">                    <span class="st">&quot;Estimate&quot;</span>,</a>
+<a class="sourceLine" id="cb295-26" title="26">                    <span class="st">&quot;p-value&quot;</span>),</a>
+<a class="sourceLine" id="cb295-27" title="27">      <span class="dt">caption =</span> <span class="st">&quot;Base models: multinomial logit (MNL), nested logit (NL), multinomial probit (MNP)&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb295-28" title="28"><span class="st">  </span><span class="kw">kable_styling</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb295-29" title="29"><span class="st">  </span><span class="kw">add_header_above</span>(<span class="kw">c</span>(<span class="st">&quot; &quot;</span> =<span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;MNL&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;NL&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;MNP&quot;</span> =<span class="st"> </span><span class="dv">2</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb295-30" title="30"><span class="st">  </span><span class="kw">footnote</span>(<span class="dt">general =</span> <span class="kw">c</span>(<span class="kw">paste0</span>(<span class="st">&quot;Log-Likelihood: MNL = &quot;</span>, <span class="kw">round</span>(mnl0<span class="op">$</span>logLik[<span class="dv">1</span>], <span class="dt">digits =</span> <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb295-31" title="31">                            <span class="st">&quot;; NL = &quot;</span>, <span class="kw">round</span>(nl<span class="op">$</span>logLik[<span class="dv">1</span>], <span class="dt">digits =</span> <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb295-32" title="32">                            <span class="st">&quot;; MNP = &quot;</span>, <span class="kw">round</span>(prbt<span class="op">$</span>logLik[<span class="dv">1</span>], <span class="dt">digits =</span> <span class="dv">3</span>)),</a>
+<a class="sourceLine" id="cb295-33" title="33">                       <span class="kw">paste0</span>(<span class="st">&quot;McFadden Adjusted R^2: MNL = &quot;</span>, <span class="kw">round</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(mnl0<span class="op">$</span>logLik[<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span><span class="kw">nrow</span>(mnl0.summary)) <span class="op">/</span><span class="st"> </span>mnl_null<span class="op">$</span>logLik[<span class="dv">1</span>], <span class="dt">digits =</span> <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb295-34" title="34">                              <span class="st">&quot;; NL = &quot;</span>, <span class="kw">round</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(nl<span class="op">$</span>logLik[<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span><span class="kw">nrow</span>(nl.summary)) <span class="op">/</span><span class="st"> </span>mnl_null<span class="op">$</span>logLik[<span class="dv">1</span>], <span class="dt">digits =</span> <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb295-35" title="35">                              <span class="st">&quot;; MNP = &quot;</span>, <span class="kw">round</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(prbt<span class="op">$</span>logLik[<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span><span class="kw">nrow</span>(prbt.summary)) <span class="op">/</span><span class="st"> </span>mnl_null<span class="op">$</span>logLik[<span class="dv">1</span>], <span class="dt">digits =</span> <span class="dv">3</span>))))</a></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:table-base-models">Table 9.1: </span>Base models: multinomial logit (MNL), nested logit (NL), multinomial probit (MNP)
@@ -880,17 +907,19 @@ NA
 </tfoot>
 </table>
 <p>The nested logit model and the multinomial probit model, as discussed in the preceding chapters, accommodate correlations among alternatives. For instance, the inclusive value of the nested logit is in the <span class="math inline">\(0&lt;iv&lt;1\)</span> range, and it is significantly different from 1 (recall that when close to one, the model collapses to the multinomial logit model). The z-score to test whether it is different from one is:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(nl<span class="op">$</span>coefficients[<span class="st">&quot;iv&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">vcov</span>(nl)[<span class="st">&quot;iv&quot;</span>,<span class="st">&quot;iv&quot;</span>])</code></pre></div>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb296-1" title="1">(nl<span class="op">$</span>coefficients[<span class="st">&quot;iv&quot;</span>] <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">vcov</span>(nl)[<span class="st">&quot;iv&quot;</span>,<span class="st">&quot;iv&quot;</span>])</a></code></pre></div>
 <pre><code>##        iv 
 ## -5.370013</code></pre>
 <p>The multinomial probit model also has covariance components that are significant, although, as discussed before, it is not straightforward to interpret them.</p>
-<p>Based on the results of the models we can obtain some behavioral insights. For instance, we know that the ratio of two coefficients represents the <em>willingness to pay</em>. If we use the coefficients of the multinomial logit model in the example, we can see that the willingness to pay is 0.29 dollars per minute of travel time saved and 6.97 dollars per minute of waiting time saved: <span class="math display">\[
+<p>Based on the results of the models we can obtain some behavioral insights. For instance, we know that the ratio of two coefficients represents the <em>willingness to pay</em>. If we use the coefficients of the multinomial logit model in the example, we can see that the willingness to pay is 0.29 dollars per minute of travel time saved and 6.97 dollars per minute of waiting time saved:
+<span class="math display">\[
 \begin{array}{c}
 -\frac{\partial \text{vcost}}{\partial \text{travel}} = \frac{\beta_{travel}}{\beta_{vcost}} = \frac{-0.004}{-0.0139} \simeq 0.29 \\
 \\
 -\frac{\partial \text{vcost}}{\partial \text{wait}} = \frac{\beta_{wait}}{\beta_{vcost}} = \frac{-0.0969}{-0.0139} \simeq 6.97
 \end{array}
-\]</span> From this, we can see that travelers dislike waiting time more than travel time, and would be willing to pay more on a per-minute basis to reduce waiting time than travel time.</p>
+\]</span>
+From this, we can see that travelers dislike waiting time more than travel time, and would be willing to pay more on a per-minute basis to reduce waiting time than travel time.</p>
 <p>A question that remains outstanding with these models is whether there are taste variations in the population. For instance, we might wonder whether all decision-makers dislike travel time (or waiting time) identically, or whether there is heterogeneity (i.e., variability) in the way they respond to these attributes of the alternatives. Are younger people more impatient and value more highly their time? Are older people less patient? Or more affluent travelers, they might have a higher value of time.</p>
 <p>A straightforward way to answer these questions would be to incorporate covariates for the individual attributes that we think are useful/relevant to explain variations in taste. But, as with the unexplained correlations that contradict proportional substitution patterns, in empirical applications it is also possible that unexplained heterogeneity remains even after introducing available covariates.</p>
 <p>The objective of this chapter is to introduce a method, based on the logit model, to account for unobserved heterogeneity. The model is variously called <em>mixed logit</em>, <em>kernel logit</em>, and <em>logit with error components or random coefficients</em>. These labels result from the way in which a mix of distributions are used in the model to produce either error components or random coefficients. These distributions wrap around the kernel of a multinomial logit model. Technically, the multinomial probit model can deal with the issue of variations in taste, but as we have seen, this is technically quite demanding and the interpretation of the results is complicated too. The mixed logit presents similar computational challenges as the multinomial probit, since the distributions for the mixture require numerical integration. On the other hand, the results are often easier to interpret from a behavioral standpoint.</p>
@@ -898,7 +927,7 @@ NA
 <div id="how-to-use-this-note-7" class="section level2">
 <h2><span class="header-section-number">9.3</span> How to use this note</h2>
 <p>Remember that the source for the document you are reading is an R Notebook. Throughout the notes, you will find examples of code in segments of text called <em>chunks</em>. This is an example of a chunk:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="st">&quot;A piece of advice: never punch a shark in the mouth&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb298-1" title="1"><span class="kw">print</span>(<span class="st">&quot;A piece of advice: never punch a shark in the mouth&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;A piece of advice: never punch a shark in the mouth&quot;</code></pre>
 <p>If you are working with the Notebook version of the document, you can run the code by clicking the ‘play’ icon on the top right corner of the chunk. If you are reading the web-book version of the document, you will often see that the code has already been executed. You can still try it by copying and pasting into your R or RStudio console.</p>
 </div>
@@ -915,23 +944,25 @@ NA
 <div id="suggested-readings-7" class="section level2">
 <h2><span class="header-section-number">9.5</span> Suggested readings</h2>
 <ul>
-<li>Ben-Akiva, M. Lerman, <span class="citation">(<a href="#ref-Benakiva1985discrete">1985</a>)</span> Discrete Choice Analysis: Theory and Applications to Travel Demand, <strong>Chapter 5, pp. 124-125</strong>, MIT Press.</li>
-<li>Hensher, D.A., Rose, J.M., Greene, W.H <span class="citation">(<a href="#ref-hensher2005applied">2005</a>)</span> Applied Choice Analysis: A Primer, <strong>Chapters 15 and 16</strong>, Cambridge University Press.</li>
-<li>Louviere, J.J., Hensher, D.A., Swait, J.D. <span class="citation">(<a href="#ref-Louviere2000stated">2000</a>)</span> Stated Choice Methods: Analysis and Application, <strong>Chapter 6, pp. 199-205</strong>, Cambridge University Press.</li>
-<li>Ortuzar JD, Willumsen LG <span class="citation">(<a href="#ref-Ortuzar2011modelling">2011</a>)</span> Modelling Transport, Fourth Edition, <strong>Chapter 7, pp. 250-256</strong>, John Wiley and Sons.</li>
-<li>Train <span class="citation">(<a href="#ref-Train2009discrete">2009</a>)</span> Discrete Choice Methods with Simulation, Second Edition, <strong>Chapter 6 and Chapter 11</strong>, Cambridge University Press.</li>
+<li>Ben-Akiva, M. Lerman, <span class="citation">(<a href="#ref-Benakiva1985discrete" role="doc-biblioref">1985</a>)</span> Discrete Choice Analysis: Theory and Applications to Travel Demand, <strong>Chapter 5, pp. 124-125</strong>, MIT Press.</li>
+<li>Hensher, D.A., Rose, J.M., Greene, W.H <span class="citation">(<a href="#ref-hensher2005applied" role="doc-biblioref">2005</a>)</span> Applied Choice Analysis: A Primer, <strong>Chapters 15 and 16</strong>, Cambridge University Press.</li>
+<li>Louviere, J.J., Hensher, D.A., Swait, J.D. <span class="citation">(<a href="#ref-Louviere2000stated" role="doc-biblioref">2000</a>)</span> Stated Choice Methods: Analysis and Application, <strong>Chapter 6, pp. 199-205</strong>, Cambridge University Press.</li>
+<li>Ortuzar JD, Willumsen LG <span class="citation">(<a href="#ref-Ortuzar2011modelling" role="doc-biblioref">2011</a>)</span> Modelling Transport, Fourth Edition, <strong>Chapter 7, pp. 250-256</strong>, John Wiley and Sons.</li>
+<li>Train <span class="citation">(<a href="#ref-Train2009discrete" role="doc-biblioref">2009</a>)</span> Discrete Choice Methods with Simulation, Second Edition, <strong>Chapter 6 and Chapter 11</strong>, Cambridge University Press.</li>
 </ul>
 </div>
 <div id="mixed-logit" class="section level2">
 <h2><span class="header-section-number">9.6</span> Mixed logit</h2>
-<p>To introduce the mixed logit model, we will begin with a simple situation with two alternatives - say, do nothing (<span class="math inline">\(DN\)</span>) and buy a new phone (<span class="math inline">\(NP\)</span>). One way to investigate taste variations in the population is to allow each decision-maker to have their own coefficient for at least some variables. This is illustrated by means of the following utility functions (notice that the utilities have alternative-level attributes only): <span class="math display">\[
+<p>To introduce the mixed logit model, we will begin with a simple situation with two alternatives - say, do nothing (<span class="math inline">\(DN\)</span>) and buy a new phone (<span class="math inline">\(NP\)</span>). One way to investigate taste variations in the population is to allow each decision-maker to have their own coefficient for at least some variables. This is illustrated by means of the following utility functions (notice that the utilities have alternative-level attributes only):
+<span class="math display">\[
 \begin{array}{ll}
   U_{i,DN} =&amp; \theta_{DN} &amp;+ \alpha_{ic}\text{cost}_{DN} + \alpha_{is}\text{speed}_{DN} &amp;+ \mu_{id} \text{duration}_{DN} + \mu_{it} \text{time}_{DN} &amp;+ \epsilon_{i,DN}\\
   U_{i,NP} =&amp; &amp;+\alpha_{ic}\text{cost}_{NP} + \alpha_{is}\text{speed}_{NP}&amp; + \mu_{id} \text{duration}_{NP} + \mu_{it} \text{time}_{NP} &amp;+ \epsilon_{i,NP}\\
 \end{array} 
 \]</span></p>
 <p>As seen above, the coefficients are <em>specific to decision-maker</em> <span class="math inline">\(i\)</span>. Clearly, estimating a coefficient for <em>each</em> decision-maker is not possible due to the incidental parameter problem: the number of parameters approaches the size of the sample. What we can do, instead, is to define the parameters in some parsimonious way that requires fewer than <span class="math inline">\(N\)</span> coefficients (i.e., the number of decision-makers in the sample).</p>
-<p>To do this, suppose that we select some coefficients for expansion in the following manner: <span class="math display">\[
+<p>To do this, suppose that we select some coefficients for expansion in the following manner:
+<span class="math display">\[
 \begin{array}{ll}
   \alpha_{ic}=a_c + \eta_{ic}\\
   \alpha_{is}=a_s + \eta_{is}
@@ -949,9 +980,12 @@ NA
     \sigma_{\eta,cs}       &amp; \sigma_{\eta,ss}
 \end{bmatrix}
 \]</span></p>
-<p>Next, suppose that the terms <span class="math inline">\(\mu_{id}\)</span> and <span class="math inline">\(\mu_{it}\)</span> are random terms drawn from, say again, a bivariate random normal distribution: <span class="math display">\[
+<p>Next, suppose that the terms <span class="math inline">\(\mu_{id}\)</span> and <span class="math inline">\(\mu_{it}\)</span> are random terms drawn from, say again, a bivariate random normal distribution:
+<span class="math display">\[
 \mu \sim N(0,\Sigma_{\mu})
-\]</span> with: <span class="math display">\[
+\]</span>
+with:
+<span class="math display">\[
 \Sigma_{\mu} =
 \begin{bmatrix}
     \sigma_{\mu,dd}       &amp; \sigma_{\mu,td} \\
@@ -960,42 +994,59 @@ NA
 \]</span></p>
 <p>Finally, assume that the terms <span class="math inline">\(\epsilon\)</span> follow the Extreme Value Type I distribution.</p>
 <p>There are a few situations that can be derived from this setup as follows.</p>
-<p>First, imposing the largest number of restrictions to the parameters, we have <span class="math inline">\(\eta_{ic}=\eta_{is}=\mu_{id}=\mu_{it}=0\)</span>. It follows then that the utility functions become: <span class="math display">\[
+<p>First, imposing the largest number of restrictions to the parameters, we have <span class="math inline">\(\eta_{ic}=\eta_{is}=\mu_{id}=\mu_{it}=0\)</span>. It follows then that the utility functions become:
+<span class="math display">\[
 \begin{array}{ll}
   U_{i,DN} =&amp; \theta_{DN} &amp;+ a_{c}\text{cost}_{DN} + a_{s}\text{speed}_{DN} &amp;+ \epsilon_{i,DN}\\
   U_{i,NP} =&amp; &amp;+a_{c}\text{cost}_{NP} + a_{s}\text{speed}_{NP}&amp; + \epsilon_{i,NP}\\
 \end{array}
-\]</span> and clearly the model collapses into the logit model.</p>
-<p>Next, we could restrict some of the parameters, say <span class="math inline">\(\mu_{id}=\mu_{it}=0\)</span>, the the utility functions are: <span class="math display">\[
+\]</span>
+and clearly the model collapses into the logit model.</p>
+<p>Next, we could restrict some of the parameters, say <span class="math inline">\(\mu_{id}=\mu_{it}=0\)</span>, the the utility functions are:
+<span class="math display">\[
 \begin{array}{ll}
   U_{i,DN} =&amp; \theta_{DN} &amp;+ \alpha_{ic}\text{cost}_{DN} + \alpha_{is}\text{speed}_{DN} &amp;+ \epsilon_{i,DN}\\
   U_{i,NP} =&amp; &amp;+\alpha_{ic}\text{cost}_{NP} + \alpha_{is}\text{speed}_{NP} &amp;+ \epsilon_{i,NP}\\
 \end{array}
-\]</span> This is called a model with <em>random coefficients</em>.</p>
-<p>Alternatively, we could restrict parameters so that <span class="math inline">\(\eta_{ic}=\eta_{is}=0\)</span>, in which case the utility functions become: <span class="math display">\[
+\]</span>
+This is called a model with <em>random coefficients</em>.</p>
+<p>Alternatively, we could restrict parameters so that <span class="math inline">\(\eta_{ic}=\eta_{is}=0\)</span>, in which case the utility functions become:
+<span class="math display">\[
 \begin{array}{ll}
   U_{i,DN} =&amp; \theta_{DN} &amp;+ a_{c}\text{cost}_{DN} + a_{s}\text{speed}_{DN} &amp;+ \mu_{id} \text{duration}_{DN} + \mu_{it} \text{time}_{DN} &amp;+ \epsilon_{i,DN}\\
   U_{i,NP} =&amp; &amp;+a_{c}\text{cost}_{NP} + a_{s}\text{speed}_{NP}&amp; + \mu_{id} \text{duration}_{NP} + \mu_{it} \text{time}_{NP} &amp;+ \epsilon_{i,NP}\\
 \end{array} 
-\]</span> The result is the <em>error components model</em>.</p>
+\]</span>
+The result is the <em>error components model</em>.</p>
 <p>In fact, the error components and the random coefficients are equivalent depending on whether <span class="math inline">\(a_c=a_s=0\)</span> or conversely, whether constants are added to the error components.</p>
-<p>More generally, we can express the utility of alternative <span class="math inline">\(j\)</span> for decision-maker <span class="math inline">\(i\)</span> as follows: <span class="math display">\[
+<p>More generally, we can express the utility of alternative <span class="math inline">\(j\)</span> for decision-maker <span class="math inline">\(i\)</span> as follows:
+<span class="math display">\[
 U_{ij}=\theta&#39;w_{ij} + \alpha_i&#39;x_{ij} + \mu&#39;_iz_{ij}+\epsilon_{ij}
-\]</span> where <span class="math inline">\(\theta\)</span> is a vector of fixed parameters associated with attributes <span class="math inline">\(w_{ij}\)</span>, <span class="math inline">\(\alpha_i\)</span> is a vector of random coefficients associated with attributes <span class="math inline">\(x_{ij}\)</span>, and <span class="math inline">\(\mu_i\)</span> is a vector of error components associated with attributes <span class="math inline">\(z_{ij}\)</span>. As we saw above, there are several ways of specifying the coefficients to give error components or random coefficients. These terms, in turn, depend on the parsimonious use of random distributions. For simplicity, then, lets say that the utility is written as follows: <span class="math display">\[
+\]</span>
+where <span class="math inline">\(\theta\)</span> is a vector of fixed parameters associated with attributes <span class="math inline">\(w_{ij}\)</span>, <span class="math inline">\(\alpha_i\)</span> is a vector of random coefficients associated with attributes <span class="math inline">\(x_{ij}\)</span>, and <span class="math inline">\(\mu_i\)</span> is a vector of error components associated with attributes <span class="math inline">\(z_{ij}\)</span>. As we saw above, there are several ways of specifying the coefficients to give error components or random coefficients. These terms, in turn, depend on the parsimonious use of random distributions. For simplicity, then, lets say that the utility is written as follows:
+<span class="math display">\[
 U_{ij}=\beta_i&#39;x_{ij} + \epsilon_{ij} = \beta(\sigma)&#39;x_{ij} + \epsilon_{ij} = V_{ij} + \epsilon_{ij} 
-\]</span> where <span class="math inline">\(\sigma\)</span> is the collection of parameters that define the distributions used in the specification of the utility function. This means that, following the usual approach, we can obtain the following model for the probability of choosing alternative <span class="math inline">\(j\)</span>: <span class="math display">\[
+\]</span>
+where <span class="math inline">\(\sigma\)</span> is the collection of parameters that define the distributions used in the specification of the utility function. This means that, following the usual approach, we can obtain the following model for the probability of choosing alternative <span class="math inline">\(j\)</span>:
+<span class="math display">\[
 P_j=\frac{e^{V_{ij}}}{\sum_k e^{V_{ik}}} = \frac{e^{\beta_i&#39;x_{ij}}}{\sum_k e^{\beta_i&#39;x_{ik}}} = \frac{e^{\beta(\sigma)&#39;x_{ij}}}{\sum_k e^{\beta(\sigma)&#39;x_{ik}}}
 \]</span></p>
 <p>Clearly, when there are no random coefficients or error terms, <span class="math inline">\(\beta(\sigma)=\beta\)</span>, which is simply a set of fixed coefficients, and the model is simply the multinomial logit, which can be estimated using the usual approach.</p>
-<p>On the other hand, when we add mixtures of distributions to obtain the mixed logit (with random coefficients and/or error components), we typically do not know a priori the parameters of the distributions, and therefore the probability needs to be calculated as a weighted average of the possible values of <span class="math inline">\(\beta_i\)</span>: <span class="math display">\[
+<p>On the other hand, when we add mixtures of distributions to obtain the mixed logit (with random coefficients and/or error components), we typically do not know a priori the parameters of the distributions, and therefore the probability needs to be calculated as a weighted average of the possible values of <span class="math inline">\(\beta_i\)</span>:
+<span class="math display">\[
 P_j = \int\frac{e^{\beta_i&#39;x_{ij}}}{\sum_k e^{\beta_i&#39;x_{ik}}} \phi(\beta|\sigma)d\beta  = \int \frac{e^{\beta(\sigma)&#39;x_{ij}}}{\sum_k e^{\beta(\sigma)&#39;x_{ik}}}\phi(\beta|\sigma)d\beta
-\]</span> where the integral provides the weighted average given a mixing distribution <span class="math inline">\(\phi\)</span>.</p>
-<p>A consequence of mixing distributions is that despite the mixed logit, despite having a logit kernel, does not display proportional substitution. To see this, recall that the odds-ratio of the multinomial logit model was: <span class="math display">\[
+\]</span>
+where the integral provides the weighted average given a mixing distribution <span class="math inline">\(\phi\)</span>.</p>
+<p>A consequence of mixing distributions is that despite the mixed logit, despite having a logit kernel, does not display proportional substitution. To see this, recall that the odds-ratio of the multinomial logit model was:
+<span class="math display">\[
 \frac{P_j}{P_m}=\frac{\frac{e^{V_{ij}}}{\sum_k e^{V_{ik}}}}{\frac{e^{V_{im}}}{\sum_k e^{V_{ik}}}} = \frac{e^{V_{ij}}}{e^{V_{im}}} 
-\]</span> The above is the independence of irrelevant alternatives property: the odds-ratio of a given pair of alternatives does not dependend on the utilities/attributes of any other alternatives.</p>
-<p>However, in the case of the mixed logit, the denominators of the probabilities are inside the integral and do not cancel each other: <span class="math display">\[
+\]</span>
+The above is the independence of irrelevant alternatives property: the odds-ratio of a given pair of alternatives does not dependend on the utilities/attributes of any other alternatives.</p>
+<p>However, in the case of the mixed logit, the denominators of the probabilities are inside the integral and do not cancel each other:
+<span class="math display">\[
 \frac{P_j}{P_m}=\frac{\int\frac{e^{V_{ij}}}{\sum_k e^{V_{ik}}}\phi(\beta|\sigma)d\beta}{\int\frac{e^{V_{im}}}{\sum_k e^{V_{ik}}}\phi(\beta|\sigma)d\beta} 
-\]</span> As a consequence, the odds-ratio depends on all alternatives, and not only alternatives <span class="math inline">\(j\)</span> and <span class="math inline">\(m\)</span>.</p>
+\]</span>
+As a consequence, the odds-ratio depends on all alternatives, and not only alternatives <span class="math inline">\(j\)</span> and <span class="math inline">\(m\)</span>.</p>
 </div>
 <div id="estimation-1" class="section level2">
 <h2><span class="header-section-number">9.7</span> Estimation</h2>
@@ -1004,14 +1055,17 @@ P_j = \int\frac{e^{\beta_i&#39;x_{ij}}}{\sum_k e^{\beta_i&#39;x_{ik}}} \phi(\bet
 <div id="practical-example" class="section level2">
 <h2><span class="header-section-number">9.8</span> Practical example</h2>
 <p>For a practical example, we estimate three mixed logit models using the variables vcost (vehicle cost), travel (travel time in min), and wait (waiting time in minutes). The difference between the models is which variables have random coefficients. The models are as follows:</p>
-<p>Model 1 (MIXL T), a model with a random coefficient for <em>travel</em> time: <span class="math display">\[
+<p>Model 1 (MIXL T), a model with a random coefficient for <em>travel</em> time:
+<span class="math display">\[
 \begin{array}{lll}
 V_{i,air} &amp;= &amp; + \beta_{vcost}vcost_{air} + \beta_{wait}wait_{air} + \beta_{i,travel}travel_{air}\\
 V_{i,train} &amp;=\beta_{train} &amp; + \beta_{vcost}vcost_{train} + \beta_{wait}wait_{train} + \beta_{i,travel}travel_{train}\\
 V_{i,bus} &amp;=\beta_{bus} &amp;+ \beta_{vcost}vcost_{bus}+\beta_{wait}wait_{bus}+\beta_{i,travel}travel_{bus}\\
 V_{i,car} &amp;=\beta_{car} &amp;+ \beta_{vcost}vcost_{bus}+\beta_{wait}wait_{bus}+\beta_{i,travel}travel_{bus}
 \end{array}
-\]</span> Model 2 (MIXL W), a model with a random coefficient for <em>wait</em> time: <span class="math display">\[
+\]</span>
+Model 2 (MIXL W), a model with a random coefficient for <em>wait</em> time:
+<span class="math display">\[
 \begin{array}{lll}
 V_{i,air} &amp;= &amp; + \beta_{vcost}vcost_{air} + \beta_{i,wait}wait_{air} + \beta_{travel}travel_{air}\\
 V_{i,train} &amp;=\beta_{train} &amp; + \beta_{vcost}vcost_{train} + \beta_{i,wait}wait_{train} + \beta_{travel}travel_{train}\\
@@ -1019,7 +1073,8 @@ V_{i,bus} &amp;=\beta_{bus} &amp;+ \beta_{vcost}vcost_{bus}+\beta_{i,wait}wait_{
 V_{i,car} &amp;=\beta_{car} &amp;+ \beta_{vcost}vcost_{car}+\beta_{i,wait}wait_{car}+\beta_{travel}travel_{car}
 \end{array}
 \]</span></p>
-<p>And Model 2 (MIXL W), a model with random coefficients for both <em>travel</em> and <em>wait</em> time: <span class="math display">\[
+<p>And Model 2 (MIXL W), a model with random coefficients for both <em>travel</em> and <em>wait</em> time:
+<span class="math display">\[
 \begin{array}{lll}
 V_{i,air} &amp;= &amp; + \beta_{vcost}vcost_{air} + \beta_{i,wait}wait_{air} + \beta_{i,travel}travel_{air}\\
 V_{i,train} &amp;=\beta_{train} &amp; + \beta_{vcost}vcost_{train} + \beta_{i,wait}wait_{train} + \beta_{i,travel}travel_{train}\\
@@ -1027,7 +1082,8 @@ V_{i,bus} &amp;=\beta_{bus} &amp;+ \beta_{vcost}vcost_{bus}+\beta_{i,wait}wait_{
 V_{i,car} &amp;=\beta_{car} &amp;+ \beta_{vcost}vcost_{car}+\beta_{i,wait}wait_{car}+\beta_{i,travel}travel_{car}
 \end{array}
 \]</span></p>
-<p>The random coefficients are defined in the following manner, with the random components <span class="math inline">\(\eta\)</span> based on the normal distributions: <span class="math display">\[
+<p>The random coefficients are defined in the following manner, with the random components <span class="math inline">\(\eta\)</span> based on the normal distributions:
+<span class="math display">\[
 \begin{array}{l}
 \beta_{i,travel} = b_{travel} + \eta_{i,travel}\\
 \text{and}\\
@@ -1035,69 +1091,69 @@ V_{i,car} &amp;=\beta_{car} &amp;+ \beta_{vcost}vcost_{car}+\beta_{i,wait}wait_{
 \end{array}
 \]</span></p>
 <p>The code to estimate the models is as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># MIXL T</span>
-mixl_t &lt;-<span class="st"> </span><span class="kw">gmnl</span>(choice <span class="op">~</span><span class="st"> </span>vcost <span class="op">+</span><span class="st"> </span>travel <span class="op">+</span><span class="st"> </span>wait <span class="op">|</span><span class="st"> </span><span class="dv">1</span>,
-             <span class="dt">data =</span> TM, <span class="dt">model =</span> <span class="st">&quot;mixl&quot;</span>, <span class="dt">ranp =</span> <span class="kw">c</span>(<span class="dt">travel =</span> <span class="st">&quot;n&quot;</span>), <span class="dt">R =</span> <span class="dv">50</span>)</code></pre></div>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb300-1" title="1"><span class="co"># MIXL T</span></a>
+<a class="sourceLine" id="cb300-2" title="2">mixl_t &lt;-<span class="st"> </span><span class="kw">gmnl</span>(choice <span class="op">~</span><span class="st"> </span>vcost <span class="op">+</span><span class="st"> </span>travel <span class="op">+</span><span class="st"> </span>wait <span class="op">|</span><span class="st"> </span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb300-3" title="3">             <span class="dt">data =</span> TM, <span class="dt">model =</span> <span class="st">&quot;mixl&quot;</span>, <span class="dt">ranp =</span> <span class="kw">c</span>(<span class="dt">travel =</span> <span class="st">&quot;n&quot;</span>), <span class="dt">R =</span> <span class="dv">50</span>)</a></code></pre></div>
 <pre><code>## Estimating MIXL model</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mixl_t<span class="op">$</span>logLik<span class="op">$</span>message</code></pre></div>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb302-1" title="1">mixl_t<span class="op">$</span>logLik<span class="op">$</span>message</a></code></pre></div>
 <pre><code>## [1] &quot;successful convergence &quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#summary(mixl_t)</span>
-
-<span class="co"># MIXL W</span>
-mixl_w &lt;-<span class="st"> </span><span class="kw">gmnl</span>(choice <span class="op">~</span><span class="st"> </span>vcost <span class="op">+</span><span class="st"> </span>travel <span class="op">+</span><span class="st"> </span>wait <span class="op">|</span><span class="st"> </span><span class="dv">1</span>,
-             <span class="dt">data =</span> TM, <span class="dt">model =</span> <span class="st">&quot;mixl&quot;</span>, <span class="dt">ranp =</span> <span class="kw">c</span>(<span class="dt">wait =</span> <span class="st">&quot;n&quot;</span>), <span class="dt">R =</span> <span class="dv">50</span>)</code></pre></div>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb304-1" title="1"><span class="co">#summary(mixl_t)</span></a>
+<a class="sourceLine" id="cb304-2" title="2"></a>
+<a class="sourceLine" id="cb304-3" title="3"><span class="co"># MIXL W</span></a>
+<a class="sourceLine" id="cb304-4" title="4">mixl_w &lt;-<span class="st"> </span><span class="kw">gmnl</span>(choice <span class="op">~</span><span class="st"> </span>vcost <span class="op">+</span><span class="st"> </span>travel <span class="op">+</span><span class="st"> </span>wait <span class="op">|</span><span class="st"> </span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb304-5" title="5">             <span class="dt">data =</span> TM, <span class="dt">model =</span> <span class="st">&quot;mixl&quot;</span>, <span class="dt">ranp =</span> <span class="kw">c</span>(<span class="dt">wait =</span> <span class="st">&quot;n&quot;</span>), <span class="dt">R =</span> <span class="dv">50</span>)</a></code></pre></div>
 <pre><code>## Estimating MIXL model</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mixl_w<span class="op">$</span>logLik<span class="op">$</span>message</code></pre></div>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb306-1" title="1">mixl_w<span class="op">$</span>logLik<span class="op">$</span>message</a></code></pre></div>
 <pre><code>## [1] &quot;successful convergence &quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#summary(mixl)</span>
-
-<span class="co"># MIXL T&amp;W</span>
-mixl &lt;-<span class="st"> </span><span class="kw">gmnl</span>(choice <span class="op">~</span><span class="st"> </span>vcost <span class="op">+</span><span class="st"> </span>travel <span class="op">+</span><span class="st"> </span>wait <span class="op">|</span><span class="st"> </span><span class="dv">1</span>,
-             <span class="dt">data =</span> TM, 
-             <span class="dt">model =</span> <span class="st">&quot;mixl&quot;</span>, 
-             <span class="dt">ranp =</span> <span class="kw">c</span>(<span class="dt">travel =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">wait =</span> <span class="st">&quot;n&quot;</span>), 
-             <span class="dt">R =</span> <span class="dv">60</span>)</code></pre></div>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb308-1" title="1"><span class="co">#summary(mixl)</span></a>
+<a class="sourceLine" id="cb308-2" title="2"></a>
+<a class="sourceLine" id="cb308-3" title="3"><span class="co"># MIXL T&amp;W</span></a>
+<a class="sourceLine" id="cb308-4" title="4">mixl &lt;-<span class="st"> </span><span class="kw">gmnl</span>(choice <span class="op">~</span><span class="st"> </span>vcost <span class="op">+</span><span class="st"> </span>travel <span class="op">+</span><span class="st"> </span>wait <span class="op">|</span><span class="st"> </span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb308-5" title="5">             <span class="dt">data =</span> TM, </a>
+<a class="sourceLine" id="cb308-6" title="6">             <span class="dt">model =</span> <span class="st">&quot;mixl&quot;</span>, </a>
+<a class="sourceLine" id="cb308-7" title="7">             <span class="dt">ranp =</span> <span class="kw">c</span>(<span class="dt">travel =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">wait =</span> <span class="st">&quot;n&quot;</span>), </a>
+<a class="sourceLine" id="cb308-8" title="8">             <span class="dt">R =</span> <span class="dv">60</span>)</a></code></pre></div>
 <pre><code>## Estimating MIXL model</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mixl<span class="op">$</span>logLik<span class="op">$</span>message</code></pre></div>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb310-1" title="1">mixl<span class="op">$</span>logLik<span class="op">$</span>message</a></code></pre></div>
 <pre><code>## [1] &quot;successful convergence &quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#summary(mixl)</span></code></pre></div>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb312-1" title="1"><span class="co">#summary(mixl)</span></a></code></pre></div>
 <p>The models are summarized in Table (<span class="citation">(<span class="citeproc-not-found" data-reference-id="table-mixed-logit-models"><strong>???</strong></span>)</span>) below:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Estimate a constants only model to calculate McFadden&#39;s _adjusted_ rho2</span>
-mixl0 &lt;-<span class="st"> </span><span class="kw">gmnl</span>(choice <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,
-             <span class="dt">data =</span> TM, 
-             <span class="dt">model =</span> <span class="st">&quot;mnl&quot;</span>)
-
-mixl_t.summary &lt;-<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">data.frame</span>(<span class="kw">summary</span>(mixl_t)<span class="op">$</span>CoefTable), <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">transmute</span>(Variable, Estimate, <span class="dt">pval =</span> <span class="st">`</span><span class="dt">Pr...z..</span><span class="st">`</span>)
-
-mixl_w.summary &lt;-<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">data.frame</span>(<span class="kw">summary</span>(mixl_w)<span class="op">$</span>CoefTable), <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">transmute</span>(Variable, Estimate, <span class="dt">pval =</span> <span class="st">`</span><span class="dt">Pr...z..</span><span class="st">`</span>)
-
-mixl.summary &lt;-<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">data.frame</span>(<span class="kw">summary</span>(mixl)<span class="op">$</span>CoefTable), <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">transmute</span>(Variable, Estimate, <span class="dt">pval =</span> <span class="st">`</span><span class="dt">Pr...z..</span><span class="st">`</span>)
-
-mixl_table_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">full_join</span>(mixl_t.summary, mixl_w.summary, <span class="dt">by =</span> <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">full_join</span>(mixl.summary, <span class="dt">by =</span> <span class="st">&quot;Variable&quot;</span>)
-
-<span class="kw">kable</span>(mixl_table_<span class="dv">1</span>, 
-      <span class="st">&quot;html&quot;</span>,
-      <span class="dt">digits =</span> <span class="dv">4</span>,
-      <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Variable&quot;</span>,
-                    <span class="st">&quot;Estimate&quot;</span>,
-                    <span class="st">&quot;p-value&quot;</span>,
-                    <span class="st">&quot;Estimate&quot;</span>,
-                    <span class="st">&quot;p-value&quot;</span>,
-                    <span class="st">&quot;Estimate&quot;</span>,
-                    <span class="st">&quot;p-value&quot;</span>),
-      <span class="dt">caption =</span> <span class="st">&quot;Mixed logit models&quot;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">kable_styling</span>() <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">add_header_above</span>(<span class="kw">c</span>(<span class="st">&quot; &quot;</span> =<span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;MIXL T&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;MIXL W&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;MIXL T&amp;W&quot;</span> =<span class="st"> </span><span class="dv">2</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">footnote</span>(<span class="dt">general =</span> <span class="kw">c</span>(<span class="kw">paste0</span>(<span class="st">&quot;Log-Likelihood: MIXL T = &quot;</span>, <span class="kw">round</span>(mixl_t<span class="op">$</span>logLik<span class="op">$</span>maximum, <span class="dt">digits =</span> <span class="dv">3</span>),
-                            <span class="st">&quot;; MIXL W = &quot;</span>, <span class="kw">round</span>(mixl_w<span class="op">$</span>logLik<span class="op">$</span>maximum, <span class="dt">digits =</span> <span class="dv">3</span>),
-                            <span class="st">&quot;; MIXL T&amp;W = &quot;</span>, <span class="kw">round</span>(mixl<span class="op">$</span>logLik<span class="op">$</span>maximum, <span class="dt">digits =</span> <span class="dv">3</span>)),
-                       <span class="kw">paste0</span>(<span class="st">&quot;McFadden Adjusted R^2: MIXL T = &quot;</span>, <span class="kw">round</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(mixl_t<span class="op">$</span>logLik<span class="op">$</span>maximum <span class="op">-</span><span class="st"> </span><span class="kw">nrow</span>(mixl_t.summary)) <span class="op">/</span><span class="st"> </span>mixl0<span class="op">$</span>logLik<span class="op">$</span>maximum, <span class="dt">digits =</span> <span class="dv">3</span>),
-                              <span class="st">&quot;; MIXL W = &quot;</span>, <span class="kw">round</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(mixl_w<span class="op">$</span>logLik<span class="op">$</span>maximum <span class="op">-</span><span class="st"> </span><span class="kw">nrow</span>(mixl_w.summary)) <span class="op">/</span><span class="st"> </span>mixl0<span class="op">$</span>logLik<span class="op">$</span>maximum, <span class="dt">digits =</span> <span class="dv">3</span>),
-                              <span class="st">&quot;; MIXL T&amp;W = &quot;</span>, <span class="kw">round</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(mixl<span class="op">$</span>logLik<span class="op">$</span>maximum <span class="op">-</span><span class="st"> </span><span class="kw">nrow</span>(mixl.summary)) <span class="op">/</span><span class="st"> </span>mixl0<span class="op">$</span>logLik<span class="op">$</span>maximum, <span class="dt">digits =</span> <span class="dv">3</span>))))</code></pre></div>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb313-1" title="1"><span class="co"># Estimate a constants only model to calculate McFadden&#39;s _adjusted_ rho2</span></a>
+<a class="sourceLine" id="cb313-2" title="2">mixl0 &lt;-<span class="st"> </span><span class="kw">gmnl</span>(choice <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb313-3" title="3">             <span class="dt">data =</span> TM, </a>
+<a class="sourceLine" id="cb313-4" title="4">             <span class="dt">model =</span> <span class="st">&quot;mnl&quot;</span>)</a>
+<a class="sourceLine" id="cb313-5" title="5"></a>
+<a class="sourceLine" id="cb313-6" title="6">mixl_t.summary &lt;-<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">data.frame</span>(<span class="kw">summary</span>(mixl_t)<span class="op">$</span>CoefTable), <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb313-7" title="7"><span class="st">  </span><span class="kw">transmute</span>(Variable, Estimate, <span class="dt">pval =</span> <span class="st">`</span><span class="dt">Pr...z..</span><span class="st">`</span>)</a>
+<a class="sourceLine" id="cb313-8" title="8"></a>
+<a class="sourceLine" id="cb313-9" title="9">mixl_w.summary &lt;-<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">data.frame</span>(<span class="kw">summary</span>(mixl_w)<span class="op">$</span>CoefTable), <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb313-10" title="10"><span class="st">  </span><span class="kw">transmute</span>(Variable, Estimate, <span class="dt">pval =</span> <span class="st">`</span><span class="dt">Pr...z..</span><span class="st">`</span>)</a>
+<a class="sourceLine" id="cb313-11" title="11"></a>
+<a class="sourceLine" id="cb313-12" title="12">mixl.summary &lt;-<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">data.frame</span>(<span class="kw">summary</span>(mixl)<span class="op">$</span>CoefTable), <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb313-13" title="13"><span class="st">  </span><span class="kw">transmute</span>(Variable, Estimate, <span class="dt">pval =</span> <span class="st">`</span><span class="dt">Pr...z..</span><span class="st">`</span>)</a>
+<a class="sourceLine" id="cb313-14" title="14"></a>
+<a class="sourceLine" id="cb313-15" title="15">mixl_table_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">full_join</span>(mixl_t.summary, mixl_w.summary, <span class="dt">by =</span> <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb313-16" title="16"><span class="st">  </span><span class="kw">full_join</span>(mixl.summary, <span class="dt">by =</span> <span class="st">&quot;Variable&quot;</span>)</a>
+<a class="sourceLine" id="cb313-17" title="17"></a>
+<a class="sourceLine" id="cb313-18" title="18"><span class="kw">kable</span>(mixl_table_<span class="dv">1</span>, </a>
+<a class="sourceLine" id="cb313-19" title="19">      <span class="st">&quot;html&quot;</span>,</a>
+<a class="sourceLine" id="cb313-20" title="20">      <span class="dt">digits =</span> <span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb313-21" title="21">      <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Variable&quot;</span>,</a>
+<a class="sourceLine" id="cb313-22" title="22">                    <span class="st">&quot;Estimate&quot;</span>,</a>
+<a class="sourceLine" id="cb313-23" title="23">                    <span class="st">&quot;p-value&quot;</span>,</a>
+<a class="sourceLine" id="cb313-24" title="24">                    <span class="st">&quot;Estimate&quot;</span>,</a>
+<a class="sourceLine" id="cb313-25" title="25">                    <span class="st">&quot;p-value&quot;</span>,</a>
+<a class="sourceLine" id="cb313-26" title="26">                    <span class="st">&quot;Estimate&quot;</span>,</a>
+<a class="sourceLine" id="cb313-27" title="27">                    <span class="st">&quot;p-value&quot;</span>),</a>
+<a class="sourceLine" id="cb313-28" title="28">      <span class="dt">caption =</span> <span class="st">&quot;Mixed logit models&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb313-29" title="29"><span class="st">  </span><span class="kw">kable_styling</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb313-30" title="30"><span class="st">  </span><span class="kw">add_header_above</span>(<span class="kw">c</span>(<span class="st">&quot; &quot;</span> =<span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;MIXL T&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;MIXL W&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;MIXL T&amp;W&quot;</span> =<span class="st"> </span><span class="dv">2</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb313-31" title="31"><span class="st">  </span><span class="kw">footnote</span>(<span class="dt">general =</span> <span class="kw">c</span>(<span class="kw">paste0</span>(<span class="st">&quot;Log-Likelihood: MIXL T = &quot;</span>, <span class="kw">round</span>(mixl_t<span class="op">$</span>logLik<span class="op">$</span>maximum, <span class="dt">digits =</span> <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb313-32" title="32">                            <span class="st">&quot;; MIXL W = &quot;</span>, <span class="kw">round</span>(mixl_w<span class="op">$</span>logLik<span class="op">$</span>maximum, <span class="dt">digits =</span> <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb313-33" title="33">                            <span class="st">&quot;; MIXL T&amp;W = &quot;</span>, <span class="kw">round</span>(mixl<span class="op">$</span>logLik<span class="op">$</span>maximum, <span class="dt">digits =</span> <span class="dv">3</span>)),</a>
+<a class="sourceLine" id="cb313-34" title="34">                       <span class="kw">paste0</span>(<span class="st">&quot;McFadden Adjusted R^2: MIXL T = &quot;</span>, <span class="kw">round</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(mixl_t<span class="op">$</span>logLik<span class="op">$</span>maximum <span class="op">-</span><span class="st"> </span><span class="kw">nrow</span>(mixl_t.summary)) <span class="op">/</span><span class="st"> </span>mixl0<span class="op">$</span>logLik<span class="op">$</span>maximum, <span class="dt">digits =</span> <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb313-35" title="35">                              <span class="st">&quot;; MIXL W = &quot;</span>, <span class="kw">round</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(mixl_w<span class="op">$</span>logLik<span class="op">$</span>maximum <span class="op">-</span><span class="st"> </span><span class="kw">nrow</span>(mixl_w.summary)) <span class="op">/</span><span class="st"> </span>mixl0<span class="op">$</span>logLik<span class="op">$</span>maximum, <span class="dt">digits =</span> <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb313-36" title="36">                              <span class="st">&quot;; MIXL T&amp;W = &quot;</span>, <span class="kw">round</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(mixl<span class="op">$</span>logLik<span class="op">$</span>maximum <span class="op">-</span><span class="st"> </span><span class="kw">nrow</span>(mixl.summary)) <span class="op">/</span><span class="st"> </span>mixl0<span class="op">$</span>logLik<span class="op">$</span>maximum, <span class="dt">digits =</span> <span class="dv">3</span>))))</a></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:table-mixed-logit-models">Table 9.2: </span>Mixed logit models
@@ -1355,78 +1411,85 @@ NA
 </div>
 <div id="behavioral-insights-from-the-mixed-logit-model" class="section level2">
 <h2><span class="header-section-number">9.9</span> Behavioral insights from the mixed logit model</h2>
-<p>The random coefficient of the MIXL W model was defined as follows: <span class="math display">\[
+<p>The random coefficient of the MIXL W model was defined as follows:
+<span class="math display">\[
 \beta_{i,wait} = b_{wait} + \eta_{i,wait}
-\]</span> with <span class="math inline">\(\eta\)</span> normal iid (independent and identically distributed). Therefore: <span class="math display">\[
+\]</span>
+with <span class="math inline">\(\eta\)</span> normal iid (independent and identically distributed). Therefore:
+<span class="math display">\[
 \beta_{i,wait} \sim N(b_{wait}, \sigma^2)
 \]</span></p>
 <p>Based on this, we can explore the variation in taste in the population.</p>
 <div id="unconditional-distribution-of-a-random-parameter" class="section level3">
 <h3><span class="header-section-number">9.9.1</span> Unconditional distribution of a random parameter</h3>
 <p>Given the parameters estimated above, we can plot the distribution of the random coefficient. This is done as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define parameters for the distribution</span>
-mu &lt;-<span class="st"> </span><span class="kw">coef</span>(mixl_w)[<span class="st">&#39;wait&#39;</span>]
-sigma &lt;-<span class="st"> </span><span class="kw">coef</span>(mixl_w)[<span class="st">&#39;sd.wait&#39;</span>]
-
-<span class="co"># Create a data frame for plotting</span>
-df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="op">-</span><span class="fl">0.6</span>, <span class="dt">to =</span> <span class="fl">0.2</span>, <span class="dt">by =</span> <span class="fl">0.005</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">normal =</span> <span class="kw">dnorm</span>(x, <span class="dt">mean =</span> mu, <span class="dt">sd =</span> sigma))
-df_p &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="fl">0.2</span>, <span class="dt">by =</span> <span class="fl">0.005</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">normal =</span> <span class="kw">dnorm</span>(x, <span class="dt">mean =</span> mu, <span class="dt">sd =</span> sigma))
-
-<span class="co"># Plot</span>
-<span class="kw">ggplot</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_area</span>(<span class="dt">data =</span> df, <span class="kw">aes</span>(x, normal), <span class="dt">fill =</span> <span class="st">&quot;orange&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_area</span>(<span class="dt">data =</span> df_p, <span class="kw">aes</span>(x, normal), <span class="dt">fill =</span> <span class="st">&quot;orange&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
-<span class="st">  </span><span class="co">#ylim(c(0, 1/(2 * L) + 0.2 * 1/(2 * L))) + # Set the limits of the y axis</span>
-<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add y axis</span>
-<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add x axis</span>
-<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;f(x)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Label the y axis</span>
-<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Unconditional distribution for wait parameter&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb314-1" title="1"><span class="co"># Define parameters for the distribution</span></a>
+<a class="sourceLine" id="cb314-2" title="2">mu &lt;-<span class="st"> </span><span class="kw">coef</span>(mixl_w)[<span class="st">&#39;wait&#39;</span>]</a>
+<a class="sourceLine" id="cb314-3" title="3">sigma &lt;-<span class="st"> </span><span class="kw">coef</span>(mixl_w)[<span class="st">&#39;sd.wait&#39;</span>]</a>
+<a class="sourceLine" id="cb314-4" title="4"></a>
+<a class="sourceLine" id="cb314-5" title="5"><span class="co"># Create a data frame for plotting</span></a>
+<a class="sourceLine" id="cb314-6" title="6">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="fl">-0.6</span>, <span class="dt">to =</span> <span class="fl">0.2</span>, <span class="dt">by =</span> <span class="fl">0.005</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb314-7" title="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">normal =</span> <span class="kw">dnorm</span>(x, <span class="dt">mean =</span> mu, <span class="dt">sd =</span> sigma))</a>
+<a class="sourceLine" id="cb314-8" title="8">df_p &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="fl">0.2</span>, <span class="dt">by =</span> <span class="fl">0.005</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb314-9" title="9"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">normal =</span> <span class="kw">dnorm</span>(x, <span class="dt">mean =</span> mu, <span class="dt">sd =</span> sigma))</a>
+<a class="sourceLine" id="cb314-10" title="10"></a>
+<a class="sourceLine" id="cb314-11" title="11"><span class="co"># Plot</span></a>
+<a class="sourceLine" id="cb314-12" title="12"><span class="kw">ggplot</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb314-13" title="13"><span class="st">  </span><span class="kw">geom_area</span>(<span class="dt">data =</span> df, <span class="kw">aes</span>(x, normal), <span class="dt">fill =</span> <span class="st">&quot;orange&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb314-14" title="14"><span class="st">  </span><span class="kw">geom_area</span>(<span class="dt">data =</span> df_p, <span class="kw">aes</span>(x, normal), <span class="dt">fill =</span> <span class="st">&quot;orange&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb314-15" title="15"><span class="st">  </span><span class="co">#ylim(c(0, 1/(2 * L) + 0.2 * 1/(2 * L))) + # Set the limits of the y axis</span></a>
+<a class="sourceLine" id="cb314-16" title="16"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add y axis</span></a>
+<a class="sourceLine" id="cb314-17" title="17"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add x axis</span></a>
+<a class="sourceLine" id="cb314-18" title="18"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;f(x)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Label the y axis</span></a>
+<a class="sourceLine" id="cb314-19" title="19"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Unconditional distribution for wait parameter&quot;</span>)</a></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-164-1.png" width="672" /></p>
 <p>As seen in the figure, the response to waiting time is heterogeneous in the population. While in general most people dislike waiting, some dislike waiting more than others. The plot also suggests that some people may in fact <em>enjoy</em> their wait time (notice how the distribution includes some positive values for the coefficient). We can calculate what proportion of the population has a positive response to waiting time:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">pnorm</span>(<span class="op">-</span><span class="kw">coef</span>(mixl_w)[<span class="st">&#39;wait&#39;</span>] <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(mixl_w)[<span class="st">&#39;sd.wait&#39;</span>])</code></pre></div>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb315-1" title="1"><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">pnorm</span>(<span class="op">-</span><span class="kw">coef</span>(mixl_w)[<span class="st">&#39;wait&#39;</span>] <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(mixl_w)[<span class="st">&#39;sd.wait&#39;</span>])</a></code></pre></div>
 <pre><code>##       wait 
 ## 0.04135726</code></pre>
 <p>Accordingly, about 4.1% of the population has a positive parameter for waiting time.</p>
-<p>As discussed above, the willingess to pay for reductions in waiting time was: <span class="math display">\[
+<p>As discussed above, the willingess to pay for reductions in waiting time was:
+<span class="math display">\[
 -\frac{\partial \text{vcost}}{\partial \text{wait}} = \frac{\beta_{wait}}{\beta_{vcost}} = \frac{-0.0969}{-0.0139} \simeq 6.97
-\]</span> or approximately 6.97 dollars per minute.</p>
-<p>But if the response to waiting time is a random variable, what is then the distribution of the willingness to pay? To answer this question, we note that multiplying a normal random variable <span class="math inline">\(X\)</span> by a constant <span class="math inline">\(c\)</span> changes the mean and the standard deviation of the distribution as follows: <span class="math display">\[
+\]</span>
+or approximately 6.97 dollars per minute.</p>
+<p>But if the response to waiting time is a random variable, what is then the distribution of the willingness to pay? To answer this question, we note that multiplying a normal random variable <span class="math inline">\(X\)</span> by a constant <span class="math inline">\(c\)</span> changes the mean and the standard deviation of the distribution as follows:
+<span class="math display">\[
 \begin{array}
 cE[X] = E[cX]\\
 c^2Var[X] = Var[cX] 
 \end{array}
 \]</span></p>
-<p>Accordingly, since willingness to pay is the ratio of a random coefficient to a constant, the distribution of willingness to pay is: <span class="math display">\[
+<p>Accordingly, since willingness to pay is the ratio of a random coefficient to a constant, the distribution of willingness to pay is:
+<span class="math display">\[
 -\frac{\partial \text{vcost}}{\partial \text{wait}} \sim N(\frac{b_{wait}}{\beta_{vcost}}, \frac{\sigma_{wait}^2}{\beta_{vcost}^2})
 \]</span></p>
 <p>The distribution of willingness to pay for waiting time is shown in the following figure:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define parameters for the distribution of willingness to pay</span>
-mu &lt;-<span class="st"> </span><span class="kw">coef</span>(mixl_w)[<span class="st">&#39;wait&#39;</span>] <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(mixl_w)[<span class="st">&#39;vcost&#39;</span>])
-sigma &lt;-<span class="st"> </span><span class="kw">coef</span>(mixl_w)[<span class="st">&#39;sd.wait&#39;</span>]<span class="op">*</span><span class="st"> </span><span class="kw">sqrt</span>((<span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(mixl_w)[<span class="st">&#39;vcost&#39;</span>])<span class="op">^</span><span class="dv">2</span>)
-
-<span class="co"># Create a data frame for plotting</span>
-df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="op">-</span><span class="dv">10</span>, <span class="dt">to =</span> <span class="dv">30</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">normal =</span> <span class="kw">dnorm</span>(x, <span class="dt">mean =</span> mu, <span class="dt">sd =</span> sigma))
-<span class="co">#df_p &lt;- data.frame(x =seq(from = 0, to = 0.2, by = 0.005)) %&gt;% </span>
-<span class="co">#  mutate(normal = dnorm(x, mean = mu, sd = sigma))</span>
-
-<span class="co"># Plot</span>
-<span class="kw">ggplot</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_area</span>(<span class="dt">data =</span> df, <span class="kw">aes</span>(x, normal), <span class="dt">fill =</span> <span class="st">&quot;orange&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span>
-<span class="co">#  geom_area(data = df_p, aes(x, normal), fill = &quot;orange&quot;, alpha = 0.5) +</span>
-<span class="st">  </span><span class="co">#ylim(c(0, 1/(2 * L) + 0.2 * 1/(2 * L))) + # Set the limits of the y axis</span>
-<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add y axis</span>
-<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add x axis</span>
-<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;f(x)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Label the y axis</span>
-<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Unconditional distribution for willingness to pay for wait&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb317-1" title="1"><span class="co"># Define parameters for the distribution of willingness to pay</span></a>
+<a class="sourceLine" id="cb317-2" title="2">mu &lt;-<span class="st"> </span><span class="kw">coef</span>(mixl_w)[<span class="st">&#39;wait&#39;</span>] <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(mixl_w)[<span class="st">&#39;vcost&#39;</span>])</a>
+<a class="sourceLine" id="cb317-3" title="3">sigma &lt;-<span class="st"> </span><span class="kw">coef</span>(mixl_w)[<span class="st">&#39;sd.wait&#39;</span>]<span class="op">*</span><span class="st"> </span><span class="kw">sqrt</span>((<span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(mixl_w)[<span class="st">&#39;vcost&#39;</span>])<span class="op">^</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb317-4" title="4"></a>
+<a class="sourceLine" id="cb317-5" title="5"><span class="co"># Create a data frame for plotting</span></a>
+<a class="sourceLine" id="cb317-6" title="6">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">-10</span>, <span class="dt">to =</span> <span class="dv">30</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb317-7" title="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">normal =</span> <span class="kw">dnorm</span>(x, <span class="dt">mean =</span> mu, <span class="dt">sd =</span> sigma))</a>
+<a class="sourceLine" id="cb317-8" title="8"><span class="co">#df_p &lt;- data.frame(x =seq(from = 0, to = 0.2, by = 0.005)) %&gt;% </span></a>
+<a class="sourceLine" id="cb317-9" title="9"><span class="co">#  mutate(normal = dnorm(x, mean = mu, sd = sigma))</span></a>
+<a class="sourceLine" id="cb317-10" title="10"></a>
+<a class="sourceLine" id="cb317-11" title="11"><span class="co"># Plot</span></a>
+<a class="sourceLine" id="cb317-12" title="12"><span class="kw">ggplot</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb317-13" title="13"><span class="st">  </span><span class="kw">geom_area</span>(<span class="dt">data =</span> df, <span class="kw">aes</span>(x, normal), <span class="dt">fill =</span> <span class="st">&quot;orange&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb317-14" title="14"><span class="co">#  geom_area(data = df_p, aes(x, normal), fill = &quot;orange&quot;, alpha = 0.5) +</span></a>
+<a class="sourceLine" id="cb317-15" title="15"><span class="st">  </span><span class="co">#ylim(c(0, 1/(2 * L) + 0.2 * 1/(2 * L))) + # Set the limits of the y axis</span></a>
+<a class="sourceLine" id="cb317-16" title="16"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add y axis</span></a>
+<a class="sourceLine" id="cb317-17" title="17"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add x axis</span></a>
+<a class="sourceLine" id="cb317-18" title="18"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;f(x)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Label the y axis</span></a>
+<a class="sourceLine" id="cb317-19" title="19"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Unconditional distribution for willingness to pay for wait&quot;</span>)</a></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-166-1.png" width="672" /></p>
 <p>It can be seen from the figure that whereas the willingness to pay for saving waiting time was estimated at approximately seven dollars per minute by the multinomial logit model, there appears to be a segment of the population willing to pay more than that value.</p>
 </div>
 <div id="conditional-distribution-of-the-random-coefficients" class="section level3">
 <h3><span class="header-section-number">9.9.2</span> Conditional distribution of the random coefficients</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(mixl_w, <span class="st">&quot;wait&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Conditional distribution for wait (MIXL W)&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb318-1" title="1"><span class="kw">plot</span>(mixl_w, <span class="st">&quot;wait&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Conditional distribution for wait (MIXL W)&quot;</span>)</a></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-167-1.png" width="672" /></p>
 </div>
 </div>
@@ -1434,22 +1497,27 @@ df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class=
 <h2><span class="header-section-number">9.10</span> Using covariates to capture variations in taste</h2>
 <p>The models above strongly suggest that there are important variations in taste in the way decision-makers respond to waiting time. However, no variables were used to characterize the decision-makers. As previously suggested, the variation might happen on a socio-economic dimension, for instance, income. In this section, we will explore whether including individual-level attributes can capture heterogeneity in decision-making, and if so, to what extent.</p>
 <p>We will test two different models, with the specifications described below.</p>
-<p>Multinomial logit with individual-level covariates (MNL-Covariates): <span class="math display">\[
+<p>Multinomial logit with individual-level covariates (MNL-Covariates):
+<span class="math display">\[
 \begin{array}{lll}
 V_{i,air} &amp;= &amp; + \beta_{vcost}vcost_{air} + \beta_{i,wait}wait_{air} + \beta_{travel}travel_{air}\\
 V_{i,train} &amp;=\beta_{train} &amp; + \beta_{vcost}vcost_{train} + \beta_{wait}wait_{train} + \beta_{travel}travel_{train} &amp; + \beta_{train:income}income_i + \beta_{train:size}size_i\\
 V_{i,bus} &amp;=\beta_{bus} &amp;+ \beta_{vcost}vcost_{bus}+\beta_{wait}wait_{bus}+\beta_{travel}travel_{bus}&amp; + \beta_{bus:income}income_i + \beta_{bus:size}size_i\\
 V_{i,car} &amp;=\beta_{car} &amp;+ \beta_{vcost}vcost_{car}+\beta_{wait}wait_{car}+\beta_{travel}travel_{car}&amp; + \beta_{car:income}income_i + \beta_{car:size}size_i 
 \end{array}
-\]</span> This model is similar to the base multinomial logit model, with the addition of individual-level attributes.</p>
-<p>Multinomial logit with deterministic expansions of coefficients (MNL-Expansion): <span class="math display">\[
+\]</span>
+This model is similar to the base multinomial logit model, with the addition of individual-level attributes.</p>
+<p>Multinomial logit with deterministic expansions of coefficients (MNL-Expansion):
+<span class="math display">\[
 \begin{array}{lll}
 V_{i,air} &amp;= &amp; + \beta_{vcost}vcost_{air} + \beta_{i,wait}wait_{air} + \beta_{i,travel}travel_{air}\\
 V_{i,train} &amp;=\beta_{train} &amp; + \beta_{vcost}vcost_{train} + \beta_{i,wait}wait_{train} + \beta_{i,travel}travel_{train}\\
 V_{i,bus} &amp;=\beta_{bus} &amp;+ \beta_{vcost}vcost_{bus}+\beta_{i,wait}wait_{bus}+\beta_{i,travel}travel_{bus}\\
 V_{i,car} &amp;=\beta_{car} &amp;+ \beta_{vcost}vcost_{car}+\beta_{i,wait}wait_{car}+\beta_{i,travel}travel_{car}
 \end{array}
-\]</span> with expanded coefficients as follows: <span class="math display">\[
+\]</span>
+with expanded coefficients as follows:
+<span class="math display">\[
 \begin{array}{l}
 \beta_{i,travel} = b_{travel} + b_{travel:income}income_i + b_{travel:size}size_i\\
 \text{and}\\
@@ -1457,48 +1525,48 @@ V_{i,car} &amp;=\beta_{car} &amp;+ \beta_{vcost}vcost_{car}+\beta_{i,wait}wait_{
 \end{array}
 \]</span></p>
 <p>To implement the expansion of the coefficients we need to add variable interactions to the table, and reformat for use in <code>mlogit</code> and <code>gmnl</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">TM &lt;-<span class="st"> </span><span class="kw">mutate</span>(TravelMode, 
-             <span class="st">`</span><span class="dt">wait:income</span><span class="st">`</span> =<span class="st"> </span>wait <span class="op">*</span><span class="st"> </span>income,  
-             <span class="st">`</span><span class="dt">travel:income</span><span class="st">`</span> =<span class="st"> </span>travel <span class="op">*</span><span class="st"> </span>income,
-             <span class="st">`</span><span class="dt">wait:size</span><span class="st">`</span> =<span class="st"> </span>wait <span class="op">*</span><span class="st"> </span>size,  
-             <span class="st">`</span><span class="dt">travel:size</span><span class="st">`</span> =<span class="st"> </span>travel <span class="op">*</span><span class="st"> </span>size)
-
-TM &lt;-<span class="st"> </span><span class="kw">mlogit.data</span>(TM, <span class="dt">choice =</span> <span class="st">&quot;choice&quot;</span>, <span class="dt">shape =</span> <span class="st">&quot;long&quot;</span>,
-                  <span class="dt">alt.levels =</span> <span class="kw">c</span>(<span class="st">&quot;air&quot;</span>, <span class="st">&quot;train&quot;</span>, <span class="st">&quot;bus&quot;</span>, <span class="st">&quot;car&quot;</span>))</code></pre></div>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb319-1" title="1">TM &lt;-<span class="st"> </span><span class="kw">mutate</span>(TravelMode, </a>
+<a class="sourceLine" id="cb319-2" title="2">             <span class="st">`</span><span class="dt">wait:income</span><span class="st">`</span> =<span class="st"> </span>wait <span class="op">*</span><span class="st"> </span>income,  </a>
+<a class="sourceLine" id="cb319-3" title="3">             <span class="st">`</span><span class="dt">travel:income</span><span class="st">`</span> =<span class="st"> </span>travel <span class="op">*</span><span class="st"> </span>income,</a>
+<a class="sourceLine" id="cb319-4" title="4">             <span class="st">`</span><span class="dt">wait:size</span><span class="st">`</span> =<span class="st"> </span>wait <span class="op">*</span><span class="st"> </span>size,  </a>
+<a class="sourceLine" id="cb319-5" title="5">             <span class="st">`</span><span class="dt">travel:size</span><span class="st">`</span> =<span class="st"> </span>travel <span class="op">*</span><span class="st"> </span>size)</a>
+<a class="sourceLine" id="cb319-6" title="6"></a>
+<a class="sourceLine" id="cb319-7" title="7">TM &lt;-<span class="st"> </span><span class="kw">mlogit.data</span>(TM, <span class="dt">choice =</span> <span class="st">&quot;choice&quot;</span>, <span class="dt">shape =</span> <span class="st">&quot;long&quot;</span>,</a>
+<a class="sourceLine" id="cb319-8" title="8">                  <span class="dt">alt.levels =</span> <span class="kw">c</span>(<span class="st">&quot;air&quot;</span>, <span class="st">&quot;train&quot;</span>, <span class="st">&quot;bus&quot;</span>, <span class="st">&quot;car&quot;</span>))</a></code></pre></div>
 <p>The models are estimated using the following code:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mnl_cov &lt;-<span class="st"> </span><span class="kw">mlogit</span>(choice <span class="op">~</span><span class="st"> </span>vcost <span class="op">+</span><span class="st"> </span>travel <span class="op">+</span><span class="st"> </span>wait <span class="op">|</span><span class="st"> </span>income <span class="op">+</span><span class="st"> </span>size,
-             <span class="dt">data =</span> TM)
-<span class="co">#summary(mnl1)</span>
-
-mnl_exp &lt;-<span class="st"> </span><span class="kw">mlogit</span>(choice <span class="op">~</span><span class="st"> </span>vcost <span class="op">+</span><span class="st"> </span>travel <span class="op">+</span><span class="st"> </span>travel<span class="op">:</span>income <span class="op">+</span><span class="st"> </span>travel<span class="op">:</span>size <span class="op">+</span><span class="st"> </span>wait <span class="op">+</span><span class="st"> </span>wait<span class="op">:</span>income <span class="op">|</span><span class="st"> </span><span class="dv">1</span>,
-             <span class="dt">data =</span> TM)
-<span class="co">#summary(mnl2)</span></code></pre></div>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb320-1" title="1">mnl_cov &lt;-<span class="st"> </span><span class="kw">mlogit</span>(choice <span class="op">~</span><span class="st"> </span>vcost <span class="op">+</span><span class="st"> </span>travel <span class="op">+</span><span class="st"> </span>wait <span class="op">|</span><span class="st"> </span>income <span class="op">+</span><span class="st"> </span>size,</a>
+<a class="sourceLine" id="cb320-2" title="2">             <span class="dt">data =</span> TM)</a>
+<a class="sourceLine" id="cb320-3" title="3"><span class="co">#summary(mnl1)</span></a>
+<a class="sourceLine" id="cb320-4" title="4"></a>
+<a class="sourceLine" id="cb320-5" title="5">mnl_exp &lt;-<span class="st"> </span><span class="kw">mlogit</span>(choice <span class="op">~</span><span class="st"> </span>vcost <span class="op">+</span><span class="st"> </span>travel <span class="op">+</span><span class="st"> </span>travel<span class="op">:</span>income <span class="op">+</span><span class="st"> </span>travel<span class="op">:</span>size <span class="op">+</span><span class="st"> </span>wait <span class="op">+</span><span class="st"> </span>wait<span class="op">:</span>income <span class="op">|</span><span class="st"> </span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb320-6" title="6">             <span class="dt">data =</span> TM)</a>
+<a class="sourceLine" id="cb320-7" title="7"><span class="co">#summary(mnl2)</span></a></code></pre></div>
 <p>Summarize results mnl with covariates:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mnl_null &lt;-<span class="st"> </span><span class="kw">mlogit</span>(choice <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,
-             <span class="dt">data =</span> TM)
-
-mnl1.summary &lt;-<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">data.frame</span>(<span class="kw">summary</span>(mnl_cov)<span class="op">$</span>CoefTable), <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">transmute</span>(Variable, Estimate, <span class="dt">pval =</span> <span class="st">`</span><span class="dt">Pr...z..</span><span class="st">`</span>)
-
-mnl2.summary &lt;-<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">data.frame</span>(<span class="kw">summary</span>(mnl_exp)<span class="op">$</span>CoefTable), <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">transmute</span>(Variable, Estimate, <span class="dt">pval =</span> <span class="st">`</span><span class="dt">Pr...z..</span><span class="st">`</span>)
-
-df_logit_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">full_join</span>(mnl1.summary, mnl2.summary, <span class="dt">by =</span> <span class="st">&quot;Variable&quot;</span>)
-
-<span class="kw">kable</span>(df_logit_<span class="dv">2</span>, 
-      <span class="st">&quot;html&quot;</span>,
-      <span class="dt">digits =</span> <span class="dv">4</span>,
-      <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Variable&quot;</span>,
-                    <span class="st">&quot;Estimate&quot;</span>,
-                    <span class="st">&quot;p-value&quot;</span>,
-                    <span class="st">&quot;Estimate&quot;</span>,
-                    <span class="st">&quot;p-value&quot;</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">kable_styling</span>() <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">add_header_above</span>(<span class="kw">c</span>(<span class="st">&quot; &quot;</span> =<span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;MNL - Covariates&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;MNL - Expansion&quot;</span> =<span class="st"> </span><span class="dv">2</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">footnote</span>(<span class="dt">general =</span> <span class="kw">c</span>(<span class="kw">paste0</span>(<span class="st">&quot;Log-Likelihood: MNL - Covariates = &quot;</span>, <span class="kw">round</span>(mnl_cov<span class="op">$</span>logLik[<span class="dv">1</span>], <span class="dt">digits =</span> <span class="dv">3</span>),
-                            <span class="st">&quot;; MNL - Expansion = &quot;</span>, <span class="kw">round</span>(mnl_exp<span class="op">$</span>logLik[<span class="dv">1</span>], <span class="dt">digits =</span> <span class="dv">3</span>)),
-                       <span class="kw">paste0</span>(<span class="st">&quot;McFadden Adjusted R^2: MNL - Covariates = &quot;</span>, <span class="kw">round</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(mnl_cov<span class="op">$</span>logLik[<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span><span class="kw">nrow</span>(mnl1.summary)) <span class="op">/</span><span class="st"> </span>mnl_null<span class="op">$</span>logLik[<span class="dv">1</span>], <span class="dt">digits =</span> <span class="dv">3</span>),
-                              <span class="st">&quot;; NL = &quot;</span>, <span class="kw">round</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(mnl_exp<span class="op">$</span>logLik[<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span><span class="kw">nrow</span>(mnl2.summary)) <span class="op">/</span><span class="st"> </span>mnl_null<span class="op">$</span>logLik[<span class="dv">1</span>], <span class="dt">digits =</span> <span class="dv">3</span>))))</code></pre></div>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb321-1" title="1">mnl_null &lt;-<span class="st"> </span><span class="kw">mlogit</span>(choice <span class="op">~</span><span class="st"> </span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb321-2" title="2">             <span class="dt">data =</span> TM)</a>
+<a class="sourceLine" id="cb321-3" title="3"></a>
+<a class="sourceLine" id="cb321-4" title="4">mnl1.summary &lt;-<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">data.frame</span>(<span class="kw">summary</span>(mnl_cov)<span class="op">$</span>CoefTable), <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb321-5" title="5"><span class="st">  </span><span class="kw">transmute</span>(Variable, Estimate, <span class="dt">pval =</span> <span class="st">`</span><span class="dt">Pr...z..</span><span class="st">`</span>)</a>
+<a class="sourceLine" id="cb321-6" title="6"></a>
+<a class="sourceLine" id="cb321-7" title="7">mnl2.summary &lt;-<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">data.frame</span>(<span class="kw">summary</span>(mnl_exp)<span class="op">$</span>CoefTable), <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb321-8" title="8"><span class="st">  </span><span class="kw">transmute</span>(Variable, Estimate, <span class="dt">pval =</span> <span class="st">`</span><span class="dt">Pr...z..</span><span class="st">`</span>)</a>
+<a class="sourceLine" id="cb321-9" title="9"></a>
+<a class="sourceLine" id="cb321-10" title="10">df_logit_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">full_join</span>(mnl1.summary, mnl2.summary, <span class="dt">by =</span> <span class="st">&quot;Variable&quot;</span>)</a>
+<a class="sourceLine" id="cb321-11" title="11"></a>
+<a class="sourceLine" id="cb321-12" title="12"><span class="kw">kable</span>(df_logit_<span class="dv">2</span>, </a>
+<a class="sourceLine" id="cb321-13" title="13">      <span class="st">&quot;html&quot;</span>,</a>
+<a class="sourceLine" id="cb321-14" title="14">      <span class="dt">digits =</span> <span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb321-15" title="15">      <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Variable&quot;</span>,</a>
+<a class="sourceLine" id="cb321-16" title="16">                    <span class="st">&quot;Estimate&quot;</span>,</a>
+<a class="sourceLine" id="cb321-17" title="17">                    <span class="st">&quot;p-value&quot;</span>,</a>
+<a class="sourceLine" id="cb321-18" title="18">                    <span class="st">&quot;Estimate&quot;</span>,</a>
+<a class="sourceLine" id="cb321-19" title="19">                    <span class="st">&quot;p-value&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb321-20" title="20"><span class="st">  </span><span class="kw">kable_styling</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb321-21" title="21"><span class="st">  </span><span class="kw">add_header_above</span>(<span class="kw">c</span>(<span class="st">&quot; &quot;</span> =<span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;MNL - Covariates&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;MNL - Expansion&quot;</span> =<span class="st"> </span><span class="dv">2</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb321-22" title="22"><span class="st">  </span><span class="kw">footnote</span>(<span class="dt">general =</span> <span class="kw">c</span>(<span class="kw">paste0</span>(<span class="st">&quot;Log-Likelihood: MNL - Covariates = &quot;</span>, <span class="kw">round</span>(mnl_cov<span class="op">$</span>logLik[<span class="dv">1</span>], <span class="dt">digits =</span> <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb321-23" title="23">                            <span class="st">&quot;; MNL - Expansion = &quot;</span>, <span class="kw">round</span>(mnl_exp<span class="op">$</span>logLik[<span class="dv">1</span>], <span class="dt">digits =</span> <span class="dv">3</span>)),</a>
+<a class="sourceLine" id="cb321-24" title="24">                       <span class="kw">paste0</span>(<span class="st">&quot;McFadden Adjusted R^2: MNL - Covariates = &quot;</span>, <span class="kw">round</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(mnl_cov<span class="op">$</span>logLik[<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span><span class="kw">nrow</span>(mnl1.summary)) <span class="op">/</span><span class="st"> </span>mnl_null<span class="op">$</span>logLik[<span class="dv">1</span>], <span class="dt">digits =</span> <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb321-25" title="25">                              <span class="st">&quot;; NL = &quot;</span>, <span class="kw">round</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(mnl_exp<span class="op">$</span>logLik[<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span><span class="kw">nrow</span>(mnl2.summary)) <span class="op">/</span><span class="st"> </span>mnl_null<span class="op">$</span>logLik[<span class="dv">1</span>], <span class="dt">digits =</span> <span class="dv">3</span>))))</a></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -1809,21 +1877,22 @@ NA
 </tfoot>
 </table>
 <p>Both models above suggest that there at least some heterogeneity in behavior can be attributed to the two characteristics of the decision-makers investigated (income and party size). In particular, we can see from the expanded coefficients that the disutility of travel time and waiting time is greater at higher levels of income:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a data frame for plotting</span>
-df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">income =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="kw">min</span>(TM<span class="op">$</span>income), <span class="dt">to =</span> <span class="kw">max</span>(TM<span class="op">$</span>income), <span class="dt">by =</span> <span class="dv">1</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">time =</span> <span class="kw">coef</span>(mnl_exp)[<span class="st">&#39;travel&#39;</span>] <span class="op">+</span><span class="st"> </span><span class="kw">coef</span>(mnl_exp)[<span class="st">&#39;travel:income&#39;</span>] <span class="op">*</span><span class="st"> </span>income,
-         <span class="dt">wait =</span> <span class="kw">coef</span>(mnl_exp)[<span class="st">&#39;wait&#39;</span>] <span class="op">+</span><span class="st"> </span><span class="kw">coef</span>(mnl_exp)[<span class="st">&#39;wait:income&#39;</span>] <span class="op">*</span><span class="st"> </span>income) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">gather</span>(variable, coefficient, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>)
-
-<span class="co"># Plot</span>
-<span class="kw">ggplot</span>(df) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> income, <span class="dt">y =</span> coefficient, <span class="dt">color =</span> variable))</code></pre></div>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb322-1" title="1"><span class="co"># Create a data frame for plotting</span></a>
+<a class="sourceLine" id="cb322-2" title="2">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">income =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="kw">min</span>(TM<span class="op">$</span>income), <span class="dt">to =</span> <span class="kw">max</span>(TM<span class="op">$</span>income), <span class="dt">by =</span> <span class="dv">1</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb322-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">time =</span> <span class="kw">coef</span>(mnl_exp)[<span class="st">&#39;travel&#39;</span>] <span class="op">+</span><span class="st"> </span><span class="kw">coef</span>(mnl_exp)[<span class="st">&#39;travel:income&#39;</span>] <span class="op">*</span><span class="st"> </span>income,</a>
+<a class="sourceLine" id="cb322-4" title="4">         <span class="dt">wait =</span> <span class="kw">coef</span>(mnl_exp)[<span class="st">&#39;wait&#39;</span>] <span class="op">+</span><span class="st"> </span><span class="kw">coef</span>(mnl_exp)[<span class="st">&#39;wait:income&#39;</span>] <span class="op">*</span><span class="st"> </span>income) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb322-5" title="5"><span class="st">  </span><span class="kw">gather</span>(variable, coefficient, <span class="dv">2</span><span class="op">:</span><span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb322-6" title="6"></a>
+<a class="sourceLine" id="cb322-7" title="7"><span class="co"># Plot</span></a>
+<a class="sourceLine" id="cb322-8" title="8"><span class="kw">ggplot</span>(df) <span class="op">+</span></a>
+<a class="sourceLine" id="cb322-9" title="9"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> income, <span class="dt">y =</span> coefficient, <span class="dt">color =</span> variable))</a></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-171-1.png" width="672" /></p>
 <p>However, is the inclusion of these variables sufficient to capture variations in taste? What if we are missing some other relevant variable, such as age? In the following section we will revisit the specification of the models to test this idea.</p>
 </div>
 <div id="revisiting-the-example" class="section level2">
 <h2><span class="header-section-number">9.11</span> Revisiting the example</h2>
-<p>We will reestimate the mixed logit models, but now after introducing the individual-level covariates as stand-alone variables and also as part of expansions. The expansion of the coefficient for waiting time includes a random component to give a random coefficient as follows: <span class="math display">\[
+<p>We will reestimate the mixed logit models, but now after introducing the individual-level covariates as stand-alone variables and also as part of expansions. The expansion of the coefficient for waiting time includes a random component to give a random coefficient as follows:
+<span class="math display">\[
 \begin{array}{l}
 \beta_{i,travel} = b_{travel} + b_{travel:income}income_i + b_{travel:size}size_i\\
 \text{and}\\
@@ -1831,39 +1900,39 @@ df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class=
 \end{array}
 \]</span></p>
 <p>The models are estimated next:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mixl_w1 &lt;-<span class="st"> </span><span class="kw">gmnl</span>(choice <span class="op">~</span><span class="st"> </span>vcost <span class="op">+</span><span class="st"> </span>travel <span class="op">+</span><span class="st"> </span>wait <span class="op">|</span><span class="st"> </span>income <span class="op">+</span><span class="st"> </span>size,
-             <span class="dt">data =</span> TM, <span class="dt">model =</span> <span class="st">&quot;mixl&quot;</span>, <span class="dt">ranp =</span> <span class="kw">c</span>(<span class="dt">wait =</span> <span class="st">&quot;n&quot;</span>), <span class="dt">R =</span> <span class="dv">50</span>)</code></pre></div>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb323-1" title="1">mixl_w1 &lt;-<span class="st"> </span><span class="kw">gmnl</span>(choice <span class="op">~</span><span class="st"> </span>vcost <span class="op">+</span><span class="st"> </span>travel <span class="op">+</span><span class="st"> </span>wait <span class="op">|</span><span class="st"> </span>income <span class="op">+</span><span class="st"> </span>size,</a>
+<a class="sourceLine" id="cb323-2" title="2">             <span class="dt">data =</span> TM, <span class="dt">model =</span> <span class="st">&quot;mixl&quot;</span>, <span class="dt">ranp =</span> <span class="kw">c</span>(<span class="dt">wait =</span> <span class="st">&quot;n&quot;</span>), <span class="dt">R =</span> <span class="dv">50</span>)</a></code></pre></div>
 <pre><code>## Estimating MIXL model</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#mixl_cov$logLik$message</span>
-<span class="co">#summary(mixl_w1)</span>
-mixl_w2 &lt;-<span class="st"> </span><span class="kw">gmnl</span>(choice <span class="op">~</span><span class="st"> </span>vcost <span class="op">+</span><span class="st"> </span>travel <span class="op">+</span><span class="st"> </span>travel<span class="op">:</span>income <span class="op">+</span><span class="st"> </span>travel<span class="op">:</span>size <span class="op">+</span><span class="st"> </span>wait <span class="op">+</span><span class="st"> </span>wait<span class="op">:</span>income <span class="op">|</span><span class="st"> </span><span class="dv">1</span>,
-             <span class="dt">data =</span> TM, <span class="dt">model =</span> <span class="st">&quot;mixl&quot;</span>, <span class="dt">ranp =</span> <span class="kw">c</span>(<span class="dt">wait =</span> <span class="st">&quot;n&quot;</span>), <span class="dt">R =</span> <span class="dv">50</span>)</code></pre></div>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb325-1" title="1"><span class="co">#mixl_cov$logLik$message</span></a>
+<a class="sourceLine" id="cb325-2" title="2"><span class="co">#summary(mixl_w1)</span></a>
+<a class="sourceLine" id="cb325-3" title="3">mixl_w2 &lt;-<span class="st"> </span><span class="kw">gmnl</span>(choice <span class="op">~</span><span class="st"> </span>vcost <span class="op">+</span><span class="st"> </span>travel <span class="op">+</span><span class="st"> </span>travel<span class="op">:</span>income <span class="op">+</span><span class="st"> </span>travel<span class="op">:</span>size <span class="op">+</span><span class="st"> </span>wait <span class="op">+</span><span class="st"> </span>wait<span class="op">:</span>income <span class="op">|</span><span class="st"> </span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb325-4" title="4">             <span class="dt">data =</span> TM, <span class="dt">model =</span> <span class="st">&quot;mixl&quot;</span>, <span class="dt">ranp =</span> <span class="kw">c</span>(<span class="dt">wait =</span> <span class="st">&quot;n&quot;</span>), <span class="dt">R =</span> <span class="dv">50</span>)</a></code></pre></div>
 <pre><code>## Estimating MIXL model</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#mixl_cov$logLik$message</span>
-<span class="co">#summary(mixl_w2)</span></code></pre></div>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb327-1" title="1"><span class="co">#mixl_cov$logLik$message</span></a>
+<a class="sourceLine" id="cb327-2" title="2"><span class="co">#summary(mixl_w2)</span></a></code></pre></div>
 <p>and the results summarized in the table below:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mixl_w1.summary &lt;-<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">data.frame</span>(<span class="kw">summary</span>(mixl_w1)<span class="op">$</span>CoefTable), <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">transmute</span>(Variable, Estimate, <span class="dt">pval =</span> <span class="st">`</span><span class="dt">Pr...z..</span><span class="st">`</span>)
-
-mixl_w2.summary &lt;-<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">data.frame</span>(<span class="kw">summary</span>(mixl_w2)<span class="op">$</span>CoefTable), <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">transmute</span>(Variable, Estimate, <span class="dt">pval =</span> <span class="st">`</span><span class="dt">Pr...z..</span><span class="st">`</span>)
-
-mixl_table_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">full_join</span>(mixl_w1.summary, mixl_w2.summary, <span class="dt">by =</span> <span class="st">&quot;Variable&quot;</span>)
-
-<span class="kw">kable</span>(mixl_table_<span class="dv">2</span>, 
-      <span class="st">&quot;html&quot;</span>,
-      <span class="dt">digits =</span> <span class="dv">4</span>,
-      <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Variable&quot;</span>,
-                    <span class="st">&quot;Estimate&quot;</span>,
-                    <span class="st">&quot;p-value&quot;</span>,
-                    <span class="st">&quot;Estimate&quot;</span>,
-                    <span class="st">&quot;p-value&quot;</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">kable_styling</span>() <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">add_header_above</span>(<span class="kw">c</span>(<span class="st">&quot; &quot;</span> =<span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;MIXL W-1&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;MIXL W-2&quot;</span> =<span class="st"> </span><span class="dv">2</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">footnote</span>(<span class="dt">general =</span> <span class="kw">c</span>(<span class="kw">paste0</span>(<span class="st">&quot;Log-Likelihood: MIXL W-1 = &quot;</span>, <span class="kw">round</span>(mixl_w1<span class="op">$</span>logLik<span class="op">$</span>maximum, <span class="dt">digits =</span> <span class="dv">3</span>),
-                            <span class="st">&quot;; MIXL W-2 = &quot;</span>, <span class="kw">round</span>(mixl_w1<span class="op">$</span>logLik<span class="op">$</span>maximum, <span class="dt">digits =</span> <span class="dv">3</span>)),
-                       <span class="kw">paste0</span>(<span class="st">&quot;McFadden Adjusted R^2: MIXL W-1 = &quot;</span>, <span class="kw">round</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(mixl_w1<span class="op">$</span>logLik<span class="op">$</span>maximum <span class="op">-</span><span class="st"> </span><span class="kw">nrow</span>(mixl_w1.summary)) <span class="op">/</span><span class="st"> </span>mixl0<span class="op">$</span>logLik<span class="op">$</span>maximum, <span class="dt">digits =</span> <span class="dv">3</span>),
-                              <span class="st">&quot;; MIXL W-2 = &quot;</span>, <span class="kw">round</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(mixl_w2<span class="op">$</span>logLik<span class="op">$</span>maximum <span class="op">-</span><span class="st"> </span><span class="kw">nrow</span>(mixl_w2.summary)) <span class="op">/</span><span class="st"> </span>mixl0<span class="op">$</span>logLik<span class="op">$</span>maximum, <span class="dt">digits =</span> <span class="dv">3</span>))))</code></pre></div>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb328-1" title="1">mixl_w1.summary &lt;-<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">data.frame</span>(<span class="kw">summary</span>(mixl_w1)<span class="op">$</span>CoefTable), <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb328-2" title="2"><span class="st">  </span><span class="kw">transmute</span>(Variable, Estimate, <span class="dt">pval =</span> <span class="st">`</span><span class="dt">Pr...z..</span><span class="st">`</span>)</a>
+<a class="sourceLine" id="cb328-3" title="3"></a>
+<a class="sourceLine" id="cb328-4" title="4">mixl_w2.summary &lt;-<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">data.frame</span>(<span class="kw">summary</span>(mixl_w2)<span class="op">$</span>CoefTable), <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb328-5" title="5"><span class="st">  </span><span class="kw">transmute</span>(Variable, Estimate, <span class="dt">pval =</span> <span class="st">`</span><span class="dt">Pr...z..</span><span class="st">`</span>)</a>
+<a class="sourceLine" id="cb328-6" title="6"></a>
+<a class="sourceLine" id="cb328-7" title="7">mixl_table_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">full_join</span>(mixl_w1.summary, mixl_w2.summary, <span class="dt">by =</span> <span class="st">&quot;Variable&quot;</span>)</a>
+<a class="sourceLine" id="cb328-8" title="8"></a>
+<a class="sourceLine" id="cb328-9" title="9"><span class="kw">kable</span>(mixl_table_<span class="dv">2</span>, </a>
+<a class="sourceLine" id="cb328-10" title="10">      <span class="st">&quot;html&quot;</span>,</a>
+<a class="sourceLine" id="cb328-11" title="11">      <span class="dt">digits =</span> <span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb328-12" title="12">      <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Variable&quot;</span>,</a>
+<a class="sourceLine" id="cb328-13" title="13">                    <span class="st">&quot;Estimate&quot;</span>,</a>
+<a class="sourceLine" id="cb328-14" title="14">                    <span class="st">&quot;p-value&quot;</span>,</a>
+<a class="sourceLine" id="cb328-15" title="15">                    <span class="st">&quot;Estimate&quot;</span>,</a>
+<a class="sourceLine" id="cb328-16" title="16">                    <span class="st">&quot;p-value&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb328-17" title="17"><span class="st">  </span><span class="kw">kable_styling</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb328-18" title="18"><span class="st">  </span><span class="kw">add_header_above</span>(<span class="kw">c</span>(<span class="st">&quot; &quot;</span> =<span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;MIXL W-1&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;MIXL W-2&quot;</span> =<span class="st"> </span><span class="dv">2</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb328-19" title="19"><span class="st">  </span><span class="kw">footnote</span>(<span class="dt">general =</span> <span class="kw">c</span>(<span class="kw">paste0</span>(<span class="st">&quot;Log-Likelihood: MIXL W-1 = &quot;</span>, <span class="kw">round</span>(mixl_w1<span class="op">$</span>logLik<span class="op">$</span>maximum, <span class="dt">digits =</span> <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb328-20" title="20">                            <span class="st">&quot;; MIXL W-2 = &quot;</span>, <span class="kw">round</span>(mixl_w1<span class="op">$</span>logLik<span class="op">$</span>maximum, <span class="dt">digits =</span> <span class="dv">3</span>)),</a>
+<a class="sourceLine" id="cb328-21" title="21">                       <span class="kw">paste0</span>(<span class="st">&quot;McFadden Adjusted R^2: MIXL W-1 = &quot;</span>, <span class="kw">round</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(mixl_w1<span class="op">$</span>logLik<span class="op">$</span>maximum <span class="op">-</span><span class="st"> </span><span class="kw">nrow</span>(mixl_w1.summary)) <span class="op">/</span><span class="st"> </span>mixl0<span class="op">$</span>logLik<span class="op">$</span>maximum, <span class="dt">digits =</span> <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb328-22" title="22">                              <span class="st">&quot;; MIXL W-2 = &quot;</span>, <span class="kw">round</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(mixl_w2<span class="op">$</span>logLik<span class="op">$</span>maximum <span class="op">-</span><span class="st"> </span><span class="kw">nrow</span>(mixl_w2.summary)) <span class="op">/</span><span class="st"> </span>mixl0<span class="op">$</span>logLik<span class="op">$</span>maximum, <span class="dt">digits =</span> <span class="dv">3</span>))))</a></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -2190,93 +2259,97 @@ NA
 </tr>
 </tfoot>
 </table>
-<p>Given the expansion, the distribution of the random coefficient now is: <span class="math display">\[
+<p>Given the expansion, the distribution of the random coefficient now is:
+<span class="math display">\[
 \beta_{i,wait} \sim N\Big(b_{wait} + b_{wait:income}income, \sigma_{wait}^2\Big)
-\]</span> which means that we can calculate the distribution at different levels of income, as shown in the following figure for the first quartile (yellow) and the third quartile (red) of income. The dashed line is the distribution of willingness to pay according to model MIXL W.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define parameters for the distribution of willingness to pay</span>
-<span class="co"># Obtain quartiles</span>
-q &lt;-<span class="st"> </span><span class="kw">quantile</span>(TM<span class="op">$</span>income, <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>))
-
-<span class="co"># Define parameters for the distribution</span>
-mu_w &lt;-<span class="st"> </span><span class="kw">coef</span>(mixl_w)[<span class="st">&#39;wait&#39;</span>]
-sigma_w &lt;-<span class="st"> </span><span class="kw">coef</span>(mixl_w)[<span class="st">&#39;sd.wait&#39;</span>]
-
-<span class="co"># First quartile</span>
-mu_w2.<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">coef</span>(mixl_w2)[<span class="st">&#39;wait&#39;</span>] <span class="op">+</span><span class="st"> </span><span class="kw">coef</span>(mixl_w2)[<span class="st">&quot;wait:income&quot;</span>] <span class="op">*</span><span class="st"> </span>q[<span class="dv">2</span>]
-sigma_w2.<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">coef</span>(mixl_w2)[<span class="st">&#39;sd.wait&#39;</span>]
-
-<span class="co"># Third quartile</span>
-mu_w2.<span class="dv">3</span> &lt;-<span class="st"> </span><span class="kw">coef</span>(mixl_w2)[<span class="st">&#39;wait&#39;</span>] <span class="op">+</span><span class="st"> </span><span class="kw">coef</span>(mixl_w2)[<span class="st">&quot;wait:income&quot;</span>] <span class="op">*</span><span class="st"> </span>q[<span class="dv">4</span>]
-sigma_w2.<span class="dv">3</span> &lt;-<span class="st"> </span><span class="kw">coef</span>(mixl_w2)[<span class="st">&#39;sd.wait&#39;</span>]
-
-<span class="co"># Create a data frame for plotting</span>
-df_w &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="op">-</span><span class="fl">0.6</span>, <span class="dt">to =</span> <span class="fl">0.2</span>, <span class="dt">by =</span> <span class="fl">0.005</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">normal =</span> <span class="kw">dnorm</span>(x, <span class="dt">mean =</span> mu_w, <span class="dt">sd =</span> sigma_w))
-
-df_w2.<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="op">-</span><span class="fl">0.6</span>, <span class="dt">to =</span> <span class="fl">0.2</span>, <span class="dt">by =</span> <span class="fl">0.005</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">normal =</span> <span class="kw">dnorm</span>(x, <span class="dt">mean =</span> mu_w2.<span class="dv">1</span>, <span class="dt">sd =</span> sigma_w2.<span class="dv">1</span>))
-df_w2.<span class="dv">3</span> &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="op">-</span><span class="fl">0.6</span>, <span class="dt">to =</span> <span class="fl">0.2</span>, <span class="dt">by =</span> <span class="fl">0.005</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">normal =</span> <span class="kw">dnorm</span>(x, <span class="dt">mean =</span> mu_w2.<span class="dv">3</span>, <span class="dt">sd =</span> sigma_w2.<span class="dv">3</span>))
-
-<span class="co"># Plot</span>
-<span class="kw">ggplot</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_area</span>(<span class="dt">data =</span> df_w2.<span class="dv">1</span>, <span class="kw">aes</span>(x, normal), <span class="dt">fill =</span> <span class="st">&quot;yellow&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> df_w2.<span class="dv">1</span>, <span class="kw">aes</span>(x, normal), <span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_area</span>(<span class="dt">data =</span> df_w2.<span class="dv">3</span>, <span class="kw">aes</span>(x, normal), <span class="dt">fill =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> df_w2.<span class="dv">3</span>, <span class="kw">aes</span>(x, normal), <span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> df_w, <span class="kw">aes</span>(x, normal), <span class="dt">linetype =</span> <span class="dv">3</span>) <span class="op">+</span>
-<span class="st">  </span><span class="co">#ylim(c(0, 1/(2 * L) + 0.2 * 1/(2 * L))) + # Set the limits of the y axis</span>
-<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add y axis</span>
-<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add x axis</span>
-<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;f(x)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Label the y axis</span>
-<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Unconditional distribution for wait parameter (dashed line is MIXL W)&quot;</span>)</code></pre></div>
+\]</span>
+which means that we can calculate the distribution at different levels of income, as shown in the following figure for the first quartile (yellow) and the third quartile (red) of income. The dashed line is the distribution of willingness to pay according to model MIXL W.</p>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb329-1" title="1"><span class="co"># Define parameters for the distribution of willingness to pay</span></a>
+<a class="sourceLine" id="cb329-2" title="2"><span class="co"># Obtain quartiles</span></a>
+<a class="sourceLine" id="cb329-3" title="3">q &lt;-<span class="st"> </span><span class="kw">quantile</span>(TM<span class="op">$</span>income, <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb329-4" title="4"></a>
+<a class="sourceLine" id="cb329-5" title="5"><span class="co"># Define parameters for the distribution</span></a>
+<a class="sourceLine" id="cb329-6" title="6">mu_w &lt;-<span class="st"> </span><span class="kw">coef</span>(mixl_w)[<span class="st">&#39;wait&#39;</span>]</a>
+<a class="sourceLine" id="cb329-7" title="7">sigma_w &lt;-<span class="st"> </span><span class="kw">coef</span>(mixl_w)[<span class="st">&#39;sd.wait&#39;</span>]</a>
+<a class="sourceLine" id="cb329-8" title="8"></a>
+<a class="sourceLine" id="cb329-9" title="9"><span class="co"># First quartile</span></a>
+<a class="sourceLine" id="cb329-10" title="10">mu_w2<span class="fl">.1</span> &lt;-<span class="st"> </span><span class="kw">coef</span>(mixl_w2)[<span class="st">&#39;wait&#39;</span>] <span class="op">+</span><span class="st"> </span><span class="kw">coef</span>(mixl_w2)[<span class="st">&quot;wait:income&quot;</span>] <span class="op">*</span><span class="st"> </span>q[<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb329-11" title="11">sigma_w2<span class="fl">.1</span> &lt;-<span class="st"> </span><span class="kw">coef</span>(mixl_w2)[<span class="st">&#39;sd.wait&#39;</span>]</a>
+<a class="sourceLine" id="cb329-12" title="12"></a>
+<a class="sourceLine" id="cb329-13" title="13"><span class="co"># Third quartile</span></a>
+<a class="sourceLine" id="cb329-14" title="14">mu_w2<span class="fl">.3</span> &lt;-<span class="st"> </span><span class="kw">coef</span>(mixl_w2)[<span class="st">&#39;wait&#39;</span>] <span class="op">+</span><span class="st"> </span><span class="kw">coef</span>(mixl_w2)[<span class="st">&quot;wait:income&quot;</span>] <span class="op">*</span><span class="st"> </span>q[<span class="dv">4</span>]</a>
+<a class="sourceLine" id="cb329-15" title="15">sigma_w2<span class="fl">.3</span> &lt;-<span class="st"> </span><span class="kw">coef</span>(mixl_w2)[<span class="st">&#39;sd.wait&#39;</span>]</a>
+<a class="sourceLine" id="cb329-16" title="16"></a>
+<a class="sourceLine" id="cb329-17" title="17"><span class="co"># Create a data frame for plotting</span></a>
+<a class="sourceLine" id="cb329-18" title="18">df_w &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="fl">-0.6</span>, <span class="dt">to =</span> <span class="fl">0.2</span>, <span class="dt">by =</span> <span class="fl">0.005</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb329-19" title="19"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">normal =</span> <span class="kw">dnorm</span>(x, <span class="dt">mean =</span> mu_w, <span class="dt">sd =</span> sigma_w))</a>
+<a class="sourceLine" id="cb329-20" title="20"></a>
+<a class="sourceLine" id="cb329-21" title="21">df_w2<span class="fl">.1</span> &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="fl">-0.6</span>, <span class="dt">to =</span> <span class="fl">0.2</span>, <span class="dt">by =</span> <span class="fl">0.005</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb329-22" title="22"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">normal =</span> <span class="kw">dnorm</span>(x, <span class="dt">mean =</span> mu_w2<span class="fl">.1</span>, <span class="dt">sd =</span> sigma_w2<span class="fl">.1</span>))</a>
+<a class="sourceLine" id="cb329-23" title="23">df_w2<span class="fl">.3</span> &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="fl">-0.6</span>, <span class="dt">to =</span> <span class="fl">0.2</span>, <span class="dt">by =</span> <span class="fl">0.005</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb329-24" title="24"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">normal =</span> <span class="kw">dnorm</span>(x, <span class="dt">mean =</span> mu_w2<span class="fl">.3</span>, <span class="dt">sd =</span> sigma_w2<span class="fl">.3</span>))</a>
+<a class="sourceLine" id="cb329-25" title="25"></a>
+<a class="sourceLine" id="cb329-26" title="26"><span class="co"># Plot</span></a>
+<a class="sourceLine" id="cb329-27" title="27"><span class="kw">ggplot</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb329-28" title="28"><span class="st">  </span><span class="kw">geom_area</span>(<span class="dt">data =</span> df_w2<span class="fl">.1</span>, <span class="kw">aes</span>(x, normal), <span class="dt">fill =</span> <span class="st">&quot;yellow&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb329-29" title="29"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> df_w2<span class="fl">.1</span>, <span class="kw">aes</span>(x, normal), <span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb329-30" title="30"><span class="st">  </span><span class="kw">geom_area</span>(<span class="dt">data =</span> df_w2<span class="fl">.3</span>, <span class="kw">aes</span>(x, normal), <span class="dt">fill =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb329-31" title="31"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> df_w2<span class="fl">.3</span>, <span class="kw">aes</span>(x, normal), <span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb329-32" title="32"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> df_w, <span class="kw">aes</span>(x, normal), <span class="dt">linetype =</span> <span class="dv">3</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb329-33" title="33"><span class="st">  </span><span class="co">#ylim(c(0, 1/(2 * L) + 0.2 * 1/(2 * L))) + # Set the limits of the y axis</span></a>
+<a class="sourceLine" id="cb329-34" title="34"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add y axis</span></a>
+<a class="sourceLine" id="cb329-35" title="35"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add x axis</span></a>
+<a class="sourceLine" id="cb329-36" title="36"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;f(x)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Label the y axis</span></a>
+<a class="sourceLine" id="cb329-37" title="37"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Unconditional distribution for wait parameter (dashed line is MIXL W)&quot;</span>)</a></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-174-1.png" width="672" /></p>
 <p>As before, we can also obtain the conditional distribution of the random component, which here is compared to the earlier model MIXL-W (without the income effect):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(mixl_w, <span class="st">&quot;wait&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Conditional distribution for wait (MIXL W)&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb330-1" title="1"><span class="kw">plot</span>(mixl_w, <span class="st">&quot;wait&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Conditional distribution for wait (MIXL W)&quot;</span>)</a></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-175-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(mixl_w2, <span class="st">&quot;wait&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Conditional distribution for wait (MIXL W-2)&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb331-1" title="1"><span class="kw">plot</span>(mixl_w2, <span class="st">&quot;wait&quot;</span>, <span class="dt">main =</span> <span class="st">&quot;Conditional distribution for wait (MIXL W-2)&quot;</span>)</a></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-175-2.png" width="672" /></p>
-<p>In a similar way, the distribution of the willingness to pay for waiting time according to model MIXL W-2 is: <span class="math display">\[
+<p>In a similar way, the distribution of the willingness to pay for waiting time according to model MIXL W-2 is:
+<span class="math display">\[
 -\frac{\partial \text{vcost}}{\partial \text{wait}} \sim N\Big(\frac{b_{wait} + b_{wait: income}income}{\beta_{vcost}}, \frac{\sigma_{wait}^2}{\beta_{vcost}^2}\Big)
-\]</span> which is shown in the following figure for the first quartile (yellow) and the third quartile (red) of income. The dashed line is the distribution of willingness to pay according to model MIXL W.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define parameters for the distribution of willingness to pay</span>
-<span class="co"># Obtain quartiles</span>
-q &lt;-<span class="st"> </span><span class="kw">quantile</span>(TM<span class="op">$</span>income, <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>))
-
-<span class="co"># MIX W2 First quartile</span>
-mu_w2.<span class="dv">1</span> &lt;-<span class="st"> </span>(<span class="kw">coef</span>(mixl_w2)[<span class="st">&#39;wait&#39;</span>] <span class="op">+</span><span class="st"> </span><span class="kw">coef</span>(mixl_w2)[<span class="st">&#39;wait:income&#39;</span>] <span class="op">*</span><span class="st"> </span>q[<span class="dv">2</span>]) <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(mixl_w2)[<span class="st">&#39;vcost&#39;</span>])
-sigma_w2.<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">coef</span>(mixl_w2)[<span class="st">&#39;sd.wait&#39;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">sqrt</span>((<span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(mixl_w2)[<span class="st">&#39;vcost&#39;</span>])<span class="op">^</span><span class="dv">2</span>)
-
-<span class="co"># MIX W2 Third quartile</span>
-mu_w2.<span class="dv">3</span> &lt;-<span class="st"> </span>(<span class="kw">coef</span>(mixl_w2)[<span class="st">&#39;wait&#39;</span>] <span class="op">+</span><span class="st"> </span><span class="kw">coef</span>(mixl_w2)[<span class="st">&#39;wait:income&#39;</span>] <span class="op">*</span><span class="st"> </span>q[<span class="dv">4</span>]) <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(mixl_w2)[<span class="st">&#39;vcost&#39;</span>])
-sigma_w2.<span class="dv">3</span> &lt;-<span class="st"> </span><span class="kw">coef</span>(mixl_w2)[<span class="st">&#39;sd.wait&#39;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">sqrt</span>((<span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(mixl_w2)[<span class="st">&#39;vcost&#39;</span>])<span class="op">^</span><span class="dv">2</span>)
-
-<span class="co"># MIX W</span>
-mu_w &lt;-<span class="st"> </span><span class="kw">coef</span>(mixl_w)[<span class="st">&#39;wait&#39;</span>] <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(mixl_w)[<span class="st">&#39;vcost&#39;</span>])
-sigma_w &lt;-<span class="st"> </span><span class="kw">coef</span>(mixl_w)[<span class="st">&#39;sd.wait&#39;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">sqrt</span>((<span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(mixl_w)[<span class="st">&#39;vcost&#39;</span>])<span class="op">^</span><span class="dv">2</span>)
-
-<span class="co"># Create data frames for plotting</span>
-df_w2.<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="op">-</span><span class="dv">10</span>, <span class="dt">to =</span> <span class="dv">30</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">normal =</span> <span class="kw">dnorm</span>(x, <span class="dt">mean =</span> mu_w2.<span class="dv">1</span>, <span class="dt">sd =</span> sigma_w2.<span class="dv">1</span>))
-
-df_w2.<span class="dv">3</span> &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="op">-</span><span class="dv">10</span>, <span class="dt">to =</span> <span class="dv">30</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">normal =</span> <span class="kw">dnorm</span>(x, <span class="dt">mean =</span> mu_w2.<span class="dv">3</span>, <span class="dt">sd =</span> sigma_w2.<span class="dv">3</span>))
-
-df_w &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="op">-</span><span class="dv">10</span>, <span class="dt">to =</span> <span class="dv">30</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">normal =</span> <span class="kw">dnorm</span>(x, <span class="dt">mean =</span> mu_w, <span class="dt">sd =</span> sigma_w))
-
-<span class="co"># Plot</span>
-<span class="kw">ggplot</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_area</span>(<span class="dt">data =</span> df_w2.<span class="dv">1</span>, <span class="kw">aes</span>(x, normal), <span class="dt">fill =</span> <span class="st">&quot;yellow&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> df_w2.<span class="dv">1</span>, <span class="kw">aes</span>(x, normal), <span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_area</span>(<span class="dt">data =</span> df_w2.<span class="dv">3</span>, <span class="kw">aes</span>(x, normal), <span class="dt">fill =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> df_w2.<span class="dv">3</span>, <span class="kw">aes</span>(x, normal), <span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> df_w, <span class="kw">aes</span>(x, normal), <span class="dt">linetype =</span> <span class="dv">3</span>) <span class="op">+</span>
-<span class="st">  </span><span class="co">#ylim(c(0, 1/(2 * L) + 0.2 * 1/(2 * L))) + # Set the limits of the y axis</span>
-<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add y axis</span>
-<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add x axis</span>
-<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;f(x)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Label the y axis</span>
-<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Unconditional distribution for willingness to pay for wait (dashed line is MIXL W)&quot;</span>)</code></pre></div>
+\]</span>
+which is shown in the following figure for the first quartile (yellow) and the third quartile (red) of income. The dashed line is the distribution of willingness to pay according to model MIXL W.</p>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb332-1" title="1"><span class="co"># Define parameters for the distribution of willingness to pay</span></a>
+<a class="sourceLine" id="cb332-2" title="2"><span class="co"># Obtain quartiles</span></a>
+<a class="sourceLine" id="cb332-3" title="3">q &lt;-<span class="st"> </span><span class="kw">quantile</span>(TM<span class="op">$</span>income, <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb332-4" title="4"></a>
+<a class="sourceLine" id="cb332-5" title="5"><span class="co"># MIX W2 First quartile</span></a>
+<a class="sourceLine" id="cb332-6" title="6">mu_w2<span class="fl">.1</span> &lt;-<span class="st"> </span>(<span class="kw">coef</span>(mixl_w2)[<span class="st">&#39;wait&#39;</span>] <span class="op">+</span><span class="st"> </span><span class="kw">coef</span>(mixl_w2)[<span class="st">&#39;wait:income&#39;</span>] <span class="op">*</span><span class="st"> </span>q[<span class="dv">2</span>]) <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(mixl_w2)[<span class="st">&#39;vcost&#39;</span>])</a>
+<a class="sourceLine" id="cb332-7" title="7">sigma_w2<span class="fl">.1</span> &lt;-<span class="st"> </span><span class="kw">coef</span>(mixl_w2)[<span class="st">&#39;sd.wait&#39;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">sqrt</span>((<span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(mixl_w2)[<span class="st">&#39;vcost&#39;</span>])<span class="op">^</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb332-8" title="8"></a>
+<a class="sourceLine" id="cb332-9" title="9"><span class="co"># MIX W2 Third quartile</span></a>
+<a class="sourceLine" id="cb332-10" title="10">mu_w2<span class="fl">.3</span> &lt;-<span class="st"> </span>(<span class="kw">coef</span>(mixl_w2)[<span class="st">&#39;wait&#39;</span>] <span class="op">+</span><span class="st"> </span><span class="kw">coef</span>(mixl_w2)[<span class="st">&#39;wait:income&#39;</span>] <span class="op">*</span><span class="st"> </span>q[<span class="dv">4</span>]) <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(mixl_w2)[<span class="st">&#39;vcost&#39;</span>])</a>
+<a class="sourceLine" id="cb332-11" title="11">sigma_w2<span class="fl">.3</span> &lt;-<span class="st"> </span><span class="kw">coef</span>(mixl_w2)[<span class="st">&#39;sd.wait&#39;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">sqrt</span>((<span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(mixl_w2)[<span class="st">&#39;vcost&#39;</span>])<span class="op">^</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb332-12" title="12"></a>
+<a class="sourceLine" id="cb332-13" title="13"><span class="co"># MIX W</span></a>
+<a class="sourceLine" id="cb332-14" title="14">mu_w &lt;-<span class="st"> </span><span class="kw">coef</span>(mixl_w)[<span class="st">&#39;wait&#39;</span>] <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(mixl_w)[<span class="st">&#39;vcost&#39;</span>])</a>
+<a class="sourceLine" id="cb332-15" title="15">sigma_w &lt;-<span class="st"> </span><span class="kw">coef</span>(mixl_w)[<span class="st">&#39;sd.wait&#39;</span>] <span class="op">*</span><span class="st"> </span><span class="kw">sqrt</span>((<span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="kw">coef</span>(mixl_w)[<span class="st">&#39;vcost&#39;</span>])<span class="op">^</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb332-16" title="16"></a>
+<a class="sourceLine" id="cb332-17" title="17"><span class="co"># Create data frames for plotting</span></a>
+<a class="sourceLine" id="cb332-18" title="18">df_w2<span class="fl">.1</span> &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">-10</span>, <span class="dt">to =</span> <span class="dv">30</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb332-19" title="19"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">normal =</span> <span class="kw">dnorm</span>(x, <span class="dt">mean =</span> mu_w2<span class="fl">.1</span>, <span class="dt">sd =</span> sigma_w2<span class="fl">.1</span>))</a>
+<a class="sourceLine" id="cb332-20" title="20"></a>
+<a class="sourceLine" id="cb332-21" title="21">df_w2<span class="fl">.3</span> &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">-10</span>, <span class="dt">to =</span> <span class="dv">30</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb332-22" title="22"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">normal =</span> <span class="kw">dnorm</span>(x, <span class="dt">mean =</span> mu_w2<span class="fl">.3</span>, <span class="dt">sd =</span> sigma_w2<span class="fl">.3</span>))</a>
+<a class="sourceLine" id="cb332-23" title="23"></a>
+<a class="sourceLine" id="cb332-24" title="24">df_w &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">-10</span>, <span class="dt">to =</span> <span class="dv">30</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb332-25" title="25"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">normal =</span> <span class="kw">dnorm</span>(x, <span class="dt">mean =</span> mu_w, <span class="dt">sd =</span> sigma_w))</a>
+<a class="sourceLine" id="cb332-26" title="26"></a>
+<a class="sourceLine" id="cb332-27" title="27"><span class="co"># Plot</span></a>
+<a class="sourceLine" id="cb332-28" title="28"><span class="kw">ggplot</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb332-29" title="29"><span class="st">  </span><span class="kw">geom_area</span>(<span class="dt">data =</span> df_w2<span class="fl">.1</span>, <span class="kw">aes</span>(x, normal), <span class="dt">fill =</span> <span class="st">&quot;yellow&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb332-30" title="30"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> df_w2<span class="fl">.1</span>, <span class="kw">aes</span>(x, normal), <span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb332-31" title="31"><span class="st">  </span><span class="kw">geom_area</span>(<span class="dt">data =</span> df_w2<span class="fl">.3</span>, <span class="kw">aes</span>(x, normal), <span class="dt">fill =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb332-32" title="32"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> df_w2<span class="fl">.3</span>, <span class="kw">aes</span>(x, normal), <span class="dt">alpha =</span> <span class="fl">0.3</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb332-33" title="33"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data =</span> df_w, <span class="kw">aes</span>(x, normal), <span class="dt">linetype =</span> <span class="dv">3</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb332-34" title="34"><span class="st">  </span><span class="co">#ylim(c(0, 1/(2 * L) + 0.2 * 1/(2 * L))) + # Set the limits of the y axis</span></a>
+<a class="sourceLine" id="cb332-35" title="35"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add y axis</span></a>
+<a class="sourceLine" id="cb332-36" title="36"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add x axis</span></a>
+<a class="sourceLine" id="cb332-37" title="37"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;f(x)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Label the y axis</span></a>
+<a class="sourceLine" id="cb332-38" title="38"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Unconditional distribution for willingness to pay for wait (dashed line is MIXL W)&quot;</span>)</a></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-176-1.png" width="672" /></p>
 <p>The results indicate that the introduction of individual-level covariates has absorbed some of the heterogeneity previously observed in the random coefficients, but it was not sufficient to completely account for variations in taste.</p>
 </div>
@@ -2295,7 +2368,7 @@ df_w &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span clas
 <li><p>Do mixed logit models display the IIA property? Explain.</p></li>
 </ol>
 <p>Load the following dataset from the <code>mlogit</code> package:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;MobilePhones&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb333-1" title="1"><span class="kw">data</span>(<span class="st">&quot;MobilePhones&quot;</span>)</a></code></pre></div>
 <pre><code>## Warning in data(&quot;MobilePhones&quot;): data set &#39;MobilePhones&#39; not found</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li><p>Using the dataset above, estimate a mixed logit model. Justify your choice of variables. Which variables do you choose to have random coefficients and why?</p></li>
@@ -2306,11 +2379,11 @@ df_w &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span clas
 </div>
 <h3>References</h3>
 <div id="refs" class="references">
-<div id="ref-Greene2003econometric">
-<p>Greene, William H. 2003. <em>Econometric Analysis</em>. 5th Edition. NJ: Prentice Hall.</p>
-</div>
 <div id="ref-Benakiva1985discrete">
 <p>Ben-Akiva, M., and S. R. Lerman. 1985. <em>Discrete Choice Analysis: Theory and Applications to Travel Demand</em>. Book. Cambridge: The MIT Press.</p>
+</div>
+<div id="ref-Greene2003econometric">
+<p>Greene, William H. 2003. <em>Econometric Analysis</em>. 5th Edition. NJ: Prentice Hall.</p>
 </div>
 <div id="ref-hensher2005applied">
 <p>Hensher, David A, John M Rose, and William H Greene. 2005. <em>Applied Choice Analysis: A Primer</em>. Cambridge University Press.</p>
@@ -2336,11 +2409,13 @@ df_w &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span clas
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -2348,12 +2423,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -2365,6 +2439,10 @@ gitbook.start({
 "text": "Edit"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -2381,10 +2459,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
