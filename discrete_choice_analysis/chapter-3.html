@@ -24,7 +24,7 @@
 <meta name="author" content="Antonio Paez" />
 
 
-<meta name="date" content="2020-01-22" />
+<meta name="date" content="2020-01-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -345,16 +345,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="modelling-choices" class="section level2">
 <h2><span class="header-section-number">4.1</span> Modelling choices</h2>
 <p>In Chapter <a href="chapter-2.html#chapter-2">3</a> a conceptual framework was described to model choice-making behavior. This framework is based on the economic notion of <em>utility</em>, basically that which decision-makers wish to maximize when making choices. The concept of utility has many flaws - key among them that it is not directly observable. If utility could be measured directly by an external observer (or analyst), behavior would seem deterministic. However, unlike Laplace’s Demon, an external observer with only human capabilities has limited knowledge of the conditions under which choices are made, if for no other reason that she cannot possibly know the frame of mind of the decision-maker at the moment when choices are made.</p>
-<p>A way to implement the conceptual framework unders such conditions involved an acknowledgement that although the decision-maker tries to maximize his utility, some part of it will look random to the observer - therefore the term <em>random utility modelling</em>. This allows the analyst to make probabilitistic statements about the behavior of decision-makers. Accordingly, the analyst does not know with certainty the outcome of a choice process, but can quantify her uncertainty in a fairly precise way.</p>
-<p>Based on these concepts, Chapter <a href="chapter-2.html#chapter-2">3</a> concluded by deriving a simple model for discrete choices, namely the lineary probability model <span class="citation">(see Ben-Akiva and Lerman <a href="#ref-Benakiva1985discrete" role="doc-biblioref">1985</a>, 66–68)</span>. This model is useful for illustrative purposes. However, it suffers from an important limitation: the linear probabilities are a stepwise function, which makes their mathematical treatment unfun, and also imply that certain outcome are certain (i.e., it can return probabilities of exactly one or exactly zero). This would preclude certain behaviors, which seems a somewhat arrogant thing to do on the part of the analyst. A better approach would be to allow any behavior, but assign very small probabilities to more extreme choices.</p>
-<p>In this chapter we will revisit those random utility terms to derive an alternative to the linear probability model. This will be the <em>logit</em> model, one of the most popular models in discrete choice analysis for reasons that will be discussed below.</p>
+<p>A way to implement the conceptual framework unders such conditions involved an acknowledgement that although the decision-maker tries to maximize their utility, some part of it will look random to the observer - therefore the term <em>random utility modelling</em>. This allows the analyst to make probabilitistic statements about the behavior of decision-makers. Accordingly, the analyst does not know with certainty the outcome of a choice process, but can quantify uncertainty in a fairly precise way.</p>
+<p>Based on these concepts, Chapter <a href="chapter-2.html#chapter-2">3</a> concluded by deriving a simple model for discrete choices, namely the linear probability model <span class="citation">(see Ben-Akiva and Lerman <a href="#ref-Benakiva1985discrete" role="doc-biblioref">1985</a>, 66–68)</span>. This model is useful for illustrative purposes. However, it suffers from an important limitation: the linear probabilities are a stepwise function, which makes their mathematical treatment unfun, and also imply that certain outcomes are certain (i.e., it can return probabilities of exactly one or exactly zero). This would preclude certain behaviors, which is a somewhat arrogant assumption on the part of the analyst. A better approach would be to allow any behavior, but instead assign very small probabilities to more extreme choices.</p>
+<p>In this chapter we will revisit the random utility terms in the probabilistic statement concerning choices, and we will derive an alternative to the linear probability model. This will be the <em>logit</em> model, one of the most popular models in discrete choice analysis for reasons that will be discussed below.</p>
 </div>
 <div id="how-to-use-this-note-2" class="section level2">
 <h2><span class="header-section-number">4.2</span> How to use this note</h2>
 <p>Remember that the source for the document you are reading is an R Notebook. Throughout the notes, you will find examples of code in segments of text called <em>chunks</em>. This is an example of a chunk:</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" title="1"><span class="kw">print</span>(<span class="st">&quot;Hello, Dr. Train&quot;</span>)</a></code></pre></div>
-<pre><code>## [1] &quot;Hello, Dr. Train&quot;</code></pre>
-<p>If you are working with the Notebook version of the document, you can run the code by clicking the ‘play’ icon on the top right corner of the chunk. If you are reading the web-book version of the document, you will often see that the code has already been executed. You can still try it by copying and pasting into your R or RStudio console.</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" title="1"><span class="kw">print</span>(<span class="st">&quot;Hello, Prof. Train&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;Hello, Prof. Train&quot;</code></pre>
+<p>If you are working with the Notebook version of the document, you can run the code by clicking the ‘play’ icon on the top right corner of the chunk. If you are reading the web-book version of the document, you will often see that the code has already been executed. You can still try it by copying and pasting into your <code>R</code> or RStudio console.</p>
 </div>
 <div id="learning-objectives-3" class="section level2">
 <h2><span class="header-section-number">4.3</span> Learning objectives</h2>
@@ -384,9 +384,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="once-again-those-random-terms" class="section level2">
 <h2><span class="header-section-number">4.6</span> Once again those random terms</h2>
-<p>Recall that in order to implement the probabilitistic statement at the heart of a discrete choice model requires the analyst to make assumptions about the random utility terms. Previously, a number of probability distributions were explored, and one in particular (the uniform distribution) was used to derive a simple discrete choice model. But, is the uniform distribution an appropriate choice for the purpose of modeling the random utility?</p>
-<p>The uniform distribution (and some of the other stepwise distributions seen in Chapter <a href="chapter-2.html#chapter-2">3</a>) are useful to illustrate the concept of probability, and more specifically the need to calculate the area under the curve of the distribution. The area under the curve of the uniform distribution is simply the area of a rectangle, which makes this extremely simple. On the other hand, it precludes certain outcomes, which limits its practical usefulness.</p>
-<p>The reality is that, since the utility is in principle unobservable, there is little theoretical support for any specific distribution of the random utility terms. For this reason, the choice of distribution tends to be very pragmatic, particularly attending the convenience for estimation purposes, i.e., retrieving parameters from a sample of observations. The parameters include the parameters used in the systematic utility function <span class="math inline">\(U_{ij}\)</span> (more on this later), as well as any parameters needed for the distribution itself. For instance, the uniform distribution is defined by two parameters, <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>:
+<p>Recall that implementation of the probabilitistic statement at the heart of a discrete choice model requires the analyst to make assumptions about the random utility terms. Previously, a number of probability distributions were explored, and one in particular (the uniform distribution) was used to derive a simple discrete choice model. But, is the uniform distribution an appropriate choice for the purpose of modeling the random utility?</p>
+<p>The uniform distribution (and some of the other stepwise distributions seen in Chapter <a href="chapter-2.html#chapter-2">3</a>) are useful to illustrate the concept of probability, and more specifically the need to calculate the area under the curve of the distribution. The area under the curve of the uniform distribution is simply the area of a rectangle, which makes this task extremely simple since it requires only the formula for the area of a rectangle. On the other hand, it precludes certain outcomes, which limits its practical usefulness.</p>
+<p>The reality is that, since the utility is in principle unobservable, there is little theoretical support for any specific distribution of the random utility terms. For this reason, the choice of a specific distribution tends to be very pragmatic, and usually pays attention to its convenience for estimation purposes, i.e., retrieving parameters from a sample of observations. Another consideration is the ability of the distribution to represent different types of behavior, as will be seen.</p>
+<p>The parameters that need to be retrieved via estimation include the parameters used in the systematic utility function <span class="math inline">\(U_{ij}\)</span> (more on this later), as well as any other parameters needed by the distribution itself. For instance, the uniform distribution is defined by two parameters, <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>:
 <span class="math display">\[
 f(x) = \left\{
         \begin{array}{lc}
@@ -396,7 +397,7 @@ f(x) = \left\{
         \end{array}
     \right.
 \]</span></p>
-<p>These parameters define the <em>dispersion</em> of the distribution. The dispersion controls the shape of the distribution, in this case how wide or narrow it is. The greater the difference between <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> the greater the range of values with non-zero probability, but the lower the probability for a constant interval of values. These two parameters also determine the <em>center</em> of the distribution. In this way, the uniform distribution is centered at <span class="math inline">\(\frac{a-b}{2}\)</span>. Other distributions also have parameters that determine their shape and position.</p>
+<p>These parameters define the <em>dispersion</em> of the distribution. The dispersion controls the shape of the distribution, in this case how wide or narrow it is. The greater the difference between <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> the greater the range of values with non-zero probability, but the lower the probability for any given constant interval of values. These two parameters also determine the <em>center</em> of the distribution (i.e., the mid-point of the rectangle). In this way, the uniform distribution is centered at <span class="math inline">\(\frac{a-b}{2}\)</span>. Other distributions also have parameters that determine their shape and position.</p>
 <p>A convenient choice of distribution is the Extreme Value type I (EV Type I) probability distribution function. This function is defined as:
 <span class="math display">\[
 f(x; \mu,\sigma) = e^{-(x + e^{-(x-\mu)/\sigma})}
@@ -407,7 +408,7 @@ f(x; \mu,\sigma) = e^{-(x + e^{-(x-\mu)/\sigma})}
 <a class="sourceLine" id="cb77-2" title="2">mu &lt;-<span class="st"> </span><span class="dv">0</span></a>
 <a class="sourceLine" id="cb77-3" title="3">sigma &lt;-<span class="st"> </span><span class="dv">1</span></a>
 <a class="sourceLine" id="cb77-4" title="4"></a>
-<a class="sourceLine" id="cb77-5" title="5"><span class="co"># Create a data frame for plotting</span></a>
+<a class="sourceLine" id="cb77-5" title="5"><span class="co"># Create a data frame for plotting; the arguments `from` and `to` define the range for plotting</span></a>
 <a class="sourceLine" id="cb77-6" title="6">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">-5</span>, <span class="dt">to =</span> <span class="dv">5</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">y =</span> <span class="kw">dgumbel</span>(x, <span class="dt">loc =</span> mu, <span class="dt">scale =</span> sigma))</a>
 <a class="sourceLine" id="cb77-7" title="7"></a>
 <a class="sourceLine" id="cb77-8" title="8"><span class="co"># Plot</span></a>
@@ -424,15 +425,15 @@ Figure 4.1: Extreme Value Type I distribution
 </p>
 </div>
 <p>If you are working with the R Notebook, you can try changing the parameters to see how the function behaves (remember to adjust the limits if you change the center of the distribution!).</p>
-<p>The EV Type I has a very interesting property: the difference of two EV Type I distributions follows the logistic distribution. In other words, if <span class="math inline">\(X \sim \text{EVI}(\alpha_Y,\sigma)\)</span> and <span class="math inline">\(Z \sim \text{EVI}(\alpha_Z,\sigma)\)</span>, then:
+<p>The EV Type I has a very interesting property: the difference of two EV Type I distributions follows the logistic distribution. In other words, if we let <span class="math inline">\(X \sim \text{EVI}(\alpha_Y,\sigma)\)</span> and <span class="math inline">\(Z \sim \text{EVI}(\alpha_Z,\sigma)\)</span>, then:
 <span class="math display">\[
 X - Y \sim \text{Logistic}(\alpha_X - \alpha_Y,\sigma)
 \]</span></p>
-<p>If we define the difference of the random utility terms as <span class="math inline">\(\epsilon_n = \epsilon_j - \epsilon_k\)</span>, the logistic distribution, in turn, is defined as follows:
+<p>Accordingly, we can define the difference of the random utility terms as <span class="math inline">\(\epsilon_n = \epsilon_j - \epsilon_k\)</span> using the logistic distribution. This distribution, in turn, is as follows:
 <span class="math display">\[
 f(x; \mu,\sigma) = \frac{e^{-(x-\mu)/\sigma}}{\sigma(1 + e^{-(x-\mu)/\sigma})^2}
 \]</span></p>
-<p>Whereas the EV Type I distribution was not symmetric, the shape of the logistic distribution is. The logistic distribution is, in fact, similar to the normal distribution but it has fatter tails, which means that the probability of extreme values is higher. This is illustrated in Figure <a href="chapter-3.html#fig:fig-logistic-normal-distribution">4.2</a>:</p>
+<p>Wher the EV Type I distribution was not symmetric, the shape of the logistic distribution is. The logistic distribution is, in fact, similar to the normal distribution but it has fatter tails, which means that for identical parameters the probability of extreme values is higher. This is illustrated in Figure <a href="chapter-3.html#fig:fig-logistic-normal-distribution">4.2</a>:</p>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" title="1"><span class="co"># Define parameters for the distribution</span></a>
 <a class="sourceLine" id="cb78-2" title="2">mu &lt;-<span class="st"> </span><span class="dv">0</span></a>
 <a class="sourceLine" id="cb78-3" title="3">sigma &lt;-<span class="st"> </span><span class="dv">1</span></a>
@@ -472,7 +473,7 @@ The above is called the <em>logit probability</em> and the resulting model is ca
 <a class="sourceLine" id="cb79-2" title="2">mu &lt;-<span class="st"> </span><span class="dv">0</span></a>
 <a class="sourceLine" id="cb79-3" title="3">sigma &lt;-<span class="st"> </span><span class="dv">1</span></a>
 <a class="sourceLine" id="cb79-4" title="4"></a>
-<a class="sourceLine" id="cb79-5" title="5"><span class="co"># Define an upper limit for calculating the probability</span></a>
+<a class="sourceLine" id="cb79-5" title="5"><span class="co"># Define an upper limit for calculating the probability; This equivalent to V_j - V_k. Negative values represent V_j &lt; V_k, and positive values are V_j &gt; V_k; when V_j = V_k, then X = 0:</span></a>
 <a class="sourceLine" id="cb79-6" title="6">X &lt;-<span class="st"> </span><span class="dv">-1</span></a>
 <a class="sourceLine" id="cb79-7" title="7"></a>
 <a class="sourceLine" id="cb79-8" title="8"><span class="co"># Create data frames for plotting</span></a>
@@ -537,7 +538,7 @@ Figure 4.5: Implication of the sigmoid shape
 <div id="now-about-those-parameters-mu-and-sigma" class="section level2">
 <h2><span class="header-section-number">4.7</span> Now, about those parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>…</h2>
 <p>Figure <a href="chapter-3.html#fig:fig-logistic-distribution">4.3</a> above was created assuming that <span class="math inline">\(\mu=0\)</span> and <span class="math inline">\(\sigma=1\)</span>. Can we really set these values in such an arbitrary fashion? The answer is no and yes.</p>
-<p>In the case of the centering parameter <span class="math inline">\(\mu\)</span>, setting it arbitrarily to zero is not appropriate. The reason is that we can think of this parameter as being key to calculating the difference between the systematic utilities. As seen above, the logit probability is:
+<p>In the case of the centering parameter <span class="math inline">\(\mu\)</span>, setting it arbitrarily to zero is not appropriate. The reason is that we this parameter is key to calculating the difference between the systematic utilities of alternatives. As seen above, the logit probability is:
 <span class="math display">\[
 P_j = P(V_j - V_k \le \epsilon_n) = \frac{1}{1 + e^{-(V_j-V_k-\mu)/\sigma}}
 \]</span></p>
@@ -553,7 +554,7 @@ V^*_j = V_j - \mu
 <span class="math display">\[
 P_j = P(V_j - V^*_k \le \epsilon_n) = \frac{1}{1 + e^{-(V_j-V^*_k)/\sigma}}
 \]</span></p>
-<p>The difference in other words depends on the value of <span class="math inline">\(\mu\)</span>. When <span class="math inline">\(\mu\)</span> is a large positive number, the effect is to increase the utility of alternative <span class="math inline">\(k\)</span> (or conversely, since it would enter with a negative sign in <span class="math inline">\(V^*_j\)</span>, it would decrease the utility of alternative <span class="math inline">\(j\)</span>). When <span class="math inline">\(\mu\)</span> is a large negative number, the effect is to <em>increase</em> the utility of <span class="math inline">\(j\)</span> - or alternatively to reduce the utility of <span class="math inline">\(k\)</span>. For this reason we do not want to arbitrarily set the value of <span class="math inline">\(\mu\)</span> to zero, because this parameter contains information about the relative differences between <span class="math inline">\(V_j\)</span> and <span class="math inline">\(V_k\)</span>. The utility function that does not contain the centering parameter <span class="math inline">\(\mu\)</span> is called the <em>reference</em> function.</p>
+<p>The difference in other words depends on the value of <span class="math inline">\(\mu\)</span>. When <span class="math inline">\(\mu\)</span> is a large positive number, the effect is to increase the utility of alternative <span class="math inline">\(k\)</span> (or conversely, since it would enter with a negative sign in <span class="math inline">\(V^*_j\)</span>, it would decrease the utility of alternative <span class="math inline">\(j\)</span>). When <span class="math inline">\(\mu\)</span> is a large negative number, the effect is to <em>increase</em> the utility of <span class="math inline">\(j\)</span> - or alternatively to reduce the utility of <span class="math inline">\(k\)</span>. For this reason we do not want to arbitrarily set the value of <span class="math inline">\(\mu\)</span> to zero, because this parameter contains information about the relative <em>systematic</em> differences between <span class="math inline">\(V_j\)</span> and <span class="math inline">\(V_k\)</span>. The utility function that does not contain the centering parameter <span class="math inline">\(\mu\)</span> is called the <em>reference</em> function.</p>
 <p>For simplicity of presentation, I will drop the notation <span class="math inline">\(V^*\)</span> and will assume henceforth that one of the utility functions has absorbed parameter <span class="math inline">\(\mu\)</span>.</p>
 <p>Now, with respect to the dispersion parameter <span class="math inline">\(\sigma\)</span>, this parameter is common to the two utility functions in the logit probability and, as it turns out, it <em>can</em> be arbitrarily set to one. Consider two utility functions as follows:
 <span class="math display">\[
@@ -563,7 +564,7 @@ V_j - V_k
 <span class="math display">\[
 \theta(V_j - V_k) = \theta V_j - \theta V_k 
 \]</span></p>
-<p>In other words, mutliplying two quantities by a positive constant changes the cardinality of the difference. If you are working with the R Notebook, you might want to try changing the value of <code>theta</code> below, keeping in mind that the value must be <strong>greater than zero</strong>:</p>
+<p>In other words, mutliplying two quantities by a positive constant changes the cardinality of the difference. If you are working with the R Notebook, you might want to try changing the value of <code>theta</code> below, keeping in mind that the value must be <strong>greater than zero</strong> (the dispersion parameter is never negative):</p>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1">V_j &lt;-<span class="st"> </span><span class="dv">-4</span></a>
 <a class="sourceLine" id="cb82-2" title="2">V_k &lt;-<span class="st"> </span><span class="dv">8</span></a>
 <a class="sourceLine" id="cb82-3" title="3">theta &lt;-<span class="st"> </span><span class="fl">0.8</span></a>
@@ -586,12 +587,12 @@ P_j = P(V_j - V_k \le \epsilon_n) = \frac{e^{V_j}}{\sum_k^Je^{V_k}}
 </div>
 <div id="properties-of-the-logit-model" class="section level2">
 <h2><span class="header-section-number">4.9</span> Properties of the logit model</h2>
-<p>The logit model is the workhorse of discrete choice analysis, in good measure because of its closed form which does not require numerical evaluation of the integrals involved in calculating probabilities (i.e., the “area under the curve”, although in multinomial situations this actually is a volume under the surface!)</p>
+<p>The logit model is the workhorse of discrete choice analysis, in good measure because its closed form does not require numerical evaluation of the integrals involved in calculating probabilities (i.e., the “area under the curve”, although in multinomial situations this actually is a volume under the surface!)</p>
 <p>One important property of the logit model is the way it handles substitution patterns. Consider the ratio of odds for any two alternatives according to the multinomial logit model:
 <span class="math display">\[
 \frac{P_j}{P_m}=\frac{\frac{e^{V_j}}{\sum_ke^{V_k}}}{\frac{e^{V_m}}{\sum_ke^{V_k}}} =\frac{e^{V_j}}{e^{V_m}} =e^{V_j - V_m}
 \]</span></p>
-<p>As seen, the ratio of the odds of <span class="math inline">\(P_j\)</span> to <span class="math inline">\(P_m\)</span> depends only on the difference in the utilities of alternatives <span class="math inline">\(j\)</span> and <span class="math inline">\(m\)</span> and nothing more. Furthermore, recall that the choice set is by design an exhaustive set of possible alternatives, and therefore the sum of the probabilities over this set is one:
+<p>As seen above, the ratio of the odds of <span class="math inline">\(P_j\)</span> to <span class="math inline">\(P_m\)</span> depends only on the difference in the utilities of alternatives <span class="math inline">\(j\)</span> and <span class="math inline">\(m\)</span> and nothing else. Furthermore, recall that the choice set is by design an exhaustive set of possible alternatives, and therefore the sum of the probabilities over this set is one:
 <span class="math display">\[
 P_1 + P_2+\cdots+P_J=1
 \]</span></p>
@@ -673,7 +674,7 @@ P^1_m = \frac{5}{7}(1 - P^1_{sb}) = \Big(\frac{5}{7}\Big)\Big(\frac{1}{2}\Big) =
 \end{array}
 \]</span></p>
 <p>Proportional substitution patterns are a consequence of the lack of correlation among the random utilities. The logit model considers that the alternatives are all independent. However, in this example, this condition is suspect: the two kinds of margarine are more similar between them than either are to butter. Indeed, if consumers choose butter for flavor, lowering the price of one kind of margarine is likely to draw <em>less</em> than proportionally from the probability of choosing butter - and more than proportionally from the probability of the other kind of margarine if, for instance, consumers prefer margarine for health reasons but respond to price changes.</p>
-<p>In this case, the correlation between the two kinds of margarine is a consequence of a missing attribute - say flavor, or health, that is necessary to discriminate among the alternatives. In this way, the logit model can be seen as the ideal model - its closed form being a very attractive feature - as long as the systematic utilities are properly and completely specified. When this is not the case, the results can lead to unrealistic and even unreasonable substition patterns. This issue suggests two possible courses of action:</p>
+<p>In this case, the correlation between the two kinds of margarine is a consequence of a missing attribute - say flavor, or health, that is necessary to discriminate among the alternatives. In this way, the logit model can be seen as the ideal model - its closed form is a very attractive feature…as long as the systematic utilities are properly and completely specified. When this is not the case, the results can lead to unrealistic and even unreasonable substition patterns. This issue suggests two possible courses of action:</p>
 <ol style="list-style-type: decimal">
 <li>Working to ensure that the systematic utility functions are properly and completely specified.</li>
 <li>Modifying the modelling apparatus to accommodate correlations among the random utilities.</li>
