@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 10 Dealing with Heterogeneity II: The Latent Class Logit Model | An Introduction to Discrete Choice Analysis</title>
   <meta name="description" content="These notes were created by Antonio Paez as a resource for teaching a graduate discrete choice analysis course (GEOG 738) at McMaster University." />
-  <meta name="generator" content="bookdown 0.16 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 10 Dealing with Heterogeneity II: The Latent Class Logit Model | An Introduction to Discrete Choice Analysis" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Antonio Paez" />
 
 
-<meta name="date" content="2020-01-29" />
+<meta name="date" content="2020-02-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -204,7 +204,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.11.1" data-path="chapter-3.html"><a href="chapter-3.html#questions-2"><i class="fa fa-check"></i><b>4.11.1</b> Questions</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="chapter-4.html"><a href="chapter-4.html"><i class="fa fa-check"></i><b>5</b> Practical specification and estimation</a><ul>
+<li class="chapter" data-level="5" data-path="chapter-4.html"><a href="chapter-4.html"><i class="fa fa-check"></i><b>5</b> Practical issues in specification and estimation</a><ul>
 <li class="chapter" data-level="5.1" data-path="chapter-4.html"><a href="chapter-4.html#theory-and-practice"><i class="fa fa-check"></i><b>5.1</b> Theory and practice</a></li>
 <li class="chapter" data-level="5.2" data-path="chapter-4.html"><a href="chapter-4.html#how-to-use-this-note-3"><i class="fa fa-check"></i><b>5.2</b> How to use this note</a></li>
 <li class="chapter" data-level="5.3" data-path="chapter-4.html"><a href="chapter-4.html#learning-objectives-4"><i class="fa fa-check"></i><b>5.3</b> Learning objectives</a></li>
@@ -345,37 +345,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="preliminaries-7" class="section level2">
 <h2><span class="header-section-number">10.1</span> Preliminaries</h2>
 <p>Load the packages used in this section:</p>
-<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb334-1" title="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb334-2" title="2"><span class="kw">library</span>(mlogit)</a>
-<a class="sourceLine" id="cb334-3" title="3"><span class="kw">library</span>(gmnl)</a>
-<a class="sourceLine" id="cb334-4" title="4"><span class="kw">library</span>(kableExtra)</a>
-<a class="sourceLine" id="cb334-5" title="5"><span class="kw">library</span>(gridExtra)</a></code></pre></div>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb327-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb327-2" title="2"><span class="kw">library</span>(mlogit)</a>
+<a class="sourceLine" id="cb327-3" title="3"><span class="kw">library</span>(gmnl)</a>
+<a class="sourceLine" id="cb327-4" title="4"><span class="kw">library</span>(kableExtra)</a>
+<a class="sourceLine" id="cb327-5" title="5"><span class="kw">library</span>(gridExtra)</a></code></pre></div>
 <p>Load the dataset used in this chapter, from the <code>mlogit</code> package:</p>
-<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb335-1" title="1"><span class="kw">data</span>(<span class="st">&quot;RiskyTransport&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;mlogit&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb328-1" title="1"><span class="kw">data</span>(<span class="st">&quot;RiskyTransport&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;mlogit&quot;</span>)</a></code></pre></div>
 <p>This dataset is from a study reported by Leon and Miguel <span class="citation">(<a href="#ref-Leon2017risky" role="doc-biblioref">2017</a>)</span> on the transportation choices of individuals travelling to and from the airport in Freetown, Sierra Leone. This airport is not on the mainland, and the alternatives for travel are ferry, hovercraft, helicopter, and water taxi. Information about the number of fatalities due to accidents by each of these modes allowed the researchers to calculate the mortality risk by mode.</p>
 <p>The choice set is not balanced, meaning that not all alternatives were available to all individuals surveyed for this study. This is due to the seasonality or occasional unavailability of some modes. For the example in this chapter, we will extract a subset of observations for those individuals who had the four alternatives available as part of their choice set. To do this, we identify all respondents with four modes:</p>
-<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb336-1" title="1">all_available &lt;-<span class="st"> </span>RiskyTransport <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(chid) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">no_rows =</span> <span class="kw">length</span>(chid)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(no_rows <span class="op">==</span><span class="st"> </span><span class="dv">4</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(chid)</a></code></pre></div>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb329-1" title="1">all_available &lt;-<span class="st"> </span>RiskyTransport <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(chid) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">no_rows =</span> <span class="kw">length</span>(chid)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(no_rows <span class="op">==</span><span class="st"> </span><span class="dv">4</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(chid)</a></code></pre></div>
 <p>Next, we do an inner join of those respondents with the full dataset. This joins will only preserve the rows in the table corresponding to the respondents in <code>all_available</code>:</p>
-<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb337-1" title="1">RT &lt;-<span class="st"> </span><span class="kw">inner_join</span>(RiskyTransport, all_available, <span class="dt">by =</span> <span class="st">&quot;chid&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">drop_na</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb330-1" title="1">RT &lt;-<span class="st"> </span><span class="kw">inner_join</span>(RiskyTransport, all_available, <span class="dt">by =</span> <span class="st">&quot;chid&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">drop_na</span>()</a></code></pre></div>
 <p>The two key variables (in addition to the mode chosen) are the generalized cost of the transport mode (<code>cost</code>) and the fatality rate in deaths per 100,000 trips (<code>risk</code>). The following table presents the descriptive statistics for the different modes of transportation:</p>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb338-1" title="1">df &lt;-<span class="st"> </span>RT <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(mode) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize</span>(<span class="dt">use =</span> <span class="kw">sum</span>(choice),</a>
-<a class="sourceLine" id="cb338-2" title="2">                                    <span class="dt">min_cost =</span> <span class="kw">min</span>(cost), <span class="dt">mean_cost =</span> <span class="kw">mean</span>(cost), <span class="dt">max_cost =</span> <span class="kw">max</span>(cost),</a>
-<a class="sourceLine" id="cb338-3" title="3">                                    <span class="dt">min_risk =</span> <span class="kw">min</span>(risk), <span class="dt">mean_risk =</span> <span class="kw">mean</span>(risk), <span class="dt">max_risk =</span> <span class="kw">max</span>(risk))</a>
-<a class="sourceLine" id="cb338-4" title="4">df<span class="op">$</span>use &lt;-<span class="st"> </span>df<span class="op">$</span>use<span class="op">/</span><span class="kw">sum</span>(df<span class="op">$</span>use)</a>
-<a class="sourceLine" id="cb338-5" title="5"></a>
-<a class="sourceLine" id="cb338-6" title="6"><span class="kw">kable</span>(df, </a>
-<a class="sourceLine" id="cb338-7" title="7">      <span class="st">&quot;html&quot;</span>,</a>
-<a class="sourceLine" id="cb338-8" title="8">      <span class="dt">digits =</span> <span class="dv">4</span>,</a>
-<a class="sourceLine" id="cb338-9" title="9">      <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Mode&quot;</span>,</a>
-<a class="sourceLine" id="cb338-10" title="10">                    <span class="st">&quot;Proportion&quot;</span>,</a>
-<a class="sourceLine" id="cb338-11" title="11">                    <span class="st">&quot;Min&quot;</span>,</a>
-<a class="sourceLine" id="cb338-12" title="12">                    <span class="st">&quot;Mean&quot;</span>,</a>
-<a class="sourceLine" id="cb338-13" title="13">                    <span class="st">&quot;Max&quot;</span>,</a>
-<a class="sourceLine" id="cb338-14" title="14">                    <span class="st">&quot;Min&quot;</span>,</a>
-<a class="sourceLine" id="cb338-15" title="15">                    <span class="st">&quot;Mean&quot;</span>,</a>
-<a class="sourceLine" id="cb338-16" title="16">                    <span class="st">&quot;Max&quot;</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb338-17" title="17"><span class="st">  </span><span class="kw">kable_styling</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb338-18" title="18"><span class="st">  </span><span class="kw">add_header_above</span>(<span class="kw">c</span>(<span class="st">&quot; &quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;Cost&quot;</span> =<span class="st"> </span><span class="dv">3</span>, <span class="st">&quot;Risk&quot;</span> =<span class="st"> </span><span class="dv">3</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb331-1" title="1">df &lt;-<span class="st"> </span>RT <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(mode) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarize</span>(<span class="dt">use =</span> <span class="kw">sum</span>(choice),</a>
+<a class="sourceLine" id="cb331-2" title="2">                                    <span class="dt">min_cost =</span> <span class="kw">min</span>(cost), <span class="dt">mean_cost =</span> <span class="kw">mean</span>(cost), <span class="dt">max_cost =</span> <span class="kw">max</span>(cost),</a>
+<a class="sourceLine" id="cb331-3" title="3">                                    <span class="dt">min_risk =</span> <span class="kw">min</span>(risk), <span class="dt">mean_risk =</span> <span class="kw">mean</span>(risk), <span class="dt">max_risk =</span> <span class="kw">max</span>(risk))</a>
+<a class="sourceLine" id="cb331-4" title="4">df<span class="op">$</span>use &lt;-<span class="st"> </span>df<span class="op">$</span>use<span class="op">/</span><span class="kw">sum</span>(df<span class="op">$</span>use)</a>
+<a class="sourceLine" id="cb331-5" title="5"></a>
+<a class="sourceLine" id="cb331-6" title="6"><span class="kw">kable</span>(df, </a>
+<a class="sourceLine" id="cb331-7" title="7">      <span class="st">&quot;html&quot;</span>,</a>
+<a class="sourceLine" id="cb331-8" title="8">      <span class="dt">digits =</span> <span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb331-9" title="9">      <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Mode&quot;</span>,</a>
+<a class="sourceLine" id="cb331-10" title="10">                    <span class="st">&quot;Proportion&quot;</span>,</a>
+<a class="sourceLine" id="cb331-11" title="11">                    <span class="st">&quot;Min&quot;</span>,</a>
+<a class="sourceLine" id="cb331-12" title="12">                    <span class="st">&quot;Mean&quot;</span>,</a>
+<a class="sourceLine" id="cb331-13" title="13">                    <span class="st">&quot;Max&quot;</span>,</a>
+<a class="sourceLine" id="cb331-14" title="14">                    <span class="st">&quot;Min&quot;</span>,</a>
+<a class="sourceLine" id="cb331-15" title="15">                    <span class="st">&quot;Mean&quot;</span>,</a>
+<a class="sourceLine" id="cb331-16" title="16">                    <span class="st">&quot;Max&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb331-17" title="17"><span class="st">  </span><span class="kw">kable_styling</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb331-18" title="18"><span class="st">  </span><span class="kw">add_header_above</span>(<span class="kw">c</span>(<span class="st">&quot; &quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;Cost&quot;</span> =<span class="st"> </span><span class="dv">3</span>, <span class="st">&quot;Risk&quot;</span> =<span class="st"> </span><span class="dv">3</span>))</a></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -530,11 +530,11 @@ Hovercraft
 <p>The dataset includes information on number of seats, noise, crowdness, convenience of location, and clientele by mode. Finally, it includes information about the decision-makers, including whether they are African, their declared life expectancy, their declared hourly wage, their imputed hourly wage, their level of education, a self-ranked response on their degree of fatalism, gender, age, whether they have children, and if they know how to swim.</p>
 <p>Althought the survey includes sample weights, we will ignore those after subsetting the data.</p>
 <p>We add to the dataset some interactions and non-linear terms:</p>
-<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb339-1" title="1">RT &lt;-<span class="st"> </span>RT <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">cost:dwage</span><span class="st">`</span> =<span class="st"> </span>cost <span class="op">*</span><span class="st"> </span>dwage,</a>
-<a class="sourceLine" id="cb339-2" title="2">                    <span class="st">`</span><span class="dt">risk:dwage</span><span class="st">`</span> =<span class="st"> </span>risk <span class="op">*</span><span class="st"> </span>dwage,</a>
-<a class="sourceLine" id="cb339-3" title="3">                    <span class="dt">dwage2 =</span> dwage<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb332-1" title="1">RT &lt;-<span class="st"> </span>RT <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">cost:dwage</span><span class="st">`</span> =<span class="st"> </span>cost <span class="op">*</span><span class="st"> </span>dwage,</a>
+<a class="sourceLine" id="cb332-2" title="2">                    <span class="st">`</span><span class="dt">risk:dwage</span><span class="st">`</span> =<span class="st"> </span>risk <span class="op">*</span><span class="st"> </span>dwage,</a>
+<a class="sourceLine" id="cb332-3" title="3">                    <span class="dt">dwage2 =</span> dwage<span class="op">^</span><span class="dv">2</span>)</a></code></pre></div>
 <p>Next, we use <code>mlogit.data</code> to format the table for use with <code>mlogit</code> and <code>gmnl</code>:</p>
-<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb340-1" title="1">RT &lt;-<span class="st"> </span><span class="kw">mlogit.data</span>(RT, <span class="dt">shape =</span> <span class="st">&quot;long&quot;</span>, <span class="dt">choice =</span> <span class="st">&quot;choice&quot;</span>, <span class="dt">alt.var =</span> <span class="st">&quot;mode&quot;</span>, <span class="dt">id.var =</span> <span class="st">&quot;id&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb333-1" title="1">RT &lt;-<span class="st"> </span><span class="kw">mlogit.data</span>(RT, <span class="dt">shape =</span> <span class="st">&quot;long&quot;</span>, <span class="dt">choice =</span> <span class="st">&quot;choice&quot;</span>, <span class="dt">alt.var =</span> <span class="st">&quot;mode&quot;</span>, <span class="dt">id.var =</span> <span class="st">&quot;id&quot;</span>)</a></code></pre></div>
 </div>
 <div id="more-on-taste-variation" class="section level2">
 <h2><span class="header-section-number">10.2</span> More on taste variation</h2>
@@ -543,7 +543,7 @@ Hovercraft
 <div id="how-to-use-this-note-8" class="section level2">
 <h2><span class="header-section-number">10.3</span> How to use this note</h2>
 <p>Remember that the source for the document you are reading is an R Notebook. Throughout the notes, you will find examples of code in segments of text called <em>chunks</em>. This is an example of a chunk:</p>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb341-1" title="1"><span class="kw">print</span>(<span class="st">&quot;Ignorance is the foundation of absolute power&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb334-1" title="1"><span class="kw">print</span>(<span class="st">&quot;Ignorance is the foundation of absolute power&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;Ignorance is the foundation of absolute power&quot;</code></pre>
 <p>If you are working with the Notebook version of the document, you can run the code by clicking the ‘play’ icon on the top right corner of the chunk. If you are reading the web-book version of the document, you will often see that the code has already been executed. You can still try it by copying and pasting into your R or RStudio console.</p>
 </div>
@@ -572,10 +572,10 @@ V_{ni} = \beta_{cost} cost_i + \beta_{risk} {risk}_i
 \]</span>
 where <code>safe</code> is the probability of completing a trip safely.</p>
 <p>This model is estimated as follows, supressing the constants in the second term of the formula:</p>
-<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb343-1" title="1">mnl.rt0 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(choice <span class="op">~</span><span class="st"> </span>cost <span class="op">+</span><span class="st"> </span>risk <span class="op">|</span><span class="st"> </span><span class="dv">0</span>, </a>
-<a class="sourceLine" id="cb343-2" title="2">                <span class="dt">data =</span> RT</a>
-<a class="sourceLine" id="cb343-3" title="3">)</a>
-<a class="sourceLine" id="cb343-4" title="4"><span class="kw">summary</span>(mnl.rt0)</a></code></pre></div>
+<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb336-1" title="1">mnl.rt0 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(choice <span class="op">~</span><span class="st"> </span>cost <span class="op">+</span><span class="st"> </span>risk <span class="op">|</span><span class="st"> </span><span class="dv">0</span>, </a>
+<a class="sourceLine" id="cb336-2" title="2">                <span class="dt">data =</span> RT</a>
+<a class="sourceLine" id="cb336-3" title="3">)</a>
+<a class="sourceLine" id="cb336-4" title="4"><span class="kw">summary</span>(mnl.rt0)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## mlogit(formula = choice ~ cost + risk | 0, data = RT, method = &quot;nr&quot;)
@@ -732,56 +732,56 @@ choice &amp; \sim&amp; \text{alternative attributes with generic coefficients } 
 \end{array}
 \]</span></p>
 <p>We proceed to estimate latent class models as follows, with <span class="math inline">\(Q=2\)</span> and <span class="math inline">\(Q=3\)</span> (i.e., two and three latent classes):</p>
-<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb345-1" title="1">lc2 &lt;-<span class="st"> </span><span class="kw">gmnl</span>(choice <span class="op">~</span><span class="st"> </span>cost <span class="op">+</span><span class="st"> </span>risk <span class="op">|</span><span class="st"> </span><span class="dv">0</span> <span class="op">|</span><span class="st"> </span><span class="dv">0</span> <span class="op">|</span><span class="st"> </span><span class="dv">0</span> <span class="op">|</span><span class="st"> </span><span class="dv">1</span>, </a>
-<a class="sourceLine" id="cb345-2" title="2">           <span class="dt">data =</span> RT,</a>
-<a class="sourceLine" id="cb345-3" title="3">           <span class="dt">model =</span> <span class="st">&#39;lc&#39;</span>, </a>
-<a class="sourceLine" id="cb345-4" title="4">           <span class="dt">Q =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb345-5" title="5">           <span class="dt">panel =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb345-6" title="6">           <span class="dt">method =</span> <span class="st">&quot;bhhh&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb338-1" title="1">lc2 &lt;-<span class="st"> </span><span class="kw">gmnl</span>(choice <span class="op">~</span><span class="st"> </span>cost <span class="op">+</span><span class="st"> </span>risk <span class="op">|</span><span class="st"> </span><span class="dv">0</span> <span class="op">|</span><span class="st"> </span><span class="dv">0</span> <span class="op">|</span><span class="st"> </span><span class="dv">0</span> <span class="op">|</span><span class="st"> </span><span class="dv">1</span>, </a>
+<a class="sourceLine" id="cb338-2" title="2">           <span class="dt">data =</span> RT,</a>
+<a class="sourceLine" id="cb338-3" title="3">           <span class="dt">model =</span> <span class="st">&#39;lc&#39;</span>, </a>
+<a class="sourceLine" id="cb338-4" title="4">           <span class="dt">Q =</span> <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb338-5" title="5">           <span class="dt">panel =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb338-6" title="6">           <span class="dt">method =</span> <span class="st">&quot;bhhh&quot;</span>)</a></code></pre></div>
 <pre><code>## Estimating LC model</code></pre>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb347-1" title="1"><span class="co">#summary(lc2)</span></a>
-<a class="sourceLine" id="cb347-2" title="2"></a>
-<a class="sourceLine" id="cb347-3" title="3">lc3 &lt;-<span class="st"> </span><span class="kw">gmnl</span>(choice <span class="op">~</span><span class="st"> </span>cost <span class="op">+</span><span class="st"> </span>risk <span class="op">|</span><span class="st"> </span><span class="dv">0</span> <span class="op">|</span><span class="st"> </span><span class="dv">0</span> <span class="op">|</span><span class="st"> </span><span class="dv">0</span> <span class="op">|</span><span class="st"> </span><span class="dv">1</span>, </a>
-<a class="sourceLine" id="cb347-4" title="4">           <span class="dt">data =</span> RT,</a>
-<a class="sourceLine" id="cb347-5" title="5">           <span class="dt">model =</span> <span class="st">&#39;lc&#39;</span>, </a>
-<a class="sourceLine" id="cb347-6" title="6">           <span class="dt">Q =</span> <span class="dv">3</span>,</a>
-<a class="sourceLine" id="cb347-7" title="7">           <span class="dt">panel =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb347-8" title="8">           <span class="dt">method =</span> <span class="st">&quot;bhhh&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb340-1" title="1"><span class="co">#summary(lc2)</span></a>
+<a class="sourceLine" id="cb340-2" title="2"></a>
+<a class="sourceLine" id="cb340-3" title="3">lc3 &lt;-<span class="st"> </span><span class="kw">gmnl</span>(choice <span class="op">~</span><span class="st"> </span>cost <span class="op">+</span><span class="st"> </span>risk <span class="op">|</span><span class="st"> </span><span class="dv">0</span> <span class="op">|</span><span class="st"> </span><span class="dv">0</span> <span class="op">|</span><span class="st"> </span><span class="dv">0</span> <span class="op">|</span><span class="st"> </span><span class="dv">1</span>, </a>
+<a class="sourceLine" id="cb340-4" title="4">           <span class="dt">data =</span> RT,</a>
+<a class="sourceLine" id="cb340-5" title="5">           <span class="dt">model =</span> <span class="st">&#39;lc&#39;</span>, </a>
+<a class="sourceLine" id="cb340-6" title="6">           <span class="dt">Q =</span> <span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb340-7" title="7">           <span class="dt">panel =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb340-8" title="8">           <span class="dt">method =</span> <span class="st">&quot;bhhh&quot;</span>)</a></code></pre></div>
 <pre><code>## Estimating LC model</code></pre>
-<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb349-1" title="1"><span class="co">#summary(lc3)</span></a></code></pre></div>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb342-1" title="1"><span class="co">#summary(lc3)</span></a></code></pre></div>
 <p>The results of these models are summarized in the table below.</p>
-<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb350-1" title="1"><span class="co"># Estimate a constants only model to calculate McFadden&#39;s _adjusted_ rho2</span></a>
-<a class="sourceLine" id="cb350-2" title="2"></a>
-<a class="sourceLine" id="cb350-3" title="3"><span class="kw">names</span>(mnl.rt0<span class="op">$</span>coefficients) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;class.1.cost&quot;</span>, <span class="st">&quot;class.1.risk&quot;</span>)</a>
-<a class="sourceLine" id="cb350-4" title="4"></a>
-<a class="sourceLine" id="cb350-5" title="5">mnl0.summary &lt;-<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">data.frame</span>(<span class="kw">summary</span>(mnl.rt0)<span class="op">$</span>CoefTable), <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb350-6" title="6"><span class="st">  </span><span class="kw">transmute</span>(Variable, Estimate, <span class="dt">pval =</span> <span class="st">`</span><span class="dt">Pr...z..</span><span class="st">`</span>)</a>
-<a class="sourceLine" id="cb350-7" title="7"></a>
-<a class="sourceLine" id="cb350-8" title="8">lc2.summary &lt;-<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">data.frame</span>(<span class="kw">summary</span>(lc2)<span class="op">$</span>CoefTable), <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb350-9" title="9"><span class="st">  </span><span class="kw">transmute</span>(Variable, Estimate, <span class="dt">pval =</span> <span class="st">`</span><span class="dt">Pr...z..</span><span class="st">`</span>)</a>
-<a class="sourceLine" id="cb350-10" title="10"></a>
-<a class="sourceLine" id="cb350-11" title="11">lc3.summary &lt;-<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">data.frame</span>(<span class="kw">summary</span>(lc3)<span class="op">$</span>CoefTable), <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb350-12" title="12"><span class="st">  </span><span class="kw">transmute</span>(Variable, Estimate, <span class="dt">pval =</span> <span class="st">`</span><span class="dt">Pr...z..</span><span class="st">`</span>)</a>
-<a class="sourceLine" id="cb350-13" title="13"></a>
-<a class="sourceLine" id="cb350-14" title="14">df &lt;-<span class="st"> </span><span class="kw">full_join</span>(mnl0.summary, lc2.summary, <span class="dt">by =</span> <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb350-15" title="15"><span class="st">  </span><span class="kw">full_join</span>(lc3.summary, <span class="dt">by =</span> <span class="st">&quot;Variable&quot;</span>)</a>
-<a class="sourceLine" id="cb350-16" title="16"></a>
-<a class="sourceLine" id="cb350-17" title="17"><span class="kw">kable</span>(df, </a>
-<a class="sourceLine" id="cb350-18" title="18">      <span class="st">&quot;html&quot;</span>,</a>
-<a class="sourceLine" id="cb350-19" title="19">      <span class="dt">digits =</span> <span class="dv">4</span>,</a>
-<a class="sourceLine" id="cb350-20" title="20">      <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Variable&quot;</span>,</a>
-<a class="sourceLine" id="cb350-21" title="21">                    <span class="st">&quot;Estimate&quot;</span>,</a>
-<a class="sourceLine" id="cb350-22" title="22">                    <span class="st">&quot;p-value&quot;</span>,</a>
-<a class="sourceLine" id="cb350-23" title="23">                    <span class="st">&quot;Estimate&quot;</span>,</a>
-<a class="sourceLine" id="cb350-24" title="24">                    <span class="st">&quot;p-value&quot;</span>,</a>
-<a class="sourceLine" id="cb350-25" title="25">                    <span class="st">&quot;Estimate&quot;</span>,</a>
-<a class="sourceLine" id="cb350-26" title="26">                    <span class="st">&quot;p-value&quot;</span>),</a>
-<a class="sourceLine" id="cb350-27" title="27">      <span class="dt">caption =</span> <span class="st">&quot;Base models: multinomial logit (MNL), latent class Q = 2 (LC2), latent class Q = 3 (LC3)&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb350-28" title="28"><span class="st">  </span><span class="kw">kable_styling</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb350-29" title="29"><span class="st">  </span><span class="kw">add_header_above</span>(<span class="kw">c</span>(<span class="st">&quot; &quot;</span> =<span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;MNL&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;LC2&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;LC3&quot;</span> =<span class="st"> </span><span class="dv">2</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb350-30" title="30"><span class="st">  </span><span class="kw">footnote</span>(<span class="dt">general =</span> <span class="kw">c</span>(<span class="kw">paste0</span>(<span class="st">&quot;Log-Likelihood: MNL = &quot;</span>, <span class="kw">round</span>(mnl.rt0<span class="op">$</span>logLik[<span class="dv">1</span>], <span class="dt">digits =</span> <span class="dv">3</span>),</a>
-<a class="sourceLine" id="cb350-31" title="31">                            <span class="st">&quot;; Latent Class (Q=2) = &quot;</span>, <span class="kw">round</span>(lc2<span class="op">$</span>logLik<span class="op">$</span>maximum, <span class="dt">digits =</span> <span class="dv">3</span>),</a>
-<a class="sourceLine" id="cb350-32" title="32">                            <span class="st">&quot;; Latent Class (Q=2) = &quot;</span>, <span class="kw">round</span>(lc3<span class="op">$</span>logLik<span class="op">$</span>maximum, <span class="dt">digits =</span> <span class="dv">3</span>))))</a></code></pre></div>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb343-1" title="1"><span class="co"># Estimate a constants only model to calculate McFadden&#39;s _adjusted_ rho2</span></a>
+<a class="sourceLine" id="cb343-2" title="2"></a>
+<a class="sourceLine" id="cb343-3" title="3"><span class="kw">names</span>(mnl.rt0<span class="op">$</span>coefficients) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;class.1.cost&quot;</span>, <span class="st">&quot;class.1.risk&quot;</span>)</a>
+<a class="sourceLine" id="cb343-4" title="4"></a>
+<a class="sourceLine" id="cb343-5" title="5">mnl0.summary &lt;-<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">data.frame</span>(<span class="kw">summary</span>(mnl.rt0)<span class="op">$</span>CoefTable), <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb343-6" title="6"><span class="st">  </span><span class="kw">transmute</span>(Variable, Estimate, <span class="dt">pval =</span> <span class="st">`</span><span class="dt">Pr...z..</span><span class="st">`</span>)</a>
+<a class="sourceLine" id="cb343-7" title="7"></a>
+<a class="sourceLine" id="cb343-8" title="8">lc2.summary &lt;-<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">data.frame</span>(<span class="kw">summary</span>(lc2)<span class="op">$</span>CoefTable), <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb343-9" title="9"><span class="st">  </span><span class="kw">transmute</span>(Variable, Estimate, <span class="dt">pval =</span> <span class="st">`</span><span class="dt">Pr...z..</span><span class="st">`</span>)</a>
+<a class="sourceLine" id="cb343-10" title="10"></a>
+<a class="sourceLine" id="cb343-11" title="11">lc3.summary &lt;-<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">data.frame</span>(<span class="kw">summary</span>(lc3)<span class="op">$</span>CoefTable), <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb343-12" title="12"><span class="st">  </span><span class="kw">transmute</span>(Variable, Estimate, <span class="dt">pval =</span> <span class="st">`</span><span class="dt">Pr...z..</span><span class="st">`</span>)</a>
+<a class="sourceLine" id="cb343-13" title="13"></a>
+<a class="sourceLine" id="cb343-14" title="14">df &lt;-<span class="st"> </span><span class="kw">full_join</span>(mnl0.summary, lc2.summary, <span class="dt">by =</span> <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb343-15" title="15"><span class="st">  </span><span class="kw">full_join</span>(lc3.summary, <span class="dt">by =</span> <span class="st">&quot;Variable&quot;</span>)</a>
+<a class="sourceLine" id="cb343-16" title="16"></a>
+<a class="sourceLine" id="cb343-17" title="17"><span class="kw">kable</span>(df, </a>
+<a class="sourceLine" id="cb343-18" title="18">      <span class="st">&quot;html&quot;</span>,</a>
+<a class="sourceLine" id="cb343-19" title="19">      <span class="dt">digits =</span> <span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb343-20" title="20">      <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Variable&quot;</span>,</a>
+<a class="sourceLine" id="cb343-21" title="21">                    <span class="st">&quot;Estimate&quot;</span>,</a>
+<a class="sourceLine" id="cb343-22" title="22">                    <span class="st">&quot;p-value&quot;</span>,</a>
+<a class="sourceLine" id="cb343-23" title="23">                    <span class="st">&quot;Estimate&quot;</span>,</a>
+<a class="sourceLine" id="cb343-24" title="24">                    <span class="st">&quot;p-value&quot;</span>,</a>
+<a class="sourceLine" id="cb343-25" title="25">                    <span class="st">&quot;Estimate&quot;</span>,</a>
+<a class="sourceLine" id="cb343-26" title="26">                    <span class="st">&quot;p-value&quot;</span>),</a>
+<a class="sourceLine" id="cb343-27" title="27">      <span class="dt">caption =</span> <span class="st">&quot;Base models: multinomial logit (MNL), latent class Q = 2 (LC2), latent class Q = 3 (LC3)&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb343-28" title="28"><span class="st">  </span><span class="kw">kable_styling</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb343-29" title="29"><span class="st">  </span><span class="kw">add_header_above</span>(<span class="kw">c</span>(<span class="st">&quot; &quot;</span> =<span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;MNL&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;LC2&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;LC3&quot;</span> =<span class="st"> </span><span class="dv">2</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb343-30" title="30"><span class="st">  </span><span class="kw">footnote</span>(<span class="dt">general =</span> <span class="kw">c</span>(<span class="kw">paste0</span>(<span class="st">&quot;Log-Likelihood: MNL = &quot;</span>, <span class="kw">round</span>(mnl.rt0<span class="op">$</span>logLik[<span class="dv">1</span>], <span class="dt">digits =</span> <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb343-31" title="31">                            <span class="st">&quot;; Latent Class (Q=2) = &quot;</span>, <span class="kw">round</span>(lc2<span class="op">$</span>logLik<span class="op">$</span>maximum, <span class="dt">digits =</span> <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb343-32" title="32">                            <span class="st">&quot;; Latent Class (Q=2) = &quot;</span>, <span class="kw">round</span>(lc3<span class="op">$</span>logLik<span class="op">$</span>maximum, <span class="dt">digits =</span> <span class="dv">3</span>))))</a></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-187">Table 10.1: </span>Base models: multinomial logit (MNL), latent class Q = 2 (LC2), latent class Q = 3 (LC3)
@@ -1031,15 +1031,15 @@ NA
 </table>
 <p>Notice that model LC3, despite improving the likelihood, returns non-significant parameters for the latent class model. For this reason, we compare only the multinomila logit model and LC2.</p>
 <p>The <span class="math inline">\(AIC\)</span> of the base multinomial logit model is:</p>
-<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb351-1" title="1"><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">length</span>(<span class="kw">coef</span>(mnl.rt0)) <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>mnl.rt0<span class="op">$</span>logLik</a></code></pre></div>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb344-1" title="1"><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">length</span>(<span class="kw">coef</span>(mnl.rt0)) <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>mnl.rt0<span class="op">$</span>logLik</a></code></pre></div>
 <pre><code>## &#39;log Lik.&#39; 674.426 (df=2)</code></pre>
 <p>The <span class="math inline">\(AIC\)</span> of model LC2 is:</p>
-<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb353-1" title="1"><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">length</span>(<span class="kw">coef</span>(lc2)) <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>lc2<span class="op">$</span>logLik<span class="op">$</span>maximum</a></code></pre></div>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb346-1" title="1"><span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">length</span>(<span class="kw">coef</span>(lc2)) <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>lc2<span class="op">$</span>logLik<span class="op">$</span>maximum</a></code></pre></div>
 <pre><code>## [1] 631.3531
 ## attr(,&quot;df&quot;)
 ## [1] 5</code></pre>
 <p>The minimum <span class="math inline">\(AIC\)</span> is for the latent class model. If we calculate the relative likelihood:</p>
-<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb355-1" title="1"><span class="kw">as.numeric</span>(<span class="kw">exp</span>(((<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">length</span>(<span class="kw">coef</span>(lc2)) <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>lc2<span class="op">$</span>logLik<span class="op">$</span>maximum) <span class="op">-</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">length</span>(<span class="kw">coef</span>(mnl.rt0)) <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>mnl.rt0<span class="op">$</span>logLik))<span class="op">/</span><span class="dv">2</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb348-1" title="1"><span class="kw">as.numeric</span>(<span class="kw">exp</span>(((<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">length</span>(<span class="kw">coef</span>(lc2)) <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>lc2<span class="op">$</span>logLik<span class="op">$</span>maximum) <span class="op">-</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">length</span>(<span class="kw">coef</span>(mnl.rt0)) <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>mnl.rt0<span class="op">$</span>logLik))<span class="op">/</span><span class="dv">2</span>))</a></code></pre></div>
 <pre><code>## [1] 4.434555e-10</code></pre>
 <p>Therefore, the standard multinomial logit model is less than <span class="math inline">\(0.001\)</span> times probable as the latent class model with <span class="math inline">\(Q=2\)</span> to minimize the information loss.</p>
 <p>Notice that in the latent class model, the coefficient for risk in class 1 is not significant, whereas the coefficient for cost in class 2 is not significant. This suggests that class 1 is more cost-averse and class 2 more risk-averse.</p>
@@ -1052,10 +1052,10 @@ and:
 p_1 = 1 - p_2
 \]</span></p>
 <p>Therefore, the share for class 1 is:</p>
-<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb357-1" title="1"><span class="kw">as.numeric</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(<span class="kw">coef</span>(lc2)[<span class="st">&quot;(class)2&quot;</span>])<span class="op">/</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(<span class="kw">coef</span>(lc2)[<span class="st">&quot;(class)2&quot;</span>])))</a></code></pre></div>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb350-1" title="1"><span class="kw">as.numeric</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(<span class="kw">coef</span>(lc2)[<span class="st">&quot;(class)2&quot;</span>])<span class="op">/</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(<span class="kw">coef</span>(lc2)[<span class="st">&quot;(class)2&quot;</span>])))</a></code></pre></div>
 <pre><code>## [1] 0.3963601</code></pre>
 <p>and the share for class 2 is:</p>
-<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb359-1" title="1"><span class="kw">as.numeric</span>(<span class="kw">exp</span>(<span class="kw">coef</span>(lc2)[<span class="st">&quot;(class)2&quot;</span>])<span class="op">/</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(<span class="kw">coef</span>(lc2)[<span class="st">&quot;(class)2&quot;</span>])))</a></code></pre></div>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb352-1" title="1"><span class="kw">as.numeric</span>(<span class="kw">exp</span>(<span class="kw">coef</span>(lc2)[<span class="st">&quot;(class)2&quot;</span>])<span class="op">/</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(<span class="kw">coef</span>(lc2)[<span class="st">&quot;(class)2&quot;</span>])))</a></code></pre></div>
 <pre><code>## [1] 0.6036399</code></pre>
 </div>
 <div id="adding-individual-level-attributes" class="section level2">
@@ -1066,38 +1066,38 @@ p_1 = 1 - p_2
 V_{ni} = (b_{cost} + b_{cost:dwage}dwage_n)cost_i + (b_{risk} + b_{risk:dwage}dwage_n)risk_i
 \]</span></p>
 <p>These models are estimated next:</p>
-<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb361-1" title="1">mnl.cov &lt;-<span class="st"> </span><span class="kw">mlogit</span>(choice <span class="op">~</span><span class="st"> </span>cost <span class="op">+</span><span class="st"> </span>risk <span class="op">|</span><span class="st"> </span>dwage <span class="op">+</span><span class="st"> </span><span class="dv">0</span>, </a>
-<a class="sourceLine" id="cb361-2" title="2">                <span class="dt">data =</span> RT)</a>
-<a class="sourceLine" id="cb361-3" title="3"><span class="co">#summary(mnl.cov)</span></a>
-<a class="sourceLine" id="cb361-4" title="4"></a>
-<a class="sourceLine" id="cb361-5" title="5">mnl.exp &lt;-<span class="st"> </span><span class="kw">mlogit</span>(choice <span class="op">~</span><span class="st"> </span>cost <span class="op">+</span><span class="st"> </span>cost<span class="op">:</span>dwage <span class="op">+</span></a>
-<a class="sourceLine" id="cb361-6" title="6"><span class="st">                   </span>risk <span class="op">+</span><span class="st"> </span>risk<span class="op">:</span>dwage <span class="op">|</span><span class="st"> </span><span class="dv">0</span>, </a>
-<a class="sourceLine" id="cb361-7" title="7">                <span class="dt">data =</span> RT)</a>
-<a class="sourceLine" id="cb361-8" title="8"><span class="co">#summary(mnl.exp)</span></a></code></pre></div>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb354-1" title="1">mnl.cov &lt;-<span class="st"> </span><span class="kw">mlogit</span>(choice <span class="op">~</span><span class="st"> </span>cost <span class="op">+</span><span class="st"> </span>risk <span class="op">|</span><span class="st"> </span>dwage <span class="op">+</span><span class="st"> </span><span class="dv">0</span>, </a>
+<a class="sourceLine" id="cb354-2" title="2">                <span class="dt">data =</span> RT)</a>
+<a class="sourceLine" id="cb354-3" title="3"><span class="co">#summary(mnl.cov)</span></a>
+<a class="sourceLine" id="cb354-4" title="4"></a>
+<a class="sourceLine" id="cb354-5" title="5">mnl.exp &lt;-<span class="st"> </span><span class="kw">mlogit</span>(choice <span class="op">~</span><span class="st"> </span>cost <span class="op">+</span><span class="st"> </span>cost<span class="op">:</span>dwage <span class="op">+</span></a>
+<a class="sourceLine" id="cb354-6" title="6"><span class="st">                   </span>risk <span class="op">+</span><span class="st"> </span>risk<span class="op">:</span>dwage <span class="op">|</span><span class="st"> </span><span class="dv">0</span>, </a>
+<a class="sourceLine" id="cb354-7" title="7">                <span class="dt">data =</span> RT)</a>
+<a class="sourceLine" id="cb354-8" title="8"><span class="co">#summary(mnl.exp)</span></a></code></pre></div>
 <p>The models are summarized next:</p>
-<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb362-1" title="1">mnl.cov.summary &lt;-<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">data.frame</span>(<span class="kw">summary</span>(mnl.cov)<span class="op">$</span>CoefTable), <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb362-2" title="2"><span class="st">  </span><span class="kw">transmute</span>(Variable, Estimate, <span class="dt">pval =</span> <span class="st">`</span><span class="dt">Pr...z..</span><span class="st">`</span>)</a>
-<a class="sourceLine" id="cb362-3" title="3"></a>
-<a class="sourceLine" id="cb362-4" title="4">mnl.exp.summary &lt;-<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">data.frame</span>(<span class="kw">summary</span>(mnl.exp)<span class="op">$</span>CoefTable), <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb362-5" title="5"><span class="st">  </span><span class="kw">transmute</span>(Variable, Estimate, <span class="dt">pval =</span> <span class="st">`</span><span class="dt">Pr...z..</span><span class="st">`</span>)</a>
-<a class="sourceLine" id="cb362-6" title="6"></a>
-<a class="sourceLine" id="cb362-7" title="7"></a>
-<a class="sourceLine" id="cb362-8" title="8"></a>
-<a class="sourceLine" id="cb362-9" title="9">df &lt;-<span class="st"> </span><span class="kw">full_join</span>(mnl.cov.summary, mnl.exp.summary, <span class="dt">by =</span> <span class="st">&quot;Variable&quot;</span>)</a>
-<a class="sourceLine" id="cb362-10" title="10"></a>
-<a class="sourceLine" id="cb362-11" title="11"><span class="kw">kable</span>(df, </a>
-<a class="sourceLine" id="cb362-12" title="12">      <span class="st">&quot;html&quot;</span>,</a>
-<a class="sourceLine" id="cb362-13" title="13">      <span class="dt">digits =</span> <span class="dv">4</span>,</a>
-<a class="sourceLine" id="cb362-14" title="14">      <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Variable&quot;</span>,</a>
-<a class="sourceLine" id="cb362-15" title="15">                    <span class="st">&quot;Estimate&quot;</span>,</a>
-<a class="sourceLine" id="cb362-16" title="16">                    <span class="st">&quot;p-value&quot;</span>,</a>
-<a class="sourceLine" id="cb362-17" title="17">                    <span class="st">&quot;Estimate&quot;</span>,</a>
-<a class="sourceLine" id="cb362-18" title="18">                    <span class="st">&quot;p-value&quot;</span>),</a>
-<a class="sourceLine" id="cb362-19" title="19">      <span class="dt">caption =</span> <span class="st">&quot;Models: multinomial logit with covariates (MNL-COV) and multinomial logit with expanded coefficients (MNL-EXP)&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb362-20" title="20"><span class="st">  </span><span class="kw">kable_styling</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb362-21" title="21"><span class="st">  </span><span class="kw">add_header_above</span>(<span class="kw">c</span>(<span class="st">&quot; &quot;</span> =<span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;MNL-COV&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;MNL-EXP&quot;</span> =<span class="st"> </span><span class="dv">2</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb362-22" title="22"><span class="st">  </span><span class="kw">footnote</span>(<span class="dt">general =</span> <span class="kw">c</span>(<span class="kw">paste0</span>(<span class="st">&quot;Log-Likelihood: MNL-COV = &quot;</span>, <span class="kw">round</span>(mnl.cov<span class="op">$</span>logLik[<span class="dv">1</span>], <span class="dt">digits =</span> <span class="dv">3</span>),</a>
-<a class="sourceLine" id="cb362-23" title="23">                            <span class="st">&quot;; MNL-EXP = &quot;</span>, <span class="kw">round</span>(mnl.exp<span class="op">$</span>logLik[<span class="dv">1</span>], <span class="dt">digits =</span> <span class="dv">3</span>))))</a></code></pre></div>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb355-1" title="1">mnl.cov.summary &lt;-<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">data.frame</span>(<span class="kw">summary</span>(mnl.cov)<span class="op">$</span>CoefTable), <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb355-2" title="2"><span class="st">  </span><span class="kw">transmute</span>(Variable, Estimate, <span class="dt">pval =</span> <span class="st">`</span><span class="dt">Pr...z..</span><span class="st">`</span>)</a>
+<a class="sourceLine" id="cb355-3" title="3"></a>
+<a class="sourceLine" id="cb355-4" title="4">mnl.exp.summary &lt;-<span class="st"> </span><span class="kw">rownames_to_column</span>(<span class="kw">data.frame</span>(<span class="kw">summary</span>(mnl.exp)<span class="op">$</span>CoefTable), <span class="st">&quot;Variable&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb355-5" title="5"><span class="st">  </span><span class="kw">transmute</span>(Variable, Estimate, <span class="dt">pval =</span> <span class="st">`</span><span class="dt">Pr...z..</span><span class="st">`</span>)</a>
+<a class="sourceLine" id="cb355-6" title="6"></a>
+<a class="sourceLine" id="cb355-7" title="7"></a>
+<a class="sourceLine" id="cb355-8" title="8"></a>
+<a class="sourceLine" id="cb355-9" title="9">df &lt;-<span class="st"> </span><span class="kw">full_join</span>(mnl.cov.summary, mnl.exp.summary, <span class="dt">by =</span> <span class="st">&quot;Variable&quot;</span>)</a>
+<a class="sourceLine" id="cb355-10" title="10"></a>
+<a class="sourceLine" id="cb355-11" title="11"><span class="kw">kable</span>(df, </a>
+<a class="sourceLine" id="cb355-12" title="12">      <span class="st">&quot;html&quot;</span>,</a>
+<a class="sourceLine" id="cb355-13" title="13">      <span class="dt">digits =</span> <span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb355-14" title="14">      <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Variable&quot;</span>,</a>
+<a class="sourceLine" id="cb355-15" title="15">                    <span class="st">&quot;Estimate&quot;</span>,</a>
+<a class="sourceLine" id="cb355-16" title="16">                    <span class="st">&quot;p-value&quot;</span>,</a>
+<a class="sourceLine" id="cb355-17" title="17">                    <span class="st">&quot;Estimate&quot;</span>,</a>
+<a class="sourceLine" id="cb355-18" title="18">                    <span class="st">&quot;p-value&quot;</span>),</a>
+<a class="sourceLine" id="cb355-19" title="19">      <span class="dt">caption =</span> <span class="st">&quot;Models: multinomial logit with covariates (MNL-COV) and multinomial logit with expanded coefficients (MNL-EXP)&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb355-20" title="20"><span class="st">  </span><span class="kw">kable_styling</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb355-21" title="21"><span class="st">  </span><span class="kw">add_header_above</span>(<span class="kw">c</span>(<span class="st">&quot; &quot;</span> =<span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;MNL-COV&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;MNL-EXP&quot;</span> =<span class="st"> </span><span class="dv">2</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb355-22" title="22"><span class="st">  </span><span class="kw">footnote</span>(<span class="dt">general =</span> <span class="kw">c</span>(<span class="kw">paste0</span>(<span class="st">&quot;Log-Likelihood: MNL-COV = &quot;</span>, <span class="kw">round</span>(mnl.cov<span class="op">$</span>logLik[<span class="dv">1</span>], <span class="dt">digits =</span> <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb355-23" title="23">                            <span class="st">&quot;; MNL-EXP = &quot;</span>, <span class="kw">round</span>(mnl.exp<span class="op">$</span>logLik[<span class="dv">1</span>], <span class="dt">digits =</span> <span class="dv">3</span>))))</a></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-194">Table 10.2: </span>Models: multinomial logit with covariates (MNL-COV) and multinomial logit with expanded coefficients (MNL-EXP)
@@ -1270,13 +1270,13 @@ NA
 </tfoot>
 </table>
 <p>The <span class="math inline">\(AIC\)</span> of MNL-COV is:</p>
-<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb363-1" title="1"><span class="kw">as.numeric</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">length</span>(<span class="kw">coef</span>(mnl.cov)) <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>mnl.cov<span class="op">$</span>logLik)</a></code></pre></div>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb356-1" title="1"><span class="kw">as.numeric</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">length</span>(<span class="kw">coef</span>(mnl.cov)) <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>mnl.cov<span class="op">$</span>logLik)</a></code></pre></div>
 <pre><code>## [1] 657.6149</code></pre>
 <p>and the <span class="math inline">\(AIC\)</span> of MNL-EXP is:</p>
-<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb365-1" title="1"><span class="kw">as.numeric</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">length</span>(<span class="kw">coef</span>(mnl.exp)) <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>mnl.exp<span class="op">$</span>logLik)</a></code></pre></div>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb358-1" title="1"><span class="kw">as.numeric</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">length</span>(<span class="kw">coef</span>(mnl.exp)) <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>mnl.exp<span class="op">$</span>logLik)</a></code></pre></div>
 <pre><code>## [1] 667.4561</code></pre>
 <p>The minimum <span class="math inline">\(AIC\)</span> is still for latent class model LC2. If we calculate the relative likelihood with respect to the best performing multinomial logit model:</p>
-<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb367-1" title="1"><span class="kw">as.numeric</span>(<span class="kw">exp</span>(((<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">length</span>(<span class="kw">coef</span>(lc2)) <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>lc2<span class="op">$</span>logLik<span class="op">$</span>maximum) <span class="op">-</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">length</span>(<span class="kw">coef</span>(mnl.cov)) <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>mnl.cov<span class="op">$</span>logLik))<span class="op">/</span><span class="dv">2</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb360-1" title="1"><span class="kw">as.numeric</span>(<span class="kw">exp</span>(((<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">length</span>(<span class="kw">coef</span>(lc2)) <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>lc2<span class="op">$</span>logLik<span class="op">$</span>maximum) <span class="op">-</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">length</span>(<span class="kw">coef</span>(mnl.cov)) <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>mnl.cov<span class="op">$</span>logLik))<span class="op">/</span><span class="dv">2</span>))</a></code></pre></div>
 <pre><code>## [1] 1.983059e-06</code></pre>
 <p>Clearly, latent class model LC2 is still the best candidate for fit.</p>
 </div>
@@ -1288,17 +1288,17 @@ p_q = \frac{e^{\gamma&#39;_q x_i}}{\sum_{z=1}^Qe^{\gamma&#39;_z x_i}}
 \]</span>
 where now <span class="math inline">\(\gamma_q\)</span> is a vector of size <span class="math inline">\(1 \times h\)</span> and <span class="math inline">\(x_1\)</span> is a vector of <span class="math inline">\(h\)</span> individual-level attributes. As before, <span class="math inline">\(\gamma_1 = 0\)</span>.</p>
 <p>To estimate a model with variables in the selection model, the fifth part of the formula is used, as shown next (call this model LC2-COV):</p>
-<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb369-1" title="1">lc2.cov &lt;-<span class="st"> </span><span class="kw">gmnl</span>(choice <span class="op">~</span><span class="st"> </span>cost <span class="op">+</span><span class="st"> </span>risk <span class="op">|</span><span class="st"> </span><span class="dv">0</span> <span class="op">|</span><span class="st"> </span><span class="dv">0</span> <span class="op">|</span><span class="st"> </span><span class="dv">0</span> <span class="op">|</span><span class="st"> </span>dwage, </a>
-<a class="sourceLine" id="cb369-2" title="2">           <span class="dt">data =</span> RT,</a>
-<a class="sourceLine" id="cb369-3" title="3">           <span class="dt">model =</span> <span class="st">&#39;lc&#39;</span>, </a>
-<a class="sourceLine" id="cb369-4" title="4">           <span class="dt">Q =</span> <span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb369-5" title="5">           <span class="dt">panel =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb369-6" title="6">           <span class="dt">method =</span> <span class="st">&quot;nm&quot;</span>,</a>
-<a class="sourceLine" id="cb369-7" title="7">           <span class="dt">iterlim =</span> <span class="dv">1200</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb362-1" title="1">lc2.cov &lt;-<span class="st"> </span><span class="kw">gmnl</span>(choice <span class="op">~</span><span class="st"> </span>cost <span class="op">+</span><span class="st"> </span>risk <span class="op">|</span><span class="st"> </span><span class="dv">0</span> <span class="op">|</span><span class="st"> </span><span class="dv">0</span> <span class="op">|</span><span class="st"> </span><span class="dv">0</span> <span class="op">|</span><span class="st"> </span>dwage, </a>
+<a class="sourceLine" id="cb362-2" title="2">           <span class="dt">data =</span> RT,</a>
+<a class="sourceLine" id="cb362-3" title="3">           <span class="dt">model =</span> <span class="st">&#39;lc&#39;</span>, </a>
+<a class="sourceLine" id="cb362-4" title="4">           <span class="dt">Q =</span> <span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb362-5" title="5">           <span class="dt">panel =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb362-6" title="6">           <span class="dt">method =</span> <span class="st">&quot;nm&quot;</span>,</a>
+<a class="sourceLine" id="cb362-7" title="7">           <span class="dt">iterlim =</span> <span class="dv">1200</span>)</a></code></pre></div>
 <pre><code>## Estimating LC model</code></pre>
-<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb371-1" title="1"><span class="kw">summary</span>(lc2.cov)</a></code></pre></div>
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb364-1" title="1"><span class="kw">summary</span>(lc2.cov)</a></code></pre></div>
 <pre><code>## 
-## Model estimated on: Wed Jan 29 9:54:05 AM 2020 
+## Model estimated on: Wed Feb 05 9:59:14 AM 2020 
 ## 
 ## Call:
 ## gmnl(formula = choice ~ cost + risk | 0 | 0 | 0 | dwage, data = RT, 
@@ -1328,45 +1328,45 @@ where now <span class="math inline">\(\gamma_q\)</span> is a vector of size <spa
 ## Number of iterations: 1149
 ## Exit of MLE: successful convergence</code></pre>
 <p>The <span class="math inline">\(AIC\)</span> of this model is:</p>
-<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb373-1" title="1"><span class="kw">as.numeric</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">length</span>(<span class="kw">coef</span>(lc2.cov)) <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>lc2.cov<span class="op">$</span>logLik<span class="op">$</span>maximum)</a></code></pre></div>
+<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb366-1" title="1"><span class="kw">as.numeric</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">length</span>(<span class="kw">coef</span>(lc2.cov)) <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>lc2.cov<span class="op">$</span>logLik<span class="op">$</span>maximum)</a></code></pre></div>
 <pre><code>## [1] 616.4306</code></pre>
 <p>which improves on the <span class="math inline">\(AIC\)</span> of the LC2 model:</p>
-<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb375-1" title="1"><span class="kw">as.numeric</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">length</span>(<span class="kw">coef</span>(lc2)) <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>lc2<span class="op">$</span>logLik<span class="op">$</span>maximum)</a></code></pre></div>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb368-1" title="1"><span class="kw">as.numeric</span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">length</span>(<span class="kw">coef</span>(lc2)) <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>lc2<span class="op">$</span>logLik<span class="op">$</span>maximum)</a></code></pre></div>
 <pre><code>## [1] 631.3531</code></pre>
 <p>The relative likelihood is now:</p>
-<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb377-1" title="1"><span class="kw">as.numeric</span>(<span class="kw">exp</span>(((<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">length</span>(<span class="kw">coef</span>(lc2.cov)) <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>lc2.cov<span class="op">$</span>logLik<span class="op">$</span>maximum) <span class="op">-</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">length</span>(<span class="kw">coef</span>(lc2)) <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>lc2<span class="op">$</span>logLik<span class="op">$</span>maximum))<span class="op">/</span><span class="dv">2</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb370-1" title="1"><span class="kw">as.numeric</span>(<span class="kw">exp</span>(((<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">length</span>(<span class="kw">coef</span>(lc2.cov)) <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>lc2.cov<span class="op">$</span>logLik<span class="op">$</span>maximum) <span class="op">-</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">*</span><span class="st"> </span><span class="kw">length</span>(<span class="kw">coef</span>(lc2)) <span class="op">-</span><span class="st"> </span><span class="dv">2</span> <span class="op">*</span><span class="st"> </span>lc2<span class="op">$</span>logLik<span class="op">$</span>maximum))<span class="op">/</span><span class="dv">2</span>))</a></code></pre></div>
 <pre><code>## [1] 0.0005749284</code></pre>
 <p>Which clearly indicates the improved performance of the model LC2-COV.</p>
 <p>The model still points at two classes of decision-makers, cost-averse and risk-averse. However, the probability of membership in those classes now changes as a function of declared wage. The following figure explores the shares of the classes by levels of wage:</p>
-<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb379-1" title="1"><span class="co">#Create a dataframe for plotting:</span></a>
-<a class="sourceLine" id="cb379-2" title="2">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">dwage =</span> <span class="kw">seq</span>(<span class="kw">min</span>(RT<span class="op">$</span>dwage), <span class="dt">to =</span> <span class="kw">max</span>(RT<span class="op">$</span>dwage), <span class="dt">by =</span> (<span class="kw">max</span>(RT<span class="op">$</span>dwage) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(RT<span class="op">$</span>dwage))<span class="op">/</span><span class="dv">100</span>))</a>
-<a class="sourceLine" id="cb379-3" title="3"></a>
-<a class="sourceLine" id="cb379-4" title="4"><span class="co"># Use the class selection model to calculate the membership probabilities</span></a>
-<a class="sourceLine" id="cb379-5" title="5">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">p_1 =</span> <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(<span class="kw">coef</span>(lc2.cov)[<span class="st">&quot;(class)2&quot;</span>] <span class="op">+</span><span class="st"> </span><span class="kw">coef</span>(lc2.cov)[<span class="st">&quot;dwage:class2&quot;</span>] <span class="op">*</span><span class="st"> </span>dwage)<span class="op">/</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(<span class="kw">coef</span>(lc2.cov)[<span class="st">&quot;(class)2&quot;</span>] <span class="op">+</span><span class="st"> </span><span class="kw">coef</span>(lc2.cov)[<span class="st">&quot;dwage:class2&quot;</span>] <span class="op">*</span><span class="st"> </span>dwage)),</a>
-<a class="sourceLine" id="cb379-6" title="6">                    <span class="dt">p_2 =</span> <span class="kw">exp</span>(<span class="kw">coef</span>(lc2.cov)[<span class="st">&quot;(class)2&quot;</span>] <span class="op">+</span><span class="st"> </span><span class="kw">coef</span>(lc2.cov)[<span class="st">&quot;dwage:class2&quot;</span>] <span class="op">*</span><span class="st"> </span>dwage)<span class="op">/</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(<span class="kw">coef</span>(lc2.cov)[<span class="st">&quot;(class)2&quot;</span>] <span class="op">+</span><span class="st"> </span><span class="kw">coef</span>(lc2.cov)[<span class="st">&quot;dwage:class2&quot;</span>] <span class="op">*</span><span class="st"> </span>dwage)))</a>
-<a class="sourceLine" id="cb379-7" title="7"></a>
-<a class="sourceLine" id="cb379-8" title="8"><span class="co"># Plot</span></a>
-<a class="sourceLine" id="cb379-9" title="9"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> dwage)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb379-10" title="10"><span class="st">  </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> <span class="dv">0</span>, <span class="dt">ymax =</span> <span class="dv">1</span>), <span class="dt">fill =</span> <span class="st">&quot;blue&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb379-11" title="11"><span class="st">  </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> <span class="dv">0</span>, <span class="dt">ymax =</span> p_<span class="dv">1</span>), <span class="dt">fill =</span> <span class="st">&quot;orange&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb379-12" title="12"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Probability of class membership&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb379-13" title="13"><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="dv">25</span>, <span class="dt">y =</span> <span class="fl">0.22</span>, <span class="dt">label =</span> <span class="st">&quot;Class 1&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb379-14" title="14"><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="dv">250</span>, <span class="dt">y =</span> <span class="fl">0.75</span>, <span class="dt">label =</span> <span class="st">&quot;Class 2&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb372-1" title="1"><span class="co">#Create a dataframe for plotting:</span></a>
+<a class="sourceLine" id="cb372-2" title="2">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">dwage =</span> <span class="kw">seq</span>(<span class="kw">min</span>(RT<span class="op">$</span>dwage), <span class="dt">to =</span> <span class="kw">max</span>(RT<span class="op">$</span>dwage), <span class="dt">by =</span> (<span class="kw">max</span>(RT<span class="op">$</span>dwage) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(RT<span class="op">$</span>dwage))<span class="op">/</span><span class="dv">100</span>))</a>
+<a class="sourceLine" id="cb372-3" title="3"></a>
+<a class="sourceLine" id="cb372-4" title="4"><span class="co"># Use the class selection model to calculate the membership probabilities</span></a>
+<a class="sourceLine" id="cb372-5" title="5">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">p_1 =</span> <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(<span class="kw">coef</span>(lc2.cov)[<span class="st">&quot;(class)2&quot;</span>] <span class="op">+</span><span class="st"> </span><span class="kw">coef</span>(lc2.cov)[<span class="st">&quot;dwage:class2&quot;</span>] <span class="op">*</span><span class="st"> </span>dwage)<span class="op">/</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(<span class="kw">coef</span>(lc2.cov)[<span class="st">&quot;(class)2&quot;</span>] <span class="op">+</span><span class="st"> </span><span class="kw">coef</span>(lc2.cov)[<span class="st">&quot;dwage:class2&quot;</span>] <span class="op">*</span><span class="st"> </span>dwage)),</a>
+<a class="sourceLine" id="cb372-6" title="6">                    <span class="dt">p_2 =</span> <span class="kw">exp</span>(<span class="kw">coef</span>(lc2.cov)[<span class="st">&quot;(class)2&quot;</span>] <span class="op">+</span><span class="st"> </span><span class="kw">coef</span>(lc2.cov)[<span class="st">&quot;dwage:class2&quot;</span>] <span class="op">*</span><span class="st"> </span>dwage)<span class="op">/</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(<span class="kw">coef</span>(lc2.cov)[<span class="st">&quot;(class)2&quot;</span>] <span class="op">+</span><span class="st"> </span><span class="kw">coef</span>(lc2.cov)[<span class="st">&quot;dwage:class2&quot;</span>] <span class="op">*</span><span class="st"> </span>dwage)))</a>
+<a class="sourceLine" id="cb372-7" title="7"></a>
+<a class="sourceLine" id="cb372-8" title="8"><span class="co"># Plot</span></a>
+<a class="sourceLine" id="cb372-9" title="9"><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> dwage)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb372-10" title="10"><span class="st">  </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> <span class="dv">0</span>, <span class="dt">ymax =</span> <span class="dv">1</span>), <span class="dt">fill =</span> <span class="st">&quot;blue&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb372-11" title="11"><span class="st">  </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> <span class="dv">0</span>, <span class="dt">ymax =</span> p_<span class="dv">1</span>), <span class="dt">fill =</span> <span class="st">&quot;orange&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb372-12" title="12"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Probability of class membership&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb372-13" title="13"><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="dv">25</span>, <span class="dt">y =</span> <span class="fl">0.22</span>, <span class="dt">label =</span> <span class="st">&quot;Class 1&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb372-14" title="14"><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="dv">250</span>, <span class="dt">y =</span> <span class="fl">0.75</span>, <span class="dt">label =</span> <span class="st">&quot;Class 2&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>)</a></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-202-1.png" width="672" /></p>
 <p>The plot indicates that individuals with lower declared wages have a higher probability of being in class 1, which is risk-averse. This tends to decline quite rapidly as declared wage increases, and overall most members of the population tend to be risk-averse.</p>
 </div>
 <div id="exercise-8" class="section level2">
 <h2><span class="header-section-number">10.12</span> Exercise</h2>
 <p>Load the following dataset (used in this chapter):</p>
-<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb380-1" title="1"><span class="kw">data</span>(<span class="st">&quot;RiskyTransport&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;mlogit&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb373-1" title="1"><span class="kw">data</span>(<span class="st">&quot;RiskyTransport&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;mlogit&quot;</span>)</a></code></pre></div>
 <p>Select individuals who had access to all four modes of transportation:</p>
-<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb381-1" title="1">all_available &lt;-<span class="st"> </span>RiskyTransport <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(chid) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">no_rows =</span> <span class="kw">length</span>(chid)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(no_rows <span class="op">==</span><span class="st"> </span><span class="dv">4</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(chid)</a>
-<a class="sourceLine" id="cb381-2" title="2">RT &lt;-<span class="st"> </span><span class="kw">inner_join</span>(RiskyTransport, all_available, <span class="dt">by =</span> <span class="st">&quot;chid&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">drop_na</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb374-1" title="1">all_available &lt;-<span class="st"> </span>RiskyTransport <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(chid) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">no_rows =</span> <span class="kw">length</span>(chid)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(no_rows <span class="op">==</span><span class="st"> </span><span class="dv">4</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(chid)</a>
+<a class="sourceLine" id="cb374-2" title="2">RT &lt;-<span class="st"> </span><span class="kw">inner_join</span>(RiskyTransport, all_available, <span class="dt">by =</span> <span class="st">&quot;chid&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">drop_na</span>()</a></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>Estimate a mixed logit model using the Risky Transportation dataset used in this chapter. Compare the mixed logit model and the latent class logit models. Which one would you select? Discuss.</li>
 </ol>
 <p>Load the following dataset from the <code>AER</code> package:</p>
-<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb382-1" title="1"><span class="kw">data</span>(<span class="st">&quot;TravelMode&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;AER&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb375-1" title="1"><span class="kw">data</span>(<span class="st">&quot;TravelMode&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;AER&quot;</span>)</a></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>Estimate a latent class logit model. Justify your modelling decisions, including the number of classes to use and the use of covariates.</li>
 </ol>
