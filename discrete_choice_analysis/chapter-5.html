@@ -24,7 +24,7 @@
 <meta name="author" content="Antonio Paez" />
 
 
-<meta name="date" content="2020-02-05" />
+<meta name="date" content="2020-02-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -353,14 +353,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="inferring-and-forecasting-behavior" class="section level2">
 <h2><span class="header-section-number">6.1</span> Inferring and forecasting behavior</h2>
 <p>In Chapter <a href="chapter-5.html#chapter-5">6</a> you learned some important practical aspects needed to estimate the logit model. Many of those aspects transfer to other kinds of discrete choice models as well. Now that you have the practical skills to estimate a model, we can take the opportunity to see how the model can be used to infer behavior.</p>
-<p>In the preceding chapters we have made the assumption that an observer/analyst cannot know the state of mind of the decision-maker, and that a model is a way to infer the decision-making mechanisms based on what people do (or say they would do - more on this in a latter chapter.) Once this has been achieved, what is a model good for?</p>
-<p>In addition to providing a plausible description of the decision-making mechanism of interest, a model can be used to examine how behavior <em>might</em> change if the conditions of the decision-making situation changed. McFadden, in one of the seminal papers on discrete choice analysis <span class="citation">(see McFadden <a href="#ref-McFadden1974measurement" role="doc-biblioref">1974</a>)</span>, is concerned with travel demand forecasting. The basis for this is a model of mode choice that helps to tease out the factors that influence the choice between car and bus as a mode for commuting to work. Once that this model was estimated, McFadden was interested in the level of demand of a new mode, a rail system called BART (Bay Area Rail Transit). This system had not been built yet, and so obtaining estimates of level of demand was an important part of policy analysis. In other words, McFadden was interested in how behavior <em>might</em> change with the introduction of a new mode of transportation. What would be the demand for the new mode at a certain fare? If fares changed? If waiting times for BART were longer or shorter? And so on.</p>
+<p>In the preceding chapters we have made the assumption that an observer/analyst cannot know the state of mind of the decision-maker, and that a model is a way to infer the decision-making mechanisms based on what people do (or say they would do - more on this in a later chapter.) Once this has been achieved, what is a model good for?</p>
+<p>In addition to providing a plausible description of the decision-making mechanism of interest, a model can be used to examine how behavior <em>might</em> change if the conditions of the decision-making situation changed. McFadden, in one of the seminal papers on discrete choice analysis <span class="citation">(see McFadden <a href="#ref-McFadden1974measurement" role="doc-biblioref">1974</a>)</span>, was concerned with travel demand forecasting. The basis for forecasting demand was a model of mode choice that helped to tease out the factors that influence the choice between car and bus as a mode for commuting to work. Once that this model was estimated, McFadden was interested in the level of demand of a new mode, a rail system called BART (Bay Area Rail Transit). This system had not been built yet, and so obtaining estimates of level of demand was an important part of policy analysis. In other words, McFadden was interested in how behavior <em>might</em> change with the introduction of a new mode of transportation. What would be the demand for the new mode at a certain fare? If fares changed? If waiting times for BART were longer or shorter? And so on.</p>
 <p>You will hopefully become familiar with this process:</p>
 <ol style="list-style-type: decimal">
 <li>Estimate and select a plausible model for the behavior of interest.</li>
 <li>Analyze scenarios: what would happen if?</li>
 </ol>
-<p>This process is valuable in several ways <span class="citation">(King and Kraemer <a href="#ref-King1993models" role="doc-biblioref">1993</a>)</span>. <strong>First</strong>, it helps to clarify issues that are of policy interest (p. 365). Modelers need to document their assumptions, specification choices, and so on, resulting in a systematic approach of simplification (and remember, all models are wrong, but some are useful). <strong>Secondly</strong>, the modeling process and subsequently the use of models, help to enforce discipline in analysis and discourse. The behavior of models is to some extent limited by their mechanics, and the results should reflect this. For example, incremental changes in the inputs should result in plausible changes in the predictions. Making predictions outside of the calibration range of the model (beyond the range of values of variables used to estimate the model) will likely result in predictions that are implausibly out of bounds. As King and Kraemer note <span class="citation">(<a href="#ref-King1993models" role="doc-biblioref">1993</a>)</span> “the results of radical changes are unlikely to be predicted accurately by models based on the performance under the status quo” (p. 365).And models when used to analyze scenarios, provide cautionary advice on <em>what not to do</em> by revealing the possible consequences of a bad policy. In this way, models can help inform policy-makers about the range of possible outcomes and whether these outcomes are in a sense in some “acceptable range” <span class="citation">(King and Kraemer <a href="#ref-King1993models" role="doc-biblioref">1993</a>, 365–66)</span>. In other words, models help to probe the limits of the plasticity of human behavior.</p>
+<p>This process is valuable in several ways <span class="citation">(King and Kraemer <a href="#ref-King1993models" role="doc-biblioref">1993</a>)</span>. <strong>First</strong>, it helps to clarify issues that are of policy interest (p. 365). Modelers need to document their assumptions, specification choices, and so on, resulting in a systematic approach of simplification (and remember, all models are wrong, but some are useful). <strong>Secondly</strong>, the modeling process and subsequently the use of models, help to enforce discipline in analysis and discourse. The behavior of models is to some extent limited by their mechanics, and the results should reflect this. For example, incremental changes in the inputs should result in plausible changes in the predictions. Making predictions outside of the calibration range of the model (beyond the range of values of variables used to estimate the model) will likely result in predictions that are implausibly out of bounds. As King and Kraemer note <span class="citation">(<a href="#ref-King1993models" role="doc-biblioref">1993</a>)</span> “the results of radical changes are unlikely to be predicted accurately by models based on the performance under the status quo” (p. 365). And models, when used to analyze scenarios, provide cautionary advice on <em>what not to do</em> by revealing the possible consequences of a bad intervation or policy. In this way, models can help inform policy-makers about the range of possible outcomes and whether these outcomes are in a sense in some “acceptable range” <span class="citation">(King and Kraemer <a href="#ref-King1993models" role="doc-biblioref">1993</a>, 365–66)</span>. In other words, models help to probe the limits of the plasticity of human behavior.</p>
 <p>We will explore the preceding issues in this chapter, looking at different ways to derive behavioral insights based on models of choices.</p>
 </div>
 <div id="how-to-use-this-note-4" class="section level2">
@@ -368,7 +368,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Remember that the source for the document you are reading is an R Notebook. Throughout the notes, you will find examples of code in segments of text called <em>chunks</em>. This is an example of a chunk:</p>
 <div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb130-1" title="1"><span class="kw">print</span>(<span class="st">&quot;Are these the shadows of the things that Will be, or are they shadows of the things that May be only?&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;Are these the shadows of the things that Will be, or are they shadows of the things that May be only?&quot;</code></pre>
-<p>If you are working with the Notebook version of the document, you can run the code by clicking the ‘play’ icon on the top right corner of the chunk. If you are reading the web-book version of the document, you will often see that the code has already been executed. You can still try it by copying and pasting into your R or RStudio console.</p>
+<p>If you are working with the Notebook version of the document, you can run the code by clicking the ‘play’ icon on the top right corner of the chunk. If you are reading the web-book version of the document, you will often see that the code has already been executed. You can still try it by copying and pasting into your <code>R</code> or RStudio console.</p>
 </div>
 <div id="learning-objectives-5" class="section level2">
 <h2><span class="header-section-number">6.3</span> Learning objectives</h2>
@@ -634,9 +634,9 @@ NA
 </tr>
 </tbody>
 </table>
-<p>The dataset is in “wide” form, which means that there is one record per decision making unit (i.e. per household). The package <code>mlogit</code> works with data in “long” format, and fortunately (since changing the format of the dataset is a tedious if fairly elementary process), there is a function for changing the format:</p>
+<p>The dataset is in “wide” form, which means that there is one record per decision making unit (i.e. per household). The package <code>mlogit</code> works with data in “long” format, but I find it easier to work with the dataframes in their wide format for the purpose of post-estimation analysis. Fortunately (since changing the format of a dataset is a tedious if fairly elementary process), there is a function for changing the format. We will call this function when required:</p>
 <div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb136-1" title="1">H &lt;-<span class="st"> </span><span class="kw">mlogit.data</span>(Heating, <span class="dt">shape =</span> <span class="st">&quot;wide&quot;</span>, <span class="dt">choice =</span> <span class="st">&quot;depvar&quot;</span>, <span class="dt">varying =</span> <span class="kw">c</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">12</span>))</a></code></pre></div>
-<p>The argument <code>varying</code> lets the function know that the variables in the columns 3 through 13 in the dataframe are alternative-specific, and therefore vary across utility functions. Once that the format of the table has been changed from “wide” to “long”, the number of rows changes from <span class="math inline">\(900\)</span> (the number of decision makers) to <span class="math inline">\(4500\)</span>: this is the number of decision makers (<span class="math inline">\(900\)</span>) times the number of alternatives (<span class="math inline">\(5\)</span>).</p>
+<p>In the above, the argument <code>varying</code> lets the function know that the variables in the columns 3 through 13 in the dataframe are alternative-specific, and therefore vary across utility functions. Once that the format of the table has been changed from “wide” to “long”, the number of rows changes from <span class="math inline">\(900\)</span> (the number of decision makers) to <span class="math inline">\(4500\)</span>: this is the number of decision makers (<span class="math inline">\(900\)</span>) times the number of alternatives (<span class="math inline">\(5\)</span>).</p>
 <p>Before estimating an initial model, we need to define the utility functions that we wish to estimate. Since there are five alternatives, we define the following five functions (with heat pump as the reference level):
 <span class="math display">\[
 \begin{array}{ccc}
@@ -648,8 +648,38 @@ V_{\text{hp}} = &amp; \beta_{hp} &amp; + \beta_1\text{ic.hp}\\
 \end{array}
 \]</span></p>
 <p>These functions include only the instalation cost of the systems (ic). The <code>mlogit</code> function can be used to estimate this model (call this Model 1), using the electric central system (“ec”) as the reference level:</p>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" title="1">mod1 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic, H, <span class="dt">reflevel =</span> <span class="st">&quot;ec&quot;</span>)</a>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb137-1" title="1">mod1 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic, Heating, <span class="dt">shape =</span> <span class="st">&quot;wide&quot;</span>, <span class="dt">choice =</span> <span class="st">&quot;depvar&quot;</span>, <span class="dt">reflevel =</span> <span class="st">&quot;ec&quot;</span>, <span class="dt">varying =</span> <span class="kw">c</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">7</span>))</a>
 <a class="sourceLine" id="cb137-2" title="2"><span class="kw">summary</span>(mod1)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## mlogit(formula = depvar ~ ic, data = Heating, reflevel = &quot;ec&quot;, 
+##     shape = &quot;wide&quot;, choice = &quot;depvar&quot;, varying = c(3:7), method = &quot;nr&quot;)
+## 
+## Frequencies of alternatives:
+##       ec       er       gc       gr       hp 
+## 0.071111 0.093333 0.636667 0.143333 0.055556 
+## 
+## nr method
+## 6 iterations, 0h:0m:0s 
+## g&#39;(-H)^-1g = 1.02E-05 
+## successive function values within tolerance limits 
+## 
+## Coefficients :
+##                   Estimate  Std. Error z-value  Pr(&gt;|z|)    
+## er:(intercept)  0.53681271  0.19194838  2.7967  0.005164 ** 
+## gc:(intercept)  2.11877361  0.13413083 15.7963 &lt; 2.2e-16 ***
+## gr:(intercept)  0.86420949  0.16435236  5.2583 1.454e-07 ***
+## hp:(intercept)  0.12259544  0.23188795  0.5287  0.597025    
+## ic             -0.00168108  0.00061843 -2.7183  0.006561 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Log-Likelihood: -1018.5
+## McFadden R^2:  0.0036292 
+## Likelihood ratio test : chisq = 7.4197 (p.value = 0.0064514)</code></pre>
+<p>We can verify that this is identical to estimating the model in the long format:</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" title="1">mod1 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic, H, <span class="dt">reflevel =</span> <span class="st">&quot;ec&quot;</span>)</a>
+<a class="sourceLine" id="cb139-2" title="2"><span class="kw">summary</span>(mod1)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## mlogit(formula = depvar ~ ic, data = H, reflevel = &quot;ec&quot;, method = &quot;nr&quot;)
@@ -679,35 +709,35 @@ V_{\text{hp}} = &amp; \beta_{hp} &amp; + \beta_1\text{ic.hp}\\
 </div>
 <div id="the-meaning-of-the-coefficients" class="section level2">
 <h2><span class="header-section-number">6.6</span> The meaning of the coefficients</h2>
-<p>The coefficients of a discrete choice model are informative because they modulate the effect of various variables on the probabilities of selecting alternatives. In addition, they also can be used to understand how decision-makers trade-off different attributes.</p>
+<p>The coefficients of a discrete choice model are informative because they modulate the effect of various variables on the probabilities of selecting alternatives. For this reason, they can be used to understand how decision-makers trade-off different attributes.</p>
 <p>The first thing to note is the sign of the coefficients. In the case of the binomial and multinomial logit model, the signs of the coefficients are informative because they tell us something about how the utility is affected by an attribute (either of the alternatives or the decision-maker). A positive sign indicates that the utility increases as the attribute increases. For instance, when considering mobile phones, we would expect speed to increase the utility of the alternatives. On the other hand, we would expect the price of the mobile phones to decrease their utility: the higher the cost, the lower the utility derived from an alternative. In this case, the expected sign of the coefficient for price would be negative.</p>
-<p>Inspecting the results of Model 0, we notice that the sign of the coefficient for installation costs is negative; this implies that the utility of a system tends to decrease as the installation cost increases. Not surprisingly, since central gas systems have the lowest installation costs, they are also the most popular, whereas heat pumps, with the highest installation costs, are the least popular.</p>
-<p>Alas, beyond this qualitative assessment of the signs of the coefficients, their magnitudes are not directly interpretable.</p>
-<p>Recall that underlying the logit models is a sigmoid relationship between the probabilities and the <em>differences in attributes</em> among utility functions. As discussed in Chapter <a href="chapter-3.html#chapter-3">4</a>, the effect on the probability of choosing an alternative, given a change on some attribute, is not constant along the logit probability curve, and in fact depends on the initial value of the variable, as seen in Figure <a href="chapter-3.html#fig:fig-logistic-shape-implication">4.5</a>) below.</p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb139-1" title="1"><span class="co"># Create a data frame for plotting</span></a>
-<a class="sourceLine" id="cb139-2" title="2">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">-5</span>, <span class="dt">to =</span> <span class="dv">5</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">y =</span> <span class="kw">plogis</span>(x))</a>
-<a class="sourceLine" id="cb139-3" title="3"></a>
-<a class="sourceLine" id="cb139-4" title="4"><span class="co"># Plot</span></a>
-<a class="sourceLine" id="cb139-5" title="5">logit_plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> df, <span class="kw">aes</span>(x, y)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb139-6" title="6"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">color =</span> <span class="st">&quot;orange&quot;</span>) <span class="op">+</span><span class="st">  </span><span class="co"># Plot cumulative distribution function</span></a>
-<a class="sourceLine" id="cb139-7" title="7"><span class="st">  </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span><span class="co"># Set the limits of the y axis</span></a>
-<a class="sourceLine" id="cb139-8" title="8"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add y axis</span></a>
-<a class="sourceLine" id="cb139-9" title="9"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>) <span class="co"># Add x axis</span></a>
-<a class="sourceLine" id="cb139-10" title="10"></a>
-<a class="sourceLine" id="cb139-11" title="11">logit_plot <span class="op">+</span></a>
-<a class="sourceLine" id="cb139-12" title="12"><span class="st">  </span><span class="kw">xlab</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(V[j], <span class="st">&quot; - &quot;</span>, V[i], <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))) <span class="op">+</span><span class="st"> </span><span class="co"># Label the x axis</span></a>
-<a class="sourceLine" id="cb139-13" title="13"><span class="st">  </span><span class="kw">ylab</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(P[j]))) <span class="op">+</span><span class="st"> </span><span class="co"># Label the y axis</span></a>
-<a class="sourceLine" id="cb139-14" title="14"><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;segment&quot;</span>, <span class="dt">x =</span> <span class="fl">-3.75</span>, <span class="dt">xend =</span> <span class="fl">-2.5</span>, <span class="dt">y =</span> <span class="fl">0.024</span>, <span class="dt">yend =</span> <span class="fl">0.024</span>, <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">linetype =</span> <span class="st">&quot;solid&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb139-15" title="15"><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;segment&quot;</span>, <span class="dt">x =</span> <span class="fl">-2.5</span>, <span class="dt">xend =</span> <span class="fl">-2.5</span>, <span class="dt">y =</span> <span class="fl">0.024</span>, <span class="dt">yend =</span> <span class="fl">0.075</span>, <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">linetype =</span> <span class="st">&quot;solid&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb139-16" title="16"><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;segment&quot;</span>, <span class="dt">x =</span> <span class="dv">0</span>, <span class="dt">xend =</span> <span class="fl">1.25</span>, <span class="dt">y =</span> <span class="fl">0.5</span>, <span class="dt">yend =</span> <span class="fl">0.5</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb139-17" title="17"><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;segment&quot;</span>, <span class="dt">x =</span> <span class="fl">1.25</span>, <span class="dt">xend =</span> <span class="fl">1.25</span>, <span class="dt">y =</span> <span class="fl">0.5</span>, <span class="dt">yend =</span> <span class="fl">0.77</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>)</a></code></pre></div>
+<p>Inspecting the results of Model 1 above, we notice that the sign of the coefficient for installation costs is negative; this implies that the utility of a system tends to decrease as the installation cost increases. Not surprisingly, since central gas systems have the lowest installation costs, they are also the most popular, whereas heat pumps, with the highest installation costs, are the least popular.</p>
+<p>If you are familiar with linear regression analysis, you are probably used to think of the coefficients as marginal effects: what is the impact on the outcome of a unit change in the relevant attribute. This interpretation does not hold in the case of discrete choice models, and so beyond a qualitative assessment of the signs of the coefficients, their magnitudes are not directly interpretable.</p>
+<p>To understand why this is so, we must recall that underlying a logit model is a sigmoid relationship between the probabilities and the <em>differences in attributes</em> among utility functions. As discussed in Chapter <a href="chapter-3.html#chapter-3">4</a>, the effect on the probability of choosing an alternative, given a change on some attribute, is not constant along the logit probability curve, and in fact depends on the initial value of the variable, as seen in Figure <a href="chapter-3.html#fig:fig-logistic-shape-implication">4.5</a>) below.</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb141-1" title="1"><span class="co"># Create a data frame for plotting</span></a>
+<a class="sourceLine" id="cb141-2" title="2">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">-5</span>, <span class="dt">to =</span> <span class="dv">5</span>, <span class="dt">by =</span> <span class="fl">0.01</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">y =</span> <span class="kw">plogis</span>(x))</a>
+<a class="sourceLine" id="cb141-3" title="3"></a>
+<a class="sourceLine" id="cb141-4" title="4"><span class="co"># Plot</span></a>
+<a class="sourceLine" id="cb141-5" title="5">logit_plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> df, <span class="kw">aes</span>(x, y)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb141-6" title="6"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">color =</span> <span class="st">&quot;orange&quot;</span>) <span class="op">+</span><span class="st">  </span><span class="co"># Plot cumulative distribution function</span></a>
+<a class="sourceLine" id="cb141-7" title="7"><span class="st">  </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span><span class="co"># Set the limits of the y axis</span></a>
+<a class="sourceLine" id="cb141-8" title="8"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Add y axis</span></a>
+<a class="sourceLine" id="cb141-9" title="9"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="dv">0</span>) <span class="co"># Add x axis</span></a>
+<a class="sourceLine" id="cb141-10" title="10"></a>
+<a class="sourceLine" id="cb141-11" title="11">logit_plot <span class="op">+</span></a>
+<a class="sourceLine" id="cb141-12" title="12"><span class="st">  </span><span class="kw">xlab</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(V[j], <span class="st">&quot; - &quot;</span>, V[i], <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))) <span class="op">+</span><span class="st"> </span><span class="co"># Label the x axis</span></a>
+<a class="sourceLine" id="cb141-13" title="13"><span class="st">  </span><span class="kw">ylab</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(P[j]))) <span class="op">+</span><span class="st"> </span><span class="co"># Label the y axis</span></a>
+<a class="sourceLine" id="cb141-14" title="14"><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;segment&quot;</span>, <span class="dt">x =</span> <span class="fl">-3.75</span>, <span class="dt">xend =</span> <span class="fl">-2.5</span>, <span class="dt">y =</span> <span class="fl">0.024</span>, <span class="dt">yend =</span> <span class="fl">0.024</span>, <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">linetype =</span> <span class="st">&quot;solid&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb141-15" title="15"><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;segment&quot;</span>, <span class="dt">x =</span> <span class="fl">-2.5</span>, <span class="dt">xend =</span> <span class="fl">-2.5</span>, <span class="dt">y =</span> <span class="fl">0.024</span>, <span class="dt">yend =</span> <span class="fl">0.075</span>, <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">linetype =</span> <span class="st">&quot;solid&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb141-16" title="16"><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;segment&quot;</span>, <span class="dt">x =</span> <span class="dv">0</span>, <span class="dt">xend =</span> <span class="fl">1.25</span>, <span class="dt">y =</span> <span class="fl">0.5</span>, <span class="dt">yend =</span> <span class="fl">0.5</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb141-17" title="17"><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;segment&quot;</span>, <span class="dt">x =</span> <span class="fl">1.25</span>, <span class="dt">xend =</span> <span class="fl">1.25</span>, <span class="dt">y =</span> <span class="fl">0.5</span>, <span class="dt">yend =</span> <span class="fl">0.77</span>, <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">linetype =</span> <span class="st">&quot;dashed&quot;</span>)</a></code></pre></div>
 <div class="figure"><span id="fig:fig-logistic-non-linear"></span>
 <img src="bookdown-demo_files/figure-html/fig-logistic-non-linear-1.png" alt="\label{fig:fig-logistic-non-linear}The logit probability is not linear on the variables" width="672" />
 <p class="caption">
 Figure 6.1: The logit probability is not linear on the variables
 </p>
 </div>
-<p>A number of different techniques are available instead to assess the behavioral implications of changes in some of the attributes. We will cover some relevant techniques next.</p>
+<p>A number of different techniques are available instead to assess the behavioral implications of changes in one or more of the attributes. We will cover some relevant techniques next.</p>
 </div>
 <div id="marginal-effects" class="section level2">
 <h2><span class="header-section-number">6.7</span> Marginal effects</h2>
@@ -715,11 +745,11 @@ Figure 6.1: The logit probability is not linear on the variables
 <p><span class="math display">\[
 M^y_{x_k}=\frac{\partial y}{\partial x_k}
 \]</span></p>
-<p>In the case of discrete choice models, the dependent variable that we are interested in is the probability of choosing alternative $j. Louviere et al. <span class="citation">(<a href="#ref-Louviere2000stated" role="doc-biblioref">2000</a>, 58–59)</span> show that, given a discrete choice model, the marginal effect is:</p>
+<p>In the case of discrete choice models, the dependent variable that we are interested in is the probability of choosing alternative <span class="math inline">\(j\)</span>. Louviere et al. <span class="citation">(<a href="#ref-Louviere2000stated" role="doc-biblioref">2000</a>, 58–59)</span> show that, given a discrete choice model, the marginal effect is:</p>
 <p><span class="math display">\[
 M^{P_{in}}_{x_{jnk}} = \beta_{k}(\delta_{ij}-P_{jn})
 \]</span>
-where <span class="math inline">\(P_{jn}\)</span> is the probability of decision-maker <span class="math inline">\(n\)</span> selecting alternative <span class="math inline">\(j\)</span> and <span class="math inline">\(\beta_{jk}\)</span> is the coefficient that corresponds to variable <span class="math inline">\(x_{jnk}\)</span>. This measures the change in probability as a result of a one-unit change in the units of <span class="math inline">\(x_{jnk}\)</span>.</p>
+where <span class="math inline">\(P_{jn}\)</span> is the probability of decision-maker <span class="math inline">\(n\)</span> selecting alternative <span class="math inline">\(j\)</span> and <span class="math inline">\(\beta_{jk}\)</span> is the coefficient that corresponds to variable <span class="math inline">\(x_{jnk}\)</span>. This measures the change in probability as a result of a one-unit change in <span class="math inline">\(x_{jnk}\)</span>.</p>
 <p>Two cases result from this expression:</p>
 <p><span class="math display">\[
 \begin{array}{c}
@@ -728,62 +758,52 @@ where <span class="math inline">\(P_{jn}\)</span> is the probability of decision
 \end{array} 
 \]</span></p>
 <p>We discuss these cases next, but first, to continue to work with an example, we need to estimate the probability of choosing different systems at different levels of the installation costs. We use different levels of the installation cost because the effects will not be the same at different starting points in the logit curve!.</p>
-<p>To simulate this situation, we begin by copying the input dataframe. Here the first 20 rows are copied so that we can modify the data for 5 different systems (and their cost) and 4 regions:</p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb140-1" title="1">ic_min &lt;-<span class="st"> </span>H[<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>,]</a>
-<a class="sourceLine" id="cb140-2" title="2">ic_mean &lt;-<span class="st"> </span>H[<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>,]</a>
-<a class="sourceLine" id="cb140-3" title="3">ic_max &lt;-<span class="st"> </span>H[<span class="dv">1</span><span class="op">:</span><span class="dv">20</span>,]</a></code></pre></div>
+<p>To simulate this situation, we begin by copying the input dataframe. Here we copy one row from the input data frame for each of the levels that we wish to simulate, namely, at the minimum cost, at the mean cost, and at the maximum cost:</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" title="1">ic_min &lt;-<span class="st"> </span>Heating[<span class="dv">1</span>,]</a>
+<a class="sourceLine" id="cb142-2" title="2">ic_mean &lt;-<span class="st"> </span>Heating[<span class="dv">1</span>,]</a>
+<a class="sourceLine" id="cb142-3" title="3">ic_max &lt;-<span class="st"> </span>Heating[<span class="dv">1</span>,]</a></code></pre></div>
 <p>Next, we define the following vectors to retrieve the minimum, mean, and maximum installation costs for each heating system:</p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb141-1" title="1">min_cost &lt;-<span class="st"> </span><span class="kw">with</span>(H, <span class="kw">data.frame</span>(<span class="dt">ic =</span> <span class="kw">tapply</span>(ic, <span class="kw">index</span>(mod1)<span class="op">$</span>alt, min)))</a>
-<a class="sourceLine" id="cb141-2" title="2">mean_cost &lt;-<span class="st"> </span><span class="kw">with</span>(H, <span class="kw">data.frame</span>(<span class="dt">ic =</span> <span class="kw">tapply</span>(ic, <span class="kw">index</span>(mod1)<span class="op">$</span>alt, mean)))</a>
-<a class="sourceLine" id="cb141-3" title="3">max_cost &lt;-<span class="st"> </span><span class="kw">with</span>(H, <span class="kw">data.frame</span>(<span class="dt">ic =</span> <span class="kw">tapply</span>(ic, <span class="kw">index</span>(mod1)<span class="op">$</span>alt, max)))</a></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" title="1">min_cost &lt;-<span class="st"> </span>Heating <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb143-2" title="2"><span class="st">  </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;ic&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">apply</span>(<span class="dv">2</span>, min)</a>
+<a class="sourceLine" id="cb143-3" title="3">mean_cost &lt;-<span class="st"> </span>Heating <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb143-4" title="4"><span class="st">  </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;ic&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">apply</span>(<span class="dv">2</span>, mean)</a>
+<a class="sourceLine" id="cb143-5" title="5">max_cost &lt;-<span class="st"> </span>Heating <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb143-6" title="6"><span class="st">  </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;ic&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">apply</span>(<span class="dv">2</span>, max)</a></code></pre></div>
 <p>We now replace the cost of installation with these vectors. Since each vector contains five values (for five heating systems) we need to repeat the vector 4 times (for 4 regions):</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb142-1" title="1">ic_min<span class="op">$</span>ic &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">t</span>(min_cost), <span class="dt">times =</span> <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb142-2" title="2">ic_mean<span class="op">$</span>ic &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">t</span>(mean_cost), <span class="dt">times =</span> <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb142-3" title="3">ic_max<span class="op">$</span>ic &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">t</span>(max_cost), <span class="dt">times =</span> <span class="dv">4</span>)</a></code></pre></div>
-<p>And finally, we replace the regions:</p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb143-1" title="1">ic_min<span class="op">$</span>region &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;valley&quot;</span>, <span class="st">&quot;scostl&quot;</span>, <span class="st">&quot;mountn&quot;</span>, <span class="st">&quot;ncostl&quot;</span>), <span class="dt">each =</span> <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb143-2" title="2">ic_mean<span class="op">$</span>region &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;valley&quot;</span>, <span class="st">&quot;scostl&quot;</span>, <span class="st">&quot;mountn&quot;</span>, <span class="st">&quot;ncostl&quot;</span>), <span class="dt">each =</span> <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb143-3" title="3">ic_max<span class="op">$</span>region &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;valley&quot;</span>, <span class="st">&quot;scostl&quot;</span>, <span class="st">&quot;mountn&quot;</span>, <span class="st">&quot;ncostl&quot;</span>), <span class="dt">each =</span> <span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" title="1">ic_min[<span class="dv">3</span><span class="op">:</span><span class="dv">7</span>] &lt;-<span class="st"> </span>min_cost</a>
+<a class="sourceLine" id="cb144-2" title="2">ic_mean[<span class="dv">3</span><span class="op">:</span><span class="dv">7</span>] &lt;-<span class="st"> </span>mean_cost</a>
+<a class="sourceLine" id="cb144-3" title="3">ic_max[<span class="dv">3</span><span class="op">:</span><span class="dv">7</span>] &lt;-<span class="st"> </span>max_cost</a></code></pre></div>
 <p>If we quickly examine the dataframe with the minimum installation costs:</p>
-<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb144-1" title="1"><span class="kw">head</span>(ic_min, <span class="dv">10</span>)</a></code></pre></div>
-<pre><code>##      idcase depvar income agehed rooms region alt     ic     oc chid
-## 1.ec      1  FALSE      7     25     6 valley  ec 469.61 553.34    1
-## 1.er      1  FALSE      7     25     6 valley  er 546.82 505.60    1
-## 1.gc      1   TRUE      7     25     6 valley  gc 431.83 199.69    1
-## 1.gr      1  FALSE      7     25     6 valley  gr 574.94 151.72    1
-## 1.hp      1  FALSE      7     25     6 valley  hp 532.32 237.88    1
-## 2.ec      2  FALSE      5     60     5 scostl  ec 469.61 520.24    2
-## 2.er      2  FALSE      5     60     5 scostl  er 546.82 486.49    2
-## 2.gc      2   TRUE      5     60     5 scostl  gc 431.83 168.66    2
-## 2.gr      2  FALSE      5     60     5 scostl  gr 574.94 168.66    2
-## 2.hp      2  FALSE      5     60     5 scostl  hp 532.32 199.19    2</code></pre>
-<p>We can see that we have simulated a dataset that includes the minimum installation cost of every system for each of four regions. We did not modify any of the other variables the age, income</p>
-<p>Given the different values of installation cost (at min, mean, and max), we can predict the probabilities as follows:</p>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb146-1" title="1">p_mod1_ic_min &lt;-<span class="st"> </span><span class="kw">predict</span>(mod1, <span class="dt">newdata =</span> ic_min)</a>
-<a class="sourceLine" id="cb146-2" title="2">p_mod1_ic_mean &lt;-<span class="st"> </span><span class="kw">predict</span>(mod1, <span class="dt">newdata =</span> ic_mean)</a>
-<a class="sourceLine" id="cb146-3" title="3">p_mod1_ic_max &lt;-<span class="st"> </span><span class="kw">predict</span>(mod1, <span class="dt">newdata =</span> ic_max)</a></code></pre></div>
-<p>The probabilities at their corresponding costs are summarized below (since “region” was not a covariate we can pick any region - they are all the same):</p>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb147-1" title="1"><span class="kw">data.frame</span>(<span class="dt">System =</span> <span class="kw">c</span>(<span class="st">&quot;Electric Central&quot;</span>, <span class="st">&quot;Electric Room&quot;</span>, <span class="st">&quot;Gas Central&quot;</span>, <span class="st">&quot;Gas Room&quot;</span>, <span class="st">&quot;Heat Pump&quot;</span>),</a>
-<a class="sourceLine" id="cb147-2" title="2">           <span class="dt">Cost_min =</span> ic_min<span class="op">$</span>ic[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>],</a>
-<a class="sourceLine" id="cb147-3" title="3">           <span class="dt">Prob_min =</span> p_mod1_ic_min[<span class="dv">1</span>,],</a>
-<a class="sourceLine" id="cb147-4" title="4">           <span class="dt">Cost_mean =</span> ic_mean<span class="op">$</span>ic[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>],</a>
-<a class="sourceLine" id="cb147-5" title="5">           <span class="dt">Prob_mean =</span> p_mod1_ic_mean[<span class="dv">1</span>,],</a>
-<a class="sourceLine" id="cb147-6" title="6">           <span class="dt">Cost_max =</span> ic_max<span class="op">$</span>ic[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>],</a>
-<a class="sourceLine" id="cb147-7" title="7">           <span class="dt">Prob_max =</span> p_mod1_ic_max[<span class="dv">1</span>,]) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb147-8" title="8"><span class="st">  </span><span class="kw">kable</span>(<span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;System&quot;</span>,</a>
-<a class="sourceLine" id="cb147-9" title="9">                      <span class="st">&quot;Cost&quot;</span>,</a>
-<a class="sourceLine" id="cb147-10" title="10">                      <span class="st">&quot;Probability&quot;</span>,</a>
-<a class="sourceLine" id="cb147-11" title="11">                      <span class="st">&quot;Cost&quot;</span>,</a>
-<a class="sourceLine" id="cb147-12" title="12">                      <span class="st">&quot;Probability&quot;</span>,</a>
-<a class="sourceLine" id="cb147-13" title="13">                      <span class="st">&quot;Cost&quot;</span>,</a>
-<a class="sourceLine" id="cb147-14" title="14">                      <span class="st">&quot;Probability&quot;</span>),</a>
-<a class="sourceLine" id="cb147-15" title="15">        <span class="dt">digits =</span> <span class="dv">3</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb147-16" title="16"><span class="st">  </span><span class="kw">kable_styling</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb147-17" title="17"><span class="st">  </span><span class="kw">add_header_above</span>(<span class="kw">c</span>(<span class="st">&quot; &quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;Minimum Cost&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;Mean Cost&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;Maximum Cost&quot;</span> =<span class="st"> </span><span class="dv">2</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb145-1" title="1"><span class="kw">head</span>(ic_min)</a></code></pre></div>
+<pre><code>##   idcase depvar  ic.gc  ic.gr  ic.ec  ic.er  ic.hp  oc.gc  oc.gr  oc.ec oc.er  oc.hp income agehed rooms region
+## 1      1     gc 431.83 574.94 469.61 546.82 532.32 199.69 151.72 553.34 505.6 237.88      7     25     6 ncostl</code></pre>
+<p>We can see that we have simulated a dataset that includes the minimum installation cost of every system. We did not modify any of the other variables (they are not part of the model, so this does not matter).</p>
+<p>Given the different values of installation cost (at min, mean, and max), we can predict the probabilities as follows (notice that predicting with an <code>mlogit</code> model requires the new data to be in long format, so we change the wide format by means of <code>mlogit.data</code>):</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb147-1" title="1">p_mod1_ic_min &lt;-<span class="st"> </span><span class="kw">predict</span>(mod1, <span class="dt">newdata =</span> <span class="kw">mlogit.data</span>(ic_min, <span class="dt">shape =</span> <span class="st">&quot;wide&quot;</span>, <span class="dt">choice =</span> <span class="st">&quot;depvar&quot;</span>, <span class="dt">varying =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">7</span>))</a>
+<a class="sourceLine" id="cb147-2" title="2">p_mod1_ic_mean &lt;-<span class="st"> </span><span class="kw">predict</span>(mod1, <span class="dt">newdata =</span> <span class="kw">mlogit.data</span>(ic_mean, <span class="dt">shape =</span> <span class="st">&quot;wide&quot;</span>, <span class="dt">choice =</span> <span class="st">&quot;depvar&quot;</span>, <span class="dt">varying =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">7</span>))</a>
+<a class="sourceLine" id="cb147-3" title="3">p_mod1_ic_max &lt;-<span class="st"> </span><span class="kw">predict</span>(mod1, <span class="dt">newdata =</span> <span class="kw">mlogit.data</span>(ic_max, <span class="dt">shape =</span> <span class="st">&quot;wide&quot;</span>, <span class="dt">choice =</span> <span class="st">&quot;depvar&quot;</span>, <span class="dt">varying =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">7</span>))</a></code></pre></div>
+<p>The probabilities at their corresponding costs are summarized below:</p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" title="1"><span class="kw">data.frame</span>(<span class="dt">System =</span> <span class="kw">c</span>(<span class="st">&quot;Electric Central&quot;</span>, <span class="st">&quot;Electric Room&quot;</span>, <span class="st">&quot;Gas Central&quot;</span>, <span class="st">&quot;Gas Room&quot;</span>, <span class="st">&quot;Heat Pump&quot;</span>),</a>
+<a class="sourceLine" id="cb148-2" title="2">      <span class="dt">ic_min =</span> ic_min <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;ic&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">t</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.numeric</span>(),</a>
+<a class="sourceLine" id="cb148-3" title="3">      <span class="dt">p_min =</span> p_mod1_ic_min <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.numeric</span>(),</a>
+<a class="sourceLine" id="cb148-4" title="4">      <span class="dt">ic_mean =</span> ic_mean <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;ic&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">t</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.numeric</span>(),</a>
+<a class="sourceLine" id="cb148-5" title="5">      <span class="dt">p_mean =</span> p_mod1_ic_mean <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.numeric</span>(),</a>
+<a class="sourceLine" id="cb148-6" title="6">      <span class="dt">ic_max =</span> ic_max <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;ic&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">t</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.numeric</span>(),</a>
+<a class="sourceLine" id="cb148-7" title="7">      <span class="dt">p_max =</span> p_mod1_ic_max <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.numeric</span>()) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb148-8" title="8"><span class="st">  </span><span class="kw">kable</span>(<span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;System&quot;</span>,</a>
+<a class="sourceLine" id="cb148-9" title="9">                      <span class="st">&quot;Cost&quot;</span>,</a>
+<a class="sourceLine" id="cb148-10" title="10">                      <span class="st">&quot;Probability&quot;</span>,</a>
+<a class="sourceLine" id="cb148-11" title="11">                      <span class="st">&quot;Cost&quot;</span>,</a>
+<a class="sourceLine" id="cb148-12" title="12">                      <span class="st">&quot;Probability&quot;</span>,</a>
+<a class="sourceLine" id="cb148-13" title="13">                      <span class="st">&quot;Cost&quot;</span>,</a>
+<a class="sourceLine" id="cb148-14" title="14">                      <span class="st">&quot;Probability&quot;</span>),</a>
+<a class="sourceLine" id="cb148-15" title="15">        <span class="dt">digits =</span> <span class="dv">3</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb148-16" title="16"><span class="st">  </span><span class="kw">kable_styling</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb148-17" title="17"><span class="st">  </span><span class="kw">add_header_above</span>(<span class="kw">c</span>(<span class="st">&quot; &quot;</span> =<span class="st"> </span><span class="dv">1</span>, <span class="st">&quot;Minimum Cost&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;Mean Cost&quot;</span> =<span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;Maximum Cost&quot;</span> =<span class="st"> </span><span class="dv">2</span>))</a></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
-<th style="border-bottom:hidden" colspan="2">
+<th style="border-bottom:hidden" colspan="1">
 </th>
 <th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
 <div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
@@ -802,8 +822,6 @@ Maximum Cost
 </th>
 </tr>
 <tr>
-<th style="text-align:left;">
-</th>
 <th style="text-align:left;">
 System
 </th>
@@ -830,25 +848,22 @@ Probability
 <tbody>
 <tr>
 <td style="text-align:left;">
-1.ec
-</td>
-<td style="text-align:left;">
 Electric Central
 </td>
 <td style="text-align:right;">
-469.61
+431.83
 </td>
 <td style="text-align:right;">
 0.070
 </td>
 <td style="text-align:right;">
-824.543
+776.827
 </td>
 <td style="text-align:right;">
 0.071
 </td>
 <td style="text-align:right;">
-1230.5
+1158.9
 </td>
 <td style="text-align:right;">
 0.072
@@ -856,25 +871,22 @@ Electric Central
 </tr>
 <tr>
 <td style="text-align:left;">
-1.er
-</td>
-<td style="text-align:left;">
 Electric Room
 </td>
 <td style="text-align:right;">
-546.82
+574.94
 </td>
 <td style="text-align:right;">
 0.105
 </td>
 <td style="text-align:right;">
-983.928
+921.770
 </td>
 <td style="text-align:right;">
 0.093
 </td>
 <td style="text-align:right;">
-1496.3
+1344.0
 </td>
 <td style="text-align:right;">
 0.078
@@ -882,25 +894,22 @@ Electric Room
 </tr>
 <tr>
 <td style="text-align:left;">
-1.gc
-</td>
-<td style="text-align:left;">
 Gas Central
 </td>
 <td style="text-align:right;">
-431.83
+469.61
 </td>
 <td style="text-align:right;">
 0.617
 </td>
 <td style="text-align:right;">
-776.827
+824.543
 </td>
 <td style="text-align:right;">
 0.639
 </td>
 <td style="text-align:right;">
-1158.9
+1230.5
 </td>
 <td style="text-align:right;">
 0.672
@@ -908,34 +917,28 @@ Gas Central
 </tr>
 <tr>
 <td style="text-align:left;">
-1.gr
-</td>
-<td style="text-align:left;">
 Gas Room
 </td>
 <td style="text-align:right;">
-574.94
+546.82
 </td>
 <td style="text-align:right;">
 0.138
 </td>
 <td style="text-align:right;">
-921.770
+983.928
 </td>
 <td style="text-align:right;">
 0.143
 </td>
 <td style="text-align:right;">
-1344.0
+1496.3
 </td>
 <td style="text-align:right;">
 0.140
 </td>
 </tr>
 <tr>
-<td style="text-align:left;">
-1.hp
-</td>
 <td style="text-align:left;">
 Heat Pump
 </td>
@@ -960,6 +963,7 @@ Heat Pump
 </tr>
 </tbody>
 </table>
+<p>Of the different systems, the probability of choosing Electric Central changes the least as the cost of installation changes to the mean cost of such system, and the maximum cost. The probability of choosing Heat Pump is similar at its lowest installation cost to Electric Central, and changes substantially; it is true too that these systems can be more expensive. The probability of choosing Gas Central increases as its installation cost goes up, but this is in comparison to the maximum installation cost of every other system! Clearly, trying to understand the probabilities as the cost of every system changes is not straightforward. To understand the response of changing the installation cost by one unit at each of the three levels of cost above,_ <em>while other things remain constant</em>, we calculate the direct marginal effects, as shown next.</p>
 <div id="direct-marginal-effects" class="section level3">
 <h3><span class="header-section-number">6.7.1</span> Direct marginal effects</h3>
 <p>The direct marginal effect is defined as follows:</p>
@@ -975,17 +979,17 @@ M^{P_{in}}_{x_{ink}} = \beta_{k}(1-P_{in})
 <p>“How much would the probability of choosing heating system <span class="math inline">\(i\)</span> change if its installation cost changed by one unit?”</p>
 </blockquote>
 <p>Based on the values summarized above, we can calculate the direct marginal effect of the gas central system at the min, mean, max installation costs as:</p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb148-1" title="1"><span class="fl">-0.00168108</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.617</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb149-1" title="1"><span class="fl">-0.00168108</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.617</span>)</a></code></pre></div>
 <pre><code>## [1] -0.0006438536</code></pre>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb150-1" title="1"><span class="fl">-0.00168108</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.639</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb151-1" title="1"><span class="fl">-0.00168108</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.639</span>)</a></code></pre></div>
 <pre><code>## [1] -0.0006068699</code></pre>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" title="1"><span class="fl">-0.00168108</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.672</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" title="1"><span class="fl">-0.00168108</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.672</span>)</a></code></pre></div>
 <pre><code>## [1] -0.0005513942</code></pre>
 <p>The values above indicate that the probabilities of choosing an electric central system would decrease by approximately <span class="math inline">\(0.00064\)</span>%, <span class="math inline">\(0.00061\)</span>%, <span class="math inline">\(0.00055\)</span>% if the installation cost increased by one dollar from the minimum, mean, and maximum installation cost, respectively.</p>
 </div>
 <div id="cross-marginal-effects" class="section level3">
 <h3><span class="header-section-number">6.7.2</span> Cross-marginal effects</h3>
-<p>The cross-marginal effect is defined as follows:</p>
+<p>We know that as the probability of choosing one alternative changes, the other probabilities change as well in response. The cross-marginal effect, which is defined as follows, is useful to investigate this effect:</p>
 <p><span class="math display">\[
 M^{P_{in}}_{x_{jnk}} = -\beta_{jk}P_{jn}
 \]</span></p>
@@ -998,11 +1002,11 @@ M^{P_{in}}_{x_{jnk}} = -\beta_{jk}P_{jn}
 <p>“How much would the probability of choosing an electric central heating system change if the installation cost of the gas central heating system changed by one percent?”</p>
 </blockquote>
 <p>Based on the values summarized above, we can calculate the cross-marginal effect of the gas central system at the min, mean, max installation costs as:</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" title="1"><span class="op">-</span>(<span class="op">-</span><span class="fl">0.00168108</span> <span class="op">*</span><span class="st"> </span><span class="fl">0.617</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb155-1" title="1"><span class="op">-</span>(<span class="op">-</span><span class="fl">0.00168108</span> <span class="op">*</span><span class="st"> </span><span class="fl">0.617</span>)</a></code></pre></div>
 <pre><code>## [1] 0.001037226</code></pre>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" title="1"><span class="op">-</span>(<span class="op">-</span><span class="fl">0.00168108</span> <span class="op">*</span><span class="st"> </span><span class="fl">0.639</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb157-1" title="1"><span class="op">-</span>(<span class="op">-</span><span class="fl">0.00168108</span> <span class="op">*</span><span class="st"> </span><span class="fl">0.639</span>)</a></code></pre></div>
 <pre><code>## [1] 0.00107421</code></pre>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" title="1"><span class="op">-</span>(<span class="op">-</span><span class="fl">0.00168108</span> <span class="op">*</span><span class="st"> </span><span class="fl">0.672</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb159-1" title="1"><span class="op">-</span>(<span class="op">-</span><span class="fl">0.00168108</span> <span class="op">*</span><span class="st"> </span><span class="fl">0.672</span>)</a></code></pre></div>
 <pre><code>## [1] 0.001129686</code></pre>
 <p>The values above indicate that the probabilities of choosing an electric central system would <em>increase</em> by approximately <span class="math inline">\(0.0010\)</span>%, <span class="math inline">\(0.0011\)</span>%, <span class="math inline">\(0.0011\)</span>% if the cost of installing a gas central heating system increased by one dollar from the minimum, mean, and maximum installation cost, respectively.</p>
 </div>
@@ -1017,7 +1021,7 @@ E^y_{x_k}=\frac{\partial y}{\partial x_k}\frac{x_k}{y}
 <p>Following a similar logic as above, there are two cases of the elasticity, direct-point elasticity and cross-point elasticity. These will be discussed next.</p>
 <div id="direct-point-elasticity" class="section level3">
 <h3><span class="header-section-number">6.8.1</span> Direct-point elasticity</h3>
-<p>Direct-point elasticity is calculated at a point value of <span class="math inline">\(x_ink\)</span> (attribute <span class="math inline">\(k\)</span> of alternative <span class="math inline">\(i\)</span> of decision-maker <span class="math inline">\(k\)</span>) with respect to the probability of selecting alternative <span class="math inline">\(i\)</span>. This elasticity is useful to ask the question:</p>
+<p>Direct-point elasticity is calculated at a point value of <span class="math inline">\(x_ink\)</span> (attribute <span class="math inline">\(k\)</span> of alternative <span class="math inline">\(i\)</span> of decision-maker <span class="math inline">\(k\)</span>) with respect to the probability of selecting alternative <span class="math inline">\(i\)</span>. This elasticity is useful when our question about behavior is as follows:</p>
 <blockquote>
 <p>“How much would the probability of choosing alternative <span class="math inline">\(i\)</span> change if its attribute <span class="math inline">\(k\)</span> changed by one percent?”</p>
 </blockquote>
@@ -1031,18 +1035,18 @@ E^{P_{in}}_{x_{ink}} = \beta_{ik}x_{ink}(1-P_{in})
 \]</span>
 where <span class="math inline">\(P_{in}\)</span> is the probability of decision-maker <span class="math inline">\(n\)</span> selecting alternative <span class="math inline">\(i\)</span>, given a variable <span class="math inline">\(x_{ink}\)</span> and its corresponding coefficient <span class="math inline">\(\beta_{ik}\)</span>.</p>
 <p>Based on the values summarized above, we can calculate the direct-point elasticity of the gas central system at the min, mean, max installation costs as:</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" title="1"><span class="fl">-0.00168108</span> <span class="op">*</span><span class="st"> </span><span class="fl">431.830</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.617</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb161-1" title="1"><span class="fl">-0.00168108</span> <span class="op">*</span><span class="st"> </span><span class="fl">431.830</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.617</span>)</a></code></pre></div>
 <pre><code>## [1] -0.2780353</code></pre>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" title="1"><span class="fl">-0.00168108</span> <span class="op">*</span><span class="st"> </span><span class="fl">776.827</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.639</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb163-1" title="1"><span class="fl">-0.00168108</span> <span class="op">*</span><span class="st"> </span><span class="fl">776.827</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.639</span>)</a></code></pre></div>
 <pre><code>## [1] -0.4714329</code></pre>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" title="1"><span class="fl">-0.00168108</span> <span class="op">*</span><span class="st"> </span><span class="fl">1158.90</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.672</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" title="1"><span class="fl">-0.00168108</span> <span class="op">*</span><span class="st"> </span><span class="fl">1158.90</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.672</span>)</a></code></pre></div>
 <pre><code>## [1] -0.6390108</code></pre>
 <p>These values indicate that the probability of choosing the electric central system with the lowest installation cost declines by approximately <span class="math inline">\(0.31\)</span>% when the installation cost increases by <span class="math inline">\(1\)</span>%. When the installation cost is the mean and the max, the probability of selecting the electric central system declines by approximately <span class="math inline">\(0.47\)</span>% and <span class="math inline">\(0.64\)</span>% respectively when the cost of installation increases by <span class="math inline">\(1\)</span>%.</p>
 <p>Notice that the elasticity tends to give greater values than the marginal effect. This is because a one-percent change in installation costs represents a much larger amount of change in the variable than a one dollar change.</p>
 </div>
 <div id="cross-point-elasticity" class="section level3">
 <h3><span class="header-section-number">6.8.2</span> Cross-point elasticity</h3>
-<p>Another useful measure of elasticity is the <em>cross-point elasticity</em>. This is useful to ask the question:</p>
+<p>Another useful measure of elasticity is the <em>cross-point elasticity</em>. This is a useful tool that responds to the question:</p>
 <blockquote>
 <p>“How much would the probability of choosing alternative <span class="math inline">\(i\)</span> change if attribute <span class="math inline">\(k\)</span> of alternative <span class="math inline">\(j\)</span> changed by one percent?”</p>
 </blockquote>
@@ -1050,17 +1054,17 @@ where <span class="math inline">\(P_{in}\)</span> is the probability of decision
 <blockquote>
 <p>“How much would the probability of choosing an electric central heating system change if the installation cost of the gas central heating system changed by one percent?”</p>
 </blockquote>
-<p>Again, Louviere et al. <span class="citation">(<a href="#ref-Louviere2000stated" role="doc-biblioref">2000</a>, 58–59)</span> show that, given a discrete choice model, the cross-point elasticity is given by:
-<span class="math display">\[
+<p>Again, Louviere et al. <span class="citation">(<a href="#ref-Louviere2000stated" role="doc-biblioref">2000</a>, 58–59)</span> show that, given a discrete choice model, the cross-point elasticity is given by:</p>
+<p><span class="math display">\[
 E^{P_{in}}_{x_{ink}} = -\beta_{jk}x_{jnk}P_{jn}
-\]</span>
-where <span class="math inline">\(P_{jn}\)</span> is the probability of decision-maker <span class="math inline">\(n\)</span> selecting alternative <span class="math inline">\(j\)</span>, given a variable <span class="math inline">\(x_{jnk}\)</span> and its corresponding coefficient <span class="math inline">\(\beta_jk\)</span>.</p>
+\]</span></p>
+<p>where <span class="math inline">\(P_{jn}\)</span> is the probability of decision-maker <span class="math inline">\(n\)</span> selecting alternative <span class="math inline">\(j\)</span>, given a variable <span class="math inline">\(x_{jnk}\)</span> and its corresponding coefficient <span class="math inline">\(\beta_jk\)</span>.</p>
 <p>The cross-point elasticities of gas central heating at the min, mean, and max values of installation cost are:</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" title="1"><span class="op">-</span>(<span class="op">-</span><span class="fl">0.00168108</span> <span class="op">*</span><span class="st"> </span><span class="fl">431.830</span> <span class="op">*</span><span class="st"> </span><span class="fl">0.617</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" title="1"><span class="op">-</span>(<span class="op">-</span><span class="fl">0.00168108</span> <span class="op">*</span><span class="st"> </span><span class="fl">431.830</span> <span class="op">*</span><span class="st"> </span><span class="fl">0.617</span>)</a></code></pre></div>
 <pre><code>## [1] 0.4479055</code></pre>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" title="1"><span class="op">-</span>(<span class="op">-</span><span class="fl">0.00168108</span> <span class="op">*</span><span class="st"> </span><span class="fl">776.827</span> <span class="op">*</span><span class="st">  </span><span class="fl">0.639</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" title="1"><span class="op">-</span>(<span class="op">-</span><span class="fl">0.00168108</span> <span class="op">*</span><span class="st"> </span><span class="fl">776.827</span> <span class="op">*</span><span class="st">  </span><span class="fl">0.639</span>)</a></code></pre></div>
 <pre><code>## [1] 0.8344754</code></pre>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" title="1"><span class="op">-</span>(<span class="op">-</span><span class="fl">0.00168108</span> <span class="op">*</span><span class="st"> </span><span class="fl">1158.90</span> <span class="op">*</span><span class="st"> </span><span class="fl">0.672</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" title="1"><span class="op">-</span>(<span class="op">-</span><span class="fl">0.00168108</span> <span class="op">*</span><span class="st"> </span><span class="fl">1158.90</span> <span class="op">*</span><span class="st"> </span><span class="fl">0.672</span>)</a></code></pre></div>
 <pre><code>## [1] 1.309193</code></pre>
 <p>In other words, the probability of choosing a system other than gas central system increases by approximately <span class="math inline">\(0.45\)</span>%, <span class="math inline">\(0.83\)</span>%, <span class="math inline">\(1.31\)</span>% when the cost of installing a gas central system goes up by <span class="math inline">\(1\)</span>% from the min, mean, and max base installation costs.</p>
 </div>
@@ -1071,17 +1075,17 @@ where <span class="math inline">\(P_{jn}\)</span> is the probability of decision
 <div id="computing-the-marginal-effects" class="section level3">
 <h3><span class="header-section-number">6.9.1</span> Computing the marginal effects</h3>
 <p>The marginal effects can be computed by means of the <code>effects</code> function. This function takes four arguments, as follows: an <code>mlogit</code> model, the name of the covariate (or attribute) that we wish to examine, the type of effect, and the data for calculating the effects.</p>
-<p>For the marginal effects, the “type” of the effect is “(r)elative” for the probability and “(a)bsolute”" for the covariate. In the case of the marginal effects at the minimum values of cost we use <code>mod0</code> (our <code>mlogit</code> model object), indicate the covariate of interest (<code>ic</code> for installation cost), the type of effect (“ra”), and the input data:</p>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" title="1"><span class="kw">effects</span>(mod1, <span class="dt">covariate =</span> <span class="st">&quot;ic&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;ra&quot;</span>, <span class="dt">data =</span> ic_min[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,])</a></code></pre></div>
+<p>For the marginal effects, the “type” of the effect is “(r)elative” for the probability and “(a)bsolute”" for the covariate. In the case of the marginal effects at the minimum values of cost we use <code>mod1</code> (our <code>mlogit</code> model object), indicate the covariate of interest (<code>ic</code> for installation cost), the type of effect (“ra”), and the input data (again, notice that the input data needs to be in long format; this is because the function needs to make predictions using the model):</p>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" title="1"><span class="kw">effects</span>(mod1, <span class="dt">covariate =</span> <span class="st">&quot;ic&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;ra&quot;</span>, <span class="dt">data =</span> <span class="kw">mlogit.data</span>(ic_min, <span class="dt">shape =</span> <span class="st">&quot;wide&quot;</span>, <span class="dt">choice =</span> <span class="st">&quot;depvar&quot;</span>, <span class="dt">varying =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">7</span>))</a></code></pre></div>
 <pre><code>##               ec            er            gc            gr            hp
 ## ec -0.0015641293  0.0001169511  0.0001169511  0.0001169511  0.0001169511
 ## er  0.0001756990 -0.0015053814  0.0001756990  0.0001756990  0.0001756990
 ## gc  0.0010369517  0.0010369517 -0.0006441287  0.0010369517  0.0010369517
 ## gr  0.0002325016  0.0002325016  0.0002325016 -0.0014485788  0.0002325016
 ## hp  0.0001189771  0.0001189771  0.0001189771  0.0001189770 -0.0015621033</code></pre>
-<p>The values on the diagonal of the table above are the direct marginal effects, whereas other values are the cross-marginal effects.</p>
+<p>The values on the diagonal of the table above are the direct marginal effects, and the values off the diagonal are the cross-marginal effects.</p>
 <p>The marginal effects at the mean values (sometimes called <em>MEM</em>, i.e., marginal effects at the mean) are:</p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" title="1"><span class="kw">effects</span>(mod1, <span class="dt">covariate =</span> <span class="st">&quot;ic&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;ra&quot;</span>, <span class="dt">data =</span> ic_mean[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,])</a></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" title="1"><span class="kw">effects</span>(mod1, <span class="dt">covariate =</span> <span class="st">&quot;ic&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;ra&quot;</span>, <span class="dt">data =</span> <span class="kw">mlogit.data</span>(ic_mean, <span class="dt">shape =</span> <span class="st">&quot;wide&quot;</span>, <span class="dt">choice =</span> <span class="st">&quot;depvar&quot;</span>, <span class="dt">varying =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">7</span>))</a></code></pre></div>
 <pre><code>##               ec            er            gc            gr            hp
 ## ec -1.562008e-03  1.190728e-04  1.190728e-04  1.190728e-04  0.0001190728
 ## er  1.558057e-04 -1.525275e-03  1.558056e-04  1.558056e-04  0.0001558056
@@ -1089,7 +1093,7 @@ where <span class="math inline">\(P_{jn}\)</span> is the probability of decision
 ## gr  2.399663e-04  2.399663e-04  2.399663e-04 -1.441114e-03  0.0002399663
 ## hp  9.268762e-05  9.268762e-05  9.268762e-05  9.268762e-05 -0.0015883927</code></pre>
 <p>And the marginal effects at the maximum values are:</p>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" title="1"><span class="kw">effects</span>(mod1, <span class="dt">covariate =</span> <span class="st">&quot;ic&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;ra&quot;</span>, <span class="dt">data =</span> ic_max[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,])</a></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb177-1" title="1"><span class="kw">effects</span>(mod1, <span class="dt">covariate =</span> <span class="st">&quot;ic&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;ra&quot;</span>, <span class="dt">data =</span> <span class="kw">mlogit.data</span>(ic_max, <span class="dt">shape =</span> <span class="st">&quot;wide&quot;</span>, <span class="dt">choice =</span> <span class="st">&quot;depvar&quot;</span>, <span class="dt">varying =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">7</span>))</a></code></pre></div>
 <pre><code>##               ec            er            gc            gr            hp
 ## ec -1.560758e-03  1.203225e-04  1.203225e-04  0.0001203225  0.0001203225
 ## er  1.316513e-04 -1.549429e-03  1.316514e-04  0.0001316513  0.0001316514
@@ -1101,7 +1105,7 @@ where <span class="math inline">\(P_{jn}\)</span> is the probability of decision
 <div id="computing-the-elasticities" class="section level3">
 <h3><span class="header-section-number">6.9.2</span> Computing the elasticities</h3>
 <p>As well, the direct-point and cross-point elasticities can be calculated using the <code>effects</code> function, however in this case the type of the effects is <em>relative</em> both for the probability and for the covariate.</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" title="1"><span class="kw">effects</span>(mod1, <span class="dt">covariate =</span> <span class="st">&quot;ic&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;rr&quot;</span>, <span class="dt">data =</span> ic_min[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,])</a></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" title="1"><span class="kw">effects</span>(mod1, <span class="dt">covariate =</span> <span class="st">&quot;ic&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;rr&quot;</span>, <span class="dt">data =</span> <span class="kw">mlogit.data</span>(ic_min, <span class="dt">shape =</span> <span class="st">&quot;wide&quot;</span>, <span class="dt">choice =</span> <span class="st">&quot;depvar&quot;</span>, <span class="dt">varying =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">7</span>))</a></code></pre></div>
 <pre><code>##             ec          er          gc          gr          hp
 ## ec -0.73453075  0.05492140  0.05492140  0.05492140  0.05492140
 ## er  0.09607572 -0.82317265  0.09607573  0.09607572  0.09607572
@@ -1110,14 +1114,14 @@ where <span class="math inline">\(P_{jn}\)</span> is the probability of decision
 ## hp  0.06333387  0.06333387  0.06333387  0.06333386 -0.83153884</code></pre>
 <p>The values on the diagonal of the table above are the direct-point elasticities, whereas other values are the cross-point elasticities.</p>
 <p>The effects can be calculated at various levels of the covariate of interest, for instance the mean and max:</p>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" title="1"><span class="kw">effects</span>(mod1, <span class="dt">covariate =</span> <span class="st">&quot;ic&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;rr&quot;</span>, <span class="dt">data =</span> ic_mean[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,])</a></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" title="1"><span class="kw">effects</span>(mod1, <span class="dt">covariate =</span> <span class="st">&quot;ic&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;rr&quot;</span>, <span class="dt">data =</span> <span class="kw">mlogit.data</span>(ic_mean, <span class="dt">shape =</span> <span class="st">&quot;wide&quot;</span>, <span class="dt">choice =</span> <span class="st">&quot;depvar&quot;</span>, <span class="dt">varying =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">7</span>))</a></code></pre></div>
 <pre><code>##             ec          er          gc          gr          hp
 ## ec -1.28794317  0.09818068  0.09818067  0.09818069  0.09818068
 ## er  0.15330155 -1.50076056  0.15330153  0.15330154  0.15330154
 ## gc  0.83396070  0.83396069 -0.47194728  0.83396070  0.83396070
 ## gr  0.22119376  0.22119375  0.22119375 -1.32837610  0.22119376
 ## hp  0.09699586  0.09699586  0.09699586  0.09699586 -1.66222324</code></pre>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" title="1"><span class="kw">effects</span>(mod1, <span class="dt">covariate =</span> <span class="st">&quot;ic&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;rr&quot;</span>, <span class="dt">data =</span> ic_max[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,])</a></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" title="1"><span class="kw">effects</span>(mod1, <span class="dt">covariate =</span> <span class="st">&quot;ic&quot;</span>, <span class="dt">type =</span> <span class="st">&quot;rr&quot;</span>, <span class="dt">data =</span> <span class="kw">mlogit.data</span>(ic_max, <span class="dt">shape =</span> <span class="st">&quot;wide&quot;</span>, <span class="dt">choice =</span> <span class="st">&quot;depvar&quot;</span>, <span class="dt">varying =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">7</span>))</a></code></pre></div>
 <pre><code>##            ec         er         gc         gr         hp
 ## ec -1.9205126  0.1480568  0.1480568  0.1480568  0.1480568
 ## er  0.1969899 -2.3184107  0.1969899  0.1969899  0.1969899
@@ -1129,22 +1133,23 @@ where <span class="math inline">\(P_{jn}\)</span> is the probability of decision
 <div id="a-note-about-attributes-in-dummy-format" class="section level2">
 <h2><span class="header-section-number">6.10</span> A note about attributes in dummy format</h2>
 <p>The attribute used above for the example was installation cost, a continuous variable. In many cases, the attributes of alternatives or decision-makers are continuous variables, but not always. In the dataset about heating systems, for example, there is a dummy variable that indicates the region of residence of the decision-maker:</p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" title="1"><span class="kw">summary</span>(Heating<span class="op">$</span>region)</a></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb185-1" title="1"><span class="kw">summary</span>(Heating<span class="op">$</span>region)</a></code></pre></div>
 <pre><code>## valley scostl mountn ncostl 
 ##    177    361    102    260</code></pre>
 <p>As can be seen, there are four regions. In the sample, <span class="math inline">\(177\)</span> respondents lived in the region labeled as “valley”, <span class="math inline">\(361\)</span> in the south coastal (“scostl”), <span class="math inline">\(102\)</span> in the mountain (“mountn”), and <span class="math inline">\(260\)</span> in north coastal (“ncostl”).</p>
-<p>The marginal effects and elasticities discussed above are not appropriate for use when it comes to dummy variables. The reason for this is that marginal changes are not meaningful (e.g., what does it mean to increase region “mountain” by one unit of by 1%?)</p>
-<p>When variable <span class="math inline">\(x_{ink}\)</span> is a dummy variable, the marginal effect must be calculated as follows:
-<span class="math display">\[
+<p>The marginal effects and elasticities discussed above are not appropriate for use when it comes to dummy variables. The reason for this is that marginal changes are not meaningful (e.g., what does it mean to increase region “mountain” by one unit or by 1%?)</p>
+<p>When variable <span class="math inline">\(x_{ink}\)</span> is a dummy variable, the marginal effect must be calculated as follows:</p>
+<p><span class="math display">\[
 M^{P_{in}}_{x_{ink}} = P_{in}(x_{ink} = 1) - P_{in}(x_{ink} = 0)
 \]</span></p>
 <p>In other words, the marginal effect is the difference in the probability of choosing <span class="math inline">\(i\)</span> when the dummy variable is <span class="math inline">\(1\)</span> versus when it is <span class="math inline">\(0\)</span>.</p>
-<p>Let estimate a second model that uses the regions variable to illustrate this (call this Model 2):</p>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb186-1" title="1">mod2 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">|</span><span class="st"> </span>region, H)</a>
-<a class="sourceLine" id="cb186-2" title="2"><span class="kw">summary</span>(mod2)</a></code></pre></div>
+<p>Next, we will estimate a second model that uses the regions variable to illustrate this (call this Model 2):</p>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" title="1">mod2 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">|</span><span class="st"> </span>region, Heating, <span class="dt">shape =</span> <span class="st">&quot;wide&quot;</span>, <span class="dt">choice =</span> <span class="st">&quot;depvar&quot;</span>, <span class="dt">reflevel =</span> <span class="st">&quot;ec&quot;</span>, <span class="dt">varying =</span> <span class="kw">c</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">7</span>))</a>
+<a class="sourceLine" id="cb187-2" title="2"><span class="kw">summary</span>(mod2)</a></code></pre></div>
 <pre><code>## 
 ## Call:
-## mlogit(formula = depvar ~ ic | region, data = H, method = &quot;nr&quot;)
+## mlogit(formula = depvar ~ ic | region, data = Heating, reflevel = &quot;ec&quot;, 
+##     shape = &quot;wide&quot;, choice = &quot;depvar&quot;, varying = c(3:7), method = &quot;nr&quot;)
 ## 
 ## Frequencies of alternatives:
 ##       ec       er       gc       gr       hp 
@@ -1180,11 +1185,19 @@ M^{P_{in}}_{x_{ink}} = P_{in}(x_{ink} = 1) - P_{in}(x_{ink} = 0)
 ## Log-Likelihood: -1012.5
 ## McFadden R^2:  0.0094891 
 ## Likelihood ratio test : chisq = 19.4 (p.value = 0.11122)</code></pre>
-<p>Notice that none of the regional coefficients is significant, so we would likely not include these variables in the model. However, for the sake of the example, lets calculate the marginal effect of the dummy variables at the mean of installation cost.</p>
-<p>We had already created a matrix with the mean of the installation cost at various regions.</p>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb188-1" title="1">p_region_ic_mean &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Region =</span> <span class="kw">c</span>(<span class="st">&quot;valley&quot;</span>, <span class="st">&quot;scostl&quot;</span>, <span class="st">&quot;mountn&quot;</span>, <span class="st">&quot;ncostl&quot;</span>),</a>
-<a class="sourceLine" id="cb188-2" title="2">                               <span class="kw">predict</span>(mod2, <span class="dt">newdata =</span> ic_mean, <span class="dt">outcome =</span> <span class="ot">FALSE</span>))</a>
-<a class="sourceLine" id="cb188-3" title="3">p_region_ic_mean</a></code></pre></div>
+<p>Notice that none of the regional coefficients is significant, so we would likely not include these variables in the model. However, for the sake of the example, we will calculate the marginal effect of the dummy variables at the mean of installation cost.</p>
+<p>We had already created a matrix with the mean of the installation cost. To add the four regions, we will copy the row four times, and then add the regions:</p>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb189-1" title="1">ic_mean_region &lt;-<span class="st"> </span>ic_mean <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb189-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">count =</span> <span class="dv">4</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb189-3" title="3"><span class="st">  </span><span class="kw">uncount</span>(count)</a>
+<a class="sourceLine" id="cb189-4" title="4">ic_mean_region<span class="op">$</span>region &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;valley&quot;</span>, <span class="st">&quot;scostl&quot;</span>, <span class="st">&quot;mountn&quot;</span>, <span class="st">&quot;ncostl&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" title="1">p_region_ic_mean &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Region =</span> <span class="kw">c</span>(<span class="st">&quot;valley&quot;</span>, <span class="st">&quot;scostl&quot;</span>, <span class="st">&quot;mountn&quot;</span>, <span class="st">&quot;ncostl&quot;</span>),</a>
+<a class="sourceLine" id="cb190-2" title="2">                               <span class="kw">predict</span>(mod2, <span class="dt">newdata =</span> <span class="kw">mlogit.data</span>(ic_mean_region,</a>
+<a class="sourceLine" id="cb190-3" title="3">                                                                   <span class="dt">shape =</span> <span class="st">&quot;wide&quot;</span>, </a>
+<a class="sourceLine" id="cb190-4" title="4">                                                                   <span class="dt">choice =</span> <span class="st">&quot;depvar&quot;</span>, </a>
+<a class="sourceLine" id="cb190-5" title="5">                                                                   <span class="dt">varying =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">7</span>), </a>
+<a class="sourceLine" id="cb190-6" title="6">                                       <span class="dt">outcome =</span> <span class="ot">FALSE</span>))</a>
+<a class="sourceLine" id="cb190-7" title="7">p_region_ic_mean</a></code></pre></div>
 <pre><code>##   Region         ec         er        gc        gr         hp
 ## 1 valley 0.06893601 0.06868371 0.7167905 0.1032603 0.04232956
 ## 2 scostl 0.07709246 0.10537150 0.5832442 0.1664375 0.06785436
@@ -1192,10 +1205,10 @@ M^{P_{in}}_{x_{ink}} = P_{in}(x_{ink} = 1) - P_{in}(x_{ink} = 0)
 ## 4 ncostl 0.06922558 0.10166470 0.6145323 0.1597530 0.05482440</code></pre>
 <p>The first row contains the probabilities of the different systems for valley (the reference region), and then for each of the three other regions.</p>
 <p>The marginal effects of changing from the valley to other regions are:</p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb190-1" title="1"><span class="kw">data.frame</span> (<span class="dt">Effect =</span> <span class="kw">c</span>(<span class="st">&quot;valley to scostl&quot;</span>, <span class="st">&quot;valley to mountn&quot;</span>, <span class="st">&quot;valley to ncostl&quot;</span>),</a>
-<a class="sourceLine" id="cb190-2" title="2">            <span class="kw">rbind</span> (p_region_ic_mean[<span class="dv">2</span>, <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>] <span class="op">-</span><span class="st"> </span>p_region_ic_mean[<span class="dv">1</span>, <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>],</a>
-<a class="sourceLine" id="cb190-3" title="3">                   p_region_ic_mean[<span class="dv">3</span>, <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>] <span class="op">-</span><span class="st"> </span>p_region_ic_mean[<span class="dv">1</span>, <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>],</a>
-<a class="sourceLine" id="cb190-4" title="4">                   p_region_ic_mean[<span class="dv">4</span>, <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>] <span class="op">-</span><span class="st"> </span>p_region_ic_mean[<span class="dv">1</span>, <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>]))</a></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" title="1"><span class="kw">data.frame</span> (<span class="dt">Effect =</span> <span class="kw">c</span>(<span class="st">&quot;valley to scostl&quot;</span>, <span class="st">&quot;valley to mountn&quot;</span>, <span class="st">&quot;valley to ncostl&quot;</span>),</a>
+<a class="sourceLine" id="cb192-2" title="2">            <span class="kw">rbind</span> (p_region_ic_mean[<span class="dv">2</span>, <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>] <span class="op">-</span><span class="st"> </span>p_region_ic_mean[<span class="dv">1</span>, <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>],</a>
+<a class="sourceLine" id="cb192-3" title="3">                   p_region_ic_mean[<span class="dv">3</span>, <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>] <span class="op">-</span><span class="st"> </span>p_region_ic_mean[<span class="dv">1</span>, <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>],</a>
+<a class="sourceLine" id="cb192-4" title="4">                   p_region_ic_mean[<span class="dv">4</span>, <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>] <span class="op">-</span><span class="st"> </span>p_region_ic_mean[<span class="dv">1</span>, <span class="dv">2</span><span class="op">:</span><span class="dv">6</span>]))</a></code></pre></div>
 <pre><code>##             Effect           ec         er         gc         gr         hp
 ## 2 valley to scostl 0.0081564496 0.03668779 -0.1335463 0.06317722 0.02552480
 ## 3 valley to mountn 0.0043664503 0.03376531 -0.1123117 0.04939991 0.02478000
@@ -1217,13 +1230,13 @@ V_{\text{gr}} = &amp; \beta_{gr} &amp; + \beta_1\text{ic.gr} + \beta_2\text{oc.g
 V_{\text{hp}} = &amp; \beta_{hp} &amp; + \beta_1\text{ic.hp} + \beta_2\text{oc.hp}\\
 \end{array}
 \]</span></p>
-<p>The model can be reestimated using these constants. The option <code>reflevel</code> is used to select the alternative that will work as reference (call this Model 3):</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb192-1" title="1">mod3 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H, <span class="dt">reflevel =</span> <span class="st">&quot;ec&quot;</span>)</a>
-<a class="sourceLine" id="cb192-2" title="2"><span class="kw">summary</span>(mod3)</a></code></pre></div>
+<p>The model can be reestimated using these constants. The option <code>reflevel</code> is used to select the alternative that will work as reference (call this Model 3; notice that the columns that vary needs to be updated to include the new alternative-related variable):</p>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" title="1">mod3 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, Heating, <span class="dt">shape =</span> <span class="st">&quot;wide&quot;</span>, <span class="dt">choice =</span> <span class="st">&quot;depvar&quot;</span>, <span class="dt">reflevel =</span> <span class="st">&quot;ec&quot;</span>, <span class="dt">varying =</span> <span class="kw">c</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">12</span>))</a>
+<a class="sourceLine" id="cb194-2" title="2"><span class="kw">summary</span>(mod3)</a></code></pre></div>
 <pre><code>## 
 ## Call:
-## mlogit(formula = depvar ~ ic + oc, data = H, reflevel = &quot;ec&quot;, 
-##     method = &quot;nr&quot;)
+## mlogit(formula = depvar ~ ic + oc, data = Heating, reflevel = &quot;ec&quot;, 
+##     shape = &quot;wide&quot;, choice = &quot;depvar&quot;, varying = c(3:12), method = &quot;nr&quot;)
 ## 
 ## Frequencies of alternatives:
 ##       ec       er       gc       gr       hp 
@@ -1248,7 +1261,7 @@ V_{\text{hp}} = &amp; \beta_{hp} &amp; + \beta_1\text{ic.hp} + \beta_2\text{oc.h
 ## Log-Likelihood: -1008.2
 ## McFadden R^2:  0.013691 
 ## Likelihood ratio test : chisq = 27.99 (p.value = 8.3572e-07)</code></pre>
-<p>So, how is this model used to understand consumer preferences? Recall that the question is at what rate are consumers willing to pay for installation relative to operation.</p>
+<p>So, how can this model be used to understand consumer preferences? Recall that the question is at what rate are consumers willing to pay for installation relative to operation.</p>
 <p>The coefficients of the model provide useful information. Suppose that we would like to know at what rate consumers would be willing to trade one aspect of the good for another, whithout compromising the utility they derive from it. In effect we would like to know how changes in one attribute relate to changes in the other. In the present case, we want to know how installation costs change with respect to operation costs, while mainting the utility (i.e., the change in utility is zero):</p>
 <p><span class="math display">\[
 \partial U = 0 = \beta_1\partial ic + \beta_{2}\partial oc
@@ -1273,14 +1286,12 @@ r = \frac{1}{4.56} = 0.219 = 21.9\%
 <div id="incentives" class="section level3">
 <h3><span class="header-section-number">6.12.1</span> Incentives</h3>
 <p>Heat pumps are on average more expensive than other heating systems, but they are also more energy-efficient. Suppose then that the government, which has perhaps carbon emission targets that it wishes to meet, is analyzing a policy to encourage the adoption of heat pumps. The policy is to offer a rebate of 15% on the installation cost of heat pumps. As a consequence of this policy, consumers who install a heat pump and apply for the rebate pay only 85% of the cost of installation.</p>
-<p>To simulate this scenario, we begin by copying the input dataframe:</p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb194-1" title="1">H_rebate &lt;-<span class="st"> </span>H</a></code></pre></div>
-<p>In the new dataframe that will simulate the rebate, replacing the cost of installation as follows:</p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb195-1" title="1">H_rebate[H_rebate<span class="op">$</span>alt <span class="op">==</span><span class="st"> &quot;hp&quot;</span>, <span class="st">&quot;ic&quot;</span>] &lt;-<span class="st"> </span><span class="fl">0.85</span> <span class="op">*</span><span class="st"> </span>H_rebate[H_rebate<span class="op">$</span>alt <span class="op">==</span><span class="st"> &quot;hp&quot;</span>, <span class="st">&quot;ic&quot;</span>]</a></code></pre></div>
+<p>To simulate this scenario, we copy the input dataframe after simulating the rebate, replacing the cost of installation as follows:</p>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" title="1">H_rebate &lt;-<span class="st"> </span>Heating <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">ic.hp =</span> <span class="fl">0.85</span> <span class="op">*</span><span class="st"> </span>ic.hp)</a></code></pre></div>
 <p>We can calculate the market shares of the “do nothing” and “rebate” policies and compare their shares (which are the mean values of the predictions):</p>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb196-1" title="1"><span class="kw">data.frame</span>(<span class="dt">Policy =</span> <span class="kw">c</span>(<span class="st">&quot;Do nothing&quot;</span>, <span class="st">&quot;15% rebate&quot;</span>),</a>
-<a class="sourceLine" id="cb196-2" title="2">           <span class="kw">rbind</span>(<span class="kw">apply</span>(<span class="kw">predict</span>(mod3, <span class="dt">newdata =</span> H), <span class="dv">2</span>, mean),</a>
-<a class="sourceLine" id="cb196-3" title="3">                 <span class="kw">apply</span>(<span class="kw">predict</span>(mod3, <span class="dt">newdata =</span> H_rebate), <span class="dv">2</span>, mean)))</a></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb197-1" title="1"><span class="kw">data.frame</span>(<span class="dt">Policy =</span> <span class="kw">c</span>(<span class="st">&quot;Do nothing&quot;</span>, <span class="st">&quot;15% rebate&quot;</span>),</a>
+<a class="sourceLine" id="cb197-2" title="2">           <span class="kw">rbind</span>(<span class="kw">apply</span>(<span class="kw">predict</span>(mod3, <span class="dt">newdata =</span> <span class="kw">mlogit.data</span>(Heating, <span class="dt">shape =</span> <span class="st">&quot;wide&quot;</span>, <span class="dt">choice =</span> <span class="st">&quot;depvar&quot;</span>, <span class="dt">varying =</span> <span class="kw">c</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">12</span>))), <span class="dv">2</span>, mean),</a>
+<a class="sourceLine" id="cb197-3" title="3">                 <span class="kw">apply</span>(<span class="kw">predict</span>(mod3, <span class="dt">newdata =</span> <span class="kw">mlogit.data</span>(H_rebate, <span class="dt">shape =</span> <span class="st">&quot;wide&quot;</span>, <span class="dt">choice =</span> <span class="st">&quot;depvar&quot;</span>, <span class="dt">varying =</span> <span class="kw">c</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">12</span>))), <span class="dv">2</span>, mean)))</a></code></pre></div>
 <pre><code>##       Policy         ec         er        gc        gr         hp
 ## 1 Do nothing 0.07111111 0.09333333 0.6366667 0.1433333 0.05555556
 ## 2 15% rebate 0.07009125 0.09199196 0.6272957 0.1412092 0.06941196</code></pre>
@@ -1289,39 +1300,39 @@ r = \frac{1}{4.56} = 0.219 = 21.9\%
 <h3><span class="header-section-number">6.12.2</span> Introduction of a new system</h3>
 <p>Suppose for example that a more efficient electric system is developed using newer technologies. The cost of installation is more expensive due to the cost of the new technology (cost of installation is $200 dollars higher than the electric central system). On the other hand, the cost of operation is only 75% that of the electric central systems. The preceding analysis suggests that consumers are willing to spend more in installation in exchange for savings in operation costs. What would be the penetration of this new system?</p>
 <p>To simulate this situation, we begin by creating a model matrix based on Model 3:</p>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb198-1" title="1">X &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(mod3)</a></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" title="1">X &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(mod3)</a></code></pre></div>
 <p>Then, we create a new alternative by copying the attributes of electric central:</p>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb199-1" title="1">alt &lt;-<span class="st"> </span><span class="kw">index</span>(H)<span class="op">$</span>alt</a>
-<a class="sourceLine" id="cb199-2" title="2">Xn &lt;-<span class="st"> </span>X[alt <span class="op">==</span><span class="st"> &quot;ec&quot;</span>,]</a></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" title="1">alt &lt;-<span class="st"> </span><span class="kw">index</span>(H)<span class="op">$</span>alt</a>
+<a class="sourceLine" id="cb200-2" title="2">Xn &lt;-<span class="st"> </span>X[alt <span class="op">==</span><span class="st"> &quot;ec&quot;</span>,]</a></code></pre></div>
 <p>Next, we’ll modify the attributes to reflect the attributes of the new system (+$200 to ic and 0.75 of oc):</p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb200-1" title="1">Xn[, <span class="st">&quot;ic&quot;</span>] &lt;-<span class="st"> </span>Xn[, <span class="st">&quot;ic&quot;</span>] <span class="op">+</span><span class="st"> </span><span class="dv">200</span></a>
-<a class="sourceLine" id="cb200-2" title="2">Xn[, <span class="st">&quot;oc&quot;</span>] &lt;-<span class="st"> </span>Xn[, <span class="st">&quot;oc&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="fl">0.75</span></a></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" title="1">Xn[, <span class="st">&quot;ic&quot;</span>] &lt;-<span class="st"> </span>Xn[, <span class="st">&quot;ic&quot;</span>] <span class="op">+</span><span class="st"> </span><span class="dv">200</span></a>
+<a class="sourceLine" id="cb201-2" title="2">Xn[, <span class="st">&quot;oc&quot;</span>] &lt;-<span class="st"> </span>Xn[, <span class="st">&quot;oc&quot;</span>] <span class="op">*</span><span class="st"> </span><span class="fl">0.75</span></a></code></pre></div>
 <p>We also want to identify the unique choice ids, which we will add as row names to the new systems:</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb201-1" title="1">chid &lt;-<span class="st"> </span><span class="kw">index</span>(H)<span class="op">$</span>chid</a>
-<a class="sourceLine" id="cb201-2" title="2">unchid &lt;-<span class="st"> </span><span class="kw">unique</span>(<span class="kw">index</span>(H)<span class="op">$</span>chid)</a>
-<a class="sourceLine" id="cb201-3" title="3"><span class="kw">rownames</span>(Xn) &lt;-<span class="st"> </span><span class="kw">paste</span>(unchid, <span class="st">&#39;new&#39;</span>, <span class="dt">sep =</span> <span class="st">&quot;.&quot;</span>)</a>
-<a class="sourceLine" id="cb201-4" title="4">chidb &lt;-<span class="st"> </span><span class="kw">c</span>(chid, unchid)</a></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" title="1">chid &lt;-<span class="st"> </span><span class="kw">index</span>(H)<span class="op">$</span>chid</a>
+<a class="sourceLine" id="cb202-2" title="2">unchid &lt;-<span class="st"> </span><span class="kw">unique</span>(<span class="kw">index</span>(H)<span class="op">$</span>chid)</a>
+<a class="sourceLine" id="cb202-3" title="3"><span class="kw">rownames</span>(Xn) &lt;-<span class="st"> </span><span class="kw">paste</span>(unchid, <span class="st">&#39;new&#39;</span>, <span class="dt">sep =</span> <span class="st">&quot;.&quot;</span>)</a>
+<a class="sourceLine" id="cb202-4" title="4">chidb &lt;-<span class="st"> </span><span class="kw">c</span>(chid, unchid)</a></code></pre></div>
 <p>After this, we can join the new system to the model matrix and sort by choice id:</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb202-1" title="1">X &lt;-<span class="st"> </span><span class="kw">rbind</span>(X, Xn)</a>
-<a class="sourceLine" id="cb202-2" title="2">X &lt;-<span class="st"> </span>X[<span class="kw">order</span>(chidb), ]</a></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" title="1">X &lt;-<span class="st"> </span><span class="kw">rbind</span>(X, Xn)</a>
+<a class="sourceLine" id="cb203-2" title="2">X &lt;-<span class="st"> </span>X[<span class="kw">order</span>(chidb), ]</a></code></pre></div>
 <p>This calculates the expression <span class="math inline">\(e^{X\beta}\)</span> and the sum, which are needed to compute the logit probabilities:</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb203-1" title="1">exp_Xb &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">exp</span>(X <span class="op">%*%</span><span class="st"> </span><span class="kw">coef</span>(mod3)))</a>
-<a class="sourceLine" id="cb203-2" title="2">sum_exp_Xb &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">tapply</span>(exp_Xb, <span class="kw">sort</span>(chidb), sum))</a></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" title="1">exp_Xb &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">exp</span>(X <span class="op">%*%</span><span class="st"> </span><span class="kw">coef</span>(mod3)))</a>
+<a class="sourceLine" id="cb204-2" title="2">sum_exp_Xb &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">tapply</span>(exp_Xb, <span class="kw">sort</span>(chidb), sum))</a></code></pre></div>
 <p>This is the vector of logit probabilities:</p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb204-1" title="1">P &lt;-<span class="st"> </span>exp_Xb <span class="op">/</span><span class="st"> </span>sum_exp_Xb[<span class="kw">sort</span>(chidb)]</a></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" title="1">P &lt;-<span class="st"> </span>exp_Xb <span class="op">/</span><span class="st"> </span>sum_exp_Xb[<span class="kw">sort</span>(chidb)]</a></code></pre></div>
 <p>Convert to a matrix of logit probabilities, so that each row is the choice probabilities for a household:</p>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb205-1" title="1">P &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(P, <span class="dt">ncol =</span> <span class="dv">6</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb205-2" title="2">P &lt;-<span class="st"> </span><span class="kw">transmute</span>(P, <span class="dt">hp =</span> P[, <span class="dv">5</span>], <span class="dt">ec =</span> P[, <span class="dv">1</span>], <span class="dt">er =</span> P[, <span class="dv">2</span>], <span class="dt">gc =</span> P[, <span class="dv">3</span>], <span class="dt">gr =</span> P[, <span class="dv">4</span>], <span class="dt">new =</span> P[, <span class="dv">6</span>])</a></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" title="1">P &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">matrix</span>(P, <span class="dt">ncol =</span> <span class="dv">6</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb206-2" title="2">P &lt;-<span class="st"> </span><span class="kw">transmute</span>(P, <span class="dt">hp =</span> P[, <span class="dv">5</span>], <span class="dt">ec =</span> P[, <span class="dv">1</span>], <span class="dt">er =</span> P[, <span class="dv">2</span>], <span class="dt">gc =</span> P[, <span class="dv">3</span>], <span class="dt">gr =</span> P[, <span class="dv">4</span>], <span class="dt">new =</span> P[, <span class="dv">6</span>])</a></code></pre></div>
 <p>We can verify that the sum of the probabilities for each household is 1:</p>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb206-1" title="1"><span class="kw">summary</span>(<span class="kw">rowSums</span>(P))</a></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb207-1" title="1"><span class="kw">summary</span>(<span class="kw">rowSums</span>(P))</a></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##       1       1       1       1       1       1</code></pre>
 <p>The estimated penetration of the new system is the average probability of households choosing this system:</p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb208-1" title="1"><span class="kw">apply</span>(P, <span class="dv">2</span>, mean)</a></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb209-1" title="1"><span class="kw">apply</span>(P, <span class="dv">2</span>, mean)</a></code></pre></div>
 <pre><code>##         hp         ec         er         gc         gr        new 
 ## 0.04977350 0.06311578 0.08347713 0.57145108 0.12855080 0.10363170</code></pre>
 <p>The new technology is estimated to have a penetration rate of approximately <span class="math inline">\(10.4\%\)</span>. Compare to the original proportions of the systems:</p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb210-1" title="1"><span class="kw">apply</span>(<span class="kw">fitted</span>(mod3, <span class="dt">outcome =</span> <span class="ot">FALSE</span>), <span class="dv">2</span>, mean)</a></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb211-1" title="1"><span class="kw">apply</span>(<span class="kw">fitted</span>(mod3, <span class="dt">outcome =</span> <span class="ot">FALSE</span>), <span class="dv">2</span>, mean)</a></code></pre></div>
 <pre><code>##         ec         er         gc         gr         hp 
 ## 0.07111111 0.09333333 0.63666667 0.14333333 0.05555556</code></pre>
 <p>Can you discern the patterns of substitution here? Are these patterns of substitution reasonable?</p>
