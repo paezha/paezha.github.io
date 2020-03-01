@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 10 Activity 4: Point Pattern Analysis I | Applied Spatial Statistics with R</title>
+  <title>Chapter 28 Activity 13: Area Data V | Applied Spatial Statistics with R</title>
   <meta name="description" content="This book was created as a resource for teaching applied spatial statistics at McMaster University by Antonio Paez, with support from Anastassios Dardas and Rajveer Ubhi." />
   <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 10 Activity 4: Point Pattern Analysis I | Applied Spatial Statistics with R" />
+  <meta property="og:title" content="Chapter 28 Activity 13: Area Data V | Applied Spatial Statistics with R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="paezha.github.io/applied_spatial_statistics" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 10 Activity 4: Point Pattern Analysis I | Applied Spatial Statistics with R" />
+  <meta name="twitter:title" content="Chapter 28 Activity 13: Area Data V | Applied Spatial Statistics with R" />
   
   <meta name="twitter:description" content="This book was created as a resource for teaching applied spatial statistics at McMaster University by Antonio Paez, with support from Anastassios Dardas and Rajveer Ubhi." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="point-pattern-analysis-i.html"/>
-<link rel="next" href="point-pattern-analysis-ii.html"/>
+<link rel="prev" href="area-data-v.html"/>
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -418,126 +418,168 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="activity-4-point-pattern-analysis-i" class="section level1">
-<h1><span class="header-section-number">Chapter 10</span> Activity 4: Point Pattern Analysis I</h1>
-<p>Remember, you can download the source file for this activity from <a href="https://github.com/paezha/Spatial-Statistics-Course">here</a>.</p>
-<div id="practice-questions-1" class="section level2">
-<h2><span class="header-section-number">10.1</span> Practice questions</h2>
+<div id="activity-13-area-data-v" class="section level1">
+<h1><span class="header-section-number">Chapter 28</span> Activity 13: Area Data V</h1>
+<div id="practice-questions-10" class="section level2">
+<h2><span class="header-section-number">28.1</span> Practice questions</h2>
 <p>Answer the following questions:</p>
 <ol style="list-style-type: decimal">
-<li>What is a random process?</li>
-<li>What is a deterministic process?</li>
-<li>What is a stochastic process?</li>
-<li>What is a pattern?</li>
-<li>What is the usefulness of a null landscape?</li>
+<li>Explain the main assumptions for linear regression models.</li>
+<li>How is Moran’s <span class="math inline">\(I\)</span> used as a diagnostic in regression analysis?</li>
+<li>Residual spatial autocorrelation is symptomatic of what issues in regression analysis?</li>
+<li>What does it mean for a model to be linear in the coefficients?</li>
+<li>What is the purpose of transforming variables for regression analysis?</li>
 </ol>
 </div>
-<div id="learning-objectives-9" class="section level2">
-<h2><span class="header-section-number">10.2</span> Learning objectives</h2>
+<div id="learning-objectives-27" class="section level2">
+<h2><span class="header-section-number">28.2</span> Learning objectives</h2>
 <p>In this activity, you will:</p>
 <ol style="list-style-type: decimal">
-<li>Use the concept of quadrats to analyze a real dataset.</li>
-<li>Learn about a quadrat-based test for randomness in point patterns.</li>
-<li>Learn how to use the p-value of a statistical test to make a decision.</li>
-<li>Think about the distribution of events in a null landscape.</li>
-<li>Think about ways to decide whether a landscape is random.</li>
+<li>Explore a spatial dataset.</li>
+<li>Conduct linear regression analysis.</li>
+<li>Conduct diagnostics for residual spatial autocorrelation.</li>
+<li>Propose ways to improve your analysis.</li>
 </ol>
 </div>
-<div id="suggested-reading-2" class="section level2">
-<h2><span class="header-section-number">10.3</span> Suggested reading</h2>
-<p>O’Sullivan D and Unwin D (2010) Geographic Information Analysis, 2nd Edition, Chapter 5. John Wiley &amp; Sons: New Jersey.</p>
+<div id="suggested-reading-11" class="section level2">
+<h2><span class="header-section-number">28.3</span> Suggested reading</h2>
+<p>O’Sullivan D and Unwin D (2010) Geographic Information Analysis, 2nd Edition, Chapter 7. John Wiley &amp; Sons: New Jersey.</p>
 </div>
-<div id="preliminaries-7" class="section level2">
-<h2><span class="header-section-number">10.4</span> Preliminaries</h2>
+<div id="preliminaries-25" class="section level2">
+<h2><span class="header-section-number">28.4</span> Preliminaries</h2>
 <p>For this activity you will need the following:</p>
 <ul>
 <li><p>An R markdown notebook version of this document (the source file).</p></li>
 <li><p>A package called <code>geog4ga3</code>.</p></li>
 </ul>
 <p>It is good practice to clear the working space to make sure that you do not have extraneous items there when you begin your work. The command in R to clear the workspace is <code>rm</code> (for “remove”), followed by a list of items to be removed. To clear the workspace from <em>all</em> objects, do the following:</p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb214-1" title="1"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</a></code></pre></div>
+<div class="sourceCode" id="cb639"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb639-1" title="1"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</a></code></pre></div>
 <p>Note that <code>ls()</code> lists all objects currently on the worspace.</p>
-<p>Load the libraries you will use in this activity. In addition to <code>tidyverse</code>, you will need <code>spatstat</code>, a package designed for the analysis of point patterns (you can learn about <code>spatstat</code> <a href="https://cran.r-project.org/web/packages/spatstat/vignettes/getstart.pdf">here</a> and <a href="http://spatstat.org/resources/spatstatJSSpaper.pdf">here</a>):</p>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb215-1" title="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb215-2" title="2"><span class="kw">library</span>(spatstat)</a>
-<a class="sourceLine" id="cb215-3" title="3"><span class="kw">library</span>(maptools) <span class="co"># Needed to convert a `Spatial Polygons` object into an `owin` object</span></a>
-<a class="sourceLine" id="cb215-4" title="4"><span class="kw">library</span>(sf)</a>
-<a class="sourceLine" id="cb215-5" title="5"><span class="kw">library</span>(geog4ga3)</a></code></pre></div>
-<pre><code>## Warning: replacing previous import &#39;plotly::filter&#39; by &#39;stats::filter&#39; when
-## loading &#39;geog4ga3&#39;</code></pre>
-<pre><code>## Warning: replacing previous import &#39;dplyr::lag&#39; by &#39;stats::lag&#39; when loading
-## &#39;geog4ga3&#39;</code></pre>
-<p>In the practice that preceded this activity, you learned about the concepts of intensity and density, about quadrats, and also how to create density maps.
-Begin by loading the data that you will use in this activity:</p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb218-1" title="1"><span class="kw">data</span>(<span class="st">&quot;Fast_Food&quot;</span>)</a>
-<a class="sourceLine" id="cb218-2" title="2"><span class="kw">data</span>(<span class="st">&quot;Gas_Stands&quot;</span>)</a>
-<a class="sourceLine" id="cb218-3" title="3"><span class="kw">data</span>(<span class="st">&quot;Paez_Mart&quot;</span>)</a></code></pre></div>
-<p>Next the geospatial files need to be read. For this example, the city boundary of Toronto is provided in two different formats, as a dataframe (which can be used to plot using <code>ggplot2</code>) and as a <code>SpatialPolygons</code> object, a format widely used in R for spatial analysis. The :</p>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb219-1" title="1"><span class="kw">data</span>(<span class="st">&quot;Toronto&quot;</span>)</a></code></pre></div>
-<p>If you inspect your workspace, you will see that the following dataframes are there:</p>
-<ul>
-<li><code>Fast_Food</code></li>
-<li><code>Gas_Stands</code></li>
-<li><code>Paez_Mart</code></li>
-</ul>
-<p>These are locations of a selection of fast food restaurants, and also of gas stands in Toronto (data are from 2008). Paez Mart on the other hand is a project to cover Toronto with convenience stores. The points are the planned locations of the stores.</p>
-<p>Also, there should be an object of class <code>sf</code>. This dataframe contains the city boundary of Toronto:</p>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb220-1" title="1"><span class="kw">class</span>(Toronto)</a></code></pre></div>
-<pre><code>## [1] &quot;sf&quot;         &quot;data.frame&quot;</code></pre>
-<p>Try plotting the following:</p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb222-1" title="1"><span class="kw">ggplot</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb222-2" title="2"><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> Toronto, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="ot">NA</span>, <span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">size =</span> <span class="fl">.3</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb222-3" title="3"><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> Paez_Mart) <span class="op">+</span></a>
-<a class="sourceLine" id="cb222-4" title="4"><span class="st">  </span><span class="kw">coord_sf</span>()</a></code></pre></div>
-<p><img src="09-Activity-Point-Pattern-Analysis-I_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<p>As discussed in the preceding chapter, the package <code>spatstat</code> offers a very rich collection of tools to do point pattern analysis. To convert the three sets of events (i.e., the fast food establishments, gas stands, and Paez Mart) into <code>ppp</code> objects we first must define a region or <em>window</em>. To do this we take the <code>sf</code> and convert to an <code>owin</code> (a window object) for use with the package <code>spatstat</code> (this is done via <code>SpatialPolygons</code>, hence <code>as(x, "Spatial")</code>:</p>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb223-1" title="1"><span class="co"># `as.owin()` will take a &quot;foreign&quot; object (foreign to `spatstat`) and convert it into an `owin` object. Here, there are two steps involved: first, we take the `sf` object with the boundaries of Toronto and convert it into a &quot;Spatial&quot; object, and then the &quot;Spatial&quot; object is passed on to `as.owin()`</span></a>
-<a class="sourceLine" id="cb223-2" title="2">Toronto.owin &lt;-<span class="st"> </span><span class="kw">as</span>(Toronto, <span class="st">&quot;Spatial&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.owin</span>() <span class="co"># Requires `maptools` package</span></a></code></pre></div>
-<p>And, then convert the dataframes to <code>ppp</code> objects (this necessitates that we extract the coordinates of the events by means of <code>st_coordinates</code>):</p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb224-1" title="1">Fast_Food.ppp &lt;-<span class="st"> </span><span class="kw">as.ppp</span>(<span class="kw">st_coordinates</span>(Fast_Food), <span class="dt">W =</span> Toronto.owin)</a>
-<a class="sourceLine" id="cb224-2" title="2">Gas_Stands.ppp &lt;-<span class="st"> </span><span class="kw">as.ppp</span>(<span class="kw">st_coordinates</span>(Gas_Stands), <span class="dt">W =</span> Toronto.owin)</a>
-<a class="sourceLine" id="cb224-3" title="3">Paez_Mart.ppp &lt;-<span class="st"> </span><span class="kw">as.ppp</span>(<span class="kw">st_coordinates</span>(Paez_Mart), <span class="dt">W =</span> Toronto.owin)</a></code></pre></div>
-<p>These objects can now be used with the functions of the <code>spatstat</code> package. For instance, you can calculate the counts of events by quadrat by means of <code>quadrat.count</code>. The input must be a <code>ppp</code> object, and the number of quadrats on the horizontal (nx) and vertical (ny) direction (notice how I use the function <code>table</code> to present the frequency of quadrats with number of events):</p>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb225-1" title="1">q_count &lt;-<span class="st"> </span><span class="kw">quadratcount</span>(Fast_Food.ppp, <span class="dt">nx =</span> <span class="dv">3</span>, <span class="dt">ny =</span> <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb225-2" title="2"><span class="kw">table</span>(q_count)</a></code></pre></div>
-<pre><code>## q_count
-##   0   6  44  48  60  64  85 144 163 
-##   1   1   1   1   1   1   1   1   1</code></pre>
-<p>As you see from the table, there is one quadrat with zero events, one quadrat with six events, one quadrat with forty-four events, and so on.</p>
-<p>You can also plot the results of the <code>quadratcount()</code> function!</p>
-<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb227-1" title="1"><span class="kw">plot</span>(q_count)</a></code></pre></div>
-<p><img src="09-Activity-Point-Pattern-Analysis-I_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<p>A useful function in the <code>spatstat</code> package is <code>quadrat.test</code>. This function implements a statistical test that compares the empirical distribution of events by quadrats to the distribution of events as expected under the hypothesis that the underlying process is <em>random</em>.</p>
-<p>This is implemented as follows:</p>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb228-1" title="1">q_test &lt;-<span class="st"> </span><span class="kw">quadrat.test</span>(Fast_Food.ppp, <span class="dt">nx =</span> <span class="dv">3</span>, <span class="dt">ny =</span> <span class="dv">3</span>)</a></code></pre></div>
-<pre><code>## Warning: Some expected counts are small; chi^2 approximation may be inaccurate</code></pre>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb230-1" title="1">q_test</a></code></pre></div>
-<pre><code>## 
-##  Chi-squared test of CSR using quadrat counts
-## 
-## data:  Fast_Food.ppp
-## X2 = 213.74, df = 8, p-value &lt; 2.2e-16
-## alternative hypothesis: two.sided
-## 
-## Quadrats: 9 tiles (irregular windows)</code></pre>
-<p>The quadrat test reports a <span class="math inline">\(p\)</span>-value which can be used to make a decision. The <span class="math inline">\(p\)</span>-value is the probability that you will be mistaken if you reject the null hypothesis. To make a decision, you need to know what is the null hypothesis, and your own tolerance for making a mistake. In the case above, the <span class="math inline">\(p\)</span>-value is very, very small (2.2e-16 = 0.00000000000000022). Since the null hypothesis is spatial randomness, you can reject this hypothesis and the probability that this decision is mistaken is vanishingly small.</p>
-<p>Try plotting the results of <code>quadrat.test</code>:</p>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb232-1" title="1"><span class="kw">plot</span>(q_test)</a></code></pre></div>
-<p><img src="09-Activity-Point-Pattern-Analysis-I_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<p>Now that you have seen how to do some analysis using quadrats, you are ready for the next activity.</p>
+<p>Load the libraries you will use in this activity. In addition to <code>tidyverse</code>, you will need <code>sf</code> and <code>geog4ga3</code>:</p>
+<div class="sourceCode" id="cb640"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb640-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb640-2" title="2"><span class="kw">library</span>(sf)</a>
+<a class="sourceLine" id="cb640-3" title="3"><span class="kw">library</span>(spdep)</a>
+<a class="sourceLine" id="cb640-4" title="4"><span class="kw">library</span>(geog4ga3)</a></code></pre></div>
+<p>Begin by loading the data files you will use in this activity:</p>
+<div class="sourceCode" id="cb641"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb641-1" title="1"><span class="kw">data</span>(<span class="st">&quot;HamiltonDAs&quot;</span>)</a>
+<a class="sourceLine" id="cb641-2" title="2"><span class="kw">data</span>(<span class="st">&quot;trips_by_mode&quot;</span>)</a>
+<a class="sourceLine" id="cb641-3" title="3"><span class="kw">data</span>(<span class="st">&quot;travel_time_car&quot;</span>)</a></code></pre></div>
+<p><code>HamiltonDAs</code> are the Dissemination Areas for Hamilton CMA, which coincide with the Traffic Analysis Zones (TAZ) of the Transportation Tomorrow Survey of 2011. The dataframe <code>trips_by_mode</code> includes the number of trips by mode of transportation by TAZ (equivalently DA), as well as other useful information from the 2011 census for Hamilton CMA. Finally, the dataframe <code>travel_time_car</code> includes the travel distance/time from TAZ/DA centroids to Jackson Square in downtown Hamilton.</p>
+<p>The data for this activity were retrieved from the 2011 Transportation Tomorrow Survey <a href="http://www.transportationtomorrow.on.ca/">TTS</a>, the periodic travel survey of the Greater Toronto and Hamilton Area, as well as data from the 2011 Canadian Census <a href="http://www12.statcan.gc.ca/census-recensement/index-eng.cfm">Census Program</a>.</p>
+<p>Before beginning the activity, join the information on trips and travel time to the <code>sf</code> object. Note that to complete the join, the identifier (in this case <code>GTA06</code>) must be in the same format in both data frames:</p>
+<div class="sourceCode" id="cb642"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb642-1" title="1">travel_time_car<span class="op">$</span>GTA06 &lt;-<span class="st"> </span><span class="kw">factor</span>(travel_time_car<span class="op">$</span>GTA06)</a>
+<a class="sourceLine" id="cb642-2" title="2"></a>
+<a class="sourceLine" id="cb642-3" title="3"><span class="co"># Travel time</span></a>
+<a class="sourceLine" id="cb642-4" title="4">HamiltonDAs &lt;-<span class="st"> </span><span class="kw">left_join</span>(HamiltonDAs, travel_time_car, <span class="dt">by =</span> <span class="st">&quot;GTA06&quot;</span>)</a>
+<a class="sourceLine" id="cb642-5" title="5"><span class="co"># Trips by mode</span></a>
+<a class="sourceLine" id="cb642-6" title="6">HamiltonDAs &lt;-<span class="st"> </span><span class="kw">left_join</span>(HamiltonDAs, trips_by_mode, <span class="dt">by =</span> <span class="st">&quot;GTA06&quot;</span>)</a></code></pre></div>
+<pre><code>## Warning: Column `GTA06` joining factor and character vector, coercing into
+## character vector</code></pre>
+<p>The analysis will be based on travel by car in the Hamilton CMA. Calculate the proportion of trips by car by TAZ:</p>
+<div class="sourceCode" id="cb644"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb644-1" title="1">HamiltonDAs &lt;-<span class="st"> </span><span class="kw">mutate</span>(HamiltonDAs, <span class="dt">Auto_driver.prop =</span> Auto_driver <span class="op">/</span><span class="st"> </span>(Auto_driver <span class="op">+</span><span class="st"> </span>Cycle <span class="op">+</span><span class="st"> </span>Walk))</a></code></pre></div>
+<p>Note that the proportion of people who travelled by car as passengers are not included in the denominator of the proportion! This is because every trip as a passenger is already included in trips with one driver.</p>
 </div>
-<div id="activity-3" class="section level2">
-<h2><span class="header-section-number">10.5</span> Activity</h2>
-<p><strong>NOTE</strong>: Activities include technical “how to” tasks/questions. Usually, these ask you to organize data, create a plot, and so on in support of analysis and interpretation. These tasks are indicated by a star (*).</p>
-<p>1.* Use <code>Fast_Food</code>, <code>Gas_Stands</code>, <code>Paez_Mart</code>, and <code>Toronto</code> to create density maps for the three point patterns. Select a quadrat size that you think is appropriate.</p>
-<p>2.* Use <code>Fast_Food.ppp</code>, <code>Gas_Stands</code>, and <code>Paez_Mart</code>, and the function <code>quadratcount</code> to calculate the number of events per quadrat. Remember that you need to select the number of quadrats in the horizontal and vertical directions!</p>
-<p>3.* Use the function <code>table()</code> to examine the frequency of events per quadrat for each of the point patterns.</p>
+<div id="activity-12" class="section level2">
+<h2><span class="header-section-number">28.5</span> Activity</h2>
+<p>1.* Examine your dataframe. What variables are included? Are there any missing values?</p>
+<p>2.* Map the variable <code>Auto_driver.prop</code>, and use Moran’s I to test for spatial autocorrelation.</p>
+<p>3.* Estimate regression model using the variables <code>Pop_Density</code> and travel time in <code>minutes</code>.</p>
 <ol start="4" style="list-style-type: decimal">
-<li><p>Show your density maps to a fellow student. Did they select the same quadrat size? If not, what was their rationale for their size?</p></li>
-<li><p>Again, use the function <code>table()</code> to examine the frequency of events per quadrat for each of the point patterns. What are the differences among these point patterns? What would you expect the frequency of events per quadrat to be in a null landscape?</p></li>
-<li><p>Use <code>Fast_Food.ppp</code>, <code>Gas_Stands</code>, and <code>Paez_Mart</code>, and the function <code>quadrat.test</code> to calculate the test of spatial independence for these point patterns. What is your decision in each case? Explain.</p></li>
+<li><p>What does the analysis of autocorrelation in point 2* tell you about <code>Auto_driver.prop</code>? Would you say that autocorrelation in this variable is a sign that autocorrelation will be an issue in regression analysis? Why or why not?</p></li>
+<li><p>Discuss the model you estimated in point 3. Next, examine its residuals. Would you say that they are spatially random/independent?</p></li>
+<li><p>Propose ways to improve your model.</p></li>
 </ol>
 
+<div id="refs" class="references">
+<div>
+<p>Anselin, Luc. 1988. <em>Spatial Econometrics: Methods and Models</em>. Book. Dordrecht: Kluwer.</p>
+</div>
+<div>
+<p>———. 1995. “Local Indicators of Spatial Association - Lisa.” Journal Article. <em>Geographical Analysis</em> 27: 93–115.</p>
+</div>
+<div>
+<p>Baddeley, Adrian, Ege Rubak, and Rolf Turner. 2016. <em>Spatial Point Patterns: Methodology and Applications with R</em>. Book. Chapman; Hall/CRC.</p>
+</div>
+<div>
+<p>Bailey, T. C., and A. C. Gatrell. 1995. <em>Interactive Spatial Data Analysis</em>. Book. Essex: Addison Wesley Longman.</p>
+</div>
+<div>
+<p>Bivand, R. S., E. J. Pebesma, and V. Gómez-Rubio. 2008. <em>Applied Spatial Data Analysis with R</em>. Book. New York: Springer Science+Business Media.</p>
+</div>
+<div>
+<p>Brunsdon, C., A. S. Fotheringham, and M. E. Charlton. 1996. “Geographically Weighted Regression: A Method for Exploring Spatial Nonstationarity.” Journal Article. <em>Geographical Analysis</em> 28 (4): 281–98. <a href="ISI:A1996VL03500001">ISI:A1996VL03500001</a>.</p>
+</div>
+<div>
+<p>Brunsdon, Chris, and Lex Comber. 2015. <em>An Introduction to R for Spatial Analysis and Mapping</em>. Book. Sage.</p>
+</div>
+<div>
+<p>Cressie, N. A. C. 1993. <em>Statistics for Spatial Data</em>. Book. Wiley Series in Probability and Mathematical Statistics. New York: John Wiley &amp; Sons.</p>
+</div>
+<div>
+<p>Fotheringham, A. S., and C. Brunsdon. 1999. “Local Forms of Spatial Analysis.” Journal Article. <em>Geographical Analysis</em> 31 (4): 340–58.</p>
+</div>
+<div>
+<p>Getis, A., and J. K. Ord. 1992. “The Analysis of Spatial Association by Use of Distance Statistics.” Journal Article. <em>Geographical Analysis</em> 24 (3): 189–206. <a href="ISI:A1992JF93400001%0AC:/Papers/Geographical%20Analysis/Geographical%20Analysis%20(1992)%2024%20(3)%20189-206.pdf">ISI:A1992JF93400001
+C:/Papers/Geographical Analysis/Geographical Analysis (1992) 24 (3) 189-206.pdf</a>.</p>
+</div>
+<div>
+<p>Geyer, Charles J, and Jesper Møller. 1994. “Simulation Procedures and Likelihood Inference for Spatial Point Processes.” <em>Scandinavian Journal of Statistics</em>, 359–73.</p>
+</div>
+<div>
+<p>Griffith, D. A. 1988. <em>Advanced Spatial Statistics: Special Topics in the Exploration of Quantitative Spatial Data Series</em>. Book. Dordrecht: Kluwer.</p>
+</div>
+<div>
+<p>Haase, P. 1995. “Spatial Pattern Analysis in Ecology Based on Ripley’s K-Function: Introduction and Methods of Edge Correction.” <em>Journal of Vegetation Science</em> 6 (4): 575–82.</p>
+</div>
+<div>
+<p>Haining, R. 1990. <em>Spatial Data Analysis in the Social and Environmental Sciences</em>. Book. Cambridge: Cambridge University Press.</p>
+</div>
+<div>
+<p>Lloyd, Christopher D. 2010. <em>Local Models for Spatial Analysis</em>. CRC press.</p>
+</div>
+<div>
+<p>Lovelace, Robin, Jacub Nowosad, and Jannes Muenchow. 2019. <em>Geocomputation with R</em>. Book. CRC Press.</p>
+</div>
+<div>
+<p>McElreath, Richard. 2016. <em>Statistical Rethinking: A Bayesian Course with Examples in R and Stan</em>. Book. Vol. 122. CRC Press.</p>
+</div>
+<div>
+<p>McGrew Jr, J Chapman, and Charles B Monroe. 2009. <em>An Introduction to Statistical Problem Solving in Geography</em>. Book. 2nd. Edition. Long Grove, Illinois: Waveland Press.</p>
+</div>
+<div>
+<p>Moller, Jesper, and Rasmus Plenge Waagepetersen. 2003. <em>Statistical Inference and Simulation for Spatial Point Processes</em>. Chapman; Hall/CRC.</p>
+</div>
+<div>
+<p>O’Sullivan, David, and David Unwin. 2010. <em>Geographic Information Analysis</em>. Book. 2nd. Edition. Hoboken, New Jersey: John Wiley &amp; Sons.</p>
+</div>
+<div>
+<p>Plant, Richard E. 2012. <em>Spatial Data Analysis in Ecology and Agriculture Using R</em>. Book. cRc Press.</p>
+</div>
+<div>
+<p>Rey, S. J. 2009. “Show Me the Code: Spatial Analysis and Open Source.” Journal Article. <em>Journal of Geographical Systems</em> 11 (2): 191–207. <a href="ISI:000266249500007">ISI:000266249500007</a>.</p>
+</div>
+<div>
+<p>Ripley, B. D. 1976. “2nd-Order Analysis of Stationary Point Processes.” Journal Article. <em>Journal of Applied Probability</em> 13 (2): 255–66. <a href="ISI:A1976CA37400007">ISI:A1976CA37400007</a>.</p>
+</div>
+<div>
+<p>Tomlin, C Dana. 1990. <em>A Map Algebra</em>. Harvard Graduate School of Design Cambridge, MA.</p>
+</div>
+<div>
+<p>Tong, Daoqin, and Alan T. Murray. 2012. “Spatial Optimization in Geography.” Journal Article. <em>Annals of the Association of American Geographers</em> 102 (6): 1290–1309. <a href="https://doi.org/10.1080/00045608.2012.685044">https://doi.org/10.1080/00045608.2012.685044</a>.</p>
+</div>
+<div>
+<p>Wickham, Hadley. 2015. <em>R Packages: Organize, Test, Document, and Share Your Code</em>. " O’Reilly Media, Inc.".</p>
+</div>
+<div>
+<p>———. 2017. <em>Tidyverse: Easily Install and Load the ’Tidyverse’</em>. <a href="https://CRAN.R-project.org/package=tidyverse">https://CRAN.R-project.org/package=tidyverse</a>.</p>
+</div>
+<div>
+<p>Wickham, Hadley, and Garrett Grolemund. 2016. <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</em>. " O’Reilly Media, Inc.".</p>
+</div>
+<div>
+<p>With, Kimberly A, and Anthony W King. 1997. “The Use and Misuse of Neutral Landscape Models in Ecology.” <em>Oikos</em>, 219–29.</p>
+</div>
+</div>
 </div>
 </div>
             </section>
@@ -545,8 +587,8 @@ Begin by loading the data that you will use in this activity:</p>
           </div>
         </div>
       </div>
-<a href="point-pattern-analysis-i.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="point-pattern-analysis-ii.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="area-data-v.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -577,7 +619,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/paezha/paezha.github.io/tree/master/applied_spatial_statistics/09-Activity-Point-Pattern-Analysis-I.Rmd",
+"link": "https://github.com/paezha/paezha.github.io/tree/master/applied_spatial_statistics/27-Activity-Area-Data-V.Rmd",
 "text": "Edit"
 },
 "history": {
