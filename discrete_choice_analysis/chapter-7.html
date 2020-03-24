@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 8 Non-Proportional Substitution Patterns I: The Probit Model | An Introduction to Discrete Choice Analysis</title>
   <meta name="description" content="These notes were created by Antonio Paez as a resource for teaching a graduate discrete choice analysis course (GEOG 738) at McMaster University." />
-  <meta name="generator" content="bookdown 0.17 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 8 Non-Proportional Substitution Patterns I: The Probit Model | An Introduction to Discrete Choice Analysis" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Antonio Paez" />
 
 
-<meta name="date" content="2020-02-12" />
+<meta name="date" content="2020-03-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,12 +52,12 @@
 
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
-<script src="libs/plotly-binding-4.9.1/plotly.js"></script>
+<script src="libs/plotly-binding-4.9.2/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.49.4/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.49.4/plotly-latest.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
 
 
 <style type="text/css">
@@ -349,13 +349,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="preliminaries-5" class="section level2">
 <h2><span class="header-section-number">8.1</span> Preliminaries</h2>
 <p>Load the packages used in this section:</p>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb256-1" title="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb256-2" title="2"><span class="kw">library</span>(mlogit)</a>
-<a class="sourceLine" id="cb256-3" title="3"><span class="kw">library</span>(kableExtra)</a></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb265-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb265-2" title="2"><span class="kw">library</span>(mlogit)</a>
+<a class="sourceLine" id="cb265-3" title="3"><span class="kw">library</span>(kableExtra)</a></code></pre></div>
 <p>Load the dataset used in this section (from the <code>mlogit</code> package):</p>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb257-1" title="1"><span class="kw">data</span>(<span class="st">&quot;Heating&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb266-1" title="1"><span class="kw">data</span>(<span class="st">&quot;Heating&quot;</span>)</a></code></pre></div>
 <p>The dataset is in “wide” form, which means that there is one record per decision making unit (i.e. per household), so we need to change the data to “long” format:</p>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb258-1" title="1">H &lt;-<span class="st"> </span><span class="kw">mlogit.data</span>(Heating, <span class="dt">shape =</span> <span class="st">&quot;wide&quot;</span>, <span class="dt">choice =</span> <span class="st">&quot;depvar&quot;</span>, <span class="dt">varying =</span> <span class="kw">c</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">12</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb267-1" title="1">H &lt;-<span class="st"> </span><span class="kw">mlogit.data</span>(Heating, <span class="dt">shape =</span> <span class="st">&quot;wide&quot;</span>, <span class="dt">choice =</span> <span class="st">&quot;depvar&quot;</span>, <span class="dt">varying =</span> <span class="kw">c</span>(<span class="dv">3</span><span class="op">:</span><span class="dv">12</span>))</a></code></pre></div>
 <p>This is the same dataset used in the preceding chapter with five heating systems:</p>
 <ul>
 <li>Gas Central (gc)</li>
@@ -374,7 +374,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="how-to-use-this-note-6" class="section level2">
 <h2><span class="header-section-number">8.3</span> How to use this note</h2>
 <p>Remember that the source for the document you are reading is an R Notebook. Throughout the notes, you will find examples of code in segments of text called <em>chunks</em>. This is an example of a chunk:</p>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb259-1" title="1"><span class="kw">print</span>(<span class="st">&quot;If you are always trying to be normal, you will never know how amazing you can be.&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb268-1" title="1"><span class="kw">print</span>(<span class="st">&quot;If you are always trying to be normal, you will never know how amazing you can be.&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;If you are always trying to be normal, you will never know how amazing you can be.&quot;</code></pre>
 <p>If you are working with the Notebook version of the document, you can run the code by clicking the ‘play’ icon on the top right corner of the chunk. If you are reading the web-book version of the document, you will often see that the code has already been executed. You can still try it by copying and pasting into your R or RStudio console.</p>
 </div>
@@ -434,8 +434,8 @@ P_j=P(U_{nkj}\le 0;\forall k\ne j)
 \phi(\tilde{\epsilon}_n)=\frac{1}{(2\pi)^{J/2}|\tilde{\Sigma}_n|^{1/2}}e^{-\frac{1}{2}\tilde{\epsilon}_n^T\tilde{\Sigma}_n^{-1}\tilde{\epsilon}_n}
 \]</span></p>
 <p>Now we are ready to estimate a multinomial logit model (we called this Model 3 in Chapter <a href="chapter-3.html#chapter-3">4</a>):</p>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb261-1" title="1">mod3 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H, <span class="dt">reflevel =</span> <span class="st">&quot;ec&quot;</span>)</a>
-<a class="sourceLine" id="cb261-2" title="2"><span class="kw">summary</span>(mod3)</a></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb270-1" title="1">mod3 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H, <span class="dt">reflevel =</span> <span class="st">&quot;ec&quot;</span>)</a>
+<a class="sourceLine" id="cb270-2" title="2"><span class="kw">summary</span>(mod3)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## mlogit(formula = depvar ~ ic + oc, data = H, reflevel = &quot;ec&quot;, 
@@ -464,10 +464,10 @@ P_j=P(U_{nkj}\le 0;\forall k\ne j)
 ## Log-Likelihood: -1008.2
 ## McFadden R^2:  0.013691 
 ## Likelihood ratio test : chisq = 27.99 (p.value = 8.3572e-07)</code></pre>
-<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb263-1" title="1">nl2 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H,</a>
-<a class="sourceLine" id="cb263-2" title="2">             <span class="dt">nests =</span> <span class="kw">list</span>(<span class="dt">room =</span> <span class="kw">c</span>( <span class="st">&#39;er&#39;</span>, <span class="st">&#39;gr&#39;</span>), <span class="dt">central =</span> <span class="kw">c</span>(<span class="st">&#39;ec&#39;</span>, <span class="st">&#39;gc&#39;</span>, <span class="st">&#39;hp&#39;</span>)),</a>
-<a class="sourceLine" id="cb263-3" title="3">             <span class="dt">un.nest.el =</span> <span class="ot">TRUE</span>, <span class="dt">steptol =</span> <span class="fl">1e-12</span>)</a>
-<a class="sourceLine" id="cb263-4" title="4"><span class="kw">summary</span>(nl2)</a></code></pre></div>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb272-1" title="1">nl2 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H,</a>
+<a class="sourceLine" id="cb272-2" title="2">             <span class="dt">nests =</span> <span class="kw">list</span>(<span class="dt">room =</span> <span class="kw">c</span>( <span class="st">&#39;er&#39;</span>, <span class="st">&#39;gr&#39;</span>), <span class="dt">central =</span> <span class="kw">c</span>(<span class="st">&#39;ec&#39;</span>, <span class="st">&#39;gc&#39;</span>, <span class="st">&#39;hp&#39;</span>)),</a>
+<a class="sourceLine" id="cb272-3" title="3">             <span class="dt">un.nest.el =</span> <span class="ot">TRUE</span>, <span class="dt">steptol =</span> <span class="fl">1e-12</span>)</a>
+<a class="sourceLine" id="cb272-4" title="4"><span class="kw">summary</span>(nl2)</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## mlogit(formula = depvar ~ ic + oc, data = H, nests = list(room = c(&quot;er&quot;, 
@@ -498,38 +498,38 @@ P_j=P(U_{nkj}\le 0;\forall k\ne j)
 ## Log-Likelihood: -1003.5
 ## McFadden R^2:  0.018329 
 ## Likelihood ratio test : chisq = 37.473 (p.value = 3.6549e-08)</code></pre>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb265-1" title="1">prob1 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H, <span class="dt">reflevel =</span> <span class="st">&quot;ec&quot;</span>, <span class="dt">probit =</span> <span class="ot">TRUE</span>, <span class="dt">R=</span><span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb265-2" title="2"><span class="kw">summary</span>(prob1)</a></code></pre></div>
-<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb266-1" title="1">prob2 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H, <span class="dt">reflevel =</span> <span class="st">&quot;ec&quot;</span>, <span class="dt">probit =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb266-2" title="2">                <span class="dt">constPar=</span><span class="kw">c</span>(<span class="st">&#39;hp.hp&#39;</span>, <span class="st">&quot;gr.hp&quot;</span>, <span class="st">&quot;gr.gr&quot;</span>, <span class="st">&quot;gc.gr&quot;</span>, <span class="st">&quot;gc.gc&quot;</span>, <span class="st">&quot;er.hp&quot;</span>))</a>
-<a class="sourceLine" id="cb266-3" title="3"><span class="kw">summary</span>(prob2)</a></code></pre></div>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb267-1" title="1">prob3 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H, <span class="dt">reflevel =</span> <span class="st">&quot;ec&quot;</span>, <span class="dt">probit =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb267-2" title="2">                <span class="dt">constPar=</span><span class="kw">c</span>(<span class="st">&quot;er.er&quot;</span>, <span class="st">&quot;gr.hp&quot;</span>, <span class="st">&quot;gc.gr&quot;</span>, <span class="st">&quot;er.hp&quot;</span>, <span class="st">&quot;er.gc&quot;</span>), <span class="dt">R =</span> <span class="dv">50</span>)</a>
-<a class="sourceLine" id="cb267-3" title="3"><span class="kw">summary</span>(prob3)</a></code></pre></div>
-<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb268-1" title="1">L1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb268-2" title="2">L1[<span class="op">!</span><span class="kw">upper.tri</span>(L1)] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="kw">coef</span>(prob3)[<span class="dv">7</span>], <span class="dv">0</span>, <span class="kw">coef</span>(prob3)[<span class="dv">8</span>], <span class="dv">0</span>, <span class="kw">coef</span>(prob3)[<span class="dv">9</span><span class="op">:</span><span class="dv">10</span>], <span class="dv">0</span>, <span class="kw">coef</span>(prob3)[<span class="dv">11</span>])</a>
-<a class="sourceLine" id="cb268-3" title="3">L1</a></code></pre></div>
-<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb269-1" title="1">L1 <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(L1)</a></code></pre></div>
-<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb270-1" title="1">L1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb270-2" title="2">L1[<span class="op">!</span><span class="kw">upper.tri</span>(L1)] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">coef</span>(prob1)[<span class="dv">7</span><span class="op">:</span><span class="dv">15</span>])</a>
-<a class="sourceLine" id="cb270-3" title="3">L1</a></code></pre></div>
-<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb271-1" title="1">L1 <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(L1)</a></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb274-1" title="1">prob1 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H, <span class="dt">reflevel =</span> <span class="st">&quot;ec&quot;</span>, <span class="dt">probit =</span> <span class="ot">TRUE</span>, <span class="dt">R=</span><span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb274-2" title="2"><span class="kw">summary</span>(prob1)</a></code></pre></div>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb275-1" title="1">prob2 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H, <span class="dt">reflevel =</span> <span class="st">&quot;ec&quot;</span>, <span class="dt">probit =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb275-2" title="2">                <span class="dt">constPar=</span><span class="kw">c</span>(<span class="st">&#39;hp.hp&#39;</span>, <span class="st">&quot;gr.hp&quot;</span>, <span class="st">&quot;gr.gr&quot;</span>, <span class="st">&quot;gc.gr&quot;</span>, <span class="st">&quot;gc.gc&quot;</span>, <span class="st">&quot;er.hp&quot;</span>))</a>
+<a class="sourceLine" id="cb275-3" title="3"><span class="kw">summary</span>(prob2)</a></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb276-1" title="1">prob3 &lt;-<span class="st"> </span><span class="kw">mlogit</span>(depvar <span class="op">~</span><span class="st"> </span>ic <span class="op">+</span><span class="st"> </span>oc, H, <span class="dt">reflevel =</span> <span class="st">&quot;ec&quot;</span>, <span class="dt">probit =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb276-2" title="2">                <span class="dt">constPar=</span><span class="kw">c</span>(<span class="st">&quot;er.er&quot;</span>, <span class="st">&quot;gr.hp&quot;</span>, <span class="st">&quot;gc.gr&quot;</span>, <span class="st">&quot;er.hp&quot;</span>, <span class="st">&quot;er.gc&quot;</span>), <span class="dt">R =</span> <span class="dv">50</span>)</a>
+<a class="sourceLine" id="cb276-3" title="3"><span class="kw">summary</span>(prob3)</a></code></pre></div>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb277-1" title="1">L1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb277-2" title="2">L1[<span class="op">!</span><span class="kw">upper.tri</span>(L1)] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="kw">coef</span>(prob3)[<span class="dv">7</span>], <span class="dv">0</span>, <span class="kw">coef</span>(prob3)[<span class="dv">8</span>], <span class="dv">0</span>, <span class="kw">coef</span>(prob3)[<span class="dv">9</span><span class="op">:</span><span class="dv">10</span>], <span class="dv">0</span>, <span class="kw">coef</span>(prob3)[<span class="dv">11</span>])</a>
+<a class="sourceLine" id="cb277-3" title="3">L1</a></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb278-1" title="1">L1 <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(L1)</a></code></pre></div>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb279-1" title="1">L1 &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb279-2" title="2">L1[<span class="op">!</span><span class="kw">upper.tri</span>(L1)] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="kw">coef</span>(prob1)[<span class="dv">7</span><span class="op">:</span><span class="dv">15</span>])</a>
+<a class="sourceLine" id="cb279-3" title="3">L1</a></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb280-1" title="1">L1 <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(L1)</a></code></pre></div>
 <p>To simulate this scenario, we begin by copying the input dataframe:</p>
-<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb272-1" title="1">H_rebate &lt;-<span class="st"> </span>H</a></code></pre></div>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb281-1" title="1">H_rebate &lt;-<span class="st"> </span>H</a></code></pre></div>
 <p>In the new dataframe that will simulate the rebate, replacing the cost of installation as follows:</p>
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb273-1" title="1">H_rebate[H_rebate<span class="op">$</span>alt <span class="op">==</span><span class="st"> &quot;gc&quot;</span>, <span class="st">&quot;ic&quot;</span>] &lt;-<span class="st"> </span><span class="fl">1.15</span> <span class="op">*</span><span class="st"> </span>H_rebate[H_rebate<span class="op">$</span>alt <span class="op">==</span><span class="st"> &quot;gc&quot;</span>, <span class="st">&quot;ic&quot;</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb282-1" title="1">H_rebate[H_rebate<span class="op">$</span>alt <span class="op">==</span><span class="st"> &quot;gc&quot;</span>, <span class="st">&quot;ic&quot;</span>] &lt;-<span class="st"> </span><span class="fl">1.15</span> <span class="op">*</span><span class="st"> </span>H_rebate[H_rebate<span class="op">$</span>alt <span class="op">==</span><span class="st"> &quot;gc&quot;</span>, <span class="st">&quot;ic&quot;</span>]</a></code></pre></div>
 <p>We can calculate the market shares of the “do nothing” and “rebate” policies and compare their shares (which are the mean values of the predictions):</p>
-<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb274-1" title="1"><span class="kw">data.frame</span>(<span class="dt">Policy =</span> <span class="kw">c</span>(<span class="st">&quot;Do nothing&quot;</span>, <span class="st">&quot;15% rebate&quot;</span>),</a>
-<a class="sourceLine" id="cb274-2" title="2">           <span class="kw">rbind</span>(<span class="kw">apply</span>(<span class="kw">predict</span>(mod3, <span class="dt">newdata =</span> H), <span class="dv">2</span>, mean),</a>
-<a class="sourceLine" id="cb274-3" title="3">                 <span class="kw">apply</span>(<span class="kw">predict</span>(mod3, <span class="dt">newdata =</span> H_rebate), <span class="dv">2</span>, mean)))</a></code></pre></div>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb283-1" title="1"><span class="kw">data.frame</span>(<span class="dt">Policy =</span> <span class="kw">c</span>(<span class="st">&quot;Do nothing&quot;</span>, <span class="st">&quot;15% rebate&quot;</span>),</a>
+<a class="sourceLine" id="cb283-2" title="2">           <span class="kw">rbind</span>(<span class="kw">apply</span>(<span class="kw">predict</span>(mod3, <span class="dt">newdata =</span> H), <span class="dv">2</span>, mean),</a>
+<a class="sourceLine" id="cb283-3" title="3">                 <span class="kw">apply</span>(<span class="kw">predict</span>(mod3, <span class="dt">newdata =</span> H_rebate), <span class="dv">2</span>, mean)))</a></code></pre></div>
 <p>Nested logit:</p>
-<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb275-1" title="1"><span class="kw">data.frame</span>(<span class="dt">Policy =</span> <span class="kw">c</span>(<span class="st">&quot;Do nothing&quot;</span>, <span class="st">&quot;15% rebate&quot;</span>),</a>
-<a class="sourceLine" id="cb275-2" title="2">           <span class="kw">rbind</span>(<span class="kw">apply</span>(<span class="kw">predict</span>(nl2, <span class="dt">newdata =</span> H), <span class="dv">2</span>, mean),</a>
-<a class="sourceLine" id="cb275-3" title="3">                 <span class="kw">apply</span>(<span class="kw">predict</span>(nl2, <span class="dt">newdata =</span> H_rebate), <span class="dv">2</span>, mean)))</a></code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb284-1" title="1"><span class="kw">data.frame</span>(<span class="dt">Policy =</span> <span class="kw">c</span>(<span class="st">&quot;Do nothing&quot;</span>, <span class="st">&quot;15% rebate&quot;</span>),</a>
+<a class="sourceLine" id="cb284-2" title="2">           <span class="kw">rbind</span>(<span class="kw">apply</span>(<span class="kw">predict</span>(nl2, <span class="dt">newdata =</span> H), <span class="dv">2</span>, mean),</a>
+<a class="sourceLine" id="cb284-3" title="3">                 <span class="kw">apply</span>(<span class="kw">predict</span>(nl2, <span class="dt">newdata =</span> H_rebate), <span class="dv">2</span>, mean)))</a></code></pre></div>
 <p>Probit:</p>
-<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb276-1" title="1"><span class="kw">data.frame</span>(<span class="dt">Policy =</span> <span class="kw">c</span>(<span class="st">&quot;Do nothing&quot;</span>, <span class="st">&quot;15% rebate&quot;</span>),</a>
-<a class="sourceLine" id="cb276-2" title="2">           <span class="kw">rbind</span>(<span class="kw">apply</span>(<span class="kw">predict</span>(prob3, <span class="dt">newdata =</span> H), <span class="dv">2</span>, mean),</a>
-<a class="sourceLine" id="cb276-3" title="3">                 <span class="kw">apply</span>(<span class="kw">predict</span>(prob3, <span class="dt">newdata =</span> H_rebate), <span class="dv">2</span>, mean)))</a></code></pre></div>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb285-1" title="1"><span class="kw">data.frame</span>(<span class="dt">Policy =</span> <span class="kw">c</span>(<span class="st">&quot;Do nothing&quot;</span>, <span class="st">&quot;15% rebate&quot;</span>),</a>
+<a class="sourceLine" id="cb285-2" title="2">           <span class="kw">rbind</span>(<span class="kw">apply</span>(<span class="kw">predict</span>(prob3, <span class="dt">newdata =</span> H), <span class="dv">2</span>, mean),</a>
+<a class="sourceLine" id="cb285-3" title="3">                 <span class="kw">apply</span>(<span class="kw">predict</span>(prob3, <span class="dt">newdata =</span> H_rebate), <span class="dv">2</span>, mean)))</a></code></pre></div>
 </div>
 <div id="exercise-6" class="section level2">
 <h2><span class="header-section-number">8.7</span> Exercise</h2>
