@@ -43,7 +43,7 @@ It is good practice to clear the working space to make sure that you do not have
 rm(list = ls())
 ```
 
-Note that `ls()` lists all objects currently on the worspace.
+Note that `ls()` lists all objects currently on the workspace.
 
 Load the libraries you will use in this activity. In addition to `tidyverse`, you will need `spatstat`, a package designed for the analysis of point patterns (you can learn about `spatstat` [here](https://cran.r-project.org/web/packages/spatstat/vignettes/getstart.pdf) and [here](http://spatstat.org/resources/spatstatJSSpaper.pdf)):
 
@@ -53,16 +53,6 @@ library(spatstat)
 library(maptools) # Needed to convert `SpatialPolygons` into `owin` object
 library(sf)
 library(geog4ga3)
-```
-
-```
-## Warning: replacing previous import 'plotly::filter' by 'stats::filter' when
-## loading 'geog4ga3'
-```
-
-```
-## Warning: replacing previous import 'dplyr::lag' by 'stats::lag' when loading
-## 'geog4ga3'
 ```
 
 In the practice that preceded this activity, you learned about the concepts of intensity and density, about quadrats, and also how to create density maps. For this practice, you will use the data that you first encountered in Activity 4, that is, the business locations in Toronto.
@@ -145,11 +135,13 @@ Now that you have the data that you need in the right format, you are ready for 
 
 ## Activity
 
-1.* Calculate the event-to-event distances to nearest neighbors using the function `nndist()`. Do this for all fast food establishments (pooled) and then for each type of establishment (i.e, "Chicken", "Hamburger", "Pizza", "Sub").
+**NOTE**: Activities include technical "how to" tasks/questions. Usually, these ask you to organize data, create a plot, and so on in support of analysis and interpretation. These tasks are indicated by a star (*).
 
-2.* Create Stienen diagrams using the distance vectors obtained in Step 1.
+1. (*)Calculate the event-to-event distances to nearest neighbors using the function `nndist()`. Do this for all fast food establishments (pooled) and then for each type of establishment (i.e, "Chicken", "Hamburger", "Pizza", "Sub").
 
-3.* Plot the empirical G-function for all fast food establishments (pooled) and then for each type of establishment (i.e, "Chicken", "Hamburger", "Pizza", "Sub").
+2. (*)Create Stienen diagrams using the distance vectors obtained in Step 1.
+
+3. (*)Plot the empirical G-function for all fast food establishments (pooled) and then for each type of establishment (i.e, "Chicken", "Hamburger", "Pizza", "Sub").
 
 4. Discuss the diagrams that you created in Question 2 with a fellow student.
 

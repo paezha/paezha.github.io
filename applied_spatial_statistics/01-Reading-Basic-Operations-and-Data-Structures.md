@@ -282,7 +282,7 @@ Cities <- data.frame(Name, Population, AvgSalary, Latitude, Longitude)
 
 After running the chunk above, now you have a new object in your environment, namely a  data frame called `Cities`. 
  
-If you double clic on `Cities` in the Environment tab, you will see that this data frame has five columns (labeled `Name`, `Population`, `AvgSalary`, `Latitude`, and `Longitude`), and three rows. You can enter data into a data frame and then use the many built-in functions of `R` to perform various types of analysis. 
+If you double click on `Cities` in the Environment tab, you will see that this data frame has five columns (labeled `Name`, `Population`, `AvgSalary`, `Latitude`, and `Longitude`), and three rows. You can enter data into a data frame and then use the many built-in functions of `R` to perform various types of analysis. 
 
 At this point, you may notice that `Name`, which was an alphanumeric vector, was converted to a _factor_ in the data frame. A factor (data class) is a way to store nominal/categorical variables that may have two or more _levels_. Nominal variables are like labels. In the present case, the factor variable has three levels, corresponding to three cities. If we had information for multiple years, each city might appear more than once, for each year that information was available.
 
@@ -298,8 +298,7 @@ Cities[1,1]
 ```
 
 ```
-## [1] Hamilton
-## Levels: Hamilton Toronto Waterloo
+## [1] "Hamilton"
 ```
 
 This will recall the element in the first row and first column of `Cities`. It also tells you what are the levels of this variable.
@@ -311,8 +310,7 @@ Cities$Name[1]
 ```
 
 ```
-## [1] Hamilton
-## Levels: Hamilton Toronto Waterloo
+## [1] "Hamilton"
 ```
 
 As you see, this has the same effect. The string sign `$` is used to reference columns in a data frame. Therefore, `R` will call the first element of `Name` in data frame `Cities`.
@@ -371,8 +369,7 @@ Cities$Name[Cities$Population==max(Cities$Population)]
 ```
 
 ```
-## [1] Toronto
-## Levels: Hamilton Toronto Waterloo
+## [1] "Toronto"
 ```
 As you see, Toronto is the largest city (by population) in this dataset. Using indexing in imaginative ways provides a way to do fairly sophisticated data analysis.
 
@@ -496,7 +493,7 @@ ggplot(data = Cities, aes(x = Longitude, y = Latitude)) +
 
 <img src="01-Reading-Basic-Operations-and-Data-Structures_files/figure-html/unnamed-chunk-33-1.png" width="672" />
 
-AFurthermore, we can fix the position of the labels by adding a vertical justification to the text (`vjust`), and to avoid the text from being cut we can also expand the limits of the plot (`expand_limits()`):
+Furthermore, we can fix the position of the labels by adding a vertical justification to the text (`vjust`), and to avoid the text from being cut we can also expand the limits of the plot (`expand_limits()`):
 
 ```r
 ggplot(data = Cities, aes(x = Longitude, y = Latitude)) + 

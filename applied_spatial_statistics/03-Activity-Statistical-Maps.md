@@ -41,7 +41,7 @@ It is good practice to clear the working space to make sure that you do not have
 rm(list = ls())
 ```
 
-Note that `ls()` lists all objects currently on the worspace.
+Note that `ls()` lists all objects currently on the workspace.
 
 Load the libraries you will use in this activity:
 
@@ -92,8 +92,7 @@ head(HamiltonDAs)
 ## geometry type:  MULTIPOLYGON
 ## dimension:      XY
 ## bbox:           xmin: 563306.2 ymin: 4777681 xmax: 610844.5 ymax: 4793682
-## epsg (SRID):    26917
-## proj4string:    +proj=utm +zone=17 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs
+## projected CRS:  NAD83 / UTM zone 17N
 ##     ID GTA06       VAR1      VAR2      VAR3      VAR4      VAR5
 ## 1 2671  5030 0.74650172 0.2596975 0.6361925 0.2290084 0.7223464
 ## 2 2716  5077 0.78107142 0.4413119 0.5690740 0.8997258 0.4163702
@@ -137,9 +136,9 @@ summary(HamiltonDAs)
 
 The above will include a column for the geometry of the spatial features.
 
-The dataframe includes all _Dissemination Areas_ (or DAs for short) for the Hamilton Census Metropolitan Arean in Canada. DAs are a type of geography used by the Census of Canada, in fact the smallest geography that is publicly available.
+The dataframe includes all _Dissemination Areas_ (or DAs for short) for the Hamilton Census Metropolitan Area in Canada. DAs are a type of geography used by the Census of Canada, in fact the smallest geography that is publicly available.
 
-To create a siple map we can use `ggplot2`, which previously we used to map points. Now, the geom for objects of class `sf` can be used to plot areas. To create such a map, we layer a geom object of type `sf` on a `ggplot2` object. For instance, to plot the DAs:
+To create a simple map we can use `ggplot2`, which previously we used to map points. Now, the geom for objects of class `sf` can be used to plot areas. To create such a map, we layer a geom object of type `sf` on a `ggplot2` object. For instance, to plot the DAs:
 
 ```r
 #head(HamiltonDAs)
@@ -175,8 +174,6 @@ Now you have seen how to create a thematic map with polygons (areal data), you a
 
 **NOTE**: Activities include technical "how to" tasks/questions. Usually, these ask you to organize data, create a plot, and so on in support of analysis and interpretation. These tasks are indicated by a star (*).
 
-1. * Create thematic maps for variables VAR1 through VAR5 in the dataframe `HamiltonDAs`. Remember that you can introduce new chunks of code.
+1. (*)Create thematic maps for variables VAR1 through VAR5 in the dataframe `HamiltonDAs`. Remember that you can introduce new chunks of code.
 
 2. Imagine that these maps were found, and for some reason the variables were not labeled. They may represent income, or population density, or something else. Which of the five maps you just created is more interesting? Rank the five maps from most to least interesting. Explain the reasons for your ranking.
-
----

@@ -33,31 +33,18 @@ For this activity you will need the following:
 
 * A dataset of your choice.
 
-It is good practice to clear the working space to make sure that you do not have extraneous items there when you begin your work. The command in R to clear the workspace is `rm` (for "remove"), followed by a list of items to be removed. To clear the workspace from _all_ objects, do the following:
+It is good practice to clear the workspace to make sure that you do not have extraneous items there when you begin your work. The command in R to clear the workspace is `rm` (for "remove"), followed by a list of items to be removed. To clear the workspace from _all_ objects, do the following:
 
 ```r
 rm(list = ls())
 ```
 
-Note that `ls()` lists all objects currently on the worspace.
+Note that `ls()` lists all objects currently on the workspace.
 
 Load the libraries you will use in this activity (load other packages as appropriate). 
 
 ```r
 library(geog4ga3)
-```
-
-```
-## Warning: replacing previous import 'plotly::filter' by 'stats::filter' when
-## loading 'geog4ga3'
-```
-
-```
-## Warning: replacing previous import 'dplyr::lag' by 'stats::lag' when loading
-## 'geog4ga3'
-```
-
-```r
 library(sf)
 library(spatstat)
 library(spdep)

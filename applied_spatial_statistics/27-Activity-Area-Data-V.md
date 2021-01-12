@@ -42,7 +42,7 @@ It is good practice to clear the working space to make sure that you do not have
 rm(list = ls())
 ```
 
-Note that `ls()` lists all objects currently on the worspace.
+Note that `ls()` lists all objects currently on the workspace.
 
 Load the libraries you will use in this activity. In addition to `tidyverse`, you will need `sf` and `geog4ga3`:
 
@@ -76,26 +76,23 @@ HamiltonDAs <- left_join(HamiltonDAs, travel_time_car, by = "GTA06")
 HamiltonDAs <- left_join(HamiltonDAs, trips_by_mode, by = "GTA06")
 ```
 
-```
-## Warning: Column `GTA06` joining factor and character vector, coercing into
-## character vector
-```
-
 The analysis will be based on travel by car in the Hamilton CMA. Calculate the proportion of trips by car by TAZ:
 
 ```r
 HamiltonDAs <- mutate(HamiltonDAs, Auto_driver.prop = Auto_driver / (Auto_driver + Cycle + Walk))
 ```
 
-Note that the proportion of people who travelled by car as passengers are not included in the denominator of the proportion! This is because every trip as a passenger is already included in trips with one driver.
+Note that the proportion of people who traveled by car as passengers are not included in the denominator of the proportion! This is because every trip as a passenger is already included in trips with one driver.
 
 ## Activity
 
-1.* Examine your dataframe. What variables are included? Are there any missing values?
+**NOTE**: Activities include technical "how to" tasks/questions. Usually, these ask you to organize data, create a plot, and so on in support of analysis and interpretation. These tasks are indicated by a star (*).
 
-2.* Map the variable `Auto_driver.prop`, and use Moran's I to test for spatial autocorrelation. 
+1. (*)Examine your dataframe. What variables are included? Are there any missing values?
 
-3.* Estimate regression model using the variables `Pop_Density` and travel time in `minutes`.
+2. (*)Map the variable `Auto_driver.prop`, and use Moran's I to test for spatial autocorrelation. 
+
+3. (*)Estimate regression model using the variables `Pop_Density` and travel time in `minutes`.
 
 4. What does the analysis of autocorrelation in point 2* tell you about `Auto_driver.prop`? Would you say that autocorrelation in this variable is a sign that autocorrelation will be an issue in regression analysis? Why or why not?
 

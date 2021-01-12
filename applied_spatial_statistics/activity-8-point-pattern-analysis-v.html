@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 18 Activity 8: Point Pattern Analysis V | Applied Spatial Statistics with R</title>
   <meta name="description" content="This book was created as a resource for teaching applied spatial statistics at McMaster University by Antonio Paez, with support from Anastassios Dardas and Rajveer Ubhi." />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 18 Activity 8: Point Pattern Analysis V | Applied Spatial Statistics with R" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Antonio Paez" />
 
 
-<meta name="date" content="2020-03-29" />
+<meta name="date" content="2021-01-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="point-pattern-analysis-v.html"/>
 <link rel="next" href="area-data-i.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.5.1/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,14 +50,15 @@
 
 
 
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
 <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
 <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.0.3/leaflet.js"></script>
+<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
 <link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.css" rel="stylesheet" />
 <link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.Default.css" rel="stylesheet" />
 <script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.js"></script>
@@ -65,24 +66,25 @@
 <script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.layersupport.js"></script>
 <script src="libs/lfx-heat-0.1.0/lfx-heat-prod.js"></script>
 <script src="libs/lfx-heat-0.1.0/lfx-heat-bindings.js"></script>
-<script src="libs/plotly-binding-4.9.2/plotly.js"></script>
+<script src="libs/plotly-binding-4.9.3/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
 <link href="libs/colourpicker-1.1/colourpicker.min.css" rel="stylesheet" />
 <script src="libs/colourpicker-1.1/colourpicker.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="libs/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet" />
 <script src="libs/bootstrap-3.3.2/js/bootstrap.min.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -91,14 +93,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -107,9 +111,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -539,18 +543,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>A package called <code>geog4ga3</code>.</p></li>
 </ul>
 <p>It is good practice to clear the working space to make sure that you do not have extraneous items there when you begin your work. The command in R to clear the workspace is <code>rm</code> (for “remove”), followed by a list of items to be removed. To clear the workspace from <em>all</em> objects, do the following:</p>
-<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb394-1" title="1"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</a></code></pre></div>
-<p>Note that <code>ls()</code> lists all objects currently on the worspace.</p>
+<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="activity-8-point-pattern-analysis-v.html#cb378-1"></a><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</span></code></pre></div>
+<p>Note that <code>ls()</code> lists all objects currently on the workspace.</p>
 <p>Load the libraries you will use in this activity. In addition to <code>tidyverse</code>, you will need <code>spatstat</code>, a package designed for the analysis of point patterns (you can learn about <code>spatstat</code> <a href="https://cran.r-project.org/web/packages/spatstat/vignettes/getstart.pdf">here</a> and <a href="http://spatstat.org/resources/spatstatJSSpaper.pdf">here</a>):</p>
-<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb395-1" title="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb395-2" title="2"><span class="kw">library</span>(spatstat)</a>
-<a class="sourceLine" id="cb395-3" title="3"><span class="kw">library</span>(geog4ga3)</a></code></pre></div>
+<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="activity-8-point-pattern-analysis-v.html#cb379-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb379-2"><a href="activity-8-point-pattern-analysis-v.html#cb379-2"></a><span class="kw">library</span>(spatstat)</span>
+<span id="cb379-3"><a href="activity-8-point-pattern-analysis-v.html#cb379-3"></a><span class="kw">library</span>(geog4ga3)</span></code></pre></div>
 <pre><code>## Warning: replacing previous import &#39;plotly::filter&#39; by &#39;stats::filter&#39; when
 ## loading &#39;geog4ga3&#39;</code></pre>
 <pre><code>## Warning: replacing previous import &#39;dplyr::lag&#39; by &#39;stats::lag&#39; when loading
 ## &#39;geog4ga3&#39;</code></pre>
 <p>Load a dataset of your choice. It could be one of the datasets that we have used before (Toronto Business Points, Bear GPS Locations), or one of the datasets included with the package <code>spatstat</code>. To see what datasets are available through the package, do the following:</p>
-<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb398-1" title="1">vcdExtra<span class="op">::</span><span class="kw">datasets</span>(<span class="st">&quot;spatstat.data&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="activity-8-point-pattern-analysis-v.html#cb382-1"></a>vcdExtra<span class="op">::</span><span class="kw">datasets</span>(<span class="st">&quot;spatstat.data&quot;</span>)</span></code></pre></div>
 <pre><code>##                 Item class   dim
 ## 1             Kovesi  list 41x13
 ## 2           amacrine   ppp     6
@@ -572,57 +576,58 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 18     chorley.extra  list     2
 ## 19          clmfires   ppp     6
 ## 20    clmfires.extra  list     2
-## 21            copper  list     7
-## 22         demohyper  list   3x3
-## 23           demopat   ppp     6
-## 24          dendrite   ppx     3
-## 25          finpines   ppp     6
-## 26               flu  list  41x4
-## 27           ganglia   ppp     6
-## 28            gordon   ppp     5
-## 29          gorillas   ppp     6
-## 30    gorillas.extra  list     7
-## 31           hamster   ppp     6
-## 32           heather  list     3
-## 33        humberside   ppp     6
-## 34 humberside.convex   ppp     6
-## 35          hyytiala   ppp     6
-## 36     japanesepines   ppp     5
-## 37           lansing   ppp     6
-## 38           letterR  owin     5
-## 39          longleaf   ppp     6
-## 40            mucosa   ppp     6
-## 41     mucosa.subwin  owin     4
-## 42         murchison  list     3
-## 43           nbfires   ppp     6
-## 44     nbfires.extra  list     2
-## 45          nbw.rect  owin     4
-## 46           nbw.seg  list     5
-## 47           nztrees   ppp     5
-## 48             osteo  list  40x5
-## 49           paracou   ppp     6
-## 50         ponderosa   ppp     5
-## 51   ponderosa.extra  list     2
-## 52         pyramidal  list  31x2
-## 53           redwood   ppp     5
-## 54          redwood3   ppp     5
-## 55       redwoodfull   ppp     5
-## 56 redwoodfull.extra  list     5
-## 57    residualspaper  list     7
-## 58           shapley   ppp     6
-## 59     shapley.extra  list     3
-## 60             simba  list  10x2
-## 61            simdat   ppp     5
-## 62         simplenet  list    10
-## 63           spiders   ppx     3
-## 64       sporophores   ppp     6
-## 65           spruces   ppp     6
-## 66      swedishpines   ppp     5
-## 67           urkiola   ppp     6
-## 68          vesicles   ppp     5
-## 69    vesicles.extra  list     4
-## 70              waka   ppp     6
-## 71     waterstriders  list     3
+## 21          concrete   ppp     5
+## 22            copper  list     7
+## 23         demohyper  list   3x3
+## 24           demopat   ppp     6
+## 25          dendrite   ppx     3
+## 26          finpines   ppp     6
+## 27               flu  list  41x4
+## 28           ganglia   ppp     6
+## 29            gordon   ppp     5
+## 30          gorillas   ppp     6
+## 31    gorillas.extra  list     7
+## 32           hamster   ppp     6
+## 33           heather  list     3
+## 34        humberside   ppp     6
+## 35 humberside.convex   ppp     6
+## 36          hyytiala   ppp     6
+## 37     japanesepines   ppp     5
+## 38           lansing   ppp     6
+## 39           letterR  owin     5
+## 40          longleaf   ppp     6
+## 41            mucosa   ppp     6
+## 42     mucosa.subwin  owin     4
+## 43         murchison  list     3
+## 44           nbfires   ppp     6
+## 45     nbfires.extra  list     2
+## 46          nbw.rect  owin     4
+## 47           nbw.seg  list     5
+## 48           nztrees   ppp     5
+## 49             osteo  list  40x5
+## 50           paracou   ppp     6
+## 51         ponderosa   ppp     5
+## 52   ponderosa.extra  list     2
+## 53         pyramidal  list  31x2
+## 54           redwood   ppp     5
+## 55          redwood3   ppp     5
+## 56       redwoodfull   ppp     5
+## 57 redwoodfull.extra  list     5
+## 58    residualspaper  list     7
+## 59           shapley   ppp     6
+## 60     shapley.extra  list     3
+## 61             simba  list  10x2
+## 62            simdat   ppp     5
+## 63         simplenet  list    10
+## 64           spiders   ppx     3
+## 65       sporophores   ppp     6
+## 66           spruces   ppp     6
+## 67      swedishpines   ppp     5
+## 68           urkiola   ppp     6
+## 69          vesicles   ppp     5
+## 70    vesicles.extra  list     4
+## 71              waka   ppp     6
+## 72     waterstriders  list     3
 ##                                                                                        Title
 ## 1                                          Colour Sequences with Uniform Perceptual Contrast
 ## 2                                                                 Hughes&#39; Amacrine Cell Data
@@ -644,63 +649,64 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 18                                                                Chorley-Ribble Cancer Data
 ## 19                                                           Castilla-La Mancha Forest Fires
 ## 20                                                           Castilla-La Mancha Forest Fires
-## 21                                                   Berman-Huntington points and lines data
-## 22                                       Demonstration Example of Hyperframe of Spatial Data
-## 23                                                             Artificial Data Point Pattern
-## 24                                                                     Dendritic Spines Data
-## 25                                                                 Pine saplings in Finland.
-## 26                                                                  Influenza Virus Proteins
-## 27                                            Beta Ganglion Cells in Cat Retina, Old Version
-## 28                                                                   People in Gordon Square
-## 29                                                                     Gorilla Nesting Sites
+## 21                                                                   Air Bubbles in Concrete
+## 22                                                   Berman-Huntington points and lines data
+## 23                                       Demonstration Example of Hyperframe of Spatial Data
+## 24                                                             Artificial Data Point Pattern
+## 25                                                                     Dendritic Spines Data
+## 26                                                                 Pine saplings in Finland.
+## 27                                                                  Influenza Virus Proteins
+## 28                                            Beta Ganglion Cells in Cat Retina, Old Version
+## 29                                                                   People in Gordon Square
 ## 30                                                                     Gorilla Nesting Sites
-## 31                                                              Aherne&#39;s hamster tumour data
-## 32                                                                     Diggle&#39;s Heather Data
-## 33                                       Humberside Data on Childhood Leukaemia and Lymphoma
+## 31                                                                     Gorilla Nesting Sites
+## 32                                                              Aherne&#39;s hamster tumour data
+## 33                                                                     Diggle&#39;s Heather Data
 ## 34                                       Humberside Data on Childhood Leukaemia and Lymphoma
-## 35                                                   Scots pines and other trees at Hyytiala
-## 36                                                              Japanese Pines Point Pattern
-## 37                                                               Lansing Woods Point Pattern
-## 38                                                               Window in Shape of Letter R
-## 39                                                              Longleaf Pines Point Pattern
-## 40                                                                   Cells in Gastric Mucosa
+## 35                                       Humberside Data on Childhood Leukaemia and Lymphoma
+## 36                                                   Scots pines and other trees at Hyytiala
+## 37                                                              Japanese Pines Point Pattern
+## 38                                                               Lansing Woods Point Pattern
+## 39                                                               Window in Shape of Letter R
+## 40                                                              Longleaf Pines Point Pattern
 ## 41                                                                   Cells in Gastric Mucosa
-## 42                                                                   Murchison gold deposits
-## 43                                              Point Patterns of New Brunswick Forest Fires
+## 42                                                                   Cells in Gastric Mucosa
+## 43                                                                   Murchison gold deposits
 ## 44                                              Point Patterns of New Brunswick Forest Fires
 ## 45                                              Point Patterns of New Brunswick Forest Fires
 ## 46                                              Point Patterns of New Brunswick Forest Fires
-## 47                                                           New Zealand Trees Point Pattern
-## 48                       Osteocyte Lacunae Data: Replicated Three-Dimensional Point Patterns
-## 49                                                   Kimboto trees at Paracou, French Guiana
-## 50                                                         Ponderosa Pine Tree Point Pattern
+## 47                                              Point Patterns of New Brunswick Forest Fires
+## 48                                                           New Zealand Trees Point Pattern
+## 49                       Osteocyte Lacunae Data: Replicated Three-Dimensional Point Patterns
+## 50                                                   Kimboto trees at Paracou, French Guiana
 ## 51                                                         Ponderosa Pine Tree Point Pattern
-## 52                                                     Pyramidal Neurons in Cingulate Cortex
-## 53                                       California Redwoods Point Pattern (Ripley&#39;s Subset)
+## 52                                                         Ponderosa Pine Tree Point Pattern
+## 53                                                     Pyramidal Neurons in Cingulate Cortex
 ## 54                                       California Redwoods Point Pattern (Ripley&#39;s Subset)
-## 55                                        California Redwoods Point Pattern (Entire Dataset)
+## 55                                       California Redwoods Point Pattern (Ripley&#39;s Subset)
 ## 56                                        California Redwoods Point Pattern (Entire Dataset)
-## 57                                     Data and Code From JRSS Discussion Paper on Residuals
-## 58                                                      Galaxies in the Shapley Supercluster
+## 57                                        California Redwoods Point Pattern (Entire Dataset)
+## 58                                     Data and Code From JRSS Discussion Paper on Residuals
 ## 59                                                      Galaxies in the Shapley Supercluster
-## 60            Simulated data from a two-group experiment with replication within each group.
-## 61                                                                   Simulated Point Pattern
-## 62                                                          Simple Example of Linear Network
-## 63                                               Spider Webs on Mortar Lines of a Brick Wall
-## 64                                                                          Sporophores Data
-## 65                                                                     Spruces Point Pattern
-## 66                                                               Swedish Pines Point Pattern
-## 67                                                               Urkiola Woods Point Pattern
-## 68                                                                             Vesicles Data
+## 60                                                      Galaxies in the Shapley Supercluster
+## 61            Simulated data from a two-group experiment with replication within each group.
+## 62                                                                   Simulated Point Pattern
+## 63                                                          Simple Example of Linear Network
+## 64                                               Spider Webs on Mortar Lines of a Brick Wall
+## 65                                                                          Sporophores Data
+## 66                                                                     Spruces Point Pattern
+## 67                                                               Swedish Pines Point Pattern
+## 68                                                               Urkiola Woods Point Pattern
 ## 69                                                                             Vesicles Data
-## 70                                                               Trees in Waka national park
-## 71 Waterstriders data.  Three independent replications of a point pattern formed by insects.</code></pre>
+## 70                                                                             Vesicles Data
+## 71                                                               Trees in Waka national park
+## 72 Waterstriders data.  Three independent replications of a point pattern formed by insects.</code></pre>
 <p>Load a dataset of your choice.</p>
 <p>You can do this by using the <code>load()</code> function if the dataset is in your drive (e.g., the GPS coordinates of the bear).</p>
 <p>On the other hand, if the dataset is included with the <code>spatstat</code> package you can do the following, for example to load the <code>gorillas</code> dataset:</p>
-<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb400-1" title="1">gorillas.ppp &lt;-<span class="st"> </span>gorillas</a></code></pre></div>
+<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="activity-8-point-pattern-analysis-v.html#cb384-1"></a>gorillas.ppp &lt;-<span class="st"> </span>gorillas</span></code></pre></div>
 <p>As usual, you can check the object by means of the <code>summary</code> function:</p>
-<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb401-1" title="1"><span class="kw">summary</span>(gorillas.ppp)</a></code></pre></div>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="activity-8-point-pattern-analysis-v.html#cb385-1"></a><span class="kw">summary</span>(gorillas.ppp)</span></code></pre></div>
 <pre><code>## Marked planar point pattern:  647 points
 ## Average intensity 3.255566e-05 points per square metre
 ## 
@@ -711,13 +717,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## Mark variables: group, season, date
 ## Summary:
-##    group       season         date           
-##  major:350   dry  :275   Min.   :2006-01-06  
-##  minor:297   rainy:372   1st Qu.:2007-03-15  
-##                          Median :2008-02-05  
-##                          Mean   :2007-12-14  
-##                          3rd Qu.:2008-09-23  
-##                          Max.   :2009-05-31  
+##     group              season               date           
+##  Length:647         Length:647         Min.   :2006-01-06  
+##  Class :character   Class :character   1st Qu.:2007-03-15  
+##  Mode  :character   Mode  :character   Median :2008-02-05  
+##                                        Mean   :2007-12-14  
+##                                        3rd Qu.:2008-09-23  
+##                                        Max.   :2009-05-31  
 ## 
 ## Window: polygonal boundary
 ## single connected closed polygon with 21 vertices

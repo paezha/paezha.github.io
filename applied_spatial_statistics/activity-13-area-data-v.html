@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 28 Activity 13: Area Data V | Applied Spatial Statistics with R</title>
   <meta name="description" content="This book was created as a resource for teaching applied spatial statistics at McMaster University by Antonio Paez, with support from Anastassios Dardas and Rajveer Ubhi." />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 28 Activity 13: Area Data V | Applied Spatial Statistics with R" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Antonio Paez" />
 
 
-<meta name="date" content="2020-03-29" />
+<meta name="date" content="2021-01-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="area-data-v.html"/>
 <link rel="next" href="area-data-vi.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.5.1/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,14 +50,15 @@
 
 
 
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
 <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
 <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.0.3/leaflet.js"></script>
+<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
 <link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.css" rel="stylesheet" />
 <link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.Default.css" rel="stylesheet" />
 <script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.js"></script>
@@ -65,24 +66,25 @@
 <script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.layersupport.js"></script>
 <script src="libs/lfx-heat-0.1.0/lfx-heat-prod.js"></script>
 <script src="libs/lfx-heat-0.1.0/lfx-heat-bindings.js"></script>
-<script src="libs/plotly-binding-4.9.2/plotly.js"></script>
+<script src="libs/plotly-binding-4.9.3/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
 <link href="libs/colourpicker-1.1/colourpicker.min.css" rel="stylesheet" />
 <script src="libs/colourpicker-1.1/colourpicker.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="libs/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet" />
 <script src="libs/bootstrap-3.3.2/js/bootstrap.min.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -91,14 +93,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -107,9 +111,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -540,38 +544,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>A package called <code>geog4ga3</code>.</p></li>
 </ul>
 <p>It is good practice to clear the working space to make sure that you do not have extraneous items there when you begin your work. The command in R to clear the workspace is <code>rm</code> (for “remove”), followed by a list of items to be removed. To clear the workspace from <em>all</em> objects, do the following:</p>
-<div class="sourceCode" id="cb652"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb652-1" title="1"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</a></code></pre></div>
-<p>Note that <code>ls()</code> lists all objects currently on the worspace.</p>
+<div class="sourceCode" id="cb608"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb608-1"><a href="activity-13-area-data-v.html#cb608-1"></a><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</span></code></pre></div>
+<p>Note that <code>ls()</code> lists all objects currently on the workspace.</p>
 <p>Load the libraries you will use in this activity. In addition to <code>tidyverse</code>, you will need <code>sf</code> and <code>geog4ga3</code>:</p>
-<div class="sourceCode" id="cb653"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb653-1" title="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb653-2" title="2"><span class="kw">library</span>(sf)</a>
-<a class="sourceLine" id="cb653-3" title="3"><span class="kw">library</span>(spdep)</a>
-<a class="sourceLine" id="cb653-4" title="4"><span class="kw">library</span>(geog4ga3)</a></code></pre></div>
+<div class="sourceCode" id="cb609"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb609-1"><a href="activity-13-area-data-v.html#cb609-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb609-2"><a href="activity-13-area-data-v.html#cb609-2"></a><span class="kw">library</span>(sf)</span>
+<span id="cb609-3"><a href="activity-13-area-data-v.html#cb609-3"></a><span class="kw">library</span>(spdep)</span>
+<span id="cb609-4"><a href="activity-13-area-data-v.html#cb609-4"></a><span class="kw">library</span>(geog4ga3)</span></code></pre></div>
 <p>Begin by loading the data files you will use in this activity:</p>
-<div class="sourceCode" id="cb654"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb654-1" title="1"><span class="kw">data</span>(<span class="st">&quot;HamiltonDAs&quot;</span>)</a>
-<a class="sourceLine" id="cb654-2" title="2"><span class="kw">data</span>(<span class="st">&quot;trips_by_mode&quot;</span>)</a>
-<a class="sourceLine" id="cb654-3" title="3"><span class="kw">data</span>(<span class="st">&quot;travel_time_car&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb610"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb610-1"><a href="activity-13-area-data-v.html#cb610-1"></a><span class="kw">data</span>(<span class="st">&quot;HamiltonDAs&quot;</span>)</span>
+<span id="cb610-2"><a href="activity-13-area-data-v.html#cb610-2"></a><span class="kw">data</span>(<span class="st">&quot;trips_by_mode&quot;</span>)</span>
+<span id="cb610-3"><a href="activity-13-area-data-v.html#cb610-3"></a><span class="kw">data</span>(<span class="st">&quot;travel_time_car&quot;</span>)</span></code></pre></div>
 <p><code>HamiltonDAs</code> are the Dissemination Areas for Hamilton CMA, which coincide with the Traffic Analysis Zones (TAZ) of the Transportation Tomorrow Survey of 2011. The dataframe <code>trips_by_mode</code> includes the number of trips by mode of transportation by TAZ (equivalently DA), as well as other useful information from the 2011 census for Hamilton CMA. Finally, the dataframe <code>travel_time_car</code> includes the travel distance/time from TAZ/DA centroids to Jackson Square in downtown Hamilton.</p>
 <p>The data for this activity were retrieved from the 2011 Transportation Tomorrow Survey <a href="http://www.transportationtomorrow.on.ca/">TTS</a>, the periodic travel survey of the Greater Toronto and Hamilton Area, as well as data from the 2011 Canadian Census <a href="http://www12.statcan.gc.ca/census-recensement/index-eng.cfm">Census Program</a>.</p>
 <p>Before beginning the activity, join the information on trips and travel time to the <code>sf</code> object. Note that to complete the join, the identifier (in this case <code>GTA06</code>) must be in the same format in both data frames:</p>
-<div class="sourceCode" id="cb655"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb655-1" title="1">travel_time_car<span class="op">$</span>GTA06 &lt;-<span class="st"> </span><span class="kw">factor</span>(travel_time_car<span class="op">$</span>GTA06)</a>
-<a class="sourceLine" id="cb655-2" title="2"></a>
-<a class="sourceLine" id="cb655-3" title="3"><span class="co"># Travel time</span></a>
-<a class="sourceLine" id="cb655-4" title="4">HamiltonDAs &lt;-<span class="st"> </span><span class="kw">left_join</span>(HamiltonDAs, travel_time_car, <span class="dt">by =</span> <span class="st">&quot;GTA06&quot;</span>)</a>
-<a class="sourceLine" id="cb655-5" title="5"><span class="co"># Trips by mode</span></a>
-<a class="sourceLine" id="cb655-6" title="6">HamiltonDAs &lt;-<span class="st"> </span><span class="kw">left_join</span>(HamiltonDAs, trips_by_mode, <span class="dt">by =</span> <span class="st">&quot;GTA06&quot;</span>)</a></code></pre></div>
-<pre><code>## Warning: Column `GTA06` joining factor and character vector, coercing into
-## character vector</code></pre>
+<div class="sourceCode" id="cb611"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb611-1"><a href="activity-13-area-data-v.html#cb611-1"></a>travel_time_car<span class="op">$</span>GTA06 &lt;-<span class="st"> </span><span class="kw">factor</span>(travel_time_car<span class="op">$</span>GTA06)</span>
+<span id="cb611-2"><a href="activity-13-area-data-v.html#cb611-2"></a></span>
+<span id="cb611-3"><a href="activity-13-area-data-v.html#cb611-3"></a><span class="co"># Travel time</span></span>
+<span id="cb611-4"><a href="activity-13-area-data-v.html#cb611-4"></a>HamiltonDAs &lt;-<span class="st"> </span><span class="kw">left_join</span>(HamiltonDAs, travel_time_car, <span class="dt">by =</span> <span class="st">&quot;GTA06&quot;</span>)</span>
+<span id="cb611-5"><a href="activity-13-area-data-v.html#cb611-5"></a><span class="co"># Trips by mode</span></span>
+<span id="cb611-6"><a href="activity-13-area-data-v.html#cb611-6"></a>HamiltonDAs &lt;-<span class="st"> </span><span class="kw">left_join</span>(HamiltonDAs, trips_by_mode, <span class="dt">by =</span> <span class="st">&quot;GTA06&quot;</span>)</span></code></pre></div>
 <p>The analysis will be based on travel by car in the Hamilton CMA. Calculate the proportion of trips by car by TAZ:</p>
-<div class="sourceCode" id="cb657"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb657-1" title="1">HamiltonDAs &lt;-<span class="st"> </span><span class="kw">mutate</span>(HamiltonDAs, <span class="dt">Auto_driver.prop =</span> Auto_driver <span class="op">/</span><span class="st"> </span>(Auto_driver <span class="op">+</span><span class="st"> </span>Cycle <span class="op">+</span><span class="st"> </span>Walk))</a></code></pre></div>
-<p>Note that the proportion of people who travelled by car as passengers are not included in the denominator of the proportion! This is because every trip as a passenger is already included in trips with one driver.</p>
+<div class="sourceCode" id="cb612"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb612-1"><a href="activity-13-area-data-v.html#cb612-1"></a>HamiltonDAs &lt;-<span class="st"> </span><span class="kw">mutate</span>(HamiltonDAs, <span class="dt">Auto_driver.prop =</span> Auto_driver <span class="op">/</span><span class="st"> </span>(Auto_driver <span class="op">+</span><span class="st"> </span>Cycle <span class="op">+</span><span class="st"> </span>Walk))</span></code></pre></div>
+<p>Note that the proportion of people who traveled by car as passengers are not included in the denominator of the proportion! This is because every trip as a passenger is already included in trips with one driver.</p>
 </div>
 <div id="activity-12" class="section level2">
 <h2><span class="header-section-number">28.5</span> Activity</h2>
-<p>1.* Examine your dataframe. What variables are included? Are there any missing values?</p>
-<p>2.* Map the variable <code>Auto_driver.prop</code>, and use Moran’s I to test for spatial autocorrelation.</p>
-<p>3.* Estimate regression model using the variables <code>Pop_Density</code> and travel time in <code>minutes</code>.</p>
-<ol start="4" style="list-style-type: decimal">
+<p><strong>NOTE</strong>: Activities include technical “how to” tasks/questions. Usually, these ask you to organize data, create a plot, and so on in support of analysis and interpretation. These tasks are indicated by a star (*).</p>
+<ol style="list-style-type: decimal">
+<li><p>(*)Examine your dataframe. What variables are included? Are there any missing values?</p></li>
+<li><p>(*)Map the variable <code>Auto_driver.prop</code>, and use Moran’s I to test for spatial autocorrelation.</p></li>
+<li><p>(*)Estimate regression model using the variables <code>Pop_Density</code> and travel time in <code>minutes</code>.</p></li>
 <li><p>What does the analysis of autocorrelation in point 2* tell you about <code>Auto_driver.prop</code>? Would you say that autocorrelation in this variable is a sign that autocorrelation will be an issue in regression analysis? Why or why not?</p></li>
 <li><p>Discuss the model you estimated in point 3. Next, examine its residuals. Would you say that they are spatially random/independent?</p></li>
 <li><p>Propose ways to improve your model.</p></li>

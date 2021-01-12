@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 15 Point Pattern Analysis IV | Applied Spatial Statistics with R</title>
   <meta name="description" content="This book was created as a resource for teaching applied spatial statistics at McMaster University by Antonio Paez, with support from Anastassios Dardas and Rajveer Ubhi." />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 15 Point Pattern Analysis IV | Applied Spatial Statistics with R" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Antonio Paez" />
 
 
-<meta name="date" content="2020-03-29" />
+<meta name="date" content="2021-01-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="activity-6-point-pattern-analysis-iii.html"/>
 <link rel="next" href="activity-7-point-pattern-analysis-iv.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.5.1/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,14 +50,15 @@
 
 
 
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
 <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
 <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.0.3/leaflet.js"></script>
+<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
 <link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.css" rel="stylesheet" />
 <link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.Default.css" rel="stylesheet" />
 <script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.js"></script>
@@ -65,24 +66,25 @@
 <script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.layersupport.js"></script>
 <script src="libs/lfx-heat-0.1.0/lfx-heat-prod.js"></script>
 <script src="libs/lfx-heat-0.1.0/lfx-heat-bindings.js"></script>
-<script src="libs/plotly-binding-4.9.2/plotly.js"></script>
+<script src="libs/plotly-binding-4.9.3/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
 <link href="libs/colourpicker-1.1/colourpicker.min.css" rel="stylesheet" />
 <script src="libs/colourpicker-1.1/colourpicker.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="libs/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet" />
 <script src="libs/bootstrap-3.3.2/js/bootstrap.min.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -91,14 +93,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -107,9 +111,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -543,32 +547,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="preliminaries-12" class="section level2">
 <h2><span class="header-section-number">15.3</span> Preliminaries</h2>
 <p>As usual, it is good practice to clear the working space to make sure that you do not have extraneous items there when you begin your work. The command in <code>R</code> to clear the workspace is <code>rm</code> (for “remove”), followed by a list of items to be removed. To clear the workspace from <em>all</em> objects, do the following:</p>
-<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb322-1" title="1"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</a></code></pre></div>
-<p>Note that <code>ls()</code> lists all objects currently on the worspace.</p>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="point-pattern-analysis-iv.html#cb312-1"></a><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</span></code></pre></div>
+<p>Note that <code>ls()</code> lists all objects currently on the workspace.</p>
 <p>Load the libraries you will use in this activity:</p>
-<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb323-1" title="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb323-2" title="2"><span class="kw">library</span>(spatstat)</a>
-<a class="sourceLine" id="cb323-3" title="3"><span class="kw">library</span>(geog4ga3)</a></code></pre></div>
-<pre><code>## Warning: replacing previous import &#39;plotly::filter&#39; by &#39;stats::filter&#39; when
-## loading &#39;geog4ga3&#39;</code></pre>
-<pre><code>## Warning: replacing previous import &#39;dplyr::lag&#39; by &#39;stats::lag&#39; when loading
-## &#39;geog4ga3&#39;</code></pre>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="point-pattern-analysis-iv.html#cb313-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb313-2"><a href="point-pattern-analysis-iv.html#cb313-2"></a><span class="kw">library</span>(spatstat)</span>
+<span id="cb313-3"><a href="point-pattern-analysis-iv.html#cb313-3"></a><span class="kw">library</span>(geog4ga3)</span></code></pre></div>
 <p>Load the datasets that you will use for this practice:</p>
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb326-1" title="1"><span class="kw">data</span>(<span class="st">&quot;pp1_df&quot;</span>)</a>
-<a class="sourceLine" id="cb326-2" title="2"><span class="kw">data</span>(<span class="st">&quot;pp2_df&quot;</span>)</a>
-<a class="sourceLine" id="cb326-3" title="3"><span class="kw">data</span>(<span class="st">&quot;pp3_df&quot;</span>)</a>
-<a class="sourceLine" id="cb326-4" title="4"><span class="kw">data</span>(<span class="st">&quot;pp4_df&quot;</span>)</a>
-<a class="sourceLine" id="cb326-5" title="5"><span class="kw">data</span>(<span class="st">&quot;pp5_df&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="point-pattern-analysis-iv.html#cb314-1"></a><span class="kw">data</span>(<span class="st">&quot;pp1_df&quot;</span>)</span>
+<span id="cb314-2"><a href="point-pattern-analysis-iv.html#cb314-2"></a><span class="kw">data</span>(<span class="st">&quot;pp2_df&quot;</span>)</span>
+<span id="cb314-3"><a href="point-pattern-analysis-iv.html#cb314-3"></a><span class="kw">data</span>(<span class="st">&quot;pp3_df&quot;</span>)</span>
+<span id="cb314-4"><a href="point-pattern-analysis-iv.html#cb314-4"></a><span class="kw">data</span>(<span class="st">&quot;pp4_df&quot;</span>)</span>
+<span id="cb314-5"><a href="point-pattern-analysis-iv.html#cb314-5"></a><span class="kw">data</span>(<span class="st">&quot;pp5_df&quot;</span>)</span></code></pre></div>
 <p>These five dataframes include the coordinates of events set in the space of a unit square. To convert these dataframes into <code>ppp</code> objects we first define a window:</p>
-<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb327-1" title="1"><span class="co"># We use &quot;owin&quot; to define a window of coordinates which is in the five dataframes. </span></a>
-<a class="sourceLine" id="cb327-2" title="2">W &lt;-<span class="st"> </span><span class="kw">owin</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="point-pattern-analysis-iv.html#cb315-1"></a><span class="co"># We use &quot;owin&quot; to define a window of coordinates which is in the five dataframes. </span></span>
+<span id="cb315-2"><a href="point-pattern-analysis-iv.html#cb315-2"></a>W &lt;-<span class="st"> </span><span class="kw">owin</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span></code></pre></div>
 <p>And then use the function <code>as.ppp</code> to convert into <code>ppp</code>:</p>
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb328-1" title="1"><span class="co"># `as.ppp()` is a function that we use to convert dataframes into ppp objects</span></a>
-<a class="sourceLine" id="cb328-2" title="2">pp1.ppp &lt;-<span class="st"> </span><span class="kw">as.ppp</span>(pp1_df, <span class="dt">W =</span> W)</a>
-<a class="sourceLine" id="cb328-3" title="3">pp2.ppp &lt;-<span class="st"> </span><span class="kw">as.ppp</span>(pp2_df, <span class="dt">W =</span> W)</a>
-<a class="sourceLine" id="cb328-4" title="4">pp3.ppp &lt;-<span class="st"> </span><span class="kw">as.ppp</span>(pp3_df, <span class="dt">W =</span> W)</a>
-<a class="sourceLine" id="cb328-5" title="5">pp4.ppp &lt;-<span class="st"> </span><span class="kw">as.ppp</span>(pp4_df, <span class="dt">W =</span> W)</a>
-<a class="sourceLine" id="cb328-6" title="6">pp5.ppp &lt;-<span class="st"> </span><span class="kw">as.ppp</span>(pp5_df, <span class="dt">W =</span> W)</a></code></pre></div>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="point-pattern-analysis-iv.html#cb316-1"></a><span class="co"># `as.ppp()` is a function that we use to convert dataframes into ppp objects</span></span>
+<span id="cb316-2"><a href="point-pattern-analysis-iv.html#cb316-2"></a>pp1.ppp &lt;-<span class="st"> </span><span class="kw">as.ppp</span>(pp1_df, <span class="dt">W =</span> W)</span>
+<span id="cb316-3"><a href="point-pattern-analysis-iv.html#cb316-3"></a>pp2.ppp &lt;-<span class="st"> </span><span class="kw">as.ppp</span>(pp2_df, <span class="dt">W =</span> W)</span>
+<span id="cb316-4"><a href="point-pattern-analysis-iv.html#cb316-4"></a>pp3.ppp &lt;-<span class="st"> </span><span class="kw">as.ppp</span>(pp3_df, <span class="dt">W =</span> W)</span>
+<span id="cb316-5"><a href="point-pattern-analysis-iv.html#cb316-5"></a>pp4.ppp &lt;-<span class="st"> </span><span class="kw">as.ppp</span>(pp4_df, <span class="dt">W =</span> W)</span>
+<span id="cb316-6"><a href="point-pattern-analysis-iv.html#cb316-6"></a>pp5.ppp &lt;-<span class="st"> </span><span class="kw">as.ppp</span>(pp5_df, <span class="dt">W =</span> W)</span></code></pre></div>
 </div>
 <div id="motivation-1" class="section level2">
 <h2><span class="header-section-number">15.4</span> Motivation</h2>
@@ -592,45 +592,45 @@ F_{pois}(x) = 1 - exp(-\lambda \pi x^2).
 <p>The interpretation of <span class="math inline">\(\hat{F}(x)\)</span> is the opposite of <span class="math inline">\(\hat{G}(x)\)</span>: when the empirical <span class="math inline">\(\hat{F}(x)\)</span> is greater than the theoretical function, this suggests that <em>empty spaces are closer to events</em> than expected, compared to the null landscape, as in a dispersed pattern. On the contrary, when the empirical function is less than the theoretical function, this would suggest a clustered pattern, since the events tend to be far away from the points used to calculate the function.</p>
 <p>The <span class="math inline">\(\hat{F}\)</span>-function can be implemented in at least two ways: (1) by using a fine grid to measure the distance to events; or (2) by measuring the distance to events from randomly drawn coordinates. The implementation in <code>spatstat</code> is the first one, which results in a pixel-based image of empty space.</p>
 <p>We can illustrate this function with the point pattern <code>pp1.ppp</code>. First, we verify that <code>pp1.ppp</code> is already a <code>ppp</code> object:</p>
-<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb329-1" title="1"><span class="kw">class</span>(pp1.ppp)</a></code></pre></div>
+<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="point-pattern-analysis-iv.html#cb317-1"></a><span class="kw">class</span>(pp1.ppp)</span></code></pre></div>
 <pre><code>## [1] &quot;ppp&quot;</code></pre>
 <p>Begin by plotting the pattern:</p>
-<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb331-1" title="1"><span class="kw">plot</span>(pp1.ppp)</a></code></pre></div>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="point-pattern-analysis-iv.html#cb319-1"></a><span class="kw">plot</span>(pp1.ppp)</span></code></pre></div>
 <p><img src="14-Point-Pattern-Analysis-IV_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>An empty space map is obtained by means of the <code>distmap()</code> function:</p>
-<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb332-1" title="1"><span class="co"># The &quot;distmap()&quot; function computes the distance map of point pattern X and returns the distance map as a pixel image</span></a>
-<a class="sourceLine" id="cb332-2" title="2"></a>
-<a class="sourceLine" id="cb332-3" title="3">empty_space_map1 &lt;-<span class="st"> </span><span class="kw">distmap</span>(pp1.ppp) </a></code></pre></div>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="point-pattern-analysis-iv.html#cb320-1"></a><span class="co"># The &quot;distmap()&quot; function computes the distance map of point pattern X and returns the distance map as a pixel image</span></span>
+<span id="cb320-2"><a href="point-pattern-analysis-iv.html#cb320-2"></a></span>
+<span id="cb320-3"><a href="point-pattern-analysis-iv.html#cb320-3"></a>empty_space_map1 &lt;-<span class="st"> </span><span class="kw">distmap</span>(pp1.ppp) </span></code></pre></div>
 <p>The plot of this is:</p>
-<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb333-1" title="1"><span class="kw">plot</span>(empty_space_map1)</a></code></pre></div>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="point-pattern-analysis-iv.html#cb321-1"></a><span class="kw">plot</span>(empty_space_map1)</span></code></pre></div>
 <p><img src="14-Point-Pattern-Analysis-IV_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Similar to the Stienen diagrams that you used previously, this map shows the distance from any location on the map to the nearest event: the smaller the value, the closer the point is to an event. It is evident in this pixel image that the values are mostly smaller, illustrating that points are closer to events.</p>
 <p>Compare the map above to <code>pp2.ppp</code>:</p>
-<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb334-1" title="1">empty_space_map2 &lt;-<span class="st"> </span><span class="kw">distmap</span>(pp2.ppp)</a>
-<a class="sourceLine" id="cb334-2" title="2"><span class="kw">plot</span>(empty_space_map2)</a></code></pre></div>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="point-pattern-analysis-iv.html#cb322-1"></a>empty_space_map2 &lt;-<span class="st"> </span><span class="kw">distmap</span>(pp2.ppp)</span>
+<span id="cb322-2"><a href="point-pattern-analysis-iv.html#cb322-2"></a><span class="kw">plot</span>(empty_space_map2)</span></code></pre></div>
 <p><img src="14-Point-Pattern-Analysis-IV_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>In the second point pattern, there is more open space in the region. This is also apparent from the symbols map:</p>
-<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb335-1" title="1"><span class="kw">plot</span>(pp2.ppp)</a></code></pre></div>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="point-pattern-analysis-iv.html#cb323-1"></a><span class="kw">plot</span>(pp2.ppp)</span></code></pre></div>
 <p><img src="14-Point-Pattern-Analysis-IV_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>The <span class="math inline">\(\hat{F}\)</span>-function is implemented in <code>spatstat</code> as <code>Fest()</code> (for F-estimated), and it requires a <code>ppp</code> object as an input. Another possible input is whether a correction is to be used. This refers to boundary corrections. Since we have not yet discussed them, select “none”:</p>
-<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb336-1" title="1"><span class="co"># The &quot;Fest()&quot; function computes an estimate of the empty space function, and it also called the &quot;point to nearest event&quot; distribution. This function estimates the nearest neighbours of a point (in this example, for pp1)</span></a>
-<a class="sourceLine" id="cb336-2" title="2">f_pattern1 &lt;-<span class="st"> </span><span class="kw">Fest</span>(pp1.ppp, <span class="dt">correction =</span> <span class="st">&quot;none&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="point-pattern-analysis-iv.html#cb324-1"></a><span class="co"># The &quot;Fest()&quot; function computes an estimate of the empty space function, and it also called the &quot;point to nearest event&quot; distribution. This function estimates the nearest neighbors of a point (in this example, for pp1)</span></span>
+<span id="cb324-2"><a href="point-pattern-analysis-iv.html#cb324-2"></a>f_pattern1 &lt;-<span class="st"> </span><span class="kw">Fest</span>(pp1.ppp, <span class="dt">correction =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
 <p>This function can be plotted as follows:</p>
-<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb337-1" title="1"><span class="kw">plot</span>(f_pattern1)</a></code></pre></div>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="point-pattern-analysis-iv.html#cb325-1"></a><span class="kw">plot</span>(f_pattern1)</span></code></pre></div>
 <p><img src="14-Point-Pattern-Analysis-IV_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>The black line is the empirical function, and we see that it is in general very similar to the theoretical function that corresponds to a null landscape. Compare to the second pattern:</p>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb338-1" title="1">f_pattern2 &lt;-<span class="st"> </span><span class="kw">Fest</span>(pp2.ppp, <span class="dt">correction =</span> <span class="st">&quot;none&quot;</span>)</a>
-<a class="sourceLine" id="cb338-2" title="2"><span class="kw">plot</span>(f_pattern2)</a>
-<a class="sourceLine" id="cb338-3" title="3"><span class="kw">lines</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.097</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="fl">0.4</span>, <span class="fl">0.4</span>), <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">lty =</span> <span class="st">&quot;dotted&quot;</span>)</a>
-<a class="sourceLine" id="cb338-4" title="4"><span class="kw">lines</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="fl">0.045</span>, <span class="fl">0.045</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="fl">0.0</span>, <span class="fl">0.4</span>), <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">lty =</span> <span class="st">&quot;dotted&quot;</span>)</a>
-<a class="sourceLine" id="cb338-5" title="5"><span class="kw">lines</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="fl">0.097</span>, <span class="fl">0.097</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="fl">0.0</span>, <span class="fl">0.4</span>), <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">lty =</span> <span class="st">&quot;dotted&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="point-pattern-analysis-iv.html#cb326-1"></a>f_pattern2 &lt;-<span class="st"> </span><span class="kw">Fest</span>(pp2.ppp, <span class="dt">correction =</span> <span class="st">&quot;none&quot;</span>)</span>
+<span id="cb326-2"><a href="point-pattern-analysis-iv.html#cb326-2"></a><span class="kw">plot</span>(f_pattern2)</span>
+<span id="cb326-3"><a href="point-pattern-analysis-iv.html#cb326-3"></a><span class="kw">lines</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.097</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="fl">0.4</span>, <span class="fl">0.4</span>), <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">lty =</span> <span class="st">&quot;dotted&quot;</span>)</span>
+<span id="cb326-4"><a href="point-pattern-analysis-iv.html#cb326-4"></a><span class="kw">lines</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="fl">0.045</span>, <span class="fl">0.045</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="fl">0.0</span>, <span class="fl">0.4</span>), <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">lty =</span> <span class="st">&quot;dotted&quot;</span>)</span>
+<span id="cb326-5"><a href="point-pattern-analysis-iv.html#cb326-5"></a><span class="kw">lines</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="fl">0.097</span>, <span class="fl">0.097</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="fl">0.0</span>, <span class="fl">0.4</span>), <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">lty =</span> <span class="st">&quot;dotted&quot;</span>)</span></code></pre></div>
 <p><img src="14-Point-Pattern-Analysis-IV_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>In the empirical (black) pattern, points on a grid tend to be more distant from events than what you would expect from the null landscape. For example, whereas under the theoretical function 40% of points have a nearest event that is at a distance of approximately 0.045 or less, under the empirical function, the events are generally more distant from the points, and for the same value of F (0.4 or 40%) the distance is closer to 0.1. See:</p>
-<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb339-1" title="1"><span class="co"># Repeat the plot of the F-function of `pp2.ppp` and use the function `lines()` to add lines to compare the distances for a given value of F, say 0.4 (or 40%)</span></a>
-<a class="sourceLine" id="cb339-2" title="2"><span class="kw">plot</span>(f_pattern2)</a>
-<a class="sourceLine" id="cb339-3" title="3"><span class="kw">lines</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.097</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="fl">0.4</span>, <span class="fl">0.4</span>), <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">lty =</span> <span class="st">&quot;dotted&quot;</span>)</a>
-<a class="sourceLine" id="cb339-4" title="4"><span class="kw">lines</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="fl">0.045</span>, <span class="fl">0.045</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="fl">0.0</span>, <span class="fl">0.4</span>), <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">lty =</span> <span class="st">&quot;dotted&quot;</span>)</a>
-<a class="sourceLine" id="cb339-5" title="5"><span class="kw">lines</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="fl">0.097</span>, <span class="fl">0.097</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="fl">0.0</span>, <span class="fl">0.4</span>), <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">lty =</span> <span class="st">&quot;dotted&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="point-pattern-analysis-iv.html#cb327-1"></a><span class="co"># Repeat the plot of the F-function of `pp2.ppp` and use the function `lines()` to add lines to compare the distances for a given value of F, say 0.4 (or 40%)</span></span>
+<span id="cb327-2"><a href="point-pattern-analysis-iv.html#cb327-2"></a><span class="kw">plot</span>(f_pattern2)</span>
+<span id="cb327-3"><a href="point-pattern-analysis-iv.html#cb327-3"></a><span class="kw">lines</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.097</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="fl">0.4</span>, <span class="fl">0.4</span>), <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">lty =</span> <span class="st">&quot;dotted&quot;</span>)</span>
+<span id="cb327-4"><a href="point-pattern-analysis-iv.html#cb327-4"></a><span class="kw">lines</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="fl">0.045</span>, <span class="fl">0.045</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="fl">0.0</span>, <span class="fl">0.4</span>), <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">lty =</span> <span class="st">&quot;dotted&quot;</span>)</span>
+<span id="cb327-5"><a href="point-pattern-analysis-iv.html#cb327-5"></a><span class="kw">lines</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="fl">0.097</span>, <span class="fl">0.097</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="fl">0.0</span>, <span class="fl">0.4</span>), <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">lty =</span> <span class="st">&quot;dotted&quot;</span>)</span></code></pre></div>
 <p><img src="14-Point-Pattern-Analysis-IV_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>This suggests that the points are clustered. Try plotting the <span class="math inline">\(\hat{G}\)</span>-functions for the patterns in this example, and compare.</p>
 </div>
@@ -638,20 +638,20 @@ F_{pois}(x) = 1 - exp(-\lambda \pi x^2).
 <h2><span class="header-section-number">15.6</span> <span class="math inline">\(\hat{K}\)</span>-function</h2>
 <p>A limitation of the two techniques that we have seen so far is that they deal with a single scale: the distance to the first nearest neighbor (or, more generally, to the <span class="math inline">\(k\)</span>-th nearest neighbor; these functions can be used for the 2nd, 3rd, and so on nearest neighbor!). Their single scale nature means that these functions can easily miss patterns when they are only evident at different scales.</p>
 <p>Consider for instance the following point pattern:</p>
-<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb340-1" title="1"><span class="kw">plot</span>(pp3.ppp)</a></code></pre></div>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="point-pattern-analysis-iv.html#cb328-1"></a><span class="kw">plot</span>(pp3.ppp)</span></code></pre></div>
 <p><img src="14-Point-Pattern-Analysis-IV_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>The events above initially appear to be clustered. However, at a different scale, a second pattern becomes evident. In fact, what we observe is a <em>regular</em> distribution of <em>clusters</em>. At a smaller scale, a single cluster may actually be a random distribution of events. In contrast, the following pattern appears to be a random distribution of regularly spaced events:</p>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb341-1" title="1"><span class="kw">plot</span>(pp4.ppp)</a></code></pre></div>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="point-pattern-analysis-iv.html#cb329-1"></a><span class="kw">plot</span>(pp4.ppp)</span></code></pre></div>
 <p><img src="14-Point-Pattern-Analysis-IV_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p>Whereas the last point pattern is of clusters of dispersed events that are themselves regularly spaced:</p>
-<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb342-1" title="1"><span class="kw">plot</span>(pp5.ppp)</a></code></pre></div>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="point-pattern-analysis-iv.html#cb330-1"></a><span class="kw">plot</span>(pp5.ppp)</span></code></pre></div>
 <p><img src="14-Point-Pattern-Analysis-IV_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>Both <span class="math inline">\(\hat{G}(x)\)</span> or <span class="math inline">\(\hat{F}(x)\)</span> when applied to any of these patterns will strongly hint at clustering at the scale of the first nearest neighbor. Regrettably, they fail to detect patterns that might exist at other scales. For instance:</p>
-<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb343-1" title="1">f_pattern3 &lt;-<span class="st"> </span><span class="kw">Fest</span>(pp3.ppp, <span class="dt">correction =</span> <span class="st">&quot;none&quot;</span>)</a>
-<a class="sourceLine" id="cb343-2" title="2"><span class="kw">plot</span>(f_pattern3)</a></code></pre></div>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="point-pattern-analysis-iv.html#cb331-1"></a>f_pattern3 &lt;-<span class="st"> </span><span class="kw">Fest</span>(pp3.ppp, <span class="dt">correction =</span> <span class="st">&quot;none&quot;</span>)</span>
+<span id="cb331-2"><a href="point-pattern-analysis-iv.html#cb331-2"></a><span class="kw">plot</span>(f_pattern3)</span></code></pre></div>
 <p><img src="14-Point-Pattern-Analysis-IV_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
-<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb344-1" title="1">g_pattern3 &lt;-<span class="st"> </span><span class="kw">Gest</span>(pp3.ppp, <span class="dt">correction =</span> <span class="st">&quot;none&quot;</span>)</a>
-<a class="sourceLine" id="cb344-2" title="2"><span class="kw">plot</span>(g_pattern3)</a></code></pre></div>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="point-pattern-analysis-iv.html#cb332-1"></a>g_pattern3 &lt;-<span class="st"> </span><span class="kw">Gest</span>(pp3.ppp, <span class="dt">correction =</span> <span class="st">&quot;none&quot;</span>)</span>
+<span id="cb332-2"><a href="point-pattern-analysis-iv.html#cb332-2"></a><span class="kw">plot</span>(g_pattern3)</span></code></pre></div>
 <p><img src="14-Point-Pattern-Analysis-IV_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p>A different technique, called the <span class="math inline">\(\hat{K}\)</span>-function, is designed to detect patterns at multiple scales <span class="citation">(see Ripley <a href="#ref-Ripley1976" role="doc-biblioref">1976</a>; and Haase <a href="#ref-Haase1995spatial" role="doc-biblioref">1995</a>)</span>. The intuition behind the function is as follows.</p>
 <p>Imagine that you visit every on of the events in the point patter in sequence. Each time you visit an event you do the following: first, you create a circle with radius “x” centered on the event, and then you count the number of events that are within the circle. Then you increase “x” by some distance, and repeat the process. Once that you have created the last circle (which will be suitably large to capture patterns at that scale), you move and visit the next event in the pattern and repeat the exact same process. These counts of events at distances “x” are aggregated and normalized by the estimated intensity of the point pattern.</p>
@@ -667,20 +667,20 @@ When the empirical function is greater than the theoretical function, this would
 <p>In contrast, when the empirical function is less than the theoretical one, this would suggest that events are typically surrounded by <em>fewer</em> events at that distance than what would be expected from a null landscape. This is interpreted as dispersion.</p>
 <p>The <span class="math inline">\(\hat{K}\)</span>-function is implemented in the package <code>spatstat</code> as <code>Kest()</code>.</p>
 <p>To see how this function works, plot <code>pp3.ppp</code> once more:</p>
-<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb345-1" title="1"><span class="kw">plot</span>(pp3.ppp)</a></code></pre></div>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="point-pattern-analysis-iv.html#cb333-1"></a><span class="kw">plot</span>(pp3.ppp)</span></code></pre></div>
 <p><img src="14-Point-Pattern-Analysis-IV_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <p>Next, use <code>Kest()</code> to calculate and plot the <span class="math inline">\(\hat{K}\)</span>-function:</p>
-<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb346-1" title="1"><span class="co"># `Kest()` function estimates nearest neighbours of a point on multiple scales, identifying more than just the distance to the first nearest neighbour. Here, we are applying the K-function to `pp3.ppp`. As before, ignore the correction; we will discuss this later </span></a>
-<a class="sourceLine" id="cb346-2" title="2">k_pattern3 &lt;-<span class="st"> </span><span class="kw">Kest</span>(pp3.ppp, <span class="dt">correction =</span> <span class="st">&quot;none&quot;</span>)</a>
-<a class="sourceLine" id="cb346-3" title="3"><span class="kw">plot</span>(k_pattern3)</a></code></pre></div>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="point-pattern-analysis-iv.html#cb334-1"></a><span class="co"># `Kest()` function estimates nearest neighbors of a point on multiple scales, identifying more than just the distance to the first nearest neighbor. Here, we are applying the K-function to `pp3.ppp`. As before, ignore the correction; we will discuss this later </span></span>
+<span id="cb334-2"><a href="point-pattern-analysis-iv.html#cb334-2"></a>k_pattern3 &lt;-<span class="st"> </span><span class="kw">Kest</span>(pp3.ppp, <span class="dt">correction =</span> <span class="st">&quot;none&quot;</span>)</span>
+<span id="cb334-3"><a href="point-pattern-analysis-iv.html#cb334-3"></a><span class="kw">plot</span>(k_pattern3)</span></code></pre></div>
 <p><img src="14-Point-Pattern-Analysis-IV_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <p>As seen from the plot, the function is suggestive of clustering at smaller scales, but regularity at a larger scale.</p>
 <p>Try this now with the last pattern:</p>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb347-1" title="1"><span class="kw">plot</span>(pp5.ppp)</a></code></pre></div>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="point-pattern-analysis-iv.html#cb335-1"></a><span class="kw">plot</span>(pp5.ppp)</span></code></pre></div>
 <p><img src="14-Point-Pattern-Analysis-IV_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <p>If you calculate and plot the <span class="math inline">\(\hat{K}\)</span>-function:</p>
-<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb348-1" title="1">k_pattern5 &lt;-<span class="st"> </span><span class="kw">Kest</span>(pp5.ppp, <span class="dt">correction =</span> <span class="st">&quot;none&quot;</span>)</a>
-<a class="sourceLine" id="cb348-2" title="2"><span class="kw">plot</span>(k_pattern5)</a></code></pre></div>
+<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="point-pattern-analysis-iv.html#cb336-1"></a>k_pattern5 &lt;-<span class="st"> </span><span class="kw">Kest</span>(pp5.ppp, <span class="dt">correction =</span> <span class="st">&quot;none&quot;</span>)</span>
+<span id="cb336-2"><a href="point-pattern-analysis-iv.html#cb336-2"></a><span class="kw">plot</span>(k_pattern5)</span></code></pre></div>
 <p><img src="14-Point-Pattern-Analysis-IV_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <p>You will see that the plot correctly suggests dispersion at the very small scale, followed by clustering at an intermediate scale. There are indeed clusters of nine events surrounded by empty space, before other clusters of regular events are detected at the largest scale, following a regular pattern.</p>
 <p>Of the distance-based techniques that you have seen so far, <span class="math inline">\(\hat{G}(x)\)</span> and <span class="math inline">\(\hat{F}(x)\)</span> are often used as complements. The <span class="math inline">\(\hat{K}(x)\)</span> is useful when exploring multi-scale patterns.</p>

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 7 Maps as Processes: Null Landscapes, Spatial Processes, and Statistical Maps | Applied Spatial Statistics with R</title>
   <meta name="description" content="This book was created as a resource for teaching applied spatial statistics at McMaster University by Antonio Paez, with support from Anastassios Dardas and Rajveer Ubhi." />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 7 Maps as Processes: Null Landscapes, Spatial Processes, and Statistical Maps | Applied Spatial Statistics with R" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Antonio Paez" />
 
 
-<meta name="date" content="2020-03-29" />
+<meta name="date" content="2021-01-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="activity-2-statistical-maps-ii.html"/>
 <link rel="next" href="activity-3-maps-as-processes.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.5.1/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,14 +50,15 @@
 
 
 
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
 <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
 <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.0.3/leaflet.js"></script>
+<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
 <link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.css" rel="stylesheet" />
 <link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.Default.css" rel="stylesheet" />
 <script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.js"></script>
@@ -65,24 +66,25 @@
 <script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.layersupport.js"></script>
 <script src="libs/lfx-heat-0.1.0/lfx-heat-prod.js"></script>
 <script src="libs/lfx-heat-0.1.0/lfx-heat-bindings.js"></script>
-<script src="libs/plotly-binding-4.9.2/plotly.js"></script>
+<script src="libs/plotly-binding-4.9.3/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
 <link href="libs/colourpicker-1.1/colourpicker.min.css" rel="stylesheet" />
 <script src="libs/colourpicker-1.1/colourpicker.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="libs/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet" />
 <script src="libs/bootstrap-3.3.2/js/bootstrap.min.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -91,14 +93,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -107,9 +111,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -542,50 +546,50 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="preliminaries-4" class="section level2">
 <h2><span class="header-section-number">7.3</span> Preliminaries</h2>
 <p>As usual, it is good practice to clear the working space to make sure that you do not have extraneous items there when you begin your work. The command in <code>R</code> to clear the workspace is <code>rm</code> (for “remove”), followed by a list of items to be removed. To clear the workspace from <em>all</em> objects, do the following:</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb152-1" title="1"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</a></code></pre></div>
-<p>Note that <code>ls()</code> lists all objects currently on the worspace.</p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb152-1"></a><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</span></code></pre></div>
+<p>Note that <code>ls()</code> lists all objects currently on the workspace.</p>
 <p>Load the libraries you will use in this activity:</p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb153-1" title="1"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb153-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
 </div>
 <div id="random-numbers" class="section level2">
 <h2><span class="header-section-number">7.4</span> Random Numbers</h2>
 <p>Colloquially, we understand <em>random</em> as something that happens in an unpredictable manner. The same word in statistics has a precise meaning, as the outcome of a process that cannot be predicted with any form of certainty.</p>
 <p>The question whether random processes exist is philosophically interesting. In the early stages of the invention of science, there was much optimism that humans could one day understand every aspect of the universe. This notion is well illustrated by Laplace’s Demon, a hypothetical entity that could predict the state of the universe in the future based on an all-encompassing knowledge of the state of the universe at any past point in time (see <a href="https://en.wikipedia.org/wiki/Laplace%27s_demon">here</a>).</p>
 <p>There are two important limitations to this perspective. First, there is the assumption that the mechanisms of operation of phenomena are well understood (in the case of Laplace’s Demon, it was somewhat naively assumed that classical Newtonian mechanics were sufficient). And secondly, the assumption that all relevant information is available to the observer.</p>
-<p>There are many processes in reality that are not fully understood, which make Laplace’s Demon an interesting, but unreliable source on predicting the state of the universe. Furthermore, there are often constraints in terms of how much and how acurately information can be collected with respect to any given phenomenon.</p>
+<p>There are many processes in reality that are not fully understood, which make Laplace’s Demon an interesting, but unreliable source on predicting the state of the universe. Furthermore, there are often constraints in terms of how much and how accurately information can be collected with respect to any given phenomenon.</p>
 <p>##Types of Processes</p>
 <p>A process can be deterministic. However, When limited knowledge/limited information prevent us from being able to make certain predictions, we assume that the process is random.</p>
 <p>It is important to note that “random” does not mean that just <em>any</em> outcome is possible. For instance, if you flip a coin, there are only two possible outcomes. If you roll a dice, there are only six possible outcomes. The concentration of a pollutant cannot be negative. The height of a human adult cannot be zero or 10 meters. And so on. It is the result of the possible outcomes that is random, as there is no process controlling the respective outcome.</p>
 <p>Over time, many formulas have been devised to describe different types of random processes. A <em>random probability distribution function</em> describes the probability of observing different outcomes.</p>
 <p>For instance, a formula for processes similar to coin flips was discovered by Bernoulli in 1713 (see <a href="https://link.springer.com/referenceworkentry/10.1007%2F978-0-387-32833-1_34">here</a>).</p>
 <p>The following function reports a random binomial variable. The number of observations <code>n</code> is how many random numbers we require. The <code>size</code> is the number of trials. For instance, if the experiment was flipping a coin, it would be how many times we get heads in <code>size</code> flips. The probability of success <code>prob</code> is the probability of getting heads in any given toss. Execute the chunk repeatedly to see what happens.</p>
-<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb154-1" title="1"><span class="co">#This function simulates the outcome of flipping a coin. Here, we are simulating the result for flipping heads, which has a probability of 0.5. The value of `n` is the number of experiments and `size` is the number of trials in each experiment </span></a>
-<a class="sourceLine" id="cb154-2" title="2"><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb154-1"></a><span class="co">#This function simulates the outcome of flipping a coin. Here, we are simulating the result for flipping heads, which has a probability of 0.5. The value of `n` is the number of experiments and `size` is the number of trials in each experiment </span></span>
+<span id="cb154-2"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb154-2"></a><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <p>It can be noted that although there are only two outcomes, we do not have control over the result of the process, making the result random. If you tried this “experiment” repeatedly, you would find that “heads” (1s) and “tails” (0s) appear each about 50% of the time. A way to implement this is to increase <code>n</code>- think of this as recruiting more people to do coin flips at the same time:</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb156-1" title="1">n &lt;-<span class="st"> </span><span class="dv">1000</span> <span class="co"># Number of people tossing the coin one time.</span></a>
-<a class="sourceLine" id="cb156-2" title="2">coin_flips &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> n, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb156-3" title="3"><span class="kw">sum</span>(coin_flips)<span class="op">/</span>n</a></code></pre></div>
-<pre><code>## [1] 0.49</code></pre>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb156-1"></a>n &lt;-<span class="st"> </span><span class="dv">1000</span> <span class="co"># Number of people tossing the coin one time.</span></span>
+<span id="cb156-2"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb156-2"></a>coin_flips &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> n, <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)</span>
+<span id="cb156-3"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb156-3"></a><span class="kw">sum</span>(coin_flips)<span class="op">/</span>n</span></code></pre></div>
+<pre><code>## [1] 0.496</code></pre>
 <p>What happens if you change the <code>size</code> to 0, and why?</p>
 <p>The binomial function is an example of a <em>discrete</em> probability distribution function, because it can take only one of a discrete (limited) number of values (i.e., 0 and 1).</p>
 <p>Other random probability distribution functions are for <em>continuous</em> variables, variables that can take any value within a predefined range. The most famous of this distributions is the <em>normal distribution</em>, which you may know also as the <em>bell curve</em>. This probability distribution is attributed to Gauss (see <a href="https://link.springer.com/referenceworkentry/10.1007/978-0-387-32833-1_285">here</a>).</p>
-<p>The normal distribution is defined by a centering paramater (the mean of the distribution) and a spread parameter (the standard deviation). In the normal distribution, 68% of values are within one standard deviation from the mean, 95% of values are within two standard deviations from the mean, and 99.7% of values are within three standard deviations from the mean.</p>
+<p>The normal distribution is defined by a centering parameter (the mean of the distribution) and a spread parameter (the standard deviation). In the normal distribution, 68% of values are within one standard deviation from the mean, 95% of values are within two standard deviations from the mean, and 99.7% of values are within three standard deviations from the mean.</p>
 <p>The following function reports a value taken at random from a normal distribution with <code>mean</code> zero and standard deviation <code>sd</code> of one. Execute this chunk repeatedly to see what happens:</p>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb158-1" title="1"><span class="co"># This function generates random numbers based on the normal distribution conditional on the given arguments, i.e., the mean and the standard deviation `sd`. </span></a>
-<a class="sourceLine" id="cb158-2" title="2"><span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</a></code></pre></div>
-<pre><code>## [1] 1.981506</code></pre>
-<p>Let’s say that the average height of men in Canada is 170.7 cm and the standard deviation is 7 cm. The heigh of a random person in this population would be:</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb160-1" title="1"><span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dt">mean =</span> <span class="fl">170.7</span>, <span class="dt">sd =</span> <span class="dv">7</span>)</a></code></pre></div>
-<pre><code>## [1] 178.8763</code></pre>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb158-1"></a><span class="co"># This function generates random numbers based on the normal distribution conditional on the given arguments, i.e., the mean and the standard deviation `sd`. </span></span>
+<span id="cb158-2"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb158-2"></a><span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## [1] 1.003877</code></pre>
+<p>Let’s say that the average height of men in Canada is 170.7 cm and the standard deviation is 7 cm. The height of a random person in this population would be:</p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb160-1"></a><span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dt">mean =</span> <span class="fl">170.7</span>, <span class="dt">sd =</span> <span class="dv">7</span>)</span></code></pre></div>
+<pre><code>## [1] 171.0493</code></pre>
 <p>And the distribution of heights of <code>n</code> men in this population would be:</p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb162-1" title="1"><span class="co">#Creating a data frame using the random numbers generated from n=1000 people. The results in the data frame are then plotted using ggplot. The end result is a distribution of heights of 1000 men. You are able to see which heights are most common out of the sample.</span></a>
-<a class="sourceLine" id="cb162-2" title="2">n &lt;-<span class="st"> </span><span class="dv">1000</span></a>
-<a class="sourceLine" id="cb162-3" title="3">height &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n, <span class="dt">mean =</span> <span class="fl">170.7</span>, <span class="dt">sd =</span> <span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb162-4" title="4">height &lt;-<span class="st"> </span><span class="kw">data.frame</span>(height)</a>
-<a class="sourceLine" id="cb162-5" title="5"></a>
-<a class="sourceLine" id="cb162-6" title="6"><span class="co"># `geom_histogram()` is a geometric object in `ggplot2` that represents the frequency of values in a vector as a bar chart</span></a>
-<a class="sourceLine" id="cb162-7" title="7"><span class="kw">ggplot</span>(<span class="dt">data =</span> height, <span class="kw">aes</span>(<span class="dt">x =</span> height)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb162-1"></a><span class="co">#Creating a data frame using the random numbers generated from n=1000 people. The results in the data frame are then plotted using ggplot. The end result is a distribution of heights of 1000 men. You are able to see which heights are most common out of the sample.</span></span>
+<span id="cb162-2"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb162-2"></a>n &lt;-<span class="st"> </span><span class="dv">1000</span></span>
+<span id="cb162-3"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb162-3"></a>height &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n, <span class="dt">mean =</span> <span class="fl">170.7</span>, <span class="dt">sd =</span> <span class="dv">7</span>)</span>
+<span id="cb162-4"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb162-4"></a>height &lt;-<span class="st"> </span><span class="kw">data.frame</span>(height)</span>
+<span id="cb162-5"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb162-5"></a></span>
+<span id="cb162-6"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb162-6"></a><span class="co"># `geom_histogram()` is a geometric object in `ggplot2` that represents the frequency of values in a vector as a bar chart</span></span>
+<span id="cb162-7"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb162-7"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> height, <span class="kw">aes</span>(<span class="dt">x =</span> height)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>()</span></code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <p><img src="06-Maps-as-Processes_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Men shorter than 150 cm would be extremely rare, as well as men taller than 190 cm.</p>
@@ -597,32 +601,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The concept of null landscapes is quite useful. They provide a benchmark to compare the results of statistical maps. Let’s see how to generate a null landscape of events.</p>
 <p>Suppose that there is a landscape with coordinates in the unit square, that is divided in very small discrete units of land. Each of these units of land can be the location of an event. For example, a tree might be present; or a case of a disease.</p>
 <p>Let’s first create a landscape. For this, we will use the <code>expand.grid</code> function to find all combinations of two sets of coordinates in the unit interval, using small partitions:</p>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb164-1" title="1"><span class="co"># expand.grid created a set of coordinates by obtaining all the combinations of the input variables. Here, our landscape ranges in the x-axis from 0 to 1, increasing by 0.05, and the y-axis also from 0 to 1, increasing by 0.05</span></a>
-<a class="sourceLine" id="cb164-2" title="2">coords &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">x =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.05</span>),</a>
-<a class="sourceLine" id="cb164-3" title="3">                      <span class="dt">y =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.05</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb164-1"></a><span class="co"># expand.grid created a set of coordinates by obtaining all the combinations of the input variables. Here, our landscape ranges in the x-axis from 0 to 1, increasing by 0.05, and the y-axis also from 0 to 1, increasing by 0.05</span></span>
+<span id="cb164-2"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb164-2"></a>coords &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">x =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.05</span>),</span>
+<span id="cb164-3"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb164-3"></a>                      <span class="dt">y =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.05</span>))</span></code></pre></div>
 <p>Now, let’s generate a binomial random variable to go with these coordinates.</p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb165-1" title="1"><span class="co"># `nrow()` returns the number of rows that are present in a data frame. Here, it returns the number of rows in the data frame `coords` </span></a>
-<a class="sourceLine" id="cb165-2" title="2">events &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="kw">nrow</span>(coords), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb165-1"></a><span class="co"># `nrow()` returns the number of rows that are present in a data frame. Here, it returns the number of rows in the data frame `coords` </span></span>
+<span id="cb165-2"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb165-2"></a>events &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="kw">nrow</span>(coords), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)</span></code></pre></div>
 <p>We will collect the coordinates and the random variable in a dataframe for plotting:</p>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb166-1" title="1"><span class="co"># `data.frame()` collects the inputs in a data frame; they must have the same number of rows</span></a>
-<a class="sourceLine" id="cb166-2" title="2">null_pattern &lt;-<span class="st"> </span><span class="kw">data.frame</span>(coords, events)</a></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb166-1"></a><span class="co"># `data.frame()` collects the inputs in a data frame; they must have the same number of rows</span></span>
+<span id="cb166-2"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb166-2"></a>null_pattern &lt;-<span class="st"> </span><span class="kw">data.frame</span>(coords, events)</span></code></pre></div>
 <p>We can plot the null landscape we just generated as follows:</p>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb167-1" title="1"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb167-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">filter</span>(null_pattern, events <span class="op">==</span><span class="st"> </span><span class="dv">1</span>), <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y), <span class="dt">shape =</span> <span class="dv">15</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb167-3" title="3"><span class="st">  </span><span class="kw">coord_fixed</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb167-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb167-2"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb167-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">filter</span>(null_pattern, events <span class="op">==</span><span class="st"> </span><span class="dv">1</span>), <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y), <span class="dt">shape =</span> <span class="dv">15</span>) <span class="op">+</span></span>
+<span id="cb167-3"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb167-3"></a><span class="st">  </span><span class="kw">coord_fixed</span>()</span></code></pre></div>
 <p><img src="06-Maps-as-Processes_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>By changing the probability <code>prob</code> in the function <code>rbinom</code> you can make the event more or less likely, i.e., frequent. If you are working with the notebook version of this document you can try changing the parameters to see what happens.</p>
 <p>A continuous random variable can also be used to generate a null landscape. For instance, imagine that a group of individuals are asked to stand in formation, and that they arrange themselves purely at random. What would a map of their heights look like? First, we will generate a random variable using the same parameters we mentioned above for the height of men in Canada:</p>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb168-1" title="1"><span class="co">#heights will be random numbers genreated based on the average height of men, 7 standard deviations, and the null landscape &quot;coords&quot; created previously.</span></a>
-<a class="sourceLine" id="cb168-2" title="2">heights &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="kw">nrow</span>(coords), <span class="dt">mean =</span> <span class="fl">170.7</span>, <span class="dt">sd =</span> <span class="dv">7</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb168-1"></a><span class="co">#heights will be random numbers generated based on the average height of men, 7 standard deviations, and the null landscape &quot;coords&quot; created previously.</span></span>
+<span id="cb168-2"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb168-2"></a>heights &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="kw">nrow</span>(coords), <span class="dt">mean =</span> <span class="fl">170.7</span>, <span class="dt">sd =</span> <span class="dv">7</span>)</span></code></pre></div>
 <p>The random values that were generated can be collected in a dataframe with the coordinates for the purpose of plotting:</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb169-1" title="1">null_trend &lt;-<span class="st"> </span><span class="kw">data.frame</span>(coords, heights)</a></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb169-1"></a>null_trend &lt;-<span class="st"> </span><span class="kw">data.frame</span>(coords, heights)</span></code></pre></div>
 <p>One possible map of heights when the individuals stand in formation at random would look like this:</p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb170-1" title="1"><span class="co"># Our plot is created based on the dataframe of coords and heights. The value of `x` is plotted to the x-axis, the value of `y` is plotted to the y-axis, and the color of the points depends on the values of `heights`. We can change the _scale_ of colors by means of `scale_color_distiller()`. There, palette `spectral` associates higher values of `heights` as red (taller men), while lower values of `heights` (i.e., shorter men) are appear in blue. More generally, we can control the scale of aesthetic aspects of the plot by means of scale_*something* (scale_shape, scale_size, etc.) </span></a>
-<a class="sourceLine" id="cb170-2" title="2"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb170-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> null_trend, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y, <span class="dt">color =</span> heights), <span class="dt">shape =</span> <span class="dv">15</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb170-4" title="4"><span class="st">  </span><span class="kw">scale_color_distiller</span>(<span class="dt">palette =</span> <span class="st">&quot;Spectral&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb170-5" title="5"><span class="st">  </span><span class="kw">coord_fixed</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb170-1"></a><span class="co"># Our plot is created based on the dataframe of coords and heights. The value of `x` is plotted to the x-axis, the value of `y` is plotted to the y-axis, and the color of the points depends on the values of `heights`. We can change the _scale_ of colors by means of `scale_color_distiller()`. There, palette `spectral` associates higher values of `heights` as red (taller men), while lower values of `heights` (i.e., shorter men) are appear in blue. More generally, we can control the scale of aesthetic aspects of the plot by means of scale_*something* (scale_shape, scale_size, etc.) </span></span>
+<span id="cb170-2"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb170-2"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb170-3"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb170-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> null_trend, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y, <span class="dt">color =</span> heights), <span class="dt">shape =</span> <span class="dv">15</span>) <span class="op">+</span></span>
+<span id="cb170-4"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb170-4"></a><span class="st">  </span><span class="kw">scale_color_distiller</span>(<span class="dt">palette =</span> <span class="st">&quot;Spectral&quot;</span>) <span class="op">+</span></span>
+<span id="cb170-5"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb170-5"></a><span class="st">  </span><span class="kw">coord_fixed</span>()</span></code></pre></div>
 <p><img src="06-Maps-as-Processes_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>These two examples illustrate only two of many possible techniques to generate null landscapes. We will discuss other strategies to work with null landscapes later in the course.</p>
 </div>
@@ -630,46 +634,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">7.6</span> Stochastic Processes</h2>
 <p>Some processes are <em>random</em>, such as the ones used above to create <em>null landscapes</em>. These processes take values with some probability, but cannot be predicted with any certainty.</p>
 <p>Let’s illustrate using again a unit square:</p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb171-1" title="1"><span class="co"># Remember that `expand.grid()` will find all combinations of values in the inputs</span></a>
-<a class="sourceLine" id="cb171-2" title="2">coords &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">x =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.05</span>), <span class="dt">y =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.05</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb171-1"></a><span class="co"># Remember that `expand.grid()` will find all combinations of values in the inputs</span></span>
+<span id="cb171-2"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb171-2"></a>coords &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">x =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.05</span>), <span class="dt">y =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.05</span>))</span></code></pre></div>
 <p>Here is an example of a random pattern of events:</p>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb172-1" title="1"><span class="co"># Create a random variable and join to the coordinates to generate a null landscape</span></a>
-<a class="sourceLine" id="cb172-2" title="2">events &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="kw">nrow</span>(coords), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb172-3" title="3">null_pattern &lt;-<span class="st"> </span><span class="kw">data.frame</span>(coords, events)</a>
-<a class="sourceLine" id="cb172-4" title="4"></a>
-<a class="sourceLine" id="cb172-5" title="5"><span class="co"># Plot the null landscape you just created</span></a>
-<a class="sourceLine" id="cb172-6" title="6"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb172-7" title="7"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">subset</span>(null_pattern, events <span class="op">==</span><span class="st"> </span><span class="dv">1</span>), <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y), <span class="dt">shape =</span> <span class="dv">15</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb172-8" title="8"><span class="st">  </span><span class="kw">coord_fixed</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb172-1"></a><span class="co"># Create a random variable and join to the coordinates to generate a null landscape</span></span>
+<span id="cb172-2"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb172-2"></a>events &lt;-<span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="kw">nrow</span>(coords), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)</span>
+<span id="cb172-3"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb172-3"></a>null_pattern &lt;-<span class="st"> </span><span class="kw">data.frame</span>(coords, events)</span>
+<span id="cb172-4"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb172-4"></a></span>
+<span id="cb172-5"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb172-5"></a><span class="co"># Plot the null landscape you just created</span></span>
+<span id="cb172-6"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb172-6"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb172-7"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb172-7"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">subset</span>(null_pattern, events <span class="op">==</span><span class="st"> </span><span class="dv">1</span>), <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y), <span class="dt">shape =</span> <span class="dv">15</span>) <span class="op">+</span></span>
+<span id="cb172-8"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb172-8"></a><span class="st">  </span><span class="kw">coord_fixed</span>()</span></code></pre></div>
 <p><img src="06-Maps-as-Processes_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>A <em>systematic</em> or <em>deterministic</em> process is one that contains no elements of randomness, and can therefore be predicted with complete certainty. For instance (note the use of <code>xlim</code> to set the extent of x axis in the plot):</p>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb173-1" title="1"><span class="co"># Copy the coordinates to a new object</span></a>
-<a class="sourceLine" id="cb173-2" title="2">deterministic_point_pattern &lt;-<span class="st"> </span>coords</a>
-<a class="sourceLine" id="cb173-3" title="3"></a>
-<a class="sourceLine" id="cb173-4" title="4"><span class="co"># `mutate()` adds new variables to a data frame while preserving esixting variables. Here, we create a new column in our data frame, called `events` that will take the value of `x` (the position of an observation along the x-axis) and will `round()` it, i.e., if it is less than 0.5 it will round it to zero, and if it is equal to or greater than 0.5 it will round to 1</span></a>
-<a class="sourceLine" id="cb173-5" title="5">deterministic_point_pattern &lt;-<span class="st"> </span><span class="kw">mutate</span>(deterministic_point_pattern, <span class="dt">events =</span> <span class="kw">round</span>(x))</a>
-<a class="sourceLine" id="cb173-6" title="6"></a>
-<a class="sourceLine" id="cb173-7" title="7"><span class="co"># Plot the new landscape: `filter()` keeps the rows in a dataframe that meet a condition (for example, that the value of `events` is 1), and discards the rest</span></a>
-<a class="sourceLine" id="cb173-8" title="8"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb173-9" title="9"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">filter</span>(deterministic_point_pattern, events <span class="op">==</span><span class="st"> </span><span class="dv">1</span>), <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y), <span class="dt">shape =</span> <span class="dv">15</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb173-10" title="10"><span class="st">  </span><span class="kw">xlim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb173-11" title="11"><span class="st">  </span><span class="kw">coord_fixed</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb173-1"></a><span class="co"># Copy the coordinates to a new object</span></span>
+<span id="cb173-2"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb173-2"></a>deterministic_point_pattern &lt;-<span class="st"> </span>coords</span>
+<span id="cb173-3"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb173-3"></a></span>
+<span id="cb173-4"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb173-4"></a><span class="co"># `mutate()` adds new variables to a data frame while preserving existing variables. Here, we create a new column in our data frame, called `events` that will take the value of `x` (the position of an observation along the x-axis) and will `round()` it, i.e., if it is less than 0.5 it will round it to zero, and if it is equal to or greater than 0.5 it will round to 1</span></span>
+<span id="cb173-5"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb173-5"></a>deterministic_point_pattern &lt;-<span class="st"> </span><span class="kw">mutate</span>(deterministic_point_pattern, <span class="dt">events =</span> <span class="kw">round</span>(x))</span>
+<span id="cb173-6"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb173-6"></a></span>
+<span id="cb173-7"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb173-7"></a><span class="co"># Plot the new landscape: `filter()` keeps the rows in a dataframe that meet a condition (for example, that the value of `events` is 1), and discards the rest</span></span>
+<span id="cb173-8"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb173-8"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb173-9"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb173-9"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">filter</span>(deterministic_point_pattern, events <span class="op">==</span><span class="st"> </span><span class="dv">1</span>), <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y), <span class="dt">shape =</span> <span class="dv">15</span>) <span class="op">+</span></span>
+<span id="cb173-10"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb173-10"></a><span class="st">  </span><span class="kw">xlim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb173-11"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb173-11"></a><span class="st">  </span><span class="kw">coord_fixed</span>()</span></code></pre></div>
 <p><img src="06-Maps-as-Processes_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p>In the process above, we used the function <code>round()</code> and the coordinate <code>x</code>. The function gives a value of one for all points with x &gt; 0.5, and a value of zero to all points with x &lt;= 0.5. The pattern is fully deterministic: if I know the value of the x coordinate I can predict whether an event will be present.</p>
 <p>A <em>stochastic process</em>, on the other hand, is a process that is neither fully random or deterministic, but rather a combination of the two. Let’s illustrate:</p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb174-1" title="1"><span class="co"># Copy the coordinates to a new object </span></a>
-<a class="sourceLine" id="cb174-2" title="2">stochastic_point_pattern &lt;-<span class="st"> </span>coords</a>
-<a class="sourceLine" id="cb174-3" title="3"></a>
-<a class="sourceLine" id="cb174-4" title="4"><span class="co"># Here, we combine the function `round()`, which does an deterministic operation, and `rbinom()` to generate a random number</span></a>
-<a class="sourceLine" id="cb174-5" title="5">stochastic_point_pattern &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb174-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(stochastic_point_pattern, </a>
-<a class="sourceLine" id="cb174-7" title="7">         <span class="dt">events =</span> <span class="kw">round</span>(x) <span class="op">-</span><span class="st"> </span><span class="kw">round</span>(x) <span class="op">*</span><span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="kw">nrow</span>(coords), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>))</a>
-<a class="sourceLine" id="cb174-8" title="8"></a>
-<a class="sourceLine" id="cb174-9" title="9"><span class="co"># Plot the new landscape</span></a>
-<a class="sourceLine" id="cb174-10" title="10"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb174-11" title="11"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">subset</span>(stochastic_point_pattern, events <span class="op">==</span><span class="st"> </span><span class="dv">1</span>), <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y), <span class="dt">shape =</span> <span class="dv">15</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb174-12" title="12"><span class="st">  </span><span class="kw">xlim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb174-13" title="13"><span class="st">  </span><span class="kw">coord_fixed</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb174-1"></a><span class="co"># Copy the coordinates to a new object </span></span>
+<span id="cb174-2"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb174-2"></a>stochastic_point_pattern &lt;-<span class="st"> </span>coords</span>
+<span id="cb174-3"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb174-3"></a></span>
+<span id="cb174-4"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb174-4"></a><span class="co"># Here, we combine the function `round()`, which does an deterministic operation, and `rbinom()` to generate a random number</span></span>
+<span id="cb174-5"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb174-5"></a>stochastic_point_pattern &lt;-<span class="st"> </span></span>
+<span id="cb174-6"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb174-6"></a><span class="st">  </span><span class="kw">mutate</span>(stochastic_point_pattern, </span>
+<span id="cb174-7"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb174-7"></a>         <span class="dt">events =</span> <span class="kw">round</span>(x) <span class="op">-</span><span class="st"> </span><span class="kw">round</span>(x) <span class="op">*</span><span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="kw">nrow</span>(coords), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>))</span>
+<span id="cb174-8"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb174-8"></a></span>
+<span id="cb174-9"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb174-9"></a><span class="co"># Plot the new landscape</span></span>
+<span id="cb174-10"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb174-10"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb174-11"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb174-11"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">subset</span>(stochastic_point_pattern, events <span class="op">==</span><span class="st"> </span><span class="dv">1</span>), <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y), <span class="dt">shape =</span> <span class="dv">15</span>) <span class="op">+</span></span>
+<span id="cb174-12"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb174-12"></a><span class="st">  </span><span class="kw">xlim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb174-13"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb174-13"></a><span class="st">  </span><span class="kw">coord_fixed</span>()</span></code></pre></div>
 <p><img src="06-Maps-as-Processes_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>The process above has a deterministic component (the probability of an event is zero if x &lt;= 0.5), and a random component (the probability of a coordinate being an event is 0.5 when x &gt; 0.5). The landscape is not fully random, but also it is not fully deterministic. Instead, it is the result of a stochastic process, a process that combines deterministic and random elements.</p>
 </div>
@@ -677,61 +681,61 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">7.7</span> Simulating Spatial Processes</h2>
 <p>Null landscapes are interesting as a benchmark. More interesting are landscapes that emerge as the outcome of a non-random process - either a systematic/deterministic or stochastic process. Here we will see more ways to introduce a systematic element into a null landscape to simulate spatial processes.</p>
 <p>Let’s begin with the point pattern, using the same landscape that we used above. We will first copy the coordinates of the landscape to a new dataframe, that we will call <code>pattern1</code>:</p>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb175-1" title="1"><span class="co"># Copy the coordinates to a new object, called `pattern1`</span></a>
-<a class="sourceLine" id="cb175-2" title="2">pattern1 &lt;-<span class="st"> </span>coords</a></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb175-1"></a><span class="co"># Copy the coordinates to a new object, called `pattern1`</span></span>
+<span id="cb175-2"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb175-2"></a>pattern1 &lt;-<span class="st"> </span>coords</span></code></pre></div>
 <p>Next, we will use the function <code>mutate</code> from the <code>dplyr</code> package that is part of the <code>tidyverse</code>. This function adds a column to a data frame that could be calculated using a formula. For instance, we will now make the probability <code>prob</code> of the random binomial number generator a function of the coordinates:</p>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb176-1" title="1"><span class="co"># Remember, mutate adds a new column to a data frame. In this example, mutate creates a new column, `events` using random binomial values; however, notice that the `prob` is not 0.5! Instead, it depends on `x` the position of the event on the x-axis </span></a>
-<a class="sourceLine" id="cb176-2" title="2">pattern1 &lt;-<span class="st"> </span><span class="kw">mutate</span>(pattern1, <span class="dt">events =</span> <span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="kw">nrow</span>(pattern1), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> (x)))</a></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb176-1"></a><span class="co"># Remember, mutate adds a new column to a data frame. In this example, mutate creates a new column, `events` using random binomial values; however, notice that the `prob` is not 0.5! Instead, it depends on `x` the position of the event on the x-axis </span></span>
+<span id="cb176-2"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb176-2"></a>pattern1 &lt;-<span class="st"> </span><span class="kw">mutate</span>(pattern1, <span class="dt">events =</span> <span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="kw">nrow</span>(pattern1), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> (x)))</span></code></pre></div>
 <p>Plot this pattern:</p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb177-1" title="1"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb177-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">subset</span>(pattern1, events <span class="op">==</span><span class="st"> </span><span class="dv">1</span>), <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y), <span class="dt">shape =</span> <span class="dv">15</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb177-3" title="3"><span class="st">  </span><span class="kw">coord_fixed</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb177-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb177-2"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb177-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">subset</span>(pattern1, events <span class="op">==</span><span class="st"> </span><span class="dv">1</span>), <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y), <span class="dt">shape =</span> <span class="dv">15</span>) <span class="op">+</span></span>
+<span id="cb177-3"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb177-3"></a><span class="st">  </span><span class="kw">coord_fixed</span>()</span></code></pre></div>
 <p><img src="06-Maps-as-Processes_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <p>Since the probability of a “success” in the binomial experiment is proportional to the value of x (the coordinate of the event), now the events are clustered to the right of the plot. The underlying process in this case can be described in simple terms as “the probability of an event increases in the east direction”. In a real process, this could be possibly as a result of wind conditions, soil fertility, or other environmental factors that follow a trend.</p>
 <p>Let’s see what happens when we make this probability a function of the y coordinate:</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb178-1" title="1"><span class="co"># Overwrite the `events`, now the probability of success in the random binomial number generator is a function of `y`, the position of the event on the y-axis </span></a>
-<a class="sourceLine" id="cb178-2" title="2">pattern1 &lt;-<span class="st"> </span><span class="kw">mutate</span>(pattern1, <span class="dt">events =</span> <span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="kw">nrow</span>(pattern1), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> (y)))</a>
-<a class="sourceLine" id="cb178-3" title="3"></a>
-<a class="sourceLine" id="cb178-4" title="4"><span class="co"># Plot the new events</span></a>
-<a class="sourceLine" id="cb178-5" title="5"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb178-6" title="6"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">subset</span>(pattern1, events <span class="op">==</span><span class="st"> </span><span class="dv">1</span>), <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y), <span class="dt">shape =</span> <span class="dv">15</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb178-7" title="7"><span class="st">  </span><span class="kw">coord_fixed</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb178-1"></a><span class="co"># Overwrite the `events`, now the probability of success in the random binomial number generator is a function of `y`, the position of the event on the y-axis </span></span>
+<span id="cb178-2"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb178-2"></a>pattern1 &lt;-<span class="st"> </span><span class="kw">mutate</span>(pattern1, <span class="dt">events =</span> <span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="kw">nrow</span>(pattern1), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> (y)))</span>
+<span id="cb178-3"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb178-3"></a></span>
+<span id="cb178-4"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb178-4"></a><span class="co"># Plot the new events</span></span>
+<span id="cb178-5"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb178-5"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb178-6"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb178-6"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">subset</span>(pattern1, events <span class="op">==</span><span class="st"> </span><span class="dv">1</span>), <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y), <span class="dt">shape =</span> <span class="dv">15</span>) <span class="op">+</span></span>
+<span id="cb178-7"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb178-7"></a><span class="st">  </span><span class="kw">coord_fixed</span>()</span></code></pre></div>
 <p><img src="06-Maps-as-Processes_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <p>Since the probability of a “success” in the binomial experiment is proportional to the value of y (the coordinate of the event), now the events are clustered to the top. The probability could be the interaction of the two coordinates:</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb179-1" title="1"><span class="co"># Now the probability is the product of `x` and `y`</span></a>
-<a class="sourceLine" id="cb179-2" title="2">pattern1 &lt;-<span class="st"> </span><span class="kw">mutate</span>(pattern1, <span class="dt">events =</span> <span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="kw">nrow</span>(pattern1), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> (x <span class="op">*</span><span class="st"> </span>y)))</a>
-<a class="sourceLine" id="cb179-3" title="3"></a>
-<a class="sourceLine" id="cb179-4" title="4"><span class="co"># Plot</span></a>
-<a class="sourceLine" id="cb179-5" title="5"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb179-6" title="6"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">subset</span>(pattern1, events <span class="op">==</span><span class="st"> </span><span class="dv">1</span>), <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y), <span class="dt">shape =</span> <span class="dv">15</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb179-7" title="7"><span class="st">  </span><span class="kw">coord_fixed</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb179-1"></a><span class="co"># Now the probability is the product of `x` and `y`</span></span>
+<span id="cb179-2"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb179-2"></a>pattern1 &lt;-<span class="st"> </span><span class="kw">mutate</span>(pattern1, <span class="dt">events =</span> <span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="kw">nrow</span>(pattern1), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> (x <span class="op">*</span><span class="st"> </span>y)))</span>
+<span id="cb179-3"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb179-3"></a></span>
+<span id="cb179-4"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb179-4"></a><span class="co"># Plot</span></span>
+<span id="cb179-5"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb179-5"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb179-6"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb179-6"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">subset</span>(pattern1, events <span class="op">==</span><span class="st"> </span><span class="dv">1</span>), <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y), <span class="dt">shape =</span> <span class="dv">15</span>) <span class="op">+</span></span>
+<span id="cb179-7"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb179-7"></a><span class="st">  </span><span class="kw">coord_fixed</span>()</span></code></pre></div>
 <p><img src="06-Maps-as-Processes_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <p>Which of course means that the events cluster on the top-right corner.</p>
 <p>A somewhat more sophisticated example could make the probability a function of distance from the center of the region:</p>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb180-1" title="1"><span class="co"># Copy the coordinates to the object `pattern1`</span></a>
-<a class="sourceLine" id="cb180-2" title="2">pattern1 &lt;-<span class="st"> </span>coords</a>
-<a class="sourceLine" id="cb180-3" title="3"></a>
-<a class="sourceLine" id="cb180-4" title="4"><span class="co"># In this case, `mutate()` creates a new variable, `distance`, which is the straight line distance from the center of the region (at coordinates x = 0.5 and y = 0.5). Now the probability of success in the random binomial number generator depends on this `distance` </span></a>
-<a class="sourceLine" id="cb180-5" title="5">pattern1 &lt;-<span class="st"> </span><span class="kw">mutate</span>(pattern1, </a>
-<a class="sourceLine" id="cb180-6" title="6">                   <span class="dt">distance =</span> <span class="kw">sqrt</span>((<span class="fl">0.5</span> <span class="op">-</span><span class="st"> </span>x)<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>(<span class="fl">0.5</span> <span class="op">-</span><span class="st"> </span>y)<span class="op">^</span><span class="dv">2</span>), </a>
-<a class="sourceLine" id="cb180-7" title="7">                   <span class="dt">events =</span> <span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="kw">nrow</span>(pattern1), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span>distance)))</a></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb180-1"></a><span class="co"># Copy the coordinates to the object `pattern1`</span></span>
+<span id="cb180-2"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb180-2"></a>pattern1 &lt;-<span class="st"> </span>coords</span>
+<span id="cb180-3"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb180-3"></a></span>
+<span id="cb180-4"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb180-4"></a><span class="co"># In this case, `mutate()` creates a new variable, `distance`, which is the straight line distance from the center of the region (at coordinates x = 0.5 and y = 0.5). Now the probability of success in the random binomial number generator depends on this `distance` </span></span>
+<span id="cb180-5"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb180-5"></a>pattern1 &lt;-<span class="st"> </span><span class="kw">mutate</span>(pattern1, </span>
+<span id="cb180-6"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb180-6"></a>                   <span class="dt">distance =</span> <span class="kw">sqrt</span>((<span class="fl">0.5</span> <span class="op">-</span><span class="st"> </span>x)<span class="op">^</span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>(<span class="fl">0.5</span> <span class="op">-</span><span class="st"> </span>y)<span class="op">^</span><span class="dv">2</span>), </span>
+<span id="cb180-7"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb180-7"></a>                   <span class="dt">events =</span> <span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="kw">nrow</span>(pattern1), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span><span class="st"> </span>distance)))</span></code></pre></div>
 <p>Don’t worry too much about the formula that I selected to generate this process; we will see different tools to describe a spatial process. In this particular example, I selected a function that makes the probability increase with distance from the center of the region.</p>
 <p>Plot this pattern:</p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb181-1" title="1"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb181-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">subset</span>(pattern1, events <span class="op">==</span><span class="st"> </span><span class="dv">1</span>), <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y), <span class="dt">shape =</span> <span class="dv">15</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb181-3" title="3"><span class="st">  </span><span class="kw">coord_fixed</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb181-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb181-2"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb181-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">subset</span>(pattern1, events <span class="op">==</span><span class="st"> </span><span class="dv">1</span>), <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y), <span class="dt">shape =</span> <span class="dv">15</span>) <span class="op">+</span></span>
+<span id="cb181-3"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb181-3"></a><span class="st">  </span><span class="kw">coord_fixed</span>()</span></code></pre></div>
 <p><img src="06-Maps-as-Processes_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 <p>As you would expect, there are few events near the center, and the number of events tends to increase away from the center.</p>
 <p>To conclude this practice, let’s revisit the example of the people standing in formation. Now, taller people are asked to stand towards the back of the formation (assuming that the back is in the positive direction of the y-axis). As a result of this instruction, now the sorting is not random, since taller people tend to stand towards the back. However, people are not able to assess the height of each other exactly, so there will be some random variation in the distribution of heights. We can simulate this by making the height a function of position.</p>
 <p>First, we copy the coordinates to a new dataframe for our trend experiment:</p>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb182-1" title="1">trend1 &lt;-<span class="st"> </span>coords</a></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb182-1"></a>trend1 &lt;-<span class="st"> </span>coords</span></code></pre></div>
 <p>Again we use <code>mutate</code> to add a column to a data frame that could be calculated using a formula. For instance, we will now make the probability <code>prob</code> of the random binomial number generator a function of the coordinates:</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb183-1" title="1">trend1 &lt;-<span class="st"> </span><span class="kw">mutate</span>(trend1, <span class="dt">heights =</span> <span class="dv">160</span> <span class="op">+</span><span class="st"> </span><span class="dv">20</span> <span class="op">*</span><span class="st"> </span>y  <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="kw">nrow</span>(pattern1), <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">7</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb183-1"></a>trend1 &lt;-<span class="st"> </span><span class="kw">mutate</span>(trend1, <span class="dt">heights =</span> <span class="dv">160</span> <span class="op">+</span><span class="st"> </span><span class="dv">20</span> <span class="op">*</span><span class="st"> </span>y  <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="kw">nrow</span>(pattern1), <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">7</span>))</span></code></pre></div>
 <p>If people have a preference for standing next to people about their same height, and shorter people have a preference for standing near the front, this is a possible map of heights in the formation:</p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb184-1" title="1"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb184-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> trend1, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y, <span class="dt">color =</span> heights), <span class="dt">shape =</span> <span class="dv">15</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb184-3" title="3"><span class="st">  </span><span class="kw">scale_color_distiller</span>(<span class="dt">palette =</span> <span class="st">&quot;Spectral&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb184-4" title="4"><span class="st">  </span><span class="kw">coord_fixed</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb184-1"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb184-2"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb184-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> trend1, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y, <span class="dt">color =</span> heights), <span class="dt">shape =</span> <span class="dv">15</span>) <span class="op">+</span></span>
+<span id="cb184-3"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb184-3"></a><span class="st">  </span><span class="kw">scale_color_distiller</span>(<span class="dt">palette =</span> <span class="st">&quot;Spectral&quot;</span>) <span class="op">+</span></span>
+<span id="cb184-4"><a href="maps-as-processes-null-landscapes-spatial-processes-and-statistical-maps.html#cb184-4"></a><span class="st">  </span><span class="kw">coord_fixed</span>()</span></code></pre></div>
 <p><img src="06-Maps-as-Processes_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 <p>As expected, shorter people are towards the “front” (bottom of the plot) and taller people towards the back. It is not a uniform process, since there is still some randomness, but a trend can be clearly appreciated.</p>
 </div>

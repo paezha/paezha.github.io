@@ -42,7 +42,7 @@ It is good practice to clear the working space to make sure that you do not have
 rm(list = ls())
 ```
 
-Note that `ls()` lists all objects currently on the worspace.
+Note that `ls()` lists all objects currently on the workspace.
 
 Load the libraries you will use in this activity. 
 
@@ -53,16 +53,6 @@ library(tidyverse)
 library(sf)
 library(cartogram)
 library(geog4ga3)
-```
-
-```
-## Warning: replacing previous import 'plotly::filter' by 'stats::filter' when
-## loading 'geog4ga3'
-```
-
-```
-## Warning: replacing previous import 'dplyr::lag' by 'stats::lag' when loading
-## 'geog4ga3'
 ```
 
 In the practice that preceded this activity, you learned about the area data and visualization techniques for area data.
@@ -93,11 +83,11 @@ You are ready for the next activity.
 
 **NOTE**: Activities include technical "how to" tasks/questions. Usually, these ask you to organize data, create a plot, and so on in support of analysis and interpretation. These tasks are indicated by a star (*).
 
-1.* Create choropleth maps for the proportion of the population who are 20 to 34 years old, 35 to 49 years old, 50 to 65 years old, and 65 and older.
+1. (*)Create choropleth maps for the proportion of the population who are 20 to 34 years old, 35 to 49 years old, 50 to 65 years old, and 65 and older.
 
-2.* Create cartograms for the proportion of the population who are 20 to 34 years old, 35 to 49 years old, 50 to 65 years old, and 65 and older.
+2. (*)Create cartograms for the proportion of the population who are 20 to 34 years old, 35 to 49 years old, 50 to 65 years old, and 65 and older.
 
-3.* Change the scheme and colors of your maps to obtain maps with 2 classes/colors, 5 classes/colors, and 10 classes/colors. You can check different color palettes [in the documentation of `ggplot2`](https://ggplot2.tidyverse.org/reference/scale_brewer.html). Which scheme is more informative? What colors looked better to you?
+3. (*)Change the scheme and colors of your maps to obtain maps with 2 classes/colors, 5 classes/colors, and 10 classes/colors. You can check different color palettes [in the documentation of `ggplot2`](https://ggplot2.tidyverse.org/reference/scale_brewer.html). Which scheme is more informative? What colors looked better to you?
 
 4. Show your maps to a fellow student. What patterns do you notice in the distribution of population by age in Hamilton? Do you think the distribution of the population by age is random, or not random?
 

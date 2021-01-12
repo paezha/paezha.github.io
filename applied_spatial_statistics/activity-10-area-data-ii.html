@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 22 Activity 10: Area Data II | Applied Spatial Statistics with R</title>
   <meta name="description" content="This book was created as a resource for teaching applied spatial statistics at McMaster University by Antonio Paez, with support from Anastassios Dardas and Rajveer Ubhi." />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 22 Activity 10: Area Data II | Applied Spatial Statistics with R" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Antonio Paez" />
 
 
-<meta name="date" content="2020-03-29" />
+<meta name="date" content="2021-01-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="area-data-ii.html"/>
 <link rel="next" href="area-data-iii.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.5.1/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -50,14 +50,15 @@
 
 
 
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
 <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/proj4-2.6.2/proj4.min.js"></script>
 <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.0.3/leaflet.js"></script>
+<script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
 <link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.css" rel="stylesheet" />
 <link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.Default.css" rel="stylesheet" />
 <script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.js"></script>
@@ -65,24 +66,25 @@
 <script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.layersupport.js"></script>
 <script src="libs/lfx-heat-0.1.0/lfx-heat-prod.js"></script>
 <script src="libs/lfx-heat-0.1.0/lfx-heat-bindings.js"></script>
-<script src="libs/plotly-binding-4.9.2/plotly.js"></script>
+<script src="libs/plotly-binding-4.9.3/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
 <link href="libs/colourpicker-1.1/colourpicker.min.css" rel="stylesheet" />
 <script src="libs/colourpicker-1.1/colourpicker.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="libs/bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet" />
 <script src="libs/bootstrap-3.3.2/js/bootstrap.min.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
@@ -91,14 +93,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -107,9 +111,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -515,7 +519,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>List and describe two criteria to define proximity in area data analysis.</li>
 <li>What is a spatial weights matrix?</li>
 <li>Why do spatial weight matrices have zeros in the main diagonal?</li>
-<li>How is a spatials weights matrix row-standardized?</li>
+<li>How is a spatial weights matrix row-standardized?</li>
 <li>Write the spatial weights matrices for the sample systems in Figures @ref{fig:simple-areal-system-i} and @ref{fig:simple-areal-system-ii}. Explain the criteria used to do so.</li>
 </ol>
 <div class="figure"><span id="fig:simple-areal-system-i"></span>
@@ -553,41 +557,39 @@ Figure 22.2: Sample areal system 2
 <li><p>A package called <code>geog4ga3</code>.</p></li>
 </ul>
 <p>It is good practice to clear the working space to make sure that you do not have extraneous items there when you begin your work. The command in R to clear the workspace is <code>rm</code> (for “remove”), followed by a list of items to be removed. To clear the workspace from <em>all</em> objects, do the following:</p>
-<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb501-1" title="1"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</a></code></pre></div>
-<p>Note that <code>ls()</code> lists all objects currently on the worspace.</p>
+<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="activity-10-area-data-ii.html#cb469-1"></a><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</span></code></pre></div>
+<p>Note that <code>ls()</code> lists all objects currently on the workspace.</p>
 <p>Load the libraries you will use in this activity.</p>
 <p>In addition to <code>tidyverse</code>, you will need <code>sf</code>, a package that implements simple features in R (you can learn about <code>sf</code> <a href="https://cran.r-project.org/web/packages/sf/vignettes/sf1.html">here</a>) and <code>spdep</code>, a package that implements several spatial statistical methods (you can learn more about it <a href="https://cran.r-project.org/web/packages/spdep/index.html">here</a>):</p>
-<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb502-1" title="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb502-2" title="2"><span class="kw">library</span>(spdep)</a>
-<a class="sourceLine" id="cb502-3" title="3"><span class="kw">library</span>(sf)</a>
-<a class="sourceLine" id="cb502-4" title="4"><span class="kw">library</span>(geog4ga3)</a></code></pre></div>
-<pre><code>## Warning: replacing previous import &#39;plotly::filter&#39; by &#39;stats::filter&#39; when
-## loading &#39;geog4ga3&#39;</code></pre>
-<pre><code>## Warning: replacing previous import &#39;dplyr::lag&#39; by &#39;stats::lag&#39; when loading
-## &#39;geog4ga3&#39;</code></pre>
-<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb505-1" title="1"><span class="kw">library</span>(plotly)</a></code></pre></div>
+<div class="sourceCode" id="cb470"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb470-1"><a href="activity-10-area-data-ii.html#cb470-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb470-2"><a href="activity-10-area-data-ii.html#cb470-2"></a><span class="kw">library</span>(spdep)</span>
+<span id="cb470-3"><a href="activity-10-area-data-ii.html#cb470-3"></a><span class="kw">library</span>(sf)</span>
+<span id="cb470-4"><a href="activity-10-area-data-ii.html#cb470-4"></a><span class="kw">library</span>(geog4ga3)</span>
+<span id="cb470-5"><a href="activity-10-area-data-ii.html#cb470-5"></a><span class="kw">library</span>(plotly)</span></code></pre></div>
 <p>In the practice that preceded this activity, you learned about the area data and visualization techniques for area data.</p>
 <p>Begin by loading the data that you will use in this activity:</p>
-<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb506-1" title="1"><span class="kw">data</span>(Hamilton_CT)</a></code></pre></div>
+<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="activity-10-area-data-ii.html#cb471-1"></a><span class="kw">data</span>(Hamilton_CT)</span></code></pre></div>
 <p>This is a <code>sf</code> object with census tracts and selected demographic variables for the Hamilton CMA in Canada.</p>
 <p>You can obtain new (calculated) variables as follows. For instance, to obtain the proportion of residents who are between 20 and 34 years old, and between 35 and 49:</p>
-<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb507-1" title="1">Hamilton_CT &lt;-<span class="st"> </span><span class="kw">mutate</span>(Hamilton_CT, <span class="dt">Prop20to34 =</span> (AGE_<span class="dv">20</span>_TO_<span class="dv">24</span> <span class="op">+</span><span class="st"> </span>AGE_<span class="dv">25</span>_TO_<span class="dv">29</span> <span class="op">+</span><span class="st"> </span>AGE_<span class="dv">30</span>_TO_<span class="dv">34</span>)<span class="op">/</span>POPULATION, <span class="dt">Prop35to49 =</span> (AGE_<span class="dv">35</span>_TO_<span class="dv">39</span> <span class="op">+</span><span class="st"> </span>AGE_<span class="dv">40</span>_TO_<span class="dv">44</span> <span class="op">+</span><span class="st"> </span>AGE_<span class="dv">45</span>_TO_<span class="dv">49</span>)<span class="op">/</span>POPULATION)</a></code></pre></div>
+<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb472-1"><a href="activity-10-area-data-ii.html#cb472-1"></a>Hamilton_CT &lt;-<span class="st"> </span>Hamilton_CT <span class="op">%&gt;%</span></span>
+<span id="cb472-2"><a href="activity-10-area-data-ii.html#cb472-2"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Prop20to34 =</span> (AGE_<span class="dv">20</span>_TO_<span class="dv">24</span> <span class="op">+</span><span class="st"> </span>AGE_<span class="dv">25</span>_TO_<span class="dv">29</span> <span class="op">+</span><span class="st"> </span>AGE_<span class="dv">30</span>_TO_<span class="dv">34</span>)<span class="op">/</span>POPULATION,</span>
+<span id="cb472-3"><a href="activity-10-area-data-ii.html#cb472-3"></a>         <span class="dt">Prop35to49 =</span> (AGE_<span class="dv">35</span>_TO_<span class="dv">39</span> <span class="op">+</span><span class="st"> </span>AGE_<span class="dv">40</span>_TO_<span class="dv">44</span> <span class="op">+</span><span class="st"> </span>AGE_<span class="dv">45</span>_TO_<span class="dv">49</span>)<span class="op">/</span>POPULATION)</span></code></pre></div>
 <p>You can also convert the <code>sf</code> object into a <code>SpatialPolygonsDataFrame</code> object for use with the <code>spdedp</code> package:</p>
-<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb508-1" title="1">Hamilton_CT.sp &lt;-<span class="st"> </span><span class="kw">as</span>(Hamilton_CT, <span class="st">&quot;Spatial&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb473-1"><a href="activity-10-area-data-ii.html#cb473-1"></a>Hamilton_CT.sp &lt;-<span class="st"> </span><span class="kw">as</span>(Hamilton_CT, <span class="st">&quot;Spatial&quot;</span>)</span></code></pre></div>
 <p>You are now ready for the next activity.</p>
 </div>
 <div id="activity-9" class="section level2">
 <h2><span class="header-section-number">22.5</span> Activity</h2>
 <p><strong>NOTE</strong>: Activities include technical “how to” tasks/questions. Usually, these ask you to organize data, create a plot, and so on in support of analysis and interpretation. These tasks are indicated by a star (*).</p>
-<p>1.* Create a spatial weights matrix for the census tracts in the Hamilton CMA. Use adjacency as your criterion for proximity.</p>
-<p>2.* Calculate the spatial moving average for the following two variables: 1) proportion of the population who are 20 to 34 years old; and 2) proportion of the population who are 65 and older.</p>
-<p>3.* Append the spatial moving averages to your dataframe.</p>
-<p>4.* Choose one age group and create a scatterplot of the proportion of population in that group versus its spatial moving average. (Hint: if you create the scatterplot using <code>ggplot2</code> you can add the 45 degree line by meand of <code>geom_abline(slope = 1, intercept = 0)</code>).</p>
-<ol start="5" style="list-style-type: decimal">
+<ol style="list-style-type: decimal">
+<li><p>(*)Create a spatial weights matrix for the census tracts in the Hamilton CMA. Use adjacency as your criterion for proximity.</p></li>
+<li><p>(*)Calculate the spatial moving average for the following two variables: 1) proportion of the population who are 20 to 34 years old; and 2) proportion of the population who are 65 and older.</p></li>
+<li><p>(*)Append the spatial moving averages to your dataframe.</p></li>
+<li><p>(*)Choose one age group and create a scatterplot of the proportion of population in that group versus its spatial moving average. (Hint: if you create the scatterplot using <code>ggplot2</code> you can add the 45 degree line by means of <code>geom_abline(slope = 1, intercept = 0)</code>).</p></li>
 <li><p>Show your scatterplot of the population versus its spatial moving average to a fellow student. What is the meaning of the 45 degree line in this plot?</p></li>
 <li><p>Create a null-landscape by scrambling the values of your variable. For instance, you can use the variable <code>prop20to34</code> to generate a null landscape as follows:</p></li>
 </ol>
-<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb509-1" title="1">Hamilton_CT<span class="op">$</span>Null_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">sample</span>(Hamilton_CT<span class="op">$</span>Prop20to34)</a></code></pre></div>
+<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb474-1"><a href="activity-10-area-data-ii.html#cb474-1"></a>Hamilton_CT<span class="op">$</span>Null_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="kw">sample</span>(Hamilton_CT<span class="op">$</span>Prop20to34)</span></code></pre></div>
 <ol start="7" style="list-style-type: decimal">
 <li>Calculate the spatial moving average of your null landscape, and create a scatterplot just like you did for your variable. How is this scatterplot different?</li>
 </ol>

@@ -39,7 +39,7 @@ As usual, it is good practice to clear the working space to make sure that you d
 rm(list = ls())
 ```
 
-Note that `ls()` lists all objects currently on the worspace.
+Note that `ls()` lists all objects currently on the workspace.
 
 Load the libraries you will use in this activity:
 
@@ -49,16 +49,6 @@ library(spdep)
 library(plotly)
 library(gstat)
 library(geog4ga3)
-```
-
-```
-## Warning: replacing previous import 'plotly::filter' by 'stats::filter' when
-## loading 'geog4ga3'
-```
-
-```
-## Warning: replacing previous import 'dplyr::lag' by 'stats::lag' when loading
-## 'geog4ga3'
 ```
 
 Begin by loading the data file:
@@ -179,7 +169,7 @@ Once the residuals have been labeled we can be plotted as follows:
 
 ```r
 ggplot(data = Walker_Lake, 
-       aes(x = X, y = Y, color = residual3)) + # Note colour is only applied to results of positive or negative residials
+       aes(x = X, y = Y, color = residual3)) + # Note color is only applied to results of positive or negative residuals
   geom_point() +
   coord_equal() # Ensures equal scales for both axes
 ```
@@ -205,11 +195,11 @@ moran.test(x = WL.trend3$residuals, listw = WL.listw)
 ## data:  WL.trend3$residuals  
 ## weights: WL.listw    
 ## 
-## Moran I statistic standard deviate = 17.159, p-value < 2.2e-16
+## Moran I statistic standard deviate = 17.199, p-value < 2.2e-16
 ## alternative hypothesis: greater
 ## sample estimates:
 ## Moran I statistic       Expectation          Variance 
-##      0.4625066528     -0.0021321962      0.0007332769
+##      0.4633803457     -0.0021321962      0.0007325452
 ```
 
 The fact that the residuals are not independent has important implications for prediction. Consider the following thought experiment.
@@ -287,7 +277,7 @@ As can be seen in the plot, spatial autocorrelation tends to decline as the numb
 
 The use of $k$-nearest neighbors points to a problem, however. The scale of the process does not depend on distance, which would be a more natural metric for a continuous process. In this case, $k$-nearest neighbors were used to ensure that each sum in the coefficient had the same number of observations. However, this means that "neighborhoods" will be geographically smaller where the observations are more dense, and larger where they are sparse.
 
-While this issue is not insurmountable (for instance, instead of $k$-neares neighbors we could have used the neighbors found at a certain distance), it points out to the fact that Moran's $I$ is not by design well suited for the analysis of spatially continuous data.
+While this issue is not insurmountable (for instance, instead of $k$-nearst neighbors we could have used the neighbors found at a certain distance), it points out to the fact that Moran's $I$ is not by design well suited for the analysis of spatially continuous data.
 
 A different approach, known as variographic analysis, is introduced next.
 
@@ -325,7 +315,7 @@ In other words, $i$ and $j$ are considered to be spatially related for the purpo
 
 The above criterion makes explicit the assumption that the autocovariance is a function of the separation $h$ between two observations, but not of other factors, such as the angle between observations. This assumption is called _isotropy_.
 
-Further, if we assume that the variance of $z$ is constant, and the correlation between observations does not depend on location (an assumption called _intrinsic stationarity_), we can _pool_ observations from accross the map to create a scatterplot to form the basis of the autocovariance calculations.
+Further, if we assume that the variance of $z$ is constant, and the correlation between observations does not depend on location (an assumption called _intrinsic stationarity_), we can _pool_ observations from across the map to create a scatterplot to form the basis of the autocovariance calculations.
 
 Consider the (regular) arrangement of observations spaced at $h$ in Figure 2. Each observation generally has four neighbors, with the exception of those in the edges, which have fewer neighbors at spatial lag $h$. This means that most observations will contribute four points to the scatterplot ($z_i$ and $z_j$, $z_k$, $z_l$, and $z_m$), and others will contribute three or at least two (those in the corners).  
 
@@ -429,7 +419,7 @@ The above plots are the _empirical_ semivariogram and covariogram. These plots a
 Since the semivariogram is the expectation of the square, the function selected for modeling the theoretical semivariogram must be non-negative. Several functions satisfy this condition, a list of which are available in `gstat` as shown below:
 
 ```r
-vgm() #this function generates a variogram mode. Here, we are able to view the lsit of possible models for a semivariogram
+vgm() #this function generates a variogram mode. Here, we are able to view the list of possible models for a semivariogram
 ```
 
 ```
@@ -460,7 +450,7 @@ The anatomy of a semivariogram includes a range, a sill, and possibly a nugget. 
 
 ![Figure 3. Elements of a semivariogram model](Spatially Continuous Data III - Figure 3.jpg)
 
-Since the semivariogram is calculated based on the square of the differences $z_i - z_j$, the smaller the semivariance is, the more similar observations tend to be. In principle, the semivariogram begins at zero, because at distance zero an observation is identical to itself (i.e., $z_i - z_i$). The range is the distance at which the sill is reached. The sill, on the other hand, is the point at which the semivariance becomes simply the variance, meaning that there is no more or less similarity beween observations than would be implied by the variance of the sample.
+Since the semivariogram is calculated based on the square of the differences $z_i - z_j$, the smaller the semivariance is, the more similar observations tend to be. In principle, the semivariogram begins at zero, because at distance zero an observation is identical to itself (i.e., $z_i - z_i$). The range is the distance at which the sill is reached. The sill, on the other hand, is the point at which the semivariance becomes simply the variance, meaning that there is no more or less similarity between observations than would be implied by the variance of the sample.
 
 An additional element is the nugget. While the semivariogram in principle begins at zero, sometime discontinuities near the origin can be observed. The terminology is from mining, and reflects the fact that a nugget could be very different from the material around it, hence the jump in the semivariogram.
 
@@ -490,7 +480,7 @@ plot(variogramLine(vgm(1, "Gau", 1), 10), type = 'l')
 
 <img src="34-Spatially-Continuous-Data-III_files/figure-html/unnamed-chunk-21-1.png" width="672" />
 
-These plots illustrate some differences in the behavior of the models. For indentical parameters, the Gaussian model provides smoother changes near the origin. The spherical model reaches the sill more rapidly than the other models.
+These plots illustrate some differences in the behavior of the models. For identical parameters, the Gaussian model provides smoother changes near the origin. The spherical model reaches the sill more rapidly than the other models.
 
 To fit a theoretical semivariogram to the empirical one, the function `fit.variogram` is used:
 
@@ -535,7 +525,7 @@ ggplot(data = variogram_z, aes(x = dist, y = gamma)) +
 
 <img src="34-Spatially-Continuous-Data-III_files/figure-html/unnamed-chunk-25-1.png" width="672" />
 
-For comparison, we will do the variographic analsysis of a simulated random dataset.
+For comparison, we will do the variographic analysis of a simulated random dataset.
 
 Generate coordinates for observations and expand on a grid:
 
@@ -567,7 +557,7 @@ ggplot(data = variogram_df, aes(x = dist, y = gamma)) +
   geom_point() + 
   geom_text(aes(label = np), nudge_y = -1500) + 
   ylim(c(0, 98100)) +
-  xlab("Distance") + ylab("Semivariance")  #addig labels to axes
+  xlab("Distance") + ylab("Semivariance")  #add labels to axes
 ```
 
 <img src="34-Spatially-Continuous-Data-III_files/figure-html/unnamed-chunk-29-1.png" width="672" />

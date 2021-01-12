@@ -54,16 +54,6 @@ library(spatstat)
 library(geog4ga3)
 ```
 
-```
-## Warning: replacing previous import 'plotly::filter' by 'stats::filter' when
-## loading 'geog4ga3'
-```
-
-```
-## Warning: replacing previous import 'dplyr::lag' by 'stats::lag' when loading
-## 'geog4ga3'
-```
-
 In the practice that preceded this activity, you learned about the concepts of intensity and density, about quadrats, and also how to create density maps. 
 Begin by loading the data that you will use in this activity:
 
@@ -132,7 +122,9 @@ Now that you have loaded the dataframe and converted to a `ppp` object, you are 
 
 ## Activity
 
-*1. Analyze the point pattern for the movements of the bear using quadrat and kernel density methods. Experiment with different quadrat sizes and kernel bandwidths. 
+**NOTE**: Activities include technical "how to" tasks/questions. Usually, these ask you to organize data, create a plot, and so on in support of analysis and interpretation. These tasks are indicated by a star (*).
+
+1. (*)Analyze the point pattern for the movements of the bear using quadrat and kernel density methods. Experiment with different quadrat sizes and kernel bandwidths. 
 
 2. Explain your choice of parameters (quadrat sizes and kernel bandwidths) to a fellow student.
 

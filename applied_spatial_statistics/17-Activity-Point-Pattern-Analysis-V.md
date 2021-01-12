@@ -42,7 +42,7 @@ It is good practice to clear the working space to make sure that you do not have
 rm(list = ls())
 ```
 
-Note that `ls()` lists all objects currently on the worspace.
+Note that `ls()` lists all objects currently on the workspace.
 
 Load the libraries you will use in this activity. In addition to `tidyverse`, you will need `spatstat`, a package designed for the analysis of point patterns (you can learn about `spatstat` [here](https://cran.r-project.org/web/packages/spatstat/vignettes/getstart.pdf) and [here](http://spatstat.org/resources/spatstatJSSpaper.pdf)):
 
@@ -90,57 +90,58 @@ vcdExtra::datasets("spatstat.data")
 ## 18     chorley.extra  list     2
 ## 19          clmfires   ppp     6
 ## 20    clmfires.extra  list     2
-## 21            copper  list     7
-## 22         demohyper  list   3x3
-## 23           demopat   ppp     6
-## 24          dendrite   ppx     3
-## 25          finpines   ppp     6
-## 26               flu  list  41x4
-## 27           ganglia   ppp     6
-## 28            gordon   ppp     5
-## 29          gorillas   ppp     6
-## 30    gorillas.extra  list     7
-## 31           hamster   ppp     6
-## 32           heather  list     3
-## 33        humberside   ppp     6
-## 34 humberside.convex   ppp     6
-## 35          hyytiala   ppp     6
-## 36     japanesepines   ppp     5
-## 37           lansing   ppp     6
-## 38           letterR  owin     5
-## 39          longleaf   ppp     6
-## 40            mucosa   ppp     6
-## 41     mucosa.subwin  owin     4
-## 42         murchison  list     3
-## 43           nbfires   ppp     6
-## 44     nbfires.extra  list     2
-## 45          nbw.rect  owin     4
-## 46           nbw.seg  list     5
-## 47           nztrees   ppp     5
-## 48             osteo  list  40x5
-## 49           paracou   ppp     6
-## 50         ponderosa   ppp     5
-## 51   ponderosa.extra  list     2
-## 52         pyramidal  list  31x2
-## 53           redwood   ppp     5
-## 54          redwood3   ppp     5
-## 55       redwoodfull   ppp     5
-## 56 redwoodfull.extra  list     5
-## 57    residualspaper  list     7
-## 58           shapley   ppp     6
-## 59     shapley.extra  list     3
-## 60             simba  list  10x2
-## 61            simdat   ppp     5
-## 62         simplenet  list    10
-## 63           spiders   ppx     3
-## 64       sporophores   ppp     6
-## 65           spruces   ppp     6
-## 66      swedishpines   ppp     5
-## 67           urkiola   ppp     6
-## 68          vesicles   ppp     5
-## 69    vesicles.extra  list     4
-## 70              waka   ppp     6
-## 71     waterstriders  list     3
+## 21          concrete   ppp     5
+## 22            copper  list     7
+## 23         demohyper  list   3x3
+## 24           demopat   ppp     6
+## 25          dendrite   ppx     3
+## 26          finpines   ppp     6
+## 27               flu  list  41x4
+## 28           ganglia   ppp     6
+## 29            gordon   ppp     5
+## 30          gorillas   ppp     6
+## 31    gorillas.extra  list     7
+## 32           hamster   ppp     6
+## 33           heather  list     3
+## 34        humberside   ppp     6
+## 35 humberside.convex   ppp     6
+## 36          hyytiala   ppp     6
+## 37     japanesepines   ppp     5
+## 38           lansing   ppp     6
+## 39           letterR  owin     5
+## 40          longleaf   ppp     6
+## 41            mucosa   ppp     6
+## 42     mucosa.subwin  owin     4
+## 43         murchison  list     3
+## 44           nbfires   ppp     6
+## 45     nbfires.extra  list     2
+## 46          nbw.rect  owin     4
+## 47           nbw.seg  list     5
+## 48           nztrees   ppp     5
+## 49             osteo  list  40x5
+## 50           paracou   ppp     6
+## 51         ponderosa   ppp     5
+## 52   ponderosa.extra  list     2
+## 53         pyramidal  list  31x2
+## 54           redwood   ppp     5
+## 55          redwood3   ppp     5
+## 56       redwoodfull   ppp     5
+## 57 redwoodfull.extra  list     5
+## 58    residualspaper  list     7
+## 59           shapley   ppp     6
+## 60     shapley.extra  list     3
+## 61             simba  list  10x2
+## 62            simdat   ppp     5
+## 63         simplenet  list    10
+## 64           spiders   ppx     3
+## 65       sporophores   ppp     6
+## 66           spruces   ppp     6
+## 67      swedishpines   ppp     5
+## 68           urkiola   ppp     6
+## 69          vesicles   ppp     5
+## 70    vesicles.extra  list     4
+## 71              waka   ppp     6
+## 72     waterstriders  list     3
 ##                                                                                        Title
 ## 1                                          Colour Sequences with Uniform Perceptual Contrast
 ## 2                                                                 Hughes' Amacrine Cell Data
@@ -162,57 +163,58 @@ vcdExtra::datasets("spatstat.data")
 ## 18                                                                Chorley-Ribble Cancer Data
 ## 19                                                           Castilla-La Mancha Forest Fires
 ## 20                                                           Castilla-La Mancha Forest Fires
-## 21                                                   Berman-Huntington points and lines data
-## 22                                       Demonstration Example of Hyperframe of Spatial Data
-## 23                                                             Artificial Data Point Pattern
-## 24                                                                     Dendritic Spines Data
-## 25                                                                 Pine saplings in Finland.
-## 26                                                                  Influenza Virus Proteins
-## 27                                            Beta Ganglion Cells in Cat Retina, Old Version
-## 28                                                                   People in Gordon Square
-## 29                                                                     Gorilla Nesting Sites
+## 21                                                                   Air Bubbles in Concrete
+## 22                                                   Berman-Huntington points and lines data
+## 23                                       Demonstration Example of Hyperframe of Spatial Data
+## 24                                                             Artificial Data Point Pattern
+## 25                                                                     Dendritic Spines Data
+## 26                                                                 Pine saplings in Finland.
+## 27                                                                  Influenza Virus Proteins
+## 28                                            Beta Ganglion Cells in Cat Retina, Old Version
+## 29                                                                   People in Gordon Square
 ## 30                                                                     Gorilla Nesting Sites
-## 31                                                              Aherne's hamster tumour data
-## 32                                                                     Diggle's Heather Data
-## 33                                       Humberside Data on Childhood Leukaemia and Lymphoma
+## 31                                                                     Gorilla Nesting Sites
+## 32                                                              Aherne's hamster tumour data
+## 33                                                                     Diggle's Heather Data
 ## 34                                       Humberside Data on Childhood Leukaemia and Lymphoma
-## 35                                                   Scots pines and other trees at Hyytiala
-## 36                                                              Japanese Pines Point Pattern
-## 37                                                               Lansing Woods Point Pattern
-## 38                                                               Window in Shape of Letter R
-## 39                                                              Longleaf Pines Point Pattern
-## 40                                                                   Cells in Gastric Mucosa
+## 35                                       Humberside Data on Childhood Leukaemia and Lymphoma
+## 36                                                   Scots pines and other trees at Hyytiala
+## 37                                                              Japanese Pines Point Pattern
+## 38                                                               Lansing Woods Point Pattern
+## 39                                                               Window in Shape of Letter R
+## 40                                                              Longleaf Pines Point Pattern
 ## 41                                                                   Cells in Gastric Mucosa
-## 42                                                                   Murchison gold deposits
-## 43                                              Point Patterns of New Brunswick Forest Fires
+## 42                                                                   Cells in Gastric Mucosa
+## 43                                                                   Murchison gold deposits
 ## 44                                              Point Patterns of New Brunswick Forest Fires
 ## 45                                              Point Patterns of New Brunswick Forest Fires
 ## 46                                              Point Patterns of New Brunswick Forest Fires
-## 47                                                           New Zealand Trees Point Pattern
-## 48                       Osteocyte Lacunae Data: Replicated Three-Dimensional Point Patterns
-## 49                                                   Kimboto trees at Paracou, French Guiana
-## 50                                                         Ponderosa Pine Tree Point Pattern
+## 47                                              Point Patterns of New Brunswick Forest Fires
+## 48                                                           New Zealand Trees Point Pattern
+## 49                       Osteocyte Lacunae Data: Replicated Three-Dimensional Point Patterns
+## 50                                                   Kimboto trees at Paracou, French Guiana
 ## 51                                                         Ponderosa Pine Tree Point Pattern
-## 52                                                     Pyramidal Neurons in Cingulate Cortex
-## 53                                       California Redwoods Point Pattern (Ripley's Subset)
+## 52                                                         Ponderosa Pine Tree Point Pattern
+## 53                                                     Pyramidal Neurons in Cingulate Cortex
 ## 54                                       California Redwoods Point Pattern (Ripley's Subset)
-## 55                                        California Redwoods Point Pattern (Entire Dataset)
+## 55                                       California Redwoods Point Pattern (Ripley's Subset)
 ## 56                                        California Redwoods Point Pattern (Entire Dataset)
-## 57                                     Data and Code From JRSS Discussion Paper on Residuals
-## 58                                                      Galaxies in the Shapley Supercluster
+## 57                                        California Redwoods Point Pattern (Entire Dataset)
+## 58                                     Data and Code From JRSS Discussion Paper on Residuals
 ## 59                                                      Galaxies in the Shapley Supercluster
-## 60            Simulated data from a two-group experiment with replication within each group.
-## 61                                                                   Simulated Point Pattern
-## 62                                                          Simple Example of Linear Network
-## 63                                               Spider Webs on Mortar Lines of a Brick Wall
-## 64                                                                          Sporophores Data
-## 65                                                                     Spruces Point Pattern
-## 66                                                               Swedish Pines Point Pattern
-## 67                                                               Urkiola Woods Point Pattern
-## 68                                                                             Vesicles Data
+## 60                                                      Galaxies in the Shapley Supercluster
+## 61            Simulated data from a two-group experiment with replication within each group.
+## 62                                                                   Simulated Point Pattern
+## 63                                                          Simple Example of Linear Network
+## 64                                               Spider Webs on Mortar Lines of a Brick Wall
+## 65                                                                          Sporophores Data
+## 66                                                                     Spruces Point Pattern
+## 67                                                               Swedish Pines Point Pattern
+## 68                                                               Urkiola Woods Point Pattern
 ## 69                                                                             Vesicles Data
-## 70                                                               Trees in Waka national park
-## 71 Waterstriders data.  Three independent replications of a point pattern formed by insects.
+## 70                                                                             Vesicles Data
+## 71                                                               Trees in Waka national park
+## 72 Waterstriders data.  Three independent replications of a point pattern formed by insects.
 ```
 
 Load a dataset of your choice.
@@ -242,13 +244,13 @@ summary(gorillas.ppp)
 ## 
 ## Mark variables: group, season, date
 ## Summary:
-##    group       season         date           
-##  major:350   dry  :275   Min.   :2006-01-06  
-##  minor:297   rainy:372   1st Qu.:2007-03-15  
-##                          Median :2008-02-05  
-##                          Mean   :2007-12-14  
-##                          3rd Qu.:2008-09-23  
-##                          Max.   :2009-05-31  
+##     group              season               date           
+##  Length:647         Length:647         Min.   :2006-01-06  
+##  Class :character   Class :character   1st Qu.:2007-03-15  
+##  Mode  :character   Mode  :character   Median :2008-02-05  
+##                                        Mean   :2007-12-14  
+##                                        3rd Qu.:2008-09-23  
+##                                        Max.   :2009-05-31  
 ## 
 ## Window: polygonal boundary
 ## single connected closed polygon with 21 vertices

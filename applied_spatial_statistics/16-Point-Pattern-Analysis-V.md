@@ -50,7 +50,7 @@ As usual, it is good practice to clear the working space to make sure that you d
 rm(list = ls())
 ```
 
-Note that `ls()` lists all objects currently on the worspace.
+Note that `ls()` lists all objects currently on the workspace.
 
 Load the libraries you will use in this activity:
 
@@ -58,16 +58,6 @@ Load the libraries you will use in this activity:
 library(tidyverse)
 library(spatstat)
 library(geog4ga3)
-```
-
-```
-## Warning: replacing previous import 'plotly::filter' by 'stats::filter' when
-## loading 'geog4ga3'
-```
-
-```
-## Warning: replacing previous import 'dplyr::lag' by 'stats::lag' when loading
-## 'geog4ga3'
 ```
 
 Load the datasets that you will use for this practice:
@@ -181,22 +171,32 @@ plot(sim1)
 Importantly, you can apply any of the techniques that you have seen so far, for instance, the $\hat{G}$-function:
 
 ```r
-g_sim1 <- Gest(sim1, correction = "none")
+g_sim1 <- Gest(sim1, 
+               correction = "none")
 ```
 
 We can try plotting the empirical functions (notice that the result of `Gest` is a dataframe with the values of `r`, the distance variable, the raw or empirical function, and the theoretical function). To plot using `ggplot2` you can stack the two dataframes as follows (after adding a factor to indicate if it is the empirical function or a simulation):
 
 ```r
-# Use `transmute()` to keep only some columns from a data frame, possibly after calculating new columns; in this example we take `raw` and put it in a column called `G`, we take `r` and put it in a column called `r` and create a new variable called `Type` to indicate that these values are for the "Empirical" function. Then we use `rbind()` to bind the rows of this data frame, and the rows of a second data frame that keeps the same columns, but based on the simulated null landscape
-g_all <- transmute(g_pp1, G = raw, x = r, Type = "Pattern 1")
-g_all <- rbind(g_all, transmute(g_sim1, G = raw, x = r, Type = "Simulation"))
+# Use `data.frame()` to create a table with the relevant elements of the `g_pp1` object; in this example we take `raw` and put it in a column called `G`, we take `r` and put it in a column called `r` and create a new variable called `Type` to indicate that these values are for the "Empirical" function. Then we use `rbind()` to bind the rows of this data frame, and a second data frame that keeps the same columns, but based on the simulated null landscape
+g_all <- data.frame(G = g_pp1$raw, 
+                    x = g_pp1$r, 
+                    Type = "Pattern 1")
+g_all <- rbind(g_all, 
+               data.frame(G = g_sim1$raw, 
+                          x = g_sim1$r, 
+                          Type = "Simulation"))
 ```
 
 We can use `ggplot2` to create a plot of the two functions:
 
 ```r
 # By assigning `Type` to the aesthetic of `color` in `ggplot()`, we plot lines of different types in different colors
-ggplot(data = g_all, aes(x= x, y = G, color = Type)) + geom_line()
+ggplot(data = g_all,
+       aes(x= x, 
+           y = G, 
+           color = Type)) + 
+  geom_line()
 ```
 
 <img src="16-Point-Pattern-Analysis-V_files/figure-html/unnamed-chunk-13-1.png" width="672" />
@@ -205,14 +205,22 @@ After seeing the plot above, we notice that the empirical function is very, very
 
 ```r
 sim2 <- rpoispp(lambda = 81, win = W)
-g_sim2 <- Gest(sim2, correction = "none")
-g_all <- rbind(g_all, transmute(g_sim2, G = raw, x = r, Type = "Simulation"))
+g_sim2 <- Gest(sim2, 
+               correction = "none")
+g_all <- rbind(g_all,
+               data.frame(G = g_sim2$raw, 
+                          x = g_sim2$r, 
+                          Type = "Simulation"))
 ```
 
 Plot again:
 
 ```r
-ggplot(data = g_all, aes(x= x, y = G, color = Type)) + geom_line()
+ggplot(data = g_all, 
+       aes(x= x, 
+           y = G, 
+           color = Type)) + 
+  geom_line()
 ```
 
 <img src="16-Point-Pattern-Analysis-V_files/figure-html/unnamed-chunk-15-1.png" width="672" />
@@ -222,15 +230,24 @@ The empirical function continues to look very similar to the simulated null land
 ```r
 # Flow control functions include `for()`; this function will repeat the statements that follow a set number of times. In this example, we had already simulated 2 null landscapes above, so we want to simulate null landscapes 3 through 99
 for(i in 3:99){
-  g_sim <- Gest(rpoispp(lambda = 81, win = W), correction = "none")
-  g_all <- rbind(g_all, transmute(g_sim, G = raw, x = r, Type = "Simulation"))
+  g_sim <- Gest(rpoispp(lambda = 81, 
+                        win = W), 
+                correction = "none")
+  g_all <- rbind(g_all, 
+                 data.frame(G = g_sim$raw, 
+                            x = g_sim$r, 
+                            Type = "Simulation"))
 }
 ```
 
 With this we have generated 99 distinct null landscapes. Try plotting the empirical function with the functions of all of these simulated landscapes:
 
 ```r
-ggplot(data = g_all, aes(x= x, y = G, color = Type)) + geom_line()
+ggplot(data = g_all, 
+       aes(x= x,
+           y = G,
+           color = Type)) + 
+  geom_line()
 ```
 
 <img src="16-Point-Pattern-Analysis-V_files/figure-html/unnamed-chunk-17-1.png" width="672" />
@@ -241,16 +258,28 @@ We can follow the same process but now for the second pattern `pp2.ppp` to the s
 
 ```r
 # Compute the G-function for the point pattern in `pp2.ppp` and then extract the value of G, the distance, and label it as an "Empirical" function in a new data frame (by means of `transmute()`)
-g_pp2 <- Gest(pp2.ppp, correction = "none")
-g_pp2 <- transmute(g_pp2, G = raw, x = r, Type = "Pattern 2")
+g_pp2 <- Gest(pp2.ppp, 
+              correction = "none")
+g_pp2 <- data.frame(G = g_pp2$raw, 
+                    x = g_pp2$r, 
+                    Type = "Pattern 2")
 
 # Bind the results of the G-function for `pp2.ppp` to the data frame with the simulations, and use `mutate()` to convert `Type` into a factor
-g_all <- rbind(g_all, g_pp2)
-g_all <- mutate(g_all, Type = factor(Type,
-                              levels = c("Pattern 1", "Pattern 2", "Simulation")))
+g_all <- rbind(g_all, 
+               g_pp2)
+g_all <- mutate(g_all, 
+                Type = factor(Type,
+                              levels = c("Pattern 1", 
+                                         "Pattern 2", 
+                                         "Simulation")))
 
 # Use filter to remove all observations associated with "Pattern 1"; in this case, Type not equal (i.e., `!=`) to "Pattern 1". This way we can plot only the G-function of "Pattern 2" and the simulations
-ggplot(data = filter(g_all, Type != "Pattern 1"), aes(x= x, y = G, color = Type)) + geom_line()
+ggplot(data = filter(g_all, 
+                     Type != "Pattern 1"), 
+       aes(x= x, 
+           y = G,
+           color = Type)) + 
+  geom_line()
 ```
 
 <img src="16-Point-Pattern-Analysis-V_files/figure-html/unnamed-chunk-18-1.png" width="672" />
@@ -267,7 +296,10 @@ As you saw above, using simulation for hypothesis testing is, in general terms, 
 
 ```r
 # The function `envelope()` automates what we did above, simulating null landscapes; it takes as arguments a `ppp` object for the empirical pattern, a function that we desire to test, for example the function `Gest`, as well as the number of simulations that we wish to conduct. An additional argument `funargs = ` is used to pass other arguments to the function that is evaluated, i.e., in this example `Gest`
-env_pp1 <- envelope(pp1.ppp, Gest, nsim = 99, funargs = list(correction = "none"))
+env_pp1 <- envelope(pp1.ppp,
+                    Gest, 
+                    nsim = 99, 
+                    funargs = list(correction = "none"))
 ```
 
 ```
@@ -292,7 +324,10 @@ It is easy to see that in this case the empirical function falls within the simu
 Also, the $\hat{F}$-function:
 
 ```r
-env_pp2 <- envelope(pp2.ppp, Fest, nsim = 99, funargs = list(correction = "none"))
+env_pp2 <- envelope(pp2.ppp, 
+                    Fest, 
+                    nsim = 99, 
+                    funargs = list(correction = "none"))
 ```
 
 ```
@@ -315,7 +350,10 @@ Now the empirical function lies well outside the simulation envelopes, which mak
 And finally, the $\hat{K}$-function:
 
 ```r
-env_pp3 <- envelope(pp3.ppp, Kest, nsim = 99, funargs = list(correction = "none"))
+env_pp3 <- envelope(pp3.ppp, 
+                    Kest, 
+                    nsim = 99, 
+                    funargs = list(correction = "none"))
 ```
 
 ```
@@ -346,7 +384,10 @@ When defining the region (or window) for the analysis, care must be taken that i
 Consider for instance the first pattern in the dataset. This pattern was defined for a unit-square window. We can apply the $\hat{K}$-function to it:
 
 ```r
-k_env_pp1 <- envelope(pp1.ppp, Kest, nsim = 99, funargs = list(correction = "none"))
+k_env_pp1 <- envelope(pp1.ppp, 
+                      Kest, 
+                      nsim = 99,
+                      funargs = list(correction = "none"))
 ```
 
 ```
@@ -369,8 +410,10 @@ Based on this we would most likely conclude that the pattern is random.
 But if we replace the unit-square window by a much larger window, as follows:
 
 ```r
-W2 <- owin(x = c(-2,4), y = c(-2, 4))
-pp1_reg2 <- as.ppp(as.data.frame(pp1.ppp), W = W2)
+W2 <- owin(x = c(-2,4), 
+           y = c(-2, 4))
+pp1_reg2 <- as.ppp(as.data.frame(pp1.ppp), 
+                   W = W2)
 plot(pp1_reg2)
 ```
 
@@ -379,7 +422,10 @@ plot(pp1_reg2)
 In the context of the larger window, the point pattern now looks clustered! See how the definition of the window would change your conclusions regarding the pattern:
 
 ```r
-k_env_pp1_reg2 <- envelope(pp1_reg2, Kest, nsim = 99, funargs = list(correction = "none"))
+k_env_pp1_reg2 <- envelope(pp1_reg2, 
+                           Kest, 
+                           nsim = 99, 
+                           funargs = list(correction = "none"))
 ```
 
 ```
@@ -419,7 +465,8 @@ Several corrections are available in `spatstat` to deal with the possibility of 
 These corrections are variations of weighting schemes. In other words, the statistic is weighted to give an unbiased estimator. See:
 
 ```r
-plot(Gest(pp2.ppp, correction = "all"))
+plot(Gest(pp2.ppp, 
+          correction = "all"))
 ```
 
 <img src="16-Point-Pattern-Analysis-V_files/figure-html/unnamed-chunk-26-1.png" width="672" />

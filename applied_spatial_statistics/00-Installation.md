@@ -108,7 +108,7 @@ library(devtools)
 This allows you to use all the functions in the package `devtools`. In particular, at this point you want to use a function that allows you to retrieve other packages! With the functionality of `devtools::install_github` you can download and install the companion package for the book by running the following instruction:
 
 ```r
-install_github("paezha/Spatial-Statistics-Course", subdir="geog4ga3")
+devtools::install_github("paezha/Spatial-Statistics-Course", subdir="geog4ga3")
 ```
 
 This will install the package (i.e., put it in your library) so that you can also benefit from its functionality.

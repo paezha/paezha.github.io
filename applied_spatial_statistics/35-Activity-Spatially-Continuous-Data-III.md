@@ -44,25 +44,12 @@ It is good practice to clear the working space to make sure that you do not have
 rm(list = ls())
 ```
 
-Note that `ls()` lists all objects currently on the worspace.
+Note that `ls()` lists all objects currently on the workspace.
 
 Load the libraries you will use in this activity (load other packages as appropriate). 
 
 ```r
 library(geog4ga3)
-```
-
-```
-## Warning: replacing previous import 'plotly::filter' by 'stats::filter' when
-## loading 'geog4ga3'
-```
-
-```
-## Warning: replacing previous import 'dplyr::lag' by 'stats::lag' when loading
-## 'geog4ga3'
-```
-
-```r
 library(gstat)
 library(sf)
 library(spdep)
@@ -91,11 +78,11 @@ The data set consists of 85 georeferenced measurements of piezometric head. Poss
 
 **NOTE**: Activities include technical "how to" tasks/questions. Usually, these ask you to organize data, create a plot, and so on in support of analysis and interpretation. These tasks are indicated by a star (*).
 
-1.* Obtain and plot the empirical semivariogram for the head in the Walker Lake dataset.
+1. (*)Obtain and plot the empirical semivariogram for the head in the Walker Lake dataset.
 
-2.* Estimate a trend surface of your choice, and obtain and plot an empirical semivariogram using the residuals. How would you interpret this semivariogram?
+2. (*)Estimate a trend surface of your choice, and obtain and plot an empirical semivariogram using the residuals. How would you interpret this semivariogram?
 
-3.* Estimate and plot a theoretical semivariogram model for the residual variogram. 
+3. (*)Estimate and plot a theoretical semivariogram model for the residual variogram. 
 
 4. What is your interpretation of the semivariograms above?
 

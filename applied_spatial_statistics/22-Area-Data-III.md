@@ -39,7 +39,7 @@ As usual, it is good practice to clear the working space to make sure that you d
 rm(list = ls())
 ```
 
-Note that `ls()` lists all objects currently on the worspace.
+Note that `ls()` lists all objects currently on the workspace.
 
 Load the libraries you will use in this activity:
 
@@ -48,19 +48,6 @@ library(tidyverse)
 library(spdep)
 library(sf)
 library(geog4ga3)
-```
-
-```
-## Warning: replacing previous import 'plotly::filter' by 'stats::filter' when
-## loading 'geog4ga3'
-```
-
-```
-## Warning: replacing previous import 'dplyr::lag' by 'stats::lag' when loading
-## 'geog4ga3'
-```
-
-```r
 library(gridExtra)
 ```
 
@@ -129,7 +116,7 @@ We will begin this chapter by briefly revisiting some of these notions. In the f
 ```r
 # Function `poly2nb()` builds a list of neighbors based on contiguous boundaries. The argument for this function is an object of class "Spatial", which was obtained from the `sf` object previously. `Hamilton_CT.sp` is an object containiing multi-polygon objects. 
 
-# Function `nb2listw()` takes a list of neighbours and creates a matrix of spatial weights in the form of a list. Together, these two functions create a spatial weights matrix for the Census Tracts in Hamilton.
+# Function `nb2listw()` takes a list of neighbors and creates a matrix of spatial weights in the form of a list. Together, these two functions create a spatial weights matrix for the Census Tracts in Hamilton.
 
 Hamilton_CT.nb <- poly2nb(pl = Hamilton_CT.sp)
 Hamilton_CT.w <- nb2listw(Hamilton_CT.nb)
@@ -268,7 +255,7 @@ ggplot() +
 
 <img src="22-Area-Data-III_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
-The empirical variable is the map in the upper left corner (labelled `POP_DENSITY.sma`). The remaining 8 maps are simulated variables. Would you say the map of the empirical variable is fairly different from the map of the simulated variables? What are the key differences?
+The empirical variable is the map in the upper left corner (labeled `POP_DENSITY.sma`). The remaining 8 maps are simulated variables. Would you say the map of the empirical variable is fairly different from the map of the simulated variables? What are the key differences?
 
 An additional advantage of the spatial moving average is its use in the development of scatterplots. The information below provides further examples of exploring spatial moving averages with scatterplots.
 
@@ -351,7 +338,7 @@ Calculate the mean-centered version of POP_DENSIT, and then its spatial moving a
 
 ```r
 df_mean_center_scatterplot <- transmute(Hamilton_CT, # Modify values in dataframe
-                                        Density_z = POP_DENSITY - mean(POP_DENSITY), # Substract the mean, so that the variable now is deviations from the mean 
+                                        Density_z = POP_DENSITY - mean(POP_DENSITY), # Subtract the mean, so that the variable now is deviations from the mean 
                                         SMA_z = lag.listw(Hamilton_CT.w, Density_z)) # Calculate the spatial moving average of the newly created variable `Density_z`
 ```
 
@@ -393,7 +380,7 @@ $$
 
 When $z_i$ is above its mean, it is a positive value. When it is below the mean, it is a negative value. Likewise, when $\bar{z}_i$ is above its mean, it is a positive value, and negative otherwise. The mean is a useful benchmark to see if values are relatively high, or relatively low.
 
-There are four posibilities with respect to the combinations of (relatively) high and low values.
+There are four possibilities with respect to the combinations of (relatively) high and low values.
 
 1. Quadrant 1 (the value of $z_i$ is high & the value of $\bar{z}_i$ is also high):
 
@@ -438,7 +425,7 @@ If many dots are in Quadrants 1 and 3 in the scatterplot, the sum of the product
 
 1. If the sum is positive, this would suggest that high & high values tend to be together, while low & low values also tend to be together.
 
-2. In contrast, if the sum is negative, this would suggest that high values tend to be surrounded by low values, and viceversa.
+2. In contrast, if the sum is negative, this would suggest that high values tend to be surrounded by low values, and vice-versa.
 
 Finally, if the dots are scattered over the four quadrants, some products will be positive and some will be negative, and they will tend to cancel each other when summed. In this way, the sum of the products will tend to be closer to zero.
 
@@ -515,4 +502,4 @@ moran.test(Hamilton_CT$POP_DENSITY, Hamilton_CT.w)
 
 Since the null hypothesis is of spatial independence, the $p$-value of the statistic is interpreted as the probability of making a mistake by rejecting the null hypothesis. In the present case, the $p$-value is such a small number that we can reject the null hypothesis with a high degree of confidence.
 
-Moran's $I$ and Moran's scatterplots are amongst the most widely used tools in the analysis of spatial area data.
+Moran's $I$ and Moran's scatterplots are among the most widely used tools in the analysis of spatial area data.

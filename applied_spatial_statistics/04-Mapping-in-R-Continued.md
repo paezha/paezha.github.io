@@ -56,7 +56,7 @@ As usual, it is good practice to clear the working space to make sure that you d
 rm(list = ls())
 ```
 
-Note that `ls()` lists all objects currently on the worspace.
+Note that `ls()` lists all objects currently on the workspace.
 
 Load the libraries you will use in this activity:
 
@@ -83,7 +83,7 @@ data("missing_df")
 
 The dataframe `missing_df` includes $n = 65$ observations (Note: text between $ characters is mathematical notation in LaTeX). These observations are geocoded using a false origin and coordinates normalized to the unit-square (the extent of their values is between zero and one). The coordinates are `x` and `y`. 
 
-In addition, there are three variables associated with the locations (VAR1, VAR2, VAR3). The variables are generic. Feel free to think of them as housing prices, concentrations in ppb of some contaminant or any other variable that will help clarify your understading. Finally, a factor variable states whether the variables were measured for a location: if the status is "FALSE", the values of the variables are missing.
+In addition, there are three variables associated with the locations (VAR1, VAR2, VAR3). The variables are generic. Feel free to think of them as housing prices, concentrations in ppb of some contaminant or any other variable that will help clarify your understanding. Finally, a factor variable states whether the variables were measured for a location: if the status is "FALSE", the values of the variables are missing.
 
 ## Summarizing a Dataframe
 
@@ -243,7 +243,7 @@ A pipe operator is written this way: `%>%`. Its objective is to pass forward the
 For instance, instead of nesting the subsetting instructions in the `summary` function, you could do the subsetting first, and pass the results of that to the summary for further processing. This would look like this:
 
 ```r
-# Remember, the pipe operator `%>%` takes pases the value of the left-hand side to the function on the right-hand side
+# Remember, the pipe operator `%>%` passes the value of the left-hand side to the function on the right-hand side
 subset(missing_df, Observed == FALSE) %>% summary()
 ```
 
@@ -266,7 +266,7 @@ subset(missing_df, Observed == FALSE) %>% summary()
 ## 
 ```
 
-The code above is read as "subset `missing_df` and pass the results to `summary`". Pipe operators make writting and reading code somewhat more natural.
+The code above is read as "subset `missing_df` and pass the results to `summary`". Pipe operators make writing and reading code somewhat more natural.
 
 ## More on Visualization
 
@@ -318,7 +318,7 @@ ggplot() +
 ```
 
 <img src="04-Mapping-in-R-Continued_files/figure-html/unnamed-chunk-15-1.png" width="672" />
-Now it is easy to see the locations of the five observations that were `Observed == FALSE`!, which are labeled with grey circles. 
+Now it is easy to see the locations of the five observations that were `Observed == FALSE`!, which are labeled with gray circles. 
 
 You can change the coloring scheme by means of `scale_color_distiller` (you can can check the different color palettes available [here](http://ggplot2.tidyverse.org/reference/scale_brewer.html)):
 
@@ -343,7 +343,7 @@ ggplot() +
 
 <img src="04-Mapping-in-R-Continued_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 
-Finally, you could try subsetting the data to have greater control of the appareance of your plot, for instance:
+Finally, you could try subsetting the data to have greater control of the appearance of your plot, for instance:
 
 ```r
 ggplot() +

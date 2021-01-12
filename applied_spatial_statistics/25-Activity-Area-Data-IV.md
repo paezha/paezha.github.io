@@ -42,7 +42,7 @@ It is good practice to clear the working space to make sure that you do not have
 rm(list = ls())
 ```
 
-Note that `ls()` lists all objects currently on the worspace.
+Note that `ls()` lists all objects currently on the workspace.
 
 Load the libraries you will use in this activity. 
 
@@ -53,16 +53,6 @@ library(tidyverse)
 library(sf)
 library(spdep)
 library(geog4ga3)
-```
-
-```
-## Warning: replacing previous import 'plotly::filter' by 'stats::filter' when
-## loading 'geog4ga3'
-```
-
-```
-## Warning: replacing previous import 'dplyr::lag' by 'stats::lag' when loading
-## 'geog4ga3'
 ```
 
 Begin by loading the data that you will use in this activity:
@@ -158,11 +148,13 @@ You are now ready for the next activity.
 
 ## Activity
 
-1.* Create local Moran maps for the population in age group 20-34 _and_ proportion of population in age group 20-34. 
+**NOTE**: Activities include technical "how to" tasks/questions. Usually, these ask you to organize data, create a plot, and so on in support of analysis and interpretation. These tasks are indicated by a star (*).
 
-2.* Use the $G_i^*$ statitic to analyze the population _and_ proportion of population in the age group 20-34.
+1. (*)Create local Moran maps for the population in age group 20-34 _and_ proportion of population in age group 20-34. 
 
-3.* Now create local Moran maps for the population _and_ population density in the age group 20-34. 
+2. (\*) Use the $G_i^*$ statistic to analyze the population _and_ proportion of population in the age group 20-34.
+
+3. (*)Now create local Moran maps for the population _and_ population density in the age group 20-34. 
 
 4. Concerning the analysis in point 1: What is the difference between using population (absolute) and population density (rate)?
 

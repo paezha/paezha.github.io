@@ -14,7 +14,7 @@ Answer the following questions:
 1. List and describe two criteria to define proximity in area data analysis.
 2. What is a spatial weights matrix?
 3. Why do spatial weight matrices have zeros in the main diagonal?
-4. How is a spatials weights matrix row-standardized?
+4. How is a spatial weights matrix row-standardized?
 4. Write the spatial weights matrices for the sample systems in Figures \@ref{fig:simple-areal-system-i} and \@ref{fig:simple-areal-system-ii}. Explain the criteria used to do so.
 
 <div class="figure">
@@ -55,7 +55,7 @@ It is good practice to clear the working space to make sure that you do not have
 rm(list = ls())
 ```
 
-Note that `ls()` lists all objects currently on the worspace.
+Note that `ls()` lists all objects currently on the workspace.
 
 Load the libraries you will use in this activity. 
 
@@ -66,19 +66,6 @@ library(tidyverse)
 library(spdep)
 library(sf)
 library(geog4ga3)
-```
-
-```
-## Warning: replacing previous import 'plotly::filter' by 'stats::filter' when
-## loading 'geog4ga3'
-```
-
-```
-## Warning: replacing previous import 'dplyr::lag' by 'stats::lag' when loading
-## 'geog4ga3'
-```
-
-```r
 library(plotly)
 ```
 
@@ -95,7 +82,9 @@ This is a `sf` object with census tracts and selected demographic variables for 
 You can obtain new (calculated) variables as follows. For instance, to obtain the proportion of residents who are between 20 and 34 years old, and between 35 and 49:
 
 ```r
-Hamilton_CT <- mutate(Hamilton_CT, Prop20to34 = (AGE_20_TO_24 + AGE_25_TO_29 + AGE_30_TO_34)/POPULATION, Prop35to49 = (AGE_35_TO_39 + AGE_40_TO_44 + AGE_45_TO_49)/POPULATION)
+Hamilton_CT <- Hamilton_CT %>%
+  mutate(Prop20to34 = (AGE_20_TO_24 + AGE_25_TO_29 + AGE_30_TO_34)/POPULATION,
+         Prop35to49 = (AGE_35_TO_39 + AGE_40_TO_44 + AGE_45_TO_49)/POPULATION)
 ```
 
 You can also convert the `sf` object into a `SpatialPolygonsDataFrame` object for use with the `spdedp` package:
@@ -110,13 +99,13 @@ You are now ready for the next activity.
 
 **NOTE**: Activities include technical "how to" tasks/questions. Usually, these ask you to organize data, create a plot, and so on in support of analysis and interpretation. These tasks are indicated by a star (*).
 
-1.* Create a spatial weights matrix for the census tracts in the Hamilton CMA. Use adjacency as your criterion for proximity.
+1. (*)Create a spatial weights matrix for the census tracts in the Hamilton CMA. Use adjacency as your criterion for proximity.
 
-2.* Calculate the spatial moving average for the following two variables: 1) proportion of the population who are 20 to 34 years old; and 2) proportion of the population who are 65 and older.
+2. (*)Calculate the spatial moving average for the following two variables: 1) proportion of the population who are 20 to 34 years old; and 2) proportion of the population who are 65 and older.
 
-3.* Append the spatial moving averages to your dataframe.
+3. (*)Append the spatial moving averages to your dataframe.
 
-4.* Choose one age group and create a scatterplot of the proportion of population in that group versus its spatial moving average. (Hint: if you create the scatterplot using `ggplot2` you can add the 45 degree line by meand of `geom_abline(slope = 1, intercept = 0)`).
+4. (*)Choose one age group and create a scatterplot of the proportion of population in that group versus its spatial moving average. (Hint: if you create the scatterplot using `ggplot2` you can add the 45 degree line by means of `geom_abline(slope = 1, intercept = 0)`).
 
 5. Show your scatterplot of the population versus its spatial moving average to a fellow student. What is the meaning of the 45 degree line in this plot?
 

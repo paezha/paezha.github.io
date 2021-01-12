@@ -14,7 +14,7 @@ Answer the following questions:
 1. What does the $\hat{G}$-function measure?
 2. What does the $\hat{F}$-function measure?
 3. How do these two functions relate to one another?
-4. Describe the intution behind the $\hat{K}$-function. 
+4. Describe the intuition behind the $\hat{K}$-function. 
 5. How does the $\hat{K}$-function capture patterns at multiple scales?
 
 ## Learning objectives
@@ -43,7 +43,7 @@ It is good practice to clear the working space to make sure that you do not have
 rm(list = ls())
 ```
 
-Note that `ls()` lists all objects currently on the worspace.
+Note that `ls()` lists all objects currently on the workspace.
 
 Load the libraries you will use in this activity. In addition to `tidyverse`, you will need `spatstat`, a package designed for the analysis of point patterns (you can learn about `spatstat` [here](https://cran.r-project.org/web/packages/spatstat/vignettes/getstart.pdf) and [here](http://spatstat.org/resources/spatstatJSSpaper.pdf)):
 
@@ -53,16 +53,6 @@ library(spatstat)
 library(maptools) # Needed to convert `SpatialPolygons` into `owin`-class object
 library(sf)
 library(geog4ga3)
-```
-
-```
-## Warning: replacing previous import 'plotly::filter' by 'stats::filter' when
-## loading 'geog4ga3'
-```
-
-```
-## Warning: replacing previous import 'dplyr::lag' by 'stats::lag' when loading
-## 'geog4ga3'
 ```
 
 For this activity, you will use the same datasets that you used in Activity 6, including the geospatial files for Toronto's city boundary:
@@ -96,9 +86,11 @@ Now that you have the datasets in the appropriate format, you are ready for the 
 
 ## Activity
 
-1. *Plot the empirical $\hat{F}$-function for all fast food establishments (pooled) and then for each type of establishment separately (i.e, "Chicken", "Hamburger", "Pizza", "Sub").
+**NOTE**: Activities include technical "how to" tasks/questions. Usually, these ask you to organize data, create a plot, and so on in support of analysis and interpretation. These tasks are indicated by a star (*).
 
-2. *Plot the empirical $\hat{K}$-function for all fast food establishments (pooled) and then for each type of establishment (i.e, "Chicken", "Hamburger", "Pizza", "Sub").
+1. (*)Plot the empirical $\hat{F}$-function for all fast food establishments (pooled) and then for each type of establishment separately (i.e, "Chicken", "Hamburger", "Pizza", "Sub").
+
+2. (*)Plot the empirical $\hat{K}$-function for all fast food establishments (pooled) and then for each type of establishment (i.e, "Chicken", "Hamburger", "Pizza", "Sub").
 
 3. Discuss your results with a fellow student. Is there evidence of clustering/regularity?
 

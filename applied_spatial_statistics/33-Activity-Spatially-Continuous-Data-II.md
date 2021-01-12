@@ -45,108 +45,15 @@ It is good practice to clear the working space to make sure that you do not have
 rm(list = ls())
 ```
 
-Note that `ls()` lists all objects currently on the worspace.
+Note that `ls()` lists all objects currently on the workspace.
 
 Load the libraries you will use in this activity (load other packages as appropriate). 
 
 ```r
 library(tidyverse)
-```
-
-```
-## -- Attaching packages ------------------------------------------------------------------------------------------------------------------- tidyverse 1.3.0 --
-```
-
-```
-## v ggplot2 3.3.0     v purrr   0.3.3
-## v tibble  2.1.3     v dplyr   0.8.5
-## v tidyr   1.0.2     v stringr 1.4.0
-## v readr   1.3.1     v forcats 0.5.0
-```
-
-```
-## -- Conflicts ---------------------------------------------------------------------------------------------------------------------- tidyverse_conflicts() --
-## x dplyr::filter() masks stats::filter()
-## x dplyr::lag()    masks stats::lag()
-```
-
-```r
 library(spatstat)
-```
-
-```
-## Loading required package: spatstat.data
-```
-
-```
-## Loading required package: nlme
-```
-
-```
-## 
-## Attaching package: 'nlme'
-```
-
-```
-## The following object is masked from 'package:dplyr':
-## 
-##     collapse
-```
-
-```
-## Loading required package: rpart
-```
-
-```
-## Registered S3 method overwritten by 'spatstat':
-##   method     from
-##   print.boxx cli
-```
-
-```
-## 
-## spatstat 1.63-3       (nickname: 'Wet paint') 
-## For an introduction to spatstat, type 'beginner'
-```
-
-```r
 library(spdep)
-```
-
-```
-## Loading required package: sp
-```
-
-```
-## Loading required package: spData
-```
-
-```
-## To access larger datasets in this package, install the spDataLarge
-## package with: `install.packages('spDataLarge',
-## repos='https://nowosad.github.io/drat/', type='source')`
-```
-
-```
-## Loading required package: sf
-```
-
-```
-## Linking to GEOS 3.6.1, GDAL 2.2.3, PROJ 4.9.3
-```
-
-```r
 library(geog4ga3)
-```
-
-```
-## Warning: replacing previous import 'plotly::filter' by 'stats::filter' when
-## loading 'geog4ga3'
-```
-
-```
-## Warning: replacing previous import 'dplyr::lag' by 'stats::lag' when loading
-## 'geog4ga3'
 ```
 
 Load the data that you will use in this activity:
@@ -165,9 +72,9 @@ The data set consists of 85 georeferenced measurements of piezometric head. Poss
 
 **NOTE**: Activities include technical "how to" tasks/questions. Usually, these ask you to organize data, create a plot, and so on in support of analysis and interpretation. These tasks are indicated by a star (*).
 
-1.* Estimate a trend surface for the dataset experimenting with different polynomials.
+1. (*)Estimate a trend surface for the dataset experimenting with different polynomials.
 
-2.* Create an interpolation grid, and use the function `predict` to interpolate the field using your chosen model. Plot the interpolated field using a method of your choice (e.g., `ggplot2`, `plot_ly()` for 3D plotting, etc.)
+2. (*)Create an interpolation grid, and use the function `predict` to interpolate the field using your chosen model. Plot the interpolated field using a method of your choice (e.g., `ggplot2`, `plot_ly()` for 3D plotting, etc.)
 
 3. Which polynomial in your experiments provides the best fit (hint: consider the coefficient of multiple determination $R^2$ and the standard error, in addition to the significance of the parameters). Justify your choice of a polynomial.
 
